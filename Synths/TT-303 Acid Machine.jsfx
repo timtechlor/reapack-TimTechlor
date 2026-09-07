@@ -21,12 +21,43 @@ desc:TT-303 Acid Machine
 //   Sequencer an der Timeline oder frei laufend.
 // @changelog
 //   1.0
+//   - Werks-Presets fuer die aktuelle Klang-Engine neu abgestimmt
+//     (Cutoff-/Decay-Bereich und Resonanz haben sich geaendert);
+//     SCREAM und HOOVER jetzt mit Rechteck-Wellenform
+//   - INIT-Preset: Kompressor an (100 %), Delay-EQ 250 Hz..3,0 kHz,
+//     Hall-EQ 300 Hz..2,3 kHz, Drive-EQ offen
+//   - Pattern-Bank D ab Werk mit einer 134-BPM-"Pump"-Bassfigur belegt
+//   1.0
 //   - Kompressor-Mix-Regler (blendet den Kompressor auf dem Dry-Signal linear ein)
 //   - Versionsanzeige in der Geraetefront (rechts neben dem Titel)
 //   - Erste oeffentliche Beta ueber ReaPack
 //tags: synth instrument acid 303 bass techno
 //author: TimTechlor
 //about:
+// TT-303 ACID MACHINE — v5
+// Uebernommen aus v4 (nachgemessen und bestaetigt):
+//   3-Punkt-Dezimierung 1/4-1/2-1/4 (Alias -4,3 dB), Accent-Attack 1,8 ms,
+//   echter EQ-Bypass, MIDI-Thru-Schalter, CC-Mapping, Pattern-Undo,
+//   Kompressor nur auf Dry, Voice-Sleep, Font-Cache.
+// In v5 zurueckgenommen (nachgemessen: Verschlechterung):
+//   poleScale-Saettigung  -> Resonanzhoecker lag +2,4 Halbtoene zu hoch
+//   polyBlepNext          -> Alias 1,1..3,2 dB SCHLECHTER als ohne
+//   kRes/resMakeUp-Tuning -> 0,8 dB Pegelverlust bei hoher Resonanz
+// In v5 neu behoben:
+//   Voice-Sleep fror die Filterzustaende ein (Knacken bei hoher Resonanz)
+//   Hall-Bypass fror Comb-/Allpass-Puffer und prePos ein (alter Inhalt)
+//   Delay-Bypass liess hpY/hpPrev stehen (Gleichsprung beim Zuschalten)
+//   Note-Stack konnte Duplikate halten (haengende Stimme)
+//   Drive-Bypass war 0,9 dB leiser als Unity; Modelle nicht pegelgleich
+//   Pattern-Daten wurden beim Laden nicht validiert
+//   MIDI-Queue 256 -> 512 Events, GUI-Mindestskalierung 0,45 -> 0,25
+// Neu in v6:
+//   Drive-EQ arbeitet parallel statt in Reihe. Was der EQ wegnimmt,
+//   laeuft am WaveShaper vorbei und kommt sauber wieder dazu — ein
+//   hochgezogener Lowcut nimmt also den Bass aus der VERZERRUNG, nicht
+//   aus dem Signal.
+//   WaveShaper 2-fach ueberabgetastet (+7,6 bis +9,8 dB Alias gemessen).
+//   MIDI OUT heisst jetzt SEQ OUT, weil THRU eine andere Aufgabe hat.
 // TT-303 ACID MACHINE — Mono-Acid-Synth im Stil der TB-303.
 // Tribute, keine Samples, kein Sample-ROM, alles Modell.
 //
@@ -134,10 +165,10 @@ slider25:0<0,3,1{A,B,C,D}>-SEQ Pattern-Bank
 slider26:0<0,1,1{Aus,An}>-SEQ Out (Sequenz nach aussen)
 slider27:0<0,20000,1>-Drive EQ Lowcut (Hz)
 slider28:20000<20,20000,1>-Drive EQ Highcut (Hz)
-slider29:300<0,20000,1>-Delay EQ Lowcut (Hz)
-slider30:20000<20,20000,1>-Delay EQ Highcut (Hz)
-slider31:0<0,20000,1>-Hall EQ Lowcut (Hz)
-slider32:20000<20,20000,1>-Hall EQ Highcut (Hz)
+slider29:250<0,20000,1>-Delay EQ Lowcut (Hz)
+slider30:3000<20,20000,1>-Delay EQ Highcut (Hz)
+slider31:300<0,20000,1>-Hall EQ Lowcut (Hz)
+slider32:2300<20,20000,1>-Hall EQ Highcut (Hz)
 slider33:0<0,1,1{Aus,An}>-MIDI Thru (eingehende Noten)
 slider34:1<0,1,1{Aus,An}>-Kompressor
 slider35:100<0,100,1>-Kompressor Mix
@@ -604,6 +635,19 @@ function defaultPattern() local(b, i) (
   setStep(0, 12, 41, 1, 0, 1);  setStep(0, 13, 41, 1, 0, 0);
   setStep(0, 14, 39, 1, 0, 0);  setStep(0, 15, 36, 0, 0, 0);
   b = 1; loop(3, copyBank(0, b*SEQ_BANK); b += 1; );
+  // Bank D (Index 3): "PUMP" — importiert aus TT-303_pump_134bpm.mid
+  // (134 BPM). Die MIDI ist zwei identische Takte lang; hier auf die
+  // 16 Steps des einen Takts reduziert (nichts geht verloren). E2-Bass
+  // mit Slide 0->1 (ueberlappende gleiche Note in der MIDI) und 10->11,
+  // Akzente auf 0/1/8 (Velocity 112), Rest Velocity 80.
+  setStep(3*SEQ_BANK,  0, 40, 1, 1, 1);  setStep(3*SEQ_BANK,  1, 40, 1, 1, 0);
+  setStep(3*SEQ_BANK,  2, 36, 0, 0, 0);  setStep(3*SEQ_BANK,  3, 40, 1, 0, 0);
+  setStep(3*SEQ_BANK,  4, 36, 0, 0, 0);  setStep(3*SEQ_BANK,  5, 28, 1, 0, 0);
+  setStep(3*SEQ_BANK,  6, 40, 1, 0, 0);  setStep(3*SEQ_BANK,  7, 36, 0, 0, 0);
+  setStep(3*SEQ_BANK,  8, 43, 1, 1, 0);  setStep(3*SEQ_BANK,  9, 36, 0, 0, 0);
+  setStep(3*SEQ_BANK, 10, 31, 1, 0, 1);  setStep(3*SEQ_BANK, 11, 31, 1, 0, 0);
+  setStep(3*SEQ_BANK, 12, 31, 1, 0, 0);  setStep(3*SEQ_BANK, 13, 43, 1, 0, 0);
+  setStep(3*SEQ_BANK, 14, 36, 0, 0, 0);  setStep(3*SEQ_BANK, 15, 31, 1, 0, 0);
 );
 
 /* ---------- Sequencer ---------- */
@@ -917,27 +961,44 @@ function noteHeld(n) local(i, r) (
 
 /* ---------- Klangvorlagen ---------- */
 
+// Klangvorlagen fuer die v8-Engine neu abgestimmt (Release v1.0). Die alten
+// Werte stammten aus der v6/v7-Engine, in der Cutoff 60 Hz..6 kHz und Decay
+// 60 ms..2,5 s spannten; seit v8 ist das ~145 Hz..~1 kHz bzw. 30..570 ms, die
+// Resonanz traegt immer schon Q~1,6 und wirkt deutlich staerker. Angepasst
+// wurde daher: Cutoff der hellen Patches hoch (SCREAM 58->72, HOOVER 64->74,
+// SQUELCH 38->52), Resonanz der heissen Patches runter (SQUELCH 86->80,
+// SCREAM 95->88, HOOVER 72->68), Decay von DUB in den langen Bereich
+// (48->82 ~ 340 ms) und von SCREAM/SQUELCH kuerzer. SCREAM und HOOVER
+// bleiben SQUARE. INIT setzt jetzt zusaetzlich Comp AN/100 % und die
+// Delay-/Hall-Eingangs-EQs (250 Hz..3,0 kHz bzw. 300 Hz..2,3 kHz).
+// Historie (v6/v7-Engine):
+//   DEEP    s5=16 s6=48 s7=42 s8=58 s9=38  s15=7  s16=18 s18=52 s19=20
+//   SQUELCH s5=38 s6=86 s7=78 s8=25 s9=78  s15=7  s16=16 s18=64 s19=14
+//   SCREAM  s5=58 s6=95 s7=88 s8=18 s9=92  s15=18 s16=10 s18=58 s19=10
+//   HOOVER  s5=64 s6=72 s7=92 s8=68 s9=72  s15=11 s16=22 s18=68 s19=22
+//   DUB     s5=20 s6=58 s7=48 s8=48 s9=52  s15=7  s16=48 s18=78 s19=42
+//   INIT    ... s29=300 s30=20000 s31=0 s32=20000, Comp unberuehrt
 function applyPatch(p) (
-  p == 1 ? ( slider2 = 0; slider5 = 16; slider6 = 48; slider7 = 42; slider8 = 58;
-             slider9 = 38; slider13 = 0; slider14 = 0; slider15 = 7;
-             slider16 = 18; slider18 = 52; slider19 = 20; )                       // DEEP
-  : p == 2 ? ( slider2 = 0; slider5 = 38; slider6 = 86; slider7 = 78; slider8 = 25;
-               slider9 = 78; slider13 = 1; slider14 = 0; slider15 = 7;
-               slider16 = 16; slider18 = 64; slider19 = 14; )                     // SQUELCH
-  : p == 3 ? ( slider2 = 1; slider5 = 58; slider6 = 95; slider7 = 88; slider8 = 18;
-               slider9 = 92; slider13 = 1; slider14 = 1; slider15 = 18;
-               slider16 = 10; slider18 = 58; slider19 = 10; )                     // SCREAM
-  : p == 4 ? ( slider2 = 1; slider5 = 64; slider6 = 72; slider7 = 92; slider8 = 68;
-               slider9 = 72; slider13 = 1; slider14 = 2; slider15 = 11;
-               slider16 = 22; slider18 = 68; slider19 = 22; )                     // HOOVER
-  : p == 5 ? ( slider2 = 0; slider5 = 20; slider6 = 58; slider7 = 48; slider8 = 48;
-               slider9 = 52; slider13 = 0; slider14 = 0; slider15 = 7;
-               slider16 = 48; slider18 = 78; slider19 = 42; )                     // DUB
+  p == 1 ? ( slider2 = 0; slider5 = 14; slider6 = 40; slider7 = 40; slider8 = 64;
+             slider9 = 35; slider13 = 0; slider14 = 0; slider15 = 7;
+             slider16 = 14; slider18 = 50; slider19 = 16; )                       // DEEP
+  : p == 2 ? ( slider2 = 0; slider5 = 52; slider6 = 80; slider7 = 82; slider8 = 22;
+               slider9 = 80; slider13 = 1; slider14 = 0; slider15 = 8;
+               slider16 = 16; slider18 = 62; slider19 = 12; )                     // SQUELCH
+  : p == 3 ? ( slider2 = 1; slider5 = 72; slider6 = 88; slider7 = 92; slider8 = 15;
+               slider9 = 95; slider13 = 1; slider14 = 1; slider15 = 16;
+               slider16 = 10; slider18 = 55; slider19 = 9; )                      // SCREAM
+  : p == 4 ? ( slider2 = 1; slider5 = 74; slider6 = 68; slider7 = 96; slider8 = 55;
+               slider9 = 70; slider13 = 1; slider14 = 2; slider15 = 11;
+               slider16 = 20; slider18 = 62; slider19 = 24; )                     // HOOVER
+  : p == 5 ? ( slider2 = 0; slider5 = 18; slider6 = 52; slider7 = 44; slider8 = 82;
+               slider9 = 50; slider13 = 0; slider14 = 0; slider15 = 7;
+               slider16 = 46; slider18 = 80; slider19 = 44; )                     // DUB
   : ( slider2 = 0; slider5 = 32; slider6 = 55; slider7 = 62; slider8 = 35;
       slider9 = 60; slider11 = 60; slider13 = 0; slider14 = 0; slider15 = 8;
       slider16 = 15; slider17 = 1; slider18 = 60; slider19 = 18; slider20 = 70;
-      slider27 = 0; slider28 = 20000; slider29 = 300; slider30 = 20000;
-      slider31 = 0; slider32 = 20000; );                                         // INIT
+      slider27 = 0; slider28 = 20000; slider29 = 250; slider30 = 3000;
+      slider31 = 300; slider32 = 2300; slider34 = 1; slider35 = 100; );           // INIT
   slider_automate(slider2);  slider_automate(slider5);  slider_automate(slider6);
   slider_automate(slider7);  slider_automate(slider8);  slider_automate(slider9);
   slider_automate(slider11); slider_automate(slider13); slider_automate(slider14);
@@ -945,6 +1006,7 @@ function applyPatch(p) (
   slider_automate(slider18); slider_automate(slider19); slider_automate(slider20);
   slider_automate(slider27); slider_automate(slider28); slider_automate(slider29);
   slider_automate(slider30); slider_automate(slider31); slider_automate(slider32);
+  slider_automate(slider34); slider_automate(slider35);
   patchSel = p;
   paramsDirty = 1;
 );
@@ -1695,17 +1757,17 @@ eqTrack(26, 360, 284, eqT(slider27), eqT(slider28));
 eqHandle(20, 26, 360, 284, slider27);
 eqHandle(21, 26, 360, 284, slider28);
 
-nv = min(fxEqVal(22, 342, 360, 208, slider29, 0, 300), slider30);
+nv = min(fxEqVal(22, 342, 360, 208, slider29, 0, 250), slider30);
 nv != slider29 ? ( slider29 = nv; slider_automate(slider29); paramsDirty = 1; patchSel = -1; );
-nv = max(fxEqVal(23, 342, 360, 208, slider30, 1, 20000), slider29);
+nv = max(fxEqVal(23, 342, 360, 208, slider30, 1, 3000), slider29);
 nv != slider30 ? ( slider30 = nv; slider_automate(slider30); paramsDirty = 1; patchSel = -1; );
 eqTrack(342, 360, 208, eqT(slider29), eqT(slider30));
 eqHandle(22, 342, 360, 208, slider29);
 eqHandle(23, 342, 360, 208, slider30);
 
-nv = min(fxEqVal(24, 562, 360, 196, slider31, 0, 0), slider32);
+nv = min(fxEqVal(24, 562, 360, 196, slider31, 0, 300), slider32);
 nv != slider31 ? ( slider31 = nv; slider_automate(slider31); paramsDirty = 1; patchSel = -1; );
-nv = max(fxEqVal(25, 562, 360, 196, slider32, 1, 20000), slider31);
+nv = max(fxEqVal(25, 562, 360, 196, slider32, 1, 2300), slider31);
 nv != slider32 ? ( slider32 = nv; slider_automate(slider32); paramsDirty = 1; patchSel = -1; );
 eqTrack(562, 360, 196, eqT(slider31), eqT(slider32));
 eqHandle(24, 562, 360, 196, slider31);
