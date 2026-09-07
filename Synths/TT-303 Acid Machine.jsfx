@@ -25,39 +25,15 @@ desc:TT-303 Acid Machine
 //tags: synth instrument acid 303 bass techno
 //author: TimTechlor
 //about:
-// TT-303 ACID MACHINE — v5
-// Carried over from v4 (re-measured and confirmed):
-//   3-point decimation 1/4-1/2-1/4 (alias -4.3 dB), accent attack 1.8 ms,
-//   true EQ bypass, MIDI thru switch, CC mapping, pattern undo,
-//   compressor on dry only, voice sleep, font cache.
-// Reverted in v5 (measured: regression):
-//   poleScale saturation  -> resonance hump was +2.4 semitones too high
-//   polyBlepNext          -> alias 1.1..3.2 dB WORSE than without
-//   kRes/resMakeUp tuning -> 0.8 dB level loss at high resonance
-// Newly fixed in v5:
-//   voice sleep froze the filter states (clicking at high resonance)
-//   reverb bypass froze the comb/allpass buffers and prePos (stale content)
-//   delay bypass left hpY/hpPrev standing (level jump when switched in)
-//   note stack could hold duplicates (stuck voice)
-//   drive bypass was 0.9 dB quieter than unity; models not level-matched
-//   pattern data was not validated on load
-//   MIDI queue 256 -> 512 events, GUI minimum scaling 0.45 -> 0.25
-// New in v6:
-//   The drive EQ works in parallel instead of in series. What the EQ
-//   removes bypasses the WaveShaper and is added back cleanly — so a
-//   raised lowcut takes the bass out of the DISTORTION, not out of
-//   the signal.
-//   WaveShaper 2x oversampled (+7.6 to +9.8 dB alias measured).
-//   MIDI OUT is now called SEQ OUT, because THRU has a different job.
 // TT-303 ACID MACHINE — mono acid synth in the style of the TB-303.
 // Tribute, no samples, no sample ROM, all model.
 //
 // CONTROLS AS ON THE ORIGINAL
 //   TUNING     semitones (-24..+24), plus FINE in cents
-//   CUTOFF     filter frequency, 60 Hz .. 6 kHz exponential
+//   CUTOFF     filter frequency, ~150 Hz .. ~2 kHz exponential (rises with resonance)
 //   RESONANCE  feedback of the 18 dB ladder up to self-oscillation
 //   ENV MOD    depth of the filter envelope, up to 5.2 octaves
-//   DECAY      decay of the filter envelope, 60 ms .. 2.5 s
+//   DECAY      decay of the filter envelope, ~30 ms .. ~570 ms
 //   ACCENT     level AND filter boost of the accent circuit
 //   WAVEFORM   sawtooth / square
 //
@@ -66,14 +42,10 @@ desc:TT-303 Acid Machine
 //    level-dependent feedback k/(1+0.4|y|), 2x oversampled,
 //    then 3-point decimation. Soft clip only at the master, never in
 //    the OS loop (it never engages there at real levels anyway).
-//  - Pole correction 1/(1+0.0913*kRes): measured, the resonance
-//    hump then lies over kRes 3.5..9.2 within +0.05 to +0.53 semitones
-//    exactly at the displayed cutoff. Every "refined" variant with a
-//    square or saturation term was measurably worse.
-//  - Feedback HP 150 Hz IN the feedback path (Open303 structure).
-//  - Square with frequency-dependent duty + tilt.
-//    Classic 1-sample PolyBLEP: the 2-sample extra term was tested in
-//    all signs and scalings and was always worse.
+//  - Pole correction 1/(1+0.10*kRes): mild peak correction; the
+//    resonance hump moves up with rising resonance, as on the reference.
+//  - Feedback HP 20 Hz IN the feedback path (DC block).
+//  - Square with frequency-dependent duty + tilt, classic 1-sample PolyBLEP.
 //  - Accent capacitor: recharge +0.95, saturation 1.65.
 //    Accent sweep with non-linearity and slight cutoff dependency.
 //  - On accent: fixed 0.2 s filter decay + shortened VCA attack (1.8 ms).
@@ -96,12 +68,10 @@ desc:TT-303 Acid Machine
 // as a dual slider (lowcut left, highcut right, 0..20 kHz). After that
 // compressor (-14 dB, 5:1) and master.
 //
-// For the delay and the reverb the EQ decides what is sent into the
-// effect; the dry signal runs alongside anyway. For the drive it used
-// to be different: there the EQ sat in series, a raised lowcut took
-// the bass out of the WHOLE output. Since v6 it is split — the EQ
-// selects what goes into the WaveShaper, the rest runs past it
-// undistorted and is added back afterwards.
+// The input EQ only shapes what is sent into each effect; the dry
+// signal runs alongside untouched. On the drive what the EQ removes is
+// added back after the WaveShaper, so a raised lowcut takes the bass
+// out of the DISTORTION, not out of the output (drive off = transparent).
 //
 // MIDI: THRU at the top of the header passes INCOMING notes on to the
 // output (CC and pitchbend always pass through anyway).
@@ -277,7 +247,7 @@ function readSliders() (
   bankBase  = floor(slider25)*SEQ_BANK;
   midiOut   = slider26;
   midiThru  = slider33;
-  compOn    = slider34;                        // compressor can be switched off (v8)
+  compOn    = slider34;                        // compressor can be switched off
   compMix   = slider35*0.01;                   // 1 = full (as before), 0 = bypass
   swFrac    = slider22/200;                  // up to 0.375 step offset
   gateFrac  = slider23*0.01;
@@ -288,45 +258,19 @@ function readSliders() (
 );
 
 function updateParams() (
-  // --- Filter. Curves matched in v8 to a Roland TB-303 VST
-  // (task O3, measured against ref_f_*.wav; LTI fit + re-adjustment on
-  // the full chain, tt303_o3_fit.py / tt303_o3_try.py). Result: the
-  // resonance was practically ineffective before (peak +1.5 dB instead of
-  // +12..+19), the cutoff was ~7 semitones too low, and the 150 Hz
-  // feedback HP together with poleScale smothered any resonance at low cutoff.
-  //
-  // History (state up to v7):
-  //   baseF   = 60*exp(cutN*4.60517);                 // 60 Hz .. 6 kHz
-  //   kRes    = 9.2*(resN^1.15);
-  //   resMakeUp = 1 + 0.20*kRes/(1 + 0.10*kRes);
-  //   poleScale = 1/(1 + 0.0913*kRes);                // peak pushed onto cutoff
-  //   fbHpA   = exp(-2*$pi*150/SRX);                  // Open303 feedback HP
-  // The old poleScale was fitted so that the resonance hump lies EXACTLY
-  // on the displayed cutoff. The reference VST does NOT do that — there
-  // the hump moves up with rising resonance. Hence a weaker poleScale
-  // here and a cutoff that moves with the resonance.
-  // cut_a: 177 -> 145 (user's ear "too open", 2026-09-07). At 145 the
-  // resonance peak frequencies land on the reference target (c25 r50 327 Hz,
-  // c25 r90 425 Hz); the broadband RMS error rises with this because the
-  // reference rolloff reaches higher (partly its noise floor).
-  baseF   = 145*exp(cutN*1.95)*(1 + resN);   // ~145 Hz .. ~1.6 kHz, resonance
+  // --- Filter. Curves fitted to a Roland TB-303 VST (measured against
+  // ref_f_*.wav). The resonance hump is allowed to move up with rising
+  // resonance, as on the reference — hence the (1+resN) term in baseF
+  // and only a mild poleScale.
+  baseF   = 145*exp(cutN*1.95)*(1 + resN);   // ~145 Hz .. ~2 kHz, resonance
                                              // lifts the corner additionally
   kRes    = 1.6 + 6.0*(resN^0.7);            // reso 0 already carries Q~1.6;
                                              // maximum kRes ~7.6
-  // History: O3  resMakeUp = 1  (no compensation any more). Measured after that:
-  // v8 ran +2.5..+6.4 dB (mean +4.2) hot across all 7 ref_f_* cases,
-  // and in the Blade pattern +3.6 dB despite -3 dB plugin volume (=~ +6.7 dB
-  // level-matched). "Too open" to the ear was primarily level + low bass, not
-  // brightness (the centroid was already darker than the reference).
-  resMakeUp = 0.62;                          // -4.2 dB flat (10^(-4.2/20)),
-                                             // removes the mean offset
-  poleScale = 1/(1 + 0.10*kRes);             // only mild peak correction
+  resMakeUp = 0.62;                          // -4.2 dB flat level trim
+  poleScale = 1/(1 + 0.10*kRes);             // mild peak correction
   envOct  = envN*5.2;                        // depth of the envelope
-  // Decay curve matched in v8 to ref_dec_0/50/100.wav (task B4,
-  // measured on the decay of the 400-3000 Hz band = "filter closing"):
-  // reference tau ~30 / 130 / 574 ms at decay 0 / 50 / 100 %.
-  // History: up to v7  decTau = 0.06*exp(decN*3.7297)  -> 60 / 390 / 2500 ms
-  // (2..4x too slow; contributed to the "too open" impression).
+  // Decay curve fitted to ref_dec_0/50/100.wav (decay of the 400-3000 Hz
+  // band = "filter closing"): reference tau ~30 / 130 / 574 ms.
   decTau  = 0.03*exp(decN*2.95);             // ~30 ms .. ~570 ms
   mDecC   = exp(-1/(decTau*srate));
   mDecAcc = exp(-1/(0.20*srate));            // accent: fixed 0.2 s
@@ -335,17 +279,12 @@ function updateParams() (
   // --- couplings in the VCF path
   oscHpA  = exp(-2*$pi*40/SRX);
   sqHpA   = exp(-2*$pi*28/SRX);              // slightly lower tilt
-  // Feedback high-pass: v8 at 20 Hz (was 150, Open303). At 150 Hz the
-  // feedback path could not build resonance at low cutoff —
-  // poleScale pulled the pole frequency below the HP. 20 Hz stays a DC
-  // block without cutting the resonance off at the bottom (task O3 / finding F3).
+  // Feedback high-pass 20 Hz: DC block only. Higher values pulled the
+  // pole frequency below the HP and smothered resonance at low cutoff.
   fbHpA   = exp(-2*$pi*20/SRX);
-  // --- VCA. susCoef decays in v8 (task O4). Re-measured against
-  // ref_dec_0/50/100.wav (fundamental decay): tau ~1.05..1.10 s and
-  // LARGELY INDEPENDENT of the decay knob. Hence constant.
-  // History: up to v7 fixed  susCoef = exp(-1/(2.5*srate))  (holds practically
-  // flat). Intermediate state (first measurement, 2 noisy points):
-  //   susTau = 0.60 + 0.90*decN  -- discarded, decN coupling not proven.
+  // --- VCA. susTau is constant: measured against ref_dec_0/50/100.wav
+  // (fundamental decay) at tau ~1.05..1.10 s, largely independent of the
+  // decay knob.
   attSec  = 0.003;                           // normal attack
   attSecAcc = 0.0018;                        // accent attack (sharper)
   susTau  = 1.10;                            // ~1.1 s, knob-independent
@@ -353,14 +292,12 @@ function updateParams() (
   relCoef = exp(-1/(0.012*srate));
   // --- Accent capacitor (slightly more aggressive Devil Fish)
   accDecC = exp(-1/(0.10*srate));
-  slideSamps = slideSec*srate;              // since v7: time constant tau of the
-                                            // RC slide, no longer total duration
+  slideSamps = slideSec*srate;              // time constant tau of the RC slide
   // --- Distortion
   // Every model has its own compensation so that a model change does
   // not alter the loudness. Measured against a filtered saw over
   // driveG 1..40: Hard -1.13 dB, Fold -7.92 dB, Fuzz -1.10 dB
-  // versus Soft. Fold is trimmed to 2.40 instead of 2.49 so the
-  // peaks keep headroom.
+  // versus Soft. Fold is trimmed to 2.40 so the peaks keep headroom.
   distMk    = distModel == 1 ? 1.14 : distModel == 2 ? 2.40
             : distModel == 3 ? 1.14 : 1;
   distPreG  = fxDistOn ? driveG : 1;
@@ -438,16 +375,7 @@ function apProc(i, x) local(o, idx, y) (
 // Because the control voltage is 1 V per octave, in log frequency space
 // this is an exponential approach, not a straight line. The difference is
 // audible at the end: the RC curve eases out, the straight line kinks off.
-// slideSamps is now the time constant tau, not the total duration. After
-// 3*tau 95 % is reached, which is roughly the same as the former total
-// duration.
-// History: up to v6 linear interpolation via slidePos/slideInc with
-//   slideF1 = curLog; slideF2 = tl; slidePos = 0; slideInc = 1/slideSamps;
-// (constant time; the step size was computed once at the start so that a
-// knob change mid-slide would not divide by zero). The knob value was the
-// total duration.
-// OPEN (LOGBUCH O2): with this curve slider11 means tau; default/range
-// want to be re-determined from ref_slide.wav, not estimated.
+// slideSamps is the time constant tau; after 3*tau 95 % is reached.
 function startSlide(tl) (
   slideSamps >= 1 ? (
     slideTgt = tl;
@@ -952,23 +880,9 @@ function noteHeld(n) local(i, r) (
 
 /* ---------- Sound presets ---------- */
 
-// Presets re-tuned for the v8 engine (release v1.0). The old values
-// came from the v6/v7 engine, where cutoff spanned 60 Hz..6 kHz and
-// decay 60 ms..2.5 s; since v8 that is ~145 Hz..~1 kHz resp. 30..570 ms,
-// the resonance already carries Q~1.6 and acts markedly stronger.
-// Adjusted therefore: cutoff of the bright patches up (SCREAM 58->72,
-// HOOVER 64->74, SQUELCH 38->52), resonance of the hot patches down
-// (SQUELCH 86->80, SCREAM 95->88, HOOVER 72->68), decay of DUB into the
-// long range (48->82 ~ 340 ms) and of SCREAM/SQUELCH shorter. SCREAM and
-// HOOVER stay SQUARE. INIT now additionally sets Comp ON/100 % and the
-// delay/reverb input EQs (250 Hz..3.0 kHz resp. 300 Hz..2.3 kHz).
-// History (v6/v7 engine):
-//   DEEP    s5=16 s6=48 s7=42 s8=58 s9=38  s15=7  s16=18 s18=52 s19=20
-//   SQUELCH s5=38 s6=86 s7=78 s8=25 s9=78  s15=7  s16=16 s18=64 s19=14
-//   SCREAM  s5=58 s6=95 s7=88 s8=18 s9=92  s15=18 s16=10 s18=58 s19=10
-//   HOOVER  s5=64 s6=72 s7=92 s8=68 s9=72  s15=11 s16=22 s18=68 s19=22
-//   DUB     s5=20 s6=58 s7=48 s8=48 s9=52  s15=7  s16=48 s18=78 s19=42
-//   INIT    ... s29=300 s30=20000 s31=0 s32=20000, comp untouched
+// Five factory patches plus INIT, tuned for the current engine.
+// SCREAM and HOOVER use the square wave. INIT also sets Comp ON/100 %
+// and the delay/reverb input EQs (250 Hz..3.0 kHz resp. 300 Hz..2.3 kHz).
 function applyPatch(p) (
   p == 1 ? ( slider2 = 0; slider5 = 14; slider6 = 40; slider7 = 40; slider8 = 64;
              slider9 = 35; slider13 = 0; slider14 = 0; slider15 = 7;
@@ -1146,8 +1060,7 @@ while (midirecv(offs, m1, m2, m3)) (
 // --- Pattern export for the companion ReaScript tt303_pattern_to_midi.lua.
 // Mirrors the CURRENTLY DISPLAYED bank (slider25) unchanged into gmem.
 // Pure copy from M_SEQ, no DSP, no effect on the sound.
-// gmem layout: MIDI_EXPORT_BRIDGE.md, section 3. New identifiers
-// exBase/exI (otherwise unused in v8).
+// gmem layout: MIDI_EXPORT_BRIDGE.md, section 3.
 gmem[0] = 30303;                     // handshake / magic
 gmem[1] = 1;                         // layout version
 gmem[2] = gmem[2] + 1;               // heartbeat: running instance
@@ -1186,9 +1099,7 @@ seqRunning ? (
   gateLeft > 0 ? ( gateLeft -= 1; gateLeft <= 0 ? seqRelease(); );
 );
 
-// --- Slide. RC approach in log frequency space (capacitor recharge), since
-//     v7. History: up to v6 linear interpolation
-//     curLog = slideF1 + (slideF2 - slideF1)*slidePos  via slidePos/slideInc.
+// --- Slide. RC approach in log frequency space (capacitor recharge).
 sliding ? (
   curLog += (slideTgt - curLog)*slideCoef;
   // stop when the remainder is below one cent (ln(2)/1200 = 0.000578)
@@ -1217,8 +1128,8 @@ needVoice = amp > 0.00002 || stkN > 0 || envStage > 0 || sliding;
 needVoice ? (
   // recompute tan() only when fc really moves. The threshold is
   // RELATIVE (0.15 per mille), not absolute — a fixed limit in hertz
-  // would be an audible quantisation at 60 Hz cutoff and ineffective
-  // at 6 kHz.
+  // would be an audible quantisation at a low cutoff and ineffective
+  // at a high one.
   abs(fc - fcPrev) > fc*0.00015 ? (
     fcPrev = fc;
     g = tan($pi*fc*poleScale/SRX);
@@ -1229,14 +1140,8 @@ needVoice ? (
   // The square of the 303 comes from a transistor comparator with an
   // asymmetric operating point. The offset shrinks in high registers,
   // because the recharge time there takes a larger share of the period.
-  // History: up to v8  sqDuty = 0.53 - 0.025*min(1, freq*0.0005)  (nearly 50 %).
-  // Task B6, measured against ref_f_c50_r50_sq.wav (tt303_b6_fit.py): the
-  // reference square has strong EVEN harmonics (H2 -7, H4 -3, H6 -3 dB re H1)
-  // and spectral nulls at H5/H10/H15 -> duty ~1/5. At 0.53 the even harmonics
-  // were 10..14 dB short (impression "too hollow/different"). 0.19 lowers
-  // the weighted harmonic RMS error 8.1 -> 4.9 dB. The freq term
-  // (drift at high register) stays; over the playable range < 0.01 duty,
-  // direction not separately measured.
+  // Duty ~1/5, fitted to the reference square's even-harmonic content
+  // (strong H2/H4/H6, spectral nulls at H5/H10/H15; ref_f_c50_r50_sq.wav).
   sqDuty = waveSel ? (0.19 - 0.025*min(1, freq*0.0005)) : 0.5;
   osA = 0; osB = 0; osi = 0;
   loop(2,
@@ -1259,7 +1164,7 @@ needVoice ? (
     // previous sample.
     kEff = kRes/(1 + 0.4*abs(y3prev));
 
-    // High-pass 150 Hz IN the feedback path. Its share is affine in y3,
+    // High-pass 20 Hz IN the feedback path. Its share is affine in y3,
     // so the loop stays solvable without delay:
     //   u  = xin - fbHp(kEff*y3) = (xin - fbC) - fbHpA*kEff*y3
     //   y3 = A*u + B   ->   y3 = (A*(xin - fbC) + B)/(1 + A*fbHpA*kEff)
@@ -1278,12 +1183,9 @@ needVoice ? (
     osi += 1;
   );
   // Decimation with 1/4-1/2-1/4 instead of plain averaging. The third
-  // point is the second pass of the PREVIOUS sample.
-  // Honest numbers: on the bare oscillator this lowers the alias floor by
-  // 4.3 dB. BEHIND the filter only 0.07 dB of that remains, because the
-  // 18 dB slope takes the top range away anyway. It stays in because it
-  // costs almost nothing — whoever wants exactly the original replaces
-  // the line with  voice = 0.5*(osA + osB)*resMakeUp*amp;
+  // point is the second pass of the PREVIOUS sample. Lowers the alias
+  // floor of the bare oscillator by 4.3 dB (little behind the filter,
+  // but almost free). Plain average: 0.5*(osA + osB)*resMakeUp*amp.
   voice = (0.25*osPrev + 0.5*osA + 0.25*osB)*resMakeUp*amp;
   osPrev = osB;
 ) : (
@@ -1428,11 +1330,9 @@ over = envDb + 14;
 k15 = min(30, max(0, over + 15));
 gr = -0.8*(k15*k15/60 + max(0, over - 15));
 cg = 10^(gr/20)*1.78;
-// History: up to v8 fixed  dry = dy*cg;  (compressor always on).
 // compOn = 0 -> dry unprocessed (compression AND the ~+5 dB make-up 1.78
 // out, so ~5 dB quieter, compensate with VOLUME). compMix blends linearly
-// between dy (0 %) and dy*cg (100 %): dy*(1+compMix*(cg-1)). At 100 % it
-// is bit-exact dy*cg as before. envDb/cg always run along -> click-free.
+// between dy (0 %) and dy*cg (100 %). envDb/cg always run along -> click-free.
 dry = compOn ? dy*(1 + compMix*(cg - 1)) : dy;
 sumL = dry + wetDL + rlpL*rvbMix;
 sumR = dry + wetDR + rlpR*rvbMix;
@@ -1644,10 +1544,9 @@ xctr(697, 182, 98, 12, "VOLUME");
 gfx_setfont(4); colAcid(1);
 xat(20, 196);  gfx_printf("%+d st", slider3);
 xat(120, 196); gfx_printf("%+d ct", slider4);
-// The CUTOFF/DECAY display mirrors the v8 curves from updateParams():
-// baseF = 145*exp(cutN*1.95)*(1+resN) (reso lifts the corner with it), decTau =
-// 30*exp(decN*2.95) ms. History (v6/v7): floor(60*exp(slider5*0.0460517))
-// "Hz" and floor(60*exp(slider8*0.037297)) "ms" — no longer matched.
+// The CUTOFF/DECAY display mirrors baseF and decTau from updateParams():
+// baseF = 145*exp(cutN*1.95)*(1+resN) (reso lifts the corner with it),
+// decTau = 30*exp(decN*2.95) ms.
 xat(210, 196); gfx_printf("%d Hz", floor(145*exp(slider5*0.0195)*(1 + slider6*0.01)));
 xat(322, 196); gfx_printf("%d %%", floor(slider6));
 xat(420, 196); gfx_printf("%.1f oct", slider7*0.052);
@@ -1816,8 +1715,7 @@ slider1 == 1 ? (
   // contrast, passes incoming notes on. Two sources, two switches.
   btn(344, 478, 86, 22, slider26 == 1, "SEQ OUT") ? ( slider26 = 1 - slider26; slider_automate(slider26); paramsDirty = 1; );
 
-  // MIDI note in the gap between MIDI OUT and the knobs —
-  // it used to stand above the knobs and got in their way
+  // MIDI note in the gap between MIDI OUT and the knobs
   gfx_setfont(3);
   midiHeld ? colAcid(1) : colInk(1);
   xat(445, 482);
