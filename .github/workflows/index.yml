@@ -1,0 +1,56 @@
+name: Update ReaPack index
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'index.xml'          # verhindert Endlosschleife durch den Bot-Commit
+  workflow_dispatch:          # manuell ausloesbar unter Actions
+
+permissions:
+  contents: write             # noetig, damit der Job index.xml zurueckpusht
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (volle Historie)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0      # reapack-index liest aus der Git-Historie, nicht dem Arbeitsbaum
+
+      - name: Ruby einrichten
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: pandoc installieren
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+        # reapack-index wandelt den @about-Text mit pandoc nach RTF um.
+        # Fehlt pandoc, werden alle Pakete mit @about kommentarlos uebersprungen.
+
+      - name: reapack-index installieren
+        run: gem install reapack-index
+
+      - name: Index bauen
+        run: |
+          # --rebuild: Index von Null aus der kompletten Historie neu aufbauen.
+          # Idempotent, fuer ein Repo dieser Groesse vernachlaessigbar langsam.
+          # --no-commit: Commit macht der naechste Step nur bei echter Aenderung
+          # (reapack-index --commit wuerde sonst pro Lauf einen Leer-Commit setzen).
+          reapack-index \
+            --name "TimTechlor ReaScripts" \
+            --url-template 'https://github.com/timtechlor/reapack-TimTechlor/raw/$commit/$path' \
+            --rebuild --no-commit
+
+      - name: index.xml committen und pushen (nur bei Aenderung)
+        run: |
+          git add index.xml
+          if git diff --cached --quiet -- index.xml; then
+            echo "index.xml unveraendert - nichts zu committen."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "index: ReaPack-Index aktualisiert"
+          git push

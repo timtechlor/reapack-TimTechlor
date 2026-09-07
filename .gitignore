@@ -1,0 +1,22 @@
+# macOS / Windows / Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+
+# Audio-Referenzen / Renders gehören nicht ins Repo
+*.wav
+*.flac
+*.mp3
+
+# REAPER-Backups
+*.bak
+*.jsfx_v*
+*.rpp-bak
+*.rpp-undo
+
+# Betreiber-Doku, nicht ins oeffentliche Repo
+/SETUP.md
