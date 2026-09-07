@@ -7,120 +7,120 @@ desc:TT-303 Acid Machine
 // @about
 //   # TT-303 Acid Machine
 //
-//   Monophoner Acid-Bass-Synthesizer im Stil der Roland TB-303. Tribute-
-//   Modell ohne Samples.
+//   Monophonic acid bass synthesizer in the style of the Roland TB-303.
+//   Tribute model, no samples.
 //
-//   - Oszillator: Saw / Rechteck, 1-Sample-PolyBLEP, 2x ueberabgetastet
-//   - VCF: 3-Pol-Leiter (18 dB/Okt) in ZDF/TPT-Form, pegelabhaengige Resonanz
-//   - Slide + Accent, interner 16-Step-Sequencer mit 4 Baenken A-D
-//   - Drive (paralleler EQ + WaveShaper), Ping-Pong-Delay, Freeverb-Hall,
-//     Kompressor (nur auf Dry) mit regelbarem Mix
-//   - Komplett gezeichnete Geraetefront mit Versionsanzeige, 5 Werks-Presets
+//   - Oscillator: saw / square, 1-sample PolyBLEP, 2x oversampled
+//   - VCF: 3-pole ladder (18 dB/oct) in ZDF/TPT form, level-dependent resonance
+//   - Slide + accent, internal 16-step sequencer with 4 banks A-D
+//   - Drive (parallel EQ + WaveShaper), ping-pong delay, Freeverb reverb,
+//     compressor (dry only) with adjustable mix
+//   - Fully drawn device front with version display, 5 factory presets
 //
-//   HOST-Modus: Klangerzeuger aus der Piano-Rolle. SEQ-Modus: interner
-//   Sequencer an der Timeline oder frei laufend.
+//   HOST mode: sound generator from the piano roll. SEQ mode: internal
+//   sequencer on the timeline or free-running.
 // @changelog
 //   1.0
-//   - Erste Vollversion
+//   - First full release
 //tags: synth instrument acid 303 bass techno
 //author: TimTechlor
 //about:
 // TT-303 ACID MACHINE — v5
-// Uebernommen aus v4 (nachgemessen und bestaetigt):
-//   3-Punkt-Dezimierung 1/4-1/2-1/4 (Alias -4,3 dB), Accent-Attack 1,8 ms,
-//   echter EQ-Bypass, MIDI-Thru-Schalter, CC-Mapping, Pattern-Undo,
-//   Kompressor nur auf Dry, Voice-Sleep, Font-Cache.
-// In v5 zurueckgenommen (nachgemessen: Verschlechterung):
-//   poleScale-Saettigung  -> Resonanzhoecker lag +2,4 Halbtoene zu hoch
-//   polyBlepNext          -> Alias 1,1..3,2 dB SCHLECHTER als ohne
-//   kRes/resMakeUp-Tuning -> 0,8 dB Pegelverlust bei hoher Resonanz
-// In v5 neu behoben:
-//   Voice-Sleep fror die Filterzustaende ein (Knacken bei hoher Resonanz)
-//   Hall-Bypass fror Comb-/Allpass-Puffer und prePos ein (alter Inhalt)
-//   Delay-Bypass liess hpY/hpPrev stehen (Gleichsprung beim Zuschalten)
-//   Note-Stack konnte Duplikate halten (haengende Stimme)
-//   Drive-Bypass war 0,9 dB leiser als Unity; Modelle nicht pegelgleich
-//   Pattern-Daten wurden beim Laden nicht validiert
-//   MIDI-Queue 256 -> 512 Events, GUI-Mindestskalierung 0,45 -> 0,25
-// Neu in v6:
-//   Drive-EQ arbeitet parallel statt in Reihe. Was der EQ wegnimmt,
-//   laeuft am WaveShaper vorbei und kommt sauber wieder dazu — ein
-//   hochgezogener Lowcut nimmt also den Bass aus der VERZERRUNG, nicht
-//   aus dem Signal.
-//   WaveShaper 2-fach ueberabgetastet (+7,6 bis +9,8 dB Alias gemessen).
-//   MIDI OUT heisst jetzt SEQ OUT, weil THRU eine andere Aufgabe hat.
-// TT-303 ACID MACHINE — Mono-Acid-Synth im Stil der TB-303.
-// Tribute, keine Samples, kein Sample-ROM, alles Modell.
+// Carried over from v4 (re-measured and confirmed):
+//   3-point decimation 1/4-1/2-1/4 (alias -4.3 dB), accent attack 1.8 ms,
+//   true EQ bypass, MIDI thru switch, CC mapping, pattern undo,
+//   compressor on dry only, voice sleep, font cache.
+// Reverted in v5 (measured: regression):
+//   poleScale saturation  -> resonance hump was +2.4 semitones too high
+//   polyBlepNext          -> alias 1.1..3.2 dB WORSE than without
+//   kRes/resMakeUp tuning -> 0.8 dB level loss at high resonance
+// Newly fixed in v5:
+//   voice sleep froze the filter states (clicking at high resonance)
+//   reverb bypass froze the comb/allpass buffers and prePos (stale content)
+//   delay bypass left hpY/hpPrev standing (level jump when switched in)
+//   note stack could hold duplicates (stuck voice)
+//   drive bypass was 0.9 dB quieter than unity; models not level-matched
+//   pattern data was not validated on load
+//   MIDI queue 256 -> 512 events, GUI minimum scaling 0.45 -> 0.25
+// New in v6:
+//   The drive EQ works in parallel instead of in series. What the EQ
+//   removes bypasses the WaveShaper and is added back cleanly — so a
+//   raised lowcut takes the bass out of the DISTORTION, not out of
+//   the signal.
+//   WaveShaper 2x oversampled (+7.6 to +9.8 dB alias measured).
+//   MIDI OUT is now called SEQ OUT, because THRU has a different job.
+// TT-303 ACID MACHINE — mono acid synth in the style of the TB-303.
+// Tribute, no samples, no sample ROM, all model.
 //
-// BEDIENELEMENTE WIE AM ORIGINAL
-//   TUNING     Halbtoene (-24..+24), dazu FINE in Cent
-//   CUTOFF     Filterfrequenz, 60 Hz .. 6 kHz exponentiell
-//   RESONANCE  Rueckkopplung der 18-dB-Leiter bis zur Selbstschwingung
-//   ENV MOD    Hub der Filterhuellkurve, bis 5,2 Oktaven
-//   DECAY      Abfall der Filterhuellkurve, 60 ms .. 2,5 s
-//   ACCENT     Lautstaerke- UND Filter-Zuschlag der Accent-Schaltung
-//   WAVEFORM   Saegezahn / Rechteck
+// CONTROLS AS ON THE ORIGINAL
+//   TUNING     semitones (-24..+24), plus FINE in cents
+//   CUTOFF     filter frequency, 60 Hz .. 6 kHz exponential
+//   RESONANCE  feedback of the 18 dB ladder up to self-oscillation
+//   ENV MOD    depth of the filter envelope, up to 5.2 octaves
+//   DECAY      decay of the filter envelope, 60 ms .. 2.5 s
+//   ACCENT     level AND filter boost of the accent circuit
+//   WAVEFORM   sawtooth / square
 //
-// MODELLDETAILS (nach R. Whittle / Devil-Fish-Dokumentation)
-//  - Filter: 3-polige Leiter (18 dB/Okt) in ZDF/TPT-Form,
-//    pegelabhaengige Rueckkopplung k/(1+0,4|y|), 2-fach ueberabgetastet,
-//    danach 3-Punkt-Dezimierung. Soft-Clip nur am Master, nie in der
-//    OS-Schleife (dort greift er bei realen Pegeln ohnehin nie).
-//  - Polkorrektur 1/(1+0,0913*kRes): nachgemessen liegt der Resonanz-
-//    hoecker damit ueber kRes 3,5..9,2 auf +0,05 bis +0,53 Halbtoenen
-//    genau am angezeigten Cutoff. Jede "verfeinerte" Variante mit
-//    Quadrat- oder Saettigungsterm war messbar schlechter.
-//  - Feedback-HP 150 Hz IM Rueckkopplungsweg (Open303-Struktur).
-//  - Rechteck mit frequenzabhaengigem Duty + Dachschraege.
-//    Klassischer 1-Sample-PolyBLEP: der 2-Sample-Zusatzterm wurde in
-//    allen Vorzeichen und Skalierungen getestet und war stets schlechter.
-//  - Accent-Kondensator: Nachladen +0.95, Saettigung 1.65.
-//    Accent-Sweep mit Nichtlinearitaet und leichter Cutoff-Abhaengigkeit.
-//  - Bei Accent: fixe 0,2 s Filter-Decay + verkuerzte VCA-Attack (1.8 ms).
-//  - Slide: konstante Zeit, Log-Frequenzraum; gleiche Note bleibt liegen.
-//  - FX: Delay/Reverb bypassed bei Mix < 0.5 %. EQ-OFF = echter Bypass.
-//  - MIDI: Noten werden verbraucht, CC/Pitchbend gehen weiter.
+// MODEL DETAILS (after R. Whittle / Devil Fish documentation)
+//  - Filter: 3-pole ladder (18 dB/oct) in ZDF/TPT form,
+//    level-dependent feedback k/(1+0.4|y|), 2x oversampled,
+//    then 3-point decimation. Soft clip only at the master, never in
+//    the OS loop (it never engages there at real levels anyway).
+//  - Pole correction 1/(1+0.0913*kRes): measured, the resonance
+//    hump then lies over kRes 3.5..9.2 within +0.05 to +0.53 semitones
+//    exactly at the displayed cutoff. Every "refined" variant with a
+//    square or saturation term was measurably worse.
+//  - Feedback HP 150 Hz IN the feedback path (Open303 structure).
+//  - Square with frequency-dependent duty + tilt.
+//    Classic 1-sample PolyBLEP: the 2-sample extra term was tested in
+//    all signs and scalings and was always worse.
+//  - Accent capacitor: recharge +0.95, saturation 1.65.
+//    Accent sweep with non-linearity and slight cutoff dependency.
+//  - On accent: fixed 0.2 s filter decay + shortened VCA attack (1.8 ms).
+//  - Slide: constant time, log frequency space; the same note stays held.
+//  - FX: delay/reverb bypassed at mix < 0.5 %. EQ OFF = true bypass.
+//  - MIDI: notes are consumed, CC/pitchbend keep going.
 //
-// BETRIEBSARTEN
-//   HOST  Reiner Klangerzeuger, gespielt aus der Piano-Rolle.
-//         Velocity >= Schwelle = Accent, ueberlappende Noten = Slide.
-//   SEQ   Interner 16-Step-Sequencer, vier Pattern-Baenke A-D mit
-//         Kopierfunktion, Zufall und Mutation, Shuffle, Gate-Laenge.
-//         Laeuft an der Projekt-Timeline oder frei (FREE RUN).
-//         MIDI-Noten transponieren das Pattern (C2 = Originallage).
-//         MIDI OUT schickt die Sequenz zusaetzlich nach draussen.
-//         Alle vier Baenke wandern mit ins Projekt.
+// OPERATING MODES
+//   HOST  Pure sound generator, played from the piano roll.
+//         Velocity >= threshold = accent, overlapping notes = slide.
+//   SEQ   Internal 16-step sequencer, four pattern banks A-D with
+//         copy function, random and mutation, shuffle, gate length.
+//         Runs on the project timeline or free (FREE RUN).
+//         MIDI notes transpose the pattern (C2 = original pitch).
+//         MIDI OUT also sends the sequence out.
+//         All four banks travel with the project.
 //
-// Effektweg: vor jeder der drei Einheiten — WaveShaper (Soft/Hard/
-// Fold/Fuzz), Ping-Pong-Delay, Freeverb-Hall — liegt ein Eingangs-EQ
-// als Dualslider (Lowcut links, Highcut rechts, 0..20 kHz). Danach
-// Kompressor (-14 dB, 5:1) und Master.
+// Effect path: ahead of each of the three units — WaveShaper (Soft/Hard/
+// Fold/Fuzz), ping-pong delay, Freeverb reverb — sits an input EQ
+// as a dual slider (lowcut left, highcut right, 0..20 kHz). After that
+// compressor (-14 dB, 5:1) and master.
 //
-// Beim Delay und beim Hall bestimmt der EQ, was in den Effekt geschickt
-// wird; das trockene Signal laeuft ohnehin daneben her. Beim Drive war
-// das frueher anders: dort sass der EQ in Reihe, ein hochgezogener
-// Lowcut hat den Bass aus dem GESAMTEN Ausgang genommen. Seit v6 wird
-// aufgeteilt — der EQ waehlt aus, was in den WaveShaper geht, der Rest
-// laeuft unverzerrt daran vorbei und wird danach wieder addiert.
+// For the delay and the reverb the EQ decides what is sent into the
+// effect; the dry signal runs alongside anyway. For the drive it used
+// to be different: there the EQ sat in series, a raised lowcut took
+// the bass out of the WHOLE output. Since v6 it is split — the EQ
+// selects what goes into the WaveShaper, the rest runs past it
+// undistorted and is added back afterwards.
 //
-// MIDI: THRU oben in der Kopfzeile reicht EINGEHENDE Noten an den
-// Ausgang weiter (CC und Pitchbend gehen ohnehin immer durch).
-// SEQ OUT im Sequencer-Panel schickt die SELBST ERZEUGTE Sequenz nach
-// draussen. Zwei verschiedene Quellen, deshalb zwei Schalter. Im
-// SEQ-Modus sind eingehende Noten Transponierbefehle — wer sie mit
-// THRU zusaetzlich durchreicht, schickt sie neben der Sequenz mit raus.
+// MIDI: THRU at the top of the header passes INCOMING notes on to the
+// output (CC and pitchbend always pass through anyway).
+// SEQ OUT in the sequencer panel sends the SELF-GENERATED sequence
+// out. Two different sources, hence two switches. In SEQ mode incoming
+// notes are transpose commands — whoever also passes them on with
+// THRU sends them out next to the sequence.
 //
-// OBERFLAECHE nach dem Tim-Techlor-Designkit: Core Black, Core White,
-// Acid Green #39FF14, Leitbahnen im 45-Grad-Winkel mit Loetpunkten.
-// Schriftzug in Zilap Orian, wenn installiert. Beschriftungen serifenlos
-// (Segoe UI / Helvetica Neue / DejaVu Sans / Arial), Zahlenwerte
-// dicktengleich (Consolas / DejaVu Sans Mono / Menlo / Courier New).
-// Welche davon vorhanden ist, misst das Skript selbst nach.
-// Die Front rechnet in einem festen Designraster und skaliert auf die
-// Fenstergroesse — zum Vergroessern einfach das FX-Fenster aufziehen.
-// HiDPI wird ueber gfx_ext_retina beruecksichtigt. Alle internen
-// JSFX-Regler sind ausgeblendet ("-" vor dem Namen), bedient wird
-// ausschliesslich ueber die Geraetefront.
+// SURFACE after the Tim Techlor design kit: Core Black, Core White,
+// Acid Green #39FF14, traces at a 45 degree angle with solder pads.
+// Wordmark in Zilap Orian, if installed. Labels sans-serif
+// (Segoe UI / Helvetica Neue / DejaVu Sans / Arial), numeric values
+// monospaced (Consolas / DejaVu Sans Mono / Menlo / Courier New).
+// Which of these is present the script measures itself.
+// The front computes in a fixed design grid and scales to the
+// window size — to enlarge, just drag the FX window open.
+// HiDPI is honoured via gfx_ext_retina. All internal
+// JSFX sliders are hidden ("-" before the name), operation is
+// exclusively via the device front.
 
 in_pin:none
 out_pin:TT-303 L
@@ -128,129 +128,129 @@ out_pin:TT-303 R
 
 options:gfx_hz=45 gmem=tt303_acid
 
-slider1:0<0,1,1{HOST,SEQ}>-Modus
+slider1:0<0,1,1{HOST,SEQ}>-Mode
 slider2:0<0,1,1{Sawtooth,Square}>-Waveform
-slider3:0<-24,24,1>-Tuning (Halbtoene)
-slider4:0<-50,50,1>-Fine (Cent)
+slider3:0<-24,24,1>-Tuning (semitones)
+slider4:0<-50,50,1>-Fine (cents)
 slider5:32<0,100,0.1>-Cutoff Freq
 slider6:55<0,100,0.1>-Resonance
 slider7:62<0,100,0.1>-Env Mod
 slider8:35<0,100,0.1>-Decay
 slider9:60<0,100,0.1>-Accent
 slider10:70<0,100,0.1>-Volume
-slider11:60<0,300,1>-Slide-Zeit (ms)
-slider12:100<1,127,1>-Accent ab Velocity
-slider13:0<0,1,1{Aus,An}>-Verzerrung
-slider14:0<0,3,1{Soft,Hard,Fold,Fuzz}>-Verzerrungs-Modell
+slider11:60<0,300,1>-Slide time (ms)
+slider12:100<1,127,1>-Accent from velocity
+slider13:0<0,1,1{Off,On}>-Distortion
+slider14:0<0,3,1{Soft,Hard,Fold,Fuzz}>-Distortion model
 slider15:8<1,40,0.1>-Drive
-slider16:15<0,100,0.5>-Delay-Mix (%)
-slider17:1<0,3,1{1/8,Punktierte 1/8,1/4,1/2}>-Delay-Teiler
-slider18:60<0,90,1>-Delay-Feedback (%)
-slider19:18<0,100,0.5>-Hall-Mix (%)
-slider20:70<20,100,1>-Raumgroesse (%)
-slider21:16<1,16,1>-SEQ Pattern-Laenge
+slider16:15<0,100,0.5>-Delay mix (%)
+slider17:1<0,3,1{1/8,Dotted 1/8,1/4,1/2}>-Delay division
+slider18:60<0,90,1>-Delay feedback (%)
+slider19:18<0,100,0.5>-Reverb mix (%)
+slider20:70<20,100,1>-Room size (%)
+slider21:16<1,16,1>-SEQ pattern length
 slider22:0<0,75,1>-SEQ Shuffle (%)
 slider23:55<10,100,1>-SEQ Gate (%)
-slider24:0<0,1,1{Aus,An}>-SEQ Free Run
-slider25:0<0,3,1{A,B,C,D}>-SEQ Pattern-Bank
-slider26:0<0,1,1{Aus,An}>-SEQ Out (Sequenz nach aussen)
+slider24:0<0,1,1{Off,On}>-SEQ Free Run
+slider25:0<0,3,1{A,B,C,D}>-SEQ pattern bank
+slider26:0<0,1,1{Off,On}>-SEQ Out (sequence to output)
 slider27:0<0,20000,1>-Drive EQ Lowcut (Hz)
 slider28:20000<20,20000,1>-Drive EQ Highcut (Hz)
 slider29:250<0,20000,1>-Delay EQ Lowcut (Hz)
 slider30:3000<20,20000,1>-Delay EQ Highcut (Hz)
-slider31:300<0,20000,1>-Hall EQ Lowcut (Hz)
-slider32:2300<20,20000,1>-Hall EQ Highcut (Hz)
-slider33:0<0,1,1{Aus,An}>-MIDI Thru (eingehende Noten)
-slider34:1<0,1,1{Aus,An}>-Kompressor
-slider35:100<0,100,1>-Kompressor Mix
+slider31:300<0,20000,1>-Reverb EQ Lowcut (Hz)
+slider32:2300<20,20000,1>-Reverb EQ Highcut (Hz)
+slider33:0<0,1,1{Off,On}>-MIDI Thru (incoming notes)
+slider34:1<0,1,1{Off,On}>-Compressor
+slider35:100<0,100,1>-Compressor mix
 
 /* ============================================================
-   @init — Speicherkarte, Funktionen, Grundzustand.
-   Funktionen muessen VOR ihrer ersten Verwendung stehen, deshalb
-   liegt hier alles beisammen.
+   @init — memory map, functions, base state.
+   Functions must come BEFORE their first use, which is why
+   everything sits together here.
    ============================================================ */
 @init
 
-// ---------- Speicherkarte ----------
-// Achtung: M_SEQ liegt bewusst in einer Luecke, die vom memset
-// ausgespart wird. @init laeuft bei jedem Samplerate-Wechsel und beim
-// Transportstart erneut — ohne diese Luecke waere das Pattern jedes Mal
-// weg, inklusive dem gerade aus dem Projekt geladenen.
-M_STK    = 0;        // 32     Note-Stack (Mono, letzte-Note-Prioritaet)
-M_SCOPE  = 64;       // 512    Oszilloskop-Ringpuffer
-M_PAR    = 1792;     // 128    Freeverb-Layout und -Zustand
-M_PRE    = 2048;     // 8192   Hall-Predelay
-M_EVT    = 10240;    // 2048   MIDI-Queue, 512 Events x 4 Werte
-M_SEQ    = 12288;    // 1024   4 Baenke x 16 Steps x 4 Werte [bleibt erhalten]
-M_UNDO   = 13312;    // 64     eine Bank Undo (RND/MUT/CLEAR)
+// ---------- Memory map ----------
+// Note: M_SEQ deliberately lies in a gap that the memset skips.
+// @init runs again on every samplerate change and on transport start —
+// without this gap the pattern would be gone every time, including the
+// one just loaded from the project.
+M_STK    = 0;        // 32     note stack (mono, last-note priority)
+M_SCOPE  = 64;       // 512    oscilloscope ring buffer
+M_PAR    = 1792;     // 128    Freeverb layout and state
+M_PRE    = 2048;     // 8192   reverb predelay
+M_EVT    = 10240;    // 2048   MIDI queue, 512 events x 4 values
+M_SEQ    = 12288;    // 1024   4 banks x 16 steps x 4 values [is preserved]
+M_UNDO   = 13312;    // 64     one bank of undo (RND/MUT/CLEAR)
 M_SEQEND = 13376;
 M_DLY1   = 16384;
 
-// Groesse nach dem laengsten moeglichen Delay: halbe Note bei 40 BPM
-// sind 3,0 s. Mit 1,6 s lief der Puffer schon unterhalb von 75 BPM an
-// den Anschlag und das Delay verlor das Timing.
+// Size follows the longest possible delay: a half note at 40 BPM
+// is 3.0 s. At 1.6 s the buffer already hit the limit below 75 BPM
+// and the delay lost its timing.
 dlyBufLen = ceil(3.3*srate);
 M_DLY2 = M_DLY1 + dlyBufLen + 16;
 M_RVB  = M_DLY2 + dlyBufLen + 16;
 
-rvSc     = max(1, srate/44100);              // Freeverb-Laengen skalieren
+rvSc     = max(1, srate/44100);              // scale Freeverb lengths
 rvSpread = ceil(23*rvSc);
 rvbTotal = ceil(25174*rvSc) + 12*rvSpread + 128;
 MEMTOP   = M_RVB + rvbTotal + 16;
 
-EVT_MAX = 512;                               // Platz in der MIDI-Queue
+EVT_MAX = 512;                               // room in the MIDI queue
 
-SRX = srate*2;                               // Arbeitsrate des Filters (2-fach)
+SRX = srate*2;                               // working rate of the filter (2x)
 
-// Step-Felder und Bankgroesse
+// step fields and bank size
 SF_NOTE = 0; SF_GATE = 1; SF_ACC = 2; SF_SLIDE = 3;
-SEQ_BANK = 64;                               // 16 Steps x 4 Werte je Bank
-SEQ_NLO = 24; SEQ_NHI = 48;                  // C1 .. C3 im Step-Editor
+SEQ_BANK = 64;                               // 16 steps x 4 values per bank
+SEQ_NLO = 24; SEQ_NHI = 48;                  // C1 .. C3 in the step editor
 
-// Layout der Front im Designraster; SC skaliert auf die Fenstergroesse
+// layout of the front in the design grid; SC scales to the window size
 UI_W = 900; UI_H = 732;
-LANE_Y = 544; LANE_H = 92; ROW_H = 3.68;     // 25 Halbtoene in der Notenspur
-GRID_X = 52; GRID_W = 52;                    // 16 Spalten a 52 Punkt
+LANE_Y = 544; LANE_H = 92; ROW_H = 3.68;     // 25 semitones in the note lane
+GRID_X = 52; GRID_W = 52;                    // 16 columns of 52 points
 
-// HiDPI: REAPER liefert dann die echte Pixelaufloesung, und weil SC aus
-// gfx_w/gfx_h faellt, wird die Front automatisch entsprechend groesser
-// gezeichnet statt winzig zu bleiben.
+// HiDPI: REAPER then delivers the real pixel resolution, and because SC
+// falls out of gfx_w/gfx_h, the front is automatically drawn larger
+// instead of staying tiny.
 gfx_ext_retina = 1;
 
-/* ---------- kleine Mathe-Helfer ---------- */
+/* ---------- small math helpers ---------- */
 
-// tanh-Ersatz (nicht jeder REAPER-Build hat tanh als Builtin)
+// tanh replacement (not every REAPER build has tanh as a builtin)
 function fastTanh(x) local(a) (
   a = min(30, max(-30, 2*x));
   (1 - exp(-a))/(1 + exp(-a));
 );
 
-// weiche Saettigung ohne exp — Pade-Naeherung von tanh, saettigt bei +-1
+// soft saturation without exp — Pade approximation of tanh, saturates at +-1
 function softSat(x) local(a) (
   a = min(3, max(-3, x));
   a*(27 + a*a)/(27 + 9*a*a);
 );
 
-// 1-Sample-PolyBLEP. Ein zusaetzlicher 2-Sample-Restterm wurde gemessen
-// (Vorzeichen +/-, Skalierung 0,25/0,5/1,0) und verschlechterte den
-// Alias-Boden in jeder Variante um 0,15 bis 3,2 dB. Deshalb bleibt es
-// beim klassischen 1-Sample-Kern; die Verbesserung kommt statt dessen
-// aus der 3-Punkt-Dezimierung weiter unten (-4,3 dB gemessen).
+// 1-sample PolyBLEP. An additional 2-sample residual term was measured
+// (sign +/-, scaling 0.25/0.5/1.0) and worsened the alias floor in
+// every variant by 0.15 to 3.2 dB. So it stays with the classic
+// 1-sample core; the improvement comes instead from the 3-point
+// decimation further down (-4.3 dB measured).
 function polyBlep(t, dt) (
   t < dt ? ( t /= dt; t + t - t*t - 1 )
   : t > 1 - dt ? ( t = (t - 1)/dt; t*t + t + t + 1 )
   : 0;
 );
 
-// Weiche Begrenzung statt hartem Schnitt. Bis 0,7 voellig linear,
-// darueber ein tanh-Knie mit stetiger Steigung, Grenzwert genau 1,0.
-// So knickt ein Resonanzueberschwinger nicht mehr rechteckig ab.
+// Soft limiting instead of a hard clip. Fully linear up to 0.7,
+// above that a tanh knee with continuous slope, limit exactly 1.0.
+// This way a resonance overshoot no longer clips off rectangularly.
 function softClip(x) local(a) (
   a = abs(x);
   a <= 0.7 ? x : (x >= 0 ? 1 : -1)*(0.7 + 0.3*fastTanh((a - 0.7)*3.3333333));
 );
 
-/* ---------- Parameter ---------- */
+/* ---------- Parameters ---------- */
 
 function readSliders() (
   seqMode   = slider1;
@@ -277,109 +277,109 @@ function readSliders() (
   bankBase  = floor(slider25)*SEQ_BANK;
   midiOut   = slider26;
   midiThru  = slider33;
-  compOn    = slider34;                        // Kompressor abschaltbar (v8)
-  compMix   = slider35*0.01;                   // 1 = voll (wie bisher), 0 = Bypass
-  swFrac    = slider22/200;                  // bis 0,375 Step Versatz
+  compOn    = slider34;                        // compressor can be switched off (v8)
+  compMix   = slider35*0.01;                   // 1 = full (as before), 0 = bypass
+  swFrac    = slider22/200;                  // up to 0.375 step offset
   gateFrac  = slider23*0.01;
   freeRun   = slider24;
-  eqDLoHz   = slider27; eqDHiHz = slider28;    // Eingangs-EQs der FX-Einheiten
+  eqDLoHz   = slider27; eqDHiHz = slider28;    // input EQs of the FX units
   eqYLoHz   = slider29; eqYHiHz = slider30;
   eqRLoHz   = slider31; eqRHiHz = slider32;
 );
 
 function updateParams() (
-  // --- Filter. Kennlinien in v8 an einen Roland-TB-303-VST angeglichen
-  // (Task O3, gemessen an ref_f_*.wav; LTI-Fit + Nachjustierung an der
-  // vollen Kette, tt303_o3_fit.py / tt303_o3_try.py). Ergebnis: die
-  // Resonanz war vorher praktisch wirkungslos (Peak +1,5 dB statt +12..+19),
-  // der Cutoff lag ~7 HT zu tief, und die 150-Hz-Feedback-HP hat zusammen
-  // mit poleScale bei tiefem Cutoff jede Resonanz erstickt.
+  // --- Filter. Curves matched in v8 to a Roland TB-303 VST
+  // (task O3, measured against ref_f_*.wav; LTI fit + re-adjustment on
+  // the full chain, tt303_o3_fit.py / tt303_o3_try.py). Result: the
+  // resonance was practically ineffective before (peak +1.5 dB instead of
+  // +12..+19), the cutoff was ~7 semitones too low, and the 150 Hz
+  // feedback HP together with poleScale smothered any resonance at low cutoff.
   //
-  // Historie (Stand bis v7):
+  // History (state up to v7):
   //   baseF   = 60*exp(cutN*4.60517);                 // 60 Hz .. 6 kHz
   //   kRes    = 9.2*(resN^1.15);
   //   resMakeUp = 1 + 0.20*kRes/(1 + 0.10*kRes);
-  //   poleScale = 1/(1 + 0.0913*kRes);                // Peak auf Cutoff geschoben
-  //   fbHpA   = exp(-2*$pi*150/SRX);                  // Open303-Feedback-HP
-  // Die alte poleScale war so gefittet, dass der Resonanzhoecker GENAU auf
-  // dem angezeigten Cutoff liegt. Der Referenz-VST macht das NICHT — dort
-  // wandert der Hoecker mit steigender Resonanz nach oben. Deshalb hier ein
-  // schwaecheres poleScale und ein Cutoff, der mit der Resonanz mitgeht.
-  // cut_a: 177 -> 145 (Nutzer-Ohr "zu offen", 2026-09-07). Bei 145 liegen
-  // die Resonanz-Peakfrequenzen auf dem Referenz-Ziel (c25 r50 327 Hz,
-  // c25 r90 425 Hz); der Broadband-RMS-Fehler steigt dabei, weil der
-  // Referenz-Rolloff hoeher reicht (teils deren Rauschteppich).
-  baseF   = 145*exp(cutN*1.95)*(1 + resN);   // ~145 Hz .. ~1,6 kHz, Resonanz
-                                             // hebt die Ecke zusaetzlich
-  kRes    = 1.6 + 6.0*(resN^0.7);            // Reso 0 traegt schon Q~1,6;
-                                             // Maximum kRes ~7,6
-  // Historie: O3  resMakeUp = 1  (kein Ausgleich mehr). Danach gemessen:
-  // v8 lag ueber alle 7 ref_f_*-Faelle +2,5..+6,4 dB (Schnitt +4,2) heiss,
-  // und im Blade-Pattern +3,6 dB trotz -3 dB Plugin-Volume (=~ +6,7 dB
-  // pegelgleich). "Zu offen" am Ohr war primaer Pegel + Tiefbass, nicht
-  // Helligkeit (Zentroid war schon dunkler als die Referenz).
-  resMakeUp = 0.62;                          // -4,2 dB flach (10^(-4.2/20)),
-                                             // holt den Schnitt-Offset raus
-  poleScale = 1/(1 + 0.10*kRes);             // nur milde Peak-Korrektur
-  envOct  = envN*5.2;                        // Hub der Huellkurve
-  // Decay-Kennlinie in v8 an ref_dec_0/50/100.wav angeglichen (Task B4,
-  // gemessen am Abfall des 400-3000-Hz-Bandes = "Filter schliesst"):
-  // Referenz-tau ~30 / 130 / 574 ms bei Decay 0 / 50 / 100 %.
-  // Historie: bis v7  decTau = 0.06*exp(decN*3.7297)  -> 60 / 390 / 2500 ms
-  // (2..4x zu langsam; trug zum Eindruck "zu offen" bei).
+  //   poleScale = 1/(1 + 0.0913*kRes);                // peak pushed onto cutoff
+  //   fbHpA   = exp(-2*$pi*150/SRX);                  // Open303 feedback HP
+  // The old poleScale was fitted so that the resonance hump lies EXACTLY
+  // on the displayed cutoff. The reference VST does NOT do that — there
+  // the hump moves up with rising resonance. Hence a weaker poleScale
+  // here and a cutoff that moves with the resonance.
+  // cut_a: 177 -> 145 (user's ear "too open", 2026-09-07). At 145 the
+  // resonance peak frequencies land on the reference target (c25 r50 327 Hz,
+  // c25 r90 425 Hz); the broadband RMS error rises with this because the
+  // reference rolloff reaches higher (partly its noise floor).
+  baseF   = 145*exp(cutN*1.95)*(1 + resN);   // ~145 Hz .. ~1.6 kHz, resonance
+                                             // lifts the corner additionally
+  kRes    = 1.6 + 6.0*(resN^0.7);            // reso 0 already carries Q~1.6;
+                                             // maximum kRes ~7.6
+  // History: O3  resMakeUp = 1  (no compensation any more). Measured after that:
+  // v8 ran +2.5..+6.4 dB (mean +4.2) hot across all 7 ref_f_* cases,
+  // and in the Blade pattern +3.6 dB despite -3 dB plugin volume (=~ +6.7 dB
+  // level-matched). "Too open" to the ear was primarily level + low bass, not
+  // brightness (the centroid was already darker than the reference).
+  resMakeUp = 0.62;                          // -4.2 dB flat (10^(-4.2/20)),
+                                             // removes the mean offset
+  poleScale = 1/(1 + 0.10*kRes);             // only mild peak correction
+  envOct  = envN*5.2;                        // depth of the envelope
+  // Decay curve matched in v8 to ref_dec_0/50/100.wav (task B4,
+  // measured on the decay of the 400-3000 Hz band = "filter closing"):
+  // reference tau ~30 / 130 / 574 ms at decay 0 / 50 / 100 %.
+  // History: up to v7  decTau = 0.06*exp(decN*3.7297)  -> 60 / 390 / 2500 ms
+  // (2..4x too slow; contributed to the "too open" impression).
   decTau  = 0.03*exp(decN*2.95);             // ~30 ms .. ~570 ms
   mDecC   = exp(-1/(decTau*srate));
-  mDecAcc = exp(-1/(0.20*srate));            // Accent: fixe 0,2 s
-  aDecC   = exp(-1/(0.085*srate));           // Accent-Zusatz etwas schneller
+  mDecAcc = exp(-1/(0.20*srate));            // accent: fixed 0.2 s
+  aDecC   = exp(-1/(0.085*srate));           // accent extra a bit faster
   fcMax   = min(16000, 0.45*SRX);
-  // --- Kopplungen im VCF-Weg
+  // --- couplings in the VCF path
   oscHpA  = exp(-2*$pi*40/SRX);
-  sqHpA   = exp(-2*$pi*28/SRX);              // leicht tiefere Dachschraege
-  // Feedback-Hochpass: v8 auf 20 Hz (war 150, Open303). Bei 150 Hz konnte
-  // der Rueckkopplungsweg bei tiefem Cutoff keine Resonanz aufbauen —
-  // poleScale zog die Polfrequenz unter die HP. 20 Hz bleibt DC-Sperre,
-  // ohne die Resonanz unten abzuschneiden (Task O3 / Befund F3).
+  sqHpA   = exp(-2*$pi*28/SRX);              // slightly lower tilt
+  // Feedback high-pass: v8 at 20 Hz (was 150, Open303). At 150 Hz the
+  // feedback path could not build resonance at low cutoff —
+  // poleScale pulled the pole frequency below the HP. 20 Hz stays a DC
+  // block without cutting the resonance off at the bottom (task O3 / finding F3).
   fbHpA   = exp(-2*$pi*20/SRX);
-  // --- VCA. susCoef klingt in v8 ab (Task O4). Nachgemessen an
-  // ref_dec_0/50/100.wav (Grundton-Abfall): tau ~1,05..1,10 s und
-  // WEITGEHEND UNABHAENGIG vom Decay-Regler. Deshalb konstant.
-  // Historie: bis v7 fix  susCoef = exp(-1/(2.5*srate))  (haelt praktisch
-  // flach). Zwischenstand (erste Messung, 2 verrauschte Punkte):
-  //   susTau = 0.60 + 0.90*decN  -- verworfen, decN-Kopplung nicht belegt.
-  attSec  = 0.003;                           // Normal-Attack
-  attSecAcc = 0.0018;                        // Accent-Attack (spitzer)
-  susTau  = 1.10;                            // ~1,1 s, reglerunabhaengig
+  // --- VCA. susCoef decays in v8 (task O4). Re-measured against
+  // ref_dec_0/50/100.wav (fundamental decay): tau ~1.05..1.10 s and
+  // LARGELY INDEPENDENT of the decay knob. Hence constant.
+  // History: up to v7 fixed  susCoef = exp(-1/(2.5*srate))  (holds practically
+  // flat). Intermediate state (first measurement, 2 noisy points):
+  //   susTau = 0.60 + 0.90*decN  -- discarded, decN coupling not proven.
+  attSec  = 0.003;                           // normal attack
+  attSecAcc = 0.0018;                        // accent attack (sharper)
+  susTau  = 1.10;                            // ~1.1 s, knob-independent
   susCoef = exp(-1/(susTau*srate));
   relCoef = exp(-1/(0.012*srate));
-  // --- Accent-Kondensator (leicht aggressiver Devil-Fish)
+  // --- Accent capacitor (slightly more aggressive Devil Fish)
   accDecC = exp(-1/(0.10*srate));
-  slideSamps = slideSec*srate;              // seit v7: Zeitkonstante tau des
-                                            // RC-Slides, nicht mehr Gesamtdauer
-  // --- Verzerrung
-  // Jedes Modell hat einen eigenen Ausgleich, damit ein Modellwechsel
-  // nicht die Lautstaerke aendert. Gemessen an einem gefilterten Saw
-  // ueber driveG 1..40: Hard -1,13 dB, Fold -7,92 dB, Fuzz -1,10 dB
-  // gegenueber Soft. Fold wird auf 2,40 statt 2,49 getrimmt, damit die
-  // Spitzen Reserve behalten.
+  slideSamps = slideSec*srate;              // since v7: time constant tau of the
+                                            // RC slide, no longer total duration
+  // --- Distortion
+  // Every model has its own compensation so that a model change does
+  // not alter the loudness. Measured against a filtered saw over
+  // driveG 1..40: Hard -1.13 dB, Fold -7.92 dB, Fuzz -1.10 dB
+  // versus Soft. Fold is trimmed to 2.40 instead of 2.49 so the
+  // peaks keep headroom.
   distMk    = distModel == 1 ? 1.14 : distModel == 2 ? 2.40
             : distModel == 3 ? 1.14 : 1;
   distPreG  = fxDistOn ? driveG : 1;
   distPostG = fxDistOn ? 0.9*distMk/(driveG^0.35) : 1;
-  // --- Kompressor (3 ms / 250 ms, Knee 30, Schwelle -14 dB, 5:1).
-  // Die Kennlinie unten ist algebraisch identisch mit der Lehrbuchform
+  // --- Compressor (3 ms / 250 ms, knee 30, threshold -14 dB, 5:1).
+  // The curve below is algebraically identical to the textbook form
   //   over<=-K/2: 0 | |over|<K/2: -(over+K/2)^2/(2K)*(1-1/R)
   //   over>=K/2 : -over*(1-1/R)
-  // mit K=30, R=5, also (1-1/R)=0,8 und 2K=60. Nicht umschreiben.
+  // with K=30, R=5, so (1-1/R)=0.8 and 2K=60. Do not rewrite.
   cAtk = 1 - exp(-1/(0.003*srate));
   cRel = 1 - exp(-1/(0.25*srate));
   // --- Delay
   lpG24   = 1 - exp(-2*$pi*2400/srate);
-  // Die Kreuzkopplung laeuft jetzt ungedaempft, die Rueckkopplung traegt
-  // dafuer das Quadrat — so bleibt die Schleifenverstaerkung pro Umlauf
-  // dieselbe wie vorher, aber der rechte Kanal bekommt auch bei 0 %
-  // Feedback noch Signal.
+  // The cross-coupling now runs undamped, the feedback carries the
+  // square in return — so the loop gain per round trip stays the same
+  // as before, but the right channel also gets signal at 0 %
+  // feedback.
   dlyFb2  = dlyFb*dlyFb;
-  // --- FX-Eingangs-EQs. 0 Hz / 20 kHz = echter Bypass (nicht a=1).
+  // --- FX input EQs. 0 Hz / 20 kHz = true bypass (not a=1).
   eqDLoOn = eqDLoHz > 0;     eqDHiOn = eqDHiHz < 20000;
   eqYLoOn = eqYLoHz > 0;     eqYHiOn = eqYHiHz < 20000;
   eqRLoOn = eqRLoHz > 0;     eqRHiOn = eqRHiHz < 20000;
@@ -389,17 +389,17 @@ function updateParams() (
   eqYHiG = eqYHiOn ? 1 - exp(-2*$pi*eqYHiHz/srate) : 1;
   eqRLoA = eqRLoOn ? exp(-2*$pi*eqRLoHz/srate) : 0;
   eqRHiG = eqRHiOn ? 1 - exp(-2*$pi*eqRHiHz/srate) : 1;
-  // --- Hall
+  // --- Reverb
   rhpA    = exp(-2*$pi*250/srate);
   rlpG    = 1 - exp(-2*$pi*3200/srate);
   cmbFb   = 0.7 + 0.25*roomSz;
-  cmbDamp = 0.44 - 0.14*roomSz;              // kuerzeste Combs etwas toter
+  cmbDamp = 0.44 - 0.14*roomSz;              // shortest combs a bit deader
   preLen  = floor(min(0.012*srate, 8000));
 );
 
-/* ---------- Effekte ---------- */
+/* ---------- Effects ---------- */
 
-// WaveShaper-Modelle (Eingang auf +-1 begrenzt wie ein Web-Audio-Shaper)
+// WaveShaper models (input limited to +-1 like a Web Audio shaper)
 function distProc(x) local(c, t, m) (
   c = min(1, max(-1, x));
   distModel == 1 ? ( t = min(0.82, max(-0.82, c*4)); fastTanh(t*1.4); )
@@ -408,7 +408,7 @@ function distProc(x) local(c, t, m) (
   : fastTanh(3.6*c);
 );
 
-// Freeverb-Comb — i = 0..15 (Kanal 0: 0..7, Kanal 1: 8..15)
+// Freeverb comb — i = 0..15 (channel 0: 0..7, channel 1: 8..15)
 function combProc(i, x) local(o, idx, y, s) (
   o = M_RVB + M_PAR[i];
   idx = M_PAR[32+i];
@@ -421,7 +421,7 @@ function combProc(i, x) local(o, idx, y, s) (
   y;
 );
 
-// Freeverb-Allpass — i = 0..7
+// Freeverb allpass — i = 0..7
 function apProc(i, x) local(o, idx, y) (
   o = M_RVB + M_PAR[64+i];
   idx = M_PAR[80+i];
@@ -432,22 +432,22 @@ function apProc(i, x) local(o, idx, y) (
   y - x;
 );
 
-/* ---------- Stimme ---------- */
+/* ---------- Voice ---------- */
 
-// Der Slide der 303 laedt einen Kondensator auf die neue Steuerspannung um.
-// Weil die Steuerspannung 1 V pro Oktave ist, ist das im Logfrequenzraum
-// eine Exponentialannaeherung, keine Gerade. Hoerbar ist der Unterschied am
-// Ende: die RC-Kurve laeuft weich aus, die Gerade knickt ab.
-// slideSamps ist jetzt die Zeitkonstante tau, nicht die Gesamtdauer. Nach
-// 3*tau sind 95 % erreicht, das entspricht ungefaehr der frueheren
-// Gesamtdauer.
-// Historie: bis v6 lineare Interpolation ueber slidePos/slideInc mit
+// The slide of the 303 recharges a capacitor to the new control voltage.
+// Because the control voltage is 1 V per octave, in log frequency space
+// this is an exponential approach, not a straight line. The difference is
+// audible at the end: the RC curve eases out, the straight line kinks off.
+// slideSamps is now the time constant tau, not the total duration. After
+// 3*tau 95 % is reached, which is roughly the same as the former total
+// duration.
+// History: up to v6 linear interpolation via slidePos/slideInc with
 //   slideF1 = curLog; slideF2 = tl; slidePos = 0; slideInc = 1/slideSamps;
-// (konstante Zeit; die Schrittweite wurde einmal beim Start berechnet, damit
-// ein Reglerwechsel mitten im Slide nicht durch null teilt). Der Reglerwert
-// war die Gesamtdauer.
-// OFFEN (LOGBUCH O2): slider11 bedeutet mit dieser Kurve tau; Default/Range
-// wollen aus ref_slide.wav neu bestimmt werden, nicht geschaetzt.
+// (constant time; the step size was computed once at the start so that a
+// knob change mid-slide would not divide by zero). The knob value was the
+// total duration.
+// OPEN (LOGBUCH O2): with this curve slider11 means tau; default/range
+// want to be re-determined from ref_slide.wav, not estimated.
 function startSlide(tl) (
   slideSamps >= 1 ? (
     slideTgt = tl;
@@ -456,42 +456,42 @@ function startSlide(tl) (
   ) : ( curLog = tl; sliding = 0; );
 );
 
-// Accent-Anteil fuer sich: Kondensator nachladen und den Filter-Sweep
-// starten. Steht getrennt, weil auch eine angebundene Slide-Note betont
-// sein kann — dann darf genau dieser Teil feuern, die Huellkurven aber
-// nicht neu anlaufen.
+// Accent part on its own: recharge the capacitor and start the filter
+// sweep. It stands separate because a tied slide note can be accented
+// too — then exactly this part may fire, but the envelopes must not
+// restart.
 function fireAccent() (
-  // Recovery: ausgeruhter Kondensator laedt kraeftiger nach (Devil-Fish)
+  // Recovery: a rested capacitor recharges more strongly (Devil Fish)
   accBoost = accCap < 0.18 ? 1.08 : 0.95;
   accCap = min(1.65, accCap + accBoost);
   accentLed = 1;
   aEnv = 1;
-  // Accent-Sweep: an Resonanz gekoppelt + leichte Cutoff-Abhaengigkeit
-  // und sanfte Nichtlinearitaet (accCap^1.12) fuer dichtere Accents
+  // Accent sweep: coupled to resonance + slight cutoff dependency
+  // and a gentle non-linearity (accCap^1.12) for denser accents
   accOctCur = accN * (0.55 + 2.55*resN) * (0.92 + 0.08*cutN)
               * ((accCap/0.95)^1.12);
 );
 
-// Anschlag. acc = Accent ja/nein.
+// Note-on. acc = accent yes/no.
 function startNote(acc) (
   accentNow = acc;
   acc ? fireAccent() : ( aEnv = 0; accOctCur = 0; );
-  // Lautstaerke: Accent hebt an (leicht staerker bei hohen accCap)
+  // Level: accent lifts it (slightly stronger at high accCap)
   peakAmp = min(1, 0.5*(1 + (acc ? 0.88*accN*(accCap/0.95) : 0)));
-  // Accent bekommt kuerzere Attack (1.8 ms) → spitzerer Anschlag
+  // Accent gets a shorter attack (1.8 ms) -> sharper note-on
   attInc  = (peakAmp - amp)/max(1, (acc ? attSecAcc : attSec)*srate);
   envStage = 1; gateHeld = 1;
   mEnv = 1;
-  mCoef = acc ? mDecAcc : mDecC;             // Accent = fixe 0,2 s
+  mCoef = acc ? mDecAcc : mDecC;             // accent = fixed 0.2 s
 );
 
 function voiceOn(n, acc) local(f, i, j) (
-  // Dieselbe Note darf nur einmal im Stack stehen. Manche Controller und
-  // manche Hosts schicken zwei Note-On ohne Note-Off dazwischen; stand die
-  // Note dann doppelt drin, hat ein einzelnes Note-Off sie nicht mehr
-  // vollstaendig entfernt und die Stimme blieb haengen. Ein vorhandener
-  // Eintrag wird herausgenommen, die Note wandert dadurch nach oben und
-  // die Letzte-Note-Prioritaet bleibt unveraendert.
+  // The same note may appear only once in the stack. Some controllers and
+  // some hosts send two note-ons without a note-off in between; if the
+  // note was then in there twice, a single note-off did not remove it
+  // fully any more and the voice stayed stuck. An existing entry is
+  // taken out, the note thereby moves to the top and last-note priority
+  // stays unchanged.
   i = 0; j = 0;
   loop(stkN, M_STK[i] != n ? ( M_STK[j] = M_STK[i]; j += 1; ); i += 1; );
   stkN = j;
@@ -500,10 +500,10 @@ function voiceOn(n, acc) local(f, i, j) (
   noteCur = n;
   f = 440*2^((n - 69 + tuneSemi + fineCent*0.01)/12);
   stkN > 1 ? (
-    startSlide(log(f));                      // Legato bindet, kein Retrigger
-    // Ein angebundener Step darf trotzdem betont sein. Kondensator und
-    // Filter-Sweep feuern, die Amplitudenhuellkurve bleibt unberuehrt —
-    // sonst waere es ein Retrigger und kein Slide.
+    startSlide(log(f));                      // legato ties, no retrigger
+    // A tied step may still be accented. Capacitor and filter sweep
+    // fire, the amplitude envelope stays untouched — otherwise it
+    // would be a retrigger and not a slide.
     acc ? ( accentNow = 1; fireAccent(); );
   ) : (
     curLog = log(f); sliding = 0;
@@ -520,7 +520,7 @@ function noteOff(n) local(i, j, v, found) (
   );
   stkN = j;
   stkN > 0 ? (
-    M_STK[stkN-1] != noteCur ? (            // letzte-Note-Prioritaet
+    M_STK[stkN-1] != noteCur ? (            // last-note priority
       noteCur = M_STK[stkN-1];
       startSlide(log(440*2^((noteCur - 69 + tuneSemi + fineCent*0.01)/12)));
     );
@@ -537,10 +537,10 @@ function allOff() (
 
 /* ---------- Pattern ---------- */
 
-// Nach dem Laden aus dem Projekt: alle Steps in gueltige Grenzen ziehen.
-// Eine beschaedigte oder aeltere Datei koennte sonst Noten weit ausserhalb
-// von SEQ_NLO..SEQ_NHI oder Flags ungleich 0/1 einschleusen — der Step-
-// Editor zeichnet dann ins Leere und seqFire spielt unbrauchbare Noten.
+// After loading from the project: pull all steps into valid bounds.
+// A corrupted or older file could otherwise smuggle in notes far outside
+// SEQ_NLO..SEQ_NHI or flags other than 0/1 — the step editor then draws
+// into nothing and seqFire plays unusable notes.
 function validateBanks() local(i, v) (
   i = 0;
   loop(4*SEQ_BANK,
@@ -572,8 +572,8 @@ function clearBank(bb) local(s) (
   s = 0; loop(16, setStep(bb, s, 36, 0, 0, 0); s += 1; );
 );
 
-// Tonvorrat fuer den Zufall: Moll-Pentatonik ueber C2 — das ist die Lage,
-// in der die typischen Acid-Linien sitzen.
+// Note supply for the random function: minor pentatonic over C2 — that is
+// the register where the typical acid lines sit.
 function randNote() local(r) (
   r = rand(1);
   r < 0.44 ? 36 : r < 0.58 ? 39 : r < 0.70 ? 41
@@ -584,19 +584,19 @@ function randPattern(bb) local(s, n) (
   s = 0;
   loop(16,
     n = randNote();
-    rand(1) < 0.12 ? n -= 12;                // ab und zu eine Oktave tiefer
+    rand(1) < 0.12 ? n -= 12;                // now and then an octave lower
     M_SEQ[bb + s*4 + SF_NOTE]  = min(SEQ_NHI, max(SEQ_NLO, n));
     M_SEQ[bb + s*4 + SF_GATE]  = rand(1) < 0.78;
     M_SEQ[bb + s*4 + SF_ACC]   = rand(1) < 0.22;
     M_SEQ[bb + s*4 + SF_SLIDE] = rand(1) < 0.16;
     s += 1;
   );
-  // Der erste Step sitzt immer und betont, sonst faengt die Figur im
-  // Nichts an und man hoert den Pattern-Anfang nicht.
+  // The first step always sits and is accented, otherwise the figure
+  // starts in nothing and the pattern beginning is not heard.
   setStep(bb, 0, 36, 1, 1, 0);
 );
 
-// Mutation: nur ein paar Steps anfassen, der Rest bleibt wiedererkennbar.
+// Mutation: touch only a few steps, the rest stays recognisable.
 function mutPattern(bb) local(k, s, r, n) (
   k = 0;
   loop(3,
@@ -626,11 +626,11 @@ function defaultPattern() local(b, i) (
   setStep(0, 12, 41, 1, 0, 1);  setStep(0, 13, 41, 1, 0, 0);
   setStep(0, 14, 39, 1, 0, 0);  setStep(0, 15, 36, 0, 0, 0);
   b = 1; loop(3, copyBank(0, b*SEQ_BANK); b += 1; );
-  // Bank D (Index 3): "PUMP" — importiert aus TT-303_pump_134bpm.mid
-  // (134 BPM). Die MIDI ist zwei identische Takte lang; hier auf die
-  // 16 Steps des einen Takts reduziert (nichts geht verloren). E2-Bass
-  // mit Slide 0->1 (ueberlappende gleiche Note in der MIDI) und 10->11,
-  // Akzente auf 0/1/8 (Velocity 112), Rest Velocity 80.
+  // Bank D (index 3): "PUMP" — imported from TT-303_pump_134bpm.mid
+  // (134 BPM). The MIDI is two identical bars long; reduced here to the
+  // 16 steps of the one bar (nothing is lost). E2 bass with slide 0->1
+  // (overlapping identical note in the MIDI) and 10->11, accents on
+  // 0/1/8 (velocity 112), rest velocity 80.
   setStep(3*SEQ_BANK,  0, 40, 1, 1, 1);  setStep(3*SEQ_BANK,  1, 40, 1, 1, 0);
   setStep(3*SEQ_BANK,  2, 36, 0, 0, 0);  setStep(3*SEQ_BANK,  3, 40, 1, 0, 0);
   setStep(3*SEQ_BANK,  4, 36, 0, 0, 0);  setStep(3*SEQ_BANK,  5, 28, 1, 0, 0);
@@ -643,8 +643,8 @@ function defaultPattern() local(b, i) (
 
 /* ---------- Sequencer ---------- */
 
-// MIDI nach draussen. Der Offset ist die Position im laufenden Block,
-// dadurch bleibt die Sequenz auch am Ausgang sample-genau.
+// MIDI to the outside. The offset is the position within the running
+// block, so the sequence stays sample-accurate at the output too.
 function seqSendOn(n, acc)  ( midiOut ? midisend(smplPos, 0x90, n, acc ? 127 : 100); );
 function seqSendOff(n)      ( midiOut ? midisend(smplPos, 0x80, n, 0); );
 
@@ -653,15 +653,15 @@ function seqRelease() (
   gateLeft = 0;
 );
 
-// Einen Step ausloesen. Das Slide-Flag eines Steps bindet ihn an den
-// FOLGENDEN — deshalb entscheidet prevSlide ueber Legato oder Retrigger.
+// Trigger one step. A step's slide flag ties it to the FOLLOWING one —
+// which is why prevSlide decides legato or retrigger.
 function seqFire(s) local(n, a, oldHeld) (
   curStepDisp = s;
   M_SEQ[bankBase + s*4 + SF_GATE] ? (
     n = min(120, max(0, M_SEQ[bankBase + s*4 + SF_NOTE] + seqTrans));
     a = M_SEQ[bankBase + s*4 + SF_ACC];
     prevSlide ? (
-      // Gleiche Zielnote nicht vom Stack nehmen — sonst stirbt der Slide-Ton
+      // do not take the same target note off the stack — otherwise the slide tone dies
       oldHeld = seqHeld;
       voiceOn(n, a); seqSendOn(n, a);
       oldHeld >= 0 && oldHeld != n ? ( noteOff(oldHeld); seqSendOff(oldHeld); );
@@ -680,7 +680,7 @@ function seqFire(s) local(n, a, oldHeld) (
 
 /* ---------- MIDI ---------- */
 
-// m1 & 0xF0 liefert 0x90 / 0x80 / 0xB0 — genau so muss verglichen werden.
+// m1 & 0xF0 yields 0x90 / 0x80 / 0xB0 — that is exactly how it must be compared.
 function handleMidi(m1, m2, m3) local(st, nv) (
   st = m1 & 0xF0;
   st == 0x90 && m3 > 0 ? (
@@ -704,18 +704,18 @@ function handleMidi(m1, m2, m3) local(st, nv) (
   : 0;
 );
 
-/* ---------- Oberflaechen-Bausteine ----------
-   Alles wird im Designraster 900 x 732 angegeben. SC ist der Faktor auf
-   die tatsaechliche Fenstergroesse, OX/OY zentrieren das Bild. Die Maus
-   wird umgekehrt ins Raster zurueckgerechnet (mX/mY), damit Treffertests
-   und Zieh-Empfindlichkeit unabhaengig vom Zoom bleiben.             */
+/* ---------- Surface building blocks ----------
+   Everything is given in the 900 x 732 design grid. SC is the factor to
+   the actual window size, OX/OY centre the image. The mouse is
+   converted back into the grid (mX/mY) so that hit tests and drag
+   sensitivity stay independent of the zoom.                            */
 
-// Vergebene Zieh-IDs (dragId), damit sich spaetere Erweiterungen nicht
-// ins Gehege kommen:
-//   1..17      Drehregler
-//   20..25     Griffe der drei Dual-EQ-Streifen
-//   1000..1015 Spalten im Step-Editor
-// Frei: 18/19, 26..999, ab 1016.
+// Assigned drag IDs (dragId), so that later extensions do not get
+// in each other's way:
+//   1..17      knobs
+//   20..25     handles of the three dual EQ strips
+//   1000..1015 columns in the step editor
+// Free: 18/19, 26..999, from 1016.
 
 function xrect(x, y, w, h) (
   gfx_rect(OX + x*SC, OY + y*SC, max(1, w*SC), max(1, h*SC), 1);
@@ -738,19 +738,19 @@ function inBox(bx, by, bw, bh) (
   mX >= bx && mX < bx + bw && mY >= by && mY < by + bh;
 );
 
-// Kernfarben aus dem Designkit
+// core colours from the design kit
 function colAcid(a)  ( gfx_set(0.224, 1.000, 0.078, a); );   // #39FF14
 function colDim(a)   ( gfx_set(0.130, 0.340, 0.090, a); );
 function colWhite(a) ( gfx_set(1, 1, 1, a); );
 function colInk(a)   ( gfx_set(0.75, 0.81, 0.75, a); );
 
-// Loetpunkt am Ende einer Leitbahn
+// solder pad at the end of a trace
 function pad(x, y, r) (
   colAcid(1); xcirc(x, y, r, 1);
   gfx_set(0, 0, 0, 1); xcirc(x, y, r*0.40, 1);
 );
 
-// Leitbahn: waagerecht bis zum Knick, dann 45 Grad
+// trace: horizontal up to the bend, then 45 degrees
 function trace(x1, y1, x2, y2) local(kx) (
   kx = x2 - abs(y2 - y1);
   colDim(1);
@@ -765,7 +765,7 @@ function panelBox(x, y, w, h) (
   xrect(x, y, 1, h); xrect(x + w - 1, y, 1, h);
 );
 
-// Schalter. Rueckgabe 1, wenn in diesem Frame geklickt wurde.
+// Switch. Returns 1 if it was clicked in this frame.
 function btn(x, y, w, h, on, s) local(hit, hov) (
   hov = inBox(x, y, w, h);
   hit = uiClick && hov;
@@ -783,8 +783,8 @@ function btn(x, y, w, h, on, s) local(hit, hov) (
   hit;
 );
 
-// Drehregler. Senkrecht ziehen, Shift = fein, Mausrad geht auch.
-// Gibt den (evtl. geaenderten) Wert zurueck.
+// Knob. Drag vertically, Shift = fine, mouse wheel works too.
+// Returns the (possibly changed) value.
 function knobDef(id) (
   id == 1 ? 0 : id == 2 ? 0 : id == 3 ? 32 : id == 4 ? 55 : id == 5 ? 62
   : id == 6 ? 35 : id == 7 ? 60 : id == 8 ? 70 : id == 9 ? 8 : id == 10 ? 15
@@ -832,15 +832,15 @@ function knob(id, cx, cy, r, val, vmn, vmx)
   nv;
 );
 
-// Zeichenkette in #vstr zentriert bei (cx, y) — Schrift vorher setzen
+// String in #vstr centred at (cx, y) — set the font beforehand
 function drawCentered(cx, y) local(w, h) (
   gfx_measurestr(#vstr, w, h);
   xat(cx - w*0.5, y); gfx_drawstr(#vstr);
 );
 
-// Beschriftung: Label (#klbl) in grau, Wert (#kval) in Acid-Gruen,
-// ab linker Kante x0. Die Position berechnet der Aufrufer aus den
-// gemessenen Breiten, damit nichts mit dem Nachbartext kollidiert.
+// Label: label (#klbl) in grey, value (#kval) in acid green,
+// from the left edge x0. The caller computes the position from the
+// measured widths so nothing collides with the neighbouring text.
 function kvLabel(x0, y) local(lw, vh) (
   gfx_setfont(3);
   gfx_measurestr(#klbl, lw, vh);
@@ -848,19 +848,19 @@ function kvLabel(x0, y) local(lw, vh) (
   xat(x0 + lw + 6, y); colAcid(1); gfx_drawstr(#kval);
 );
 
-/* ---------- Dual-EQ-Slider unter jeder Effekteineheit ----------
-   Logarithmische Skala 20 Hz .. 20 kHz: f = 20*1000^t. Die linke
-   Kante (t = 0) ist der Lowcut und rastet auf OFF (0 Hz), die rechte
-   (t = 1) der Highcut auf OFF (20 kHz). Rechtsklick auf einen Griff
-   stellt die Werkseinstellung zurueck.                              */
+/* ---------- Dual EQ slider under each effect unit ----------
+   Logarithmic scale 20 Hz .. 20 kHz: f = 20*1000^t. The left edge
+   (t = 0) is the lowcut and snaps to OFF (0 Hz), the right one
+   (t = 1) the highcut to OFF (20 kHz). Right-click on a handle
+   resets the factory setting.                                      */
 
-// Position im Streifen (0..1) fuer eine Frequenz: log(hz/20)/log(1000)
-// — 20 Hz ganz links, 20 kHz ganz rechts, OFF (0 Hz) auf der linken
-// Kante. Umrechnung und Rueckweg in fxEq muessen spiegelbildlich sein,
-// sonst springt der Griff beim Greifen.
+// Position in the strip (0..1) for a frequency: log(hz/20)/log(1000)
+// — 20 Hz far left, 20 kHz far right, OFF (0 Hz) on the left edge.
+// Conversion and the way back in fxEq must be mirror images,
+// otherwise the handle jumps when grabbed.
 function eqT(hz) ( min(1, max(0, log(max(20, hz)*0.05)*0.144764827)); );
 
-// Kompakte Frequenzanzeige in #vstr
+// compact frequency display in #vstr
 function hzTxt(hz) (
   hz <= 0 || hz >= 20000 ? sprintf(#vstr, "OFF")
   : hz >= 9950 ? sprintf(#vstr, "%dk", floor(hz*0.001 + 0.5))
@@ -868,21 +868,21 @@ function hzTxt(hz) (
   : sprintf(#vstr, "%d", floor(hz + 0.5));
 );
 
-// Lauf des Streifens; das Feld zwischen den Griffen ist das
-// durchgelassene Band
+// run of the strip; the field between the handles is the
+// passed band
 function eqTrack(x, y, w, tLo, tHi) (
   gfx_set(0.092, 0.097, 0.092, 1); xrect(x, y, w, 6);
   tHi > tLo ? ( colAcid(0.30); xrect(x + tLo*w, y + 1, (tHi - tLo)*w, 4); );
 );
 
-// Ein Griff: side 0 = Lowcut (links), side 1 = Highcut (rechts).
-// Diese Funktion rechnet nur, gezeichnet wird in eqHandle.
+// One handle: side 0 = lowcut (left), side 1 = highcut (right).
+// This function only computes, drawing happens in eqHandle.
 //
-// Der Wegfaktor ist die Streifenbreite w, nicht mehr die feste 170 der
-// Drehregler. Nur so laeuft der Griff genau unter dem Mauszeiger mit.
-// Bei einem 284 Punkt breiten Streifen lief er mit 170 um den Faktor
-// 1,67 zu schnell — deshalb zogen die EQ-Slider nicht sauber mit.
-// Shift = fuenffach fein, mit mitwanderndem Bezugspunkt.
+// The travel factor is the strip width w, no longer the fixed 170 of the
+// knobs. Only that way does the handle track exactly under the mouse
+// pointer. On a 284 point wide strip it ran with 170 by a factor of
+// 1.67 too fast — which is why the EQ sliders did not track cleanly.
+// Shift = five times finer, with a moving reference point.
 function fxEqVal(id, x, y, w, hz, side, defHz)
   local(t, hot, nv, hx, sh) (
   t  = eqT(hz);
@@ -908,9 +908,9 @@ function fxEqVal(id, x, y, w, hz, side, defHz)
   nv;
 );
 
-// Ein Griff, nur zeichnen. Getrennt vom Rechnen, damit das durch-
-// gelassene Band im selben Bild steht wie der Griff — vorher lief der
-// Streifen dem Griff beim Ziehen ein Bild hinterher.
+// One handle, drawing only. Kept apart from the computing so that the
+// passed band stands in the same frame as the handle — before, the
+// strip ran a frame behind the handle while dragging.
 function eqHandle(id, x, y, w, hz) local(hx) (
   hx = x + eqT(hz)*w;
   dragId == id || (mX >= hx - 8 && mX <= hx + 8 && mY >= y - 7 && mY <= y + 11)
@@ -919,7 +919,7 @@ function eqHandle(id, x, y, w, hz) local(hx) (
   gfx_set(0, 0, 0, 1); xrect(hx - 1, y, 2, 6);
 );
 
-// LO/HI-Beschriftung mit Frequenzwerten unter einem EQ-Streifen
+// LO/HI labelling with frequency values under an EQ strip
 function eqLabels(x, y, w, loHz, hiHz) local(a, b, c, d, x0) (
   gfx_setfont(3);
   hzTxt(loHz); gfx_measurestr(#vstr, a, b);
@@ -933,7 +933,7 @@ function eqLabels(x, y, w, loHz, hiHz) local(a, b, c, d, x0) (
   xat(x0 + c + 5, y); colAcid(0.85); gfx_drawstr(#vstr);
 );
 
-// Notenname, z. B. "C#2" — zeichnet an der aktuellen Textposition
+// note name, e.g. "C#2" — draws at the current text position
 function noteName(n) local(k, o) (
   k = n - 12*floor(n/12); o = floor(n/12) - 1;
   k == 0 ? gfx_drawstr("C") : k == 1 ? gfx_drawstr("C#") : k == 2 ? gfx_drawstr("D")
@@ -943,32 +943,32 @@ function noteName(n) local(k, o) (
   gfx_printf("%d", o);
 );
 
-// Liegt diese Note gerade im Stack? (fuer die Tastaturanzeige)
+// Is this note currently in the stack? (for the keyboard display)
 function noteHeld(n) local(i, r) (
   r = 0; i = 0;
   loop(stkN, M_STK[i] == n ? r = 1; i += 1; );
   r;
 );
 
-/* ---------- Klangvorlagen ---------- */
+/* ---------- Sound presets ---------- */
 
-// Klangvorlagen fuer die v8-Engine neu abgestimmt (Release v1.0). Die alten
-// Werte stammten aus der v6/v7-Engine, in der Cutoff 60 Hz..6 kHz und Decay
-// 60 ms..2,5 s spannten; seit v8 ist das ~145 Hz..~1 kHz bzw. 30..570 ms, die
-// Resonanz traegt immer schon Q~1,6 und wirkt deutlich staerker. Angepasst
-// wurde daher: Cutoff der hellen Patches hoch (SCREAM 58->72, HOOVER 64->74,
-// SQUELCH 38->52), Resonanz der heissen Patches runter (SQUELCH 86->80,
-// SCREAM 95->88, HOOVER 72->68), Decay von DUB in den langen Bereich
-// (48->82 ~ 340 ms) und von SCREAM/SQUELCH kuerzer. SCREAM und HOOVER
-// bleiben SQUARE. INIT setzt jetzt zusaetzlich Comp AN/100 % und die
-// Delay-/Hall-Eingangs-EQs (250 Hz..3,0 kHz bzw. 300 Hz..2,3 kHz).
-// Historie (v6/v7-Engine):
+// Presets re-tuned for the v8 engine (release v1.0). The old values
+// came from the v6/v7 engine, where cutoff spanned 60 Hz..6 kHz and
+// decay 60 ms..2.5 s; since v8 that is ~145 Hz..~1 kHz resp. 30..570 ms,
+// the resonance already carries Q~1.6 and acts markedly stronger.
+// Adjusted therefore: cutoff of the bright patches up (SCREAM 58->72,
+// HOOVER 64->74, SQUELCH 38->52), resonance of the hot patches down
+// (SQUELCH 86->80, SCREAM 95->88, HOOVER 72->68), decay of DUB into the
+// long range (48->82 ~ 340 ms) and of SCREAM/SQUELCH shorter. SCREAM and
+// HOOVER stay SQUARE. INIT now additionally sets Comp ON/100 % and the
+// delay/reverb input EQs (250 Hz..3.0 kHz resp. 300 Hz..2.3 kHz).
+// History (v6/v7 engine):
 //   DEEP    s5=16 s6=48 s7=42 s8=58 s9=38  s15=7  s16=18 s18=52 s19=20
 //   SQUELCH s5=38 s6=86 s7=78 s8=25 s9=78  s15=7  s16=16 s18=64 s19=14
 //   SCREAM  s5=58 s6=95 s7=88 s8=18 s9=92  s15=18 s16=10 s18=58 s19=10
 //   HOOVER  s5=64 s6=72 s7=92 s8=68 s9=72  s15=11 s16=22 s18=68 s19=22
 //   DUB     s5=20 s6=58 s7=48 s8=48 s9=52  s15=7  s16=48 s18=78 s19=42
-//   INIT    ... s29=300 s30=20000 s31=0 s32=20000, Comp unberuehrt
+//   INIT    ... s29=300 s30=20000 s31=0 s32=20000, comp untouched
 function applyPatch(p) (
   p == 1 ? ( slider2 = 0; slider5 = 14; slider6 = 40; slider7 = 40; slider8 = 64;
              slider9 = 35; slider13 = 0; slider14 = 0; slider15 = 7;
@@ -1002,15 +1002,15 @@ function applyPatch(p) (
   paramsDirty = 1;
 );
 
-/* ---------- Grundzustand ---------- */
+/* ---------- Base state ---------- */
 
 readSliders();
 
-// Zwei memsets: die Pattern-Luecke bleibt unberuehrt.
+// Two memsets: the pattern gap stays untouched.
 memset(0, 0, M_SEQ);
 memset(M_SEQEND, 0, MEMTOP - M_SEQEND);
 
-// Freeverb: 8 Combs + 4 Allpaesse je Kanal, Laengen skalieren mit srate
+// Freeverb: 8 combs + 4 allpasses per channel, lengths scale with srate
 M_PAR[16] = ceil(1116*rvSc); M_PAR[17] = ceil(1188*rvSc);
 M_PAR[18] = ceil(1277*rvSc); M_PAR[19] = ceil(1356*rvSc);
 M_PAR[20] = ceil(1422*rvSc); M_PAR[21] = ceil(1491*rvSc);
@@ -1027,32 +1027,32 @@ i = 0; loop(4, M_PAR[68+i] = p; p += M_PAR[76+i]; i += 1; );
 
 updateParams();
 
-// Startpattern nur beim allerersten Mal — danach stehen hier entweder die
-// selbst gebauten Baenke oder die aus dem Projekt geladenen.
+// Start pattern only the very first time — after that either the
+// self-built banks or the ones loaded from the project stand here.
 patInit != 1 ? ( defaultPattern(); patInit = 1; );
 
-// Stimme
+// Voice
 stkN = 0; gateHeld = 0; envStage = 0; amp = 0; peakAmp = 0.5; accentNow = 0;
 accCap = 0; sliding = 0; slideTgt = 0; slideCoef = 0; noteCur = 36;
 curLog = log(65.406); phase = 0;
 mEnv = 0; aEnv = 0; mCoef = 1; accOctCur = 0;
 s1 = 0; s2 = 0; s3 = 0; y3prev = 0;
 oscHpY = 0; oscHpX = 0; sqHpY = 0; sqHpX = 0; fbHpY = 0; fbHpX = 0;
-// Effektzustand
+// Effect state
 envDb = -100; dlyPos = 0; prePos = 0;
 hpY = 0; hpPrev = 0; lpL = 0; lpR = 0;
-dHpY = 0; dHpX = 0; dLpY = 0; dlyLpY = 0;    // FX-Eingangs-EQs
-dPrevIn = 0; dsPrev = 0;                     // Drive-Oversampling
+dHpY = 0; dHpX = 0; dLpY = 0; dlyLpY = 0;    // FX input EQs
+dPrevIn = 0; dsPrev = 0;                     // drive oversampling
 rvHpY = 0; rvHpX = 0; rvLpY = 0;
 rhpL = 0; rhpXL = 0; rlpL = 0; rhpR = 0; rhpXR = 0; rlpR = 0;
 scopePos = 0; accentLed = 0; bpmNow = 120;
 dlySamps = min(dlyBufLen - 4, 0.75*(60/120)*srate);
-// Ablaufsteuerung
+// Control flow
 evN = 0; evRd = 0; smplPos = 0; paramsDirty = 0;
 seqHeld = -1; prevSlide = 0; gateLeft = 0; lastStep = -1; seqPos = 0;
 curStepDisp = 0; seqTrans = 0; midiHeld = 0; seqRunning = 0; modePrev = -1;
 stepSamps = srate*0.125; stepInc = 1/stepSamps;
-// Oberflaeche
+// Surface
 SC = 1; OX = 0; OY = 0; mX = -1; mY = -1;
 dragId = -1; dragX = 0; dragY = 0; dragV = 0; dragT = 0; dragSh = 0;
 bigSel = 0;
@@ -1061,20 +1061,20 @@ monoSel = 0; sansSel = 0; fontChk = 0; patchSel = 0; copyArm = 0;
 fBigP = -1; fMedP = -1; fSmlP = -1;
 clickId = -1; clickWait = 0; undoArm = 0;
 fcPrev = -1; osPrev = 0; osA = 0; osB = 0; scopeDiv = 0;
-rvbWas = rvbMix > 0.005;      // Zustand des Hall-Bypass, s. @sample
+rvbWas = rvbMix > 0.005;      // state of the reverb bypass, see @sample
 g = 0; G = 0;
 
 /* ============================================================
-   @serialize — alle vier Baenke wandern ins Projekt und in Presets
+   @serialize — all four banks travel into the project and into presets
    ============================================================ */
 @serialize
 
 seqVer = 2;
 file_var(0, seqVer);
 file_mem(0, M_SEQ, 4*SEQ_BANK);
-// Laeuft in beide Richtungen. Beim Schreiben ist es ein No-Op, weil die
-// Werte ohnehin gueltig sind; beim Lesen faengt es beschaedigte oder
-// fremde Daten ab. Kuenftige Formatwechsel gehoeren ueber seqVer hierher.
+// Runs in both directions. On write it is a no-op, because the values
+// are valid anyway; on read it catches corrupted or foreign data.
+// Future format changes belong here via seqVer.
 validateBanks();
 patInit = 1;
 
@@ -1087,18 +1087,18 @@ readSliders();
 updateParams();
 
 /* ============================================================
-   @block — Transport, Taktung, MIDI einsammeln
+   @block — transport, timing, collecting MIDI
    ============================================================ */
 @block
 
 paramsDirty ? ( readSliders(); updateParams(); paramsDirty = 0; );
 
 bpmNow    = tempo > 10 ? tempo : 120;
-stepSamps = max(16, srate*15/bpmNow);        // ein 16tel in Samples
+stepSamps = max(16, srate*15/bpmNow);        // one 16th in samples
 stepInc   = 1/stepSamps;
 dlySamps  = min(dlyBufLen - 4, (60/bpmNow)*dlyDiv*srate);
 
-// Moduswechsel sauber abfangen
+// catch a mode change cleanly
 seqMode != modePrev ? (
   modePrev = seqMode;
   seqRelease(); allOff();
@@ -1112,15 +1112,15 @@ seqWant != seqRunning ? (
   seqRunning ? (
     prevSlide = 0;
     hostPlay ? ( seqPos = beat_position*4; ) : ( seqPos = 0; );
-    lastStep = floor(seqPos) - 1;             // Step unter dem Cursor feuert
+    lastStep = floor(seqPos) - 1;             // the step under the cursor fires
   ) : ( seqRelease(); );
 );
-// An der Timeline haengen, aber NICHT jeden Block hart neu setzen.
-// beat_position rundet, und wenn seqPos im @sample gerade ueber eine
-// Step-Grenze gelaufen ist, schiebt der Blockanfang es minimal zurueck —
-// der Step feuert dann doppelt oder faellt aus. Das war der Timing-
-// Jitter. Nachgezogen wird nur bei echtem Versatz: Loop-Sprung,
-// Positionswechsel, Tempoaenderung. 0,02 Steps sind bei 130 BPM 2,3 ms.
+// Hang on the timeline, but do NOT hard-reset every block.
+// beat_position rounds, and if seqPos in @sample has just crossed a
+// step boundary, the block start nudges it minimally back — the step
+// then fires twice or drops out. That was the timing jitter. It is
+// re-synced only on a real offset: loop jump, position change, tempo
+// change. 0.02 steps are 2.3 ms at 130 BPM.
 seqRunning && hostPlay ? (
   tgtPos = beat_position*4;
   abs(tgtPos - seqPos) > 0.02 ? (
@@ -1129,7 +1129,7 @@ seqRunning && hostPlay ? (
   );
 );
 
-// MIDI mit Offset in die Queue, Ausloesung erfolgt sample-genau im @sample
+// MIDI with offset into the queue, triggering happens sample-accurately in @sample
 evN = 0; evRd = 0; smplPos = 0;
 while (midirecv(offs, m1, m2, m3)) (
   evN < EVT_MAX ? (
@@ -1137,25 +1137,25 @@ while (midirecv(offs, m1, m2, m3)) (
     M_EVT[evN*4+2] = m2;   M_EVT[evN*4+3] = m3;
     evN += 1;
   ) : ( handleMidi(m1, m2, m3); );
-  // Instrument: Noten werden verbraucht. CC/Pitchbend/Clock gehen weiter.
+  // Instrument: notes are consumed. CC/pitchbend/clock keep going.
   stThru = m1 & 0xF0;
   midiThru ? midisend(offs, m1, m2, m3)
            : ( stThru != 0x80 && stThru != 0x90 ? midisend(offs, m1, m2, m3) );
 );
 
-// --- Pattern-Export fuer das Companion-ReaScript tt303_pattern_to_midi.lua.
-// Spiegelt die GERADE ANGEZEIGTE Bank (slider25) unveraendert nach gmem.
-// Reines Kopieren aus M_SEQ, kein DSP, keine Rueckwirkung auf den Klang.
-// gmem-Layout: MIDI_EXPORT_BRIDGE.md, Abschnitt 3. Neue Bezeichner
-// exBase/exI (im v8 sonst nirgends belegt).
-gmem[0] = 30303;                     // Handschlag / Magic
-gmem[1] = 1;                         // Layout-Version
-gmem[2] = gmem[2] + 1;               // Heartbeat: laufende Instanz
-gmem[3] = floor(slider25);           // angezeigte Bank 0..3 (A..D)
-gmem[4] = slider21;                  // SEQ Pattern-Laenge, roh (Script klemmt 1..16)
-gmem[5] = slider23;                  // globales SEQ GATE % (Nicht-Slide-Steps)
+// --- Pattern export for the companion ReaScript tt303_pattern_to_midi.lua.
+// Mirrors the CURRENTLY DISPLAYED bank (slider25) unchanged into gmem.
+// Pure copy from M_SEQ, no DSP, no effect on the sound.
+// gmem layout: MIDI_EXPORT_BRIDGE.md, section 3. New identifiers
+// exBase/exI (otherwise unused in v8).
+gmem[0] = 30303;                     // handshake / magic
+gmem[1] = 1;                         // layout version
+gmem[2] = gmem[2] + 1;               // heartbeat: running instance
+gmem[3] = floor(slider25);           // displayed bank 0..3 (A..D)
+gmem[4] = slider21;                  // SEQ pattern length, raw (script clamps 1..16)
+gmem[5] = slider23;                  // global SEQ GATE % (non-slide steps)
 gmem[6] = slider22;                  // SEQ SHUFFLE %
-gmem[7] = 36;                        // Notennummer der Originallage (C2)
+gmem[7] = 36;                        // note number of the original pitch (C2)
 exBase = floor(slider25)*SEQ_BANK;
 exI = 0;
 loop(64,
@@ -1164,17 +1164,17 @@ loop(64,
 );
 
 /* ============================================================
-   @sample — eine Stimme, Signalweg wie in der Hardware
+   @sample — one voice, signal path as in the hardware
    ============================================================ */
 @sample
 
-// --- faellige MIDI-Ereignisse
+// --- due MIDI events
 while (evRd < evN && M_EVT[evRd*4] <= smplPos) (
   handleMidi(M_EVT[evRd*4+1], M_EVT[evRd*4+2], M_EVT[evRd*4+3]);
   evRd += 1;
 );
 
-// --- Sequencer-Uhr. Ungerade Steps wandern beim Shuffle nach hinten.
+// --- Sequencer clock. Odd steps move back on shuffle.
 seqRunning ? (
   seqPos += stepInc;
   stepIdx = floor(seqPos);
@@ -1186,18 +1186,18 @@ seqRunning ? (
   gateLeft > 0 ? ( gateLeft -= 1; gateLeft <= 0 ? seqRelease(); );
 );
 
-// --- Slide. RC-Annaeherung im Logfrequenzraum (Kondensator-Umladung), seit
-//     v7. Historie: bis v6 lineare Interpolation
-//     curLog = slideF1 + (slideF2 - slideF1)*slidePos  ueber slidePos/slideInc.
+// --- Slide. RC approach in log frequency space (capacitor recharge), since
+//     v7. History: up to v6 linear interpolation
+//     curLog = slideF1 + (slideF2 - slideF1)*slidePos  via slidePos/slideInc.
 sliding ? (
   curLog += (slideTgt - curLog)*slideCoef;
-  // Abbruch, wenn der Rest unter einem Cent liegt (ln(2)/1200 = 0.000578)
+  // stop when the remainder is below one cent (ln(2)/1200 = 0.000578)
   abs(slideTgt - curLog) < 0.0005 ? ( curLog = slideTgt; sliding = 0; );
 );
 freq = exp(curLog);
 
-// --- Huellkurven. Accent laeuft auf einer zweiten, schnelleren Kurve,
-//     der Kondensator entlaedt sich unabhaengig davon weiter.
+// --- Envelopes. Accent runs on a second, faster curve,
+//     the capacitor discharges further independently of it.
 mEnv *= mCoef;
 aEnv *= aDecC;
 accCap *= accDecC;
@@ -1215,10 +1215,10 @@ envStage == 3 ? ( amp *= relCoef; amp < 0.00002 ? ( amp = 0; envStage = 0; ); );
 needVoice = amp > 0.00002 || stkN > 0 || envStage > 0 || sliding;
 
 needVoice ? (
-  // tan() nur nachrechnen, wenn sich fc wirklich bewegt. Die Schwelle ist
-  // RELATIV (0,15 Promille), nicht absolut — eine feste Grenze in Hertz
-  // waere bei 60 Hz Cutoff eine hoerbare Quantisierung und bei 6 kHz
-  // wirkungslos gewesen.
+  // recompute tan() only when fc really moves. The threshold is
+  // RELATIVE (0.15 per mille), not absolute — a fixed limit in hertz
+  // would be an audible quantisation at 60 Hz cutoff and ineffective
+  // at 6 kHz.
   abs(fc - fcPrev) > fc*0.00015 ? (
     fcPrev = fc;
     g = tan($pi*fc*poleScale/SRX);
@@ -1226,23 +1226,23 @@ needVoice ? (
   );
   inc  = min(max(freq, 8), 0.45*SRX)/SRX;
   A    = G*G*G;
-  // Das Rechteck der 303 kommt aus einem Transistor-Komparator mit
-  // unsymmetrischem Arbeitspunkt. Der Versatz geht in hohen Lagen zurueck,
-  // weil die Umladezeit dort einen groesseren Anteil der Periode ausmacht.
-  // Historie: bis v8  sqDuty = 0.53 - 0.025*min(1, freq*0.0005)  (fast 50 %).
-  // Task B6, gemessen an ref_f_c50_r50_sq.wav (tt303_b6_fit.py): die Referenz-
-  // Square hat kraeftige GERADE Harmonische (H2 -7, H4 -3, H6 -3 dB re H1) und
-  // spektrale Nullstellen bei H5/H10/H15 -> Duty ~1/5. Bei 0,53 fehlten die
-  // geraden Harmonischen 10..14 dB (Eindruck "zu hohl/anders"). 0,19 senkt
-  // den gewichteten Harmonischen-RMS-Fehler 8,1 -> 4,9 dB. Der freq-Term
-  // (Drift bei hoher Lage) bleibt; ueber den spielbaren Bereich < 0,01 Duty,
-  // Richtung nicht separat vermessen.
+  // The square of the 303 comes from a transistor comparator with an
+  // asymmetric operating point. The offset shrinks in high registers,
+  // because the recharge time there takes a larger share of the period.
+  // History: up to v8  sqDuty = 0.53 - 0.025*min(1, freq*0.0005)  (nearly 50 %).
+  // Task B6, measured against ref_f_c50_r50_sq.wav (tt303_b6_fit.py): the
+  // reference square has strong EVEN harmonics (H2 -7, H4 -3, H6 -3 dB re H1)
+  // and spectral nulls at H5/H10/H15 -> duty ~1/5. At 0.53 the even harmonics
+  // were 10..14 dB short (impression "too hollow/different"). 0.19 lowers
+  // the weighted harmonic RMS error 8.1 -> 4.9 dB. The freq term
+  // (drift at high register) stays; over the playable range < 0.01 duty,
+  // direction not separately measured.
   sqDuty = waveSel ? (0.19 - 0.025*min(1, freq*0.0005)) : 0.5;
   osA = 0; osB = 0; osi = 0;
   loop(2,
     phase += inc; phase >= 1 ? phase -= 1;
     waveSel ? (
-      // zweite Flanke bei phase = sqDuty, also (phase - sqDuty) mod 1
+      // second edge at phase = sqDuty, so (phase - sqDuty) mod 1
       tp = phase + (1 - sqDuty); tp -= floor(tp);
       sqRaw = (phase < sqDuty ? 1 : -1)
             + polyBlep(phase, inc) - polyBlep(tp, inc);
@@ -1254,12 +1254,13 @@ needVoice ? (
     oscHpY = oscHpA*(oscHpY + oscv - oscHpX); oscHpX = oscv;
     xin = softSat(oscHpY*0.8);
 
-    // Pegelabhaengige Rueckkopplung: gehoert IN die Ueberabtastung, sonst
-    // rechnet der zweite Durchlauf mit dem Wert vom vorigen Sample.
+    // Level-dependent feedback: it belongs INSIDE the oversampling,
+    // otherwise the second pass computes with the value from the
+    // previous sample.
     kEff = kRes/(1 + 0.4*abs(y3prev));
 
-    // Hochpass 150 Hz IM Rueckkopplungsweg. Sein Anteil ist affin in y3,
-    // deshalb bleibt die Schleife weiterhin ohne Verzug aufloesbar:
+    // High-pass 150 Hz IN the feedback path. Its share is affine in y3,
+    // so the loop stays solvable without delay:
     //   u  = xin - fbHp(kEff*y3) = (xin - fbC) - fbHpA*kEff*y3
     //   y3 = A*u + B   ->   y3 = (A*(xin - fbC) + B)/(1 + A*fbHpA*kEff)
     fbC = fbHpA*(fbHpY - fbHpX);
@@ -1276,22 +1277,21 @@ needVoice ? (
     osi == 0 ? osA = o3 : osB = o3;
     osi += 1;
   );
-  // Dezimierung mit 1/4-1/2-1/4 statt reinem Mitteln. Der dritte Punkt
-  // ist der zweite Durchlauf des VORIGEN Samples.
-  // Ehrliche Zahlen: am nackten Oszillator senkt das den Alias-Boden um
-  // 4,3 dB. HINTER dem Filter bleiben davon nur 0,07 dB uebrig, weil die
-  // 18-dB-Flanke den oberen Bereich ohnehin wegnimmt. Es bleibt drin,
-  // weil es fast nichts kostet — wer exakt das Original will, ersetzt die
-  // Zeile durch  voice = 0.5*(osA + osB)*resMakeUp*amp;
+  // Decimation with 1/4-1/2-1/4 instead of plain averaging. The third
+  // point is the second pass of the PREVIOUS sample.
+  // Honest numbers: on the bare oscillator this lowers the alias floor by
+  // 4.3 dB. BEHIND the filter only 0.07 dB of that remains, because the
+  // 18 dB slope takes the top range away anyway. It stays in because it
+  // costs almost nothing — whoever wants exactly the original replaces
+  // the line with  voice = 0.5*(osA + osB)*resMakeUp*amp;
   voice = (0.25*osPrev + 0.5*osA + 0.25*osB)*resMakeUp*amp;
   osPrev = osB;
 ) : (
-  // Stimme schlaeft. Die Filterzustaende duerfen dabei NICHT einfach
-  // stehenbleiben: amp wirkt erst hinter dem Filter, bei hoher Resonanz
-  // schwingt die Leiter also noch mit vollem Pegel, wenn amp laengst
-  // unter der Schwelle liegt. Eingefroren waeren diese Werte beim
-  // naechsten Anschlag als Knacken zu hoeren. Deshalb hier ein kurzes
-  // Ausklingen aller Zustaende (rund 5 ms Zeitkonstante).
+  // Voice sleeps. The filter states must NOT simply stay put: amp acts
+  // only behind the filter, so at high resonance the ladder still rings
+  // at full level when amp is long below the threshold. Frozen, these
+  // values would be heard as a click on the next note-on. Hence a short
+  // decay of all states here (around 5 ms time constant).
   voice = 0;
   s1 *= 0.99; s2 *= 0.99; s3 *= 0.99;
   fbHpX *= 0.99; fbHpY *= 0.99; y3prev *= 0.99;
@@ -1299,18 +1299,18 @@ needVoice ? (
   osPrev *= 0.5;
 );
 
-// --- Drive: EQ waehlt das Band aus, das verzerrt wird.
+// --- Drive: the EQ selects the band that gets distorted.
 //
-// Der EQ liegt NICHT mehr in Reihe. dBand ist der Anteil, den der EQ
-// durchlaesst und der in den WaveShaper geht; dRest ist genau das, was
-// der EQ weggenommen hat, und laeuft unverzerrt daran vorbei. Weil
-// dRest als Differenz gebildet wird, ergibt dBand + dRest wieder exakt
-// das Eingangssignal — bei ausgeschalteter Verzerrung ist die ganze
-// Stufe damit bitgenau transparent, egal wie der EQ steht.
+// The EQ is NOT in series any more. dBand is the share the EQ passes
+// and that goes into the WaveShaper; dRest is exactly what the EQ has
+// removed, and runs past it undistorted. Because dRest is formed as a
+// difference, dBand + dRest is again exactly the input signal — with
+// the distortion switched off the whole stage is thereby bit-exact
+// transparent, no matter how the EQ is set.
 //
-// Praktisch heisst das: Lowcut hochziehen nimmt den Bass aus der
-// VERZERRUNG, nicht aus dem Ausgang. Genau so ist ein Drive-Eingangs-EQ
-// gemeint — die Grundwelle bleibt sauber, nur die Mitten werden dreckig.
+// In practice that means: raising the lowcut takes the bass out of the
+// DISTORTION, not out of the output. That is exactly how a drive input
+// EQ is meant — the fundamental stays clean, only the mids get dirty.
 dIn   = voice;
 dBand = dIn;
 eqDLoOn ? ( dHpY = eqDLoA*(dHpY + dBand - dHpX); dHpX = dBand; dBand = dHpY; )
@@ -1319,17 +1319,17 @@ eqDHiOn ? ( dLpY += eqDHiG*(dBand - dLpY); dBand = dLpY; )
         : ( dLpY = dBand; );
 dRest = dIn - dBand;
 
-// WaveShaper 2-fach ueberabgetastet. Der Zwischenpunkt wird linear
-// interpoliert, danach dieselbe 1/4-1/2-1/4-Dezimierung wie im Filter.
-// Nachgemessen am echten Filterausgang senkt das den Alias-Boden hinter
-// dem Drive um 7,6 bis 9,8 dB — je nach Modell und Drive von -15..-56
-// auf -24..-60 dBc. Das ist der groesste verbliebene Alias-Hebel im
-// ganzen Geraet, deutlich groesser als 4x Oversampling von Osz+Filter.
+// WaveShaper 2x oversampled. The intermediate point is linearly
+// interpolated, then the same 1/4-1/2-1/4 decimation as in the filter.
+// Measured at the real filter output, this lowers the alias floor behind
+// the drive by 7.6 to 9.8 dB — depending on model and drive from -15..-56
+// to -24..-60 dBc. That is the largest remaining alias lever in the
+// whole device, clearly larger than 4x oversampling of osc+filter.
 //
-// Die dezimierte Kette laeuft dadurch eine halbe Sampleperiode hinter
-// dRest her. Bei den flachen Ein-Pol-EQs sind das im Uebergangsbereich
-// weniger als 0,1 dB Summenfehler; bei ausgeschaltetem EQ ist dRest
-// exakt null und die Frage stellt sich gar nicht.
+// The decimated chain thereby runs half a sample period behind
+// dRest. With the flat one-pole EQs that is less than 0.1 dB sum error
+// in the transition band; with the EQ switched off dRest is exactly
+// zero and the question does not arise.
 fxDistOn ? (
   dMid  = 0.5*(dPrevIn + dBand); dPrevIn = dBand;
   dsA   = distProc(dMid*distPreG)*distPostG;
@@ -1337,12 +1337,12 @@ fxDistOn ? (
   dy    = 0.25*dsPrev + 0.5*dsA + 0.25*dsB + dRest;
   dsPrev = dsB;
 ) : (
-  // Bypass ist echtes Unity — dBand + dRest ist wieder dIn.
+  // Bypass is true unity — dBand + dRest is dIn again.
   dy = dIn;
   dPrevIn = dBand; dsPrev *= 0.5;
 );
 
-// --- Ping-Pong-Delay (komplett bypassed bei Mix < 0.5 %)
+// --- Ping-pong delay (fully bypassed at mix < 0.5 %)
 dlyMix > 0.005 ? (
   dlyIn = dy;
   eqYLoOn ? ( hpY = eqYLoA*(hpY + dlyIn - hpPrev); hpPrev = dlyIn; dlyIn = hpY; ) : ( hpY = dlyIn; hpPrev = dlyIn; );
@@ -1362,33 +1362,33 @@ dlyMix > 0.005 ? (
  ) : (
   wetDL = 0; wetDR = 0;
   lpL *= 0.995; lpR *= 0.995; dlyLpY *= 0.995;
-  // Der Eingangs-Hochpass wird mitgefuehrt, sonst steht hpPrev beim
-  // Wiedereinschalten auf einem alten Wert und der Differenzierer sieht
-  // einen Gleichsprung — das war ein Plopp beim Aufdrehen des Mix.
+  // The input high-pass is carried along, otherwise hpPrev stands on an
+  // old value when switched back in and the differentiator sees a
+  // level jump — that was a plop when turning the mix up.
   hpPrev = dy; hpY *= 0.995;
-  // Schreibzeiger laeuft weiter und legt Stille ab, damit im Puffer kein
-  // alter Inhalt konserviert wird, der beim Zuschalten zurueckkommt.
+  // The write pointer keeps running and lays down silence, so that no
+  // old content is preserved in the buffer that comes back when switched in.
   M_DLY1[dlyPos] = 0; M_DLY2[dlyPos] = 0;
   dlyPos += 1; dlyPos >= dlyBufLen ? dlyPos = 0;
 );
 
-// --- Hall (komplett bypassed bei Mix < 0.5 %)
-// Beim Umschalten AUF Bypass werden Predelay, Combs, Allpaesse und die
-// Ausgangsfilter einmal geloescht. Ohne das blieben Puffer und Indizes
-// stehen (combProc/apProc laufen im Bypass ja gar nicht) und beim
-// Wiederaufdrehen kam sekundenalter Inhalt zurueck. Der eine memset
-// kostet rund 220 kB, faellt genau einmal am Nulldurchgang des Reglers
-// an und liegt unter einer Samplezeit.
+// --- Reverb (fully bypassed at mix < 0.5 %)
+// When switching TO bypass, predelay, combs, allpasses and the output
+// filters are cleared once. Without that the buffers and indices would
+// stand still (combProc/apProc do not run at all in bypass) and on
+// turning back up seconds-old content came back. The one memset costs
+// around 220 kB, occurs exactly once at the zero crossing of the knob
+// and lies below one sample time.
 rvbOn = rvbMix > 0.005;
 rvbOn != rvbWas ? (
   rvbWas = rvbOn;
   !rvbOn ? (
     memset(M_PRE, 0, 8192);
     memset(M_RVB, 0, rvbTotal);
-    ri = 48; loop(16, M_PAR[ri] = 0; ri += 1; );   // Comb-Daempfungsspeicher
+    ri = 48; loop(16, M_PAR[ri] = 0; ri += 1; );   // comb damping store
     prePos = 0;
-    ri = 32; loop(16, M_PAR[ri] = 0; ri += 1; );   // Comb-Leseindizes
-    ri = 80; loop(8,  M_PAR[ri] = 0; ri += 1; );   // Allpass-Leseindizes
+    ri = 32; loop(16, M_PAR[ri] = 0; ri += 1; );   // comb read indices
+    ri = 80; loop(8,  M_PAR[ri] = 0; ri += 1; );   // allpass read indices
     rvHpX = 0; rvHpY = 0; rvLpY = 0;
     rhpL = 0; rhpR = 0; rhpXL = 0; rhpXR = 0; rlpL = 0; rlpR = 0;
   );
@@ -1420,7 +1420,7 @@ rvbOn ? (
   rlpR += rlpG*(rhpR - rlpR);
 );
 
-// --- Kompressor nur auf Dry, dann Delay/Hall dazu (303-Punch bleibt)
+// --- Compressor on dry only, then delay/reverb added (303 punch stays)
 lv = abs(dy);
 db = 20*log(lv + 0.00000001)*0.43429448;
 db > envDb ? ( envDb += (db - envDb)*cAtk; ) : ( envDb += (db - envDb)*cRel; );
@@ -1428,65 +1428,63 @@ over = envDb + 14;
 k15 = min(30, max(0, over + 15));
 gr = -0.8*(k15*k15/60 + max(0, over - 15));
 cg = 10^(gr/20)*1.78;
-// Historie: bis v8 fest  dry = dy*cg;  (Kompressor immer an).
-// compOn = 0 -> Dry unbearbeitet (Kompression UND das ~+5 dB Make-up 1.78
-// raus, also ~5 dB leiser, mit VOLUME ausgleichen). compMix blendet linear
-// zwischen dy (0 %) und dy*cg (100 %): dy*(1+compMix*(cg-1)). Bei 100 % ist
-// es bitgenau dy*cg wie zuvor. envDb/cg laufen immer mit -> klickfrei.
+// History: up to v8 fixed  dry = dy*cg;  (compressor always on).
+// compOn = 0 -> dry unprocessed (compression AND the ~+5 dB make-up 1.78
+// out, so ~5 dB quieter, compensate with VOLUME). compMix blends linearly
+// between dy (0 %) and dy*cg (100 %): dy*(1+compMix*(cg-1)). At 100 % it
+// is bit-exact dy*cg as before. envDb/cg always run along -> click-free.
 dry = compOn ? dy*(1 + compMix*(cg - 1)) : dy;
 sumL = dry + wetDL + rlpL*rvbMix;
 sumR = dry + wetDR + rlpR*rvbMix;
 spl0 = min(1, max(-1, softClip(sumL*volG)));
 spl1 = min(1, max(-1, softClip(sumR*volG)));
 
-// --- Oszilloskop (jedes 2. Sample reicht bei gfx 45 Hz)
+// --- Oscilloscope (every 2nd sample is enough at gfx 45 Hz)
 scopeDiv ? (
   M_SCOPE[scopePos] = (spl0 + spl1)*0.5;
   scopePos += 1; scopePos >= 512 ? scopePos = 0;
 );
 scopeDiv = 1 - scopeDiv;
 
-// Blockposition erst hier hochzaehlen: waehrend Sample n steht smplPos
-// damit auf n, und der Offset im MIDI-Ausgang stimmt auf das Sample.
+// Advance the block position only here: while sample n is processed
+// smplPos stays at n, and the offset in the MIDI output matches the sample.
 smplPos += 1;
 
 /* ============================================================
-   @gfx — Geraetefront nach dem Tim-Techlor-Designkit
-   Core Black als Grund, Acid Green als einzige Akzentfarbe,
-   Core White nur fuer Zeiger und Tastatur. Leitbahnen im
-   45-Grad-Winkel enden in Loetpunkten und gliedern das Layout.
-   Gezeichnet wird im Raster 900 x 732, SC skaliert auf das Fenster.
+   @gfx — device front after the Tim Techlor design kit
+   Core Black as the ground, Acid Green as the only accent colour,
+   Core White only for pointers and keyboard. Traces at a
+   45 degree angle end in solder pads and structure the layout.
+   Drawing happens in the 900 x 732 grid, SC scales to the window.
    ============================================================ */
 @gfx 1120 912
 
-// ---------- Massstab ----------
+// ---------- Scale ----------
 SC = min(gfx_w/UI_W, gfx_h/UI_H);
-// Untergrenze nur als Notbremse gegen SC = 0. Bei 0,45 wurde die Front
-// bei kleinen Fenstern groesser gezeichnet als das Fenster und rechts
-// und unten abgeschnitten.
+// Lower limit only as an emergency brake against SC = 0. At 0.45 the
+// front was drawn larger than the window at small window sizes and
+// cut off on the right and at the bottom.
 SC = max(0.25, SC);
 OX = (gfx_w - UI_W*SC)*0.5;
 OY = (gfx_h - UI_H*SC)*0.5;
 mX = (mouse_x - OX)/SC;
 mY = (mouse_y - OY)/SC;
 
-/* ---------- Schriften ----------
-   Zwei Familien: eine serifenlose fuer alle Beschriftungen und eine
-   dicktengleiche nur fuer Zahlenwerte, damit Ziffern beim Drehen nicht
-   zappeln.
+/* ---------- Fonts ----------
+   Two families: a sans-serif one for all labels and a monospaced one
+   only for numeric values, so digits do not jitter when turning.
 
-   Jeder Kandidat wird gegen eine garantiert nicht vorhandene Schrift
-   gemessen. Misst er genauso, ist er nicht installiert und REAPER ist
-   auf dieselbe Systemvorgabe ausgewichen — dann wird der naechste
-   probiert. Ohne diese Pruefung landete frueher das ganze Geraet in
-   Courier New: "Liberation Mono" gibt es auf Windows nicht, GDI hat auf
-   die Standard-Festbreitenschrift ausgewichen, und der alte M/i-Test hat
-   das nicht gemerkt, weil Courier New ebenfalls dicktengleich ist.
-   Daher die Serifen.
+   Each candidate is measured against a font that is guaranteed not to
+   exist. If it measures the same, it is not installed and REAPER has
+   fallen back to the same system default — then the next one is tried.
+   Without this check the whole device used to end up in Courier New:
+   "Liberation Mono" does not exist on Windows, GDI fell back to the
+   standard fixed-width font, and the old M/i test did not notice,
+   because Courier New is likewise monospaced. Hence the serifs.
 
-     1  Schriftzug   Zilap Orian, sonst serifenlos fett
-     2  serifenlos   mittel      3  serifenlos   klein
-     4  dicktengleich mittel     5  dicktengleich klein               */
+     1  wordmark      Zilap Orian, else sans-serif bold
+     2  sans-serif    medium      3  sans-serif    small
+     4  monospaced    medium      5  monospaced    small               */
 
 fontChk == 0 ? (
   fontChk = 1;
@@ -1503,9 +1501,9 @@ fontChk == 0 ? (
                   (tw1 != refW || th1 != refH) ? sansSel = 2; );
   sansSel < 0 ? ( gfx_setfont(9, "Liberation Sans", 16); gfx_measurestr("HAMBURGEFONSIV", tw1, th1);
                   (tw1 != refW || th1 != refH) ? sansSel = 3; );
-  sansSel < 0 ? sansSel = 4;                 // Notnagel: Arial
+  sansSel < 0 ? sansSel = 4;                 // last resort: Arial
 
-  // dicktengleich: muss vorhanden UND wirklich gleich breit sein
+  // monospaced: must be present AND really equal in width
   monoSel = -1;
   monoSel < 0 ? ( gfx_setfont(9, "Consolas", 16);
                   gfx_measurestr("M", tw1, th1); gfx_measurestr("i", tw2, th2);
@@ -1516,15 +1514,15 @@ fontChk == 0 ? (
   monoSel < 0 ? ( gfx_setfont(9, "Menlo", 16);
                   gfx_measurestr("M", tw1, th1); gfx_measurestr("i", tw2, th2);
                   (tw1 == tw2 && tw1 != refM) ? monoSel = 2; );
-  monoSel < 0 ? monoSel = 3;                 // Notnagel: Courier New
+  monoSel < 0 ? monoSel = 3;                 // last resort: Courier New
 
-  // Hausschrift fuer den Schriftzug nur, wenn sie wirklich da ist
+  // house font for the wordmark only if it is really there
   gfx_setfont(9, "Zilap Orian", 16); gfx_measurestr("HAMBURGEFONSIV", tw1, th1);
   bigSel = (tw1 != refW || th1 != refH);
 );
 
-// Groessen wachsen mit dem Fenster. Die kleinen Groessen liegen einen
-// Punkt hoeher als frueher, der Schriftzug bleibt wie er war.
+// Sizes grow with the window. The small sizes sit one point higher
+// than before, the wordmark stays as it was.
 fBig = max(12, floor(38*SC));
 fMed = max(10, floor(16*SC));
 fSml = max(9,  floor(13*SC));
@@ -1548,7 +1546,7 @@ fSml = max(9,  floor(13*SC));
   : ( gfx_setfont(4, "Courier New", fMed); gfx_setfont(5, "Courier New", fSml); );
 );
 
-// Mauszustand: Klick als Flanke, damit Schalter nicht dauerfeuern
+// Mouse state: click as an edge, so switches do not fire continuously
 uiLmb   = mouse_cap & 1;
 uiClick = uiLmb && !lmbPrev;
 uiRClk  = (mouse_cap & 2) && !rmbPrev;
@@ -1558,15 +1556,15 @@ clickWait > 0 ? clickWait -= 1;
 
 accentLed *= 0.88;
 
-// ---------- Grund ----------
+// ---------- Ground ----------
 gfx_set(0.050, 0.054, 0.050, 1);
 gfx_rect(0, 0, gfx_w, gfx_h, 1);
 
-// ---------- Kopfzeile ----------
+// ---------- Header ----------
 gfx_setfont(1);
 colAcid(1);
 xstr(24, 8, "TT-303");
-// Versionsbadge rechts neben dem Titel (kleine Schrift, an der Titel-Grundlinie)
+// Version badge to the right of the title (small font, on the title baseline)
 gfx_measurestr("TT-303", hdrTW, hdrTH);
 gfx_setfont(3);
 gfx_measurestr("v1.0", hdrVW, hdrVH);
@@ -1585,14 +1583,14 @@ pad(320, 60, 3); pad(448, 60, 3);
 colDim(1); xline(0, 70, UI_W, 70);
 colAcid(1); xrect(0, 70, 232, 1);
 
-// Accent-Anzeige (Ladung des Accent-Kondensators)
+// Accent display (charge of the accent capacitor)
 colInk(1); xstr(500, 22, "ACCENT");
 gfx_set(0.11, 0.13, 0.11, 1); xrect(500, 38, 64, 8);
 ledA = min(1, max(accentLed, accCap*0.6));
 gfx_set(0.224*ledA, 1*ledA, 0.078*ledA, 1);
 ledA > 0.01 ? xrect(501, 39, 62*ledA, 6);
 
-// Betriebsart + MIDI-Thru
+// Operating mode + MIDI thru
 colInk(1); xstr(572, 20, "MIDI");
 gfx_setfont(2);
 btn(572, 32, 70, 26, slider33 == 1, "THRU") ? ( slider33 = 1 - slider33; slider_automate(slider33); paramsDirty = 1; );
@@ -1615,7 +1613,7 @@ btn(670, 82, 66, 18, patchSel == 3, "SCRM") ? applyPatch(3);
 btn(740, 82, 66, 18, patchSel == 4, "HOOV") ? applyPatch(4);
 btn(810, 82, 66, 18, patchSel == 5, "DUB")  ? applyPatch(5);
 
-// --- Regler
+// --- Knobs
 nv = floor(knob(1, 60, 152, 27, slider3, -24, 24) + 0.5);
 nv != slider3 ? ( slider3 = nv; slider_automate(slider3); paramsDirty = 1; patchSel = -1; );
 nv = floor(knob(2, 158, 152, 27, slider4, -50, 50) + 0.5);
@@ -1646,10 +1644,10 @@ xctr(697, 182, 98, 12, "VOLUME");
 gfx_setfont(4); colAcid(1);
 xat(20, 196);  gfx_printf("%+d st", slider3);
 xat(120, 196); gfx_printf("%+d ct", slider4);
-// CUTOFF/DECAY-Anzeige spiegelt die v8-Kennlinien aus updateParams():
-// baseF = 145*exp(cutN*1.95)*(1+resN) (Reso hebt die Ecke mit), decTau =
-// 30*exp(decN*2.95) ms. Historie (v6/v7): floor(60*exp(slider5*0.0460517))
-// "Hz" und floor(60*exp(slider8*0.037297)) "ms" — passte nicht mehr.
+// The CUTOFF/DECAY display mirrors the v8 curves from updateParams():
+// baseF = 145*exp(cutN*1.95)*(1+resN) (reso lifts the corner with it), decTau =
+// 30*exp(decN*2.95) ms. History (v6/v7): floor(60*exp(slider5*0.0460517))
+// "Hz" and floor(60*exp(slider8*0.037297)) "ms" — no longer matched.
 xat(210, 196); gfx_printf("%d Hz", floor(145*exp(slider5*0.0195)*(1 + slider6*0.01)));
 xat(322, 196); gfx_printf("%d %%", floor(slider6));
 xat(420, 196); gfx_printf("%.1f oct", slider7*0.052);
@@ -1662,8 +1660,8 @@ gfx_setfont(2);
 btn(800, 118, 78, 22, slider2 == 0, "SAW") ? ( slider2 = 0; slider_automate(slider2); paramsDirty = 1; );
 btn(800, 144, 78, 22, slider2 == 1, "SQUARE") ? ( slider2 = 1; slider_automate(slider2); paramsDirty = 1; );
 
-// Accent-Schwelle — gehoert zum Synthesizer und steht jetzt hier;
-// im SEQ-Modus ohne Funktion, deshalb nur dann gezeichnet
+// Accent threshold — belongs to the synthesizer and now stands here;
+// no function in SEQ mode, so only drawn then
 slider1 == 0 ? (
   gfx_setfont(3); colInk(1); xstr(800, 172, "ACCENT VEL");
   gfx_setfont(4); colAcid(1);
@@ -1673,12 +1671,12 @@ slider1 == 0 ? (
   btn(826, 202, 20, 18, 0, "+") ? ( slider12 = min(127, slider12 + 1); slider_automate(slider12); paramsDirty = 1; );
 );
 
-/* ---------- Panel EFFEKTE ----------
-   DRIVE und DELAY sind schmaler, REVERB dafuer breiter. Unter jeder
-   Einheit liegt ihr Eingangs-EQ als Dualslider: links der Lowcut,
-   rechts der Highcut, logarithmische Skala 20 Hz..20 kHz, an den
-   Aussenkanten rastet die Kante auf OFF. Rechtsklick auf einen Griff
-   stellt die Werkseinstellung wieder her. */
+/* ---------- Panel EFFECTS ----------
+   DRIVE and DELAY are narrower, REVERB wider in return. Under each
+   unit sits its input EQ as a dual slider: lowcut on the left,
+   highcut on the right, logarithmic scale 20 Hz..20 kHz, at the
+   outer edges the edge snaps to OFF. Right-click on a handle
+   restores the factory setting. */
 panelBox(14, 234, 872, 156);
 gfx_setfont(3);
 colAcid(1);
@@ -1702,8 +1700,8 @@ btn(388, 254, 42, 18, slider17 == 1, "1/8.") ? ( slider17 = 1; slider_automate(s
 btn(434, 254, 42, 18, slider17 == 2, "1/4")  ? ( slider17 = 2; slider_automate(slider17); paramsDirty = 1; );
 btn(480, 254, 42, 18, slider17 == 3, "1/2")  ? ( slider17 = 3; slider_automate(slider17); paramsDirty = 1; );
 
-// Kompressor: eigene Spalte rechts (Divider bei 762). ON/OFF in der
-// Button-Zeile, MIX als Knopf (id 18) in der Knopfzeile. Reine Zeichnung.
+// Compressor: own column on the right (divider at 762). ON/OFF in the
+// button row, MIX as a knob (id 18) in the knob row. Drawing only.
 btn(772, 254, 64, 18, slider34 == 1, slider34 == 1 ? "ON" : "OFF")
   ? ( slider34 = 1 - slider34; slider_automate(slider34); paramsDirty = 1; );
 gfx_setfont(2); colInk(1); xstr(772, 354, "-14 dB / 5:1");
@@ -1740,10 +1738,10 @@ sprintf(#vstr, "%d %%", floor(slider20)); drawCentered(657, 336);
 sprintf(#vstr, "%d ms", floor(slider11)); drawCentered(722, 336);
 sprintf(#vstr, "%d %%", floor(slider35)); drawCentered(824, 336);
 
-// --- Eingangs-EQs: Lowcut links, Highcut rechts, je 0..20 kHz
-// Erst rechnen, dann zeichnen — so stehen Streifen und Griffe im selben
-// Bild. min/max halten den Lowcut unter dem Highcut; sonst laesst sich
-// das Band zukneifen und die Einheit ist stumm, ohne dass man sieht warum.
+// --- Input EQs: lowcut left, highcut right, each 0..20 kHz
+// Compute first, then draw — so strip and handles stand in the same
+// frame. min/max keep the lowcut below the highcut; otherwise the band
+// can be pinched shut and the unit is mute without it being visible why.
 nv = min(fxEqVal(20, 26, 360, 284, slider27, 0, 0), slider28);
 nv != slider27 ? ( slider27 = nv; slider_automate(slider27); paramsDirty = 1; patchSel = -1; );
 nv = max(fxEqVal(21, 26, 360, 284, slider28, 1, 20000), slider27);
@@ -1772,7 +1770,7 @@ eqLabels(26, 370, 284, slider27, slider28);
 eqLabels(342, 370, 208, slider29, slider30);
 eqLabels(562, 370, 196, slider31, slider32);
 
-/* ---------- Oszilloskop (Signalwelle als Leitmotiv) ---------- */
+/* ---------- Oscilloscope (signal wave as a leitmotif) ---------- */
 panelBox(14, 398, 872, 64);
 gfx_set(0.042, 0.048, 0.042, 1); xrect(16, 400, 868, 60);
 gfx_set(0.10, 0.13, 0.08, 1);
@@ -1813,19 +1811,19 @@ slider1 == 1 ? (
 
   gfx_setfont(2);
   btn(250, 478, 86, 22, slider24 == 1, "FREE RUN") ? ( slider24 = 1 - slider24; slider_automate(slider24); paramsDirty = 1; );
-  // Heisst SEQ OUT und nicht MIDI OUT, damit klar bleibt, dass hier die
-  // erzeugte Sequenz rausgeht — der THRU-Schalter oben reicht dagegen
-  // eingehende Noten weiter. Zwei Quellen, zwei Schalter.
+  // Called SEQ OUT and not MIDI OUT, so it stays clear that the
+  // generated sequence goes out here — the THRU switch above, by
+  // contrast, passes incoming notes on. Two sources, two switches.
   btn(344, 478, 86, 22, slider26 == 1, "SEQ OUT") ? ( slider26 = 1 - slider26; slider_automate(slider26); paramsDirty = 1; );
 
-  // MIDI-Hinweis in der Luecke zwischen MIDI OUT und den Reglern —
-  // er stand frueher ueber den Reglern und lief ihnen ueber den Weg
+  // MIDI note in the gap between MIDI OUT and the knobs —
+  // it used to stand above the knobs and got in their way
   gfx_setfont(3);
   midiHeld ? colAcid(1) : colInk(1);
   xat(445, 482);
   midiHeld ? gfx_printf("MIDI TRANSPOSE %+d", seqTrans) : gfx_drawstr("MIDI = TRANSPOSE");
 
-  // --- Baenke. COPY scharfschalten, dann Zielbank anklicken.
+  // --- Banks. Arm COPY, then click the target bank.
   gfx_setfont(3); colInk(1); xstr(26, 516, "BANK");
   gfx_setfont(2);
   btn(70, 510, 36, 22, slider25 == 0, "A") ? (
@@ -1847,20 +1845,20 @@ slider1 == 1 ? (
   btn(456, 510, 52, 22, undoArm, "UNDO") ? ( loadUndo(bb); copyArm = 0; );
   bb = floor(slider25)*SEQ_BANK;
   gfx_setfont(3);
-  copyArm ? ( colAcid(1); xstr(514, 516, "ZIELBANK WAEHLEN"); );
+  copyArm ? ( colAcid(1); xstr(514, 516, "SELECT TARGET BANK"); );
 
-  // --- Sequencer-Regler. Label UND Wert in einer Zeile darunter,
-  //     damit ueber den Reglern nichts mehr schwebt.
+  // --- Sequencer knobs. Label AND value in one line beneath,
+  //     so that nothing floats above the knobs any more.
   nv = floor(knob(15, 690, 506, 19, slider21, 1, 16) + 0.5);
   nv != slider21 ? ( slider21 = nv; slider_automate(slider21); paramsDirty = 1; patchSel = -1; );
   nv = floor(knob(16, 770, 506, 19, slider22, 0, 75) + 0.5);
   nv != slider22 ? ( slider22 = nv; slider_automate(slider22); paramsDirty = 1; patchSel = -1; );
   nv = floor(knob(17, 849, 506, 19, slider23, 10, 100) + 0.5);
   nv != slider23 ? ( slider23 = nv; slider_automate(slider23); paramsDirty = 1; patchSel = -1; );
-  // Werte unter den Reglern: erst die Breiten der Texte messen, dann
-  // die Positionen vergeben — Mindestabstand 10 zueinander, rechts
-  // Rand bis 880. So ueberlappt nichts, egal wie breit die Schrift
-  // beim Aufziehen des Fensters oder bei einer Fall-back-Schrift ist.
+  // Values under the knobs: first measure the widths of the texts, then
+  // assign the positions — minimum distance 10 to each other, right
+  // margin up to 880. That way nothing overlaps, no matter how wide the
+  // font is when dragging the window open or with a fallback font.
   gfx_setfont(3);
   sprintf(#klbl, "LEN");  sprintf(#kval, "%d", floor(slider21));
   gfx_measurestr(#klbl, kw1, kh1); gfx_measurestr(#kval, vw1, vh1);
@@ -1881,14 +1879,14 @@ slider1 == 1 ? (
   sprintf(#klbl, "SHUF"); sprintf(#kval, "%d %%", floor(slider22));  kvLabel(qx2, 528);
   sprintf(#klbl, "GATE"); sprintf(#kval, "%d %%", floor(slider23));  kvLabel(qx3, 528);
 
-  // --- Zeilenbeschriftung
+  // --- Row labels
   colInk(1);
   xstr(14, 584, "NOTE");
   xstr(14, 660, "GATE");
   xstr(14, 678, "ACC");
   xstr(14, 696, "SLD");
 
-  // Hilfslinien der C-Toene
+  // guide lines of the C notes
   gi = 0;
   loop(3,
     ly = LANE_Y + LANE_H - (24 + gi*12 - SEQ_NLO + 1)*ROW_H;
@@ -1897,8 +1895,8 @@ slider1 == 1 ? (
     gi += 1;
   );
 
-  // --- 16 Spalten. Notennamen dicktengleich, damit die Spalten
-  //     beim Verschieben der Tonhoehe nicht zappeln.
+  // --- 16 columns. Note names monospaced, so the columns do not
+  //     jitter when shifting the pitch.
   gfx_setfont(5);
   gi = 0;
   loop(16,
@@ -1962,12 +1960,12 @@ slider1 == 1 ? (
 
 ) : (
 
-  // ---------- HOST-Modus: MIDI-Anzeige ----------
+  // ---------- HOST mode: MIDI display ----------
   gfx_setfont(3);
   colAcid(1); xstr(26, 478, "MIDI INPUT");
-  colInk(1);  xstr(26, 492, "PIANO ROLL SPIELT DEN KLANGERZEUGER");
+  colInk(1);  xstr(26, 492, "PIANO ROLL PLAYS THE SOUND ENGINE");
   xat(26, 514);
-  gfx_printf("VELOCITY >= %d = ACCENT   |   UEBERLAPPENDE NOTEN = SLIDE   |   LETZTE NOTE GEWINNT   |   GEHALTEN: %d", floor(slider12), stkN);
+  gfx_printf("VELOCITY >= %d = ACCENT   |   OVERLAPPING NOTES = SLIDE   |   LAST NOTE WINS   |   HELD: %d", floor(slider12), stkN);
 
   gi = 0; wi = 0;
   loop(37,
@@ -1997,7 +1995,7 @@ slider1 == 1 ? (
   pad(40, 676, 4); pad(832, 676, 4);
   colDim(1); xline(44, 676, 828, 676);
   colInk(1);
-  xstr(26, 692, "SEQ-MODUS OBEN RECHTS SCHALTET DEN INTERNEN 16-STEP-SEQUENCER EIN");
+  xstr(26, 692, "SEQ MODE (TOP RIGHT) SWITCHES ON THE INTERNAL 16-STEP SEQUENCER");
 );
 
 lmbPrev = uiLmb;
