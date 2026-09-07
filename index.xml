@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<index version="1" name="TimTechlor ReaScripts" commit="a05cb10fe7b57dd3e1ccf46e686249ebf310f105">
+  <category name="Synths">
+    <reapack name="TT-303 Acid Machine.jsfx" type="effect" desc="TT-303 Acid Machine">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 TT-303 ACID MACHINE \u8212- mono acid synth in the style of the TB-303. Tribute, no samples, no sample ROM, all model.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 CONTROLS AS ON THE ORIGINAL TUNING semitones (-24..+24), plus FINE in cents CUTOFF filter frequency, ~150 Hz .. ~2 kHz exponential (rises with resonance) RESONANCE feedback of the 18 dB ladder up to self-oscillation ENV MOD depth of the filter envelope, up to 5.2 octaves DECAY decay of the filter envelope, ~30 ms .. ~570 ms ACCENT level AND filter boost of the accent circuit WAVEFORM sawtooth / square\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MODEL DETAILS (after R. Whittle / Devil Fish documentation)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Filter: 3-pole ladder (18 dB/oct) in ZDF/TPT form, level-dependent feedback k/(1+0.4|y|), 2x oversampled, then 3-point decimation. Soft clip only at the master, never in the OS loop (it never engages there at real levels anyway).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Pole correction 1/(1+0.10*kRes): mild peak correction; the resonance hump moves up with rising resonance, as on the reference.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Feedback HP 20 Hz IN the feedback path (DC block).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Square with frequency-dependent duty + tilt, classic 1-sample PolyBLEP.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Accent capacitor: recharge +0.95, saturation 1.65. Accent sweep with non-linearity and slight cutoff dependency.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab On accent: fixed 0.2 s filter decay + shortened VCA attack (1.8 ms).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Slide: constant time, log frequency space; the same note stays held.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab FX: delay/reverb bypassed at mix < 0.5 %. EQ OFF = true bypass.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab MIDI: notes are consumed, CC/pitchbend keep going.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 OPERATING MODES HOST Pure sound generator, played from the piano roll. Velocity >= threshold = accent, overlapping notes = slide. SEQ Internal 16-step sequencer, four pattern banks A-D with copy function, random and mutation, shuffle, gate length. Runs on the project timeline or free (FREE RUN). MIDI notes transpose the pattern (C2 = original pitch). MIDI OUT also sends the sequence out. All four banks travel with the project.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Effect path: ahead of each of the three units \u8212- WaveShaper (Soft/Hard/ Fold/Fuzz), ping-pong delay, Freeverb reverb \u8212- sits an input EQ as a dual slider (lowcut left, highcut right, 0..20 kHz). After that compressor (-14 dB, 5:1) and master.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The input EQ only shapes what is sent into each effect; the dry signal runs alongside untouched. On the drive what the EQ removes is added back after the WaveShaper, so a raised lowcut takes the bass out of the DISTORTION, not out of the output (drive off = transparent).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIDI: THRU at the top of the header passes INCOMING notes on to the output (CC and pitchbend always pass through anyway). SEQ OUT in the sequencer panel sends the SELF-GENERATED sequence out. Two different sources, hence two switches. In SEQ mode incoming notes are transpose commands \u8212- whoever also passes them on with THRU sends them out next to the sequence.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 SURFACE after the Tim Techlor design kit: Core Black, Core White, Acid Green #39FF14, traces at a 45 degree angle with solder pads. Wordmark in Zilap Orian, if installed. Labels sans-serif (Segoe UI / Helvetica Neue / DejaVu Sans / Arial), numeric values monospaced (Consolas / DejaVu Sans Mono / Menlo / Courier New). Which of these is present the script measures itself. The front computes in a fixed design grid and scales to the window size \u8212- to enlarge, just drag the FX window open. HiDPI is honoured via gfx_ext_retina. All internal JSFX sliders are hidden ("-" before the name), operation is exclusively via the device front.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0" author="TimTechlor" time="2026-09-07T18:35:08Z">
+        <changelog><![CDATA[1.0
+- Kompressor-Mix-Regler (blendet den Kompressor auf dem Dry-Signal linear ein)
+- Versionsanzeige in der Geraetefront (rechts neben dem Titel)
+- Erste oeffentliche Beta ueber ReaPack]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/11c85427ad2b30cabf09cbdb8ed01ef07305b6ed/Synths/TT-303%20Acid%20Machine.jsfx</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Tempo Tools">
+    <reapack name="TT_BPM_Calculator.lua" type="script" desc="BPM2MS2HZ Calculator">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 BPM2MS2HZ Calculator\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Wandelt Notenwerte aus dem Projekttempo in Millisekunden und Hertz um - als echtes Werkzeugfenster (ReaImGui) statt Konsolentext.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Tempo folgt standardmaessig dem Projekt; Slider schaltet auf manuelles Tempo, Checkbox zurueck auf Sync.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Klick auf einen Wert kopiert ihn in die Zwischenablage.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab OPTIONS: UI-Schriftgroesse, punktierte/Triolen-Varianten, Wordmark.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Tabs: Notenwerte (1/1 .. 1/32, punktiert, Triolen) und Takte (bis 64).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Benoetigt die ReaPack-Erweiterung "ReaImGui: ReaScript binding for Dear ImGui" (cfillion, im Repo "ReaTeam Extensions").\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0.0" author="Tim Techlor" time="2026-09-07T18:35:08Z">
+        <changelog><![CDATA[Erste Veroeffentlichung ueber ReaPack.]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/11c85427ad2b30cabf09cbdb8ed01ef07305b6ed/Tempo%20Tools/TT_BPM_Calculator.lua</source>
+        <source file="TT_Wordmark.png">https://github.com/timtechlor/reapack-TimTechlor/raw/11c85427ad2b30cabf09cbdb8ed01ef07305b6ed/Tempo%20Tools/TT_Wordmark.png</source>
+      </version>
+    </reapack>
+  </category>
+</index>
