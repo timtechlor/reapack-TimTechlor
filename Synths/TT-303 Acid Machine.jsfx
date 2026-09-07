@@ -21,16 +21,7 @@ desc:TT-303 Acid Machine
 //   Sequencer an der Timeline oder frei laufend.
 // @changelog
 //   1.0
-//   - Werks-Presets fuer die aktuelle Klang-Engine neu abgestimmt
-//     (Cutoff-/Decay-Bereich und Resonanz haben sich geaendert);
-//     SCREAM und HOOVER jetzt mit Rechteck-Wellenform
-//   - INIT-Preset: Kompressor an (100 %), Delay-EQ 250 Hz..3,0 kHz,
-//     Hall-EQ 300 Hz..2,3 kHz, Drive-EQ offen
-//   - Pattern-Bank D ab Werk mit einer 134-BPM-"Pump"-Bassfigur belegt
-//   1.0
-//   - Kompressor-Mix-Regler (blendet den Kompressor auf dem Dry-Signal linear ein)
-//   - Versionsanzeige in der Geraetefront (rechts neben dem Titel)
-//   - Erste oeffentliche Beta ueber ReaPack
+//   - Erste Vollversion
 //tags: synth instrument acid 303 bass techno
 //author: TimTechlor
 //about:
@@ -1655,10 +1646,14 @@ xctr(697, 182, 98, 12, "VOLUME");
 gfx_setfont(4); colAcid(1);
 xat(20, 196);  gfx_printf("%+d st", slider3);
 xat(120, 196); gfx_printf("%+d ct", slider4);
-xat(210, 196); gfx_printf("%d Hz", floor(60*exp(slider5*0.0460517)));
+// CUTOFF/DECAY-Anzeige spiegelt die v8-Kennlinien aus updateParams():
+// baseF = 145*exp(cutN*1.95)*(1+resN) (Reso hebt die Ecke mit), decTau =
+// 30*exp(decN*2.95) ms. Historie (v6/v7): floor(60*exp(slider5*0.0460517))
+// "Hz" und floor(60*exp(slider8*0.037297)) "ms" — passte nicht mehr.
+xat(210, 196); gfx_printf("%d Hz", floor(145*exp(slider5*0.0195)*(1 + slider6*0.01)));
 xat(322, 196); gfx_printf("%d %%", floor(slider6));
 xat(420, 196); gfx_printf("%.1f oct", slider7*0.052);
-xat(512, 196); gfx_printf("%d ms", floor(60*exp(slider8*0.037297)));
+xat(512, 196); gfx_printf("%d ms", floor(30*exp(slider8*0.0295)));
 xat(616, 196); gfx_printf("%d %%", floor(slider9));
 xat(714, 196); gfx_printf("%d %%", floor(slider10));
 
