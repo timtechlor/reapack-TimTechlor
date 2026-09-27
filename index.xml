@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="a05cb10fe7b57dd3e1ccf46e686249ebf310f105">
+<index version="1" name="TimTechlor ReaScripts" commit="6a708db5b7269c5a889e28261a7bd0b2ff45115f">
+  <category name="Drum Tools">
+    <reapack name="TT-PHALYX Load Kit.lua" type="script" desc="TT-PHALYX Load Kit">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-PHALYX Load Kit\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Picks any WAV from a kit folder and distributes the folder's contents sorted across the 16 sample-A pads of TT-PHALYX. Requires the TT-PHALYX Drum Sampler JSFX to be installed.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0" author="TimTechlor" time="2026-09-27T18:51:52Z">
+        <changelog><![CDATA[Erste Veroeffentlichung ueber ReaPack.]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/6a708db5b7269c5a889e28261a7bd0b2ff45115f/Drum%20Tools/TT-PHALYX%20Load%20Kit.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TT-PHALYX Save Bank.lua" type="script" desc="TT-PHALYX Save Bank">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-PHALYX Save Bank\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Saves the complete parameter and FX state of TT-PHALYX to one of 8 bank slots. Requires the TT-PHALYX Drum Sampler JSFX to be installed.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0" author="TimTechlor" time="2026-09-27T18:51:52Z">
+        <changelog><![CDATA[Erste Veroeffentlichung ueber ReaPack.]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/6a708db5b7269c5a889e28261a7bd0b2ff45115f/Drum%20Tools/TT-PHALYX%20Save%20Bank.lua</source>
+      </version>
+    </reapack>
+  </category>
   <category name="Synths">
     <reapack name="TT-303 Acid Machine.jsfx" type="effect" desc="TT-303 Acid Machine">
       <metadata>
@@ -33,6 +67,96 @@
 - Versionsanzeige in der Geraetefront (rechts neben dem Titel)
 - Erste oeffentliche Beta ueber ReaPack]]></changelog>
         <source>https://github.com/timtechlor/reapack-TimTechlor/raw/11c85427ad2b30cabf09cbdb8ed01ef07305b6ed/Synths/TT-303%20Acid%20Machine.jsfx</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Synths/TT-PHALYX">
+    <reapack name="tt-phalyx.jsfx" type="effect" desc="TT-PHALYX Drum Sampler v1.03">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-PHALYX Drum Sampler v1.03\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 16-pad sample player for Reaper with the feature depth of Vengeance Phalanx, in the Tim-Techlor design (sibling of the TT-303 Acid Machine). Triggering is MIDI only - no internal sequencer.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == THE FRONT == Top: 16 slim pads. Click selects the pad, M = mute, S = solo, the fader sets the pad volume, the LED shows active voices. Center: the full panel of the selected pad. A/B chooses the slot the two knob rows act on (transpose, fine, gain, start, rnd offset, delay, LPF/HPF/LoFi/Spike). A -> B copies slot A to slot B, PHASE inverts, REV plays backwards, SCR arms the scratcher. The fader below mixes A and B (crossfade). Right: the INPUT box - KIT note (kit mode, channel 1) or MIDI channel 1-16 (multitrack, tonal with keytrack - base = ROOT), killnote (choke), voices, one-shot vs sustain, envelopes -> init, PB range.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == LOADING A KIT == The front has no file dialogs. Load a kit with the Lua script "TT-PHALYX Load Kit.lua" (Actions -> Load ReaScript): pick any WAV from the kit folder - the folder is sorted across the 16 pads (entries 1-16 = sample A pads P01-P16, 17-32 = sample B) and written to tt-phalyx-kit.bin, which the FX adopts automatically every ~0.5 s. tt-phalyx-kit.txt is the readable reference. Kit mode listens on channel 1 and uses the GM map (36 kick, 38 snare, 42/46 hats, 41/45/48 toms, ...).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == THE TABS == AMP Amp envelope over the waveform (drag the points), timescale, retrig keytrack/fade, one-shot/sustain. FILTER Type (LP/HP/BP/notch, 6/12/24 dB), cutoff, reso, env mod with draggable filter ADSR, drive clean/dirty. PITCH Pitch envelope (drag the points), range in semitones, step quantise, flip; portamento OFF/POLY/LEGATO. FX Master chain: 4-band EQ (band type per click +1 / R-click -1, live response curve) -> 4 insert slots (each type + 4 parameters + mix): DELAY, CHORUS, FLANGER, PHASER, DISTORT, CRUSH, COMP, LIMIT, ROOM, TRASH, GATE, STEREO. LOOP Loop editor of the selected slot: LOOP on/off, drag the start/end flags, NRM/PING/XFD, ZERO (zero-crossing search against clicks), XFADE length. MOD Mod matrix 8 rows (click source > target, drag amount; sources VEL/KEY/G1-G3/M-X/M-Y/LFO1/LFO2/MENV/RND, targets VOL/PAN/PITCH/CUTOFF/RESO/LFO1/2-RATE/XFADE), 2 LFOs, mod envelope, velocity depth + curve with sketch, panorama per slot, GUI modifiers G1-G3. MIDI/ARP Drum kit matrix: click a key to assign it to the pad. Right: the arpeggiator - mode (R-click back), shuffle (drag the number = swing), octaves +/-, rate, gate. Modes UP/DOWN/UP-DN/RND/ROLL (ROLL = retrigger wall, e.g. for hat rolls). SYSTEM Readouts, interpolation LIN/AA (anti-alias Hermite, more CPU but cleaner upshifting), IN TRANSPOSE +/-24 st (in kit mode remaps the whole kit - like Phalanx), POLYPHONY 4-64, SNAP/UNDO, BANKS B1-B8 (load), SYNC (tempo sync: delay time and/or arp rate follow the project tempo - delay 1/16 to 1/1, arp 1/4 to 1/32).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == SCRATCHER == Arm the pad with the SCR button, hold a note, grab the waveform and drag - the playhead of both slots follows the position. The same position is automation slider 53 (MIDI learn/modulator).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == BANKS & UNDO == A bank stores ALL pad parameters plus the FX chain; samples come from the kit. Saving: Lua script "TT-PHALYX Save Bank.lua" (asks for slot 1-8, writes tt-phalyx-bankN.bin). Loading: B1-B8 in the SYSTEM tab. UNDO restores the pad's last state; a snapshot is also taken automatically on every pad switch.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == MIDI LEARN == All parameters sit as hidden automation sliders 1-63 behind the front: 3-52 mirror the selected pad, 53-63 scratch/system/arp/ root/PB/shuffle/sync; the FX knobs in the FX tab are separate. Learn as usual via Reaper (Param -> MIDI learn / modulator).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == LIMITS VS. PHALANX == 1 stereo output (Phalanx: 16 - workaround: multiple instances), 64 voices global (1-16 per pad), no convolution reverbs, bank saving via Lua (JSFX file access is read-only), undo is one level per pad.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.03" author="TimTechlor" time="2026-09-27T18:51:52Z">
+        <changelog><![CDATA[1.03 (English UI)
+- UI language: all on-screen text, the built-in manual (@about)
+  and the Lua helpers translated to English; helper scripts
+  renamed to "TT-PHALYX Load Kit" / "TT-PHALYX Save Bank"
+  (re-add them once in the action list)
+1.02 (polish package)
+- NEW: tempo sync (SYSTEM tab, slider 63): delay time and/or arp
+  rate follow the project tempo - delay grid 1/16 to 1/1, arp
+  grid 1/4 to 1/32 (each including triplets)
+- NEW: slim pads draw sample B as a dark ghost contour behind
+  sample A
+- TONE: chorus with a second voice per channel (quarter-phase
+  offset, medium mod depth); flanger feedback with HF damping
+  (~2.5 kHz one-pole)
+1.01 (improvement package)
+- NEW: arp shuffle 0-50 % (off-beats swing late, SHUF field in
+  the MIDI/ARP tab, automation slider 62)
+- NEW: pitch bend with per-pad range 0-24 st (smoothed, INPUT
+  box; affects the playback rate in both trigger modes, slider 61)
+- NEW: root note control (multitrack keytrack base, INPUT box,
+  slider 60)
+- NEW: MIDI monitor in the status line (pitch bend/CC readout +
+  hit velocity bars per pad)
+- NEW: predelay 0-250 ms for ROOM/TRASH/GATE (4th parameter)
+- NEW: clip LED in the header, scratch playhead line, arp markers
+  on the slim pads
+- FIX: debug counters no longer written into the serialized blobs
+1.00 (release)
+- Manual: @about with a chapter per tab (front, kit, tabs,
+  scratcher, banks/undo, MIDI learn, limits vs. Phalanx)
+- CPU: the arp scheduler in @sample is skipped while no arp is
+  active (arpAct flag, maintained on start/stop/kill)
+0.6.0
+- NEW: arpeggiator per pad (UP/DOWN/UP-DN/RND/ROLL, rate 20 ms to
+  2 s, 1-4 octaves, gate 5-100 %, sample-accurate in @sample)
+- NEW: scratcher per pad (SCR button + dragging on the waveform
+  while a note is held, or automation slider 53)
+- NEW: system page (anti-alias Hermite interpolation, incoming
+  transpose +/-24 st, working polyphony limit), preset banks as
+  files (8 slots, load B1-B8), per-pad undo (SNAP/UNDO)
+- FIX: ROOM reverb was near full scale - output 0.02 -> 0.011,
+  room feedback base 0.78 -> 0.72
+0.5.0
+- NEW: FX page as master chain: EQ -> 4 insert slots; 4-band EQ
+  (PEAK/LO-SHELF/HI-SHELF/LO-CUT/HI-CUT, RBJ biquads, live
+  response curve); inserts DELAY, CHORUS, FLANGER, PHASER,
+  DISTORT, CRUSH, COMP, LIMIT, ROOM, TRASH, GATE, STEREO
+0.4.0
+- NEW: 8-row mod matrix, 2 LFOs per pad, mod envelope, GUI
+  modifiers, velocity depth + curve, per-slot panorama
+0.3.x
+- NEW: filter page (LP/HP/BP/notch, 6/12/24 dB, drive
+  clean/dirty), pitch envelope with portamento (OFF/POLY/LEGATO),
+  loop editor (normal/ping-pong/crossfade, zero-cross snap)
+- FIX: crackle artefacts of the early build removed
+0.2.0
+- NEW: sample B + crossfade, reverse, start/random offsets,
+  sample delay, phase invert, per-slot LPF/HPF/LoFi/Spike,
+  retrigger, amp envelope editor over the waveform
+0.1.x
+- First playable version: loader (file_riff, resample to project
+  rate, peak cache), 64-voice pool, amp envelope, kit note map,
+  multitrack channels, killnote, crossfade, mute/solo,
+  transpose/fine, slim-pad UI, full panel, tab bar, scope]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/6a708db5b7269c5a889e28261a7bd0b2ff45115f/Synths/TT-PHALYX/tt-phalyx.jsfx</source>
+        <source file="front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/6a708db5b7269c5a889e28261a7bd0b2ff45115f/Synths/TT-PHALYX/front.png</source>
+        <source file="tt-phalyx-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/6a708db5b7269c5a889e28261a7bd0b2ff45115f/Synths/TT-PHALYX/tt-phalyx-manual.html</source>
       </version>
     </reapack>
   </category>
