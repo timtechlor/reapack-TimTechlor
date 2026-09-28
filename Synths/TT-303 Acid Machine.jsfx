@@ -1,7 +1,7 @@
 desc:TT-303 Acid Machine
 // @description TT-303 Acid Machine
 // @author TimTechlor
-// @version 1.0.1
+// @version 1.07
 // @license MIT
 // @tags synth instrument acid 303 tb-303 bass techno
 // @about
@@ -11,7 +11,8 @@ desc:TT-303 Acid Machine
 //   Tribute model, no samples.
 //
 //   - Oscillator: saw / square, 1-sample PolyBLEP, 2x oversampled
-//   - VCF: 3-pole ladder (18 dB/oct) in ZDF/TPT form, level-dependent resonance
+//   - VCF: 4-pole cascade at the TB-303 pole positions (ZDF/TPT),
+//     level-dependent resonance
 //   - Slide + accent, internal 16-step sequencer with 4 banks A-D
 //   - Drive (parallel EQ + WaveShaper), ping-pong delay, Freeverb reverb,
 //     compressor (dry only) with adjustable mix
@@ -20,39 +21,57 @@ desc:TT-303 Acid Machine
 //   HOST mode: sound generator from the piano roll. SEQ mode: internal
 //   sequencer on the timeline or free-running.
 // @changelog
+//   1.07
+//   - Sound engine recalibrated against reference recordings:
+//     4-pole VCF at the TB-303 pole positions, much stronger resonance,
+//     lower cutoff floor (~100 Hz), decay range 25-570 ms, fast VEG sag
+//     after the attack (shorter, punchier steps), accent network
+//     (latch + RC) with audible accent tail, 6 ms release
+//   - SLIDE time now sets the arrival time (~95 %) instead of the time constant
+//   - Square with pitch-dependent duty; 7-tap half-band decimation
+//   - Hotter distortion (more drive and presence tilt) and +12 dB output
+//     make-up: 1.07 is noticeably louder than 1.0 - lower VOLUME if needed
+//   - New EQ defaults: drive EQ fully open, delay 300 Hz-2.8 kHz,
+//     reverb 300 Hz-2.5 kHz (header and INIT)
+//   - The preset bar shows the active preset again after loading a project
+//   - Fixes: same-pitch overlaps in HOST mode; held notes are released on
+//     transport stop; step at the loop end no longer fires twice; tie after
+//     All-Notes-Off no longer silent; UNDO restores the right bank and
+//     survives transport start; no hanging notes on SEQ OUT; MIDI transpose
+//     counts keys, not events; TUNING/FINE and MIDI CC act immediately;
+//     INIT resets all sound controls
+//   - COPY creates an undo point for the target bank
+//   - Wordmark font name corrected to "Zilap Orion"
 //   1.0.1
-//   - Wordmark font name corrected to "Zilap Orion" (the logo now uses the
-//     house font when it is installed)
+//   - Wordmark font name corrected to "Zilap Orion"
 //   1.0
 //   - First full release
-//tags: synth instrument acid 303 bass techno
-//author: TimTechlor
 //about:
 // TT-303 ACID MACHINE — mono acid synth in the style of the TB-303.
 // Tribute, no samples, no sample ROM, all model.
 //
 // CONTROLS AS ON THE ORIGINAL
-//   TUNING     semitones (-24..+24), plus FINE in cents
-//   CUTOFF     filter frequency, ~150 Hz .. ~2 kHz exponential (rises with resonance)
-//   RESONANCE  feedback of the 18 dB ladder up to self-oscillation
+//   TUNING     semitones (-24..+24), plus FINE in cents (act immediately)
+//   CUTOFF     filter frequency, ~100 Hz .. ~1 kHz, resonance raises it up to 2x
+//   RESONANCE  filter feedback up to self-oscillation
 //   ENV MOD    depth of the filter envelope, up to 5.2 octaves
-//   DECAY      decay of the filter envelope, ~30 ms .. ~570 ms
+//   DECAY      decay of the filter envelope, ~25 ms .. ~570 ms
 //   ACCENT     level AND filter boost of the accent circuit
 //   WAVEFORM   sawtooth / square
 //
-// MODEL DETAILS (after R. Whittle / Devil Fish documentation)
-//  - Filter: 3-pole ladder (18 dB/oct) in ZDF/TPT form,
-//    level-dependent feedback k/(1+0.4|y|), 2x oversampled,
-//    then 3-point decimation. Soft clip only at the master, never in
-//    the OS loop (it never engages there at real levels anyway).
-//  - Pole correction 1/(1+0.10*kRes): mild peak correction; the
-//    resonance hump moves up with rising resonance, as on the reference.
-//  - Feedback HP 20 Hz IN the feedback path (DC block).
-//  - Square with frequency-dependent duty + tilt, classic 1-sample PolyBLEP.
-//  - Accent capacitor: recharge +0.95, saturation 1.65.
-//    Accent sweep with non-linearity and slight cutoff dependency.
-//  - On accent: fixed 0.2 s filter decay + shortened VCA attack (1.8 ms).
-//  - Slide: constant time, log frequency space; the same note stays held.
+// MODEL DETAILS (after R. Whittle / Devil Fish / Open303 / Stinchcombe)
+//  - Filter: 4 TPT stages at the poles of the idealised TB-303 diode
+//    ladder denominator {0.128/1.038/2.325/3.236} — this makes the open
+//    transfer function exact. Level-dependent feedback k/(1+0.4|y|),
+//    2x oversampled, 7-tap half-band decimation. Soft clip only at the
+//    master. Feedback HP 20 Hz, pole correction 1/(1+0.10*kRes).
+//  - Square: pitch-dependent duty ~0.5*sqrt(85 Hz/f) (after Burnett)
+//    and a lower level than saw -> different filter excitation.
+//    1-sample PolyBLEP. The VCO runs freely.
+//  - Accent: own control latch + RC network (sweep capacitor charges
+//    via diode+R, discharges via the pot wiper; smoothed VCA path
+//    47k x 0.033 uF). MEG time on accent = decay minimum.
+//  - Slide: RC time constant in log frequency space; the same note stays.
 //  - FX: delay/reverb bypassed at mix < 0.5 %. EQ OFF = true bypass.
 //  - MIDI: notes are consumed, CC/pitchbend keep going.
 //
@@ -72,16 +91,14 @@ desc:TT-303 Acid Machine
 // compressor (-14 dB, 5:1) and master.
 //
 // The input EQ only shapes what is sent into each effect; the dry
-// signal runs alongside untouched. On the drive what the EQ removes is
-// added back after the WaveShaper, so a raised lowcut takes the bass
-// out of the DISTORTION, not out of the output (drive off = transparent).
+// signal runs alongside. On the drive the filtered band is distorted
+// and the rest is added back undistorted — a raised lowcut takes the
+// bass out of the DISTORTION, not out of the output.
 //
-// MIDI: THRU at the top of the header passes INCOMING notes on to the
-// output (CC and pitchbend always pass through anyway).
-// SEQ OUT in the sequencer panel sends the SELF-GENERATED sequence
-// out. Two different sources, hence two switches. In SEQ mode incoming
-// notes are transpose commands — whoever also passes them on with
-// THRU sends them out next to the sequence.
+// MIDI: THRU (header) passes INCOMING notes on, SEQ OUT (sequencer
+// panel) sends the GENERATED sequence out — two sources, two switches.
+// CC/pitchbend always pass through. In SEQ mode incoming notes are
+// transpose commands.
 //
 // SURFACE after the Tim Techlor design kit: Core Black, Core White,
 // Acid Green #39FF14, traces at a 45 degree angle with solder pads.
@@ -127,12 +144,12 @@ slider23:55<10,100,1>-SEQ Gate (%)
 slider24:0<0,1,1{Off,On}>-SEQ Free Run
 slider25:0<0,3,1{A,B,C,D}>-SEQ pattern bank
 slider26:0<0,1,1{Off,On}>-SEQ Out (sequence to output)
-slider27:0<0,20000,1>-Drive EQ Lowcut (Hz)
+slider27:20<0,20000,1>-Drive EQ Lowcut (Hz)
 slider28:20000<20,20000,1>-Drive EQ Highcut (Hz)
-slider29:250<0,20000,1>-Delay EQ Lowcut (Hz)
-slider30:3000<20,20000,1>-Delay EQ Highcut (Hz)
+slider29:300<0,20000,1>-Delay EQ Lowcut (Hz)
+slider30:2800<20,20000,1>-Delay EQ Highcut (Hz)
 slider31:300<0,20000,1>-Reverb EQ Lowcut (Hz)
-slider32:2300<20,20000,1>-Reverb EQ Highcut (Hz)
+slider32:2500<20,20000,1>-Reverb EQ Highcut (Hz)
 slider33:0<0,1,1{Off,On}>-MIDI Thru (incoming notes)
 slider34:1<0,1,1{Off,On}>-Compressor
 slider35:100<0,100,1>-Compressor mix
@@ -149,19 +166,20 @@ slider35:100<0,100,1>-Compressor mix
 // @init runs again on every samplerate change and on transport start —
 // without this gap the pattern would be gone every time, including the
 // one just loaded from the project.
-M_STK    = 0;        // 32     note stack (mono, last-note priority)
 M_SCOPE  = 64;       // 512    oscilloscope ring buffer
 M_PAR    = 1792;     // 128    Freeverb layout and state
 M_PRE    = 2048;     // 8192   reverb predelay
 M_EVT    = 10240;    // 2048   MIDI queue, 512 events x 4 values
 M_SEQ    = 12288;    // 1024   4 banks x 16 steps x 4 values [is preserved]
-M_UNDO   = 13312;    // 64     one bank of undo (RND/MUT/CLEAR)
-M_SEQEND = 13376;
+M_UNDO   = 13312;    // 64     one bank of undo (RND/MUT/CLEAR/COPY) [is preserved]
+M_SOUT   = 13376;    // 128    notes currently on at SEQ OUT [preserved, so @block can end them]
+M_SEQEND = 13504;    // covered by the memset again from here
+M_HELD   = 13504;    // 128    held transpose keys (SEQ mode)
+M_STK    = 13632;    // 128    unique pitches, last note wins
+M_NCNT   = 13760;    // 128    open note-ons per pitch (HOST overlap)
 M_DLY1   = 16384;
 
-// Size follows the longest possible delay: a half note at 40 BPM
-// is 3.0 s. At 1.6 s the buffer already hit the limit below 75 BPM
-// and the delay lost its timing.
+// Sized for the longest possible delay: a half note at 40 BPM is 3.0 s.
 dlyBufLen = ceil(3.3*srate);
 M_DLY2 = M_DLY1 + dlyBufLen + 16;
 M_RVB  = M_DLY2 + dlyBufLen + 16;
@@ -175,24 +193,24 @@ EVT_MAX = 512;                               // room in the MIDI queue
 
 SRX = srate*2;                               // working rate of the filter (2x)
 
-// step fields and bank size
+// Step fields and bank size
 SF_NOTE = 0; SF_GATE = 1; SF_ACC = 2; SF_SLIDE = 3;
 SEQ_BANK = 64;                               // 16 steps x 4 values per bank
 SEQ_NLO = 24; SEQ_NHI = 48;                  // C1 .. C3 in the step editor
 
-// layout of the front in the design grid; SC scales to the window size
+// Layout of the front in the design grid; SC scales to the window size
 UI_W = 900; UI_H = 732;
 LANE_Y = 544; LANE_H = 92; ROW_H = 3.68;     // 25 semitones in the note lane
 GRID_X = 52; GRID_W = 52;                    // 16 columns of 52 points
 
-// HiDPI: REAPER then delivers the real pixel resolution, and because SC
-// falls out of gfx_w/gfx_h, the front is automatically drawn larger
+// HiDPI: REAPER then reports the real pixel resolution, and because SC
+// follows from gfx_w/gfx_h, the front is automatically drawn larger
 // instead of staying tiny.
 gfx_ext_retina = 1;
 
 /* ---------- small math helpers ---------- */
 
-// tanh replacement (not every REAPER build has tanh as a builtin)
+// tanh substitute (not every REAPER build has tanh as a builtin)
 function fastTanh(x) local(a) (
   a = min(30, max(-30, 2*x));
   (1 - exp(-a))/(1 + exp(-a));
@@ -204,20 +222,16 @@ function softSat(x) local(a) (
   a*(27 + a*a)/(27 + 9*a*a);
 );
 
-// 1-sample PolyBLEP. An additional 2-sample residual term was measured
-// (sign +/-, scaling 0.25/0.5/1.0) and worsened the alias floor in
-// every variant by 0.15 to 3.2 dB. So it stays with the classic
-// 1-sample core; the improvement comes instead from the 3-point
-// decimation further down (-4.3 dB measured).
+// 1-sample PolyBLEP
 function polyBlep(t, dt) (
   t < dt ? ( t /= dt; t + t - t*t - 1 )
   : t > 1 - dt ? ( t = (t - 1)/dt; t*t + t + t + 1 )
   : 0;
 );
 
-// Soft limiting instead of a hard clip. Fully linear up to 0.7,
-// above that a tanh knee with continuous slope, limit exactly 1.0.
-// This way a resonance overshoot no longer clips off rectangularly.
+// Soft limiting instead of a hard cut. Fully linear up to 0.7, above
+// that a tanh knee with continuous slope, limit exactly 1.0.
+// A resonance overshoot no longer clips off square.
 function softClip(x) local(a) (
   a = abs(x);
   a <= 0.7 ? x : (x >= 0 ? 1 : -1)*(0.7 + 0.3*fastTanh((a - 0.7)*3.3333333));
@@ -250,8 +264,8 @@ function readSliders() (
   bankBase  = floor(slider25)*SEQ_BANK;
   midiOut   = slider26;
   midiThru  = slider33;
-  compOn    = slider34;                        // compressor can be switched off
-  compMix   = slider35*0.01;                   // 1 = full (as before), 0 = bypass
+  compOn    = slider34;                        // compressor on/off
+  compMix   = slider35*0.01;                   // 1 = full, 0 = bypass
   swFrac    = slider22/200;                  // up to 0.375 step offset
   gateFrac  = slider23*0.01;
   freeRun   = slider24;
@@ -261,50 +275,72 @@ function readSliders() (
 );
 
 function updateParams() (
-  // --- Filter. Curves fitted to a Roland TB-303 VST (measured against
-  // ref_f_*.wav). The resonance hump is allowed to move up with rising
-  // resonance, as on the reference — hence the (1+resN) term in baseF
-  // and only a mild poleScale.
-  baseF   = 145*exp(cutN*1.95)*(1 + resN);   // ~145 Hz .. ~2 kHz, resonance
-                                             // lifts the corner additionally
-  kRes    = 1.6 + 6.0*(resN^0.7);            // reso 0 already carries Q~1.6;
-                                             // maximum kRes ~7.6
-  resMakeUp = 0.62;                          // -4.2 dB flat level trim
+  // --- Filter. The resonance hump moves up with rising resonance, so the
+  // cutoff follows it. The (145 - K*e^-6cutN) term sets the low floor
+  // (~100 Hz, ~200 Hz at full resonance) without moving mid and top.
+  baseF   = (145 - 45*exp(-6*cutN))*exp(cutN*1.95)*(1 + resN);
+  // Resonance range: coefficient and ^1.2 curve keep the middle moderate
+  // and reach strong resonance at the top while staying stable.
+  kRes    = 1.6 + 14.5*(resN^1.2);           // Q~1.6 at 0, max ~16.1
+  resMakeUp = 0.62;                          // -4.2 dB flat: level offset of the chain
   poleScale = 1/(1 + 0.10*kRes);             // mild peak correction
-  envOct  = envN*5.2;                        // depth of the envelope
-  // Decay curve fitted to ref_dec_0/50/100.wav (decay of the 400-3000 Hz
-  // band = "filter closing"): reference tau ~30 / 130 / 574 ms.
-  decTau  = 0.03*exp(decN*2.95);             // ~30 ms .. ~570 ms
+  // Residual effect with the control at 0: the TB-303 circuit does not
+  // let the MEG influence vanish completely (Whittle).
+  envOct  = 0.4 + envN*4.8;                  // depth: ~0.4 .. 5.2 octaves
+  // Tuning as a log offset that is applied to the note in @sample, so
+  // TUNING/FINE act immediately on the sounding note and on a slide
+  // target. ln(2)/12 = 0.0577622650.
+  tuneLog = (tuneSemi + fineCent*0.01)*0.0577622650;
+  // MEG decay range 25 / 120 / 566 ms.
+  decTau  = 0.025*exp(decN*3.12);
   mDecC   = exp(-1/(decTau*srate));
-  mDecAcc = exp(-1/(0.20*srate));            // accent: fixed 0.2 s
-  aDecC   = exp(-1/(0.085*srate));           // accent extra a bit faster
+  // Accent shorts the decay pot: MEG time = decay minimum
+  // (Whittle, 303-unique), here 45 ms.
+  mDecAcc = exp(-1/(0.045*srate));
+  // Accent network (Whittle): sweep capacitor 1 uF charges via
+  // diode + 47k + part of the resonance pot (0..100k) -> tau ~47..147 ms;
+  // discharge via the 100k wiper -> tau ~100 ms. VCA path 47k x
+  // 0.033 uF -> tau ~1.55 ms (smooths the accent pulse only slightly).
+  accChgC = 1 - exp(-1/((0.047 + 0.10*resN)*srate));
+  accDisC = exp(-1/(0.10*srate));
+  accVcaC = 1 - exp(-1/(0.00155*srate));
   fcMax   = min(16000, 0.45*SRX);
-  // --- couplings in the VCF path
+  // --- Couplings in the VCF path
   oscHpA  = exp(-2*$pi*40/SRX);
   sqHpA   = exp(-2*$pi*28/SRX);              // slightly lower tilt
-  // Feedback high-pass 20 Hz: DC block only. Higher values pulled the
-  // pole frequency below the HP and smothered resonance at low cutoff.
+  // Feedback HP 20 Hz: DC block. Higher values choke the resonance at low
+  // cutoff because poleScale pulls the pole below the HP.
   fbHpA   = exp(-2*$pi*20/SRX);
-  // --- VCA. susTau is constant: measured against ref_dec_0/50/100.wav
-  // (fundamental decay) at tau ~1.05..1.10 s, largely independent of the
-  // decay knob.
-  attSec  = 0.003;                           // normal attack
-  attSecAcc = 0.0018;                        // accent attack (sharper)
-  susTau  = 1.10;                            // ~1.1 s, knob-independent
+  // --- VCA: fundamental decay tau ~1.1 s, independent of the controls
+  attSec  = 0.003;                           // VEG attack (sharp)
+  susTau  = 1.10;
   susCoef = exp(-1/(susTau*srate));
-  relCoef = exp(-1/(0.012*srate));
-  // --- Accent capacitor (slightly more aggressive Devil Fish)
-  accDecC = exp(-1/(0.10*srate));
-  slideSamps = slideSec*srate;              // time constant tau of the RC slide
-  // --- Distortion
-  // Every model has its own compensation so that a model change does
-  // not alter the loudness. Measured against a filtered saw over
-  // driveG 1..40: Hard -1.13 dB, Fold -7.92 dB, Fuzz -1.10 dB
-  // versus Soft. Fold is trimmed to 2.40 so the peaks keep headroom.
+  // Sag stage: after the attack the VEG falls quickly to ~45 % of the
+  // peak (tau 20 ms) and then decays slowly with susTau -> short,
+  // punchy steps like the original.
+  sagCoef = exp(-1/(0.020*srate));
+  // Release 6 ms.
+  relCoef = exp(-1/(0.006*srate));
+  // SLIDE control = ~95 % arrival time: tau_eff = slideSec/3 reaches
+  // ~95 % of the target exactly at the set time (RC character stays).
+  slideSamps = slideSec*srate/3;
+  // --- Distortion: level compensation per model (measured, filtered saw,
+  // driveG 1..40): Hard -1.13 dB, Fold -7.92 dB, Fuzz -1.10 dB vs. Soft.
+  // Fold 2.40 instead of 2.49 = peak headroom.
   distMk    = distModel == 1 ? 1.14 : distModel == 2 ? 2.40
             : distModel == 3 ? 1.14 : 1;
-  distPreG  = fxDistOn ? driveG : 1;
+  // Input gain of the shaper (x3) and presence tilt (x2.6) set the
+  // amount of distortion; the output soft clip limits the level gain.
+  distPreG  = fxDistOn ? driveG*3.0 : 1;
   distPostG = fxDistOn ? 0.9*distMk/(driveG^0.35) : 1;
+  // Presence tilt for the shaper input only: one-pole LP at ~1.8 kHz,
+  // band = LP + 2.6*(x - LP) => high shelf ~+8.3 dB. Sharpens the
+  // distortion without changing the dry sound (dRest runs unaffected).
+  dShG      = 1 - exp(-2*$pi*1800/srate);
+  // Fixed output make-up +12 dB at the very end before the master clip.
+  // The gain sits behind all FX, so internal level ratios stay the same
+  // and the soft clip keeps working as a limiter.
+  outMk     = 4.0;
   // --- Compressor (3 ms / 250 ms, knee 30, threshold -14 dB, 5:1).
   // The curve below is algebraically identical to the textbook form
   //   over<=-K/2: 0 | |over|<K/2: -(over+K/2)^2/(2K)*(1-1/R)
@@ -314,10 +350,8 @@ function updateParams() (
   cRel = 1 - exp(-1/(0.25*srate));
   // --- Delay
   lpG24   = 1 - exp(-2*$pi*2400/srate);
-  // The cross-coupling now runs undamped, the feedback carries the
-  // square in return — so the loop gain per round trip stays the same
-  // as before, but the right channel also gets signal at 0 %
-  // feedback.
+  // Cross-coupling undamped, feedback squared — same loop gain, but
+  // the right channel sounds even at 0 % feedback.
   dlyFb2  = dlyFb*dlyFb;
   // --- FX input EQs. 0 Hz / 20 kHz = true bypass (not a=1).
   eqDLoOn = eqDLoHz > 0;     eqDHiOn = eqDHiHz < 20000;
@@ -333,7 +367,7 @@ function updateParams() (
   rhpA    = exp(-2*$pi*250/srate);
   rlpG    = 1 - exp(-2*$pi*3200/srate);
   cmbFb   = 0.7 + 0.25*roomSz;
-  cmbDamp = 0.44 - 0.14*roomSz;              // shortest combs a bit deader
+  cmbDamp = 0.44 - 0.14*roomSz;              // shortest combs a little deader
   preLen  = floor(min(0.012*srate, 8000));
 );
 
@@ -374,11 +408,9 @@ function apProc(i, x) local(o, idx, y) (
 
 /* ---------- Voice ---------- */
 
-// The slide of the 303 recharges a capacitor to the new control voltage.
-// Because the control voltage is 1 V per octave, in log frequency space
-// this is an exponential approach, not a straight line. The difference is
-// audible at the end: the RC curve eases out, the straight line kinks off.
-// slideSamps is the time constant tau; after 3*tau 95 % is reached.
+// RC recharge of the control voltage (1 V/oct) -> exponential curve in
+// log frequency space that eases out at the end instead of kinking.
+// slideSamps is the time constant tau (95 % after 3*tau).
 function startSlide(tl) (
   slideSamps >= 1 ? (
     slideTgt = tl;
@@ -387,91 +419,75 @@ function startSlide(tl) (
   ) : ( curLog = tl; sliding = 0; );
 );
 
-// Accent part on its own: recharge the capacitor and start the filter
-// sweep. It stands separate because a tied slide note can be accented
-// too — then exactly this part may fire, but the envelopes must not
-// restart.
-function fireAccent() (
-  // Recovery: a rested capacitor recharges more strongly (Devil Fish)
-  accBoost = accCap < 0.18 ? 1.08 : 0.95;
-  accCap = min(1.65, accCap + accBoost);
-  accentLed = 1;
-  aEnv = 1;
-  // Accent sweep: coupled to resonance + slight cutoff dependency
-  // and a gentle non-linearity (accCap^1.12) for denser accents
-  accOctCur = accN * (0.55 + 2.55*resN) * (0.92 + 0.08*cutN)
-              * ((accCap/0.95)^1.12);
-);
-
-// Note-on. acc = accent yes/no.
+// Note start. accOn is the accent control latch: the network (sweep
+// capacitor, VCA path) follows it even during a tie, without
+// retriggering the base envelopes. noteAcc remembers the MEG time of
+// the note (accent = short decay = decay minimum, Whittle).
 function startNote(acc) (
-  accentNow = acc;
-  acc ? fireAccent() : ( aEnv = 0; accOctCur = 0; );
-  // Level: accent lifts it (slightly stronger at high accCap)
-  peakAmp = min(1, 0.5*(1 + (acc ? 0.88*accN*(accCap/0.95) : 0)));
-  // Accent gets a shorter attack (1.8 ms) -> sharper note-on
-  attInc  = (peakAmp - amp)/max(1, (acc ? attSecAcc : attSec)*srate);
+  accOn = acc;
+  noteAcc = acc;
+  accentLed = acc;
+  peakAmp = 0.5;                    // accent level comes from accVca
+  attInc  = (peakAmp - amp)/max(1, attSec*srate);
   envStage = 1; gateHeld = 1;
   mEnv = 1;
-  mCoef = acc ? mDecAcc : mDecC;             // accent = fixed 0.2 s
 );
 
-function voiceOn(n, acc) local(f, i, j) (
-  // The same note may appear only once in the stack. Some controllers and
-  // some hosts send two note-ons without a note-off in between; if the
-  // note was then in there twice, a single note-off did not remove it
-  // fully any more and the voice stayed stuck. An existing entry is
-  // taken out, the note thereby moves to the top and last-note priority
-  // stays unchanged.
+function voiceOn(n, acc) local(f, i, j, legato, sameNote) (
+  // Every note-on needs its note-off. The counter keeps same-pitch
+  // ties; the stack holds each pitch only once for the priority.
+  legato = gateHeld && stkN > 0;
+  sameNote = n == noteCur;
+  M_NCNT[n] += 1;
   i = 0; j = 0;
   loop(stkN, M_STK[i] != n ? ( M_STK[j] = M_STK[i]; j += 1; ); i += 1; );
   stkN = j;
-  stkN >= 32 ? ( i = 0; loop(31, M_STK[i] = M_STK[i+1]; i += 1; ); stkN = 31; );
   M_STK[stkN] = n; stkN += 1;
   noteCur = n;
-  f = 440*2^((n - 69 + tuneSemi + fineCent*0.01)/12);
-  stkN > 1 ? (
-    startSlide(log(f));                      // legato ties, no retrigger
-    // A tied step may still be accented. Capacitor and filter sweep
-    // fire, the amplitude envelope stays untouched — otherwise it
-    // would be a retrigger and not a slide.
-    acc ? ( accentNow = 1; fireAccent(); );
+  f = 440*2^((n - 69)/12);                   // tuning: tuneLog in @sample
+  legato ? (
+    !sameNote ? startSlide(log(f));          // tie: leave a slide to the same target alone
+    // A tied step may still be accented: the accent latch follows the
+    // step (on AND off) without retriggering the envelopes.
+    accOn = acc; accentLed = acc;
   ) : (
     curLog = log(f); sliding = 0;
     startNote(acc);
   );
 );
 
-function noteOff(n) local(i, j, v, found) (
-  found = 0; j = 0; i = 0;
-  loop(stkN,
-    v = M_STK[i];
-    !found && v == n ? found = 1 : ( M_STK[j] = v; j += 1; );
-    i += 1;
-  );
-  stkN = j;
-  stkN > 0 ? (
-    M_STK[stkN-1] != noteCur ? (            // last-note priority
-      noteCur = M_STK[stkN-1];
-      startSlide(log(440*2^((noteCur - 69 + tuneSemi + fineCent*0.01)/12)));
+function noteOff(n) local(i, j) (
+  // A note-off only acts when the last open note-on of this pitch is
+  // closed. Unknown offs are ignored.
+  M_NCNT[n] > 0 ? (
+    M_NCNT[n] -= 1;
+    M_NCNT[n] == 0 ? (
+      i = 0; j = 0;
+      loop(stkN, M_STK[i] != n ? ( M_STK[j] = M_STK[i]; j += 1; ); i += 1; );
+      stkN = j;
+      stkN > 0 ? (
+        M_STK[stkN-1] != noteCur ? (            // last-note priority
+          noteCur = M_STK[stkN-1];
+          startSlide(log(440*2^((noteCur - 69)/12)));
+        );
+      ) : (
+        gateHeld = 0;
+        envStage == 1 || envStage == 2 ? envStage = 3 : 0;
+      );
     );
-  ) : (
-    gateHeld = 0;
-    envStage == 1 || envStage == 2 ? envStage = 3 : 0;
   );
 );
 
 function allOff() (
+  memset(M_NCNT, 0, 128);
   stkN = 0; gateHeld = 0;
   envStage == 1 || envStage == 2 ? envStage = 3 : 0;
 );
 
 /* ---------- Pattern ---------- */
 
-// After loading from the project: pull all steps into valid bounds.
-// A corrupted or older file could otherwise smuggle in notes far outside
-// SEQ_NLO..SEQ_NHI or flags other than 0/1 — the step editor then draws
-// into nothing and seqFire plays unusable notes.
+// After loading: pull all steps into valid limits — protection against
+// damaged/older project data (editor and seqFire rely on it).
 function validateBanks() local(i, v) (
   i = 0;
   loop(4*SEQ_BANK,
@@ -491,20 +507,21 @@ function copyBank(src, dst) local(i) (
   src != dst ? ( i = 0; loop(SEQ_BANK, M_SEQ[dst + i] = M_SEQ[src + i]; i += 1; ); );
 );
 
+// Undo remembers the bank it came from and writes back only there.
 function saveUndo(bb) local(i) (
   i = 0; loop(SEQ_BANK, M_UNDO[i] = M_SEQ[bb + i]; i += 1; );
-  undoArm = 1;
+  undoArm = 1; undoBank = bb;
 );
-function loadUndo(bb) local(i) (
-  undoArm ? ( i = 0; loop(SEQ_BANK, M_SEQ[bb + i] = M_UNDO[i]; i += 1; ); undoArm = 0; );
+function loadUndo() local(i) (
+  undoArm ? ( i = 0; loop(SEQ_BANK, M_SEQ[undoBank + i] = M_UNDO[i]; i += 1; ); undoArm = 0; );
 );
 
 function clearBank(bb) local(s) (
   s = 0; loop(16, setStep(bb, s, 36, 0, 0, 0); s += 1; );
 );
 
-// Note supply for the random function: minor pentatonic over C2 — that is
-// the register where the typical acid lines sit.
+// Note pool for random: minor pentatonic above C2 — the register where
+// the typical acid lines sit.
 function randNote() local(r) (
   r = rand(1);
   r < 0.44 ? 36 : r < 0.58 ? 39 : r < 0.70 ? 41
@@ -522,12 +539,12 @@ function randPattern(bb) local(s, n) (
     M_SEQ[bb + s*4 + SF_SLIDE] = rand(1) < 0.16;
     s += 1;
   );
-  // The first step always sits and is accented, otherwise the figure
-  // starts in nothing and the pattern beginning is not heard.
+  // The first step is always set and accented, otherwise the figure
+  // starts in nothing and you cannot hear the pattern start.
   setStep(bb, 0, 36, 1, 1, 0);
 );
 
-// Mutation: touch only a few steps, the rest stays recognisable.
+// Mutation: only touch a few steps, the rest stays recognisable.
 function mutPattern(bb) local(k, s, r, n) (
   k = 0;
   loop(3,
@@ -557,79 +574,100 @@ function defaultPattern() local(b, i) (
   setStep(0, 12, 41, 1, 0, 1);  setStep(0, 13, 41, 1, 0, 0);
   setStep(0, 14, 39, 1, 0, 0);  setStep(0, 15, 36, 0, 0, 0);
   b = 1; loop(3, copyBank(0, b*SEQ_BANK); b += 1; );
-  // Bank D (index 3): "PUMP" — imported from TT-303_pump_134bpm.mid
-  // (134 BPM). The MIDI is two identical bars long; reduced here to the
-  // 16 steps of the one bar (nothing is lost). E2 bass with slide 0->1
-  // (overlapping identical note in the MIDI) and 10->11, accents on
-  // 0/1/8 (velocity 112), rest velocity 80.
-  setStep(3*SEQ_BANK,  0, 40, 1, 1, 1);  setStep(3*SEQ_BANK,  1, 40, 1, 1, 0);
-  setStep(3*SEQ_BANK,  2, 36, 0, 0, 0);  setStep(3*SEQ_BANK,  3, 40, 1, 0, 0);
-  setStep(3*SEQ_BANK,  4, 36, 0, 0, 0);  setStep(3*SEQ_BANK,  5, 28, 1, 0, 0);
-  setStep(3*SEQ_BANK,  6, 40, 1, 0, 0);  setStep(3*SEQ_BANK,  7, 36, 0, 0, 0);
-  setStep(3*SEQ_BANK,  8, 43, 1, 1, 0);  setStep(3*SEQ_BANK,  9, 36, 0, 0, 0);
-  setStep(3*SEQ_BANK, 10, 31, 1, 0, 1);  setStep(3*SEQ_BANK, 11, 31, 1, 0, 0);
-  setStep(3*SEQ_BANK, 12, 31, 1, 0, 0);  setStep(3*SEQ_BANK, 13, 43, 1, 0, 0);
-  setStep(3*SEQ_BANK, 14, 36, 0, 0, 0);  setStep(3*SEQ_BANK, 15, 31, 1, 0, 0);
 );
 
 /* ---------- Sequencer ---------- */
 
-// MIDI to the outside. The offset is the position within the running
-// block, so the sequence stays sample-accurate at the output too.
-function seqSendOn(n, acc)  ( midiOut ? midisend(smplPos, 0x90, n, acc ? 127 : 100); );
-function seqSendOff(n)      ( midiOut ? midisend(smplPos, 0x80, n, 0); );
+// MIDI out. The offset is the position in the running block, so the
+// sequence stays sample-accurate at the output too.
+// M_SOUT remembers every note sent out: the note-off follows even if
+// SEQ OUT has been switched off in the meantime (otherwise the note
+// hangs in the target device), and no orphan note-off goes out without
+// a note-on.
+// Velocity 64/127 instead of 100/127: a receiver with the usual
+// threshold >= 100 (e.g. this device itself in HOST mode) would
+// otherwise treat normal notes as accents.
+function seqSendOn(n, acc) (
+  midiOut ? ( midisend(smplPos, 0x90, n, acc ? 127 : 64); M_SOUT[n] = 1; );
+);
+function seqSendOff(n) (
+  M_SOUT[n] ? ( midisend(smplPos, 0x80, n, 0); M_SOUT[n] = 0; );
+);
 
 function seqRelease() (
   seqHeld >= 0 ? ( noteOff(seqHeld); seqSendOff(seqHeld); seqHeld = -1; );
   gateLeft = 0;
 );
 
-// Trigger one step. A step's slide flag ties it to the FOLLOWING one —
-// which is why prevSlide decides legato or retrigger.
-function seqFire(s) local(n, a, oldHeld) (
+// Fire a step. A step's slide flag ties it to the FOLLOWING one —
+// hence prevSlide decides between legato and retrigger.
+// The gate only stays up past the step when the following step is a
+// note: slide -> rest releases the gate at the normal gate end
+// (Savov/Schmidt: the gate falls at the following step if there is
+// no gate there).
+function seqFire(s) local(n, a, oldHeld, sl, nextS, nextNote) (
   curStepDisp = s;
   M_SEQ[bankBase + s*4 + SF_GATE] ? (
     n = min(120, max(0, M_SEQ[bankBase + s*4 + SF_NOTE] + seqTrans));
     a = M_SEQ[bankBase + s*4 + SF_ACC];
     prevSlide ? (
-      // do not take the same target note off the stack — otherwise the slide tone dies
       oldHeld = seqHeld;
-      voiceOn(n, a); seqSendOn(n, a);
-      oldHeld >= 0 && oldHeld != n ? ( noteOff(oldHeld); seqSendOff(oldHeld); );
+      // Same target note = tie: the note keeps sounding, no retrigger.
+      // Accent is its own latch and switches per step on AND off.
+      oldHeld == n ? ( accOn = a; accentLed = a; )
+      : (
+        voiceOn(n, a); seqSendOn(n, a);
+        oldHeld >= 0 ? ( noteOff(oldHeld); seqSendOff(oldHeld); );
+      );
     ) : (
       seqHeld >= 0 ? ( noteOff(seqHeld); seqSendOff(seqHeld); );
       voiceOn(n, a); seqSendOn(n, a);
     );
     seqHeld = n;
-    prevSlide = M_SEQ[bankBase + s*4 + SF_SLIDE];
-    gateLeft = prevSlide ? -1 : max(1, gateFrac*stepSamps);
+    sl = M_SEQ[bankBase + s*4 + SF_SLIDE];
+    nextS = s + 1 >= patLen ? 0 : s + 1;
+    nextNote = M_SEQ[bankBase + nextS*4 + SF_GATE];
+    prevSlide = sl;
+    gateLeft = sl && nextNote ? -1 : max(1, gateFrac*stepSamps);
   ) : (
     seqRelease();
-    prevSlide = 0;
+    prevSlide = 0; accOn = 0;
   );
 );
 
 /* ---------- MIDI ---------- */
 
-// m1 & 0xF0 yields 0x90 / 0x80 / 0xB0 — that is exactly how it must be compared.
+// Release transpose keys in SEQ mode (mode change, All-Notes-Off)
+function clearHeld() ( memset(M_HELD, 0, 128); midiHeld = 0; seqTrans = 0; );
+
+// m1 & 0xF0 yields 0x90 / 0x80 / 0xB0 — this is exactly how to compare.
+// SEQ mode: midiHeld counts KEYS (M_HELD), not events — otherwise a
+// double note-on left the transposition hanging after release.
+// All-Notes-Off also releases the sequencer note: otherwise seqHeld
+// pointed at a note the voice no longer has, and a following tie
+// (slide to the same note) stayed silent.
+// Sound CCs go straight into the DSP aliases, so they act at once and
+// not only in the next @block.
+function syncDsp() ( readSliders(); updateParams(); );
+
 function handleMidi(m1, m2, m3) local(st, nv) (
   st = m1 & 0xF0;
   st == 0x90 && m3 > 0 ? (
-    seqMode ? ( midiHeld += 1; seqTrans = m2 - 36; )
+    seqMode ? ( !M_HELD[m2] ? ( M_HELD[m2] = 1; midiHeld += 1; ); seqTrans = m2 - 36; )
             : voiceOn(m2, m3 >= accThresh);
   )
   : (st == 0x80 || (st == 0x90 && m3 == 0)) ? (
-    seqMode ? ( midiHeld = max(0, midiHeld - 1); midiHeld == 0 ? seqTrans = 0; )
+    seqMode ? ( M_HELD[m2] ? ( M_HELD[m2] = 0; midiHeld -= 1; ); midiHeld == 0 ? seqTrans = 0; )
             : noteOff(m2);
   )
   : st == 0xB0 ? (
-    m2 == 123 || m2 == 120 ? ( allOff(); midiHeld = 0; seqTrans = 0; )
-    : m2 == 74 ? ( slider5  = m3 * 100 / 127; slider_automate(slider5);  paramsDirty = 1; )  // Cutoff
-    : m2 == 71 ? ( slider6  = m3 * 100 / 127; slider_automate(slider6);  paramsDirty = 1; )  // Res
-    : m2 == 73 ? ( slider7  = m3 * 100 / 127; slider_automate(slider7);  paramsDirty = 1; )  // Env
-    : m2 == 75 ? ( slider8  = m3 * 100 / 127; slider_automate(slider8);  paramsDirty = 1; )  // Decay
-    : m2 == 16 ? ( slider9  = m3 * 100 / 127; slider_automate(slider9);  paramsDirty = 1; )  // Accent
-    : m2 ==  7 ? ( slider10 = m3 * 100 / 127; slider_automate(slider10); paramsDirty = 1; )  // Volume
+    m2 == 123 || m2 == 120 ? ( seqRelease(); allOff(); prevSlide = 0; clearHeld(); )
+    : m2 == 74 ? ( slider5  = m3 * 100 / 127; slider_automate(slider5);  syncDsp(); )  // cutoff
+    : m2 == 71 ? ( slider6  = m3 * 100 / 127; slider_automate(slider6);  syncDsp(); )  // res
+    : m2 == 73 ? ( slider7  = m3 * 100 / 127; slider_automate(slider7);  syncDsp(); )  // env
+    : m2 == 75 ? ( slider8  = m3 * 100 / 127; slider_automate(slider8);  syncDsp(); )  // decay
+    : m2 == 16 ? ( slider9  = m3 * 100 / 127; slider_automate(slider9);  syncDsp(); )  // accent
+    : m2 ==  7 ? ( slider10 = m3 * 100 / 127; slider_automate(slider10); syncDsp(); )  // volume
     : 0;
   )
   : 0;
@@ -637,16 +675,15 @@ function handleMidi(m1, m2, m3) local(st, nv) (
 
 /* ---------- Surface building blocks ----------
    Everything is given in the 900 x 732 design grid. SC is the factor to
-   the actual window size, OX/OY centre the image. The mouse is
-   converted back into the grid (mX/mY) so that hit tests and drag
-   sensitivity stay independent of the zoom.                            */
+   the actual window size, OX/OY centre the image. The mouse is mapped
+   back into the grid (mX/mY), so that hit tests and drag sensitivity
+   stay independent of the zoom.                                       */
 
-// Assigned drag IDs (dragId), so that later extensions do not get
-// in each other's way:
-//   1..17      knobs
+// Assigned drag IDs (dragId), so later extensions do not collide:
+//   1..18      rotary knobs
 //   20..25     handles of the three dual EQ strips
 //   1000..1015 columns in the step editor
-// Free: 18/19, 26..999, from 1016.
+// Free: 19, 26..999, from 1016.
 
 function xrect(x, y, w, h) (
   gfx_rect(OX + x*SC, OY + y*SC, max(1, w*SC), max(1, h*SC), 1);
@@ -669,19 +706,19 @@ function inBox(bx, by, bw, bh) (
   mX >= bx && mX < bx + bw && mY >= by && mY < by + bh;
 );
 
-// core colours from the design kit
+// Core colours from the design kit
 function colAcid(a)  ( gfx_set(0.224, 1.000, 0.078, a); );   // #39FF14
 function colDim(a)   ( gfx_set(0.130, 0.340, 0.090, a); );
 function colWhite(a) ( gfx_set(1, 1, 1, a); );
 function colInk(a)   ( gfx_set(0.75, 0.81, 0.75, a); );
 
-// solder pad at the end of a trace
+// Solder pad at the end of a trace
 function pad(x, y, r) (
   colAcid(1); xcirc(x, y, r, 1);
   gfx_set(0, 0, 0, 1); xcirc(x, y, r*0.40, 1);
 );
 
-// trace: horizontal up to the bend, then 45 degrees
+// Trace: horizontal up to the bend, then 45 degrees
 function trace(x1, y1, x2, y2) local(kx) (
   kx = x2 - abs(y2 - y1);
   colDim(1);
@@ -714,7 +751,7 @@ function btn(x, y, w, h, on, s) local(hit, hov) (
   hit;
 );
 
-// Knob. Drag vertically, Shift = fine, mouse wheel works too.
+// Rotary knob. Drag vertically, Shift = fine, mouse wheel works too.
 // Returns the (possibly changed) value.
 function knobDef(id) (
   id == 1 ? 0 : id == 2 ? 0 : id == 3 ? 32 : id == 4 ? 55 : id == 5 ? 62
@@ -763,15 +800,14 @@ function knob(id, cx, cy, r, val, vmn, vmx)
   nv;
 );
 
-// String in #vstr centred at (cx, y) — set the font beforehand
+// String in #vstr centred at (cx, y) — set the font first
 function drawCentered(cx, y) local(w, h) (
   gfx_measurestr(#vstr, w, h);
   xat(cx - w*0.5, y); gfx_drawstr(#vstr);
 );
 
-// Label: label (#klbl) in grey, value (#kval) in acid green,
-// from the left edge x0. The caller computes the position from the
-// measured widths so nothing collides with the neighbouring text.
+// Label (#klbl) grey + value (#kval) acid from x0; the caller computes
+// the position from the measured widths (no collisions).
 function kvLabel(x0, y) local(lw, vh) (
   gfx_setfont(3);
   gfx_measurestr(#klbl, lw, vh);
@@ -780,18 +816,13 @@ function kvLabel(x0, y) local(lw, vh) (
 );
 
 /* ---------- Dual EQ slider under each effect unit ----------
-   Logarithmic scale 20 Hz .. 20 kHz: f = 20*1000^t. The left edge
-   (t = 0) is the lowcut and snaps to OFF (0 Hz), the right one
-   (t = 1) the highcut to OFF (20 kHz). Right-click on a handle
-   resets the factory setting.                                      */
-
-// Position in the strip (0..1) for a frequency: log(hz/20)/log(1000)
-// — 20 Hz far left, 20 kHz far right, OFF (0 Hz) on the left edge.
-// Conversion and the way back in fxEq must be mirror images,
-// otherwise the handle jumps when grabbed.
+   Logarithmic scale 20 Hz .. 20 kHz: f = 20*1000^t, t = eqT(hz).
+   Left edge = lowcut (snaps to OFF/0 Hz), right = highcut (OFF/
+   20 kHz). Right-click = factory setting. eqT and the way back in
+   fxEqVal must be mirror images, otherwise the handle jumps.        */
 function eqT(hz) ( min(1, max(0, log(max(20, hz)*0.05)*0.144764827)); );
 
-// compact frequency display in #vstr
+// Compact frequency display in #vstr
 function hzTxt(hz) (
   hz <= 0 || hz >= 20000 ? sprintf(#vstr, "OFF")
   : hz >= 9950 ? sprintf(#vstr, "%dk", floor(hz*0.001 + 0.5))
@@ -799,21 +830,16 @@ function hzTxt(hz) (
   : sprintf(#vstr, "%d", floor(hz + 0.5));
 );
 
-// run of the strip; the field between the handles is the
-// passed band
+// Track of the strip; the area between the handles is the band that
+// passes
 function eqTrack(x, y, w, tLo, tHi) (
   gfx_set(0.092, 0.097, 0.092, 1); xrect(x, y, w, 6);
   tHi > tLo ? ( colAcid(0.30); xrect(x + tLo*w, y + 1, (tHi - tLo)*w, 4); );
 );
 
-// One handle: side 0 = lowcut (left), side 1 = highcut (right).
-// This function only computes, drawing happens in eqHandle.
-//
-// The travel factor is the strip width w, no longer the fixed 170 of the
-// knobs. Only that way does the handle track exactly under the mouse
-// pointer. On a 284 point wide strip it ran with 170 by a factor of
-// 1.67 too fast — which is why the EQ sliders did not track cleanly.
-// Shift = five times finer, with a moving reference point.
+// One handle (side 0 = lowcut left, 1 = highcut right); compute only,
+// eqHandle draws. The travel factor is the strip width w — otherwise
+// the handle does not follow the pointer. Shift = 5x fine.
 function fxEqVal(id, x, y, w, hz, side, defHz)
   local(t, hot, nv, hx, sh) (
   t  = eqT(hz);
@@ -839,9 +865,8 @@ function fxEqVal(id, x, y, w, hz, side, defHz)
   nv;
 );
 
-// One handle, drawing only. Kept apart from the computing so that the
-// passed band stands in the same frame as the handle — before, the
-// strip ran a frame behind the handle while dragging.
+// Draw the handle — separate from computing, otherwise the strip lags
+// one frame behind the handle while dragging.
 function eqHandle(id, x, y, w, hz) local(hx) (
   hx = x + eqT(hz)*w;
   dragId == id || (mX >= hx - 8 && mX <= hx + 8 && mY >= y - 7 && mY <= y + 11)
@@ -850,7 +875,7 @@ function eqHandle(id, x, y, w, hz) local(hx) (
   gfx_set(0, 0, 0, 1); xrect(hx - 1, y, 2, 6);
 );
 
-// LO/HI labelling with frequency values under an EQ strip
+// LO/HI label with frequency values under an EQ strip
 function eqLabels(x, y, w, loHz, hiHz) local(a, b, c, d, x0) (
   gfx_setfont(3);
   hzTxt(loHz); gfx_measurestr(#vstr, a, b);
@@ -864,7 +889,7 @@ function eqLabels(x, y, w, loHz, hiHz) local(a, b, c, d, x0) (
   xat(x0 + c + 5, y); colAcid(0.85); gfx_drawstr(#vstr);
 );
 
-// note name, e.g. "C#2" — draws at the current text position
+// Note name, e.g. "C#2" — draws at the current text position
 function noteName(n) local(k, o) (
   k = n - 12*floor(n/12); o = floor(n/12) - 1;
   k == 0 ? gfx_drawstr("C") : k == 1 ? gfx_drawstr("C#") : k == 2 ? gfx_drawstr("D")
@@ -883,30 +908,31 @@ function noteHeld(n) local(i, r) (
 
 /* ---------- Sound presets ---------- */
 
-// Five factory patches plus INIT, tuned for the current engine.
-// SCREAM and HOOVER use the square wave. INIT also sets Comp ON/100 %
-// and the delay/reverb input EQs (250 Hz..3.0 kHz resp. 300 Hz..2.3 kHz).
 function applyPatch(p) (
-  p == 1 ? ( slider2 = 0; slider5 = 14; slider6 = 40; slider7 = 40; slider8 = 64;
-             slider9 = 35; slider13 = 0; slider14 = 0; slider15 = 7;
-             slider16 = 14; slider18 = 50; slider19 = 16; )                       // DEEP
-  : p == 2 ? ( slider2 = 0; slider5 = 52; slider6 = 80; slider7 = 82; slider8 = 22;
-               slider9 = 80; slider13 = 1; slider14 = 0; slider15 = 8;
-               slider16 = 16; slider18 = 62; slider19 = 12; )                     // SQUELCH
-  : p == 3 ? ( slider2 = 1; slider5 = 72; slider6 = 88; slider7 = 92; slider8 = 15;
-               slider9 = 95; slider13 = 1; slider14 = 1; slider15 = 16;
-               slider16 = 10; slider18 = 55; slider19 = 9; )                      // SCREAM
-  : p == 4 ? ( slider2 = 1; slider5 = 74; slider6 = 68; slider7 = 96; slider8 = 55;
-               slider9 = 70; slider13 = 1; slider14 = 2; slider15 = 11;
-               slider16 = 20; slider18 = 62; slider19 = 24; )                     // HOOVER
-  : p == 5 ? ( slider2 = 0; slider5 = 18; slider6 = 52; slider7 = 44; slider8 = 82;
-               slider9 = 50; slider13 = 0; slider14 = 0; slider15 = 7;
-               slider16 = 46; slider18 = 80; slider19 = 44; )                     // DUB
-  : ( slider2 = 0; slider5 = 32; slider6 = 55; slider7 = 62; slider8 = 35;
-      slider9 = 60; slider11 = 60; slider13 = 0; slider14 = 0; slider15 = 8;
+  p == 1 ? ( slider2 = 0; slider5 = 16; slider6 = 48; slider7 = 42; slider8 = 58;
+             slider9 = 38; slider13 = 0; slider14 = 0; slider15 = 7;
+             slider16 = 18; slider18 = 52; slider19 = 20; )                       // DEEP
+  : p == 2 ? ( slider2 = 0; slider5 = 38; slider6 = 86; slider7 = 78; slider8 = 25;
+               slider9 = 78; slider13 = 1; slider14 = 0; slider15 = 7;
+               slider16 = 16; slider18 = 64; slider19 = 14; )                     // SQUELCH
+  : p == 3 ? ( slider2 = 1; slider5 = 58; slider6 = 95; slider7 = 88; slider8 = 18;
+               slider9 = 92; slider13 = 1; slider14 = 1; slider15 = 18;
+               slider16 = 10; slider18 = 58; slider19 = 10; )                     // SCREAM
+  : p == 4 ? ( slider2 = 1; slider5 = 64; slider6 = 72; slider7 = 92; slider8 = 68;
+               slider9 = 72; slider13 = 1; slider14 = 2; slider15 = 11;
+               slider16 = 22; slider18 = 68; slider19 = 22; )                     // HOOVER
+  : p == 5 ? ( slider2 = 0; slider5 = 20; slider6 = 58; slider7 = 48; slider8 = 48;
+               slider9 = 52; slider13 = 0; slider14 = 0; slider15 = 7;
+               slider16 = 48; slider18 = 78; slider19 = 42; )                     // DUB
+  : ( slider2 = 0; slider3 = 0; slider4 = 0;
+      slider5 = 32; slider6 = 55; slider7 = 62; slider8 = 35;
+      slider9 = 60; slider10 = 70; slider11 = 60;
+      slider13 = 0; slider14 = 0; slider15 = 8;
       slider16 = 15; slider17 = 1; slider18 = 60; slider19 = 18; slider20 = 70;
-      slider27 = 0; slider28 = 20000; slider29 = 250; slider30 = 3000;
-      slider31 = 300; slider32 = 2300; slider34 = 1; slider35 = 100; );           // INIT
+      slider27 = 20; slider28 = 20000; slider29 = 300; slider30 = 2800;
+      slider31 = 300; slider32 = 2500; slider34 = 1; slider35 = 100;
+      slider_automate(slider3); slider_automate(slider4); slider_automate(slider10);
+      slider_automate(slider34); slider_automate(slider35); );                      // INIT
   slider_automate(slider2);  slider_automate(slider5);  slider_automate(slider6);
   slider_automate(slider7);  slider_automate(slider8);  slider_automate(slider9);
   slider_automate(slider11); slider_automate(slider13); slider_automate(slider14);
@@ -914,9 +940,39 @@ function applyPatch(p) (
   slider_automate(slider18); slider_automate(slider19); slider_automate(slider20);
   slider_automate(slider27); slider_automate(slider28); slider_automate(slider29);
   slider_automate(slider30); slider_automate(slider31); slider_automate(slider32);
-  slider_automate(slider34); slider_automate(slider35);
   patchSel = p;
   paramsDirty = 1;
+);
+
+// Rebuild patchSel after loading — the state comes from the sliders
+// themselves (REAPER stores them in the project), not from an extra
+// serialised index. A patch counts as active if all sliders it sets
+// match exactly; EQ/compressor trims (27-32, 34, 35) and SEQ/system
+// sliders are free and do not invalidate a preset. No match -> -1 =
+// custom (no button marked).
+function matchPatchState() (
+  patchSel =
+    (slider2==0 && slider5==16 && slider6==48 && slider7==42 && slider8==58 &&
+     slider9==38 && slider13==0 && slider14==0 && slider15==7 &&
+     slider16==18 && slider18==52 && slider19==20) ? 1
+  : (slider2==0 && slider5==38 && slider6==86 && slider7==78 && slider8==25 &&
+     slider9==78 && slider13==1 && slider14==0 && slider15==7 &&
+     slider16==16 && slider18==64 && slider19==14) ? 2
+  : (slider2==1 && slider5==58 && slider6==95 && slider7==88 && slider8==18 &&
+     slider9==92 && slider13==1 && slider14==1 && slider15==18 &&
+     slider16==10 && slider18==58 && slider19==10) ? 3
+  : (slider2==1 && slider5==64 && slider6==72 && slider7==92 && slider8==68 &&
+     slider9==72 && slider13==1 && slider14==2 && slider15==11 &&
+     slider16==22 && slider18==68 && slider19==22) ? 4
+  : (slider2==0 && slider5==20 && slider6==58 && slider7==48 && slider8==48 &&
+     slider9==52 && slider13==0 && slider14==0 && slider15==7 &&
+     slider16==48 && slider18==78 && slider19==42) ? 5
+  : (slider2==0 && slider3==0 && slider4==0 && slider5==32 && slider6==55 &&
+     slider7==62 && slider8==35 && slider9==60 && slider10==70 &&
+     slider11==60 && slider13==0 && slider14==0 && slider15==8 &&
+     slider16==15 && slider17==1 && slider18==60 && slider19==18 &&
+     slider20==70) ? 0
+  : -1;
 );
 
 /* ---------- Base state ---------- */
@@ -944,56 +1000,68 @@ i = 0; loop(4, M_PAR[68+i] = p; p += M_PAR[76+i]; i += 1; );
 
 updateParams();
 
-// Start pattern only the very first time — after that either the
-// self-built banks or the ones loaded from the project stand here.
+// Start pattern only the very first time — after that this holds either
+// the banks you built or those loaded from the project.
 patInit != 1 ? ( defaultPattern(); patInit = 1; );
 
 // Voice
-stkN = 0; gateHeld = 0; envStage = 0; amp = 0; peakAmp = 0.5; accentNow = 0;
+stkN = 0; gateHeld = 0; envStage = 0; amp = 0; peakAmp = 0.5;
 accCap = 0; sliding = 0; slideTgt = 0; slideCoef = 0; noteCur = 36;
 curLog = log(65.406); phase = 0;
-mEnv = 0; aEnv = 0; mCoef = 1; accOctCur = 0;
-s1 = 0; s2 = 0; s3 = 0; y3prev = 0;
+mEnv = 0; accOn = 0; accVca = 0; noteAcc = 0;
+s1 = 0; s2 = 0; s3 = 0; s4 = 0; y4prev = 0;
 oscHpY = 0; oscHpX = 0; sqHpY = 0; sqHpX = 0; fbHpY = 0; fbHpX = 0;
 // Effect state
 envDb = -100; dlyPos = 0; prePos = 0;
 hpY = 0; hpPrev = 0; lpL = 0; lpR = 0;
 dHpY = 0; dHpX = 0; dLpY = 0; dlyLpY = 0;    // FX input EQs
 dPrevIn = 0; dsPrev = 0;                     // drive oversampling
+dShA = 0; dShB = 0;                          // drive tilt states
 rvHpY = 0; rvHpX = 0; rvLpY = 0;
 rhpL = 0; rhpXL = 0; rlpL = 0; rhpR = 0; rhpXR = 0; rlpR = 0;
 scopePos = 0; accentLed = 0; bpmNow = 120;
 dlySamps = min(dlyBufLen - 4, 0.75*(60/120)*srate);
-// Control flow
+// Sequencing
 evN = 0; evRd = 0; smplPos = 0; paramsDirty = 0;
 seqHeld = -1; prevSlide = 0; gateLeft = 0; lastStep = -1; seqPos = 0;
-curStepDisp = 0; seqTrans = 0; midiHeld = 0; seqRunning = 0; modePrev = -1;
+curStepDisp = 0; seqTrans = 0; midiHeld = 0; seqRunning = 0; modePrev = -1; hostWasPlaying = 0;
 stepSamps = srate*0.125; stepInc = 1/stepSamps;
 // Surface
 SC = 1; OX = 0; OY = 0; mX = -1; mY = -1;
 dragId = -1; dragX = 0; dragY = 0; dragV = 0; dragT = 0; dragSh = 0;
 bigSel = 0;
 paintRow = -1; lmbPrev = 0; rmbPrev = 0;
-monoSel = 0; sansSel = 0; fontChk = 0; patchSel = 0; copyArm = 0;
+monoSel = 0; sansSel = 0; fontChk = 0; copyArm = 0;
 fBigP = -1; fMedP = -1; fSmlP = -1;
-clickId = -1; clickWait = 0; undoArm = 0;
-fcPrev = -1; osPrev = 0; osA = 0; osB = 0; scopeDiv = 0;
+clickId = -1; clickWait = 0;
+// Only on the first load: @init also runs on every transport start, and
+// M_UNDO sits in the memset gap on purpose — without this lock UNDO and
+// the preset display would be reset after every play.
+uiInit != 1 ? ( patchSel = 0; undoArm = 0; undoBank = 0; uiInit = 1; );
+// @init has discarded seqHeld; whatever still sounds at SEQ OUT (e.g.
+// play pressed out of FREE RUN) is ended by the next @block.
+soutFlush = 1;
+poleFcPrev = -1; osA = 0; osB = 0;
+oA1 = 0; oB1 = 0; oB2 = 0; oB3 = 0; scopeDiv = 0;
 rvbWas = rvbMix > 0.005;      // state of the reverb bypass, see @sample
-g = 0; G = 0;
+gTan = 0; G1 = 0; G2 = 0; G3 = 0; G4 = 0;
 
 /* ============================================================
-   @serialize — all four banks travel into the project and into presets
+   @serialize — all four banks travel into the project and presets
    ============================================================ */
 @serialize
 
 seqVer = 2;
 file_var(0, seqVer);
 file_mem(0, M_SEQ, 4*SEQ_BANK);
-// Runs in both directions. On write it is a no-op, because the values
-// are valid anyway; on read it catches corrupted or foreign data.
-// Future format changes belong here via seqVer.
+// Runs in both directions. When writing it is a no-op because the
+// values are valid anyway; when reading it catches damaged or foreign
+// data. Future format changes belong here via seqVer.
 validateBanks();
 patInit = 1;
+// The slider state is loaded at this point -> derive the preset marker
+// from it (a no-op when writing, because patchSel is correct anyway).
+matchPatchState();
 
 /* ============================================================
    @slider
@@ -1004,50 +1072,76 @@ readSliders();
 updateParams();
 
 /* ============================================================
-   @block — transport, timing, collecting MIDI
+   @block — transport, clocking, collecting MIDI
    ============================================================ */
 @block
 
+// First: seqRelease() may already send a note-off here (stop, mode
+// change); with the old smplPos (= length of the PREVIOUS block) its
+// offset would lie behind the block end.
+smplPos = 0;
+
 paramsDirty ? ( readSliders(); updateParams(); paramsDirty = 0; );
 
+soutFlush ? (
+  soI = 0;
+  loop(128, M_SOUT[soI] ? ( midisend(0, 0x80, soI, 0); M_SOUT[soI] = 0; ); soI += 1; );
+  soutFlush = 0;
+);
+
 bpmNow    = tempo > 10 ? tempo : 120;
-stepSamps = max(16, srate*15/bpmNow);        // one 16th in samples
+stepSamps = max(16, srate*15/bpmNow);        // a 16th in samples
 stepInc   = 1/stepSamps;
 dlySamps  = min(dlyBufLen - 4, (60/bpmNow)*dlyDiv*srate);
 
-// catch a mode change cleanly
+// Catch mode changes cleanly
 seqMode != modePrev ? (
   modePrev = seqMode;
-  seqRelease(); allOff();
-  midiHeld = 0; seqTrans = 0; lastStep = -1; prevSlide = 0;
+  seqRelease(); allOff(); clearHeld();
+  lastStep = -1; prevSlide = 0;
 );
 
 hostPlay = play_state & 1;
+// HOST: the edge play -> stop/pause releases held notes (replacement
+// for lost note-offs). HOST only — live playing while stopped and
+// SEQ/FREE RUN keep running independently of the transport.
+hostWasPlaying && !hostPlay && !seqMode ? allOff();
+hostWasPlaying = hostPlay;
 seqWant  = seqMode && (hostPlay || freeRun);
 seqWant != seqRunning ? (
   seqRunning = seqWant;
   seqRunning ? (
     prevSlide = 0;
     hostPlay ? ( seqPos = beat_position*4; ) : ( seqPos = 0; );
-    lastStep = floor(seqPos) - 1;             // the step under the cursor fires
+    lastStep = floor(seqPos) - 1;             // step under the cursor fires
   ) : ( seqRelease(); );
 );
-// Hang on the timeline, but do NOT hard-reset every block.
-// beat_position rounds, and if seqPos in @sample has just crossed a
-// step boundary, the block start nudges it minimally back — the step
-// then fires twice or drops out. That was the timing jitter. It is
-// re-synced only on a real offset: loop jump, position change, tempo
-// change. 0.02 steps are 2.3 ms at 130 BPM.
+// Follow the timeline, but only correct on a real offset (loop jump,
+// position change, tempo). Hard setting per block caused double-fired
+// or dropped steps because beat_position rounds. 0.02 steps = 2.3 ms at
+// 130 BPM.
+// Loop jump by whole pattern lengths: rebook phase-true, do NOT fire
+// again. seqPos is incremented before the check, so the step at the
+// loop end often fires in the last sample before the wrap; firing it
+// again would double the accent and send note-on/off/on at SEQ OUT.
+// Real jump: the step under the cursor fires, unless it is already
+// running (correction within a step).
 seqRunning && hostPlay ? (
   tgtPos = beat_position*4;
-  abs(tgtPos - seqPos) > 0.02 ? (
-    seqPos = tgtPos;
-    lastStep = floor(seqPos) - 1;
+  dPos = tgtPos - seqPos;
+  abs(dPos) > 0.02 ? (
+    dWrap = patLen*floor(dPos/patLen + 0.5);
+    dWrap != 0 && abs(dPos - dWrap) <= 0.02 ? (
+      seqPos += dWrap; lastStep += dWrap;
+    ) : (
+      seqPos = tgtPos;
+      floor(seqPos) != lastStep ? lastStep = floor(seqPos) - 1;
+    );
   );
 );
 
 // MIDI with offset into the queue, triggering happens sample-accurately in @sample
-evN = 0; evRd = 0; smplPos = 0;
+evN = 0; evRd = 0;
 while (midirecv(offs, m1, m2, m3)) (
   evN < EVT_MAX ? (
     M_EVT[evN*4] = offs;   M_EVT[evN*4+1] = m1;
@@ -1060,10 +1154,8 @@ while (midirecv(offs, m1, m2, m3)) (
            : ( stThru != 0x80 && stThru != 0x90 ? midisend(offs, m1, m2, m3) );
 );
 
-// --- Pattern export for the companion ReaScript tt303_pattern_to_midi.lua.
-// Mirrors the CURRENTLY DISPLAYED bank (slider25) unchanged into gmem.
-// Pure copy from M_SEQ, no DSP, no effect on the sound.
-// gmem layout: MIDI_EXPORT_BRIDGE.md, section 3.
+// --- Pattern export to the companion ReaScript tt303_pattern_to_midi.lua:
+// the DISPLAYED bank raw into gmem.
 gmem[0] = 30303;                     // handshake / magic
 gmem[1] = 1;                         // layout version
 gmem[2] = gmem[2] + 1;               // heartbeat: running instance
@@ -1079,6 +1171,34 @@ loop(64,
   exI += 1;
 );
 
+// --- State handoff via gmem: REAPER stores FX states per file path, so
+// a newly inserted instance from a differently named file starts with
+// defaults. A fresh instance (all sliders at their header defaults) takes
+// over the state last exported in this session, once. Import before the
+// own export, otherwise we would overwrite the donor.
+// Limits: gmem is session-only (empty after a REAPER restart — then the
+// project state applies as usual) and global across all instances
+// (with several TT-303 in parallel the last export wins).
+stDone != 1 ? (
+  stDone = 1;
+  stFresh = slider1==0 && slider2==0 && slider3==0 && slider4==0 &&
+    slider5==32 && slider6==55 && slider7==62 && slider8==35 &&
+    slider9==60 && slider10==70 && slider11==60 && slider12==100 &&
+    slider13==0 && slider14==0 && slider15==8 && slider16==15 &&
+    slider17==1 && slider18==60 && slider19==18 && slider20==70 &&
+    slider21==16 && slider22==0 && slider23==55 && slider24==0 &&
+    slider25==0 && slider26==0 && slider27==20 && slider28==20000 &&
+    slider29==300 && slider30==2800 && slider31==300 && slider32==2500 &&
+    slider33==0 && slider34==1 && slider35==100;
+  stFresh && gmem[200] == 30307 && gmem[201] == 1 ? (
+    stI = 1; loop(35, slider(stI) = gmem[201 + stI]; stI += 1; );
+    paramsDirty = 1; matchPatchState();
+  );
+);
+// export the own state (area 200-236, the bridge uses 0-71).
+gmem[200] = 30307; gmem[201] = 1;
+stI = 1; loop(35, gmem[201 + stI] = slider(stI); stI += 1; );
+
 /* ============================================================
    @sample — one voice, signal path as in the hardware
    ============================================================ */
@@ -1090,7 +1210,7 @@ while (evRd < evN && M_EVT[evRd*4] <= smplPos) (
   evRd += 1;
 );
 
-// --- Sequencer clock. Odd steps move back on shuffle.
+// --- Sequencer clock. With shuffle, odd steps move back.
 seqRunning ? (
   seqPos += stepInc;
   stepIdx = floor(seqPos);
@@ -1102,120 +1222,136 @@ seqRunning ? (
   gateLeft > 0 ? ( gateLeft -= 1; gateLeft <= 0 ? seqRelease(); );
 );
 
-// --- Slide. RC approach in log frequency space (capacitor recharge).
+// --- Slide: RC approach in log frequency space (capacitor recharge).
 sliding ? (
   curLog += (slideTgt - curLog)*slideCoef;
-  // stop when the remainder is below one cent (ln(2)/1200 = 0.000578)
+  // stop when the rest is below one cent (ln(2)/1200 = 0.000578)
   abs(slideTgt - curLog) < 0.0005 ? ( curLog = slideTgt; sliding = 0; );
 );
-freq = exp(curLog);
+freq = exp(curLog + tuneLog);
 
-// --- Envelopes. Accent runs on a second, faster curve,
-//     the capacitor discharges further independently of it.
-mEnv *= mCoef;
-aEnv *= aDecC;
-accCap *= accDecC;
-fc = baseF*exp((envOct*mEnv + accOctCur*aEnv)*0.6931472);
+// --- Envelopes and accent network (after Whittle). The MEG (mEnv)
+//     drives the filter directly; via the accent switch it feeds two
+//     extra paths: the sweep capacitor (charges via diode+R, discharges
+//     via the pot wiper) and the smoothed accent VCA path (47k x 0.033 uF).
+//     accSrc uses a minimum feed of 0.55 for tied accents — pure MEG
+//     coupling (floor 0) would make tied accents practically silent.
+mEnv *= (noteAcc ? mDecAcc : mDecC);   // decay control acts continuously
+accSrc = accOn*gateHeld*max(mEnv, 0.55);  // pulses only while the gate is up
+accOn ? accCap += (accSrc - accCap)*accChgC
+      : (accCap *= accDisC);
+// VCA accent path: while the gate is held it follows accSrc with 1.55 ms
+// (47k x 0.033 uF); after the gate it decays on its own with ~40 ms —
+// the audible accent tail of the original.
+gateHeld ? accVca += (accSrc - accVca)*accVcaC
+      : (accVca *= exp(-1/(0.04*srate)));
+// ACW: direct pulse (MEG copy); CW: smoothed cap curve
+accDrv = accN*(0.55 + 2.55*resN)*(0.92 + 0.08*cutN)
+         * ((1 - resN)*accSrc + resN*accCap);
+fc = baseF*exp((envOct*mEnv + accDrv)*0.6931472);
 fc = min(fcMax, max(30, fc));
 
-// --- VCA
+// --- VCA: VEG (amp) and accent contribution separately
 envStage == 1 ? (
   amp += attInc;
   (attInc >= 0 ? amp >= peakAmp : amp <= peakAmp) ? ( amp = peakAmp; envStage = 2; );
 );
-envStage == 2 ? amp *= susCoef;
+// Fast sag phase down to 45 % of the peak (tau 20 ms), then slow
+// sustain decay (peak:body ~4:1).
+envStage == 2 ? amp *= (amp > 0.45*peakAmp ? sagCoef : susCoef);
 envStage == 3 ? ( amp *= relCoef; amp < 0.00002 ? ( amp = 0; envStage = 0; ); );
+vcaGain = amp + accN*0.45*accVca;
 
-needVoice = amp > 0.00002 || stkN > 0 || envStage > 0 || sliding;
+needVoice = amp > 0.00002 || stkN > 0 || envStage > 0 || sliding
+          || accVca > 0.0001;
+
+// The VCO keeps running freely — the hardware has no oscillator reset
+// on the gate; a frozen phase would be the same on every note.
+phaseInc = min(max(freq, 8), 0.45*SRX)/SRX;   // step per OS sub-sample
+phase += 2*phaseInc; phase -= floor(phase);
+phA = phase - phaseInc; phA < 0 ? phA += 1;   // middle of the host period
 
 needVoice ? (
-  // recompute tan() only when fc really moves. The threshold is
-  // RELATIVE (0.15 per mille), not absolute — a fixed limit in hertz
-  // would be an audible quantisation at a low cutoff and ineffective
-  // at a high one.
-  abs(fc - fcPrev) > fc*0.00015 ? (
-    fcPrev = fc;
-    g = tan($pi*fc*poleScale/SRX);
-    G = g/(1 + g);
+  // Four TPT one-pole stages at the poles of the idealised TB-303
+  // diode ladder denominator (Stinchcombe, C1 = C/2):
+  //   s^4 + 2^(11/4)s^3 + 10*sqrt(2)s^2 + 2^(13/4)s + 1
+  // A cascade of single poles at the same positions gives exactly the
+  // same open transfer function.
+  // Coefficients are cached by the actual pole (fc*poleScale).
+  poleFc = fc*poleScale;
+  abs(poleFc - poleFcPrev) > poleFc*0.00015 ? (
+    poleFcPrev = poleFc;
+    gTan = tan(min(1.5, $pi*poleFc*0.1280189/SRX)); G1 = gTan/(1+gTan);
+    gTan = tan(min(1.5, $pi*poleFc*1.0381986/SRX)); G2 = gTan/(1+gTan);
+    gTan = tan(min(1.5, $pi*poleFc*2.3253871/SRX)); G3 = gTan/(1+gTan);
+    gTan = tan(min(1.5, $pi*poleFc*3.2355668/SRX)); G4 = gTan/(1+gTan);
   );
-  inc  = min(max(freq, 8), 0.45*SRX)/SRX;
-  A    = G*G*G;
-  // The square of the 303 comes from a transistor comparator with an
-  // asymmetric operating point. The offset shrinks in high registers,
-  // because the recharge time there takes a larger share of the period.
-  // Duty ~1/5, fitted to the reference square's even-harmonic content
-  // (strong H2/H4/H6, spectral nulls at H5/H10/H15; ref_f_c50_r50_sq.wav).
-  sqDuty = waveSel ? (0.19 - 0.025*min(1, freq*0.0005)) : 0.5;
+  // Square: pitch-dependent — duty ~0.5*sqrt(85 Hz/f), ~50 % at ~85 Hz,
+  // narrower above (after Burnett).
+  // A lower level than saw excites the filter resonance differently.
+  sqDuty = waveSel ? min(0.72, max(0.10, 0.5*sqrt(85/max(freq, 20)))) : 0.5;
   osA = 0; osB = 0; osi = 0;
   loop(2,
-    phase += inc; phase >= 1 ? phase -= 1;
+    ph = osi == 0 ? phA : phase;
     waveSel ? (
-      // second edge at phase = sqDuty, so (phase - sqDuty) mod 1
-      tp = phase + (1 - sqDuty); tp -= floor(tp);
-      sqRaw = (phase < sqDuty ? 1 : -1)
-            + polyBlep(phase, inc) - polyBlep(tp, inc);
+      // second edge at ph = sqDuty, i.e. (ph - sqDuty) mod 1
+      tp = ph + (1 - sqDuty); tp -= floor(tp);
+      sqRaw = (ph < sqDuty ? 1 : -1)
+            + polyBlep(ph, phaseInc) - polyBlep(tp, phaseInc);
       sqHpY = sqHpA*(sqHpY + sqRaw - sqHpX); sqHpX = sqRaw;
-      oscv = sqHpY;
+      oscv = softSat(sqHpY*1.8)*0.5;   // overdriven stage, small level
     ) : (
-      oscv = 2*phase - 1 - polyBlep(phase, inc);
+      oscv = 2*ph - 1 - polyBlep(ph, phaseInc);
     );
     oscHpY = oscHpA*(oscHpY + oscv - oscHpX); oscHpX = oscv;
     xin = softSat(oscHpY*0.8);
 
-    // Level-dependent feedback: it belongs INSIDE the oversampling,
-    // otherwise the second pass computes with the value from the
-    // previous sample.
-    kEff = kRes/(1 + 0.4*abs(y3prev));
+    // Level-dependent feedback: belongs INSIDE the oversampling, otherwise
+    // the second pass computes with the value from the previous sample.
+    kEff = kRes/(1 + 0.4*abs(y4prev));
 
-    // High-pass 20 Hz IN the feedback path. Its share is affine in y3,
+    // High-pass IN the feedback path. Its share is affine in y4,
     // so the loop stays solvable without delay:
-    //   u  = xin - fbHp(kEff*y3) = (xin - fbC) - fbHpA*kEff*y3
-    //   y3 = A*u + B   ->   y3 = (A*(xin - fbC) + B)/(1 + A*fbHpA*kEff)
+    //   u  = xin - fbHp(kEff*y4) = (xin - fbC) - fbHpA*kEff*y4
+    //   y4 = A*u + B   ->   y4 = (A*(xin - fbC) + B)/(1 + A*fbHpA*kEff)
     fbC = fbHpA*(fbHpY - fbHpX);
-    B   = G*G*(1 - G)*s1 + G*(1 - G)*s2 + (1 - G)*s3;
-    y3  = (A*(xin - fbC) + B)/(1 + A*fbHpA*kEff);
-    fbI = kEff*y3;
+    B   = G4*G3*G2*(1 - G1)*s1 + G4*G3*(1 - G2)*s2
+        + G4*(1 - G3)*s3 + (1 - G4)*s4;
+    A   = G1*G2*G3*G4;
+    y4  = (A*(xin - fbC) + B)/(1 + A*fbHpA*kEff);
+    fbI = kEff*y4;
     fbHpY = fbHpA*(fbHpY + fbI - fbHpX); fbHpX = fbI;
     u = xin - fbHpY;
 
-    v = (u  - s1)*G; o1 = v + s1; s1 = o1 + v;
-    v = (o1 - s2)*G; o2 = v + s2; s2 = o2 + v;
-    v = (o2 - s3)*G; o3 = v + s3; s3 = o3 + v;
-    y3prev = o3;
-    osi == 0 ? osA = o3 : osB = o3;
+    v = (u  - s1)*G1; o1 = v + s1; s1 = o1 + v;
+    v = (o1 - s2)*G2; o2 = v + s2; s2 = o2 + v;
+    v = (o2 - s3)*G3; o3 = v + s3; s3 = o3 + v;
+    v = (o3 - s4)*G4; o4 = v + s4; s4 = o4 + v;
+    y4prev = o4;
+    osi == 0 ? osA = o4 : osB = o4;
     osi += 1;
   );
-  // Decimation with 1/4-1/2-1/4 instead of plain averaging. The third
-  // point is the second pass of the PREVIOUS sample. Lowers the alias
-  // floor of the bare oscillator by 4.3 dB (little behind the filter,
-  // but almost free). Plain average: 0.5*(osA + osB)*resMakeUp*amp.
-  voice = (0.25*osPrev + 0.5*osA + 0.25*osB)*resMakeUp*amp;
-  osPrev = osB;
+  // 7-tap half-band decimation [-1/32, 0, 9/32, 1/2, 9/32, 0, -1/32]:
+  // zero at the OS Nyquist frequency and a much wider stop band than
+  // 1/4-1/2-1/4. Latency 1.5 host samples.
+  voice = (0.5*oA1 + 0.28125*(oB1 + oB2) - 0.03125*(osB + oB3))
+          * resMakeUp * vcaGain;
+  oA1 = osA; oB3 = oB2; oB2 = oB1; oB1 = osB;
 ) : (
-  // Voice sleeps. The filter states must NOT simply stay put: amp acts
-  // only behind the filter, so at high resonance the ladder still rings
-  // at full level when amp is long below the threshold. Frozen, these
-  // values would be heard as a click on the next note-on. Hence a short
-  // decay of all states here (around 5 ms time constant).
+  // Voice asleep: let the states decay instead of freezing them — amp
+  // acts behind the filter, the ladder keeps ringing at high resonance;
+  // frozen, that would click on the next note.
   voice = 0;
-  s1 *= 0.99; s2 *= 0.99; s3 *= 0.99;
-  fbHpX *= 0.99; fbHpY *= 0.99; y3prev *= 0.99;
+  s1 *= 0.99; s2 *= 0.99; s3 *= 0.99; s4 *= 0.99;
+  fbHpX *= 0.99; fbHpY *= 0.99; y4prev *= 0.99;
   oscHpX *= 0.99; oscHpY *= 0.99; sqHpX *= 0.99; sqHpY *= 0.99;
-  osPrev *= 0.5;
+  oA1 *= 0.5; oB1 *= 0.5; oB2 *= 0.5; oB3 *= 0.5;
 );
 
-// --- Drive: the EQ selects the band that gets distorted.
-//
-// The EQ is NOT in series any more. dBand is the share the EQ passes
-// and that goes into the WaveShaper; dRest is exactly what the EQ has
-// removed, and runs past it undistorted. Because dRest is formed as a
-// difference, dBand + dRest is again exactly the input signal — with
-// the distortion switched off the whole stage is thereby bit-exact
-// transparent, no matter how the EQ is set.
-//
-// In practice that means: raising the lowcut takes the bass out of the
-// DISTORTION, not out of the output. That is exactly how a drive input
-// EQ is meant — the fundamental stays clean, only the mids get dirty.
+// --- Drive: EQ selects the band to distort. dBand goes into the
+// WaveShaper, dRest (= dIn - dBand) passes undistorted. The sum is
+// exactly the input signal — bypass bit-exact transparent, EQ or not.
+// Lowcut takes the bass out of the distortion, not out of the output.
 dIn   = voice;
 dBand = dIn;
 eqDLoOn ? ( dHpY = eqDLoA*(dHpY + dBand - dHpX); dHpX = dBand; dBand = dHpY; )
@@ -1224,27 +1360,24 @@ eqDHiOn ? ( dLpY += eqDHiG*(dBand - dLpY); dBand = dLpY; )
         : ( dLpY = dBand; );
 dRest = dIn - dBand;
 
-// WaveShaper 2x oversampled. The intermediate point is linearly
-// interpolated, then the same 1/4-1/2-1/4 decimation as in the filter.
-// Measured at the real filter output, this lowers the alias floor behind
-// the drive by 7.6 to 9.8 dB — depending on model and drive from -15..-56
-// to -24..-60 dBc. That is the largest remaining alias lever in the
-// whole device, clearly larger than 4x oversampling of osc+filter.
-//
-// The decimated chain thereby runs half a sample period behind
-// dRest. With the flat one-pole EQs that is less than 0.1 dB sum error
-// in the transition band; with the EQ switched off dRest is exactly
-// zero and the question does not arise.
+// WaveShaper 2x OS (linear midpoint + 1/4-1/2-1/4 decimation).
+// The chain runs half a sample period behind dRest (<0.1 dB
+// sum error with one-pole EQs; with EQ off dRest is exactly 0).
 fxDistOn ? (
   dMid  = 0.5*(dPrevIn + dBand); dPrevIn = dBand;
-  dsA   = distProc(dMid*distPreG)*distPostG;
-  dsB   = distProc(dBand*distPreG)*distPostG;
+  // Presence tilt into the shaper input (states dShA/dShB follow the
+  // signal in bypass too — no jump when switching on).
+  dShA += dShG*(dMid  - dShA);
+  dShB += dShG*(dBand - dShB);
+  dsA   = distProc((dShA + 2.6*(dMid  - dShA))*distPreG)*distPostG;
+  dsB   = distProc((dShB + 2.6*(dBand - dShB))*distPreG)*distPostG;
   dy    = 0.25*dsPrev + 0.5*dsA + 0.25*dsB + dRest;
   dsPrev = dsB;
 ) : (
   // Bypass is true unity — dBand + dRest is dIn again.
   dy = dIn;
   dPrevIn = dBand; dsPrev *= 0.5;
+  dShA = dBand; dShB = dBand;
 );
 
 // --- Ping-pong delay (fully bypassed at mix < 0.5 %)
@@ -1267,30 +1400,24 @@ dlyMix > 0.005 ? (
  ) : (
   wetDL = 0; wetDR = 0;
   lpL *= 0.995; lpR *= 0.995; dlyLpY *= 0.995;
-  // The input high-pass is carried along, otherwise hpPrev stands on an
-  // old value when switched back in and the differentiator sees a
-  // level jump — that was a plop when turning the mix up.
+  // Carry the HP state along (otherwise a DC step = pop when switching
+  // back on); the write pointer keeps storing silence — no old buffer
+  // content when switching on.
   hpPrev = dy; hpY *= 0.995;
-  // The write pointer keeps running and lays down silence, so that no
-  // old content is preserved in the buffer that comes back when switched in.
   M_DLY1[dlyPos] = 0; M_DLY2[dlyPos] = 0;
   dlyPos += 1; dlyPos >= dlyBufLen ? dlyPos = 0;
 );
 
-// --- Reverb (fully bypassed at mix < 0.5 %)
-// When switching TO bypass, predelay, combs, allpasses and the output
-// filters are cleared once. Without that the buffers and indices would
-// stand still (combProc/apProc do not run at all in bypass) and on
-// turning back up seconds-old content came back. The one memset costs
-// around 220 kB, occurs exactly once at the zero crossing of the knob
-// and lies below one sample time.
+// --- Reverb (bypassed at mix < 0.5 %). When switching off, clear
+// buffers/indices once — otherwise old content comes back when turning
+// it up again. One-off memset (~220 kB) within one sample period.
 rvbOn = rvbMix > 0.005;
 rvbOn != rvbWas ? (
   rvbWas = rvbOn;
   !rvbOn ? (
     memset(M_PRE, 0, 8192);
     memset(M_RVB, 0, rvbTotal);
-    ri = 48; loop(16, M_PAR[ri] = 0; ri += 1; );   // comb damping store
+    ri = 48; loop(16, M_PAR[ri] = 0; ri += 1; );   // comb damping memory
     prePos = 0;
     ri = 32; loop(16, M_PAR[ri] = 0; ri += 1; );   // comb read indices
     ri = 80; loop(8,  M_PAR[ri] = 0; ri += 1; );   // allpass read indices
@@ -1325,7 +1452,7 @@ rvbOn ? (
   rlpR += rlpG*(rhpR - rlpR);
 );
 
-// --- Compressor on dry only, then delay/reverb added (303 punch stays)
+// --- Compressor on dry only, then add delay/reverb (303 punch stays)
 lv = abs(dy);
 db = 20*log(lv + 0.00000001)*0.43429448;
 db > envDb ? ( envDb += (db - envDb)*cAtk; ) : ( envDb += (db - envDb)*cRel; );
@@ -1333,14 +1460,14 @@ over = envDb + 14;
 k15 = min(30, max(0, over + 15));
 gr = -0.8*(k15*k15/60 + max(0, over - 15));
 cg = 10^(gr/20)*1.78;
-// compOn = 0 -> dry unprocessed (compression AND the ~+5 dB make-up 1.78
-// out, so ~5 dB quieter, compensate with VOLUME). compMix blends linearly
-// between dy (0 %) and dy*cg (100 %). envDb/cg always run along -> click-free.
+// compOn=0: dry unprocessed incl. ~+5 dB make-up 1.78 (compensate
+// VOLUME). compMix blends dy <-> dy*cg; envDb/cg always run along
+// -> click-free.
 dry = compOn ? dy*(1 + compMix*(cg - 1)) : dy;
 sumL = dry + wetDL + rlpL*rvbMix;
 sumR = dry + wetDR + rlpR*rvbMix;
-spl0 = min(1, max(-1, softClip(sumL*volG)));
-spl1 = min(1, max(-1, softClip(sumR*volG)));
+spl0 = min(1, max(-1, softClip(sumL*volG*outMk)));
+spl1 = min(1, max(-1, softClip(sumR*volG*outMk)));
 
 // --- Oscilloscope (every 2nd sample is enough at gfx 45 Hz)
 scopeDiv ? (
@@ -1349,41 +1476,31 @@ scopeDiv ? (
 );
 scopeDiv = 1 - scopeDiv;
 
-// Advance the block position only here: while sample n is processed
-// smplPos stays at n, and the offset in the MIDI output matches the sample.
+// Count smplPos up here -> the MIDI output offset is sample-accurate.
 smplPos += 1;
 
 /* ============================================================
    @gfx — device front after the Tim Techlor design kit
-   Core Black as the ground, Acid Green as the only accent colour,
+   Core Black as the base, Acid Green as the only accent colour,
    Core White only for pointers and keyboard. Traces at a
    45 degree angle end in solder pads and structure the layout.
-   Drawing happens in the 900 x 732 grid, SC scales to the window.
+   Drawn in the 900 x 732 grid, SC scales to the window.
    ============================================================ */
 @gfx 1120 912
 
 // ---------- Scale ----------
 SC = min(gfx_w/UI_W, gfx_h/UI_H);
-// Lower limit only as an emergency brake against SC = 0. At 0.45 the
-// front was drawn larger than the window at small window sizes and
-// cut off on the right and at the bottom.
-SC = max(0.25, SC);
+SC = max(0.25, SC);    // only an emergency brake against SC = 0
 OX = (gfx_w - UI_W*SC)*0.5;
 OY = (gfx_h - UI_H*SC)*0.5;
 mX = (mouse_x - OX)/SC;
 mY = (mouse_y - OY)/SC;
 
 /* ---------- Fonts ----------
-   Two families: a sans-serif one for all labels and a monospaced one
-   only for numeric values, so digits do not jitter when turning.
-
-   Each candidate is measured against a font that is guaranteed not to
-   exist. If it measures the same, it is not installed and REAPER has
-   fallen back to the same system default — then the next one is tried.
-   Without this check the whole device used to end up in Courier New:
-   "Liberation Mono" does not exist on Windows, GDI fell back to the
-   standard fixed-width font, and the old M/i test did not notice,
-   because Courier New is likewise monospaced. Hence the serifs.
+   Sans-serif for labels, monospaced for numbers (no jitter while
+   turning). Availability test: measure against a font that is
+   guaranteed to be missing — same size = not installed (otherwise
+   the GDI fallback silently catches the test).
 
      1  wordmark      Zilap Orion, else sans-serif bold
      2  sans-serif    medium      3  sans-serif    small
@@ -1406,7 +1523,7 @@ fontChk == 0 ? (
                   (tw1 != refW || th1 != refH) ? sansSel = 3; );
   sansSel < 0 ? sansSel = 4;                 // last resort: Arial
 
-  // monospaced: must be present AND really equal in width
+  // monospaced: must be present AND really fixed-width
   monoSel = -1;
   monoSel < 0 ? ( gfx_setfont(9, "Consolas", 16);
                   gfx_measurestr("M", tw1, th1); gfx_measurestr("i", tw2, th2);
@@ -1424,8 +1541,7 @@ fontChk == 0 ? (
   bigSel = (tw1 != refW || th1 != refH);
 );
 
-// Sizes grow with the window. The small sizes sit one point higher
-// than before, the wordmark stays as it was.
+// Sizes grow with the window.
 fBig = max(12, floor(38*SC));
 fMed = max(10, floor(16*SC));
 fSml = max(9,  floor(13*SC));
@@ -1449,7 +1565,7 @@ fSml = max(9,  floor(13*SC));
   : ( gfx_setfont(4, "Courier New", fMed); gfx_setfont(5, "Courier New", fSml); );
 );
 
-// Mouse state: click as an edge, so switches do not fire continuously
+// Mouse state: click as an edge so switches do not fire continuously
 uiLmb   = mouse_cap & 1;
 uiClick = uiLmb && !lmbPrev;
 uiRClk  = (mouse_cap & 2) && !rmbPrev;
@@ -1459,7 +1575,7 @@ clickWait > 0 ? clickWait -= 1;
 
 accentLed *= 0.88;
 
-// ---------- Ground ----------
+// ---------- Background ----------
 gfx_set(0.050, 0.054, 0.050, 1);
 gfx_rect(0, 0, gfx_w, gfx_h, 1);
 
@@ -1470,11 +1586,11 @@ xstr(24, 8, "TT-303");
 // Version badge to the right of the title (small font, on the title baseline)
 gfx_measurestr("TT-303", hdrTW, hdrTH);
 gfx_setfont(3);
-gfx_measurestr("v1.0", hdrVW, hdrVH);
+gfx_measurestr("v1.07", hdrVW, hdrVH);
 colInk(1);
 gfx_x = OX + 24*SC + hdrTW + 10*SC;
 gfx_y = OY + 8*SC + hdrTH - hdrVH - 1*SC;
-gfx_drawstr("v1.0");
+gfx_drawstr("v1.07");
 gfx_setfont(3);
 colInk(1);
 xstr(26, 48, "ACID MACHINE // TIM TECHLOR // MONO BASS SYNTHESIZER");
@@ -1507,7 +1623,7 @@ btn(804, 32, 74, 26, slider1 == 1, "SEQ")  ? ( slider1 = 1; slider_automate(slid
 panelBox(14, 78, 872, 148);
 gfx_setfont(3);
 colAcid(1); xstr(26, 84, "SYNTHESIZER");
-colInk(1);  xstr(26, 98, "VCO / VCF 18 dB / VCA");
+colInk(1);  xstr(26, 98, "VCO / VCF 24 dB / VCA");
 
 btn(460, 82, 66, 18, patchSel == 0, "INIT") ? applyPatch(0);
 btn(530, 82, 66, 18, patchSel == 1, "DEEP") ? applyPatch(1);
@@ -1547,13 +1663,10 @@ xctr(697, 182, 98, 12, "VOLUME");
 gfx_setfont(4); colAcid(1);
 xat(20, 196);  gfx_printf("%+d st", slider3);
 xat(120, 196); gfx_printf("%+d ct", slider4);
-// The CUTOFF/DECAY display mirrors baseF and decTau from updateParams():
-// baseF = 145*exp(cutN*1.95)*(1+resN) (reso lifts the corner with it),
-// decTau = 30*exp(decN*2.95) ms.
-xat(210, 196); gfx_printf("%d Hz", floor(145*exp(slider5*0.0195)*(1 + slider6*0.01)));
+xat(210, 196); gfx_printf("%d Hz", floor(baseF));
 xat(322, 196); gfx_printf("%d %%", floor(slider6));
 xat(420, 196); gfx_printf("%.1f oct", slider7*0.052);
-xat(512, 196); gfx_printf("%d ms", floor(30*exp(slider8*0.0295)));
+xat(512, 196); gfx_printf("%d ms", floor(decTau*1000 + 0.5));
 xat(616, 196); gfx_printf("%d %%", floor(slider9));
 xat(714, 196); gfx_printf("%d %%", floor(slider10));
 
@@ -1562,8 +1675,7 @@ gfx_setfont(2);
 btn(800, 118, 78, 22, slider2 == 0, "SAW") ? ( slider2 = 0; slider_automate(slider2); paramsDirty = 1; );
 btn(800, 144, 78, 22, slider2 == 1, "SQUARE") ? ( slider2 = 1; slider_automate(slider2); paramsDirty = 1; );
 
-// Accent threshold — belongs to the synthesizer and now stands here;
-// no function in SEQ mode, so only drawn then
+// Accent threshold only matters in HOST mode, so it is only drawn then
 slider1 == 0 ? (
   gfx_setfont(3); colInk(1); xstr(800, 172, "ACCENT VEL");
   gfx_setfont(4); colAcid(1);
@@ -1574,11 +1686,7 @@ slider1 == 0 ? (
 );
 
 /* ---------- Panel EFFECTS ----------
-   DRIVE and DELAY are narrower, REVERB wider in return. Under each
-   unit sits its input EQ as a dual slider: lowcut on the left,
-   highcut on the right, logarithmic scale 20 Hz..20 kHz, at the
-   outer edges the edge snaps to OFF. Right-click on a handle
-   restores the factory setting. */
+   Under each unit its input EQ as a dual slider (see above). */
 panelBox(14, 234, 872, 156);
 gfx_setfont(3);
 colAcid(1);
@@ -1602,8 +1710,7 @@ btn(388, 254, 42, 18, slider17 == 1, "1/8.") ? ( slider17 = 1; slider_automate(s
 btn(434, 254, 42, 18, slider17 == 2, "1/4")  ? ( slider17 = 2; slider_automate(slider17); paramsDirty = 1; );
 btn(480, 254, 42, 18, slider17 == 3, "1/2")  ? ( slider17 = 3; slider_automate(slider17); paramsDirty = 1; );
 
-// Compressor: own column on the right (divider at 762). ON/OFF in the
-// button row, MIX as a knob (id 18) in the knob row. Drawing only.
+// COMP column: ON/OFF in the button row, MIX = knob id 18.
 btn(772, 254, 64, 18, slider34 == 1, slider34 == 1 ? "ON" : "OFF")
   ? ( slider34 = 1 - slider34; slider_automate(slider34); paramsDirty = 1; );
 gfx_setfont(2); colInk(1); xstr(772, 354, "-14 dB / 5:1");
@@ -1640,10 +1747,9 @@ sprintf(#vstr, "%d %%", floor(slider20)); drawCentered(657, 336);
 sprintf(#vstr, "%d ms", floor(slider11)); drawCentered(722, 336);
 sprintf(#vstr, "%d %%", floor(slider35)); drawCentered(824, 336);
 
-// --- Input EQs: lowcut left, highcut right, each 0..20 kHz
-// Compute first, then draw — so strip and handles stand in the same
-// frame. min/max keep the lowcut below the highcut; otherwise the band
-// can be pinched shut and the unit is mute without it being visible why.
+// --- Input EQs: compute first, then draw (same frame);
+// min/max prevents the band from being pinched shut — the unit would
+// otherwise be silent without any visible reason.
 nv = min(fxEqVal(20, 26, 360, 284, slider27, 0, 0), slider28);
 nv != slider27 ? ( slider27 = nv; slider_automate(slider27); paramsDirty = 1; patchSel = -1; );
 nv = max(fxEqVal(21, 26, 360, 284, slider28, 1, 20000), slider27);
@@ -1652,17 +1758,17 @@ eqTrack(26, 360, 284, eqT(slider27), eqT(slider28));
 eqHandle(20, 26, 360, 284, slider27);
 eqHandle(21, 26, 360, 284, slider28);
 
-nv = min(fxEqVal(22, 342, 360, 208, slider29, 0, 250), slider30);
+nv = min(fxEqVal(22, 342, 360, 208, slider29, 0, 300), slider30);
 nv != slider29 ? ( slider29 = nv; slider_automate(slider29); paramsDirty = 1; patchSel = -1; );
-nv = max(fxEqVal(23, 342, 360, 208, slider30, 1, 3000), slider29);
+nv = max(fxEqVal(23, 342, 360, 208, slider30, 1, 20000), slider29);
 nv != slider30 ? ( slider30 = nv; slider_automate(slider30); paramsDirty = 1; patchSel = -1; );
 eqTrack(342, 360, 208, eqT(slider29), eqT(slider30));
 eqHandle(22, 342, 360, 208, slider29);
 eqHandle(23, 342, 360, 208, slider30);
 
-nv = min(fxEqVal(24, 562, 360, 196, slider31, 0, 300), slider32);
+nv = min(fxEqVal(24, 562, 360, 196, slider31, 0, 0), slider32);
 nv != slider31 ? ( slider31 = nv; slider_automate(slider31); paramsDirty = 1; patchSel = -1; );
-nv = max(fxEqVal(25, 562, 360, 196, slider32, 1, 2300), slider31);
+nv = max(fxEqVal(25, 562, 360, 196, slider32, 1, 20000), slider31);
 nv != slider32 ? ( slider32 = nv; slider_automate(slider32); paramsDirty = 1; patchSel = -1; );
 eqTrack(562, 360, 196, eqT(slider31), eqT(slider32));
 eqHandle(24, 562, 360, 196, slider31);
@@ -1693,7 +1799,7 @@ gfx_set(0, 0, 0, 0.75); xrect(20, 442, 384, 16);
 gateHeld ? colAcid(1) : colInk(1);
 xat(24, 444);
 gfx_printf("NOTE "); noteName(noteCur);
-gfx_printf("  %.1f Hz  |  VCF %d Hz  |  %d BPM", exp(curLog), floor(fc), floor(bpmNow));
+gfx_printf("  %.1f Hz  |  VCF %d Hz  |  %d BPM", freq, floor(fc), floor(bpmNow));
 
 /* ---------- Panel SEQUENCER / MIDI ---------- */
 panelBox(14, 470, 872, 250);
@@ -1713,53 +1819,55 @@ slider1 == 1 ? (
 
   gfx_setfont(2);
   btn(250, 478, 86, 22, slider24 == 1, "FREE RUN") ? ( slider24 = 1 - slider24; slider_automate(slider24); paramsDirty = 1; );
-  // Called SEQ OUT and not MIDI OUT, so it stays clear that the
-  // generated sequence goes out here — the THRU switch above, by
-  // contrast, passes incoming notes on. Two sources, two switches.
+  // SEQ OUT = generated sequence out (THRU at the top = incoming notes).
   btn(344, 478, 86, 22, slider26 == 1, "SEQ OUT") ? ( slider26 = 1 - slider26; slider_automate(slider26); paramsDirty = 1; );
 
-  // MIDI note in the gap between MIDI OUT and the knobs
   gfx_setfont(3);
   midiHeld ? colAcid(1) : colInk(1);
   xat(445, 482);
   midiHeld ? gfx_printf("MIDI TRANSPOSE %+d", seqTrans) : gfx_drawstr("MIDI = TRANSPOSE");
 
-  // --- Banks. Arm COPY, then click the target bank.
+  // --- Banks. Arm COPY, then click the target bank. The target bank
+  // gets an undo point first (UNDO there, after switching).
   gfx_setfont(3); colInk(1); xstr(26, 516, "BANK");
   gfx_setfont(2);
   btn(70, 510, 36, 22, slider25 == 0, "A") ? (
-    copyArm ? ( copyBank(bb, 0); copyArm = 0; ) : ( slider25 = 0; slider_automate(slider25); paramsDirty = 1; );
+    copyArm ? ( bb != 0 ? ( saveUndo(0); copyBank(bb, 0); ); copyArm = 0; )
+            : ( slider25 = 0; slider_automate(slider25); paramsDirty = 1; );
   );
   btn(110, 510, 36, 22, slider25 == 1, "B") ? (
-    copyArm ? ( copyBank(bb, SEQ_BANK); copyArm = 0; ) : ( slider25 = 1; slider_automate(slider25); paramsDirty = 1; );
+    copyArm ? ( bb != SEQ_BANK ? ( saveUndo(SEQ_BANK); copyBank(bb, SEQ_BANK); ); copyArm = 0; )
+            : ( slider25 = 1; slider_automate(slider25); paramsDirty = 1; );
   );
   btn(150, 510, 36, 22, slider25 == 2, "C") ? (
-    copyArm ? ( copyBank(bb, 2*SEQ_BANK); copyArm = 0; ) : ( slider25 = 2; slider_automate(slider25); paramsDirty = 1; );
+    copyArm ? ( bb != 2*SEQ_BANK ? ( saveUndo(2*SEQ_BANK); copyBank(bb, 2*SEQ_BANK); ); copyArm = 0; )
+            : ( slider25 = 2; slider_automate(slider25); paramsDirty = 1; );
   );
   btn(190, 510, 36, 22, slider25 == 3, "D") ? (
-    copyArm ? ( copyBank(bb, 3*SEQ_BANK); copyArm = 0; ) : ( slider25 = 3; slider_automate(slider25); paramsDirty = 1; );
+    copyArm ? ( bb != 3*SEQ_BANK ? ( saveUndo(3*SEQ_BANK); copyBank(bb, 3*SEQ_BANK); ); copyArm = 0; )
+            : ( slider25 = 3; slider_automate(slider25); paramsDirty = 1; );
   );
   btn(236, 510, 56, 22, copyArm, "COPY")  ? ( copyArm = 1 - copyArm; );
   btn(300, 510, 46, 22, 0, "RND")   ? ( saveUndo(bb); randPattern(bb); copyArm = 0; );
   btn(350, 510, 46, 22, 0, "MUT")   ? ( saveUndo(bb); mutPattern(bb); copyArm = 0; );
   btn(400, 510, 52, 22, 0, "CLEAR") ? ( saveUndo(bb); clearBank(bb); copyArm = 0; );
-  btn(456, 510, 52, 22, undoArm, "UNDO") ? ( loadUndo(bb); copyArm = 0; );
+  // UNDO only lit and active on the bank the undo point comes from
+  btn(456, 510, 52, 22, undoArm && undoBank == bb, "UNDO") ? (
+    undoBank == bb ? loadUndo(); copyArm = 0;
+  );
   bb = floor(slider25)*SEQ_BANK;
   gfx_setfont(3);
   copyArm ? ( colAcid(1); xstr(514, 516, "SELECT TARGET BANK"); );
 
-  // --- Sequencer knobs. Label AND value in one line beneath,
-  //     so that nothing floats above the knobs any more.
+  // --- Sequencer knobs, values below.
   nv = floor(knob(15, 690, 506, 19, slider21, 1, 16) + 0.5);
   nv != slider21 ? ( slider21 = nv; slider_automate(slider21); paramsDirty = 1; patchSel = -1; );
   nv = floor(knob(16, 770, 506, 19, slider22, 0, 75) + 0.5);
   nv != slider22 ? ( slider22 = nv; slider_automate(slider22); paramsDirty = 1; patchSel = -1; );
   nv = floor(knob(17, 849, 506, 19, slider23, 10, 100) + 0.5);
   nv != slider23 ? ( slider23 = nv; slider_automate(slider23); paramsDirty = 1; patchSel = -1; );
-  // Values under the knobs: first measure the widths of the texts, then
-  // assign the positions — minimum distance 10 to each other, right
-  // margin up to 880. That way nothing overlaps, no matter how wide the
-  // font is when dragging the window open or with a fallback font.
+  // Positions from measured text widths (minimum gap 10, right
+  // edge 880) — no overlap with any fallback font or window size.
   gfx_setfont(3);
   sprintf(#klbl, "LEN");  sprintf(#kval, "%d", floor(slider21));
   gfx_measurestr(#klbl, kw1, kh1); gfx_measurestr(#kval, vw1, vh1);
@@ -1796,8 +1904,7 @@ slider1 == 1 ? (
     gi += 1;
   );
 
-  // --- 16 columns. Note names monospaced, so the columns do not
-  //     jitter when shifting the pitch.
+  // --- 16 columns (monospaced note names, nothing jitters).
   gfx_setfont(5);
   gi = 0;
   loop(16,
