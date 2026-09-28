@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="fb92605d112674841822dd6e84a0f4c8641de47a">
+<index version="1" name="TimTechlor ReaScripts" commit="71ab76c07c5319ca9fe8d3662dcc8f3698426936">
   <category name="Drum Tools">
     <reapack name="TT-PHALYX Load Kit.lua" type="script" desc="TT-PHALYX Load Kit">
       <metadata>
@@ -195,7 +195,7 @@
 {\pard \ql \f0 \sa180 \li0 \fi0 Find and change the font sizes of the active REAPER theme.\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Picker: hover over any text in the REAPER window, click or press Shift to lock it. The editor shows which WALTER font (or ini font) is used there.\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Change size, bold and italic; element overrides give single WALTER elements a font of their own.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Changes are previewed live through a working copy; "Bake theme" writes a new theme " (TimTechlor)". The original theme stays untouched.\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Changes are previewed live through a working copy; "Bake theme" writes a new theme {\f1 <Name> (TimTechlor)}. The original theme stays untouched.\sa180\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Requires ReaImGui (0.10+) and js_ReaScriptAPI (both in ReaTeam Extensions). Manual: TT_ThemeFontEditor_Manual.html next to the script.\par}
 }
 ]]></description>
