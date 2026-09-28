@@ -25,11 +25,14 @@ Updates danach über **Extensions → ReaPack → Synchronize packages**.
 |---|---|---|---|
 | TT-303 Acid Machine | JSFX (Instrument) | Synths | Monophoner Acid-Bass-Synth im Stil der TB-303 |
 | BPM2MS2HZ Calculator | Lua-Script | Tempo Tools | Notenwerte → Millisekunden & Hertz (ReaImGui) |
+| TT Theme Font Editor | Lua-Script | Theme Tools | Theme-Schriften per Picker finden und ändern, neues Theme schreiben (ReaImGui) |
 
 ### Abhängigkeiten
 
 - **BPM2MS2HZ Calculator** benötigt *ReaImGui: ReaScript binding for Dear ImGui*
   (cfillion). In ReaPack über das Repo **ReaTeam Extensions** verfügbar.
+- **TT Theme Font Editor** benötigt *ReaImGui* (0.10+) und *js_ReaScriptAPI*,
+  beide ebenfalls über **ReaTeam Extensions**.
 
 ## Lizenz
 
