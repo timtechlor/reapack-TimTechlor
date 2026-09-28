@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="157f4ad4c31c0def725dcd6f82ff87aaf19ab3e6">
+<index version="1" name="TimTechlor ReaScripts" commit="8c9039e8f36777327c6fa4445a94964b361e93c2">
   <category name="Drum Tools">
     <reapack name="TT-PHALYX Load Kit.lua" type="script" desc="TT-PHALYX Load Kit">
       <metadata>
@@ -42,21 +42,18 @@
 \widowctrl\hyphauto
 
 {\pard \ql \f0 \sa180 \li0 \fi0 TT-303 ACID MACHINE \u8212- mono acid synth in the style of the TB-303. Tribute, no samples, no sample ROM, all model.\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 CONTROLS AS ON THE ORIGINAL TUNING semitones (-24..+24), plus FINE in cents CUTOFF filter frequency, ~150 Hz .. ~2 kHz exponential (rises with resonance) RESONANCE feedback of the 18 dB ladder up to self-oscillation ENV MOD depth of the filter envelope, up to 5.2 octaves DECAY decay of the filter envelope, ~30 ms .. ~570 ms ACCENT level AND filter boost of the accent circuit WAVEFORM sawtooth / square\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 MODEL DETAILS (after R. Whittle / Devil Fish documentation)\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Filter: 3-pole ladder (18 dB/oct) in ZDF/TPT form, level-dependent feedback k/(1+0.4|y|), 2x oversampled, then 3-point decimation. Soft clip only at the master, never in the OS loop (it never engages there at real levels anyway).\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Pole correction 1/(1+0.10*kRes): mild peak correction; the resonance hump moves up with rising resonance, as on the reference.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Feedback HP 20 Hz IN the feedback path (DC block).\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Square with frequency-dependent duty + tilt, classic 1-sample PolyBLEP.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Accent capacitor: recharge +0.95, saturation 1.65. Accent sweep with non-linearity and slight cutoff dependency.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab On accent: fixed 0.2 s filter decay + shortened VCA attack (1.8 ms).\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Slide: constant time, log frequency space; the same note stays held.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 CONTROLS AS ON THE ORIGINAL TUNING semitones (-24..+24), plus FINE in cents (act immediately) CUTOFF filter frequency, ~100 Hz .. ~1 kHz, resonance raises it up to 2x RESONANCE filter feedback up to self-oscillation ENV MOD depth of the filter envelope, up to 5.2 octaves DECAY decay of the filter envelope, ~25 ms .. ~570 ms ACCENT level AND filter boost of the accent circuit WAVEFORM sawtooth / square\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MODEL DETAILS (after R. Whittle / Devil Fish / Open303 / Stinchcombe)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Filter: 4 TPT stages at the poles of the idealised TB-303 diode ladder denominator \{0.128/1.038/2.325/3.236\} \u8212- this makes the open transfer function exact. Level-dependent feedback k/(1+0.4|y|), 2x oversampled, 7-tap half-band decimation. Soft clip only at the master. Feedback HP 20 Hz, pole correction 1/(1+0.10*kRes).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Square: pitch-dependent duty ~0.5*sqrt(85 Hz/f) (after Burnett) and a lower level than saw -> different filter excitation. 1-sample PolyBLEP. The VCO runs freely.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Accent: own control latch + RC network (sweep capacitor charges via diode+R, discharges via the pot wiper; smoothed VCA path 47k x 0.033 uF). MEG time on accent = decay minimum.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Slide: RC time constant in log frequency space; the same note stays.\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab FX: delay/reverb bypassed at mix < 0.5 %. EQ OFF = true bypass.\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab MIDI: notes are consumed, CC/pitchbend keep going.\sa180\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 OPERATING MODES HOST Pure sound generator, played from the piano roll. Velocity >= threshold = accent, overlapping notes = slide. SEQ Internal 16-step sequencer, four pattern banks A-D with copy function, random and mutation, shuffle, gate length. Runs on the project timeline or free (FREE RUN). MIDI notes transpose the pattern (C2 = original pitch). MIDI OUT also sends the sequence out. All four banks travel with the project.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Effect path: ahead of each of the three units \u8212- WaveShaper (Soft/Hard/ Fold/Fuzz), ping-pong delay, Freeverb reverb \u8212- sits an input EQ as a dual slider (lowcut left, highcut right, 0..20 kHz). After that compressor (-14 dB, 5:1) and master.\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 The input EQ only shapes what is sent into each effect; the dry signal runs alongside untouched. On the drive what the EQ removes is added back after the WaveShaper, so a raised lowcut takes the bass out of the DISTORTION, not out of the output (drive off = transparent).\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 MIDI: THRU at the top of the header passes INCOMING notes on to the output (CC and pitchbend always pass through anyway). SEQ OUT in the sequencer panel sends the SELF-GENERATED sequence out. Two different sources, hence two switches. In SEQ mode incoming notes are transpose commands \u8212- whoever also passes them on with THRU sends them out next to the sequence.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The input EQ only shapes what is sent into each effect; the dry signal runs alongside. On the drive the filtered band is distorted and the rest is added back undistorted \u8212- a raised lowcut takes the bass out of the DISTORTION, not out of the output.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIDI: THRU (header) passes INCOMING notes on, SEQ OUT (sequencer panel) sends the GENERATED sequence out \u8212- two sources, two switches. CC/pitchbend always pass through. In SEQ mode incoming notes are transpose commands.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 SURFACE after the Tim Techlor design kit: Core Black, Core White, Acid Green #39FF14, traces at a 45 degree angle with solder pads. Wordmark in Zilap Orion, if installed. Labels sans-serif (Segoe UI / Helvetica Neue / DejaVu Sans / Arial), numeric values monospaced (Consolas / DejaVu Sans Mono / Menlo / Courier New). Which of these is present the script measures itself. The front computes in a fixed design grid and scales to the window size \u8212- to enlarge, just drag the FX window open. HiDPI is honoured via gfx_ext_retina. All internal JSFX sliders are hidden ("-" before the name), operation is exclusively via the device front.\par}
 }
 ]]></description>
@@ -75,6 +72,34 @@
 1.0
 - First full release]]></changelog>
         <source>https://github.com/timtechlor/reapack-TimTechlor/raw/157f4ad4c31c0def725dcd6f82ff87aaf19ab3e6/Synths/TT-303%20Acid%20Machine.jsfx</source>
+      </version>
+      <version name="1.07" author="TimTechlor" time="2026-09-28T15:07:33Z">
+        <changelog><![CDATA[1.07
+- Sound engine recalibrated against reference recordings:
+  4-pole VCF at the TB-303 pole positions, much stronger resonance,
+  lower cutoff floor (~100 Hz), decay range 25-570 ms, fast VEG sag
+  after the attack (shorter, punchier steps), accent network
+  (latch + RC) with audible accent tail, 6 ms release
+- SLIDE time now sets the arrival time (~95 %) instead of the time constant
+- Square with pitch-dependent duty; 7-tap half-band decimation
+- Hotter distortion (more drive and presence tilt) and +12 dB output
+  make-up: 1.07 is noticeably louder than 1.0 - lower VOLUME if needed
+- New EQ defaults: drive EQ fully open, delay 300 Hz-2.8 kHz,
+  reverb 300 Hz-2.5 kHz (header and INIT)
+- The preset bar shows the active preset again after loading a project
+- Fixes: same-pitch overlaps in HOST mode; held notes are released on
+  transport stop; step at the loop end no longer fires twice; tie after
+  All-Notes-Off no longer silent; UNDO restores the right bank and
+  survives transport start; no hanging notes on SEQ OUT; MIDI transpose
+  counts keys, not events; TUNING/FINE and MIDI CC act immediately;
+  INIT resets all sound controls
+- COPY creates an undo point for the target bank
+- Wordmark font name corrected to "Zilap Orion"
+1.0.1
+- Wordmark font name corrected to "Zilap Orion"
+1.0
+- First full release]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/8c9039e8f36777327c6fa4445a94964b361e93c2/Synths/TT-303%20Acid%20Machine.jsfx</source>
       </version>
     </reapack>
   </category>
