@@ -19,7 +19,7 @@
 --   - Change size, bold and italic; element overrides give single WALTER
 --     elements a font of their own.
 --   - Changes are previewed live through a working copy; "Bake theme" writes a
---     new theme "<Name> (TimTechlor)". The original theme stays untouched.
+--     new theme `<Name> (TimTechlor)`. The original theme stays untouched.
 --
 --   Requires ReaImGui (0.10+) and js_ReaScriptAPI (both in ReaTeam Extensions).
 --   Manual: TT_ThemeFontEditor_Manual.html next to the script.
