@@ -34,9 +34,10 @@ header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacin
 nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
 nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
 nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
-nav.toc li a { display: block; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
 nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
 nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
 main { min-width: 0; max-width: 860px; }
 h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
 h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
@@ -87,20 +88,20 @@ footer .acid { color: var(--acid); }
   <nav class="toc" aria-label="Contents">
     <div class="label">CONTENTS //</div>
     <ol>
-<li><a href="#1-overview"><span class="num">01</span>Overview</a></li>
-<li><a href="#2-requirements-and-installation"><span class="num">02</span>Requirements and installation</a></li>
-<li><a href="#3-the-window-at-a-glance"><span class="num">03</span>The window at a glance</a></li>
-<li><a href="#4-quick-start"><span class="num">04</span>Quick start</a></li>
-<li><a href="#5-finding-a-font-with-the-picker"><span class="num">05</span>Finding a font with the picker</a></li>
-<li><a href="#6-the-target-section"><span class="num">06</span>The TARGET section</a></li>
-<li><a href="#7-editing-a-font-edit-section"><span class="num">07</span>Editing a font (EDIT section)</a></li>
-<li><a href="#8-the-all-fonts-list"><span class="num">08</span>The ALL FONTS list</a></li>
-<li><a href="#9-element-overrides"><span class="num">09</span>Element overrides</a></li>
-<li><a href="#10-live-preview"><span class="num">10</span>Live preview</a></li>
-<li><a href="#11-baking-and-discarding"><span class="num">11</span>Baking and discarding</a></li>
-<li><a href="#12-options"><span class="num">12</span>Options</a></li>
-<li><a href="#13-walter-fonts-explained"><span class="num">13</span>WALTER fonts explained</a></li>
-<li><a href="#14-troubleshooting-faq"><span class="num">14</span>Troubleshooting / FAQ</a></li>
+<li><a href="#1-overview"><span class="num">01</span><span>Overview</span></a></li>
+<li><a href="#2-requirements-and-installation"><span class="num">02</span><span>Requirements and installation</span></a></li>
+<li><a href="#3-the-window-at-a-glance"><span class="num">03</span><span>The window at a glance</span></a></li>
+<li><a href="#4-quick-start"><span class="num">04</span><span>Quick start</span></a></li>
+<li><a href="#5-finding-a-font-with-the-picker"><span class="num">05</span><span>Finding a font with the picker</span></a></li>
+<li><a href="#6-the-target-section"><span class="num">06</span><span>The TARGET section</span></a></li>
+<li><a href="#7-editing-a-font-edit-section"><span class="num">07</span><span>Editing a font (EDIT section)</span></a></li>
+<li><a href="#8-the-all-fonts-list"><span class="num">08</span><span>The ALL FONTS list</span></a></li>
+<li><a href="#9-element-overrides"><span class="num">09</span><span>Element overrides</span></a></li>
+<li><a href="#10-live-preview"><span class="num">10</span><span>Live preview</span></a></li>
+<li><a href="#11-baking-and-discarding"><span class="num">11</span><span>Baking and discarding</span></a></li>
+<li><a href="#12-options"><span class="num">12</span><span>Options</span></a></li>
+<li><a href="#13-walter-fonts-explained"><span class="num">13</span><span>WALTER fonts explained</span></a></li>
+<li><a href="#14-troubleshooting-faq"><span class="num">14</span><span>Troubleshooting / FAQ</span></a></li>
     </ol>
   </nav>
   <main>
