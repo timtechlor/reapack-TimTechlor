@@ -1,7 +1,7 @@
 desc:TT-303 Acid Machine
 // @description TT-303 Acid Machine
 // @author TimTechlor
-// @version 1.0
+// @version 1.0.1
 // @license MIT
 // @tags synth instrument acid 303 tb-303 bass techno
 // @about
@@ -20,6 +20,9 @@ desc:TT-303 Acid Machine
 //   HOST mode: sound generator from the piano roll. SEQ mode: internal
 //   sequencer on the timeline or free-running.
 // @changelog
+//   1.0.1
+//   - Wordmark font name corrected to "Zilap Orion" (the logo now uses the
+//     house font when it is installed)
 //   1.0
 //   - First full release
 //tags: synth instrument acid 303 bass techno
@@ -82,7 +85,7 @@ desc:TT-303 Acid Machine
 //
 // SURFACE after the Tim Techlor design kit: Core Black, Core White,
 // Acid Green #39FF14, traces at a 45 degree angle with solder pads.
-// Wordmark in Zilap Orian, if installed. Labels sans-serif
+// Wordmark in Zilap Orion, if installed. Labels sans-serif
 // (Segoe UI / Helvetica Neue / DejaVu Sans / Arial), numeric values
 // monospaced (Consolas / DejaVu Sans Mono / Menlo / Courier New).
 // Which of these is present the script measures itself.
@@ -1382,7 +1385,7 @@ mY = (mouse_y - OY)/SC;
    standard fixed-width font, and the old M/i test did not notice,
    because Courier New is likewise monospaced. Hence the serifs.
 
-     1  wordmark      Zilap Orian, else sans-serif bold
+     1  wordmark      Zilap Orion, else sans-serif bold
      2  sans-serif    medium      3  sans-serif    small
      4  monospaced    medium      5  monospaced    small               */
 
@@ -1417,7 +1420,7 @@ fontChk == 0 ? (
   monoSel < 0 ? monoSel = 3;                 // last resort: Courier New
 
   // house font for the wordmark only if it is really there
-  gfx_setfont(9, "Zilap Orian", 16); gfx_measurestr("HAMBURGEFONSIV", tw1, th1);
+  gfx_setfont(9, "Zilap Orion", 16); gfx_measurestr("HAMBURGEFONSIV", tw1, th1);
   bigSel = (tw1 != refW || th1 != refH);
 );
 
@@ -1429,7 +1432,7 @@ fSml = max(9,  floor(13*SC));
 
 (fBig != fBigP || fMed != fMedP || fSml != fSmlP) ? (
   fBigP = fBig; fMedP = fMed; fSmlP = fSml;
-  bigSel ? gfx_setfont(1, "Zilap Orian", fBig, 'b')
+  bigSel ? gfx_setfont(1, "Zilap Orion", fBig, 'b')
   : sansSel == 0 ? gfx_setfont(1, "Segoe UI", fBig, 'b')
   : sansSel == 1 ? gfx_setfont(1, "Helvetica Neue", fBig, 'b')
   : sansSel == 2 ? gfx_setfont(1, "DejaVu Sans", fBig, 'b')
