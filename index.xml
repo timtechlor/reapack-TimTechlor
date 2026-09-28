@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="6a708db5b7269c5a889e28261a7bd0b2ff45115f">
+<index version="1" name="TimTechlor ReaScripts" commit="fb92605d112674841822dd6e84a0f4c8641de47a">
   <category name="Drum Tools">
     <reapack name="TT-PHALYX Load Kit.lua" type="script" desc="TT-PHALYX Load Kit">
       <metadata>
@@ -181,6 +181,31 @@
         <changelog><![CDATA[Erste Veroeffentlichung ueber ReaPack.]]></changelog>
         <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/11c85427ad2b30cabf09cbdb8ed01ef07305b6ed/Tempo%20Tools/TT_BPM_Calculator.lua</source>
         <source file="TT_Wordmark.png">https://github.com/timtechlor/reapack-TimTechlor/raw/11c85427ad2b30cabf09cbdb8ed01ef07305b6ed/Tempo%20Tools/TT_Wordmark.png</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Theme Tools">
+    <reapack name="TT_ThemeFontEditor.lua" type="script" desc="TT Theme Font Editor">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT Theme Font Editor\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Find and change the font sizes of the active REAPER theme.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Picker: hover over any text in the REAPER window, click or press Shift to lock it. The editor shows which WALTER font (or ini font) is used there.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Change size, bold and italic; element overrides give single WALTER elements a font of their own.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Changes are previewed live through a working copy; "Bake theme" writes a new theme " (TimTechlor)". The original theme stays untouched.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Requires ReaImGui (0.10+) and js_ReaScriptAPI (both in ReaTeam Extensions). Manual: TT_ThemeFontEditor_Manual.html next to the script.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.3" author="TimTechlor" time="2026-09-28T14:31:28Z">
+        <changelog><![CDATA[First release via ReaPack.
+- Element overrides table uses the full remaining window height
+- Draggable splitter between the font list and the element overrides]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/fb92605d112674841822dd6e84a0f4c8641de47a/Theme%20Tools/TT_ThemeFontEditor.lua</source>
+        <source file="TT_ThemeFontEditor_Manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/fb92605d112674841822dd6e84a0f4c8641de47a/Theme%20Tools/TT_ThemeFontEditor_Manual.html</source>
       </version>
     </reapack>
   </category>
