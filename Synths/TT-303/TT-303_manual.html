@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-303 (Web) Manual – Free TB-303 Synth in Your Browser</title>
+<meta name="description" content="User manual for TT-303 Acid Machine, a free TB-303 style acid bass synth with step sequencer and drum machine that runs in your browser. No install.">
+<meta name="tt-doc-name" content="TT-303 (Web)">
+<meta name="tt-doc-version" content="1.07">
+<meta name="tt-doc-date" content="2026-10-03">
+<link rel="canonical" href="https://timtechlor.de/docs/TT-303_manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-303 (Web) Manual – Free TB-303 Synth in Your Browser">
+<meta property="og:description" content="User manual for TT-303 Acid Machine, a free TB-303 style acid bass synth with step sequencer and drum machine that runs in your browser. No install.">
+<meta property="og:url" content="https://timtechlor.de/docs/TT-303_manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-303-acid-machine.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-303 (Web) — User Manual">
+<meta property="article:modified_time" content="2026-10-03">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-303 (Web) Manual – Free TB-303 Synth in Your Browser">
+<meta name="twitter:description" content="User manual for TT-303 Acid Machine, a free TB-303 style acid bass synth with step sequencer and drum machine that runs in your browser. No install.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-303-acid-machine.png">
+<meta name="twitter:image:alt" content="TT-303 (Web) — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/TT-303_manual.html#article",
+   "headline": "TT-303 (Web) — User Manual",
+   "name": "TT-303 (Web) Manual – Free TB-303 Synth in Your Browser",
+   "description": "User manual for TT-303 Acid Machine, a free TB-303 style acid bass synth with step sequencer and drum machine that runs in your browser. No install.",
+   "url": "https://timtechlor.de/docs/TT-303_manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/TT-303_manual.html",
+   "datePublished": "2026-10-03",
+   "dateModified": "2026-10-03",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-303-acid-machine.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "TB-303 online, acid synth browser, free 303 emulation, acid bassline, web synthesizer, step sequencer, Web Audio synth, acid techno",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/TT-303_manual.html#software" },
+   "version": "1.07"
+  },
+  {
+   "@type": "WebApplication",
+   "@id": "https://timtechlor.de/docs/TT-303_manual.html#software",
+   "name": "TT-303 (Web)",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Any (modern web browser)",
+   "softwareVersion": "1.07",
+   "description": "Free browser-based TB-303 style acid bass synthesizer with 16-step sequencer, FX and drum machine.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-303 (Web)", "item": "https://timtechlor.de/docs/TT-303_manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303 (Web)</span></nav>
+      <div class="wordmark" style="--wm-n:6" role="img" aria-label="TT-303 (Web)">TT-303</div>
+      <h1>TT-303 (Web) — User Manual</h1>
+      <div class="meta">Browser app (Web Audio) // Version 1.07 // TimTechlor</div>
+      <p class="lead">TT-303 Acid Machine is a free acid bass synthesizer in the style of the Roland TB-303 that runs in your browser: the synth with accent and slide, a 16-step sequencer with four pattern banks, drive, delay, reverb and compressor, and a small companion drum machine. Nothing to install &mdash; open the app at <a href="https://timtechlor.de/tt-303/">timtechlor.de/tt-303</a>.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg" aria-label="Enlarge screenshot of the TT-303 (Web) user interface" title="Click to enlarge"><img src="img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg" width="1018" height="745" alt="TT-303 (Web) user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#introduction"><span class="num">01</span><span>Introduction</span></a></li>
+<li><a href="#getting-started"><span class="num">02</span><span>Getting Started</span></a></li>
+<li><a href="#two-modes-host-and-seq"><span class="num">03</span><span>Two Modes: HOST and SEQ</span></a></li>
+<li><a href="#the-synth-panel"><span class="num">04</span><span>The SYNTH Panel</span></a></li>
+<li><a href="#presets-six-starting-points"><span class="num">05</span><span>Presets — Six Starting Points</span></a></li>
+<li><a href="#the-fx-panel"><span class="num">06</span><span>The FX Panel</span></a></li>
+<li><a href="#the-sequencer-seq-panel"><span class="num">07</span><span>The Sequencer (SEQ Panel)</span></a></li>
+<li><a href="#playing-live-in-host-mode"><span class="num">08</span><span>Playing Live in HOST Mode</span></a></li>
+<li><a href="#midi-output"><span class="num">09</span><span>MIDI Output</span></a></li>
+<li><a href="#the-drum-machine"><span class="num">10</span><span>The Drum Machine</span></a></li>
+<li><a href="#saving-loading-and-transferring-presets"><span class="num">11</span><span>Saving, Loading and Transferring Presets</span></a></li>
+<li><a href="#exporting-audio-and-midi"><span class="num">12</span><span>Exporting Audio and MIDI</span></a></li>
+<li><a href="#tips-troubleshooting"><span class="num">13</span><span>Tips &amp; Troubleshooting</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="introduction"><span class="num">01</span>Introduction</h2>
+<p>TT-303 Acid Machine is a browser-based recreation of the Roland TB-303, the single-oscillator bassline synthesizer whose squelchy, sliding lines defined the acid house sound. Alongside the faithful synth engine and its step sequencer, the app includes a small companion drum machine, so a complete acid groove can come together in a single browser tab.</p>
+<p>Everything runs locally. The audio engine is built on the Web Audio API and an AudioWorklet, there is nothing to install, nothing is uploaded to a server, and all of your patterns and presets are stored in the browser's localStorage on your own device.</p>
+<p>To use the app you need a current version of a modern browser (Chrome, Edge or Firefox) and a working audio output — speakers or headphones. Because browsers block audio until you interact with a page, the app opens behind a start overlay. One click on it unlocks the audio engine; until you do that, the app stays silent.</p>
+<figure>
+  <img fetchpriority="high" width="1018" height="745" src="img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg" alt="The full TT-303 Acid Machine interface, showing the transport bar, SYNTH and FX panels, sequencer and drum machine side panel">
+  <figcaption>The full interface: transport bar (top), SYNTH and FX panels, the sequencer, and the drum machine on the right.</figcaption>
+</figure>
+<h2 id="getting-started"><span class="num">02</span>Getting Started</h2>
+<p>Click the start button on the overlay. The interface appears with the transport bar along the top. Press the play button — or simply hit the spacebar — to start playback, and press it again to stop.</p>
+<p>The tempo is set in the BPM field in the transport bar. It accepts values from 40 to 300 BPM; click the field, type a number, and the running pattern follows immediately. The sequencer and the drum machine both lock to this tempo, so one BPM value drives the whole groove.</p>
+<figure>
+  <img decoding="async" loading="lazy" width="1568" height="39" src="img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp" alt="Transport bar with play button, BPM field, preset controls, WAV/MIDI export buttons and the MIDI output dropdown">
+  <figcaption>The transport bar: play/BPM on the left, preset management, export, and MIDI I/O on the right.</figcaption>
+</figure>
+<h2 id="two-modes-host-and-seq"><span class="num">03</span>Two Modes: HOST and SEQ</h2>
+<p>The app has two fundamentally different ways of making sound, selected with the HOST/SEQ switch in the header.</p>
+<p>In <strong>HOST mode</strong>, the app behaves like a regular MIDI instrument. Notes come from you — played on the computer keyboard or on an external MIDI keyboard — and the 303 voice responds directly, just as if it were a hardware module. The internal sequencer does not drive the synth in this mode. Use HOST mode to jam, to audition sounds while you tweak the knobs, or to play the app from a controller or a DAW.</p>
+<p>In <strong>SEQ mode</strong>, the built-in step sequencer takes over. It plays the currently loaded pattern in a loop, in classic 303 fashion, while you shape the sound with the filter and effects. Pattern editing — notes, accents, slides — also happens here.</p>
+<figure>
+  <img decoding="async" loading="lazy" width="1354" height="98" src="img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp" alt="Header showing the TT-303 logo, the ACCENT indicator, the MIDI THRU switch and the HOST/SEQ mode switch">
+  <figcaption>The header: ACCENT indicator, MIDI THRU switch, and the HOST/SEQ mode switch on the right (SEQ is active here).</figcaption>
+</figure>
+<h2 id="the-synth-panel"><span class="num">04</span>The SYNTH Panel</h2>
+<p>The SYNTH panel holds the sound-shaping controls of the 303 voice. Most parameters are rotary knobs; the waveform is a two-position switch rather than a knob.</p>
+<figure>
+  <img decoding="async" loading="lazy" width="1354" height="220" src="img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp" alt="SYNTH panel with the eight sound-shaping knobs, the six preset buttons and the waveform switch">
+  <figcaption>The SYNTH panel: Tuning, Fine, Cutoff Freq, Resonance, Env Mod, Decay, Accent and Volume, plus the six presets (INIT, DEEP, SQCH, SCRM, HOOV, DUB) and the SAW/SQUARE waveform switch.</figcaption>
+</figure>
+<table><thead><tr><th>Control</th><th>Range</th><th>What it does</th></tr></thead><tbody><tr><td>Waveform</td><td>Sawtooth / Square</td><td>Selects the oscillator shape. Sawtooth is the brighter, more aggressive 303 staple; square is hollower and rounder.</td></tr><tr><td>Tuning</td><td>−24…+24 semitones</td><td>Coarse pitch offset, up to two octaves in either direction.</td></tr><tr><td>Fine</td><td>−50…+50 cents</td><td>Fine pitch adjustment for detuning against other instruments.</td></tr><tr><td>Cutoff Freq</td><td>0–100</td><td>Cutoff frequency of the classic 303-style lowpass filter. The single most performance-critical knob on the panel.</td></tr><tr><td>Resonance</td><td>0–100</td><td>Emphasis at the cutoff frequency — the nasal, whistling peak that makes the filter "squelch".</td></tr><tr><td>Env Mod</td><td>0–100</td><td>How strongly the note envelope sweeps the filter cutoff. This is the essence of the acid sound: each note opens the filter, then it falls shut.</td></tr><tr><td>Decay</td><td>0–100</td><td>How quickly the envelope (and the note) fades out. Short values give tight, percussive blips; long values let notes ring.</td></tr><tr><td>Accent</td><td>0–100</td><td>Intensity of the accent effect applied to accented steps — a louder, sharper, more filter-open hit.</td></tr><tr><td>Volume</td><td>0–100</td><td>Output level of the 303 voice.</td></tr><tr><td>Accent velocity threshold</td><td>1–127</td><td>Incoming MIDI velocity at or above which a note is treated as accented. Relevant when playing live in HOST mode.</td></tr><tr><td>Slide time</td><td>0–300 ms</td><td>Duration of the portamento glide between notes that are tied together with a slide.</td></tr></tbody></table>
+<h3>Working with the knobs</h3>
+<p>All knobs share the same interaction model:</p>
+<ul>
+<li><strong>Drag vertically</strong> to change the value — up increases, down decreases.</li>
+<li><strong>Hold Shift while dragging</strong> for fine mode, which moves the value in small increments for precise settings.</li>
+<li><strong>Scroll the mouse wheel</strong> over a knob to step the value in roughly 2% increments.</li>
+<li><strong>Right-click or double-click</strong> a knob to reset it to its default value.</li>
+</ul>
+<h2 id="presets-six-starting-points"><span class="num">05</span>Presets — Six Starting Points</h2>
+<p>The six buttons above the knobs — <strong>INIT</strong>, <strong>DEEP</strong>, <strong>SQCH</strong>, <strong>SCRM</strong>, <strong>HOOV</strong> and <strong>DUB</strong> — load built-in factory sounds instantly. They are starting points: pick the one closest to what you hear in your head, then adjust the knobs from there. Loading one never locks anything — every control remains fully editable, and your adjusted result can be stored as a user preset (see the preset section further below).</p>
+<h2 id="the-fx-panel"><span class="num">06</span>The FX Panel</h2>
+<p>The FX panel contains a chain of four processors that the 303 signal passes through. Each can be toggled on or off independently.</p>
+<figure>
+  <img decoding="async" loading="lazy" width="1354" height="229" src="img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp" alt="FX panel with Drive, Delay, Reverb and Compressor sections, each with its own controls and a 2-band EQ frequency display">
+  <figcaption>The FX panel: Drive (model + amount + EQ), Delay (division + mix + feedback + EQ), Reverb (mix + size + EQ) and Compressor (mix). The green bar under each EQ is the frequency band that passes through.</figcaption>
+</figure>
+<h3>Drive</h3>
+<p>A distortion stage with four selectable models — <strong>Soft</strong>, <strong>Hard</strong>, <strong>Fold</strong> and <strong>Fuzz</strong> — which range from gentle saturation to aggressive clipping and wave-folding. The Drive control sets the amount of distortion. The stage has its own 2-band EQ (Lowcut and Highcut, in Hz) so you can, for example, keep the low end clean while fuzzing the mids.</p>
+<h3>Delay</h3>
+<p>A tempo-synced echo. <strong>Mix</strong> sets the wet/dry balance in percent. The delay time is chosen from four note-value divisions relative to the current BPM: <strong>1/8</strong>, <strong>dotted 1/8</strong>, <strong>1/4</strong> and <strong>1/2</strong> — the dotted eighth is the classic choice for rhythmic interest against straight 16th-note patterns. <strong>Feedback</strong> (0–90%) controls how many repeats you hear. A dedicated 2-band EQ shapes the echo tone.</p>
+<h3>Reverb</h3>
+<p>A room-style reverb with two main controls: <strong>Mix</strong> (percent wet) and <strong>Room Size</strong> (20–100%), which scales the virtual space from a small booth to a large hall. It also has its own 2-band EQ, which is useful for darkening the tail or keeping reverb out of the bass frequencies.</p>
+<h3>Compressor</h3>
+<p>A simple on/off compressor with a <strong>Mix</strong> control. Because it is a wet/dry mix rather than a hard insert, it works as parallel compression: at moderate settings it fattens the line without flattening the accents.</p>
+<h3>The EQ strips</h3>
+<p>Drive, Delay and Reverb each carry an identical EQ strip with two band edges — Lowcut and Highcut — covering 0 to 20,000 Hz. These are not numeric knobs: you set them by dragging directly inside the frequency-band display, left edge for the low cut, right edge for the high cut. The band between the two edges is what passes through that processor's EQ.</p>
+<h2 id="the-sequencer-seq-panel"><span class="num">07</span>The Sequencer (SEQ Panel)</h2>
+<p>The sequencer panel is only visible and active in SEQ mode. It is a 16-step sequencer in the spirit of the original, extended with pattern banks and editing tools.</p>
+<figure>
+  <img decoding="async" loading="lazy" width="1354" height="375" src="img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp" alt="Sequencer panel with pattern banks A to D, the note lane above the step grid, and the GATE/ACC/SLD rows below it">
+  <figcaption>The SEQ panel: banks A–D, LEN/SHUF/GATE knobs, the note lane, and the GATE/ACC/SLD rows for each of the 16 steps.</figcaption>
+</figure>
+<h3>Pattern banks and playback controls</h3>
+<ul>
+<li><strong>Banks A–D</strong>: four independent pattern memories. Switch banks at any time; the playing pattern changes accordingly.</li>
+<li><strong>Pattern length</strong>: 1–16 steps. Shorter lengths loop the first steps only, which is handy for unusual meters.</li>
+<li><strong>Shuffle</strong>: 0–75%. Delays every second 16th-note step to create swing; 0% is perfectly straight.</li>
+<li><strong>Gate length</strong>: 10–100%. How long each step's note sustains relative to the step duration — short gates sound choppy, long gates sound legato.</li>
+<li><strong>RUN indicator</strong>: highlights the step currently being played so you can follow the loop position visually.</li>
+<li><strong>FREE RUN</strong>: lets the sequencer keep running independently of the main transport, useful for keeping a pattern cycling while you audition edits.</li>
+<li><strong>SEQ OUT</strong>: sends the sequencer's internally generated notes out as external MIDI in addition to playing the internal synth (see the MIDI output section).</li>
+</ul>
+<h3>The step editor</h3>
+<p>Each step carries four editable properties, one row each:</p>
+<ul>
+<li><strong>Note</strong>: the pitch of the step.</li>
+<li><strong>Gate</strong>: on/off — whether the step sounds at all.</li>
+<li><strong>Accent</strong>: on/off — whether the step triggers the accent effect.</li>
+<li><strong>Slide</strong>: on/off — ties the step to the next one with a portamento glide instead of a new attack.</li>
+</ul>
+<p>Clicking sets or toggles a value; clicking and dragging across a row "paints" the same setting onto several steps at once, which is the fastest way to lay out a run of accents or slides.</p>
+<h3>Pattern tools</h3>
+<ul>
+<li><strong>COPY</strong> — copies the current bank's pattern.</li>
+<li><strong>RND</strong> — generates a random pattern, a quick source of new ideas.</li>
+<li><strong>MUT</strong> — mutates the current pattern: small random variations on what you already have, rather than a fully random pattern.</li>
+<li><strong>CLEAR</strong> — empties the current bank.</li>
+<li><strong>UNDO</strong> — reverts the last editing action, so experimenting with RND, MUT or CLEAR is safe.</li>
+</ul>
+<h2 id="playing-live-in-host-mode"><span class="num">08</span>Playing Live in HOST Mode</h2>
+<p>In HOST mode the computer keyboard becomes a two-octave piano. The mapping follows the German keyboard layout:</p>
+<ul>
+<li><strong>Lower octave</strong>: <code>Y S X D C V G B H N J M</code> — the letter keys are the white keys, the keys between them are the black keys.</li>
+<li><strong>Upper octave</strong>: <code>Q 2 W 3 E R 5 T 6 Z 7 U I 9 O 0 P</code> — the same piano-style arrangement one octave up.</li>
+<li><strong>Arrow keys Up/Down</strong>: shift the keyboard range by octave.</li>
+<li><strong>Shift or Ctrl while striking a key</strong>: plays the note accented — equivalent to hitting it with a velocity above the accent threshold.</li>
+<li><strong>Right-click on the on-screen keyboard</strong>: gate/reset.</li>
+</ul>
+<p>You can also plug in an external MIDI keyboard; the app uses the Web MIDI API to receive notes directly. The <strong>THRU</strong> switch forwards incoming MIDI notes to the selected MIDI output, so the app can sit inside a larger MIDI chain instead of terminating it.</p>
+<h2 id="midi-output"><span class="num">09</span>MIDI Output</h2>
+<figure>
+  <img decoding="async" loading="lazy" width="1568" height="39" src="img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp" alt="Transport bar detail highlighting the MIDI IN/OUT status and the OUT dropdown on the right">
+  <figcaption>The MIDI status and the OUT dropdown live at the right end of the transport bar (here: 1 IN / 1 OUT connected, output set to "off").</figcaption>
+</figure>
+<p>The <strong>OUT</strong> dropdown in the transport bar selects an external MIDI destination — for example a hardware synthesizer on a USB/MIDI interface, or a DAW reached through a virtual MIDI bridge such as loopMIDI. The default setting is <strong>off</strong>, in which case nothing is sent.</p>
+<p>Two switches decide what leaves the app once an output is chosen:</p>
+<ul>
+<li><strong>SEQ OUT</strong> sends the notes generated by the built-in sequencer, so an external instrument can play your pattern in parallel with — or instead of — the internal synth.</li>
+<li><strong>THRU</strong> passes notes arriving at the app's MIDI input straight through to the output.</li>
+</ul>
+<p>The selected output is remembered in the browser and restored automatically on your next visit. Note that Web MIDI requires a browser that supports it, and the browser will ask for permission the first time — the app can only see your MIDI devices after you approve that dialog.</p>
+<h2 id="the-drum-machine"><span class="num">10</span>The Drum Machine</h2>
+<p>Next to the 303 panel sits a small, self-contained drum machine. A dropdown selects the drum kit, and each sound in the kit has its own row with an on/off LED and a volume slider, so you can mute individual instruments and balance the kit against the bassline.</p>
+<p>The drum machine runs independently of the 303 sequencer — it has its own pattern life — but it is locked to the same transport and the same BPM. Press play once and both start together in sync.</p>
+<figure>
+  <img decoding="async" loading="lazy" width="236" height="400" src="img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp" alt="Drum machine panel with the kit dropdown and one row per drum sound, each with an on/off LED and a volume slider">
+  <figcaption>The drum machine panel: kit selector on top, one row per sound with its on/off LED and volume slider.</figcaption>
+</figure>
+<h2 id="saving-loading-and-transferring-presets"><span class="num">11</span>Saving, Loading and Transferring Presets</h2>
+<p>The preset library controls sit in the transport bar, next to the play button (see the screenshot at the top of this guide): the name field, <strong>SAVE</strong>, the preset dropdown, <strong>✕</strong>, <strong>⇓ ALL</strong> and <strong>⇑ ALL</strong>.</p>
+<ul>
+<li><strong>SAVE</strong>: type a name into the name field and press SAVE to store the complete current state — SYNTH settings, FX settings and the current pattern — under that name.</li>
+<li><strong>Preset dropdown</strong>: selecting an entry loads it immediately, no separate load button needed.</li>
+<li><strong>✕</strong>: deletes the preset currently selected in the dropdown.</li>
+<li><strong>⇓ ALL</strong>: exports your entire preset library plus the current session state as a single file and downloads it.</li>
+<li><strong>⇑ ALL</strong>: imports such a file back, overwriting or extending the local library.</li>
+</ul>
+<p>One thing to keep in mind: everything is stored in the localStorage of this browser on this device. There is no account and no cloud sync. If you reinstall the browser, switch machines or simply want a backup of your sounds, use ⇓ ALL — the exported file is the only way to carry your library with you.</p>
+<h2 id="exporting-audio-and-midi"><span class="num">12</span>Exporting Audio and MIDI</h2>
+<p>Two export buttons turn the currently loaded pattern into files:</p>
+<ul>
+<li><strong>WAV·2B</strong> renders the pattern offline to a WAV audio file — two bars long — and downloads it. This is the fast way to get a printed loop for a DJ set, a sampler or a DAW arrangement.</li>
+<li><strong>MID·2B</strong> exports the same pattern as a standard MIDI file, also two bars, ready to be dropped onto an instrument track in any DAW for further editing.</li>
+</ul>
+<p>The WAV export contains only the 303 voice — the drum machine is not rendered into the file.</p>
+<h2 id="tips-troubleshooting"><span class="num">13</span>Tips &amp; Troubleshooting</h2>
+<p><strong>No sound at all?</strong> First make sure you clicked the start overlay — browsers will not let the audio engine run without that click. Then check that the browser tab is in the foreground and not muted, that the site is not muted in the browser's tab menu, and that your system output is working.</p>
+<p><strong>Your MIDI device doesn't appear in the OUT dropdown?</strong> Confirm the browser supports Web MIDI and that you accepted the permission prompt. If the device was connected after the page loaded, or the permission state is unclear, restart the browser and reconnect the device.</p>
+<p><strong>Presets or settings disappeared after a browser reinstall, or they don't show up on your other computer?</strong> That is expected: localStorage is per browser and per device. Always export with ⇓ ALL before reinstalling, and use the exported file to move your library between machines.</p>
+<p><strong>The pattern sounds different from what you exported?</strong> Remember that the WAV render covers the 303 voice only. If you need the drums as audio, record the app output in real time instead of using the offline WAV export.</p>
+  
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-303 (Web) v1.07</b> — Browser app (Web Audio) · Tim Techlor design series<br> Manual revision 1.07 · Runs locally in the browser, nothing to install, nothing uploaded</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>

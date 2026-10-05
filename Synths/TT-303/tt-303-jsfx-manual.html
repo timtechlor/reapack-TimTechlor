@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-303 (JSFX) Manual – Acid Bass Synthesizer in the Style of the TB-303 for REAPER</title>
+<meta name="description" content="Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.">
+<meta name="tt-doc-name" content="TT-303 (JSFX)">
+<meta name="tt-doc-version" content="2.0.0">
+<meta name="tt-doc-date" content="2026-10-05">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-303-jsfx-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-303 (JSFX) Manual – Acid Bass Synthesizer for REAPER">
+<meta property="og:description" content="Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-303-jsfx-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-303-jsfx.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-303 (JSFX) — User Manual">
+<meta property="article:modified_time" content="2026-10-05">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-303 (JSFX) Manual – Acid Bass Synthesizer for REAPER">
+<meta name="twitter:description" content="Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-303-jsfx.png">
+<meta name="twitter:image:alt" content="TT-303 (JSFX) — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-303-jsfx-manual.html#article",
+   "headline": "TT-303 (JSFX) — User Manual",
+   "name": "TT-303 (JSFX) Manual – Acid Bass Synthesizer for REAPER",
+   "description": "Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.",
+   "url": "https://timtechlor.de/docs/tt-303-jsfx-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-303-jsfx-manual.html",
+   "datePublished": "2026-10-05",
+   "dateModified": "2026-10-05",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-303-jsfx.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "TB-303 JSFX, acid bass synthesizer REAPER, 303 clone plug-in, acid sequencer, slide and accent, ladder filter 18 dB, free REAPER synth, JSFX instrument",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-303-jsfx-manual.html#software" },
+   "version": "2.0.0"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-303-jsfx-manual.html#software",
+   "name": "TT-303 (JSFX)",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "2.0.0",
+   "description": "Free JSFX instrument for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 (tribute model, no samples) with slide and accent, a 3-pole 18 dB ladder filter, drive, ping-pong delay, reverb, compressor, an internal 16-step sequencer with four banks, a preset bar with a 32-slot user bank and ten colour schemes.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-303 (JSFX)", "item": "https://timtechlor.de/docs/tt-303-jsfx-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303 (JSFX)</span></nav>
+      <div class="wordmark" style="--wm-n:6" role="img" aria-label="TT-303 (JSFX)">TT-303</div>
+      <h1>TT-303 (JSFX) — User Manual</h1>
+      <div class="meta">JSFX plug-in for REAPER // Version 2.0.0 // TimTechlor</div>
+      <p class="lead">TT-303 is a monophonic acid bass synthesizer in the style of the Roland TB-303 &mdash; a tribute model, no samples: one oscillator, an 18 dB ladder filter that squeals, the accent and slide circuits that make a 303 line move, and a chain of drive, ping-pong delay, reverb and compressor behind it. Play it from the piano roll (HOST) or let the built-in 16-step sequencer with four pattern banks run on the project timeline (SEQ).</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/303-front.png" aria-label="Enlarge screenshot of the TT-303 (JSFX) user interface" title="Click to enlarge"><img src="img/tt-ui-options/303-front.png" width="1142" height="920" alt="TT-303 (JSFX) user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#install"><span class="num">02</span><span>Installation</span></a></li>
+<li><a href="#quickstart"><span class="num">03</span><span>Quick start</span></a></li>
+<li><a href="#front"><span class="num">04</span><span>The front &amp; how to operate it</span></a></li>
+<li><a href="#modes"><span class="num">05</span><span>Operating modes: HOST and SEQ</span></a></li>
+<li><a href="#voice"><span class="num">06</span><span>Oscillator &amp; filter</span></a></li>
+<li><a href="#accentslide"><span class="num">07</span><span>Accent &amp; slide</span></a></li>
+<li><a href="#drive"><span class="num">08</span><span>Drive</span></a></li>
+<li><a href="#delay"><span class="num">09</span><span>Delay</span></a></li>
+<li><a href="#reverb"><span class="num">10</span><span>Reverb</span></a></li>
+<li><a href="#comp"><span class="num">11</span><span>Compressor &amp; master</span></a></li>
+<li><a href="#sequencer"><span class="num">12</span><span>The sequencer</span></a></li>
+<li><a href="#midi"><span class="num">13</span><span>MIDI</span></a></li>
+<li><a href="#presets"><span class="num">14</span><span>Preset bar &amp; user bank</span></a></li>
+<li><a href="#options"><span class="num">15</span><span>Options / Color</span></a></li>
+<li><a href="#automation"><span class="num">16</span><span>Automation &amp; parameters</span></a></li>
+<li><a href="#practice"><span class="num">17</span><span>In practice</span></a></li>
+<li><a href="#trouble"><span class="num">18</span><span>Troubleshooting</span></a></li>
+<li><a href="#notes"><span class="num">19</span><span>Release notes</span></a></li>
+<li><a href="#tech"><span class="num">20</span><span>Technical data &amp; honest notes</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">21</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>The Roland TB-303 is a single-oscillator bass synthesizer whose filter, envelopes and
+sequencer were never meant to be a bass synthesizer &mdash; and became the sound of acid house.
+TT-303 is a tribute to it as a REAPER instrument: a model of the signal path, without samples
+and without a sample ROM. There is one voice (monophonic), one oscillator, one filter, and
+the two circuits that give the original its character: <b>accent</b> and <b>slide</b>.</p>
+<pre><code>note → oscillator (saw / square) → 18 dB ladder filter (VCF) → VCA
+     → drive → ping-pong delay → reverb → compressor (dry only)
+     → VOLUME → soft clip → stereo out</code></pre>
+<p>The plug-in has no audio input and two outputs (stereo). Its MIDI input is the only way to
+play it from the outside; in <b>SEQ</b> mode an internal 16-step sequencer with four banks A&ndash;D
+plays the notes itself. The whole front is drawn by the plug-in, uses the UI SIZE setting in OPTIONS, and every
+control can be automated.</p>
+<figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current suite front at 125% UI size, version 2.0.0"><figcaption>Current front in v2.0.0, at the default UI size of 125%.</figcaption></figure>
+<div class="box" data-k="Not the web app">There is also a browser version of the TT-303 with its own manual (<a href="TT-303_manual.html">TT-303 (Web)</a>).
+This manual describes the REAPER plug-in only &mdash; the JSFX has no drum machine and no export buttons (REAPER renders the audio), and its tempo is always the project tempo.</div>
+
+<h2 id="install"><span class="num">02</span>Installation</h2>
+<p>TT-303 ships through the TimTechlor ReaPack repository. In REAPER: <b>Extensions &rarr; ReaPack &rarr; Import repositories&hellip;</b>,
+add</p>
+<pre><code>https://raw.githubusercontent.com/timtechlor/reapack-TimTechlor/main/index.xml</code></pre>
+<p>then <b>Browse packages</b>, pick <code>TT-303 Acid Machine</code> and apply. The effect is listed under
+<b>JS: TT-303 Acid Machine</b> in the FX browser. Manual installation works too: the plug-in is one file,
+<code>TT-303_Acid_Machine.jsfx</code>; copy it into <code>Effects</code> (or a sub-folder) in REAPER&rsquo;s resource
+path (<em>Options &rarr; Show REAPER resource path in explorer</em>) and add it from the FX browser.</p>
+<p>There is nothing else to install: the plug-in needs no samples and no additional files. REAPER 6 or newer is assumed.
+The wordmark uses the font <i>Zilap Orion</i> if it is installed; otherwise a bold sans-serif is used. The front
+measures which fonts exist and falls back by itself.</p>
+<p>After an update REAPER may keep showing the old name or version in the FX window title &mdash; see
+<a href="#trouble">Troubleshooting</a>. The real version is always written in the header of the front (the small version badge next to the wordmark).</p>
+
+<h2 id="quickstart"><span class="num">03</span>Quick start</h2>
+<ol>
+  <li>Create a track and add <code>JS: TT-303 Acid Machine</code> (it is an instrument: it needs no audio input,
+      only MIDI). A new instance starts in <b>HOST</b> mode with the INIT sound.</li>
+  <li>Give the track MIDI: record-arm it and play a keyboard, or put a MIDI item on it. Play a low note (C2 is the
+      original pitch of the sequencer, the keys around C1&ndash;C3 are the bass register).
+      <b>Overlapping notes slide</b>, a note with <b>velocity &ge; 65 is an accent</b> (the threshold is adjustable).</li>
+  <li>Shape the sound with <b>CUTOFF FREQ</b>, <b>RESONANCE</b>, <b>ENV MOD</b> and <b>DECAY</b> (the four knobs that
+      make the acid sound) and <b>ACCENT</b>. Pick a starting point from the <b>preset bar</b> in the header
+      (INIT, DEEP, SQUELCH, SCREAM, HOOVER, DUB).</li>
+  <li>Want a pattern without MIDI? Switch the <b>MODE</b> (top right) to <b>SEQ</b> and press play: the 16-step sequencer
+      below the effects panel plays the start pattern of bank A on the project timeline. <b>FREE RUN</b> lets it run while
+      the transport is stopped.</li>
+  <li>Add character in the effects panel: <b>DRIVE</b> on with FOLD or FUZZ, the dotted-eighth <b>DELAY</b> (the INIT default),
+      some <b>REVERB</b>; <b>COMP</b> adds punch to the dry signal.</li>
+</ol>
+
+<h2 id="front"><span class="num">04</span>The front &amp; how to operate it</h2>
+<p>The front is drawn in a fixed grid (900 &times; 732 units) and redrawn at the UI SIZE chosen in OPTIONS (125% by default; HiDPI is honoured). Resize the FX window to show more of the front. All built-in REAPER sliders are hidden; you operate the drawn front only. The areas, top to bottom:</p>
+<table>
+  <tr><th>Area</th><th>Contents</th></tr>
+  <tr><td>Header</td><td>Wordmark and version, <b>ACCENT</b> indicator (charge of the accent capacitor), <b>MIDI THRU</b>, the <b>MODE</b> switch HOST / SEQ, the <b>preset bar</b> (<code>&lt; name &gt; SAVE ...</code>) and <b>OPTIONS</b></td></tr>
+  <tr><td>SYNTHESIZER</td><td>Knobs TUNING, FINE, CUTOFF FREQ, RESONANCE, ENV MOD, DECAY, ACCENT, VOLUME; WAVEFORM SAW / SQUARE; ACCENT VEL (only in HOST mode)</td></tr>
+  <tr><td>Effects panel</td><td>Four columns: DRIVE (on/off, model, amount, input EQ), DELAY (division, mix, feedback, EQ), REVERB (mix, size, EQ and the <b>SLIDE</b> time knob), COMP (on/off, mix)</td></tr>
+  <tr><td>Oscilloscope</td><td>The output signal, with a read-out <code>NOTE C2 65.4 Hz | VCF 419 Hz | 125 BPM</code>: current note and pitch, the <em>current</em> filter cutoff (moves with the envelope) and the tempo in use</td></tr>
+  <tr><td>Bottom panel</td><td>HOST: a keyboard that lights the notes being held. SEQ: the sequencer (section 12)</td></tr>
+</table>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-synth-fx.png" alt="SYNTHESIZER panel and effects panel: eight knobs with value read-outs, waveform switch, accent velocity, DRIVE, DELAY, REVERB and COMP columns with input EQ strips" width="1099" height="394"><figcaption><span class="tag">PANELS</span><b>SYNTHESIZER and effects panel.</b> Read-outs under the knobs: semitones, cents, cutoff in Hz, resonance in %, envelope depth in octaves, decay in ms, accent and volume in %. The green bar under each EQ is the band that passes.</figcaption></figure>
+<h3>Knobs</h3>
+<p>Drag a knob <b>vertically</b> (up = more). Hold <kbd>Shift</kbd> while dragging for fine adjustment (about five times finer);
+the <b>mouse wheel</b> over a knob moves knobs with whole-number values (TUNING, FINE, FEEDBACK, SIZE, COMP MIX, LEN, SHUF, GATE) by exactly one step per notch
+and all others by 2 % of their range (SLIDE: 6 ms); <b>right-click</b> or <b>double-click</b> resets it to its default value. Values land on the step of the parameter
+(0.1 for CUTOFF FREQ to VOLUME and DRIVE, 0.5 for the delay and reverb MIX, whole numbers for the rest). A knob you do not touch never writes its parameter, so an automation envelope on it is left alone.</p>
+<h3>Tooltips</h3>
+<p>Every control of the front has a tooltip: rest the pointer on a knob, button, EQ handle, sequencer step row or preset-bar button for about a third of a second and a one-line explanation appears next to it (not while you drag). <code>OPTIONS &gt; TOOLTIPS ON / OFF</code> switches them off for this instance; the setting is saved with the project.</p>
+<h3>Buttons and the EQ strips</h3>
+<p>Buttons switch on click (mode, waveform, drive model, delay division, FREE RUN and so on). The three <b>EQ strips</b> under DRIVE, DELAY and REVERB
+carry two handles: the left one is the <b>low cut</b> (LO), the right one the <b>high cut</b> (HI), on a logarithmic scale from 20 Hz to 20 kHz. Drag a handle
+horizontally (<kbd>Shift</kbd> = five times finer, mouse wheel = steps), right-click restores the factory value. At the outer edge a handle snaps to <b>OFF</b>
+(low cut 0, high cut 20 kHz = true bypass of that filter). The low cut cannot cross the high cut.</p>
+<div class="box" data-k="good to know">The EQ strips are <em>input</em> filters of each effect: they shape what is sent into DRIVE, DELAY or REVERB. The dry signal is not touched by them
+(details in the sections of the effects).</div>
+
+<h2 id="modes"><span class="num">05</span>Operating modes: HOST and SEQ</h2>
+<p>The <b>MODE</b> switch in the header selects who plays the voice. Switching modes releases all notes cleanly.</p>
+<h3>HOST</h3>
+<p>The plug-in is a pure sound generator, played from the piano roll, a keyboard or another plug-in&rsquo;s MIDI output. Rules, as printed on the front:</p>
+<ul>
+  <li><b>Velocity &ge; ACCENT VEL = accent.</b> The threshold is set with the <code>-</code> / <code>+</code> buttons under ACCENT VEL (1&ndash;127, <b>default 65</b>, as on the Devil Fish). The <code>DF</code> button next to them steps through the four thresholds of the Devil Fish documentation, <b>65, 80, 100 and 120</b> (&ldquo;Accent Velocity Threshold, Parameter 6: Threshold equal to or above which Note On Velocity will activate Accent&rdquo;); it lights when the value is one of these four. It is only shown and used in HOST mode. A project or user preset saved with an earlier version keeps its stored value (the default used to be 100); only new instances and the INIT command of the preset menu start at 65.</li>
+  <li><b>Overlapping notes = slide.</b> A note that starts while the previous one is still held glides to the new pitch without retriggering the envelopes (legato).</li>
+  <li><b>The same note again while it sounds = ignored.</b> The voice behaves like the MIDI input of the Devil Fish modification (Robin Whittle, Real World Interfaces: &ldquo;A second Note On event for a note which is already On is ignored&rdquo;). If a note of the <em>same</em> pitch starts while that key is still held (overlapping notes of one key in the piano roll), the second note-on does nothing: no new attack, no accent, no glide. The <em>first</em> note-off of that key ends the note; a further note-off of the same key is ignored. So the first of two overlapping equal notes sets the length, and the second one is lost. To hear the pitch twice, let the first note end before the second one starts (a gap of a few milliseconds is enough). A source that sends a note-on twice but only one note-off therefore cannot leave a note hanging.</li>
+  <li><b>Last note wins.</b> The voice is monophonic. Notes that are still held are remembered in a stack <b>ten notes deep</b>, as on the Devil Fish (&ldquo;a ten-deep internal stack of the most recently turned on notes&rdquo;): when you release the newest one, the voice glides back to the one before. If an eleventh key is pressed while ten are held, the <em>oldest</em> one falls out of the stack: after you release the other keys it no longer holds the note, even if it is still held (up to v1.4.1 the stack held 32 notes).</li>
+  <li><b>Sustain (CC 64) keeps the gate on.</b> As on the Devil Fish (&ldquo;Controller 64 (Sustain or Hold) can be used to independently turn on the Synthesizer Gate&rdquo;; &ldquo;Values 0 to 63 turn Off the internal flag which can turn the Gate On. Values 64 to 127 turn the flag On&rdquo;), the gate is on as long as a key is held <em>or</em> CC 64 is at 64 or above. When you release the last key while CC 64 is on, the note keeps sounding at the last pitch with no release; it ends when CC 64 drops below 64 (or on All Notes Off, CC 123 / 120, which also clears the sustain flag). A key pressed while only the sustain holds the gate changes the pitch without a new attack and without a glide (the gate does not go off and on; there is no tied key to slide from); an accent fires as for a tied note. Pressing CC 64 while nothing sounds does not start a note, it only holds a note that sounds or is played afterwards. The stack itself is not touched by CC 64: a released key leaves it at once, so releasing CC 64 with keys still held changes nothing. The line above the keyboard shows <code>SUSTAIN (CC 64)</code> while the flag is on. Sustain works in HOST mode only.</li>
+  <li>The keyboard at the bottom (C1 to C4) lights the held notes; <code>HELD: n</code> counts them (at most 10).</li>
+</ul>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-midi.png" alt="The MIDI INPUT panel in HOST mode: the rule line VELOCITY >= n = ACCENT, OVERLAPPING NOTES = SLIDE, LAST NOTE WINS, and a keyboard from C1 to C4" width="1094" height="317"><figcaption><span class="tag">HOST</span><b>The MIDI input panel.</b> The rule line repeats the current accent threshold (65 by default); held notes light up on the keyboard.</figcaption></figure>
+<h3>SEQ</h3>
+<p>The internal 16-step sequencer takes over and plays the pattern of the active bank (A&ndash;D). MIDI notes no longer play the voice:
+they <b>transpose</b> the pattern (section 12). The bottom panel turns into the sequencer.</p>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-seq.png" alt="TT-303 front in SEQ mode with FREE RUN running: the sequencer panel shows banks A to D, COPY RND MUT CLEAR UNDO, the LEN SHUF GATE knobs, the note lane and the GATE ACC SLD rows of 16 steps" width="1126" height="917"><figcaption><span class="tag">SEQ</span><b>SEQ mode.</b> The header shows SEQ active and the ACCENT indicator lights on accented steps; the sequencer panel at the bottom replaces the keyboard. Here FREE RUN is on and step 02 is playing.</figcaption></figure>
+
+<h2 id="voice"><span class="num">06</span>Oscillator &amp; filter</h2>
+<table>
+  <tr><th>Control</th><th>Range</th><th>What it does</th></tr>
+  <tr><td><code>WAVEFORM</code></td><td>SAW / SQUARE</td><td>Sawtooth, or the 303 square: a narrow, asymmetric pulse (duty about one fifth, slightly narrower towards high notes) with a high-pass tilt, rich in even harmonics. Both are band-limited (1-sample PolyBLEP).</td></tr>
+  <tr><td><code>TUNING</code></td><td>&minus;24 &hellip; +24 st</td><td>Coarse pitch. Takes effect with the next note.</td></tr>
+  <tr><td><code>FINE</code></td><td>&minus;50 &hellip; +50 ct</td><td>Fine pitch, for detuning against other instruments.</td></tr>
+  <tr><td><code>CUTOFF FREQ</code></td><td>0 &hellip; 100</td><td>Base cutoff of the filter, exponential, about 145 Hz at 0 up to about 1 kHz at 100. <b>Resonance lifts the corner</b> additionally (factor 1 + resonance, so up to about 2 kHz at both knobs full). The Hz read-out under the knob is this base cutoff, before the envelope.</td></tr>
+  <tr><td><code>RESONANCE</code></td><td>0 &hellip; 100 %</td><td>Feedback of the ladder. Even at 0 % the filter has a slight peak (Q about 1.6); towards 100 % it becomes the nasal, whistling peak. The feedback is level-dependent, so a loud signal damps its own peak, as on the original. A small fixed level trim keeps the loudness similar across the knob.</td></tr>
+  <tr><td><code>ENV MOD</code></td><td>0 &hellip; 100</td><td>How far each note opens the filter: up to <b>5.2 octaves</b> (the read-out shows octaves). The essence of the acid sound: every note flings the cutoff up, then it falls shut.</td></tr>
+  <tr><td><code>DECAY</code></td><td>0 &hellip; 100</td><td>Decay of the <em>filter</em> envelope, exponential from about <b>30 ms</b> to about <b>570 ms</b> (the read-out shows the time constant in ms). Short values give tight blips, long ones let the filter stay open. <em>Accented notes ignore this knob</em> &mdash; their filter decay is a fixed 0.2 s (next section).</td></tr>
+  <tr><td><code>VOLUME</code></td><td>0 &hellip; 100 %</td><td>Output level, after all effects (section 11).</td></tr>
+</table>
+<p>The filter is a <b>three-pole ladder, 18 dB per octave</b> (like the original), built in zero-delay-feedback form, run at twice the sample rate
+and decimated with a 1/4-1/2-1/4 filter. A 20 Hz high-pass sits in the feedback path as a DC block, so the resonance stays alive even at a low cutoff.
+The amplitude envelope (VCA) is an attack of about 3 ms (1.8 ms on accented notes) followed by a slow sag with a fixed time constant of about 1.1 s, independent of the
+DECAY knob, and a release of about 12 ms when the note ends. The filter cutoff is limited to 30 Hz at the bottom and to 16 kHz (or 0.45 of the working rate) at the top.</p>
+
+<h2 id="accentslide"><span class="num">07</span>Accent &amp; slide</h2>
+<h3>Accent</h3>
+<p>An accented note is louder, has a sharper attack and opens the filter further &mdash; and the effect depends on the knobs, as on the hardware:</p>
+<ul>
+  <li><b>ACCENT</b> (0&ndash;100 %) scales both the <b>level boost</b> and the <b>extra filter sweep</b> of accented notes.</li>
+  <li>The sweep is coupled to <b>resonance</b>: the more resonance, the stronger the accent sweeps the cutoff (and a little to the cutoff setting).</li>
+  <li>Accented notes use a fixed filter decay of 0.2 s and an extra sweep that dies away in about 85 ms; the VCA attack shortens to 1.8 ms.</li>
+  <li>The <b>accent capacitor</b> models the recharge of the original: accents in quick succession build up (the charge is capped) and are stronger than a single accent after a rest.
+      The <b>ACCENT</b> bar in the header shows the charge and flashes on every accent.</li>
+</ul>
+<p>In HOST mode an accent is a velocity at or above <code>ACCENT VEL</code>; in SEQ mode it is the <code>ACC</code> row of a step.</p>
+<h3>Slide</h3>
+<p>A slide ties two notes: the pitch glides from the old to the new note and the envelopes are <b>not</b> retriggered, so the filter and amplitude carry on.
+The glide is an <b>RC-style approach in logarithmic frequency</b>: constant time for any interval (a fifth takes as long as an octave), fast at first,
+then settling. The <b>SLIDE</b> knob (0&ndash;300 ms, default 60) is the time constant: about 63 % of the way after one time constant, about 95 % after three. At 0 the pitch jumps.
+(The knob sits in the REVERB column of the effects panel, to the right of SIZE.)</p>
+<p>An <em>accented</em> note that is tied by a slide still fires its accent sweep, but the amplitude envelope is left alone &mdash; that is how accents and slides combine on the hardware.
+In HOST mode a slide is an overlapping note of a <em>different</em> pitch (the same pitch overlapping is ignored, as on the Devil Fish, see section 05), in SEQ mode the <code>SLD</code> flag of a step ties it to the <em>following</em> step.
+If the following step has the <em>same</em> note, the note is simply held on (a tie): no new attack, and <code>SEQ OUT</code> keeps one held note instead of sending a second note-on.</p>
+
+<h2 id="drive"><span class="num">08</span>Drive</h2>
+<p>A distortion stage between the voice and the delay. <code>ON/OFF</code> switches it (off = the stage is bit-exact transparent). Four models:</p>
+<table>
+  <tr><th>Model</th><th>Character</th></tr>
+  <tr><td><code>SOFT</code></td><td>Smooth tanh saturation.</td></tr>
+  <tr><td><code>HARD</code></td><td>Hard clipping: the signal is driven into a limit at about &plusmn;0.82 with rounded corners.</td></tr>
+  <tr><td><code>FOLD</code></td><td>Wave folding (a triangle fold): new harmonics that change with the level.</td></tr>
+  <tr><td><code>FUZZ</code></td><td>Asymmetric fuzz: the positive and the negative half-waves are bent with different curves.</td></tr>
+</table>
+<p><code>DRIVE</code> (1 &hellip; 40) is the gain in front of the shaper; the output level is compensated with the amount and, per model, so that changing the model does not change the loudness
+much. The shaper runs at twice the sample rate to keep aliasing down.</p>
+<p><b>The EQ strip selects what gets distorted.</b> It is not in series: the band between LO and HI goes into the shaper, what the EQ removes runs past it <em>undistorted</em> and is added back afterwards.
+Raise the low cut and the bass is taken out of the <em>distortion</em>, not out of the output: the fundamental stays clean, only the mids get dirty. The factory setting is OFF / OFF (the whole signal is distorted).</p>
+
+<h2 id="delay"><span class="num">09</span>Delay</h2>
+<p>A stereo <b>ping-pong delay</b>, synchronised to the project tempo.</p>
+<ul>
+  <li><code>1/8</code>, <code>1/8.</code> (dotted eighth, the INIT default), <code>1/4</code>, <code>1/2</code>: the delay time as a note value at the current tempo.</li>
+  <li><code>MIX</code> 0&ndash;100 %: the level of the echoes. Below 0.5 % the delay is bypassed completely.</li>
+  <li><code>FEEDBACK</code> 0&ndash;90 %: the number of repeats. The feedback path is low-passed (about 2.4 kHz), so each repeat gets darker. The echoes bounce between left and right.</li>
+  <li><b>EQ strip</b>: filters what goes <em>into</em> the delay (factory 250 Hz &hellip; 3.0 kHz). The dry signal is unaffected.</li>
+</ul>
+<p>The echoes also feed the reverb, so they get a tail of their own. The tempo is read from REAPER; below 10 BPM (or if none is reported) 120 BPM is used. The delay buffer holds 3.3 s, which is only reached with the 1/2 setting below about 37 BPM.</p>
+
+<h2 id="reverb"><span class="num">10</span>Reverb</h2>
+<p>A Freeverb-type room: eight comb filters and four all-pass filters per channel with a short pre-delay (about 12 ms), lengths scaled with the sample rate.</p>
+<ul>
+  <li><code>MIX</code> 0&ndash;100 %: level of the tail. Below 0.5 % the reverb is bypassed, and its buffers are cleared once on the way down (no old tail comes back when you turn it up again).</li>
+  <li><code>SIZE</code> 20&ndash;100 %: room size. Small rooms give a short, tight tail, large ones a longer tail.</li>
+  <li><b>EQ strip</b>: filters what goes into the reverb (factory 300 Hz &hellip; 2.3 kHz). The tail itself is additionally band-limited (a 250 Hz high-pass and a 3.2 kHz low-pass), which keeps it out of the bass and off the top.</li>
+</ul>
+
+<h2 id="comp"><span class="num">11</span>Compressor &amp; master</h2>
+<p>The <b>COMP</b> column holds a compressor that acts on the <em>dry</em> signal only &mdash; delay and reverb are added afterwards, so the punch of the 303 stays in front of the room.
+Fixed values: threshold &minus;14 dB, ratio 5:1, soft knee (30 dB wide), attack 3 ms, release 250 ms, plus a make-up gain of about +5 dB.</p>
+<ul>
+  <li><code>ON/OFF</code>: default ON. Switching it off also removes the make-up, so the dry signal is about 5 dB quieter (compensate with VOLUME). The detector keeps running, so switching is click-free.</li>
+  <li><code>MIX</code> 0&ndash;100 %: a linear blend between the uncompressed (0 %) and the compressed signal (100 %) &mdash; parallel compression. At 100 % it is identical to the plain compressor.</li>
+</ul>
+<p><b>Master.</b> Dry, delay and reverb are summed and scaled by <code>VOLUME</code>; then a soft clipper takes over: linear up to 0.7, a tanh knee above it, with a limit of exactly 1.0, so a resonance overshoot rounds off instead of clipping square. A hard limit at &plusmn;1 follows.</p>
+
+<h2 id="sequencer"><span class="num">12</span>The sequencer</h2>
+<p>In SEQ mode the plug-in plays a pattern of up to 16 steps. One step is a sixteenth note at the project tempo.
+Each step has a <b>note</b>, a <b>gate</b> (sounds or rests), an <b>accent</b> flag and a <b>slide</b> flag.</p>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-sequencer.png" alt="The sequencer panel: RUN indicator with the step number, FREE RUN and SEQ OUT switches, the MIDI = TRANSPOSE note, bank buttons A to D, COPY RND MUT CLEAR UNDO, the LEN SHUF GATE knobs, the note lane and the GATE ACC SLD rows" width="1099" height="319"><figcaption><span class="tag">SEQ</span><b>The sequencer panel.</b> Top: RUN / STOP with the current step, FREE RUN, SEQ OUT and the transpose hint. Second row: banks, COPY, RND, MUT, CLEAR, UNDO and the knobs LEN, SHUF, GATE. Below: the note lane (C1&ndash;C3) and three rows per step. White bars are accented steps, the arrow marks a slide into the next step, dimmed bars are rests.</figcaption></figure>
+<h3>Editing steps</h3>
+<ul>
+  <li><b>Note lane:</b> click or drag in a column to set the note of that step (two octaves, <b>C1 to C3</b>); the name of the note (for example <code>D#2</code>) is printed under the lane.
+      <b>Right-click</b> a column to switch the step&rsquo;s gate on or off.</li>
+  <li><b>GATE / ACC / SLD rows:</b> click a cell to toggle it; <b>drag across a row</b> to paint the same state onto several steps &mdash; the quickest way to lay out a run of accents or slides.
+      GATE off = rest, ACC (white) = accent, SLD = the step is tied to the <em>next</em> one (slide).</li>
+  <li>The column of the step that is playing is highlighted. Steps beyond <code>LEN</code> are dimmed and do not play.</li>
+</ul>
+<h3>Playback controls</h3>
+<table>
+  <tr><th>Control</th><th>Function</th></tr>
+  <tr><td><code>LEN</code> (1&ndash;16)</td><td>Pattern length. Shorter patterns loop their first steps &mdash; useful for odd meters. The pattern is locked to the project timeline, so a 12-step pattern restarts every 12 sixteenths counted from the project start.</td></tr>
+  <tr><td><code>SHUF</code> (0&ndash;75 %)</td><td>Shuffle: delays every second sixteenth (steps 2, 4, 6&hellip;) by up to 37.5 % of a step. 0 = straight.</td></tr>
+  <tr><td><code>GATE</code> (10&ndash;100 %)</td><td>How long each normal step sounds, as a share of the step. Steps that carry a slide flag are held until the next step starts.</td></tr>
+  <tr><td><code>BANK A B C D</code></td><td>Four pattern memories. Switching during playback changes the pattern with the next step. A new instance holds the start pattern in A, B and C and the pattern <b>PUMP</b> in D (an E2 bass with slides and accents).</td></tr>
+  <tr><td><code>FREE RUN</code></td><td>Runs the sequencer with the transport stopped: it starts at step 1 and follows the project tempo. When the transport runs, the sequencer follows the timeline again.</td></tr>
+  <tr><td><code>SEQ OUT</code></td><td>Also sends the <em>generated</em> notes to the plug-in&rsquo;s MIDI output (channel 1, velocity 127 for accents, otherwise 100) &mdash; to play an external synth or another plug-in with the same line. See the MIDI section for the difference from MIDI THRU.</td></tr>
+  <tr><td><code>RUN / STOP</code></td><td>A lamp and the current step number.</td></tr>
+</table>
+<h3>Pattern tools</h3>
+<ul>
+  <li><b>COPY:</b> click COPY (it lights and <code>SELECT TARGET BANK</code> appears), then click a bank letter: the <em>active</em> bank is copied into it. The active bank does not change.</li>
+  <li><b>RND:</b> a random pattern in the active bank. Notes come from a minor pentatonic over C2 with now and then an octave down; about 78 % of the steps sound, 22 % are accented, 16 % slide. Step 1 always sounds, accented.</li>
+  <li><b>MUT:</b> a mutation: three random steps are changed (a new note, or gate, accent or slide flipped), the rest stays recognisable.</li>
+  <li><b>CLEAR:</b> all steps become rests on C2.</li>
+  <li><b>UNDO:</b> takes back the last RND, MUT or CLEAR (one level). It belongs to the bank it was made in: the button lights, and works, only while that bank is shown;
+      switch back to it to use UNDO. Copying another bank onto it with COPY discards the UNDO. It does not cover manual step edits.</li>
+</ul>
+<p>All four banks, the length, shuffle and gate settings are saved with the project. RND, MUT, CLEAR and UNDO work on the active bank only.
+Every pattern change (step edits, COPY, RND, MUT, CLEAR, UNDO, loading a user preset or INIT) also creates an entry in REAPER&rsquo;s undo history (<kbd>Ctrl</kbd>+<kbd>Z</kbd>,
+<em>Edit FX</em>) once the mouse button is released, and marks the project as changed.</p>
+<h3>Transport and MIDI transpose</h3>
+<p>The sequencer runs while the project plays (and, with FREE RUN, also while it is stopped). On start it picks up the step under the cursor; a loop jump, a position change or a tempo
+change re-syncs it, but the ordinary running does not, so the timing stays steady; a small re-sync (for example after a tempo change) never plays a step twice.
+Pressing play does not cut a note that is sounding (FREE RUN, a held key) or a delay or reverb tail, and keeps UNDO, COPY and a held transpose key; if the plug-in is silent at that moment it starts from its clean
+initial state, exactly as before. Incoming MIDI notes <b>transpose</b> the pattern: <b>C2 (MIDI note 36) is the original pitch</b>, every semitone
+above or below shifts the pattern accordingly while the key is held; <code>MIDI TRANSPOSE +n</code> shows the shift. When the key is released the pattern returns to its original pitch.</p>
+
+<h2 id="midi"><span class="num">13</span>MIDI</h2>
+<h3>Notes</h3>
+<p>In HOST mode incoming notes play the voice (velocity &ge; ACCENT VEL = accent, overlapping = slide, last note wins from a stack of ten). In SEQ mode they transpose the pattern. The plug-in listens on <b>all MIDI channels</b>.
+Notes are <em>consumed</em> by the instrument: unless <code>MIDI THRU</code> is on they do not appear at the output.</p>
+<h3>Controllers</h3>
+<table>
+  <tr><th>CC</th><th>Controls</th><th>Notes</th></tr>
+  <tr><td><code>74</code></td><td>CUTOFF FREQ</td><td rowspan="6">0&ndash;127 is scaled to the full 0&ndash;100 range of the knob; the knob on the front follows. Any MIDI channel.</td></tr>
+  <tr><td><code>71</code></td><td>RESONANCE</td></tr>
+  <tr><td><code>73</code></td><td>ENV MOD</td></tr>
+  <tr><td><code>75</code></td><td>DECAY</td></tr>
+  <tr><td><code>16</code></td><td>ACCENT</td></tr>
+  <tr><td><code>7</code></td><td>VOLUME</td></tr>
+  <tr><td><code>64</code></td><td>Sustain (HOST mode)</td><td>64&ndash;127 holds the gate on after the last key is released, 0&ndash;63 lets it go (Devil Fish behaviour, see section 05). Ignored in SEQ mode. The controller still passes through to the output.</td></tr>
+  <tr><td><code>123</code>, <code>120</code></td><td>All notes off</td><td>Releases the voice and clears held notes, the sustain flag and the MIDI transpose.</td></tr>
+</table>
+<p>Pitch bend, clock and all other controllers are not used by the voice; they are passed to the output.</p>
+<h3>THRU and SEQ OUT &mdash; two different sources</h3>
+<ul>
+  <li><b>MIDI THRU</b> (header) forwards the <em>incoming</em> notes to the output. CC, pitch bend and clock always pass through.</li>
+  <li><b>SEQ OUT</b> (sequencer panel) sends the <em>self-generated</em> sequence to the output.</li>
+</ul>
+<p>In SEQ mode incoming notes are transpose commands &mdash; whoever also passes them on with THRU sends them out next to the sequence. MIDI events carry their sample offset: notes start sample-accurately, and the sequence leaves the plug-in with the same accuracy.</p>
+<h3>The pattern mirror (gmem)</h3>
+<p>The plug-in mirrors the displayed bank into shared memory named <code>tt303_acid</code>. A ReaScript can read it and turn the pattern into a MIDI item;
+the script <code>tt303_pattern_to_midi.lua</code> does exactly that (accent = velocity 127, otherwise 100; slides tie legato into the next step). It is a separate file that is not part of the plug-in package. With several instances in a project, the last one processed wins.</p>
+
+<h2 id="presets"><span class="num">14</span>Preset bar &amp; user bank</h2>
+<p>The preset bar sits in the header, directly left of <b>OPTIONS</b>: <code>&lt; name &gt; SAVE ...</code>. It replaces the six patch buttons of earlier versions.</p>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-presets.png" alt="The preset bar with its dropdown open: the FACTORY section with INIT, DEEP, SQUELCH, SCREAM, HOOVER and DUB and the USER section with empty slots" width="583" height="315"><figcaption><span class="tag">PRESETS</span><b>Preset bar with the list open.</b> Click the name to open the list; FACTORY first, then the 32 USER slots (empty ones read <code>- empty -</code>). The mouse wheel scrolls, a click loads.</figcaption></figure>
+<table>
+  <tr><th>Control</th><th>Function</th></tr>
+  <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: first the six factory presets, then the used user slots; wraps around and loads immediately.</td></tr>
+  <tr><td>Name field</td><td>Opens the list with FACTORY and USER. A <code>*</code> behind the name means that a sound or pattern setting differs from the loaded preset.</td></tr>
+  <tr><td><code>SAVE</code></td><td>Saves the current state into the selected user slot; with a factory preset (or none) selected, into the first free slot. A name box opens (up to 24 characters, default <code>User 07</code>): type, <kbd>Enter</kbd> or <b>OK</b> saves, <b>CANCEL</b> or a click outside cancels.</td></tr>
+  <tr><td><code>...</code></td><td><b>RENAME</b>, <b>COPY</b> (into the next free slot, named <code>Copy of &hellip;</code>) and <b>DELETE</b> (a second click confirms) &mdash; for the selected <em>user</em> preset &mdash; and <b>INIT</b>: all preset parameters to their default values and the start pattern in banks A&ndash;D.</td></tr>
+</table>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-save.png" alt="The SAVE PRESET name box with the default name User 01, OK and CANCEL buttons" width="583" height="169"><figcaption><span class="tag">SAVE</span><b>Naming a preset.</b> The name box opens after SAVE: up to 24 characters, <kbd>Enter</kbd> = OK. REAPER keeps the space bar for the transport, so type <kbd>Shift</kbd>+<kbd>Space</kbd> for a blank.</figcaption></figure>
+<h3>The factory presets</h3>
+<p>The six FACTORY entries are the former patch buttons. A factory preset sets the sound controls listed below and leaves everything else (tuning, fine, volume, accent velocity, slide time, the delay division, the EQs, the compressor, the pattern and its banks) alone &mdash; except <b>INIT</b>, which also restores slide time 60 ms, dotted-eighth delay, room size 70 %, the three EQ strips, compressor ON / 100 %.</p>
+<table>
+  <tr><th>Preset</th><th>Wave</th><th>Cutoff</th><th>Reso</th><th>Env</th><th>Decay</th><th>Accent</th><th>Drive</th><th>Delay mix / fb</th><th>Reverb</th></tr>
+  <tr><td>INIT</td><td>SAW</td><td>32</td><td>55</td><td>62</td><td>35</td><td>60</td><td>off, SOFT 8</td><td>15 / 60</td><td>18</td></tr>
+  <tr><td>DEEP</td><td>SAW</td><td>14</td><td>40</td><td>40</td><td>64</td><td>35</td><td>off, SOFT 7</td><td>14 / 50</td><td>16</td></tr>
+  <tr><td>SQUELCH</td><td>SAW</td><td>52</td><td>80</td><td>82</td><td>22</td><td>80</td><td>on, SOFT 8</td><td>16 / 62</td><td>12</td></tr>
+  <tr><td>SCREAM</td><td>SQUARE</td><td>72</td><td>88</td><td>92</td><td>15</td><td>95</td><td>on, HARD 16</td><td>10 / 55</td><td>9</td></tr>
+  <tr><td>HOOVER</td><td>SQUARE</td><td>74</td><td>68</td><td>96</td><td>55</td><td>70</td><td>on, FOLD 11</td><td>20 / 62</td><td>24</td></tr>
+  <tr><td>DUB</td><td>SAW</td><td>18</td><td>52</td><td>44</td><td>82</td><td>50</td><td>off, SOFT 7</td><td>46 / 80</td><td>44</td></tr>
+</table>
+<p>All values are knob positions (0&ndash;100), except drive (1&ndash;40) and feedback (%). They are starting points: every control stays editable.</p>
+<h3>What a user preset contains</h3>
+<p>All sound controls (waveform, tuning, fine, cutoff, resonance, env mod, decay, accent, volume, slide time, accent velocity, drive on / model / amount, delay mix / division / feedback, reverb mix / room size,
+the three input EQs, compressor on / mix), the pattern settings (length, shuffle, gate, active bank) <b>and the four pattern banks A&ndash;D with all steps</b>. The pattern is always part of a user preset (for an acid machine the pattern is part of the sound),
+so loading one replaces the pattern too. <b>Not</b> part of a preset: the operating mode (HOST / SEQ), FREE RUN, SEQ OUT, MIDI THRU, the colour scheme (OPTIONS) and the transport.</p>
+<h3>Where the user bank lives</h3>
+<p>A plug-in cannot write files, so the 32 user slots are part of the <b>plug-in state</b>: they are saved with the project, with FX-chain and track-template copies, and in every REAPER preset of this plug-in (the <code>+</code> button in the FX window toolbar).
+To take your bank to another project or computer, save a REAPER preset once (<code>+</code> &rarr; <em>Save preset</em>) and load it there: the whole bank comes with it. Projects saved with earlier versions (v1.0, v1.1) load unchanged with an empty bank.</p>
+<div class="box warn" data-k="typing names">REAPER keeps <kbd>Space</kbd> for the transport: type <kbd>Shift</kbd>+<kbd>Space</kbd> for a blank. Depending on your REAPER settings <kbd>Esc</kbd> closes the whole FX window &mdash; use <b>CANCEL</b> (or a click outside) to leave the name box.</div>
+
+<h2 id="options"><span class="num">15</span>Options / Color</h2>
+<p>The <b>OPTIONS</b> button is at the right end of the header (up to v1.1 it sat between THRU and MODE; since v1.2 the preset bar is on its left). Click it, then a swatch. A click outside the box closes it.</p>
+<figure class="shot"><img src="img/tt-ui-options/303-options.png" alt="The OPTIONS box open: ten colour swatches in two rows, the factory scheme ACID marked with a white frame and named below" width="580" height="467"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Ten swatches; the marked one is active, the name of the swatch under the pointer is shown below. The box says <code>per instance</code>.</figcaption></figure>
+<p><code>COLOR</code> offers ten schemes: <b>ACID</b>, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (knob rings, active buttons, step bars, LEDs, traces), the dimmed accent and, for RED to ICE, the slightly tinted panel background of the whole front at once.
+The choice applies <b>per plug-in instance</b> and is saved with the project and with FX-chain copies. The factory colour is <b>ACID</b>, the classic acid green (#39FF14). Loading a preset (factory or user), RND, MUT or UNDO does not change the colour.
+It is stored in the hidden parameter 36 (<code>UI Color</code>, 0&ndash;9); the sound is not affected.</p>
+
+<p><b>Tooltips.</b> The title row of the box carries a <code>TOOLTIPS ON / OFF</code> switch. ON (the default) shows the tooltip of the control under the pointer after a short dwell; OFF hides all of them. The setting applies <b>per instance</b>, is saved with the project, the FX chain and REAPER presets, and is not part of the factory or user presets.</p>
+
+<p><b>Style: font size and custom colours.</b> Below the swatches the box carries the style controls: <code>FONT SIZE</code> scales the two font slots in steps of about 8 % (range -4&ndash;+8) &mdash; <code>FONT 1</code> is the large title font, <code>FONT 2</code> is all other text; the current step is shown between the <code>-</code> and <code>+</code> buttons. The colour picker assigns a custom colour to <code>FONT 1</code>, <code>FONT 2</code> or the background <code>BG</code>: pick the target, then drag in the hue strip and the saturation/value field &mdash; every change applies live while you drag, and BG derives the panel, border and knob colours from the spacing of the active scheme. <code>RESET</code> restores the scheme value of the selected target, <code>RESET ALL</code> restores everything. If a custom text colour drops below a contrast of 3:1 against the background, the box shows a small warning. All style settings apply <b>per instance</b>, are stored with the project, the FX chain and REAPER presets &mdash; and are not part of the factory or user presets of the preset bar.</p>
+
+<h2 id="automation"><span class="num">16</span>Automation &amp; parameters</h2>
+<p>All sliders are hidden in the plug-in window, but every one is a normal REAPER parameter: use the <b>Param</b> menu of the FX window (or the automation list of the track) to put any of them on an envelope or to map it to a controller.
+The values are saved with the project. Names as REAPER shows them:</p>
+<table>
+  <tr><th>#</th><th>Name</th><th>Range</th><th>Default</th></tr>
+  <tr><td>1</td><td>Mode</td><td>HOST / SEQ</td><td>HOST</td></tr>
+  <tr><td>2</td><td>Waveform</td><td>Sawtooth / Square</td><td>Sawtooth</td></tr>
+  <tr><td>3</td><td>Tuning (semitones)</td><td>&minus;24 &hellip; 24</td><td>0</td></tr>
+  <tr><td>4</td><td>Fine (cents)</td><td>&minus;50 &hellip; 50</td><td>0</td></tr>
+  <tr><td>5</td><td>Cutoff Freq</td><td>0 &hellip; 100</td><td>32</td></tr>
+  <tr><td>6</td><td>Resonance</td><td>0 &hellip; 100</td><td>55</td></tr>
+  <tr><td>7</td><td>Env Mod</td><td>0 &hellip; 100</td><td>62</td></tr>
+  <tr><td>8</td><td>Decay</td><td>0 &hellip; 100</td><td>35</td></tr>
+  <tr><td>9</td><td>Accent</td><td>0 &hellip; 100</td><td>60</td></tr>
+  <tr><td>10</td><td>Volume</td><td>0 &hellip; 100</td><td>70</td></tr>
+  <tr><td>11</td><td>Slide time (ms)</td><td>0 &hellip; 300</td><td>60</td></tr>
+  <tr><td>12</td><td>Accent from velocity</td><td>1 &hellip; 127</td><td>65 (up to v1.4.1: 100)</td></tr>
+  <tr><td>13</td><td>Distortion</td><td>Off / On</td><td>Off</td></tr>
+  <tr><td>14</td><td>Distortion model</td><td>Soft / Hard / Fold / Fuzz</td><td>Soft</td></tr>
+  <tr><td>15</td><td>Drive</td><td>1 &hellip; 40</td><td>8</td></tr>
+  <tr><td>16</td><td>Delay mix (%)</td><td>0 &hellip; 100</td><td>15</td></tr>
+  <tr><td>17</td><td>Delay division</td><td>1/8 / Dotted 1/8 / 1/4 / 1/2</td><td>Dotted 1/8</td></tr>
+  <tr><td>18</td><td>Delay feedback (%)</td><td>0 &hellip; 90</td><td>60</td></tr>
+  <tr><td>19</td><td>Reverb mix (%)</td><td>0 &hellip; 100</td><td>18</td></tr>
+  <tr><td>20</td><td>Room size (%)</td><td>20 &hellip; 100</td><td>70</td></tr>
+  <tr><td>21</td><td>SEQ pattern length</td><td>1 &hellip; 16</td><td>16</td></tr>
+  <tr><td>22</td><td>SEQ Shuffle (%)</td><td>0 &hellip; 75</td><td>0</td></tr>
+  <tr><td>23</td><td>SEQ Gate (%)</td><td>10 &hellip; 100</td><td>55</td></tr>
+  <tr><td>24</td><td>SEQ Free Run</td><td>Off / On</td><td>Off</td></tr>
+  <tr><td>25</td><td>SEQ pattern bank</td><td>A / B / C / D</td><td>A</td></tr>
+  <tr><td>26</td><td>SEQ Out (sequence to output)</td><td>Off / On</td><td>Off</td></tr>
+  <tr><td>27 / 28</td><td>Drive EQ Lowcut / Highcut (Hz)</td><td>0 &hellip; 20000 / 20 &hellip; 20000</td><td>0 / 20000 (off)</td></tr>
+  <tr><td>29 / 30</td><td>Delay EQ Lowcut / Highcut (Hz)</td><td>0 &hellip; 20000 / 20 &hellip; 20000</td><td>250 / 3000</td></tr>
+  <tr><td>31 / 32</td><td>Reverb EQ Lowcut / Highcut (Hz)</td><td>0 &hellip; 20000 / 20 &hellip; 20000</td><td>300 / 2300</td></tr>
+  <tr><td>33</td><td>MIDI Thru (incoming notes)</td><td>Off / On</td><td>Off</td></tr>
+  <tr><td>34</td><td>Compressor</td><td>Off / On</td><td>On</td></tr>
+  <tr><td>35</td><td>Compressor mix</td><td>0 &hellip; 100</td><td>100</td></tr>
+  <tr><td>36</td><td>UI Color</td><td>0 &hellip; 9</td><td>0 (ACID)</td></tr>
+  <tr><td>37&ndash;40</td><td>Q IDX (test), Q CMD (test), Q A (ro), Q B (ro)</td><td>see below</td><td>0</td></tr>
+</table>
+<p>REAPER adds its own <em>Bypass</em>, <em>Wet</em> and <em>Delta</em> after these. Moving a knob on the front, a CC (section 13) or a preset load all move the same parameters.</p>
+<div class="box" data-k="sequencer automation">Automating <b>25 (SEQ pattern bank)</b> switches the pattern from bank to bank along the song; <b>21, 22, 23</b> (length, shuffle, gate) and <b>24</b> (FREE RUN) are automatable too. The pattern <em>steps</em> themselves are not parameters: they live in the plug-in state.</div>
+<div class="box warn" data-k="hidden test sliders">Sliders 37&ndash;40 are the test interface of the preset bank (index, command, two read-outs). They are not needed in normal use and should not be automated: a non-zero <code>Q CMD</code> is a command (for example it saves the current state into a user slot, loads a factory preset or randomises the pattern).
+Since v1.3.3 these commands only run while a test script has unlocked them; otherwise the plug-in ignores them and sets <code>Q CMD</code> back to 0. Slider 36 (<code>UI Color</code>) stores the colour scheme.</div>
+
+<h2 id="practice"><span class="num">17</span>In practice</h2>
+<ul>
+  <li><b>The classic squelch:</b> preset SQUELCH (saw, resonance 80, env mod 82, decay 22, accent 80), then play with CUTOFF FREQ while the pattern runs; set ACC on a few steps and SLD on two or three.</li>
+  <li><b>A bass that sits in the mix:</b> DEEP or DUB with drive off. The delay EQ high cut around 3 kHz and the reverb EQ low cut at 300 Hz (both INIT defaults) keep echoes and tail out of the low end.</li>
+  <li><b>Dirt without losing the fundamental:</b> DRIVE on, FOLD or FUZZ, and raise the drive EQ <b>low cut</b> (LO) to 150&ndash;300 Hz: the bass stays clean while the mids are distorted.</li>
+  <li><b>Play it from MIDI, tie the notes:</b> in HOST mode let notes overlap a little in the piano roll for slides, and use velocity 65+ (the default <code>ACCENT VEL</code>; the <code>DF</code> button offers 65 / 80 / 100 / 120) for accents. Hold the sustain pedal (CC 64) to keep a note sounding after the key is released.</li>
+  <li><b>Pattern ideas:</b> press RND until something sticks, then MUT for variations; COPY into the next bank before you go on; UNDO takes back the last RND / MUT / CLEAR.</li>
+  <li><b>Songs from banks:</b> put the parts in A&ndash;D and automate <em>SEQ pattern bank</em> (parameter 25).</li>
+  <li><b>With TT-303PATGEN:</b> the TimTechlor pattern generator writes acid patterns as MIDI; insert it <em>before</em> the TT-303, keep the TT-303 in HOST mode and use velocity for accents and overlaps for slides (see the <a href="tt-303patgen-manual.html">TT-303PATGEN manual</a>). TT-303PATGEN 0.5.7 and later send normal steps with NORM VEL 64 and accents with ACC VEL 127, and its THRESH defaults to 65, the default ACCENT VEL of the TT-303: on a new instance of both, accents land exactly on the accent steps. If you raise ACCENT VEL with <code>DF</code>, set THRESH in TT-303PATGEN to the same value.</li>
+  <li><b>Play the sequence on another synth:</b> SEQ mode, <code>SEQ OUT</code> on, and route the track&rsquo;s MIDI output; turn VOLUME down if the TT-303 itself should stay quiet.</li>
+  <li><b>Parallel compression:</b> COMP at 40&ndash;60 % mix keeps the accents lively while adding body. With COMP off, raise VOLUME to make up the roughly 5 dB.</li>
+</ul>
+
+<h2 id="trouble"><span class="num">18</span>Troubleshooting</h2>
+<ul>
+  <li><b>No sound.</b> TT-303 makes sound only from MIDI: in HOST mode it needs notes on the track (record-arm or a MIDI item; the keyboard display lights when notes arrive), in SEQ mode it needs the project to play or <code>FREE RUN</code> on. Check VOLUME and that the track is not muted.</li>
+  <li><b>The voice does not play my notes / the pattern plays transposed.</b> In SEQ mode MIDI notes only transpose (C2 = original pitch). To play the voice from MIDI, switch to HOST.</li>
+  <li><b>Notes come out twice.</b> <code>MIDI THRU</code> passes incoming notes, <code>SEQ OUT</code> sends the sequence: with both on in SEQ mode you send both. Switch off what you do not need.</li>
+  <li><b>The sustain pedal does nothing.</b> CC 64 only works in HOST mode and only holds a note that already sounds or is played while it is down; pressing it with nothing sounding starts no note. A value below 64 counts as released.</li>
+  <li><b>A held note suddenly stops (more than ten keys).</b> The note stack is ten deep as on the Devil Fish: the oldest of eleven held keys falls out and no longer holds the voice.</li>
+  <li><b>No slide.</b> In HOST mode the notes must actually overlap (the second starts before the first ends). In SEQ mode set <code>SLD</code> on the <em>first</em> of the two steps; the flag ties a step to the following one. With SLIDE at 0 ms the pitch jumps.</li>
+  <li><b>No accent.</b> HOST mode: the velocity must reach <code>ACCENT VEL</code> (default 65). SEQ mode: set <code>ACC</code> on the step. Also raise the ACCENT knob; at 0 % an accent has no effect.</li>
+  <li><b>The sound got quieter by about 5 dB.</b> Compressor OFF also removes its make-up gain; turn COMP on or raise VOLUME.</li>
+  <li><b>No echoes / no tail.</b> Delay and reverb are bypassed below 0.5 % MIX. The delay EQ and reverb EQ are input filters: a high low cut or a low high cut can leave nothing to delay.</li>
+  <li><b>Tempo feels wrong.</b> The plug-in reads the project tempo; if REAPER reports none (under 10 BPM) 120 BPM is used. The delay and the sequencer both follow it.</li>
+  <li><b>The FX window still shows the old name or version.</b> REAPER caches the description of a JSFX (the <code>desc:</code> line) in <code>reaper-jsfx.ini</code> in its resource folder, so after an update the window title can keep the old text. It is cosmetic: the version in the header of the front is the real one.
+      To refresh it, close REAPER, delete <code>reaper-jsfx.ini</code> (REAPER creates it again and re-reads all JSFX at the next start) and start REAPER.</li>
+  <li><b>The first click in the plug-in window does nothing.</b> A click that only gives the window the focus can be swallowed by REAPER; click again.</li>
+  <li><b>The front is small.</b> Choose a larger UI SIZE in OPTIONS; enlarge the FX window to show more of the front.</li>
+  <li><b>A project from v1.0 or v1.1 shows an empty user bank.</b> Expected: older projects have no bank; it starts empty and all sounds and patterns of the project load unchanged.</li>
+  <li><b>Names cannot contain a space / Esc closes the window.</b> See the box in the preset section: use <kbd>Shift</kbd>+<kbd>Space</kbd> and CANCEL.</li>
+</ul>
+
+<h2 id="notes"><span class="num">19</span>Release notes</h2>
+<h3>v2.0.0 &mdash; 2026-10-05: ReaPack release</h3>
+<ul>
+  <li>First release in the ReaPack repository since v1.07. The code is the same as v1.5.0; the number jumps to 2.0.0 because ReaPack reads 1.07 as 1.7 and would not offer 1.5.0 as an update. Everything listed below since v1.07 is part of this release.</li>
+</ul>
+<h3>v1.5.0 &mdash; 2026-10-03: HOST mode, more of the Devil Fish MIDI input</h3>
+<ul>
+  <li><b>Sound change (HOST mode only):</b> three more rules of the Devil Fish MIDI input (Robin Whittle, Real World Interfaces; MIDI In Manual V1.0.4 and MIDI In and Out Manual): <b>(1) Note stack ten deep</b> instead of 32: with more than ten keys held the oldest falls out. <b>(2) Sustain on CC 64:</b> the gate stays on while CC 64 is 64 or above, even after the last key is released; CC 64 below 64, CC 123 and CC 120 release it. <b>(3) Accent threshold 65</b> as the new default (V1.0.4 raised the Devil Fish default from 64 to 65); the four thresholds of the documentation, 65 / 80 / 100 / 120, are one click apart on the new <code>DF</code> button next to <code>-</code> / <code>+</code>.</li>
+  <li><b>What you will hear in existing projects:</b> (a) Projects and user presets saved with v1.4.1 or earlier keep their stored <code>ACCENT VEL</code> (the old default 100); nothing changes there. (b) New instances and the INIT command of the preset menu start at 65: notes with velocity 65 to 99 are now accents, where they used to be plain notes. (c) A piano roll that holds more than ten notes at once and then releases the newer ones no longer falls back to the oldest notes. (d) CC 64 messages in a project, which used to pass through unused, now hold notes: a sustain pedal lane in the MIDI item lets notes ring on until the pedal goes up. Not changed: note range, transposition and the MIDI channel (the plug-in still listens on all channels), pitch bend (still passed through), the sequencer.</li>
+  <li>Test aid: with the test unlock used by the test scripts (never otherwise) the plug-in logs the MIDI events it receives into its shared memory. It has no effect on the sound.</li>
+</ul>
+<h3>v1.4.1 &mdash; 2026-10-02: HOST mode as on the Devil Fish</h3>
+<ul>
+  <li><b>Sound change (HOST mode only):</b> a second note-on of a key that is already sounding is ignored (it was struck again in v1.4.0 and tied in v1.3.3), exactly as the Devil Fish MIDI input handles it. The first note-off of that key ends the note, so no note can stay stuck when a source sends two note-ons and one note-off (v1.4.0 held it until the next note-off of that key). Slides between different pitches, the last-note rule, notes that do not overlap and the sequencer are unchanged. Projects that have overlapping notes of one pitch sound as in v1.3.3 at these spots, except that a second note-on no longer fires an accent or moves a lower held key to the top.</li>
+</ul>
+<h3>v1.4.0 &mdash; 2026-10-02: same note in HOST mode</h3>
+<ul>
+  <li><b>Sound change (HOST mode only):</b> an overlapping note of the <em>same</em> pitch is struck again with a new attack and sounds until its own note-off. Up to v1.3.3 it was tied to the sounding note (no attack, v1.3.3) and the note-off of the first note already ended it. Projects whose MIDI has such overlaps sound different at exactly these spots; everything else (other notes, slides between different pitches, the sequencer, SEQ ties) is unchanged.</li>
+  <li>Large FONT steps (OPTIONS): labels in tight places (header, knob names and values, effect titles, ACCENT VEL) only grow while they still fit; where a larger step would not fit, that label stays at the normal size, so nothing overlaps. The values under the effect knobs are centred correctly again at UI sizes other than 100 %.</li>
+</ul>
+<h3>v1.3.3 &mdash; 2026-10-02: fixes from the code review</h3>
+<ul>
+  <li><b>Sound change:</b> a slide into a step with the <em>same</em> note ties again (no new attack), as described in this manual; since an internal v5 such a step had been retriggered. This touches the factory patterns (banks A&ndash;C steps 8 and 13, bank D steps 1 and 11) and every pattern of yours with the same note after an SLD step. In HOST mode a second note-on of the same held key ties as well. <code>SEQ OUT</code> no longer sends two note-ons for such a tie.</li>
+  <li>UNDO restores the bank it was made in (it used to write into the bank that was shown at that moment).</li>
+  <li>Pattern and bank edits create an entry in REAPER&rsquo;s undo history and mark the project as changed.</li>
+  <li>Pressing play no longer cuts a sounding note or a delay / reverb tail, no longer leaves a held <code>SEQ OUT</code> note hanging and keeps UNDO, COPY and a held transpose key.</li>
+  <li>A re-sync after a tempo change no longer plays the current step twice.</li>
+  <li>Mouse wheel: one step per notch on whole-number knobs (LEN did not move before, SHUF jumped +2 / &minus;1); dragged values land on the parameter step; untouched knobs no longer write over an automation envelope.</li>
+  <li>The preset bar no longer covers the OPTIONS button in very small windows; tooltips of the preset bar and OPTIONS as in the other TimTechlor plug-ins; long button labels at large FONT 2 sizes switch to a smaller font.</li>
+  <li>The hidden test commands (parameters 37&ndash;40) only run when a test script unlocks them.</li>
+</ul>
+
+<h3>v1.3.2 &mdash; 2026-10-01: tooltips</h3>
+<p>Every control of the front now has a tooltip (knobs, switches, bank and pattern buttons, sequencer rows, EQ handles, preset bar, OPTIONS). The OPTIONS box gains <code>TOOLTIPS ON / OFF</code> (per instance, saved with the project). DSP and audio unchanged.</p>
+
+<h3>v1.3 &mdash; 2026-10-01: style options</h3>
+<p>The OPTIONS box gains FONT SIZE for FONT 1 (titles) and FONT 2 (text) and a custom HSV colour picker for FONT 1 / FONT 2 / BG with RESET / RESET ALL, live preview and a low-contrast warning; dim text contrast raised for readability in all schemes. DSP unchanged.</p>
+
+<h3>v1.2 &mdash; 2026-09-30: preset bar</h3>
+<ul>
+  <li>New <b>preset bar</b> in the header (<code>&lt; name &gt; SAVE ...</code>): six FACTORY presets and a <b>32-slot user bank</b>; RENAME, COPY, DELETE, INIT. A user preset contains all sound settings <em>and</em> the four pattern banks. The bank is saved in the project, FX chains and REAPER presets.</li>
+  <li>The six patch buttons are gone (their sounds are the FACTORY list); <b>OPTIONS</b> moved to the top right of the header.</li>
+  <li>New hidden test parameters 37&ndash;40 for the preset bank. The audio is unchanged against v1.1 (bit-identical render).</li>
+</ul>
+<h3>v1.1 &mdash; 2026-09-30: Options / Color</h3>
+<ul>
+  <li>New <b>OPTIONS</b> box with <b>COLOR</b>: ten colour schemes (ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT, ICE), stored per instance in the hidden parameter 36.</li>
+  <li>No change to the sound: a render of v1.1 is bit-identical to v1.0.</li>
+</ul>
+<h3>v1.0 &mdash; 2026-09-07: first full release</h3>
+<ul>
+  <li>The sound engine was fitted to recordings of a TB-303 software reference: 3-pole 18 dB ladder with new cutoff and resonance curves, filter decay of 30&ndash;570 ms, a fixed VCA sag, an RC slide in log frequency, a narrower square duty, a level trim.</li>
+  <li>Factory presets retuned for this engine; start pattern PUMP in bank D; INIT with the working defaults (delay and reverb EQs, compressor on).</li>
+  <li>Compressor on/off with a MIX knob, in its own COMP column of the effects panel; version badge in the header; the CUTOFF and DECAY read-outs show the real values of the engine.</li>
+  <li>Pattern mirror in shared memory for a companion ReaScript that exports the displayed bank as a MIDI item.</li>
+</ul>
+
+<h2 id="tech"><span class="num">20</span>Technical data &amp; honest notes</h2>
+<table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Type</td><td>JSFX instrument, monophonic, stereo out (<code>TT-303 L / R</code>), no audio input</td></tr>
+  <tr><td>Host</td><td>REAPER 6 or newer (Windows, macOS, Linux); developed and tested with REAPER 7</td></tr>
+  <tr><td>Oscillator</td><td>Saw / square, 1-sample PolyBLEP, 2&times; oversampled</td></tr>
+  <tr><td>Filter</td><td>3-pole ladder, 18 dB/oct, ZDF/TPT, level-dependent feedback, 2&times; oversampled, 1/4-1/2-1/4 decimation</td></tr>
+  <tr><td>Envelopes</td><td>VCF decay 30&ndash;570 ms (accent: 0.2 s fixed), VCA attack 3 ms / 1.8 ms, sag 1.1 s, release 12 ms</td></tr>
+  <tr><td>Drive</td><td>Soft / Hard / Fold / Fuzz, 2&times; oversampled, parallel input EQ</td></tr>
+  <tr><td>Delay</td><td>Ping-pong, 1/8, dotted 1/8, 1/4, 1/2 of the project tempo, feedback 0&ndash;90 %, buffer 3.3 s</td></tr>
+  <tr><td>Reverb</td><td>Freeverb type, 8 combs + 4 all-passes per channel, sample-rate scaled</td></tr>
+  <tr><td>Compressor</td><td>&minus;14 dB, 5:1, knee 30 dB, 3 ms / 250 ms, about +5 dB make-up, dry only, MIX</td></tr>
+  <tr><td>Master</td><td>Soft clip (linear to 0.7, tanh knee, limit 1.0) and a hard limit at &plusmn;1</td></tr>
+  <tr><td>Sequencer</td><td>16 steps, 4 banks, step = 1/16 note, shuffle up to 37.5 %, note range C1&ndash;C3, sample-accurate notes</td></tr>
+  <tr><td>MIDI</td><td>All channels; CC 74, 71, 73, 75, 16, 7, 123, 120; queue of 512 events per block</td></tr>
+  <tr><td>Presets</td><td>6 factory, 32 user slots in the plug-in state (project, FX chain, REAPER preset)</td></tr>
+  <tr><td>Latency</td><td>None reported (no plug-in delay compensation)</td></tr>
+  <tr><td>Window</td><td>Default 1120 &times; 912, scalable; drawing grid 900 &times; 732; HiDPI aware</td></tr>
+</table>
+<h3>Honest notes</h3>
+<ul>
+  <li>TT-303 is a <em>tribute model</em>. The filter, envelope, slide and square-duty values were fitted to reference recordings of a TB-303 software emulation; the match is close for level, decay and the filter curves, not exact.
+      In the filter, resonance peak and corner frequency sit somewhat higher than in the reference (a limit of the three-pole ladder structure); the cutoff range was set a little darker on purpose, by ear.</li>
+  <li>The square wave has fewer strong high harmonics (from about the 6th) than the reference.</li>
+  <li>The default slide time (60 ms as time constant) has not been confirmed against a reference; the reference glide was estimated at about 100 ms in total, so a setting of 30&ndash;40 ms comes closer.</li>
+  <li>The user bank was verified through the project and FX-chain round trip. The REAPER preset file path relies on the same plug-in state, which the other plug-ins with this preset module were tested with, but it was not run separately for TT-303.</li>
+  <li>Pitch bend is not applied to the voice.</li>
+</ul>
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v1.3.4</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>50 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/303-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-303 (JSFX) v2.0.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 2.0.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>
