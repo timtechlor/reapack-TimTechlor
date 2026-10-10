@@ -6,8 +6,8 @@
 <title>TT-303 (JSFX) Manual – Acid Bass Synthesizer in the Style of the TB-303 for REAPER</title>
 <meta name="description" content="Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.">
 <meta name="tt-doc-name" content="TT-303 (JSFX)">
-<meta name="tt-doc-version" content="2.0.0">
-<meta name="tt-doc-date" content="2026-10-05">
+<meta name="tt-doc-version" content="2.1.0">
+<meta name="tt-doc-date" content="2026-10-10">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-303-jsfx-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-303 (JSFX) — User Manual">
-<meta property="article:modified_time" content="2026-10-05">
+<meta property="article:modified_time" content="2026-10-10">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-303 (JSFX) Manual – Acid Bass Synthesizer for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.",
    "url": "https://timtechlor.de/docs/tt-303-jsfx-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-303-jsfx-manual.html",
-   "datePublished": "2026-10-05",
-   "dateModified": "2026-10-05",
+   "datePublished": "2026-10-10",
+   "dateModified": "2026-10-10",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-303-jsfx.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "TB-303 JSFX, acid bass synthesizer REAPER, 303 clone plug-in, acid sequencer, slide and accent, ladder filter 18 dB, free REAPER synth, JSFX instrument",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-303-jsfx-manual.html#software" },
-   "version": "2.0.0"
+   "version": "2.1.0"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-303 (JSFX)",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "2.0.0",
+   "softwareVersion": "2.1.0",
    "description": "Free JSFX instrument for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 (tribute model, no samples) with slide and accent, a 3-pole 18 dB ladder filter, drive, ping-pong delay, reverb, compressor, an internal 16-step sequencer with four banks, a preset bar with a 32-slot user bank and ten colour schemes.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,7 +228,7 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303 (JSFX)</span></nav>
       <div class="wordmark" style="--wm-n:6" role="img" aria-label="TT-303 (JSFX)">TT-303</div>
       <h1>TT-303 (JSFX) — User Manual</h1>
-      <div class="meta">JSFX plug-in for REAPER // Version 2.0.0 // TimTechlor</div>
+      <div class="meta">JSFX plug-in for REAPER // Version 2.1.0 // TimTechlor</div>
       <p class="lead">TT-303 is a monophonic acid bass synthesizer in the style of the Roland TB-303 &mdash; a tribute model, no samples: one oscillator, an 18 dB ladder filter that squeals, the accent and slide circuits that make a 303 line move, and a chain of drive, ping-pong delay, reverb and compressor behind it. Play it from the piano roll (HOST) or let the built-in 16-step sequencer with four pattern banks run on the project timeline (SEQ).</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-ui-options/303-front.png" aria-label="Enlarge screenshot of the TT-303 (JSFX) user interface" title="Click to enlarge"><img src="img/tt-ui-options/303-front.png" width="1142" height="920" alt="TT-303 (JSFX) user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -275,7 +275,7 @@ the two circuits that give the original its character: <b>accent</b> and <b>slid
 play it from the outside; in <b>SEQ</b> mode an internal 16-step sequencer with four banks A&ndash;D
 plays the notes itself. The whole front is drawn by the plug-in, uses the UI SIZE setting in OPTIONS, and every
 control can be automated.</p>
-<figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current suite front at 125% UI size, version 2.0.0"><figcaption>Current front in v2.0.0, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current suite front at 125% UI size, version 2.1.0"><figcaption>Current front in v2.1.0, at the default UI size of 125%.</figcaption></figure>
 <div class="box" data-k="Not the web app">There is also a browser version of the TT-303 with its own manual (<a href="TT-303_manual.html">TT-303 (Web)</a>).
 This manual describes the REAPER plug-in only &mdash; the JSFX has no drum machine and no export buttons (REAPER renders the audio), and its tempo is always the project tempo.</div>
 
@@ -315,12 +315,12 @@ measures which fonts exist and falls back by itself.</p>
 <table>
   <tr><th>Area</th><th>Contents</th></tr>
   <tr><td>Header</td><td>Wordmark and version, <b>ACCENT</b> indicator (charge of the accent capacitor), <b>MIDI THRU</b>, the <b>MODE</b> switch HOST / SEQ, the <b>preset bar</b> (<code>&lt; name &gt; SAVE ...</code>) and <b>OPTIONS</b></td></tr>
-  <tr><td>SYNTHESIZER</td><td>Knobs TUNING, FINE, CUTOFF FREQ, RESONANCE, ENV MOD, DECAY, ACCENT, VOLUME; WAVEFORM SAW / SQUARE; ACCENT VEL (only in HOST mode)</td></tr>
-  <tr><td>Effects panel</td><td>Four columns: DRIVE (on/off, model, amount, input EQ), DELAY (division, mix, feedback, EQ), REVERB (mix, size, EQ and the <b>SLIDE</b> time knob), COMP (on/off, mix)</td></tr>
+  <tr><td>SYNTHESIZER</td><td>Nine knobs: TUNING, FINE, <b>SLIDE</b>, CUTOFF FREQ, RESONANCE, ENV MOD, DECAY, ACCENT, VOLUME; WAVEFORM SAW / SQUARE; ACCENT VEL (only in HOST mode)</td></tr>
+  <tr><td>Effects panel</td><td>Four columns: DRIVE (on/off, model, amount, input EQ), DELAY (division, mix, feedback, EQ), REVERB (mix, size, EQ), COMP (on/off, mix)</td></tr>
   <tr><td>Oscilloscope</td><td>The output signal, with a read-out <code>NOTE C2 65.4 Hz | VCF 419 Hz | 125 BPM</code>: current note and pitch, the <em>current</em> filter cutoff (moves with the envelope) and the tempo in use</td></tr>
-  <tr><td>Bottom panel</td><td>HOST: a keyboard that lights the notes being held. SEQ: the sequencer (section 12)</td></tr>
+  <tr><td>Bottom panel</td><td>HOST: a keyboard you can play with the mouse; it also lights the notes being held. SEQ: the sequencer (section 12)</td></tr>
 </table>
-<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-synth-fx.png" alt="SYNTHESIZER panel and effects panel: eight knobs with value read-outs, waveform switch, accent velocity, DRIVE, DELAY, REVERB and COMP columns with input EQ strips" width="1099" height="394"><figcaption><span class="tag">PANELS</span><b>SYNTHESIZER and effects panel.</b> Read-outs under the knobs: semitones, cents, cutoff in Hz, resonance in %, envelope depth in octaves, decay in ms, accent and volume in %. The green bar under each EQ is the band that passes.</figcaption></figure>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-synth-fx.png" alt="SYNTHESIZER panel and effects panel: nine knobs with value read-outs, waveform switch, accent velocity, DRIVE, DELAY, REVERB and COMP columns with input EQ strips" width="1099" height="394"><figcaption><span class="tag">PANELS</span><b>SYNTHESIZER and effects panel.</b> Read-outs under the knobs: semitones, cents, cutoff in Hz, resonance in %, envelope depth in octaves, decay in ms, accent and volume in %. The green bar under each EQ is the band that passes.</figcaption></figure>
 <h3>Knobs</h3>
 <p>Drag a knob <b>vertically</b> (up = more). Hold <kbd>Shift</kbd> while dragging for fine adjustment (about five times finer);
 the <b>mouse wheel</b> over a knob moves knobs with whole-number values (TUNING, FINE, FEEDBACK, SIZE, COMP MIX, LEN, SHUF, GATE) by exactly one step per notch
@@ -346,9 +346,9 @@ horizontally (<kbd>Shift</kbd> = five times finer, mouse wheel = steps), right-c
   <li><b>The same note again while it sounds = ignored.</b> The voice behaves like the MIDI input of the Devil Fish modification (Robin Whittle, Real World Interfaces: &ldquo;A second Note On event for a note which is already On is ignored&rdquo;). If a note of the <em>same</em> pitch starts while that key is still held (overlapping notes of one key in the piano roll), the second note-on does nothing: no new attack, no accent, no glide. The <em>first</em> note-off of that key ends the note; a further note-off of the same key is ignored. So the first of two overlapping equal notes sets the length, and the second one is lost. To hear the pitch twice, let the first note end before the second one starts (a gap of a few milliseconds is enough). A source that sends a note-on twice but only one note-off therefore cannot leave a note hanging.</li>
   <li><b>Last note wins.</b> The voice is monophonic. Notes that are still held are remembered in a stack <b>ten notes deep</b>, as on the Devil Fish (&ldquo;a ten-deep internal stack of the most recently turned on notes&rdquo;): when you release the newest one, the voice glides back to the one before. If an eleventh key is pressed while ten are held, the <em>oldest</em> one falls out of the stack: after you release the other keys it no longer holds the note, even if it is still held (up to v1.4.1 the stack held 32 notes).</li>
   <li><b>Sustain (CC 64) keeps the gate on.</b> As on the Devil Fish (&ldquo;Controller 64 (Sustain or Hold) can be used to independently turn on the Synthesizer Gate&rdquo;; &ldquo;Values 0 to 63 turn Off the internal flag which can turn the Gate On. Values 64 to 127 turn the flag On&rdquo;), the gate is on as long as a key is held <em>or</em> CC 64 is at 64 or above. When you release the last key while CC 64 is on, the note keeps sounding at the last pitch with no release; it ends when CC 64 drops below 64 (or on All Notes Off, CC 123 / 120, which also clears the sustain flag). A key pressed while only the sustain holds the gate changes the pitch without a new attack and without a glide (the gate does not go off and on; there is no tied key to slide from); an accent fires as for a tied note. Pressing CC 64 while nothing sounds does not start a note, it only holds a note that sounds or is played afterwards. The stack itself is not touched by CC 64: a released key leaves it at once, so releasing CC 64 with keys still held changes nothing. The line above the keyboard shows <code>SUSTAIN (CC 64)</code> while the flag is on. Sustain works in HOST mode only.</li>
-  <li>The keyboard at the bottom (C1 to C4) lights the held notes; <code>HELD: n</code> counts them (at most 10).</li>
+  <li><b>The keyboard at the bottom (C1 to C4) is playable.</b> Click a key to play it; the note goes through the same rules as a note from the piano roll (accent, slide, stack, sustain). <b>Where you click sets the velocity</b>: near the top of a key it is soft, near the bottom hard (30 to 127), so a click lower on the key reaches the accent threshold (ACCENT VEL). <b>Drag to another key</b> while the mouse button is held and the new note overlaps the old one: a slide. Releasing the button ends the note. The keys also light for notes from the piano roll or a MIDI keyboard; <code>HELD: n</code> counts the held notes (at most 10).</li>
 </ul>
-<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-midi.png" alt="The MIDI INPUT panel in HOST mode: the rule line VELOCITY >= n = ACCENT, OVERLAPPING NOTES = SLIDE, LAST NOTE WINS, and a keyboard from C1 to C4" width="1094" height="317"><figcaption><span class="tag">HOST</span><b>The MIDI input panel.</b> The rule line repeats the current accent threshold (65 by default); held notes light up on the keyboard.</figcaption></figure>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-midi.png" alt="The KEYBOARD / MIDI INPUT panel in HOST mode: the rule line VELOCITY >= n = ACCENT, OVERLAPPING NOTES = SLIDE, LAST NOTE WINS, and a playable keyboard from C1 to C4" width="1094" height="317"><figcaption><span class="tag">HOST</span><b>The keyboard and MIDI input panel.</b> The rule line repeats the current accent threshold (65 by default); click the keys to play, held notes light up.</figcaption></figure>
 <h3>SEQ</h3>
 <p>The internal 16-step sequencer takes over and plays the pattern of the active bank (A&ndash;D). MIDI notes no longer play the voice:
 they <b>transpose</b> the pattern (section 12). The bottom panel turns into the sequencer.</p>
@@ -386,7 +386,7 @@ DECAY knob, and a release of about 12 ms when the note ends. The filter cutoff i
 <p>A slide ties two notes: the pitch glides from the old to the new note and the envelopes are <b>not</b> retriggered, so the filter and amplitude carry on.
 The glide is an <b>RC-style approach in logarithmic frequency</b>: constant time for any interval (a fifth takes as long as an octave), fast at first,
 then settling. The <b>SLIDE</b> knob (0&ndash;300 ms, default 60) is the time constant: about 63 % of the way after one time constant, about 95 % after three. At 0 the pitch jumps.
-(The knob sits in the REVERB column of the effects panel, to the right of SIZE.)</p>
+(The knob sits in the SYNTHESIZER panel, between FINE and CUTOFF FREQ. Up to v2.0.0 it stood in the REVERB column of the effects panel.)</p>
 <p>An <em>accented</em> note that is tied by a slide still fires its accent sweep, but the amplitude envelope is left alone &mdash; that is how accents and slides combine on the hardware.
 In HOST mode a slide is an overlapping note of a <em>different</em> pitch (the same pitch overlapping is ignored, as on the Devil Fish, see section 05), in SEQ mode the <code>SLD</code> flag of a step ties it to the <em>following</em> step.
 If the following step has the <em>same</em> note, the note is simply held on (a tie): no new attack, and <code>SEQ OUT</code> keeps one held note instead of sending a second note-on.</p>
@@ -604,7 +604,7 @@ Since v1.3.3 these commands only run while a test script has unlocked them; othe
 
 <h2 id="trouble"><span class="num">18</span>Troubleshooting</h2>
 <ul>
-  <li><b>No sound.</b> TT-303 makes sound only from MIDI: in HOST mode it needs notes on the track (record-arm or a MIDI item; the keyboard display lights when notes arrive), in SEQ mode it needs the project to play or <code>FREE RUN</code> on. Check VOLUME and that the track is not muted.</li>
+  <li><b>No sound.</b> TT-303 makes sound only from MIDI: in HOST mode it needs notes on the track (record-arm or a MIDI item, or click the keyboard at the bottom; the keys light when notes arrive), in SEQ mode it needs the project to play or <code>FREE RUN</code> on. Check VOLUME and that the track is not muted.</li>
   <li><b>The voice does not play my notes / the pattern plays transposed.</b> In SEQ mode MIDI notes only transpose (C2 = original pitch). To play the voice from MIDI, switch to HOST.</li>
   <li><b>Notes come out twice.</b> <code>MIDI THRU</code> passes incoming notes, <code>SEQ OUT</code> sends the sequence: with both on in SEQ mode you send both. Switch off what you do not need.</li>
   <li><b>The sustain pedal does nothing.</b> CC 64 only works in HOST mode and only holds a note that already sounds or is played while it is down; pressing it with nothing sounding starts no note. A value below 64 counts as released.</li>
@@ -623,6 +623,15 @@ Since v1.3.3 these commands only run while a test script has unlocked them; othe
 </ul>
 
 <h2 id="notes"><span class="num">19</span>Release notes</h2>
+<h3>v2.1.0 &mdash; 2026-10-10: playable keyboard, SLIDE in the synthesizer panel, smoother knobs</h3>
+<ul>
+  <li><b>The keyboard is playable.</b> In HOST mode a click on a key plays it; the click height sets the velocity (accent from ACCENT VEL), dragging to another key slides. The notes use the same path as MIDI from the piano roll.</li>
+  <li><b>SLIDE moved</b> from the effects panel (where it sat in the REVERB column) to the SYNTHESIZER panel, between FINE and CUTOFF FREQ. The synthesizer panel has nine knob columns now; REVERB keeps MIX and SIZE. Parameter, range, default and saved projects are unchanged.</li>
+  <li><b>Sound change (all modes):</b> CUTOFF FREQ, RESONANCE, ENV MOD and VOLUME are smoothed with a time constant of 5 ms. A knob turned with the mouse (or an automation or CC step) no longer jumps from one value to the next, which removes zipper noise on fast moves. Note, accent and slide envelopes are not smoothed; a static sound is unchanged.</li>
+  <li><b>MIDI CC 74, 71, 73, 75, 16 and 7</b> act at the sample position of the controller message instead of at the start of the next audio block.</li>
+  <li><b>AUTO FIT:</b> the UI zoom follows the size of the FX window again (OPTIONS &gt; AUTO FIT ON / OFF, see the OPTIONS section). The zoom range now reaches down to 25&nbsp;%.</li>
+  <li><b>Fixed:</b> user presets did not store DISTORTION ON / OFF (a preset saved with v2.0.0 has no distortion state and loads it as OFF); with the SEQ front open, switching the reverb MIX down to the bypass could corrupt the reverb state; at the cutoff ceiling the filter did not follow a change of RESONANCE; the changed-star (*) of the preset bar disappeared after loading a project; key presses collected while the name box opened could end SAVE at once.</li>
+</ul>
 <h3>v2.0.0 &mdash; 2026-10-05: ReaPack release</h3>
 <ul>
   <li>First release in the ReaPack repository since v1.07. The code is the same as v1.5.0; the number jumps to 2.0.0 because ReaPack reads 1.07 as 1.7 and would not offer 1.5.0 as an update. Everything listed below since v1.07 is part of this release.</li>
@@ -709,14 +718,15 @@ Since v1.3.3 these commands only run while a test script has unlocked them; othe
 </ul>
 <section class="section">
 <h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
-<p>Updated in <b>v1.3.4</b>. New instances open at <b>125%</b> UI size for clearer text.
+<p>Updated in <b>v2.1.0</b>. New instances open at <b>125%</b> UI size for clearer text.
 The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
 <figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
 <p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
-or click the percentage field and enter a whole number from <b>50 to 400</b>.
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
 <b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
 Values outside the range are limited to the nearest supported value.</p>
 <figure class="shot"><img src="img/tt-ui-options/303-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
 <p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
 The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
 You can also enlarge the REAPER FX window to show more of the front.</p>
@@ -731,7 +741,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-303 (JSFX) v2.0.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 2.0.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-303 (JSFX) v2.1.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 2.1.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
