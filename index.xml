@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="55c179c87c2eeb43138033af5a75ffe7da105527">
+<index version="1" name="TimTechlor ReaScripts" commit="dd3c0f1553e027b5f642649728dd685b4d476387">
   <category name="Synths">
     <reapack name="TT-303 Acid Machine.jsfx" type="effect" desc="TT-303 Acid Machine">
       <metadata>
@@ -118,6 +118,68 @@
         <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-sequencer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/55c179c87c2eeb43138033af5a75ffe7da105527/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-sequencer.png</source>
         <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png">https://github.com/timtechlor/reapack-TimTechlor/raw/55c179c87c2eeb43138033af5a75ffe7da105527/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png</source>
         <source file="TT-303/TT-303_manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/55c179c87c2eeb43138033af5a75ffe7da105527/Synths/TT-303/TT-303_manual.html</source>
+      </version>
+      <version name="2.1.0" author="TimTechlor" time="2026-10-10T11:53:16Z">
+        <changelog><![CDATA[2.1.0
+- The keyboard in HOST mode is playable: click a key to play it, click
+  lower on the key to play harder (accent from ACCENT VEL), drag to
+  another key to slide
+- SLIDE moved from the effects row into the SYNTHESIZER panel (nine
+  knob columns); REVERB keeps MIX and SIZE
+- CUTOFF, RESONANCE, ENV MOD and VOLUME are smoothed (5 ms): no zipper
+  noise when turning a knob with the mouse; a static sound is unchanged
+- MIDI CC takes effect at its sample position instead of the next block
+- AUTO FIT: the UI zoom follows the size of the FX window again
+  (switchable in OPTIONS)
+- Fixed: user presets lost DISTORTION ON/OFF (presets saved with 2.0.0
+  load it as OFF); the reverb bypass could be corrupted while the SEQ
+  front was open; the filter did not follow the resonance at the cutoff
+  ceiling; the changed-star of the preset bar was lost after loading a
+  project
+2.0.0
+- First ReaPack release since 1.07. Renumbered from 1.5.0: ReaPack reads 1.07 as 1.7,
+  so 1.5.0 would not be offered as an update. Includes all changes listed below.
+1.5.0
+- HOST mode aligned further with the Devil Fish MIDI In: note stack
+  10 deep (oldest falls out), sustain on CC 64 (gate stays on while
+  CC 64 >= 64), accent velocity default 65 with the four Devil Fish
+  thresholds 65/80/100/120 on a DF button; existing projects and
+  presets keep their stored accent velocity
+1.4.1
+- HOST mode as the Devil Fish MIDI In: a note-on for a key that is
+  already on is ignored (no retrigger, no hanging note); the first
+  note-off ends it
+1.4.0
+- HOST mode: an overlapping note of the same pitch was struck again
+  (replaced by 1.4.1)
+1.3.4
+- Persistent UI size and options; larger default, stable colours
+  when zooming
+1.07
+- Sound engine recalibrated against reference recordings; slide time
+  sets the arrival time; hotter distortion and +12 dB output make-up
+  (noticeably louder); several HOST/SEQ fixes]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303%20Acid%20Machine.jsfx</source>
+        <source file="TT-303/tt-303-jsfx-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/tt-303-jsfx-manual.html</source>
+        <source file="TT-303/img/tt-ui-options/303-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-ui-options/303-front.png</source>
+        <source file="TT-303/img/tt-ui-options/303-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-ui-options/303-options.png</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-tt-303-acid-machine-web-logo.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-tt-303-acid-machine-web-logo.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-logo.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-logo.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-midi.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-midi.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-presets.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-save.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-save.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-seq.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-seq.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-sequencer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-sequencer.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png</source>
+        <source file="TT-303/TT-303_manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/TT-303_manual.html</source>
       </version>
     </reapack>
   </category>
