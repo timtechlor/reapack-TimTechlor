@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="dd3c0f1553e027b5f642649728dd685b4d476387">
+<index version="1" name="TimTechlor ReaScripts" commit="c2f0581d78fbf7512fe5d741106bc69243b3ec19">
   <category name="Synths">
     <reapack name="TT-303 Acid Machine.jsfx" type="effect" desc="TT-303 Acid Machine">
       <metadata>
@@ -8,7 +8,7 @@
 \widowctrl\hyphauto
 
 {\pard \ql \f0 \sa180 \li0 \fi0 TT-303 ACID MACHINE \u8212- mono acid synth in the style of the TB-303. Tribute, no samples, no sample ROM, all model.\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 CONTROLS AS ON THE ORIGINAL TUNING semitones (-24..+24), plus FINE in cents CUTOFF filter frequency, ~150 Hz .. ~2 kHz exponential (rises with resonance) RESONANCE feedback of the 18 dB ladder up to self-oscillation ENV MOD depth of the filter envelope, up to 5.2 octaves DECAY decay of the filter envelope, ~30 ms .. ~570 ms ACCENT level AND filter boost of the accent circuit WAVEFORM sawtooth / square\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 CONTROLS AS ON THE ORIGINAL TUNING semitones (-24..+24), plus FINE in cents SLIDE glide time between tied notes, 0..300 ms CUTOFF filter frequency, ~150 Hz .. ~2 kHz exponential (rises with resonance) RESONANCE feedback of the 18 dB ladder up to self-oscillation ENV MOD depth of the filter envelope, up to 5.2 octaves DECAY decay of the filter envelope, ~30 ms .. ~570 ms ACCENT level AND filter boost of the accent circuit WAVEFORM sawtooth / square\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 MODEL DETAILS (after R. Whittle / Devil Fish documentation)\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Filter: 3-pole ladder (18 dB/oct) in ZDF/TPT form, level-dependent feedback k/(1+0.4|y|), 2x oversampled, then 3-point decimation. Soft clip only at the master, never in the OS loop (it never engages there at real levels anyway).\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Pole correction 1/(1+0.10*kRes): mild peak correction; the resonance hump moves up with rising resonance, as on the reference.\par}
@@ -24,7 +24,7 @@
 {\pard \ql \f0 \sa180 \li0 \fi0 The input EQ only shapes what is sent into each effect; the dry signal runs alongside untouched. On the drive what the EQ removes is added back after the WaveShaper, so a raised lowcut takes the bass out of the DISTORTION, not out of the output (drive off = transparent).\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 OPTIONS box: FONT SIZE (FONT 1/2) and a custom HSV colour picker (FONT 1 / FONT 2 / BG) with RESET / RESET ALL, live and per instance, with low-contrast warning; TOOLTIPS ON / OFF (saved with the project), tooltips on every control.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 A slide into the same note ties (no retrigger, one note-on at SEQ OUT); pattern and bank edits create a REAPER undo point and UNDO restores the bank it was made in; the mouse wheel steps whole-number knobs one step at a time.\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 PRESETS: bar in the header, left of OPTIONS: [<] [name v] [>] [SAVE] [...]. FACTORY = INIT, DEEP, SQUELCH, SCREAM, HOOVER, DUB (the former patch buttons); USER = 32 slots that travel with the project (@serialize, after the four pattern banks; old projects load with an empty bank). A user preset holds all sound sliders (2..20, 27..32, 34, 35), the pattern settings (length, shuffle, gate, active bank 21/22/23/25) AND the four pattern banks A-D. Not part of it: MODE, FREE RUN, SEQ OUT, MIDI THRU, UI Color, transport. A native REAPER preset file of this plugin carries the whole bank.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 PRESETS: bar in the header, left of OPTIONS: [<] [name v] [>] [SAVE] [...]. FACTORY = INIT, TT-Groove, TT-BigBoy, TT-HiImTom!, TT-OffbeatBaby, TT-GoodStart (the default presets of the web version, each with its sound and the four pattern banks A-D); USER = 32 slots that travel with the project (@serialize, after the four pattern banks; old projects load with an empty bank). A user preset holds all sound sliders (2..20, 27..32, 34, 35), the pattern settings (length, shuffle, gate, active bank 21/22/23/25) AND the four pattern banks A-D. Not part of it: MODE, FREE RUN, SEQ OUT, MIDI THRU, UI Color, transport. A native REAPER preset file of this plugin carries the whole bank.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 MIDI: THRU at the top of the header passes INCOMING notes on to the output (CC and pitchbend always pass through anyway). SEQ OUT in the sequencer panel sends the SELF-GENERATED sequence out. Two different sources, hence two switches. In SEQ mode incoming notes are transpose commands \u8212- whoever also passes them on with THRU sends them out next to the sequence.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 SURFACE after the Tim Techlor design kit: Core Black, Core White, Acid Green #39FF14, traces at a 45 degree angle with solder pads. Wordmark in Zilap Orion, if installed. Labels sans-serif (Segoe UI / Helvetica Neue / DejaVu Sans / Arial), numeric values monospaced (Consolas / DejaVu Sans Mono / Menlo / Courier New). Which of these is present the script measures itself. The front computes in a fixed design grid and scales to the window size \u8212- to enlarge, just drag the FX window open. HiDPI is honoured via gfx_ext_retina. All internal JSFX sliders are hidden ("-" before the name), operation is exclusively via the device front.\par}
 }
@@ -181,22 +181,96 @@
         <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png</source>
         <source file="TT-303/TT-303_manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/TT-303_manual.html</source>
       </version>
+      <version name="2.1.2" author="TimTechlor" time="2026-10-14T18:20:54Z">
+        <changelog><![CDATA[2.1.2
+- New factory presets: the default presets of the web version
+  (TT-Groove, TT-BigBoy, TT-HiImTom!, TT-OffbeatBaby, TT-GoodStart,
+  INIT); each one loads its sound AND its four pattern banks A-D
+  (replaces INIT, DEEP, SQUELCH, SCREAM, HOOVER and DUB)
+- Fixed: dragging quickly across the keyboard could leave a note
+  hanging
+- Fixed: the LO and HI handles of an effect EQ could not be separated
+  when they sat on top of each other
+- Fixed: value labels under the sequencer knobs and the EQ strips
+  keep their spacing at large UI sizes; the keyboard tooltip fits
+  the window
+2.1.0
+- The keyboard in HOST mode is playable: click a key to play it, click
+  lower on the key to play harder (accent from ACCENT VEL), drag to
+  another key to slide
+- SLIDE moved from the effects row into the SYNTHESIZER panel (nine
+  knob columns); REVERB keeps MIX and SIZE
+- CUTOFF, RESONANCE, ENV MOD and VOLUME are smoothed (5 ms): no zipper
+  noise when turning a knob with the mouse; a static sound is unchanged
+- MIDI CC takes effect at its sample position instead of the next block
+- AUTO FIT: the UI zoom follows the size of the FX window again
+  (switchable in OPTIONS)
+- Fixed: user presets lost DISTORTION ON/OFF (presets saved with 2.0.0
+  load it as OFF); the reverb bypass could be corrupted while the SEQ
+  front was open; the filter did not follow the resonance at the cutoff
+  ceiling; the changed-star of the preset bar was lost after loading a
+  project
+2.0.0
+- First ReaPack release since 1.07. Renumbered from 1.5.0: ReaPack reads 1.07 as 1.7,
+  so 1.5.0 would not be offered as an update. Includes all changes listed below.
+1.5.0
+- HOST mode aligned further with the Devil Fish MIDI In: note stack
+  10 deep (oldest falls out), sustain on CC 64 (gate stays on while
+  CC 64 >= 64), accent velocity default 65 with the four Devil Fish
+  thresholds 65/80/100/120 on a DF button; existing projects and
+  presets keep their stored accent velocity
+1.4.1
+- HOST mode as the Devil Fish MIDI In: a note-on for a key that is
+  already on is ignored (no retrigger, no hanging note); the first
+  note-off ends it
+1.4.0
+- HOST mode: an overlapping note of the same pitch was struck again
+  (replaced by 1.4.1)
+1.3.4
+- Persistent UI size and options; larger default, stable colours
+  when zooming
+1.07
+- Sound engine recalibrated against reference recordings; slide time
+  sets the arrival time; hotter distortion and +12 dB output make-up
+  (noticeably louder); several HOST/SEQ fixes]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303%20Acid%20Machine.jsfx</source>
+        <source file="TT-303/tt-303-jsfx-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/tt-303-jsfx-manual.html</source>
+        <source file="TT-303/img/tt-ui-options/303-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-ui-options/303-front.png</source>
+        <source file="TT-303/img/tt-ui-options/303-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-ui-options/303-options.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-midi.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-midi.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-presets.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-save.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-save.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-seq.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-seq.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-sequencer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-sequencer.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-host-mode-keyboard-panel-with-the-playable-keyboard.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-host-mode-keyboard-panel-with-the-playable-keyboard.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp</source>
+        <source file="TT-303/TT-303_manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/TT-303_manual.html</source>
+      </version>
     </reapack>
   </category>
   <category name="Tempo Tools">
-    <reapack name="TT_BPM_Calculator.lua" type="script" desc="BPM2MS2HZ Calculator">
+    <reapack name="TT_BPM_Calculator.lua" type="script" desc="TT-BPM2MS2HZ (note values to milliseconds and Hertz)">
       <metadata>
         <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
 {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
 \widowctrl\hyphauto
 
-{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 BPM2MS2HZ Calculator\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 Wandelt Notenwerte aus dem Projekttempo in Millisekunden und Hertz um - als echtes Werkzeugfenster (ReaImGui) statt Konsolentext.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Tempo folgt standardmaessig dem Projekt; Slider schaltet auf manuelles Tempo, Checkbox zurueck auf Sync.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Klick auf einen Wert kopiert ihn in die Zwischenablage.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab OPTIONS: UI-Schriftgroesse, punktierte/Triolen-Varianten, Wordmark.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Tabs: Notenwerte (1/1 .. 1/32, punktiert, Triolen) und Takte (bis 64).\sa180\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 Benoetigt die ReaPack-Erweiterung "ReaImGui: ReaScript binding for Dear ImGui" (cfillion, im Repo "ReaTeam Extensions").\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-BPM2MS2HZ\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Converts note values at the project tempo into milliseconds and Hertz, in a tool window drawn in the TimTechlor UI kit look (ReaImGui).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The tempo follows the project by default; the slider switches to a manual tempo, FROM PROJECT switches back to sync.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Click any value to copy it to the clipboard.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Tabs: NOTE VALUES (1/1 to 1/32, dotted, triplets) and BARS (1 to 64 bars, selectable time signature).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab OPTIONS: tooltips on/off, AUTO FIT, UI size, font size, dotted and triplet rows, wordmark watermark. All settings are saved.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Manual: bpm2ms2hz-manual.html next to the script.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Requires the ReaPack extension "ReaImGui: ReaScript binding for Dear ImGui" (cfillion, repository "ReaTeam Extensions").\par}
 }
 ]]></description>
       </metadata>
@@ -205,20 +279,37 @@
         <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/11c85427ad2b30cabf09cbdb8ed01ef07305b6ed/Tempo%20Tools/TT_BPM_Calculator.lua</source>
         <source file="TT_Wordmark.png">https://github.com/timtechlor/reapack-TimTechlor/raw/11c85427ad2b30cabf09cbdb8ed01ef07305b6ed/Tempo%20Tools/TT_Wordmark.png</source>
       </version>
+      <version name="1.5.0" author="Tim Techlor" time="2026-10-14T18:20:54Z">
+        <changelog><![CDATA[v1.5.0
+- New name: TT-BPM2MS2HZ (formerly "BPM2MS2HZ Calculator"); file name and saved settings stay the same.
+- New look after the TT UI kit 7: panels, LED switches, tempo slider and value tables drawn like the TimTechlor plugins.
+- Every control has a tooltip; OPTIONS > TOOLTIPS ON / OFF switches them off (saved).
+- NEW: OPTIONS > AUTO FIT ON / OFF (default on): dragging the window edge rescales the UI to the new window size (25 to 400 %); the UI SIZE buttons 100 / 125 / 150 / 200 / 300 % resize the window. Saved.
+- Wide windows show the tempo panel and the table side by side.
+- Mouse wheel over the tempo slider: 1 BPM per step (Shift: 0.1 BPM).
+- Version shown in the window header.]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/TT_BPM_Calculator.lua</source>
+        <source file="TT_Wordmark.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/TT_Wordmark.png</source>
+        <source file="bpm2ms2hz-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/bpm2ms2hz-manual.html</source>
+        <source file="img/bpm2ms2hz/bpm2ms2hz-web-console.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/img/bpm2ms2hz/bpm2ms2hz-web-console.png</source>
+        <source file="img/bpm2ms2hz/tt-bpm2ms2hz-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-front.png</source>
+        <source file="img/bpm2ms2hz/tt-bpm2ms2hz-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-options.png</source>
+        <source file="img/bpm2ms2hz/tt-bpm2ms2hz-wide-bars.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-wide-bars.png</source>
+      </version>
     </reapack>
   </category>
   <category name="Theme Tools">
-    <reapack name="TT_ThemeFontEditor.lua" type="script" desc="TT Theme Font Editor">
+    <reapack name="TT_ThemeFontEditor.lua" type="script" desc="TT-THEMEFONTEDITOR">
       <metadata>
         <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
 {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
 \widowctrl\hyphauto
 
-{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT Theme Font Editor\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-THEMEFONTEDITOR\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Find and change the font sizes of the active REAPER theme.\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Picker: hover over any text in the REAPER window, click or press Shift to lock it. The editor shows which WALTER font (or ini font) is used there.\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Change size, bold and italic; element overrides give single WALTER elements a font of their own.\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Changes are previewed live through a working copy; "Bake theme" writes a new theme {\f1 <Name> (TimTechlor)}. The original theme stays untouched.\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Changes are previewed live through a working copy; "Bake theme" writes a new theme {\f1 <Name> (TimTechlor)} (original untouched) or, if chosen under BAKE TO, back into the original (previous version kept as .bak).\sa180\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Requires ReaImGui (0.10+) and js_ReaScriptAPI (both in ReaTeam Extensions). Manual: TT_ThemeFontEditor_Manual.html next to the script.\par}
 }
 ]]></description>
@@ -229,6 +320,50 @@
 - Draggable splitter between the font list and the element overrides]]></changelog>
         <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/fb92605d112674841822dd6e84a0f4c8641de47a/Theme%20Tools/TT_ThemeFontEditor.lua</source>
         <source file="TT_ThemeFontEditor_Manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/fb92605d112674841822dd6e84a0f4c8641de47a/Theme%20Tools/TT_ThemeFontEditor_Manual.html</source>
+      </version>
+      <version name="1.5.0" author="TimTechlor" time="2026-10-14T18:20:54Z">
+        <changelog><![CDATA[v1.5.0
+- NEW LOOK: panels, buttons, switches and the size slider now follow the TimTechlor UI kit 7.
+- NEW: every control has a tooltip; OPTIONS > TOOLTIPS ON / OFF switches them off (saved).
+- NEW: OPTIONS > AUTO FIT ON / OFF (default on): resizing the window rescales the content to the largest size that fits; the UI SIZE buttons 100 / 125 / 150 / 200 / 300 % set a fixed size until the window changes again. Range 25 to 400 %, saved.
+- NEW NAME: TT Theme Font Editor is now TT-THEMEFONTEDITOR. File name, action and saved settings stay the same.
+- The version is shown next to the name at the top of the window.
+- FIX: BAKE THEME right after the first change now finishes the bake after preparing the working copy (before, only the preview was made).
+- FIX: an incomplete working copy (a file that could not be copied or extracted) is reported and no longer marked as ready.
+- FIX: baking never deletes the previous export first: the old file is moved aside and only replaced once the new one is in place; if that fails, the old export stays.
+- FIX: write errors (e.g. a full disk) are detected; a plain theme is written to a temporary file, checked, and only then replaces the target, so no cut-off theme is left behind.
+- FIX: a missing or unreadable file inside a zipped theme, or a zip write error, stops the bake with "Baking failed: ..." instead of writing an incomplete theme.
+- FIX: selecting a font larger than 48 px (or smaller than 6 px) no longer changes it; at a fixed large UI size the window scrolls instead of cutting off controls.
+- NEW: BAKE TO chooses where BAKE THEME writes: CREATE COPY (default) makes a new theme file "<name> (TimTechlor)" next to the original, numbered "(TimTechlor 2)", "(TimTechlor 3)" ... if that name is taken, and never replaces an existing file; OVERWRITE ORIGINAL writes back into the theme you are editing and keeps its previous version as "<name>.bak". The choice is saved; the status line names the file that was written.
+- FIX: closing the window while the working copy is being prepared or a theme is being baked now stops the job cleanly: files are closed and no half-written theme or temporary file is left behind.
+- FIX: a change right after baking no longer races with the removal of the old working folder (the folder is renamed before it is deleted in the background).]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/TT_ThemeFontEditor.lua</source>
+        <source file="TT_ThemeFontEditor_Manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/TT_ThemeFontEditor_Manual.html</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-all-fonts-every-font-of-the-theme-changed-rows-ma.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-all-fonts-every-font-of-the-theme-changed-rows-ma.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-bake-step-1-start.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-bake-step-1-start.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-bake-step-2-changed-rows.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-bake-step-2-changed-rows.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-bake-step-2-changes.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-bake-step-2-changes.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-bake-step-3-tooltip.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-bake-step-3-tooltip.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-bake-step-4-progress.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-bake-step-4-progress.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-bake-step-5-done.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-bake-step-5-done.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-bake-target-choice.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-bake-target-choice.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-baked-theme-in-reaper.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-baked-theme-in-reaper.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-before-after-mixer-track-name.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-before-after-mixer-track-name.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-before-after-third-element.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-before-after-third-element.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-before-after-track-name.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-before-after-track-name.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-discard-original-again.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-discard-original-again.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-discard-preview-active.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-discard-preview-active.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-edit-with-a-selected-font-size-controls-bold-ital.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-edit-with-a-selected-font-size-controls-bold-ital.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-element-overrides-expanded-and-filtered-to-mcp-fx.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-element-overrides-expanded-and-filtered-to-mcp-fx.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-footer-bake-discard-reload-and-status-line.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-footer-bake-discard-reload-and-status-line.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-hover-on-a-font-row-with-tooltip.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-hover-on-a-font-row-with-tooltip.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-hover-tooltip-on-the-picker-button.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-hover-tooltip-on-the-picker-button.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-hover-tooltip-on-the-size-slider.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-hover-tooltip-on-the-size-slider.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-picker-label-over-the-mixer.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-picker-label-over-the-mixer.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-target-after-locking-a-mixer-fx-list-hit-test-nam.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-target-after-locking-a-mixer-fx-list-hit-test-nam.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-the-main-window-with-a-locked-target-in-target-a.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-the-main-window-with-a-locked-target-in-target-a.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-the-options-popup-with-font-size-table-font-and-d.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-the-options-popup-with-font-size-table-font-and-d.webp</source>
+        <source file="img/tt-theme-font-editor/tt-theme-font-editor-while-the-picker-is-armed-the-row-shows-cancel-pi.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-while-the-picker-is-armed-the-row-shows-cancel-pi.webp</source>
       </version>
     </reapack>
   </category>
