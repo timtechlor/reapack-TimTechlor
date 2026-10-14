@@ -6,8 +6,8 @@
 <title>TT-303 (Web) Manual – Free TB-303 Synth in Your Browser</title>
 <meta name="description" content="User manual for TT-303 Acid Machine, a free TB-303 style acid bass synth with step sequencer and drum machine that runs in your browser. No install.">
 <meta name="tt-doc-name" content="TT-303 (Web)">
-<meta name="tt-doc-version" content="1.07">
-<meta name="tt-doc-date" content="2026-10-03">
+<meta name="tt-doc-version" content="2.1.0">
+<meta name="tt-doc-date" content="2026-10-10">
 <link rel="canonical" href="https://timtechlor.de/docs/TT-303_manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-303 (Web) — User Manual">
-<meta property="article:modified_time" content="2026-10-03">
+<meta property="article:modified_time" content="2026-10-10">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-303 (Web) Manual – Free TB-303 Synth in Your Browser">
@@ -45,8 +45,8 @@
    "description": "User manual for TT-303 Acid Machine, a free TB-303 style acid bass synth with step sequencer and drum machine that runs in your browser. No install.",
    "url": "https://timtechlor.de/docs/TT-303_manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/TT-303_manual.html",
-   "datePublished": "2026-10-03",
-   "dateModified": "2026-10-03",
+   "datePublished": "2026-10-10",
+   "dateModified": "2026-10-10",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-303-acid-machine.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "TB-303 online, acid synth browser, free 303 emulation, acid bassline, web synthesizer, step sequencer, Web Audio synth, acid techno",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/TT-303_manual.html#software" },
-   "version": "1.07"
+   "version": "2.1.0"
   },
   {
    "@type": "WebApplication",
@@ -62,7 +62,7 @@
    "name": "TT-303 (Web)",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Any (modern web browser)",
-   "softwareVersion": "1.07",
+   "softwareVersion": "2.1.0",
    "description": "Free browser-based TB-303 style acid bass synthesizer with 16-step sequencer, FX and drum machine.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,7 +228,7 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303 (Web)</span></nav>
       <div class="wordmark" style="--wm-n:6" role="img" aria-label="TT-303 (Web)">TT-303</div>
       <h1>TT-303 (Web) — User Manual</h1>
-      <div class="meta">Browser app (Web Audio) // Version 1.07 // TimTechlor</div>
+      <div class="meta">Browser app (Web Audio) // Version 2.1.0 // TimTechlor</div>
       <p class="lead">TT-303 Acid Machine is a free acid bass synthesizer in the style of the Roland TB-303 that runs in your browser: the synth with accent and slide, a 16-step sequencer with four pattern banks, drive, delay, reverb and compressor, and a small companion drum machine. Nothing to install &mdash; open the app at <a href="https://timtechlor.de/tt-303/">timtechlor.de/tt-303</a>.</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg" aria-label="Enlarge screenshot of the TT-303 (Web) user interface" title="Click to enlarge"><img src="img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg" width="1018" height="745" alt="TT-303 (Web) user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -242,7 +242,7 @@ nav.crumbs [aria-current] { color: var(--white); }
 <li><a href="#getting-started"><span class="num">02</span><span>Getting Started</span></a></li>
 <li><a href="#two-modes-host-and-seq"><span class="num">03</span><span>Two Modes: HOST and SEQ</span></a></li>
 <li><a href="#the-synth-panel"><span class="num">04</span><span>The SYNTH Panel</span></a></li>
-<li><a href="#presets-six-starting-points"><span class="num">05</span><span>Presets — Six Starting Points</span></a></li>
+<li><a href="#factory-presets"><span class="num">05</span><span>Factory Presets</span></a></li>
 <li><a href="#the-fx-panel"><span class="num">06</span><span>The FX Panel</span></a></li>
 <li><a href="#the-sequencer-seq-panel"><span class="num">07</span><span>The Sequencer (SEQ Panel)</span></a></li>
 <li><a href="#playing-live-in-host-mode"><span class="num">08</span><span>Playing Live in HOST Mode</span></a></li>
@@ -251,39 +251,43 @@ nav.crumbs [aria-current] { color: var(--white); }
 <li><a href="#saving-loading-and-transferring-presets"><span class="num">11</span><span>Saving, Loading and Transferring Presets</span></a></li>
 <li><a href="#exporting-audio-and-midi"><span class="num">12</span><span>Exporting Audio and MIDI</span></a></li>
 <li><a href="#tips-troubleshooting"><span class="num">13</span><span>Tips &amp; Troubleshooting</span></a></li>
+<li><a href="#release-notes"><span class="num">14</span><span>Release Notes</span></a></li>
     </ol>
   </nav>
   <main>
 <h2 id="introduction"><span class="num">01</span>Introduction</h2>
 <p>TT-303 Acid Machine is a browser-based recreation of the Roland TB-303, the single-oscillator bassline synthesizer whose squelchy, sliding lines defined the acid house sound. Alongside the faithful synth engine and its step sequencer, the app includes a small companion drum machine, so a complete acid groove can come together in a single browser tab.</p>
+<p>The synth engine and the front are the same code as the <a href="tt-303-jsfx-manual.html">TT-303 JSFX plug-in for REAPER</a> (version 2.1.0): the browser app is generated from the plug-in's source, so a sound set up here behaves like the plug-in. What the browser adds is the transport bar, the preset library, the exports, Web MIDI and the drum machine.</p>
 <p>Everything runs locally. The audio engine is built on the Web Audio API and an AudioWorklet, there is nothing to install, nothing is uploaded to a server, and all of your patterns and presets are stored in the browser's localStorage on your own device.</p>
 <p>To use the app you need a current version of a modern browser (Chrome, Edge or Firefox) and a working audio output — speakers or headphones. Because browsers block audio until you interact with a page, the app opens behind a start overlay. One click on it unlocks the audio engine; until you do that, the app stays silent.</p>
 <figure>
-  <img fetchpriority="high" width="1018" height="745" src="img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg" alt="The full TT-303 Acid Machine interface, showing the transport bar, SYNTH and FX panels, sequencer and drum machine side panel">
-  <figcaption>The full interface: transport bar (top), SYNTH and FX panels, the sequencer, and the drum machine on the right.</figcaption>
+  <img fetchpriority="high" width="1018" height="719" src="img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg" alt="The full TT-303 Acid Machine interface, showing the transport bar, SYNTHESIZER and FX panels, oscilloscope, sequencer and drum machine side panel">
+  <figcaption>The full interface: transport bar (top), SYNTHESIZER and FX panels, oscilloscope, sequencer and the drum machine on the right.</figcaption>
 </figure>
 <h2 id="getting-started"><span class="num">02</span>Getting Started</h2>
 <p>Click the start button on the overlay. The interface appears with the transport bar along the top. Press the play button — or simply hit the spacebar — to start playback, and press it again to stop.</p>
 <p>The tempo is set in the BPM field in the transport bar. It accepts values from 40 to 300 BPM; click the field, type a number, and the running pattern follows immediately. The sequencer and the drum machine both lock to this tempo, so one BPM value drives the whole groove.</p>
 <figure>
-  <img decoding="async" loading="lazy" width="1568" height="39" src="img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp" alt="Transport bar with play button, BPM field, preset controls, WAV/MIDI export buttons and the MIDI output dropdown">
+  <img decoding="async" loading="lazy" width="1568" height="48" src="img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp" alt="Transport bar with play button, BPM field, preset controls, WAV/MIDI export buttons and the MIDI output dropdown">
   <figcaption>The transport bar: play/BPM on the left, preset management, export, and MIDI I/O on the right.</figcaption>
 </figure>
 <h2 id="two-modes-host-and-seq"><span class="num">03</span>Two Modes: HOST and SEQ</h2>
 <p>The app has two fundamentally different ways of making sound, selected with the HOST/SEQ switch in the header.</p>
-<p>In <strong>HOST mode</strong>, the app behaves like a regular MIDI instrument. Notes come from you — played on the computer keyboard or on an external MIDI keyboard — and the 303 voice responds directly, just as if it were a hardware module. The internal sequencer does not drive the synth in this mode. Use HOST mode to jam, to audition sounds while you tweak the knobs, or to play the app from a controller or a DAW.</p>
+<p>In <strong>HOST mode</strong>, the app behaves like a regular MIDI instrument. Notes come from you — played with the mouse on the on-screen keyboard, on the computer keyboard or on an external MIDI keyboard — and the 303 voice responds directly, just as if it were a hardware module. The internal sequencer does not drive the synth in this mode. Use HOST mode to jam, to audition sounds while you tweak the knobs, or to play the app from a controller or a DAW.</p>
 <p>In <strong>SEQ mode</strong>, the built-in step sequencer takes over. It plays the currently loaded pattern in a loop, in classic 303 fashion, while you shape the sound with the filter and effects. Pattern editing — notes, accents, slides — also happens here.</p>
 <figure>
-  <img decoding="async" loading="lazy" width="1354" height="98" src="img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp" alt="Header showing the TT-303 logo, the ACCENT indicator, the MIDI THRU switch and the HOST/SEQ mode switch">
+  <img decoding="async" loading="lazy" width="1354" height="100" src="img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp" alt="Header showing the TT-303 logo, the ACCENT indicator, the MIDI THRU switch and the HOST/SEQ mode switch">
   <figcaption>The header: ACCENT indicator, MIDI THRU switch, and the HOST/SEQ mode switch on the right (SEQ is active here).</figcaption>
 </figure>
-<h2 id="the-synth-panel"><span class="num">04</span>The SYNTH Panel</h2>
-<p>The SYNTH panel holds the sound-shaping controls of the 303 voice. Most parameters are rotary knobs; the waveform is a two-position switch rather than a knob.</p>
+<h2 id="the-synth-panel"><span class="num">04</span>The SYNTHESIZER Panel</h2>
+<p>The SYNTHESIZER panel holds the sound-shaping controls of the 303 voice: nine rotary knobs in one row, the waveform switch and, in HOST mode, the accent velocity threshold.</p>
 <figure>
-  <img decoding="async" loading="lazy" width="1354" height="220" src="img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp" alt="SYNTH panel with the eight sound-shaping knobs, the six preset buttons and the waveform switch">
-  <figcaption>The SYNTH panel: Tuning, Fine, Cutoff Freq, Resonance, Env Mod, Decay, Accent and Volume, plus the six presets (INIT, DEEP, SQCH, SCRM, HOOV, DUB) and the SAW/SQUARE waveform switch.</figcaption>
+  <img decoding="async" loading="lazy" width="1354" height="230" src="img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp" alt="SYNTHESIZER panel with the nine knobs TUNING, FINE, SLIDE, CUTOFF FREQ, RESONANCE, ENV MOD, DECAY, ACCENT and VOLUME with value read-outs, and the SAW / SQUARE waveform switch">
+  <figcaption>The SYNTHESIZER panel: Tuning, Fine, Slide, Cutoff Freq, Resonance, Env Mod, Decay, Accent and Volume with their value read-outs, and the SAW/SQUARE waveform switch.</figcaption>
 </figure>
-<table><thead><tr><th>Control</th><th>Range</th><th>What it does</th></tr></thead><tbody><tr><td>Waveform</td><td>Sawtooth / Square</td><td>Selects the oscillator shape. Sawtooth is the brighter, more aggressive 303 staple; square is hollower and rounder.</td></tr><tr><td>Tuning</td><td>−24…+24 semitones</td><td>Coarse pitch offset, up to two octaves in either direction.</td></tr><tr><td>Fine</td><td>−50…+50 cents</td><td>Fine pitch adjustment for detuning against other instruments.</td></tr><tr><td>Cutoff Freq</td><td>0–100</td><td>Cutoff frequency of the classic 303-style lowpass filter. The single most performance-critical knob on the panel.</td></tr><tr><td>Resonance</td><td>0–100</td><td>Emphasis at the cutoff frequency — the nasal, whistling peak that makes the filter "squelch".</td></tr><tr><td>Env Mod</td><td>0–100</td><td>How strongly the note envelope sweeps the filter cutoff. This is the essence of the acid sound: each note opens the filter, then it falls shut.</td></tr><tr><td>Decay</td><td>0–100</td><td>How quickly the envelope (and the note) fades out. Short values give tight, percussive blips; long values let notes ring.</td></tr><tr><td>Accent</td><td>0–100</td><td>Intensity of the accent effect applied to accented steps — a louder, sharper, more filter-open hit.</td></tr><tr><td>Volume</td><td>0–100</td><td>Output level of the 303 voice.</td></tr><tr><td>Accent velocity threshold</td><td>1–127</td><td>Incoming MIDI velocity at or above which a note is treated as accented. Relevant when playing live in HOST mode.</td></tr><tr><td>Slide time</td><td>0–300 ms</td><td>Duration of the portamento glide between notes that are tied together with a slide.</td></tr></tbody></table>
+<table><thead><tr><th>Control</th><th>Range</th><th>What it does</th></tr></thead><tbody><tr><td>Waveform</td><td>Sawtooth / Square</td><td>Selects the oscillator shape. Sawtooth is the brighter, more aggressive 303 staple; square is hollower and rounder.</td></tr><tr><td>Tuning</td><td>−24…+24 semitones</td><td>Coarse pitch offset, up to two octaves in either direction.</td></tr><tr><td>Fine</td><td>−50…+50 cents</td><td>Fine pitch adjustment for detuning against other instruments.</td></tr><tr><td>Cutoff Freq</td><td>0–100</td><td>Cutoff frequency of the classic 303-style lowpass filter. The single most performance-critical knob on the panel.</td></tr><tr><td>Resonance</td><td>0–100</td><td>Emphasis at the cutoff frequency — the nasal, whistling peak that makes the filter "squelch".</td></tr><tr><td>Env Mod</td><td>0–100</td><td>How strongly the note envelope sweeps the filter cutoff. This is the essence of the acid sound: each note opens the filter, then it falls shut.</td></tr><tr><td>Decay</td><td>0–100</td><td>How quickly the envelope (and the note) fades out. Short values give tight, percussive blips; long values let notes ring.</td></tr><tr><td>Accent</td><td>0–100</td><td>Intensity of the accent effect applied to accented steps — a louder, sharper, more filter-open hit.</td></tr><tr><td>Volume</td><td>0–100</td><td>Output level of the 303 voice.</td></tr><tr><td>Accent velocity threshold</td><td>1–127</td><td>Incoming MIDI velocity at or above which a note is treated as accented. Relevant when playing live in HOST mode.</td></tr><tr><td>Slide</td><td>0–300 ms</td><td>Duration of the portamento glide between notes that are tied together with a slide (SLIDE knob, between FINE and CUTOFF FREQ).</td></tr></tbody></table>
+<p>The accent velocity threshold (ACCENT VEL, right of the knobs) is only shown in HOST mode. The <strong>−</strong> and <strong>+</strong> buttons change it by one; <strong>DF</strong> steps through 65, 80, 100 and 120, the four thresholds of the Devil Fish MIDI input.</p>
+<p>Knobs that are turned with the mouse are smoothed over a few milliseconds (CUTOFF FREQ, RESONANCE, ENV MOD and VOLUME), so fast moves do not produce zipper noise.</p>
 <h3>Working with the knobs</h3>
 <p>All knobs share the same interaction model:</p>
 <ul>
@@ -292,12 +296,13 @@ nav.crumbs [aria-current] { color: var(--white); }
 <li><strong>Scroll the mouse wheel</strong> over a knob to step the value in roughly 2% increments.</li>
 <li><strong>Right-click or double-click</strong> a knob to reset it to its default value.</li>
 </ul>
-<h2 id="presets-six-starting-points"><span class="num">05</span>Presets — Six Starting Points</h2>
-<p>The six buttons above the knobs — <strong>INIT</strong>, <strong>DEEP</strong>, <strong>SQCH</strong>, <strong>SCRM</strong>, <strong>HOOV</strong> and <strong>DUB</strong> — load built-in factory sounds instantly. They are starting points: pick the one closest to what you hear in your head, then adjust the knobs from there. Loading one never locks anything — every control remains fully editable, and your adjusted result can be stored as a user preset (see the preset section further below).</p>
+<h2 id="factory-presets"><span class="num">05</span>Factory Presets</h2>
+<p>The preset dropdown in the transport bar offers <strong>INIT</strong> and five complete factory sounds with a pattern each: <strong>TT-BigBoy</strong>, <strong>TT-GoodStart</strong>, <strong>TT-Groove</strong>, <strong>TT-HiImTom!</strong> and <strong>TT-OffbeatBaby</strong>. Selecting one loads it instantly, including the pattern and the tempo. They are starting points: pick the one closest to what you hear in your head, then adjust the knobs from there. Nothing is locked — every control stays fully editable, and your adjusted result can be stored as a user preset (see the preset section further below).</p>
+<p>The factory presets were made for the earlier engine of this app; with the 2.1.0 engine (3-pole 18 dB ladder filter as in the plug-in) they sound close but not identical, so treat them as a fresh starting point.</p>
 <h2 id="the-fx-panel"><span class="num">06</span>The FX Panel</h2>
 <p>The FX panel contains a chain of four processors that the 303 signal passes through. Each can be toggled on or off independently.</p>
 <figure>
-  <img decoding="async" loading="lazy" width="1354" height="229" src="img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp" alt="FX panel with Drive, Delay, Reverb and Compressor sections, each with its own controls and a 2-band EQ frequency display">
+  <img decoding="async" loading="lazy" width="1354" height="243" src="img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp" alt="FX panel with Drive, Delay, Reverb and Compressor sections, each with its own controls and a 2-band EQ frequency display">
   <figcaption>The FX panel: Drive (model + amount + EQ), Delay (division + mix + feedback + EQ), Reverb (mix + size + EQ) and Compressor (mix). The green bar under each EQ is the frequency band that passes through.</figcaption>
 </figure>
 <h3>Drive</h3>
@@ -313,7 +318,7 @@ nav.crumbs [aria-current] { color: var(--white); }
 <h2 id="the-sequencer-seq-panel"><span class="num">07</span>The Sequencer (SEQ Panel)</h2>
 <p>The sequencer panel is only visible and active in SEQ mode. It is a 16-step sequencer in the spirit of the original, extended with pattern banks and editing tools.</p>
 <figure>
-  <img decoding="async" loading="lazy" width="1354" height="375" src="img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp" alt="Sequencer panel with pattern banks A to D, the note lane above the step grid, and the GATE/ACC/SLD rows below it">
+  <img decoding="async" loading="lazy" width="1354" height="388" src="img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp" alt="Sequencer panel with pattern banks A to D, the note lane above the step grid, and the GATE/ACC/SLD rows below it">
   <figcaption>The SEQ panel: banks A–D, LEN/SHUF/GATE knobs, the note lane, and the GATE/ACC/SLD rows for each of the 16 steps.</figcaption>
 </figure>
 <h3>Pattern banks and playback controls</h3>
@@ -344,18 +349,23 @@ nav.crumbs [aria-current] { color: var(--white); }
 <li><strong>UNDO</strong> — reverts the last editing action, so experimenting with RND, MUT or CLEAR is safe.</li>
 </ul>
 <h2 id="playing-live-in-host-mode"><span class="num">08</span>Playing Live in HOST Mode</h2>
-<p>In HOST mode the computer keyboard becomes a two-octave piano. The mapping follows the German keyboard layout:</p>
+<p>In HOST mode the bottom panel shows a three-octave keyboard (C1 to C4). <strong>Click a key to play it.</strong> Where you click sets the velocity: near the top of a key the note is soft, near the bottom it is hard, so a click low on the key reaches the accent threshold. <strong>Drag to another key</strong> while the button is held and the new note overlaps the old one: a slide. Releasing the button ends the note. The keys also light for notes from the computer keyboard and from MIDI.</p>
+<figure>
+  <img decoding="async" loading="lazy" width="1354" height="388" src="img/tt-303-acid-machine/tt-303-acid-machine-host-mode-keyboard-panel-with-the-playable-keyboard.webp" alt="The KEYBOARD / MIDI INPUT panel in HOST mode with a playable keyboard from C1 to C4 and the key C2 lit">
+  <figcaption>HOST mode: the keyboard panel. The lit key is being held; HELD counts the notes in the ten-note stack.</figcaption>
+</figure>
+<p>In HOST mode the computer keyboard becomes a two-octave piano as well. The mapping follows the physical key positions (the app shows your own layout in the hint line at the bottom):</p>
 <ul>
 <li><strong>Lower octave</strong>: <code>Y S X D C V G B H N J M</code> — the letter keys are the white keys, the keys between them are the black keys.</li>
 <li><strong>Upper octave</strong>: <code>Q 2 W 3 E R 5 T 6 Z 7 U I 9 O 0 P</code> — the same piano-style arrangement one octave up.</li>
 <li><strong>Arrow keys Up/Down</strong>: shift the keyboard range by octave.</li>
 <li><strong>Shift or Ctrl while striking a key</strong>: plays the note accented — equivalent to hitting it with a velocity above the accent threshold.</li>
-<li><strong>Right-click on the on-screen keyboard</strong>: gate/reset.</li>
 </ul>
+<p>The voice follows the Devil Fish MIDI input: velocities at or above ACCENT VEL are accents, overlapping notes of different pitch are slides, the last note wins from a stack of ten, a second note-on of a key that is already sounding is ignored, and the sustain controller (CC 64) keeps the gate on.</p>
 <p>You can also plug in an external MIDI keyboard; the app uses the Web MIDI API to receive notes directly. The <strong>THRU</strong> switch forwards incoming MIDI notes to the selected MIDI output, so the app can sit inside a larger MIDI chain instead of terminating it.</p>
 <h2 id="midi-output"><span class="num">09</span>MIDI Output</h2>
 <figure>
-  <img decoding="async" loading="lazy" width="1568" height="39" src="img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp" alt="Transport bar detail highlighting the MIDI IN/OUT status and the OUT dropdown on the right">
+  <img decoding="async" loading="lazy" width="1568" height="48" src="img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp" alt="Transport bar detail highlighting the MIDI IN/OUT status and the OUT dropdown on the right">
   <figcaption>The MIDI status and the OUT dropdown live at the right end of the transport bar (here: 1 IN / 1 OUT connected, output set to "off").</figcaption>
 </figure>
 <p>The <strong>OUT</strong> dropdown in the transport bar selects an external MIDI destination — for example a hardware synthesizer on a USB/MIDI interface, or a DAW reached through a virtual MIDI bridge such as loopMIDI. The default setting is <strong>off</strong>, in which case nothing is sent.</p>
@@ -369,7 +379,7 @@ nav.crumbs [aria-current] { color: var(--white); }
 <p>Next to the 303 panel sits a small, self-contained drum machine. A dropdown selects the drum kit, and each sound in the kit has its own row with an on/off LED and a volume slider, so you can mute individual instruments and balance the kit against the bassline.</p>
 <p>The drum machine runs independently of the 303 sequencer — it has its own pattern life — but it is locked to the same transport and the same BPM. Press play once and both start together in sync.</p>
 <figure>
-  <img decoding="async" loading="lazy" width="236" height="400" src="img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp" alt="Drum machine panel with the kit dropdown and one row per drum sound, each with an on/off LED and a volume slider">
+  <img decoding="async" loading="lazy" width="236" height="397" src="img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp" alt="Drum machine panel with the kit dropdown and one row per drum sound, each with an on/off LED and a volume slider">
   <figcaption>The drum machine panel: kit selector on top, one row per sound with its on/off LED and volume slider.</figcaption>
 </figure>
 <h2 id="saving-loading-and-transferring-presets"><span class="num">11</span>Saving, Loading and Transferring Presets</h2>
@@ -394,11 +404,21 @@ nav.crumbs [aria-current] { color: var(--white); }
 <p><strong>Your MIDI device doesn't appear in the OUT dropdown?</strong> Confirm the browser supports Web MIDI and that you accepted the permission prompt. If the device was connected after the page loaded, or the permission state is unclear, restart the browser and reconnect the device.</p>
 <p><strong>Presets or settings disappeared after a browser reinstall, or they don't show up on your other computer?</strong> That is expected: localStorage is per browser and per device. Always export with ⇓ ALL before reinstalling, and use the exported file to move your library between machines.</p>
 <p><strong>The pattern sounds different from what you exported?</strong> Remember that the WAV render covers the 303 voice only. If you need the drums as audio, record the app output in real time instead of using the offline WAV export.</p>
+<h2 id="release-notes"><span class="num">14</span>Release Notes</h2>
+<h3>v2.1.0 &mdash; 2026-10-10</h3>
+<ul>
+<li><strong>New engine and front.</strong> The browser app is now generated from the TT-303 JSFX 2.1.0, the plug-in for REAPER. The synth voice is the plug-in's 3-pole 18 dB ladder filter with level-dependent resonance, the accent and slide circuits, the Devil Fish HOST input and the 5 ms smoothing of the main knobs. Up to version 1.07 the app used an earlier engine.</li>
+<li><strong>Playable keyboard</strong> in HOST mode: click to play, click height sets the velocity, drag to slide.</li>
+<li><strong>SLIDE</strong> sits in the SYNTHESIZER panel next to FINE (it was in the REVERB column). The panel has nine knobs now; ACCENT VEL with the DF button appears in HOST mode.</li>
+<li><strong>Sound changes:</strong> the filter and the level are not the same as in 1.07. The app output is raised so that the level stays close to the earlier version. With DRIVE off the signal is now exactly the dry voice, so switching DRIVE on is a step up in level, as in the plug-in.</li>
+<li>Saved sessions, presets and share links of earlier versions still load; they keep their parameter values and sound a little different because of the new engine.</li>
+<li>MIDI controllers (CC 74, 71, 73, 75, 16, 7) now move the knobs on the front.</li>
+</ul>
   
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-303 (Web) v1.07</b> — Browser app (Web Audio) · Tim Techlor design series<br> Manual revision 1.07 · Runs locally in the browser, nothing to install, nothing uploaded</div>
+  <div class="wrap"><b>TT-303 (Web) v2.1.0</b> — Browser app (Web Audio) · Tim Techlor design series<br> Manual revision 2.1.0 · Runs locally in the browser, nothing to install, nothing uploaded</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

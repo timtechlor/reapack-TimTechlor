@@ -6,8 +6,8 @@
 <title>TT-303 (JSFX) Manual – Acid Bass Synthesizer in the Style of the TB-303 for REAPER</title>
 <meta name="description" content="Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.">
 <meta name="tt-doc-name" content="TT-303 (JSFX)">
-<meta name="tt-doc-version" content="2.1.0">
-<meta name="tt-doc-date" content="2026-10-10">
+<meta name="tt-doc-version" content="2.1.2">
+<meta name="tt-doc-date" content="2026-10-14">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-303-jsfx-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-303 (JSFX) — User Manual">
-<meta property="article:modified_time" content="2026-10-10">
+<meta property="article:modified_time" content="2026-10-14">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-303 (JSFX) Manual – Acid Bass Synthesizer for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.",
    "url": "https://timtechlor.de/docs/tt-303-jsfx-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-303-jsfx-manual.html",
-   "datePublished": "2026-10-10",
-   "dateModified": "2026-10-10",
+   "datePublished": "2026-10-14",
+   "dateModified": "2026-10-14",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-303-jsfx.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "TB-303 JSFX, acid bass synthesizer REAPER, 303 clone plug-in, acid sequencer, slide and accent, ladder filter 18 dB, free REAPER synth, JSFX instrument",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-303-jsfx-manual.html#software" },
-   "version": "2.1.0"
+   "version": "2.1.2"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-303 (JSFX)",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "2.1.0",
+   "softwareVersion": "2.1.2",
    "description": "Free JSFX instrument for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 (tribute model, no samples) with slide and accent, a 3-pole 18 dB ladder filter, drive, ping-pong delay, reverb, compressor, an internal 16-step sequencer with four banks, a preset bar with a 32-slot user bank and ten colour schemes.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,7 +228,7 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303 (JSFX)</span></nav>
       <div class="wordmark" style="--wm-n:6" role="img" aria-label="TT-303 (JSFX)">TT-303</div>
       <h1>TT-303 (JSFX) — User Manual</h1>
-      <div class="meta">JSFX plug-in for REAPER // Version 2.1.0 // TimTechlor</div>
+      <div class="meta">JSFX plug-in for REAPER // Version 2.1.2 // TimTechlor</div>
       <p class="lead">TT-303 is a monophonic acid bass synthesizer in the style of the Roland TB-303 &mdash; a tribute model, no samples: one oscillator, an 18 dB ladder filter that squeals, the accent and slide circuits that make a 303 line move, and a chain of drive, ping-pong delay, reverb and compressor behind it. Play it from the piano roll (HOST) or let the built-in 16-step sequencer with four pattern banks run on the project timeline (SEQ).</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-ui-options/303-front.png" aria-label="Enlarge screenshot of the TT-303 (JSFX) user interface" title="Click to enlarge"><img src="img/tt-ui-options/303-front.png" width="1142" height="920" alt="TT-303 (JSFX) user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -275,7 +275,7 @@ the two circuits that give the original its character: <b>accent</b> and <b>slid
 play it from the outside; in <b>SEQ</b> mode an internal 16-step sequencer with four banks A&ndash;D
 plays the notes itself. The whole front is drawn by the plug-in, uses the UI SIZE setting in OPTIONS, and every
 control can be automated.</p>
-<figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current suite front at 125% UI size, version 2.1.0"><figcaption>Current front in v2.1.0, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current suite front at 125% UI size, version 2.1.2"><figcaption>Current front in v2.1.2, at the default UI size of 125%.</figcaption></figure>
 <div class="box" data-k="Not the web app">There is also a browser version of the TT-303 with its own manual (<a href="TT-303_manual.html">TT-303 (Web)</a>).
 This manual describes the REAPER plug-in only &mdash; the JSFX has no drum machine and no export buttons (REAPER renders the audio), and its tempo is always the project tempo.</div>
 
@@ -302,7 +302,7 @@ measures which fonts exist and falls back by itself.</p>
       <b>Overlapping notes slide</b>, a note with <b>velocity &ge; 65 is an accent</b> (the threshold is adjustable).</li>
   <li>Shape the sound with <b>CUTOFF FREQ</b>, <b>RESONANCE</b>, <b>ENV MOD</b> and <b>DECAY</b> (the four knobs that
       make the acid sound) and <b>ACCENT</b>. Pick a starting point from the <b>preset bar</b> in the header
-      (INIT, DEEP, SQUELCH, SCREAM, HOOVER, DUB).</li>
+      (INIT, TT-Groove, TT-BigBoy, TT-HiImTom!, TT-OffbeatBaby, TT-GoodStart).</li>
   <li>Want a pattern without MIDI? Switch the <b>MODE</b> (top right) to <b>SEQ</b> and press play: the 16-step sequencer
       below the effects panel plays the start pattern of bank A on the project timeline. <b>FREE RUN</b> lets it run while
       the transport is stopped.</li>
@@ -503,7 +503,7 @@ the script <code>tt303_pattern_to_midi.lua</code> does exactly that (accent = ve
 
 <h2 id="presets"><span class="num">14</span>Preset bar &amp; user bank</h2>
 <p>The preset bar sits in the header, directly left of <b>OPTIONS</b>: <code>&lt; name &gt; SAVE ...</code>. It replaces the six patch buttons of earlier versions.</p>
-<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-presets.png" alt="The preset bar with its dropdown open: the FACTORY section with INIT, DEEP, SQUELCH, SCREAM, HOOVER and DUB and the USER section with empty slots" width="583" height="315"><figcaption><span class="tag">PRESETS</span><b>Preset bar with the list open.</b> Click the name to open the list; FACTORY first, then the 32 USER slots (empty ones read <code>- empty -</code>). The mouse wheel scrolls, a click loads.</figcaption></figure>
+<figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-presets.png" alt="The preset bar with its dropdown open: the FACTORY section with INIT, TT-Groove, TT-BigBoy, TT-HiImTom!, TT-OffbeatBaby and TT-GoodStart and the USER section with empty slots" width="583" height="315"><figcaption><span class="tag">PRESETS</span><b>Preset bar with the list open.</b> Click the name to open the list; FACTORY first, then the 32 USER slots (empty ones read <code>- empty -</code>). The mouse wheel scrolls, a click loads.</figcaption></figure>
 <table>
   <tr><th>Control</th><th>Function</th></tr>
   <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: first the six factory presets, then the used user slots; wraps around and loads immediately.</td></tr>
@@ -513,15 +513,15 @@ the script <code>tt303_pattern_to_midi.lua</code> does exactly that (accent = ve
 </table>
 <figure class="shot"><img src="img/tt-303-jsfx/tt-303-jsfx-save.png" alt="The SAVE PRESET name box with the default name User 01, OK and CANCEL buttons" width="583" height="169"><figcaption><span class="tag">SAVE</span><b>Naming a preset.</b> The name box opens after SAVE: up to 24 characters, <kbd>Enter</kbd> = OK. REAPER keeps the space bar for the transport, so type <kbd>Shift</kbd>+<kbd>Space</kbd> for a blank.</figcaption></figure>
 <h3>The factory presets</h3>
-<p>The six FACTORY entries are the former patch buttons. A factory preset sets the sound controls listed below and leaves everything else (tuning, fine, volume, accent velocity, slide time, the delay division, the EQs, the compressor, the pattern and its banks) alone &mdash; except <b>INIT</b>, which also restores slide time 60 ms, dotted-eighth delay, room size 70 %, the three EQ strips, compressor ON / 100 %.</p>
+<p>The six FACTORY entries are the default presets of the web version of the TT-303. Unlike a sound-only patch, a factory preset loads the <b>complete state of a user preset</b>: all sound controls listed below, the pattern settings (length, shuffle, gate, active bank) <b>and the four pattern banks A&ndash;D</b>, so loading one replaces the pattern too. Not part of it: the operating mode (HOST / SEQ), FREE RUN, SEQ OUT, MIDI THRU and the tempo (the plug-in follows the host tempo; the web presets were made at 135 BPM). Switch to <b>SEQ</b> to hear the pattern.</p>
 <table>
   <tr><th>Preset</th><th>Wave</th><th>Cutoff</th><th>Reso</th><th>Env</th><th>Decay</th><th>Accent</th><th>Drive</th><th>Delay mix / fb</th><th>Reverb</th></tr>
-  <tr><td>INIT</td><td>SAW</td><td>32</td><td>55</td><td>62</td><td>35</td><td>60</td><td>off, SOFT 8</td><td>15 / 60</td><td>18</td></tr>
-  <tr><td>DEEP</td><td>SAW</td><td>14</td><td>40</td><td>40</td><td>64</td><td>35</td><td>off, SOFT 7</td><td>14 / 50</td><td>16</td></tr>
-  <tr><td>SQUELCH</td><td>SAW</td><td>52</td><td>80</td><td>82</td><td>22</td><td>80</td><td>on, SOFT 8</td><td>16 / 62</td><td>12</td></tr>
-  <tr><td>SCREAM</td><td>SQUARE</td><td>72</td><td>88</td><td>92</td><td>15</td><td>95</td><td>on, HARD 16</td><td>10 / 55</td><td>9</td></tr>
-  <tr><td>HOOVER</td><td>SQUARE</td><td>74</td><td>68</td><td>96</td><td>55</td><td>70</td><td>on, FOLD 11</td><td>20 / 62</td><td>24</td></tr>
-  <tr><td>DUB</td><td>SAW</td><td>18</td><td>52</td><td>44</td><td>82</td><td>50</td><td>off, SOFT 7</td><td>46 / 80</td><td>44</td></tr>
+  <tr><td>INIT</td><td>SAW</td><td>32</td><td>46.6</td><td>26.7</td><td>27.9</td><td>60</td><td>off</td><td>0 / 76</td><td>0</td></tr>
+  <tr><td>TT-Groove</td><td>SQUARE</td><td>0</td><td>100</td><td>0</td><td>0</td><td>100</td><td>on, HARD 24.8</td><td>29.5 / 58</td><td>28.5</td></tr>
+  <tr><td>TT-BigBoy</td><td>SQUARE</td><td>0</td><td>0</td><td>7.1</td><td>0</td><td>57.6</td><td>on, HARD 24.5</td><td>8 / 76</td><td>11</td></tr>
+  <tr><td>TT-HiImTom!</td><td>SQUARE</td><td>0</td><td>0</td><td>45.7</td><td>41.4</td><td>77.5</td><td>on, FOLD 29.5</td><td>5.5 / 76</td><td>11</td></tr>
+  <tr><td>TT-OffbeatBaby</td><td>SQUARE</td><td>57.1</td><td>50.8</td><td>47.8</td><td>36.2</td><td>81</td><td>on, FOLD 32.3</td><td>12 / 77</td><td>28</td></tr>
+  <tr><td>TT-GoodStart</td><td>SAW</td><td>13.1</td><td>55</td><td>62</td><td>35</td><td>60</td><td>on, SOFT 8</td><td>15 / 60</td><td>18</td></tr>
 </table>
 <p>All values are knob positions (0&ndash;100), except drive (1&ndash;40) and feedback (%). They are starting points: every control stays editable.</p>
 <h3>What a user preset contains</h3>
@@ -591,13 +591,13 @@ Since v1.3.3 these commands only run while a test script has unlocked them; othe
 
 <h2 id="practice"><span class="num">17</span>In practice</h2>
 <ul>
-  <li><b>The classic squelch:</b> preset SQUELCH (saw, resonance 80, env mod 82, decay 22, accent 80), then play with CUTOFF FREQ while the pattern runs; set ACC on a few steps and SLD on two or three.</li>
-  <li><b>A bass that sits in the mix:</b> DEEP or DUB with drive off. The delay EQ high cut around 3 kHz and the reverb EQ low cut at 300 Hz (both INIT defaults) keep echoes and tail out of the low end.</li>
+  <li><b>The classic squelch:</b> a preset with a high RESONANCE and ENV MOD and a short DECAY (try TT-Groove in SEQ mode), then play with CUTOFF FREQ while the pattern runs; set ACC on a few steps and SLD on two or three.</li>
+  <li><b>A bass that sits in the mix:</b> a preset with the drive off (INIT, TT-GoodStart). The delay EQ high cut around 3 kHz and the reverb EQ low cut at 300 Hz (both INIT defaults) keep echoes and tail out of the low end.</li>
   <li><b>Dirt without losing the fundamental:</b> DRIVE on, FOLD or FUZZ, and raise the drive EQ <b>low cut</b> (LO) to 150&ndash;300 Hz: the bass stays clean while the mids are distorted.</li>
   <li><b>Play it from MIDI, tie the notes:</b> in HOST mode let notes overlap a little in the piano roll for slides, and use velocity 65+ (the default <code>ACCENT VEL</code>; the <code>DF</code> button offers 65 / 80 / 100 / 120) for accents. Hold the sustain pedal (CC 64) to keep a note sounding after the key is released.</li>
   <li><b>Pattern ideas:</b> press RND until something sticks, then MUT for variations; COPY into the next bank before you go on; UNDO takes back the last RND / MUT / CLEAR.</li>
   <li><b>Songs from banks:</b> put the parts in A&ndash;D and automate <em>SEQ pattern bank</em> (parameter 25).</li>
-  <li><b>With TT-303PATGEN:</b> the TimTechlor pattern generator writes acid patterns as MIDI; insert it <em>before</em> the TT-303, keep the TT-303 in HOST mode and use velocity for accents and overlaps for slides (see the <a href="tt-303patgen-manual.html">TT-303PATGEN manual</a>). TT-303PATGEN 0.5.7 and later send normal steps with NORM VEL 64 and accents with ACC VEL 127, and its THRESH defaults to 65, the default ACCENT VEL of the TT-303: on a new instance of both, accents land exactly on the accent steps. If you raise ACCENT VEL with <code>DF</code>, set THRESH in TT-303PATGEN to the same value.</li>
+  <li><b>With a MIDI pattern generator:</b> insert it <em>before</em> the TT-303, keep the TT-303 in HOST mode and use velocity for accents and overlaps for slides. A generator that sends normal steps with velocity 64 and accents with velocity 127 works on a new instance, because the default ACCENT VEL is 65: accents land exactly on the accent steps. If you raise ACCENT VEL with <code>DF</code>, set the accent threshold of your generator to the same value.</li>
   <li><b>Play the sequence on another synth:</b> SEQ mode, <code>SEQ OUT</code> on, and route the track&rsquo;s MIDI output; turn VOLUME down if the TT-303 itself should stay quiet.</li>
   <li><b>Parallel compression:</b> COMP at 40&ndash;60 % mix keeps the accents lively while adding body. With COMP off, raise VOLUME to make up the roughly 5 dB.</li>
 </ul>
@@ -623,6 +623,17 @@ Since v1.3.3 these commands only run while a test script has unlocked them; othe
 </ul>
 
 <h2 id="notes"><span class="num">19</span>Release notes</h2>
+<h3>v2.1.2 &mdash; 2026-10-14: fixes</h3>
+<ul>
+  <li><b>Keyboard:</b> dragging quickly across the keys could leave a note hanging. The note-off of the previous key now follows at once; the slide stays.</li>
+  <li><b>Effect EQs:</b> when the LO and HI handles sit on top of each other, dragging to the left moves LO again, so the two can always be separated.</li>
+  <li><b>Large UI sizes:</b> the values under the sequencer knobs (LEN, SHUF, GATE) and under the EQ strips keep their spacing at 200 and 300 %.</li>
+  <li>The keyboard tooltip fits the window; the OPTIONS tooltip mentions the UI size.</li>
+</ul>
+<h3>v2.1.1 &mdash; 2026-10-12: new factory presets</h3>
+<ul>
+  <li><b>The factory presets are the default presets of the web version:</b> INIT, TT-Groove, TT-BigBoy, TT-HiImTom!, TT-OffbeatBaby and TT-GoodStart. Each one loads its sound <em>and</em> its four pattern banks A&ndash;D. The former presets DEEP, SQUELCH, SCREAM, HOOVER and DUB are gone; your user presets are not affected.</li>
+</ul>
 <h3>v2.1.0 &mdash; 2026-10-10: playable keyboard, SLIDE in the synthesizer panel, smoother knobs</h3>
 <ul>
   <li><b>The keyboard is playable.</b> In HOST mode a click on a key plays it; the click height sets the velocity (accent from ACCENT VEL), dragging to another key slides. The notes use the same path as MIDI from the piano roll.</li>
@@ -718,7 +729,7 @@ Since v1.3.3 these commands only run while a test script has unlocked them; othe
 </ul>
 <section class="section">
 <h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
-<p>Updated in <b>v2.1.0</b>. New instances open at <b>125%</b> UI size for clearer text.
+<p>Updated in <b>v2.1.2</b>. New instances open at <b>125%</b> UI size for clearer text.
 The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
 <figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
 <p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
@@ -741,7 +752,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-303 (JSFX) v2.1.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 2.1.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-303 (JSFX) v2.1.2</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 2.1.2 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

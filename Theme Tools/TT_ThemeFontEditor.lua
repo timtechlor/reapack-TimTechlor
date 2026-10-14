@@ -1,16 +1,53 @@
--- @description TT Theme Font Editor
+-- @description TT-THEMEFONTEDITOR
 -- @author TimTechlor
--- @version 1.3
+-- @version 1.5.0
 -- @license MIT
 -- @tags theme fonts walter rtconfig imgui
 -- @provides
 --   TT_ThemeFontEditor_Manual.html
+--   img/tt-theme-font-editor/tt-theme-font-editor-all-fonts-every-font-of-the-theme-changed-rows-ma.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-bake-step-1-start.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-bake-step-2-changed-rows.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-bake-step-2-changes.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-bake-step-3-tooltip.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-bake-step-4-progress.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-bake-step-5-done.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-bake-target-choice.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-baked-theme-in-reaper.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-before-after-mixer-track-name.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-before-after-third-element.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-before-after-track-name.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-discard-original-again.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-discard-preview-active.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-edit-with-a-selected-font-size-controls-bold-ital.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-element-overrides-expanded-and-filtered-to-mcp-fx.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-footer-bake-discard-reload-and-status-line.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-hover-on-a-font-row-with-tooltip.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-hover-tooltip-on-the-picker-button.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-hover-tooltip-on-the-size-slider.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-picker-label-over-the-mixer.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-target-after-locking-a-mixer-fx-list-hit-test-nam.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-the-main-window-with-a-locked-target-in-target-a.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-the-options-popup-with-font-size-table-font-and-d.webp
+--   img/tt-theme-font-editor/tt-theme-font-editor-while-the-picker-is-armed-the-row-shows-cancel-pi.webp
 -- @changelog
---   First release via ReaPack.
---   - Element overrides table uses the full remaining window height
---   - Draggable splitter between the font list and the element overrides
+--   v1.5.0
+--   - NEW LOOK: panels, buttons, switches and the size slider now follow the TimTechlor UI kit 7.
+--   - NEW: every control has a tooltip; OPTIONS > TOOLTIPS ON / OFF switches them off (saved).
+--   - NEW: OPTIONS > AUTO FIT ON / OFF (default on): resizing the window rescales the content to the largest size that fits; the UI SIZE buttons 100 / 125 / 150 / 200 / 300 % set a fixed size until the window changes again. Range 25 to 400 %, saved.
+--   - NEW NAME: TT Theme Font Editor is now TT-THEMEFONTEDITOR. File name, action and saved settings stay the same.
+--   - The version is shown next to the name at the top of the window.
+--   - FIX: BAKE THEME right after the first change now finishes the bake after preparing the working copy (before, only the preview was made).
+--   - FIX: an incomplete working copy (a file that could not be copied or extracted) is reported and no longer marked as ready.
+--   - FIX: baking never deletes the previous export first: the old file is moved aside and only replaced once the new one is in place; if that fails, the old export stays.
+--   - FIX: write errors (e.g. a full disk) are detected; a plain theme is written to a temporary file, checked, and only then replaces the target, so no cut-off theme is left behind.
+--   - FIX: a missing or unreadable file inside a zipped theme, or a zip write error, stops the bake with "Baking failed: ..." instead of writing an incomplete theme.
+--   - FIX: selecting a font larger than 48 px (or smaller than 6 px) no longer changes it; at a fixed large UI size the window scrolls instead of cutting off controls.
+--   - NEW: BAKE TO chooses where BAKE THEME writes: CREATE COPY (default) makes a new theme file "<name> (TimTechlor)" next to the original, numbered "(TimTechlor 2)", "(TimTechlor 3)" ... if that name is taken, and never replaces an existing file; OVERWRITE ORIGINAL writes back into the theme you are editing and keeps its previous version as "<name>.bak". The choice is saved; the status line names the file that was written.
+--   - FIX: closing the window while the working copy is being prepared or a theme is being baked now stops the job cleanly: files are closed and no half-written theme or temporary file is left behind.
+--   - FIX: a change right after baking no longer races with the removal of the old working folder (the folder is renamed before it is deleted in the background).
 -- @about
---   # TT Theme Font Editor
+--   # TT-THEMEFONTEDITOR
 --
 --   Find and change the font sizes of the active REAPER theme.
 --
@@ -19,7 +56,8 @@
 --   - Change size, bold and italic; element overrides give single WALTER
 --     elements a font of their own.
 --   - Changes are previewed live through a working copy; "Bake theme" writes a
---     new theme `<Name> (TimTechlor)`. The original theme stays untouched.
+--     new theme `<Name> (TimTechlor)` (original untouched) or, if chosen under
+--     BAKE TO, back into the original (previous version kept as .bak).
 --
 --   Requires ReaImGui (0.10+) and js_ReaScriptAPI (both in ReaTeam Extensions).
 --   Manual: TT_ThemeFontEditor_Manual.html next to the script.
@@ -46,11 +84,14 @@
 -- and scales.
 --
 -- Requires: ReaImGui (0.10+), js_ReaScriptAPI (zip, mouse). REAPER 6.x+.
--- TimTechlor brand design (black/white/acid green, Zilap Orion +
--- Liberation Sans/Mono, circuit traces).
+-- TimTechlor brand design; since 1.5.0 in the look of the TT UI kit 7
+-- (graphite panels, acid green, Inter + Liberation Sans/Mono, circuit
+-- traces), UI SIZE / AUTO FIT / TOOLTIPS in OPTIONS.
+-- Name since 1.5.0: TT-THEMEFONTEDITOR (file name, action and ExtState
+-- namespace unchanged, so saved settings are kept).
 
 local R = reaper
-local VERSION = "1.3"
+local VERSION = "1.5.0"
 local NS = "TT_ThemeFontEditor"
 local EDIT_MARK = " (TT-Edit)"
 local BAKE_MARK = " (TimTechlor)"
@@ -149,10 +190,50 @@ local function read_file(p)
   return d
 end
 
+-- Check the return values of write and close; a full disk
+-- or a write error yields false instead of a silently truncated file
 local function write_file(p, d)
   local f = io.open(p, "wb"); if not f then return false end
-  f:write(d); f:close()
-  return true
+  local okw = f:write(d)
+  local okc = f:close()
+  return (okw ~= nil and okw ~= false) and (okc ~= nil and okc ~= false)
+end
+
+-- Put tmp in place of final without deleting the old file first:
+-- final -> final.bak, tmp -> final, on success delete .bak, otherwise rename .bak back.
+-- Returns true, or false + reason; on an error tmp is left in place (the caller decides about cleanup).
+-- keep: the old file stays as final.bak
+-- (one generation, the next swap replaces it); third return value = path of the backup. REAPER and list_themes
+-- do not show .bak as a theme (extension .ReaperTheme.bak / .ReaperThemeZip.bak).
+-- An already existing .bak (previous generation) is removed only after a successful swap; if
+-- the swap fails, it is put back in its place.
+local function swap_in(tmp, final, keep)
+  local bak = final .. ".bak"
+  local hadOld = file_exists(final)
+  local prev
+  if hadOld then
+    if file_exists(bak) then
+      prev = bak .. ".prev"
+      os.remove(prev)
+      if not os.rename(bak, prev) then return false, "cannot move the old backup aside" end
+    end
+    if not os.rename(final, bak) then
+      if prev then os.rename(prev, bak) end
+      return false, "cannot move the old file aside"
+    end
+  end
+  if os.rename(tmp, final) then
+    if prev then os.remove(prev) end
+    if hadOld and not keep then os.remove(bak) end
+    return true, nil, (hadOld and keep) and bak or nil
+  end
+  if hadOld and not os.rename(bak, final) then
+    -- the source now exists only as .bak, the previous generation as .bak.prev (no room for both under .bak);
+    -- the caller reports this and does not create a fallback copy
+    return false, "rename failed, old file kept as " .. bak   -- split_path is not defined yet here
+  end
+  if prev then os.rename(prev, bak) end
+  return false, "rename failed"
 end
 
 local function file_size(p)
@@ -240,7 +321,11 @@ local function zip_open(p, mode)
   return zh
 end
 
-local function zip_close(p, zh) pcall(R.JS_Zip_Close, p, zh) end
+-- true if closing succeeded (js_ReaScriptAPI: negative number = error)
+local function zip_close(p, zh)
+  local ok, rv = pcall(R.JS_Zip_Close, p, zh)
+  return ok and not (type(rv) == "number" and rv < 0)
+end
 
 local function zip_names(zh)
   local ok, n, names = pcall(R.JS_Zip_ListAllEntries, zh)
@@ -266,10 +351,13 @@ local function zip_read(zh, name)
   return type(data) == "string" and data or nil
 end
 
+-- check every step, returns true/false
 local function zip_write(zh, name, data)
-  R.JS_Zip_Entry_OpenByName(zh, name)
-  R.JS_Zip_Entry_CompressMemory(zh, data, #data)
-  R.JS_Zip_Entry_Close(zh)
+  local function good(ok, rv) return ok and not (type(rv) == "number" and rv < 0) and rv ~= false end
+  if not good(pcall(R.JS_Zip_Entry_OpenByName, zh, name)) then return false end
+  local okc = good(pcall(R.JS_Zip_Entry_CompressMemory, zh, data, #data))
+  local okx = good(pcall(R.JS_Zip_Entry_Close, zh))
+  return okc and okx
 end
 
 -- reads ini + rtconfig; for a zip also the entry names, for a plain theme
@@ -826,10 +914,64 @@ local function workcopy_paths(orig)
   return dir .. stem .. ".ReaperTheme", dir .. stem
 end
 
-local function bake_path(orig, asZip)
+-- Bake target:
+--   "copy"      = new file next to the original "<name> (TimTechlor)"; if the name is already taken (as .ReaperTheme OR
+--                 .ReaperThemeZip, both show the same name in REAPER and share the themeconfig section), consecutively
+--                 "(TimTechlor 2)", "(TimTechlor 3)" ... Never over an existing file.
+--   "overwrite" = back into the source file itself, its previous version is kept as "<file>.bak" (swap_in with keep).
+-- Default "copy": a wrong choice costs at most one extra file, never the original (not even for Default 7.0).
+-- Saved in ExtState bake_target. An unpacked theme with element overrides is always baked as a zip (the
+-- changed rtconfig must be included) -> overwriting is not possible there, a copy is made instead (button locked, tooltip
+-- and status say so); the saved choice stays for the next themes.
+-- Previously the target was always "<name> (TimTechlor)", replacing an existing target and keeping a .bak.
+local function stem_taken(dir, stem)
+  return file_exists(dir .. stem .. ".ReaperTheme") or file_exists(dir .. stem .. ".ReaperThemeZip")
+end
+
+local function copy_path(orig, asZip)
   local dir = split_path(orig)
-  local stem = sanitize(base_stem(orig)) .. BAKE_MARK
+  local base = sanitize(base_stem(orig))
+  local stem, n = base .. BAKE_MARK, 1
+  while stem_taken(dir, stem) and n < 999 do
+    n = n + 1
+    stem = base .. " (TimTechlor " .. n .. ")"
+  end
+  -- even "(TimTechlor 999)" is taken -> no name (the bake stops with a message)
+  if stem_taken(dir, stem) then return nil end
   return dir .. stem .. (asZip and ".ReaperThemeZip" or ".ReaperTheme")
+end
+
+-- Place the copy: only onto a name that is taken with NO extension, and via
+-- os.rename, which on Windows never replaces an existing file (no swap_in, hence no .bak that could be deleted).
+-- If the name was taken since the selection (race during the job), the next free number is used.
+-- Returns: path, or nil + reason; tmp is left in place on an error.
+local function place_copy(tmp, target, asZip)
+  if not target or stem_taken(split_path(target), theme_stem(target)) then target = copy_path(S.orig, asZip) end
+  if not target then return nil, "no free name for a copy" end
+  if os.rename(tmp, target) then return target end
+  return nil, "rename failed"
+end
+
+local function bake_mode()
+  if not S.bakeTarget then
+    S.bakeTarget = R.GetExtState(NS, "bake_target") == "overwrite" and "overwrite" or "copy"
+  end
+  return S.bakeTarget
+end
+
+local function set_bake_mode(m, persist)
+  S.bakeTarget = (m == "overwrite") and "overwrite" or "copy"
+  if persist then R.SetExtState(NS, "bake_target", S.bakeTarget, true) end
+end
+
+-- actual target: path, mode ("copy" | "overwrite"), note if overwriting was chosen but is not possible
+local function bake_target(asZip)
+  local orig = S.orig
+  if bake_mode() == "overwrite" then
+    if (asZip and true or false) == is_zip(orig) then return orig, "overwrite" end
+    return copy_path(orig, asZip), "copy", "overrides need a zipped theme"
+  end
+  return copy_path(orig, asZip), "copy"
 end
 
 local function source_sig()
@@ -883,6 +1025,12 @@ local function init_theme(active)
     return false
   end
   S.orig, S.T = orig, T
+  -- Has REAPER loaded the theme parameters (rtconfig) of the active original? An unpacked theme
+  -- outside ColorThemes does not get them even for the original (there ThemeLayout_GetParameter(0) = nil,
+  -- the same copy in ColorThemes provides parameters). Then the
+  -- missing rtconfig of the working copy is not a preview error -> no warning (apply_preview). nil = unknown.
+  if is_edit(active) or not R.ThemeLayout_GetParameter then S.origParams = nil
+  else S.origParams = R.ThemeLayout_GetParameter(0) ~= nil end
   S.needFolder = T.zip or T.assetDir ~= nil
   R.SetExtState(NS, "orig", orig, true)
   S.wcIni, S.wcFolder = workcopy_paths(orig)
@@ -919,9 +1067,12 @@ end
 local function run_job()
   local J = S.job
   if not J then return end
+  -- Test hook holdat:<n> (only with test_ok): pause the job at step n so the test rig can capture the progress
+  if S.holdAt and (J.pos or 0) >= S.holdAt then return end
   local t0 = R.time_precise()
   local ok, err = pcall(function()
     while R.time_precise() - t0 < BUDGET do
+      if S.holdAt and (J.pos or 0) >= S.holdAt then return end
       if J.step() then
         S.job = nil
         if J.done then J.done() end
@@ -934,6 +1085,22 @@ local function run_job()
     if J.fail then J.fail() end
     set_status(J.name .. " failed: " .. tostring(err))
   end
+end
+
+-- Window closed or script ended while a job is running.
+-- The job is ended through its own failure path (J.fail: close source and target exactly once, delete the temporary
+-- zip); a pending bake is dropped. An aborted preparation leaves no ready marker
+-- (.tt_ready), the working folder is refilled next time. Calling it repeatedly (window + atexit) is harmless.
+local function abort_job(why)
+  S.bakePending = nil
+  S.holdAt = nil
+  local J = S.job
+  if not J then return false end
+  S.job = nil
+  if J.fail then pcall(J.fail) end
+  tlog(string.format("%s aborted (%s) at %d / %d - temporary files removed, target unchanged",
+    J.name or "job", why, J.pos or 0, J.total or 0))
+  return true
 end
 
 -- Prepare the working folder: extract the zip flat (image folder content to
@@ -961,6 +1128,9 @@ local function start_prepare(done)
   end
   R.RecursiveCreateDirectory(S.wcFolder, 0)
   local made, i = {}, 0
+  -- check every file; the ready marker .tt_ready and wcReady only after
+  -- complete success, otherwise a status message and no further processing (preview/bake never build on a partial folder)
+  local fails = {}
   S.job = {
     name = T.zip and "Extracting" or "Copying", total = #list, pos = 0,
     step = function()
@@ -969,25 +1139,37 @@ local function start_prepare(done)
       local n = list[i]
       if not n then
         if zh then zip_close(T.path, zh) end
-        write_file(S.wcFolder .. "/.tt_ready", source_sig())
+        if #fails == 0 and not write_file(S.wcFolder .. "/.tt_ready", source_sig()) then
+          fails[#fails + 1] = ".tt_ready"
+        end
         return true
       end
       local rel = T.zip and n:sub(#prefix + 1) or n
       local out = S.wcFolder .. "/" .. rel
       local d = out:match("^(.*)/[^/]+$")
       if d and not made[d] then R.RecursiveCreateDirectory(d, 0); made[d] = true end
+      local ok = false
       if T.zip then
         if zip_entry(zh, n) then
-          R.JS_Zip_Entry_ExtractToFile(zh, out)
+          pcall(R.JS_Zip_Entry_ExtractToFile, zh, out)
           pcall(R.JS_Zip_Entry_Close, zh)
+          ok = file_exists(out)
         end
       else
         local data = read_file(T.assetDir .. "/" .. n)
-        if data then write_file(out, data) end
+        ok = data ~= nil and write_file(out, data)
       end
+      if not ok then fails[#fails + 1] = rel end
       return false
     end,
     done = function()
+      if #fails > 0 then
+        S.wcReady = false
+        tlog("working folder incomplete: " .. #fails .. " of " .. #list .. " files failed, first: " .. fails[1])
+        set_status("Working copy incomplete: " .. #fails .. " file" .. (#fails == 1 and "" or "s")
+          .. " could not be " .. (T.zip and "extracted" or "copied") .. " (first: " .. fails[1] .. ") - preview stopped")
+        return
+      end
       S.wcReady, S.rtcSig = true, ""
       tlog("working folder: " .. #list .. " files")
       done()
@@ -1047,7 +1229,8 @@ local function apply_preview()
   if first then
     local want = S.T.rtc and S.T.rtc:find("define_parameter") ~= nil
     local okp = R.ThemeLayout_GetParameter and R.ThemeLayout_GetParameter(0) ~= nil
-    if want and not okp then set_status("Warning: working copy rtconfig not loaded") return end
+    -- warn only if REAPER had loaded the original's rtconfig (S.origParams not false), see init_theme
+    if want and not okp and S.origParams ~= false then set_status("Warning: working copy rtconfig not loaded") return end
   end
   local n = changed_count()
   set_status(string.format("Preview active (%d change%s, reload %.0f ms)%s", n, n == 1 and "" or "s",
@@ -1077,27 +1260,49 @@ local function cleanup_workcopy()
   if S.wcIni and file_exists(S.wcIni) then os.remove(S.wcIni) end
   if S.wcFolder and file_exists(S.wcFolder .. "/.tt_ready") then
     os.remove(S.wcFolder .. "/.tt_ready")
+    -- rename first, then delete in the background. Otherwise rmdir would delete the folder under its
+    -- own name while an immediately following change (e.g. baking again) was already refilling it.
+    local del = S.wcFolder .. ".del" .. os.time()
+    local gone = os.rename(S.wcFolder, del) and del or S.wcFolder
     -- remove the folder without a console window and without waiting
-    R.ExecProcess('cmd.exe /C rmdir /S /Q "' .. S.wcFolder:gsub("/", "\\") .. '"', -1)
+    R.ExecProcess('cmd.exe /C rmdir /S /Q "' .. gone:gsub("/", "\\") .. '"', -1)
   end
   S.wcReady, S.wcLoaded, S.rtcSig = false, false, nil
 end
 
-local function finish_bake(final)
+-- bak = backup of the previously existing target (swap_in with keep), otherwise nil; mode = "copy" | "overwrite";
+-- note = reason if the target differs from the chosen one. The status line always names the actual target.
+local function finish_bake(final, bak, mode, note)
   sync_themeconfig(theme_stem(S.orig), theme_stem(final))
   if not load_theme(final) then set_status("Saved, but could not load: " .. final) return end
   cleanup_workcopy()
   init_theme(final)
-  set_status("Baked: " .. select(2, split_path(final)))
+  S.lastBake, S.lastBak = final, bak
+  local name = select(2, split_path(final))
+  if mode == "overwrite" then
+    set_status("Baked: " .. name .. " (original overwritten)"
+      .. (bak and (" - previous version kept as " .. select(2, split_path(bak))) or ""))
+  else
+    set_status("Baked: " .. name .. " (new copy, original untouched" .. (note and (" - " .. note) or "") .. ")")
+  end
 end
 
 -- builds a zip in slices; items = { {name, get = function() -> data} }
-local function start_zip_job(final, items, closeSrc)
+local function start_zip_job(final, items, closeSrc, mode, note)
+  -- do not delete a leftover .tmp of an earlier failed bake ("new theme kept as ...");
+  -- use a free tmp name instead
   local tmp = final:gsub("%.ReaperThemeZip$", ".tmp.ReaperThemeZip")
+  local k = 1
+  while file_exists(tmp) and k < 99 do
+    k = k + 1
+    tmp = final:gsub("%.ReaperThemeZip$", ".tmp" .. k .. ".ReaperThemeZip")
+  end
   os.remove(tmp)
   local dst = zip_open(tmp, "w")
   if not dst then if closeSrc then closeSrc() end set_status("Could not create zip") return end
   local i = 0
+  local srcOpen, dstOpen = true, true
+  local function close_src() if srcOpen and closeSrc then closeSrc() end srcOpen = false end
   S.job = {
     name = "Baking", total = #items, pos = 0,
     step = function()
@@ -1105,28 +1310,61 @@ local function start_zip_job(final, items, closeSrc)
       S.job.pos = i
       local it = items[i]
       if not it then
-        if closeSrc then closeSrc() end
-        zip_close(tmp, dst)
-        -- if the target is loaded in REAPER, switch to the preview to release it
-        if file_exists(final) and norm(R.GetLastColorThemeFile()) == norm(final) and file_exists(S.wcIni) then
-          R.OpenColorThemeFile(S.wcIni)
+        close_src()
+        dstOpen = false
+        if not zip_close(tmp, dst) then error("could not finish " .. select(2, split_path(tmp)), 0) end
+        local target, ok, why, bak = final, false, nil, nil
+        if mode == "overwrite" then
+          -- if the target is loaded in REAPER, switch to the preview to release it
+          if norm(R.GetLastColorThemeFile()) == norm(target) and file_exists(S.wcIni) then
+            R.OpenColorThemeFile(S.wcIni)
+          end
+          -- the old target is not deleted beforehand but swapped via swap_in.
+          -- OVERWRITE ORIGINAL replaces the source itself, its old version is kept as .bak.
+          -- The source has already been read completely and closed here (close_src above) before it is replaced.
+          ok, why, bak = swap_in(tmp, target, true)
+          if not ok and not file_exists(target) then
+            -- swapping back failed: the original now exists only as .bak -> no
+            -- fallback copy and no "original untouched" message; the reason names the .bak
+            set_status("Rename failed (" .. why .. "): new theme kept as " .. select(2, split_path(tmp)))
+            return true
+          end
+        else
+          -- copy: never over an existing file (place_copy)
+          local placed
+          placed, why = place_copy(tmp, target, true)
+          ok = placed ~= nil
+          if ok then target = placed end
         end
-        os.remove(final)
-        local target = final
-        if not os.rename(tmp, target) then
-          -- target locked: save under a new name instead of failing
-          target = final:gsub("%)%.ReaperThemeZip$", " " .. os.date("%H%M%S") .. ").ReaperThemeZip")
-          if not os.rename(tmp, target) then set_status("Rename failed: " .. tmp) return true end
-          tlog("target locked, written as " .. target)
+        if not ok then
+          -- target locked: save under a new name instead of failing (the old file stays untouched).
+          -- fallback name = next free copy name (a timestamp in the name would not work for an
+          -- original without a trailing parenthesis, e.g. Default_7.0)
+          local alt = copy_path(S.orig, true)
+          local placed = alt and norm(alt) ~= norm(target) and place_copy(tmp, alt, true) or nil
+          if not placed then
+            set_status("Rename failed (" .. tostring(why) .. "): new theme kept as " .. select(2, split_path(tmp)))
+            return true
+          end
+          tlog("target locked (" .. tostring(why) .. "), written as " .. placed)
+          finish_bake(placed, nil, "copy", "target was locked")
+          return true
         end
-        finish_bake(target)
+        finish_bake(target, bak, mode, note)
         return true
       end
+      -- missing/unreadable content or a write error aborts the bake
+      -- (run_job calls fail(): tmp is removed, status "Baking failed: ...")
       local data = it.get()
-      if data then zip_write(dst, it.name, data) end
+      if data == nil then error("missing or unreadable content: " .. it.name, 0) end
+      if not zip_write(dst, it.name, data) then error("could not write " .. it.name, 0) end
       return false
     end,
-    fail = function() if closeSrc then closeSrc() end zip_close(tmp, dst); os.remove(tmp) end,
+    fail = function()
+      close_src()
+      if dstOpen then dstOpen = false; zip_close(tmp, dst) end
+      os.remove(tmp)
+    end,
   }
   set_status("Writing " .. select(2, split_path(final)) .. " ...")
 end
@@ -1152,22 +1390,54 @@ local function start_bake()
         end }
       end
     end
-    start_zip_job(bake_path(S.orig, true), items, function() zip_close(T.path, src) end)
+    local final, mode, note = bake_target(true)
+    if not final then zip_close(T.path, src); set_status("No free name for a copy (nothing baked)") return end
+    start_zip_job(final, items, function() zip_close(T.path, src) end, mode, note)
     return
   end
 
   if not hasOvr then
     -- plain theme without overrides: new ini only, image folder stays the same
-    local final = bake_path(S.orig, false)
-    if not write_file(final, ini) then set_status("Write failed: " .. final) return end
-    finish_bake(final)
+    local final, mode, note = bake_target(false)
+    if not final then set_status("No free name for a copy (nothing baked)") return end
+    -- first write final.tmp and read it back, then swap as with the zip
+    local tmp = final .. ".tmp"
+    os.remove(tmp)
+    if not write_file(tmp, ini) or read_file(tmp) ~= ini then
+      os.remove(tmp)
+      set_status("Write failed: " .. select(2, split_path(final)) .. " (nothing changed)")
+      return
+    end
+    -- with OVERWRITE ORIGINAL the old version is kept as .bak (the source is already
+    -- completely in T.ini); a copy always goes to a free name (place_copy)
+    local ok, why, bak
+    if mode == "overwrite" then
+      ok, why, bak = swap_in(tmp, final, true)
+    else
+      local placed
+      placed, why = place_copy(tmp, final, false)
+      ok = placed ~= nil
+      if ok then final = placed end
+    end
+    if not ok then
+      -- delete tmp only while the target is still in place (otherwise it is the only new version besides the .bak)
+      if mode ~= "overwrite" or file_exists(final) then os.remove(tmp) end
+      set_status("Write failed: " .. select(2, split_path(final)) .. " (" .. tostring(why) .. ")")
+      return
+    end
+    finish_bake(final, bak, mode, note)
     return
   end
 
   -- plain theme with overrides: build a zip from the working folder
   if not S.wcReady then start_prepare(start_bake) return end
   if S.rtcSig ~= ovr_sig(S.ovr) then
-    write_file(S.wcFolder .. "/rtconfig.txt", apply_overrides(T.rtc, S.ovr))
+    -- check the return value, otherwise a stale rtconfig would be baked
+    if not write_file(S.wcFolder .. "/rtconfig.txt", apply_overrides(T.rtc, S.ovr)) then
+      S.rtcSig = nil
+      set_status("Write failed: working copy rtconfig (nothing baked)")
+      return
+    end
     S.rtcSig = ovr_sig(S.ovr)
   end
   local inner = sanitize(base_stem(S.orig))
@@ -1179,7 +1449,19 @@ local function start_bake()
       end }
     end
   end
-  start_zip_job(bake_path(S.orig, true), items, nil)
+  local final, mode, note = bake_target(true)
+  if not final then set_status("No free name for a copy (nothing baked)") return end
+  start_zip_job(final, items, nil, mode, note)
+end
+
+-- BAKE THEME (button and test hook): first the pending preview, then bake.
+-- If apply_preview first starts preparing the working copy, a job is running
+-- and start_bake() returns immediately -> queue the bake, loop() resumes it after the preparation
+local function request_bake()
+  S.test = nil
+  if S.dirtyAt then apply_preview() end
+  if S.job then S.bakePending = true; set_status("Bake queued - preparing the working copy first ...")
+  else start_bake() end
 end
 
 -- Discard: load the original; the working folder is kept for the next
@@ -1292,6 +1574,18 @@ local function pick_at(x, y)
   return r
 end
 
+-- Lock the target (picker via click/Shift or test hook pickat:<x>,<y>)
+local function lock_target(t)
+  S.target, S.hover = t, nil
+  S.sel = t.slots[1] and t.slots[1].key or S.sel
+  local ks = {}
+  for _, sl in ipairs(t.slots) do ks[#ks + 1] = sl.key end
+  tlog(string.format("pick info='%s' track='%s' P_LAYOUT='%s' -> Layout '%s' elems=%s slots=%s",
+    t.info, tostring(t.track), tostring(t.rawLayout), tostring(t.layout),
+    table.concat(t.elems, ","), table.concat(ks, ",")))
+  set_status("Target: " .. t.info .. (t.track and (" [" .. t.track .. "]") or ""))
+end
+
 local function pick_poll()
   if not picker.armed then return end
   local mx, my = R.GetMousePosition()
@@ -1309,15 +1603,7 @@ local function pick_poll()
   picker.shift = shift
   if lock then
     picker.armed = false
-    local t = S.hover
-    S.target, S.hover = t, nil
-    S.sel = t.slots[1] and t.slots[1].key or S.sel
-    local ks = {}
-    for _, sl in ipairs(t.slots) do ks[#ks + 1] = sl.key end
-    tlog(string.format("pick info='%s' track='%s' P_LAYOUT='%s' -> Layout '%s' elems=%s slots=%s",
-      t.info, tostring(t.track), tostring(t.rawLayout), tostring(t.layout),
-      table.concat(t.elems, ","), table.concat(ks, ",")))
-    set_status("Target: " .. t.info .. (t.track and (" [" .. t.track .. "]") or ""))
+    lock_target(S.hover)
   end
 end
 
@@ -1352,12 +1638,93 @@ local function save_opts()
 end
 
 --------------------------------------------------------------------
--- Brand design
+-- User interface (in its own function: Lua allows at most
+-- 200 local variables per function, with the kit layer there would be more)
+--------------------------------------------------------------------
+local function run_gui()
+
+--------------------------------------------------------------------
+-- View: UI SIZE (zoom), AUTO FIT, TOOLTIPS
+-- Zoom, AUTO FIT and TOOLTIPS are stored per REAPER installation in ExtState
+-- (ui_zoom / ui_autofit / ui_tips, same namespace NS).
+-- AUTO FIT as in the plugins: when
+-- the window size changes, the zoom is set to the largest whole percentage
+-- at which the design grid DES_W x DES_H fits in the window
+-- (25..400 %). The first frame only records the window size; the
+-- zoom buttons hold until the next window change.
+--------------------------------------------------------------------
+local DES_W, DES_H = 800, 820           -- design grid at 100 % (= start size of the window)
+local ZOOM_MIN, ZOOM_MAX = 0.25, 4.0
+local ZOOM_STEPS = { 1.0, 1.25, 1.5, 2.0, 3.0 }
+local VIEW = { zoom = 1.0, autofit = true, tips = true, lastW = nil, lastH = nil }
+-- Test hooks for the screenshot rig and the dry run:
+-- only active while the unsaved ExtState test_ok = 20261001 is set.
+local TEST = { on = false, dump = nil, size = nil, rects = {}, state = nil }
+local UI = { openOpts = nil, ovrOpen = false, optsRect = nil }
+
+local function clampz(z)
+  if z ~= z or not z then return 1.0 end
+  if z < ZOOM_MIN then return ZOOM_MIN elseif z > ZOOM_MAX then return ZOOM_MAX end
+  return z
+end
+
+local function fit_zoom(w, h)
+  return clampz(math.floor(math.min(w / DES_W, h / DES_H) * 100 + 0.0001) / 100)
+end
+
+local function load_view()
+  local z = tonumber(R.GetExtState(NS, "ui_zoom"))
+  if z then VIEW.zoom = clampz(z) end
+  VIEW.autofit = R.GetExtState(NS, "ui_autofit") ~= "0"
+  VIEW.tips = R.GetExtState(NS, "ui_tips") ~= "0"
+end
+
+local function set_zoom(z, persist)
+  VIEW.zoom = clampz(math.floor(z * 100 + 0.5) / 100)
+  if persist then R.SetExtState(NS, "ui_zoom", string.format("%.2f", VIEW.zoom), true) end
+end
+
+local function set_autofit(on, persist)
+  VIEW.autofit = on
+  if persist then R.SetExtState(NS, "ui_autofit", on and "1" or "0", true) end
+  -- switching on adjusts once immediately
+  if on and VIEW.lastW then set_zoom(fit_zoom(VIEW.lastW, VIEW.lastH), persist) end
+end
+
+local function set_tips(on, persist)
+  VIEW.tips = on
+  if persist then R.SetExtState(NS, "ui_tips", on and "1" or "0", true) end
+end
+
+-- Track the window size: the first frame only records it (the saved zoom
+-- stays), every later change adjusts the zoom if AUTO FIT is on.
+local function track_window(w, h)
+  if not VIEW.lastW then VIEW.lastW, VIEW.lastH = w, h return end
+  if math.abs(w - VIEW.lastW) < 1 and math.abs(h - VIEW.lastH) < 1 then return end
+  VIEW.lastW, VIEW.lastH = w, h
+  if VIEW.autofit then
+    local z = fit_zoom(w, h)
+    -- saved only after the mouse is released (save_view_pending), not at every intermediate size
+    if z ~= VIEW.zoom then set_zoom(z, false); VIEW.zsave = not TEST.on end
+  end
+end
+
+local function save_view_pending(mouseDown)
+  if VIEW.zsave and not mouseDown then
+    VIEW.zsave = false
+    R.SetExtState(NS, "ui_zoom", string.format("%.2f", VIEW.zoom), true)
+  end
+end
+
+--------------------------------------------------------------------
+-- Brand design (in the look of the TT UI kit 7)
 --------------------------------------------------------------------
 local ctx
 local BLACK, WHITE, ACID = 0x000000FF, 0xFFFFFFFF, 0x39FF14FF
 local function acid_a(a) return 0x39FF1400 | math.floor(a * 255 + 0.5) end
 local GREY = 0x8C8C8CFF
+local INKC = 0xD6E2D6FF
+local BGC = 0x0D0E0DFF
 local FONTS = { ui = {}, bold = {}, mono = {} }
 
 local function font_file(name)
@@ -1383,13 +1750,13 @@ local function make_font(file, family, fallback, flags)
     ok, f = pcall(R.ImGui_CreateFont, family, flags)
     if ok and f and not file then return f end
   end
+  if not fallback then return nil end
   ok, f = pcall(R.ImGui_CreateFont, fallback, flags)
   if ok then return f end
 end
 
 local function init_fonts()
   local bold = R.ImGui_FontFlags_Bold and R.ImGui_FontFlags_Bold() or nil
-  FONTS.brand = make_font("Zilap Orion.ttf", nil, "sans-serif", bold)
   for _, u in ipairs(UI_FONTS) do
     FONTS.ui[u.name] = make_font(u.file, u.name, "sans-serif", nil)
     FONTS.bold[u.name] = make_font(u.bfile, u.name, "sans-serif", bold)
@@ -1397,10 +1764,15 @@ local function init_fonts()
   for _, m in ipairs(MONO_FONTS) do
     FONTS.mono[m.name] = make_font(m.file, m.name, "monospace", nil)
   end
-  R.ImGui_Attach(ctx, FONTS.brand)
+  -- Kit font (labels of the drawn front): Inter Medium,
+  -- otherwise Liberation Sans
+  FONTS.kit = make_font("Inter-Medium.ttf", nil, nil, nil)
+  local kitOwn = FONTS.kit ~= nil
+  if not kitOwn then FONTS.kit = FONTS.ui["Liberation Sans"] end
   for _, grp in ipairs({ FONTS.ui, FONTS.bold, FONTS.mono }) do
     for _, f in pairs(grp) do R.ImGui_Attach(ctx, f) end
   end
+  if kitOwn then R.ImGui_Attach(ctx, FONTS.kit) end
 end
 
 local function pushf(f, size)
@@ -1408,40 +1780,69 @@ local function pushf(f, size)
   return false
 end
 local function popf(p) if p then R.ImGui_PopFont(ctx) end end
-local function push_mono(d) return pushf(FONTS.mono[OPT.mono], OPT.msize + (d or 0)) end
-local function push_bold(d) return pushf(FONTS.bold[OPT.ui], OPT.size + (d or 0)) end
+local function push_mono(d) return pushf(FONTS.mono[OPT.mono], (OPT.msize + (d or 0)) * VIEW.zoom) end
+local function push_bold(d) return pushf(FONTS.bold[OPT.ui], (OPT.size + (d or 0)) * VIEW.zoom) end
 
+-- Tooltips (English, one sentence): appear after hovering for 0.35 s,
+-- not while dragging; OPTIONS > TOOLTIPS OFF switches them all off.
+local HOVER = { id = nil, t = 0 }
+local function show_tip(text)
+  if R.ImGui_BeginTooltip(ctx) then
+    R.ImGui_PushTextWrapPos(ctx, 420 * VIEW.zoom)
+    R.ImGui_Text(ctx, text)
+    R.ImGui_PopTextWrapPos(ctx)
+    R.ImGui_EndTooltip(ctx)
+  end
+end
+
+local function tip_hover(id, text, hovered)
+  if not VIEW.tips or not text then return end
+  if hovered and not R.ImGui_IsMouseDown(ctx, 0) then
+    local now = R.time_precise()
+    if HOVER.id ~= id then HOVER.id = id; HOVER.t = now end
+    if now - HOVER.t > 0.35 then show_tip(text) end
+  elseif HOVER.id == id then
+    HOVER.id = nil
+  end
+end
+
+-- Tooltip for the most recently drawn ImGui item
+local HOV_DIS = R.ImGui_HoveredFlags_AllowWhenDisabled and R.ImGui_HoveredFlags_AllowWhenDisabled() or 0
 local function tip(text)
-  if R.ImGui_SetItemTooltip then R.ImGui_SetItemTooltip(ctx, text)
-  elseif R.ImGui_IsItemHovered(ctx) then R.ImGui_SetTooltip(ctx, text) end
+  local x, y = R.ImGui_GetItemRectMin(ctx)
+  tip_hover(text .. "@" .. math.floor(x or 0) .. "," .. math.floor(y or 0), text, R.ImGui_IsItemHovered(ctx, HOV_DIS))
 end
 
 local THEME_COLS = {
-  { "WindowBg", BLACK }, { "ChildBg", BLACK }, { "PopupBg", 0x0A0A0AFF },
-  { "Text", WHITE }, { "TextDisabled", GREY },
-  { "Border", acid_a(0.55) }, { "BorderShadow", 0x00000000 },
-  { "TitleBg", BLACK }, { "TitleBgActive", BLACK }, { "TitleBgCollapsed", BLACK },
-  { "FrameBg", 0x0E0E0EFF }, { "FrameBgHovered", acid_a(0.18) }, { "FrameBgActive", acid_a(0.30) },
-  { "Button", BLACK }, { "ButtonHovered", acid_a(0.22) }, { "ButtonActive", acid_a(0.45) },
-  { "Header", acid_a(0.20) }, { "HeaderHovered", acid_a(0.30) }, { "HeaderActive", acid_a(0.45) },
+  { "WindowBg", BGC }, { "ChildBg", 0x00000000 }, { "PopupBg", 0x121412FF },
+  { "Text", INKC }, { "TextDisabled", GREY },
+  { "Border", acid_a(0.35) }, { "BorderShadow", 0x00000000 },
+  { "TitleBg", BGC }, { "TitleBgActive", 0x121412FF }, { "TitleBgCollapsed", BGC },
+  { "FrameBg", 0x1B1C1BFF }, { "FrameBgHovered", acid_a(0.18) }, { "FrameBgActive", acid_a(0.30) },
+  { "Button", 0x1B1C1BFF }, { "ButtonHovered", acid_a(0.25) }, { "ButtonActive", acid_a(0.50) },
+  { "Header", acid_a(0.18) }, { "HeaderHovered", acid_a(0.30) }, { "HeaderActive", acid_a(0.45) },
   { "SliderGrab", ACID }, { "SliderGrabActive", WHITE }, { "CheckMark", ACID },
-  { "Separator", acid_a(0.35) }, { "SeparatorHovered", ACID }, { "SeparatorActive", ACID },
-  { "Tab", 0x0E0E0EFF }, { "TabHovered", acid_a(0.28) }, { "TabSelected", 0x1A1A1AFF },
-  { "TabSelectedOverline", ACID }, { "TabDimmed", BLACK }, { "TabDimmedSelected", 0x121212FF },
-  { "TableHeaderBg", 0x111111FF }, { "TableBorderStrong", acid_a(0.35) },
-  { "TableBorderLight", 0x222222FF }, { "TableRowBgAlt", 0x0A0A0AFF },
-  { "ScrollbarBg", BLACK }, { "ScrollbarGrab", 0x2A2A2AFF },
+  { "Separator", acid_a(0.30) }, { "SeparatorHovered", ACID }, { "SeparatorActive", ACID },
+  { "TableHeaderBg", 0x161816FF }, { "TableBorderStrong", acid_a(0.30) },
+  { "TableBorderLight", 0x262826FF }, { "TableRowBg", 0x00000000 }, { "TableRowBgAlt", 0xFFFFFF08 },
+  { "ScrollbarBg", 0x0A0B0AFF }, { "ScrollbarGrab", 0x2A2C2AFF },
   { "ScrollbarGrabHovered", acid_a(0.5) }, { "ScrollbarGrabActive", ACID },
   { "ResizeGrip", acid_a(0.25) }, { "ResizeGripHovered", acid_a(0.6) }, { "ResizeGripActive", ACID },
   { "PlotHistogram", ACID }, { "TextSelectedBg", acid_a(0.35) }, { "NavCursor", ACID },
 }
 local THEME_VARS = {
-  { "WindowRounding", 0 }, { "FrameRounding", 0 }, { "TabRounding", 0 },
-  { "GrabRounding", 0 }, { "ScrollbarRounding", 0 }, { "PopupRounding", 0 },
+  { "WindowRounding", 0 }, { "FrameRounding", 2 }, { "TabRounding", 0 }, { "ChildRounding", 0 },
+  { "GrabRounding", 2 }, { "ScrollbarRounding", 0 }, { "PopupRounding", 0 },
   { "WindowBorderSize", 1 }, { "FrameBorderSize", 1 }, { "PopupBorderSize", 1 },
 }
+-- Spacing grows with the zoom (value at 100 %)
+local THEME_VARS_Z = {
+  { "FramePadding", 4, 3 }, { "ItemSpacing", 8, 4 }, { "ItemInnerSpacing", 4, 4 },
+  { "CellPadding", 4, 2 }, { "WindowPadding", 8, 8 },
+  { "ScrollbarSize", 14 }, { "GrabMinSize", 10 }, { "IndentSpacing", 21 },
+}
 
-local function push_theme()
+local function push_theme(z)
   local nc, nv = 0, 0
   for _, c in ipairs(THEME_COLS) do
     local fn = R["ImGui_Col_" .. c[1]]
@@ -1451,67 +1852,320 @@ local function push_theme()
     local fn = R["ImGui_StyleVar_" .. v[1]]
     if fn then R.ImGui_PushStyleVar(ctx, fn(), v[2]); nv = nv + 1 end
   end
+  for _, v in ipairs(THEME_VARS_Z) do
+    local fn = R["ImGui_StyleVar_" .. v[1]]
+    if fn then
+      if v[3] then R.ImGui_PushStyleVar(ctx, fn(), v[2] * z, v[3] * z)
+      else R.ImGui_PushStyleVar(ctx, fn(), v[2] * z) end
+      nv = nv + 1
+    end
+  end
   return nc, nv
 end
 
--- Circuit trace: polyline with 45 degree bends, ending in a solder pad
-local function trace(dl, pts, col)
-  for i = 1, #pts - 1 do
-    R.ImGui_DrawList_AddLine(dl, pts[i][1], pts[i][2], pts[i + 1][1], pts[i + 1][2], col, 1.5)
+--------------------------------------------------------------------
+-- UI kit 7 look (ReaImGui port)
+-- Copy of the TimTechlor UI kit 7 layer.
+--
+-- Changes compared to the original: origin per row/section via
+-- kit_at() (the front here is a flow layout with a scroll area, not a fixed
+-- grid), scale = VIEW.zoom, accent fixed to Acid Green, btn() with a
+-- disabled state, tooltip switch VIEW.tips; knob() is dropped.
+--------------------------------------------------------------------
+local floor = math.floor
+local UK = { sc = 1, ox = 0, oy = 0, dl = nil, ar = 0.2235, ag = 1.0, ab = 0.0784,
+             mx = 0, my = 0, mxd = 0, myd = 0, shift = false, ctrl = false }
+local DRAGS = {}
+
+local function f255(v) if v < 0 then v = 0 elseif v > 1 then v = 1 end return floor(v * 255 + 0.5) end
+local function C(r, g, b, a) return (f255(r) << 24) | (f255(g) << 16) | (f255(b) << 8) | f255(a or 1) end
+local function acid(a) return C(UK.ar, UK.ag, UK.ab, a) end
+local function dimc(a) return C(UK.ar * 0.58, UK.ag * 0.57, UK.ab * 0.55, a) end
+local function tone(g, t, a) return C(g + (UK.ar - g) * t, g + (UK.ag - g) * t, g + (UK.ab - g) * t, a) end
+local INK = { 0.75, 0.81, 0.75 }
+local AMBER = { 1.0, 0.70, 0.36 }
+
+local function X(x) return UK.ox + x * UK.sc end
+local function Y(y) return UK.oy + y * UK.sc end
+local function Z(v) return v * UK.sc end
+local function lw() local w = floor(UK.sc + 0.5); return w < 1 and 1 or w end
+
+-- Set the origin of the kit drawing (screen point = design point 0,0)
+local function kit_at(dl, ox, oy)
+  UK.dl, UK.ox, UK.oy, UK.sc = dl, ox, oy, VIEW.zoom
+  UK.mxd = (UK.mx - ox) / UK.sc
+  UK.myd = (UK.my - oy) / UK.sc
+end
+
+-- ---- Text (pixel size = design size * scale, rounded to an integer)
+local TWC = {}
+local function tw(s, size)
+  size = size or 13
+  local k = size .. "|" .. s
+  local v = TWC[k]
+  if not v then
+    R.ImGui_PushFont(ctx, FONTS.kit, size)
+    v = R.ImGui_CalcTextSize(ctx, s)
+    R.ImGui_PopFont(ctx)
+    TWC[k] = v
   end
+  return v
+end
+local function ptext(x, y, s, colr, size)
+  size = size or 13
+  local px_ = floor(size * UK.sc + 0.5)
+  if px_ < 8 then px_ = 8 end
+  R.ImGui_PushFont(ctx, FONTS.kit, px_)
+  R.ImGui_DrawList_AddText(UK.dl, X(x), Y(y), colr, s)
+  R.ImGui_PopFont(ctx)
+end
+local function ptext_c(cx, y, s, colr, size) ptext(cx - tw(s, size) / 2, y, s, colr, size) end
+local function ptext_r(rx, y, s, colr, size) ptext(rx - tw(s, size), y, s, colr, size) end
+local function spaced(x, y, s, colr, size, sp)
+  for ch in s:gmatch(".") do
+    ptext(x, y, ch, colr, size)
+    x = x + tw(ch, size) + sp
+  end
+  return x
+end
+-- Shorten text to a width (design units), with "..."
+local function fit_text(s, size, maxw)
+  if maxw <= 0 then return "" end
+  if tw(s, size) <= maxw then return s end
+  local n = #s
+  while n > 1 and tw(s:sub(1, n) .. "...", size) > maxw do n = n - 1 end
+  return s:sub(1, n) .. "..."
+end
+
+-- ---- Primitives
+local function rfill(x, y, w, h, colr, r)
+  R.ImGui_DrawList_AddRectFilled(UK.dl, X(x), Y(y), X(x + w), Y(y + h), colr, Z(r or 0))
+end
+local function rline(x, y, w, h, colr, r)
+  local o = lw() * 0.5
+  R.ImGui_DrawList_AddRect(UK.dl, X(x) + o, Y(y) + o, X(x + w) - o, Y(y + h) - o, colr, Z(r or 0), 0, lw())
+end
+local function circ(cx, cy, r, colr) R.ImGui_DrawList_AddCircleFilled(UK.dl, X(cx), Y(cy), Z(r), colr, 0) end
+local function circ_line(cx, cy, r, colr, th) R.ImGui_DrawList_AddCircle(UK.dl, X(cx), Y(cy), Z(r), colr, 0, th or lw()) end
+local function line(x1, y1, x2, y2, colr, th) R.ImGui_DrawList_AddLine(UK.dl, X(x1), Y(y1), X(x2), Y(y2), colr, th or lw()) end
+-- vertical gradient, also with rounded corners (bands with a clip rectangle)
+local function grad(x, y, w, h, r1, g1, b1, r2, g2, b2, rad, a)
+  if (rad or 0) == 0 then
+    local c1, c2 = C(r1, g1, b1, a), C(r2, g2, b2, a)
+    R.ImGui_DrawList_AddRectFilledMultiColor(UK.dl, X(x), Y(y), X(x + w), Y(y + h), c1, c1, c2, c2)
+    return
+  end
+  local n = floor(h * UK.sc / 4)
+  if n < 2 then n = 2 elseif n > 12 then n = 12 end
+  for k = 0, n - 1 do
+    local f = (k + 0.5) / n
+    local colr = C(r1 + (r2 - r1) * f, g1 + (g2 - g1) * f, b1 + (b2 - b1) * f, a)
+    R.ImGui_DrawList_PushClipRect(UK.dl, X(x) - 2, Y(y + h * k / n), X(x + w) + 2, Y(y + h * (k + 1) / n) + 0.5, true)
+    R.ImGui_DrawList_AddRectFilled(UK.dl, X(x), Y(y), X(x + w), Y(y + h), colr, Z(rad))
+    R.ImGui_DrawList_PopClipRect(UK.dl)
+  end
+end
+-- Circuit trace with a 45-degree bend, ends in a solder pad
+local function trace(pts, colr)
+  for i = 1, #pts - 1 do line(pts[i][1], pts[i][2], pts[i + 1][1], pts[i + 1][2], colr, Z(1.2)) end
   local e = pts[#pts]
-  R.ImGui_DrawList_AddCircle(dl, e[1], e[2], 5.5, acid_a(0.45), 0, 1.2)
-  R.ImGui_DrawList_AddCircleFilled(dl, e[1], e[2], 3.2, ACID)
+  circ_line(e[1], e[2], 4.4, acid(0.45), Z(1))
+  circ(e[1], e[2], 2.6, acid(1))
 end
 
-local function draw_header()
-  local dl = R.ImGui_GetWindowDrawList(ctx)
-  local x0, y0 = R.ImGui_GetCursorScreenPos(ctx)
-  local w = R.ImGui_GetContentRegionAvail(ctx)
-  local H = 50
-  local pf = pushf(FONTS.brand, 26)
-  local word = "FONT EDITOR"
-  local tw = R.ImGui_CalcTextSize(ctx, word)
-  R.ImGui_DrawList_AddText(dl, x0, y0 + 2, WHITE, word)
-  popf(pf)
-  pf = pushf(FONTS.mono["Liberation Mono"], 12)
-  local meta = "TT_ThemeFontEditor " .. VERSION .. " // TIMTECHLOR"
-  R.ImGui_DrawList_AddText(dl, x0 + 1, y0 + 34, ACID, meta)
-  local mw = R.ImGui_CalcTextSize(ctx, meta)
-  popf(pf)
-  -- three traces from the right edge, 45 degrees down to solder pads
-  local tx = x0 + math.max(tw, mw) + 24
-  local xR = x0 + w
-  if xR - tx >= 130 then
-    local yEnd = y0 + H - 6
-    for i = 0, 2 do
-      local y = y0 + 6 + i * 9
-      local xb = tx + 40 + i * 22
-      trace(dl, { { xR, y }, { xb, y }, { xb - (yEnd - y), yEnd } }, i == 1 and ACID or acid_a(0.6))
-    end
+-- ---- Input
+local function hit(id, x, y, w, h)
+  R.ImGui_SetCursorScreenPos(ctx, X(x), Y(y))
+  R.ImGui_InvisibleButton(ctx, id, math.max(1, Z(w)), math.max(1, Z(h)))
+  -- test hook: position of every control for the screenshot rig (mouse for hover/tooltip images)
+  if TEST.on then TEST.rects[id] = { X(x), Y(y), X(x + w), Y(y + h) } end
+  return R.ImGui_IsItemHovered(ctx), R.ImGui_IsItemActive(ctx)
+end
+local function tipfor(id, s) tip_hover(id, s, R.ImGui_IsItemHovered(ctx)) end
+-- Dragging: ax "x" (slider, span = width); Shift = fine, wheel 2 %, reset via right/double/Ctrl click
+local function drag_ctl(id, hov, act, val, mn, mx, def, ax, span, spanfine)
+  local nv = val
+  local pos = (ax == "x") and UK.mxd or UK.myd
+  if R.ImGui_IsItemActivated(ctx) then
+    if UK.ctrl then nv = def; DRAGS[id] = nil
+    else DRAGS[id] = { p = pos, v = val, sh = UK.shift } end
   end
-  R.ImGui_Dummy(ctx, w, H)
-  local _, yb = R.ImGui_GetCursorScreenPos(ctx)
-  R.ImGui_DrawList_AddLine(dl, x0, yb - 2, xR, yb - 2, acid_a(0.35), 1)
+  if hov and R.ImGui_IsMouseDoubleClicked(ctx, 0) then nv = def; DRAGS[id] = nil end
+  if R.ImGui_IsItemClicked(ctx, 1) then nv = def end
+  local d = DRAGS[id]
+  if act and d then
+    if UK.shift ~= d.sh then d.sh = UK.shift; d.p = pos; d.v = val end
+    local delta = (ax == "x") and (pos - d.p) or (d.p - pos)
+    nv = d.v + delta * (mx - mn) / (d.sh and spanfine or span)
+  elseif not act then
+    DRAGS[id] = nil
+  end
+  if hov then
+    local wv = R.ImGui_GetMouseWheel(ctx)
+    if wv ~= 0 then nv = val + wv * (mx - mn) * 0.02 end
+  end
+  if nv < mn then nv = mn elseif nv > mx then nv = mx end
+  return nv
 end
 
--- Section marker: small trace + title in mono
-local function section(title)
-  R.ImGui_Spacing(ctx)
+-- ---- Widgets
+local function panel(x, y, w, h, title)
+  for j = 0, 5 do
+    local e = 6 - j
+    R.ImGui_DrawList_AddRect(UK.dl, X(x) - Z(e), Y(y) - Z(e) + Z(3), X(x + w) + Z(e), Y(y + h) + Z(e) + Z(3),
+      C(0, 0, 0, 0.03 + 0.012 * j), Z(4 + e), 0, 1)
+  end
+  rfill(x, y, w, h, tone(0.11, 0.10), 4)
+  grad(x + 1.5, y + 1.5, w - 3, h - 3, 0.090, 0.096, 0.090, 0.060, 0.064, 0.060, 3)
+  rfill(x + 3, y + 1, w - 6, 1, C(1, 1, 1, 0.07))
+  rfill(x + 3, y + h - 2, w - 6, 1, C(0, 0, 0, 0.35))
+  rline(x, y, w, h, C(0, 0, 0, 0.5), 4)
+  ptext(x + 12, y + 3, title, C(0.88, 0.98, 0.86, 1), 14)
+  rfill(x + 10, y + 21, w - 20, 1, dimc(0.55))
+  rfill(x + 10, y + 21, 26, 1, acid(0.85))
+end
+
+local function led(cx, cy, r, on, colr)
+  if on then
+    circ(cx, cy, r + 2.2, colr and C(colr[1], colr[2], colr[3], 0.25) or acid(0.25))
+    circ(cx, cy, r, colr and C(colr[1], colr[2], colr[3], 1) or acid(1))
+    circ(cx - r * 0.3, cy - r * 0.3, r * 0.35, C(1, 1, 1, 0.5))
+  else
+    circ(cx, cy, r, tone(0.17, 0.06))
+  end
+end
+
+-- dis = disabled (gray, no click; tooltip stays)
+local function btn(id, x, y, w, h, label, on, prim, tiptxt, dis)
+  local hov, act = hit(id, x, y, w, h)
+  local clicked = (not dis) and R.ImGui_IsItemActivated(ctx)
+  if dis then
+    rfill(x, y, w, h, C(0.075, 0.078, 0.075))
+    rline(x, y, w, h, tone(0.13, 0.05), 0)
+    ptext_c(x + w / 2, y + (h - 13) / 2 - 1, label, C(0.36, 0.39, 0.36))
+  elseif on then
+    rfill(x, y, w, h, acid(0.88))
+    ptext_c(x + w / 2, y + (h - 13) / 2 - 1, label, C(0, 0, 0, 1))
+  else
+    rfill(x, y, w, h, C(0.098, 0.103, 0.098))
+    local bc = hov and tone(0.37, 0.35) or (prim and acid(0.55) or tone(0.16, 0.12))
+    rline(x, y, w, h, bc, 0)
+    local tc = hov and C(0.85, 0.95, 0.82) or (prim and acid(1) or C(0.78, 0.84, 0.76))
+    ptext_c(x + w / 2, y + (h - 13) / 2 - 1, label, tc)
+    if act then rfill(x + 1, y + 1, w - 2, h - 2, C(1, 1, 1, 0.05)) end
+  end
+  tipfor(id, tiptxt)
+  return clicked
+end
+
+local function toggle(id, x, y, w, h, on, label, tiptxt)
+  local hov = hit(id, x, y, w, h)
+  local clicked = R.ImGui_IsItemActivated(ctx)
+  rfill(x, y + 1.2, w, h, C(0, 0, 0, 0.35), 3)
+  if on then
+    grad(x, y, w, h, 0.150, 0.170, 0.145, 0.085, 0.100, 0.082, 3)
+    rline(x, y, w, h, acid(0.75), 3)
+  else
+    if hov then grad(x, y, w, h, 0.135, 0.142, 0.135, 0.075, 0.080, 0.075, 3)
+    else grad(x, y, w, h, 0.115, 0.120, 0.115, 0.062, 0.066, 0.062, 3) end
+    rline(x, y, w, h, hov and tone(0.37, 0.35) or tone(0.16, 0.12), 3)
+  end
+  rfill(x + 2, y + 1, w - 4, 1, C(1, 1, 1, 0.06))
+  led(x + h * 0.5, y + h * 0.5, math.min(3.2, h * 0.17), on)
+  local tc = on and C(0.96, 0.98, 0.96) or (hov and C(0.85, 0.95, 0.82) or C(0.72, 0.78, 0.70))
+  ptext(x + h * 0.95, y + (h - 13) / 2 - 1, label, tc)
+  tipfor(id, tiptxt)
+  return clicked
+end
+
+local function hslider(id, x, y, w, h, val, mn, mx, def, tiptxt)
+  local hov, act = hit(id, x - 6, y - 3, w + 12, h + 6)
+  local nv = drag_ctl(id, hov, act, val, mn, mx, def, "x", w, w * 6)
+  local t = (nv - mn) / (mx - mn)
+  local ty = y + h * 0.5 - 2
+  rfill(x - 1, ty - 1, w + 2, 6, C(0, 0, 0, 0.5), 3)
+  rfill(x, ty, w, 4, C(0.035, 0.038, 0.035), 2)
+  if t > 0.004 then rfill(x, ty, math.max(4, w * t), 4, acid(0.95), 2) end
+  local hx = x + t * w
+  rfill(hx - 4.5, y + 1.5, 10, h, C(0, 0, 0, 0.45), 3)
+  if hov or act then grad(hx - 5, y, 10, h, 0.36, 0.38, 0.36, 0.20, 0.21, 0.20, 2)
+  else grad(hx - 5, y, 10, h, 0.28, 0.30, 0.28, 0.15, 0.16, 0.15, 2) end
+  rfill(hx - 4, y, 8, 1, C(1, 1, 1, 0.22))
+  rfill(hx - 0.5, y + 2, 1, h - 4, acid(1))
+  tipfor(id, tiptxt)
+  return nv
+end
+-- End of the kit layer ----------------------------------------------
+
+-- Window background: dark gradient with darkened edges
+local function ground(dl, ox, oy, cw, ch)
+  local top, bot = C(0.068, 0.073, 0.068), C(0.038, 0.041, 0.038)
+  R.ImGui_DrawList_AddRectFilledMultiColor(dl, ox, oy, ox + cw, oy + ch, top, top, bot, bot)
+  local bw = math.max(24, math.min(cw, ch) * 0.06)
+  local k, zc = C(0, 0, 0, 0.30), C(0, 0, 0, 0)
+  R.ImGui_DrawList_AddRectFilledMultiColor(dl, ox, oy, ox + cw, oy + bw, k, k, zc, zc)
+  R.ImGui_DrawList_AddRectFilledMultiColor(dl, ox, oy + ch - bw, ox + cw, oy + ch, zc, zc, k, k)
+end
+
+-- Rectangles for the screenshot rig (ImGui screen coordinates)
+local function rect(name, x0, y0, x1, y1)
+  if TEST.on then TEST.rects[name] = { x0, y0, x1, y1 } end
+end
+
+-- Width for content inside a panel (right panel edge)
+local function inner_w() return math.max(40, R.ImGui_GetContentRegionAvail(ctx) - 12 * VIEW.zoom) end
+
+-- Kit row in the flow layout: draws fn(width in design units) from the
+-- cursor and then occupies h design units of height
+local function kit_row(h, fn)
+  local z = VIEW.zoom
+  local sx, sy = R.ImGui_GetCursorScreenPos(ctx)
+  local wd = inner_w() / z
+  kit_at(R.ImGui_GetWindowDrawList(ctx), sx, sy)
+  fn(wd)
+  R.ImGui_SetCursorScreenPos(ctx, sx, sy)
+  R.ImGui_Dummy(ctx, wd * z, h * z)
+end
+
+-- Section as a kit panel. The panel sits behind the content and is drawn before
+-- it; its height comes from the previous frame (SECH).
+local SECH = {}
+local function sec_begin(id, title, extra)
+  local z = VIEW.zoom
+  R.ImGui_Dummy(ctx, 1, 2 * z)
+  local sx, sy = R.ImGui_GetCursorScreenPos(ctx)
+  local w = inner_w()
   local dl = R.ImGui_GetWindowDrawList(ctx)
-  local x, y = R.ImGui_GetCursorScreenPos(ctx)
-  local pm = push_mono(-1)
-  local lh = R.ImGui_GetTextLineHeight(ctx)
-  trace(dl, { { x + 1, y + 1 }, { x + lh * 0.5, y + lh * 0.5 }, { x + 12, y + lh * 0.5 } }, acid_a(0.6))
-  R.ImGui_Dummy(ctx, 20, lh)
-  R.ImGui_SameLine(ctx)
-  R.ImGui_TextColored(ctx, ACID, title)
-  popf(pm)
+  kit_at(dl, sx, sy)
+  panel(0, 0, w / z, (SECH[id] or 30 * z) / z, title)
+  if extra then extra(w / z) end
+  R.ImGui_SetCursorScreenPos(ctx, sx, sy)
+  R.ImGui_Dummy(ctx, w, 26 * z)
+  R.ImGui_Indent(ctx, 12 * z)
+  local wx = R.ImGui_GetWindowPos(ctx)
+  R.ImGui_PushTextWrapPos(ctx, sx + w - 12 * z - wx)
+  return { id = id, sx = sx, sy = sy, w = w }
+end
+
+local function sec_end(s)
+  local z = VIEW.zoom
+  R.ImGui_PopTextWrapPos(ctx)
+  R.ImGui_Unindent(ctx, 12 * z)
+  R.ImGui_Dummy(ctx, 1, 6 * z)
+  local _, ey = R.ImGui_GetCursorScreenPos(ctx)
+  local h = math.max(30 * z, ey - s.sy - 4 * z)
+  SECH[s.id] = h
+  rect("sec_" .. s.id, s.sx - 6 * z, s.sy - 4 * z, s.sx + s.w + 6 * z, s.sy + h + 8 * z)
+  R.ImGui_Dummy(ctx, 1, 4 * z)
 end
 
 --------------------------------------------------------------------
 -- GUI
 --------------------------------------------------------------------
+local WIN_TITLE = "TT-THEMEFONTEDITOR"   -- new title = new window ID: the window starts once at 800 x 820
+local HEAD_H, TOOL_H, FOOT_H, JOB_H = 50, 66, 102, 20   -- FOOT_H includes the BAKE TO row
+local MIN_WD, MIN_BODY = 480, 120   -- smallest design area, below that scrollbars appear
+
 local function font_line(key)
   local f = S.cur[key]
   local changed = S.base[key] and not font_same(f, S.base[key])
@@ -1525,10 +2179,12 @@ local function test_toggle(key)
   touch()
 end
 
+local TIP_TEST_ON = "End the test and show this font at its normal size again."
+local TIP_TEST = "Show this font twice as large and bold in the preview to see where REAPER uses it."
+
 local function test_button(key, id)
   if R.ImGui_SmallButton(ctx, (S.test == key and "TEST OFF" or "  TEST  ") .. "##" .. id) then test_toggle(key) end
-  tip(S.test == key and "End the test - font back to normal"
-    or "Enlarge this font in the preview (double size, bold)\nto see where it is used in the REAPER window.")
+  tip(S.test == key and TIP_TEST_ON or TIP_TEST)
 end
 
 -- Combo box with all fonts; returns the chosen key
@@ -1549,7 +2205,7 @@ end
 -- Element override choice: "(as theme)" or a WALTER font
 local function ovr_combo(elem, id, width)
   local curIdx = S.ovr[elem]
-  R.ImGui_SetNextItemWidth(ctx, width or 170)
+  R.ImGui_SetNextItemWidth(ctx, width or 170 * VIEW.zoom)
   local k = font_combo("##ov" .. id, key_of_idx(curIdx), true, "(as theme)")
   if k == false then set_override(elem, nil)
   elseif k then
@@ -1558,59 +2214,66 @@ local function ovr_combo(elem, id, width)
   end
 end
 
--- Edit block for one font: -/+, slider, bold/italic, reset
-local function editor(key)
+-- Edit block for one font: -/+, slider, bold/italic, test, reset (kit row)
+local function draw_edit(key)
   local f = S.cur[key]; if not f then return end
   local b = S.base[key]
+  local s = sec_begin("edit", "EDIT")
   local pb = push_bold(2)
   R.ImGui_TextColored(ctx, ACID, font_label(key))
   popf(pb)
   R.ImGui_SameLine(ctx)
   R.ImGui_TextDisabled(ctx, f.face .. "   (original " .. px(b) .. " px)")
 
-  if R.ImGui_Button(ctx, " - ##ed") then set_font(key, function(x) x.height = with_px(x, px(x) - 1) end) end
-  tip("1 pixel smaller")
-  R.ImGui_SameLine(ctx)
-  R.ImGui_SetNextItemWidth(ctx, 220)
-  local ch, v = R.ImGui_SliderInt(ctx, "##px", px(f), 6, 48, "%d px")
-  if ch then set_font(key, function(x) x.height = with_px(x, v) end) end
-  tip("Font size in pixels (Ctrl+click: type a value).\nThe preview reloads when you release the mouse.")
-  R.ImGui_SameLine(ctx)
-  if R.ImGui_Button(ctx, " + ##ed") then set_font(key, function(x) x.height = with_px(x, px(x) + 1) end) end
-  tip("1 pixel larger")
-  R.ImGui_SameLine(ctx)
-  local pm = push_mono()
-  R.ImGui_Text(ctx, string.format("~%d pt", pt(f)))
-  popf(pm)
-  R.ImGui_SameLine(ctx)
-  local cb, bold = R.ImGui_Checkbox(ctx, "Bold", f.weight >= 600)
-  if cb then set_font(key, function(x) x.weight = bold and 700 or 400 end) end
-  tip("Font weight bold / regular")
-  R.ImGui_SameLine(ctx)
-  local ci, it = R.ImGui_Checkbox(ctx, "Italic", f.italic)
-  if ci then set_font(key, function(x) x.italic = it end) end
-  tip("Italic style")
-  R.ImGui_SameLine(ctx)
-  test_button(key, "ed")
-  if not font_same(f, b) then
-    R.ImGui_SameLine(ctx)
-    if R.ImGui_Button(ctx, "Reset##ed") then S.cur[key] = copy_font(b); touch() end
-    tip("Reset this font to the value of the original theme")
-  end
+  local wide = (inner_w() / VIEW.zoom) >= 700
+  kit_row(wide and 32 or 64, function(wd)
+    if btn("k_minus", 0, 2, 26, 26, "-", false, false, "Make this font 1 pixel smaller.") then
+      set_font(key, function(x) x.height = with_px(x, px(x) - 1) end)
+    end
+    -- the slider shows 6..48 px but changes the font only when it is
+    -- operated. Larger/smaller theme values (e.g. 64 px) stay unchanged on selection and after RESET.
+    local shown = math.max(6, math.min(48, px(f)))
+    local nv = hslider("k_size", 40, 4, 200, 22, shown, 6, 48, math.max(6, math.min(48, px(b))),
+      "Drag to set the font size from 6 to 48 pixels (Shift = fine, double-click or right-click = original size); the preview reloads when you release the mouse.")
+    local np = floor(nv + 0.5)
+    if np ~= shown then set_font(key, function(x) x.height = with_px(x, np) end) end
+    if btn("k_plus", 254, 2, 26, 26, "+", false, false, "Make this font 1 pixel larger.") then
+      set_font(key, function(x) x.height = with_px(x, px(x) + 1) end)
+    end
+    ptext(290, 8, px(f) .. " px", acid(1), 13)
+    ptext(338, 9, string.format("~%d pt", pt(f)), C(0.55, 0.60, 0.55), 12)
+    local x0, y0 = 390, 2
+    if not wide then x0, y0 = 0, 34 end
+    if toggle("k_bold", x0, y0, 70, 26, f.weight >= 600, "BOLD", "Switch the font weight between bold and regular.") then
+      set_font(key, function(x) x.weight = (x.weight >= 600) and 400 or 700 end)
+    end
+    if toggle("k_italic", x0 + 78, y0, 78, 26, f.italic, "ITALIC", "Switch the italic style of this font on or off.") then
+      set_font(key, function(x) x.italic = not x.italic end)
+    end
+    if btn("k_test", x0 + 164, y0, 76, 26, S.test == key and "TEST OFF" or "TEST", S.test == key, false,
+        S.test == key and TIP_TEST_ON or TIP_TEST) then
+      test_toggle(key)
+    end
+    local same = font_same(f, b)
+    if btn("k_reset", x0 + 248, y0, 66, 26, "RESET", false, false,
+        "Reset this font to the value of the original theme.", same) then
+      S.cur[key] = copy_font(b); touch()
+    end
+  end)
 
   local users = usage_of(key)
   if #users > 0 then
     local all = table.concat(users, ", ")
     R.ImGui_TextDisabled(ctx, "used by " .. #users .. " element" .. (#users == 1 and "" or "s") .. ": "
       .. all:sub(1, 150) .. (#all > 150 and " ..." or ""))
-    tip(table.concat(users, "\n"))
+    tip("Elements of the default layout that use this font: " .. table.concat(users, ", ") .. ".")
   end
+  sec_end(s)
 end
 
 local function draw_target()
   local t = S.target
-  section("TARGET")
-  R.ImGui_SameLine(ctx)
+  local s = sec_begin("target", "TARGET")
   local pm = push_mono()
   R.ImGui_Text(ctx, (t.info ~= "" and t.info or "?") .. (t.track and ("   Track: " .. t.track) or "")
     .. (t.layout and ("   Layout: " .. (t.layout ~= "" and t.layout or "default")) or ""))
@@ -1624,7 +2287,7 @@ local function draw_target()
   R.ImGui_AlignTextToFramePadding(ctx)
   R.ImGui_Text(ctx, "Responsible font:")
   R.ImGui_SameLine(ctx)
-  R.ImGui_SetNextItemWidth(ctx, 220)
+  R.ImGui_SetNextItemWidth(ctx, 220 * VIEW.zoom)
   local cur = S.confirm[ck] or (t.slots[1] and t.slots[1].key)
   local k = font_combo("##resp", cur, true, "(automatic)")
   if k ~= nil then
@@ -1640,9 +2303,7 @@ local function draw_target()
     t.slots = slots
     set_status(k and (ck .. " -> " .. font_label(k) .. " remembered") or (ck .. ": automatic again"))
   end
-  tip("Which font really controls this spot? If the detection is off,\n"
-    .. "choose the right one here (check it with TEST).\n"
-    .. "The choice is remembered for this theme.")
+  tip("Choose the font that really controls this spot if the detection is off; the choice is remembered for this theme.")
   if cur then
     R.ImGui_SameLine(ctx)
     test_button(cur, "resp")
@@ -1655,7 +2316,7 @@ local function draw_target()
     if t.coarse then
       R.ImGui_TextColored(ctx, ACID, "Coarse: REAPER only reports the area here - check the candidates with TEST.")
     end
-    local availW = R.ImGui_GetContentRegionAvail(ctx)
+    local availW = inner_w()
     for i, sl in ipairs(t.slots) do
       local f = S.cur[sl.key]
       local pm2 = push_mono()
@@ -1663,12 +2324,13 @@ local function draw_target()
         sl.confirmed and "OK " or (sl.ovr and "EL " or "   "),
         font_label(sl.key), px(f), sl.elem or "", sl.via and (" = " .. sl.via) or "", i)
       if R.ImGui_Selectable(ctx, label, S.sel == sl.key, R.ImGui_SelectableFlags_AllowOverlap(),
-          math.max(100, availW - 90), 0) then
+          math.max(100, availW - 90 * VIEW.zoom), 0) then
         S.sel = sl.key
       end
       popf(pm2)
-      tip(sl.confirmed and "Font chosen by you" or sl.ovr and "Element override"
-        or "Computed from the rtconfig - click to edit")
+      tip(sl.confirmed and "Font chosen by you; click to edit it."
+        or sl.ovr and "Font assigned by an element override; click to edit it."
+        or "Font computed from the rtconfig; click to edit it.")
       R.ImGui_SameLine(ctx)
       test_button(sl.key, "tt" .. i)
     end
@@ -1686,82 +2348,94 @@ local function draw_target()
       popf(pm3)
       R.ImGui_SameLine(ctx)
       ovr_combo(e, "t" .. i)
-      tip("Own WALTER font for " .. e .. " only.\nWritten to the working copy rtconfig"
-        .. "\n(all layouts/scales). \"(as theme)\" removes it.")
+      tip("Give " .. e .. " a WALTER font of its own in all layouts and scales; \"(as theme)\" removes it.")
     end
   end
+  sec_end(s)
 end
 
 -- Horizontal splitter: drag to change the height of the font list
 local function splitter(id)
-  local w = R.ImGui_GetContentRegionAvail(ctx)
+  local z = VIEW.zoom
+  local w = inner_w()
   local x, y = R.ImGui_GetCursorScreenPos(ctx)
-  R.ImGui_InvisibleButton(ctx, id, math.max(w, 1), 10)
+  R.ImGui_InvisibleButton(ctx, id, math.max(w, 1), 10 * z)
   local hov, act = R.ImGui_IsItemHovered(ctx), R.ImGui_IsItemActive(ctx)
   if hov or act then R.ImGui_SetMouseCursor(ctx, R.ImGui_MouseCursor_ResizeNS()) end
   if act then
     local _, dy = R.ImGui_GetMouseDelta(ctx)
-    OPT.listH = math.max(80, math.min(2000, OPT.listH + dy))
+    OPT.listH = math.max(80, math.min(2000, OPT.listH + dy / z))
   end
   if R.ImGui_IsItemDeactivated(ctx) then save_opts() end
   local dl = R.ImGui_GetWindowDrawList(ctx)
   local col = (hov or act) and ACID or acid_a(0.35)
-  local cy = y + 5
+  local cy = y + 5 * z
   R.ImGui_DrawList_AddLine(dl, x, cy, x + w, cy, col, (hov or act) and 2 or 1)
   local cx = x + w * 0.5
-  for i = -1, 1 do R.ImGui_DrawList_AddCircleFilled(dl, cx + i * 9, cy, 2.2, col) end
-  tip("Drag to change the height of the font list.\nDouble-click: default height.")
+  for i = -1, 1 do R.ImGui_DrawList_AddCircleFilled(dl, cx + i * 9 * z, cy, 2.2 * z, col) end
+  tip("Drag to change the height of the font list; double-click restores the default height.")
   if hov and R.ImGui_IsMouseDoubleClicked(ctx, 0) then OPT.listH = 230; save_opts() end
 end
 
 local function draw_list()
+  local z = VIEW.zoom
+  local s = sec_begin("list", "ALL FONTS")
   local flags = R.ImGui_TableFlags_RowBg() | R.ImGui_TableFlags_BordersInnerH() | R.ImGui_TableFlags_ScrollY()
-  if not R.ImGui_BeginTable(ctx, "fonts", 3, flags, 0, OPT.listH) then return end
-  R.ImGui_TableSetupScrollFreeze(ctx, 0, 1)
-  R.ImGui_TableSetupColumn(ctx, "Font / size / face", R.ImGui_TableColumnFlags_WidthStretch())
-  R.ImGui_TableSetupColumn(ctx, "Elements", R.ImGui_TableColumnFlags_WidthFixed(), 70)
-  R.ImGui_TableSetupColumn(ctx, "", R.ImGui_TableColumnFlags_WidthFixed(), 56)
-  R.ImGui_TableHeadersRow(ctx)
-  for _, key in ipairs(S.order) do
-    R.ImGui_TableNextRow(ctx)
-    R.ImGui_TableNextColumn(ctx)
-    local pm = push_mono()
-    if R.ImGui_Selectable(ctx, font_line(key) .. "##l" .. key, S.sel == key,
-        R.ImGui_SelectableFlags_AllowOverlap()) then
-      S.sel = key
+  if R.ImGui_BeginTable(ctx, "fonts", 3, flags, inner_w(), OPT.listH * z) then
+    R.ImGui_TableSetupScrollFreeze(ctx, 0, 1)
+    R.ImGui_TableSetupColumn(ctx, "Font / size / face", R.ImGui_TableColumnFlags_WidthStretch())
+    R.ImGui_TableSetupColumn(ctx, "Elements", R.ImGui_TableColumnFlags_WidthFixed(), 70 * z)
+    R.ImGui_TableSetupColumn(ctx, "", R.ImGui_TableColumnFlags_WidthFixed(), 56 * z)
+    R.ImGui_TableHeadersRow(ctx)
+    for _, key in ipairs(S.order) do
+      R.ImGui_TableNextRow(ctx)
+      R.ImGui_TableNextColumn(ctx)
+      local pm = push_mono()
+      if R.ImGui_Selectable(ctx, font_line(key) .. "##l" .. key, S.sel == key,
+          R.ImGui_SelectableFlags_AllowOverlap()) then
+        S.sel = key
+      end
+      if TEST.on then
+        local ax, ay = R.ImGui_GetItemRectMin(ctx)
+        local bx, by = R.ImGui_GetItemRectMax(ctx)
+        rect("row_" .. key, ax, ay, bx, by)
+      end
+      popf(pm)
+      tip("Click to edit this font in the EDIT section above.")
+      R.ImGui_TableNextColumn(ctx)
+      local u = usage_of(key)
+      if #u > 0 then
+        R.ImGui_TextDisabled(ctx, tostring(#u))
+        tip("Elements of the default layout using this font: " .. table.concat(u, ", ") .. ".")
+      end
+      R.ImGui_TableNextColumn(ctx)
+      if R.ImGui_SmallButton(ctx, "-##" .. key) then
+        set_font(key, function(x) x.height = with_px(x, px(x) - 1) end)
+      end
+      tip("Make this font 1 pixel smaller.")
+      R.ImGui_SameLine(ctx)
+      if R.ImGui_SmallButton(ctx, "+##" .. key) then
+        set_font(key, function(x) x.height = with_px(x, px(x) + 1) end)
+      end
+      tip("Make this font 1 pixel larger.")
     end
-    popf(pm)
-    tip("Click to edit (above, under EDIT)")
-    R.ImGui_TableNextColumn(ctx)
-    local u = usage_of(key)
-    if #u > 0 then
-      R.ImGui_TextDisabled(ctx, tostring(#u))
-      tip("Elements in the default layout using this font:\n" .. table.concat(u, "\n"))
-    end
-    R.ImGui_TableNextColumn(ctx)
-    if R.ImGui_SmallButton(ctx, "-##" .. key) then
-      set_font(key, function(x) x.height = with_px(x, px(x) - 1) end)
-    end
-    tip("1 pixel smaller")
-    R.ImGui_SameLine(ctx)
-    if R.ImGui_SmallButton(ctx, "+##" .. key) then
-      set_font(key, function(x) x.height = with_px(x, px(x) + 1) end)
-    end
-    tip("1 pixel larger")
+    R.ImGui_EndTable(ctx)
   end
-  R.ImGui_EndTable(ctx)
+  splitter("##split")
+  sec_end(s)
 end
 
 -- all elements of the default layout with their own font override
 local function draw_elements()
+  local z = VIEW.zoom
   if not (S.T and S.T.rtc) then
     R.ImGui_TextDisabled(ctx, "This theme has no rtconfig - no elements.")
     return
   end
-  R.ImGui_SetNextItemWidth(ctx, 240)
+  R.ImGui_SetNextItemWidth(ctx, 240 * z)
   local ch, v = R.ImGui_InputTextWithHint(ctx, "##ef", "Filter, e.g. mcp.fx", S.elemFilter)
   if ch then S.elemFilter = v end
-  tip("Filter element names (substring)")
+  tip("Show only elements whose name contains this text.")
   R.ImGui_SameLine(ctx)
   local n = 0
   for _ in pairs(S.ovr) do n = n + 1 end
@@ -1774,216 +2448,337 @@ local function draw_elements()
   table.sort(names)
   local flags = R.ImGui_TableFlags_RowBg() | R.ImGui_TableFlags_BordersInnerH() | R.ImGui_TableFlags_ScrollY()
   local _, availH = R.ImGui_GetContentRegionAvail(ctx)
-  if not R.ImGui_BeginTable(ctx, "elems", 3, flags, 0, math.max(160, availH - 2)) then return end
+  if not R.ImGui_BeginTable(ctx, "elems", 3, flags, inner_w(), math.max(160 * z, availH - 16 * z)) then return end
   R.ImGui_TableSetupScrollFreeze(ctx, 0, 1)
   R.ImGui_TableSetupColumn(ctx, "Element", R.ImGui_TableColumnFlags_WidthStretch())
-  R.ImGui_TableSetupColumn(ctx, "Theme", R.ImGui_TableColumnFlags_WidthFixed(), 130)
-  R.ImGui_TableSetupColumn(ctx, "Own font", R.ImGui_TableColumnFlags_WidthFixed(), 180)
+  R.ImGui_TableSetupColumn(ctx, "Theme", R.ImGui_TableColumnFlags_WidthFixed(), 130 * z)
+  R.ImGui_TableSetupColumn(ctx, "Own font", R.ImGui_TableColumnFlags_WidthFixed(), 180 * z)
   R.ImGui_TableHeadersRow(ctx)
   for i, e in ipairs(names) do
     R.ImGui_TableNextRow(ctx)
     R.ImGui_TableNextColumn(ctx)
     local pm = push_mono()
     R.ImGui_AlignTextToFramePadding(ctx)
-    R.ImGui_TextColored(ctx, S.ovr[e] and ACID or WHITE, e)
+    R.ImGui_TextColored(ctx, S.ovr[e] and ACID or INKC, e)
     popf(pm)
-    if S.elemVar[e] then tip("via variable " .. S.elemVar[e]) end
+    tip(S.elemVar[e] and ("This element gets its font via the variable " .. S.elemVar[e] .. ".")
+      or "WALTER element of the default layout.")
     R.ImGui_TableNextColumn(ctx)
     local idx = S.elemIdx[e]
     R.ImGui_TextDisabled(ctx, idx == 0 and "main font" or idx == -1 and "vol/pan" or font_label(key_of_idx(idx) or "?"))
     R.ImGui_TableNextColumn(ctx)
     ovr_combo(e, "l" .. i, -1)
-    tip("Own WALTER font for this element only")
+    tip("Give this element a WALTER font of its own; \"(as theme)\" removes it.")
   end
   R.ImGui_EndTable(ctx)
 end
 
-local function draw_options()
-  if R.ImGui_Button(ctx, "OPTIONS") then R.ImGui_OpenPopup(ctx, "tt_opts") end
-  tip("Set font and size of this window")
-  if R.ImGui_BeginPopup(ctx, "tt_opts") then
-    section("OPTIONS")
-    local changed = false
-    R.ImGui_SetNextItemWidth(ctx, 200)
-    if R.ImGui_BeginCombo(ctx, "Font", OPT.ui) then
-      for _, u in ipairs(UI_FONTS) do
-        if R.ImGui_Selectable(ctx, u.name, OPT.ui == u.name) then OPT.ui = u.name; changed = true end
-      end
-      R.ImGui_EndCombo(ctx)
+local function draw_overrides()
+  local s = sec_begin("ovr", "ELEMENT OVERRIDES", function(wd)
+    if btn("k_ovr", wd - 12 - 70, 2, 70, 18, UI.ovrOpen and "HIDE" or "SHOW", UI.ovrOpen, false,
+        "Show or hide the table that gives any WALTER element a font of its own.") then
+      UI.ovrOpen = not UI.ovrOpen
     end
-    tip("Font for texts and buttons of this window")
-    R.ImGui_SetNextItemWidth(ctx, 200)
-    local c1, v1 = R.ImGui_SliderInt(ctx, "Size##ui", OPT.size, 10, 22, "%d px")
-    if c1 then OPT.size = v1; changed = true end
-    tip("Font size for texts and buttons")
-    R.ImGui_SetNextItemWidth(ctx, 200)
-    if R.ImGui_BeginCombo(ctx, "Table font", OPT.mono) then
-      for _, m in ipairs(MONO_FONTS) do
-        if R.ImGui_Selectable(ctx, m.name, OPT.mono == m.name) then OPT.mono = m.name; changed = true end
-      end
-      R.ImGui_EndCombo(ctx)
-    end
-    tip("Fixed-width font for tables and status")
-    R.ImGui_SetNextItemWidth(ctx, 200)
-    local c2, v2 = R.ImGui_SliderInt(ctx, "Size##mono", OPT.msize, 9, 20, "%d px")
-    if c2 then OPT.msize = v2; changed = true end
-    tip("Font size for tables and status")
-    if R.ImGui_Button(ctx, "Defaults") then
-      OPT.ui, OPT.size, OPT.mono, OPT.msize = "Liberation Sans", 14, "Liberation Mono", 13
-      changed = true
-    end
-    tip("Liberation Sans 14 / Liberation Mono 13")
-    if changed then save_opts() end
-    R.ImGui_EndPopup(ctx)
+  end)
+  if UI.ovrOpen then
+    draw_elements()
+  else
+    R.ImGui_TextDisabled(ctx, "Give single WALTER elements (mcp.fxlist, tcp.label ...) a font of their own - click SHOW.")
   end
+  sec_end(s)
+end
+
+-- OPTIONS: kit header (TOOLTIPS, UI SIZE, AUTO FIT) and the fonts of the window
+local function draw_options_popup(px_, py_)
+  if R.ImGui_SetNextWindowPos then R.ImGui_SetNextWindowPos(ctx, px_, py_, R.ImGui_Cond_Appearing(), 1, 0) end
+  if not R.ImGui_BeginPopup(ctx, "tt_opts") then return end
+  if UI.openOpts == false then UI.openOpts = nil; R.ImGui_CloseCurrentPopup(ctx) end
+  local z = VIEW.zoom
+  local x0, y0 = R.ImGui_GetCursorScreenPos(ctx)
+  kit_at(R.ImGui_GetWindowDrawList(ctx), x0, y0)
+  local PW = 400
+  ptext(0, 0, "OPTIONS", C(0.88, 0.98, 0.86, 1), 14)
+  rfill(0, 22, PW, 1, dimc(0.55))
+  rfill(0, 22, 26, 1, acid(0.85))
+  if toggle("k_tips", PW - 122, -1, 122, 20, VIEW.tips, VIEW.tips and "TOOLTIPS ON" or "TOOLTIPS OFF",
+      "Show or hide the tooltips of this window.") then
+    set_tips(not VIEW.tips, true)
+  end
+  ptext(0, 32, "UI SIZE", C(INK[1], INK[2], INK[3], 0.92), 12)
+  ptext(64, 32, string.format("%d %%", floor(VIEW.zoom * 100 + 0.5)), acid(1), 12)
+  for i, f in ipairs(ZOOM_STEPS) do
+    local lbl = string.format("%d%%", floor(f * 100 + 0.5))
+    if btn("k_z" .. i, (i - 1) * 54, 50, 50, 24, lbl, math.abs(VIEW.zoom - f) < 0.005, false,
+        "Show the window content at " .. lbl .. "; the size stays until the window is resized again.") then
+      set_zoom(f, not TEST.on)
+    end
+  end
+  if toggle("k_af", PW - 116, 50, 116, 24, VIEW.autofit, VIEW.autofit and "AUTO FIT ON" or "AUTO FIT OFF",
+      "When on, resizing the window rescales the content to the largest size that fits, from 25 to 400 percent.") then
+    set_autofit(not VIEW.autofit, not TEST.on)
+  end
+  rfill(0, 86, PW, 1, dimc(0.35))
+  ptext(0, 94, "WINDOW FONTS", C(INK[1], INK[2], INK[3], 0.92), 12)
+  R.ImGui_SetCursorScreenPos(ctx, x0, y0)
+  R.ImGui_Dummy(ctx, PW * z, 112 * z)
+
+  local changed = false
+  R.ImGui_SetNextItemWidth(ctx, 200 * z)
+  if R.ImGui_BeginCombo(ctx, "Font", OPT.ui) then
+    for _, u in ipairs(UI_FONTS) do
+      if R.ImGui_Selectable(ctx, u.name, OPT.ui == u.name) then OPT.ui = u.name; changed = true end
+    end
+    R.ImGui_EndCombo(ctx)
+  end
+  tip("Font for the texts and lists of this window.")
+  R.ImGui_SetNextItemWidth(ctx, 200 * z)
+  local c1, v1 = R.ImGui_SliderInt(ctx, "Size##ui", OPT.size, 10, 22, "%d px")
+  if c1 then OPT.size = v1; changed = true end
+  tip("Size of that font at 100 percent UI size, from 10 to 22 pixels.")
+  R.ImGui_SetNextItemWidth(ctx, 200 * z)
+  if R.ImGui_BeginCombo(ctx, "Table font", OPT.mono) then
+    for _, m in ipairs(MONO_FONTS) do
+      if R.ImGui_Selectable(ctx, m.name, OPT.mono == m.name) then OPT.mono = m.name; changed = true end
+    end
+    R.ImGui_EndCombo(ctx)
+  end
+  tip("Fixed-width font for the tables and the target line.")
+  R.ImGui_SetNextItemWidth(ctx, 200 * z)
+  local c2, v2 = R.ImGui_SliderInt(ctx, "Size##mono", OPT.msize, 9, 20, "%d px")
+  if c2 then OPT.msize = v2; changed = true end
+  tip("Size of the table font at 100 percent UI size, from 9 to 20 pixels.")
+  if R.ImGui_Button(ctx, "Defaults") then
+    OPT.ui, OPT.size, OPT.mono, OPT.msize = "Liberation Sans", 14, "Liberation Mono", 13
+    changed = true
+  end
+  tip("Back to Liberation Sans 14 px and Liberation Mono 13 px.")
+  if changed then save_opts() end
+  local wx, wy = R.ImGui_GetWindowPos(ctx)
+  local ww, wh = R.ImGui_GetWindowSize(ctx)
+  rect("options", wx, wy, wx + ww, wy + wh)
+  R.ImGui_EndPopup(ctx)
 end
 
 local function draw_theme_chooser()
+  local z = VIEW.zoom
+  local s = sec_begin("chooser", "CHOOSE A THEME")
   R.ImGui_TextColored(ctx, ACID, "No readable theme active.")
   R.ImGui_TextWrapped(ctx, "Choose a theme to edit (it will be loaded):")
   local dir = RES .. "/ColorThemes/"
-  if R.ImGui_BeginChild(ctx, "themes", 0, 260) then
+  if R.ImGui_BeginChild(ctx, "themes", inner_w(), 260 * z) then
     for _, f in ipairs(list_themes(dir)) do
       if R.ImGui_Selectable(ctx, f) then
         if R.OpenColorThemeFile(dir .. f) then init_theme(dir .. f)
         else set_status("Loading failed: " .. f) end
       end
+      tip("Load this theme in REAPER and open it for editing.")
     end
     R.ImGui_EndChild(ctx)
   end
+  sec_end(s)
 end
 
-local function draw_footer()
-  R.ImGui_Separator(ctx)
-  if S.job then
-    local frac = S.job.total > 0 and (S.job.pos / S.job.total) or 0
-    R.ImGui_ProgressBar(ctx, frac, -1, 0, string.format("%s  %d / %d", S.job.name, S.job.pos, S.job.total))
-  end
-  local pm = push_mono()
-  local dl = R.ImGui_GetWindowDrawList(ctx)
-  local sx, sy = R.ImGui_GetCursorScreenPos(ctx)
-  local lh = R.ImGui_GetTextLineHeight(ctx)
-  trace(dl, { { sx + 2, sy }, { sx + 2 + lh * 0.5, sy + lh * 0.5 }, { sx + 14, sy + lh * 0.5 } }, acid_a(0.6))
-  R.ImGui_Dummy(ctx, 22, lh)
-  R.ImGui_SameLine(ctx)
-  R.ImGui_TextColored(ctx, ACID, "STATUS //")
-  R.ImGui_SameLine(ctx)
-  R.ImGui_TextWrapped(ctx, S.status)
-  popf(pm)
-end
-
-local function draw_actions()
-  local n = changed_count()
-  local busy = S.job ~= nil
-  if busy then R.ImGui_BeginDisabled(ctx) end
-  if n == 0 then R.ImGui_BeginDisabled(ctx) end
-  local pb = push_bold(1)
-  if R.ImGui_Button(ctx, "  BAKE THEME  ") then
-    S.test = nil
-    if S.dirtyAt then apply_preview() end
-    start_bake()
-  end
-  popf(pb)
-  tip("Write a new theme with all changes and load it:\n"
-    .. select(2, split_path(bake_path(S.orig, S.T.zip or next(S.ovr) ~= nil)))
-    .. "\nThe original stays untouched.")
-  R.ImGui_SameLine(ctx)
-  if R.ImGui_Button(ctx, "Discard") then discard() end
-  tip("Discard all changes and load the original theme again")
-  if n == 0 then R.ImGui_EndDisabled(ctx) end
-  R.ImGui_SameLine(ctx)
-  if R.ImGui_Button(ctx, "Reload") then init_theme(R.GetLastColorThemeFile()) end
-  tip("Read the active theme again (e.g. after switching themes in REAPER\nor changing the UI scale)")
-  if busy then R.ImGui_EndDisabled(ctx) end
-  R.ImGui_SameLine(ctx)
-  local pm = push_mono()
-  R.ImGui_TextColored(ctx, n > 0 and ACID or GREY, n .. " change" .. (n == 1 and "" or "s")
-    .. (S.dirtyAt and "  (preview pending)" or ""))
-  popf(pm)
-end
-
-local function draw_main()
-  S.guiHovered = R.ImGui_IsWindowHovered(ctx, R.ImGui_HoveredFlags_RootAndChildWindows())
-  draw_header()
-
+-- Header: wordmark, version, preview state (kit coordinates from the window content)
+local function draw_header(Wd)
+  local x = spaced(14, 13, "TT-THEMEFONTEDITOR", acid(1), 19, 2.0)
+  ptext(x + 8, 20, "v" .. VERSION, C(0.45, 0.48, 0.45), 12)
+  local label, colr, ttxt
   if not S.T then
-    draw_theme_chooser()
-    draw_footer()
-    return
-  end
-
-  R.ImGui_Text(ctx, "Theme: " .. select(2, split_path(S.orig)))
-  R.ImGui_SameLine(ctx)
-  local pm = push_mono()
-  R.ImGui_TextColored(ctx, ACID, string.format("SCALE %d%% -> layout %s", math.floor(S.uiscale * 100 + 0.5),
-    S.defLayout ~= "" and S.defLayout or "default"))
-  popf(pm)
-  tip("UI scale from the REAPER preferences and the mixer layout\n"
-    .. "used to compute the fonts")
-  if S.wcLoaded then
-    R.ImGui_SameLine(ctx)
-    R.ImGui_TextDisabled(ctx, "- preview active")
-    tip("REAPER is showing the working copy with your changes")
-  end
-
-  -- working copy made by the older TT_ThemeFonts script: its rtconfig
-  -- was rewritten and may lose scaling terms
-  if S.T.rtc and S.T.rtc:find("define_parameter%s+ttf_") then
-    local legacy = find_original(S.orig)
-    R.ImGui_TextColored(ctx, ACID, "Warning: working copy of the older TT_ThemeFonts script - rtconfig is modified.")
-    if legacy and norm(legacy) ~= norm(S.orig) then
-      R.ImGui_SameLine(ctx)
-      if R.ImGui_SmallButton(ctx, "Load original##legacy") then
-        if load_theme(legacy) then init_theme(legacy) end
-      end
-      tip("Loads " .. select(2, split_path(legacy)) .. "\nFont changes of the old copy are not carried over.")
-    end
-  end
-
-  -- picker + options
-  if picker.armed then
-    if R.ImGui_Button(ctx, "Cancel picker") then picker.armed = false; S.hover = nil end
-    tip("Stop the picker without locking a target")
-    R.ImGui_SameLine(ctx)
-    local pb = push_bold()
-    R.ImGui_TextColored(ctx, ACID, "Hover over text in the REAPER window - click or SHIFT locks it")
-    popf(pb)
+    label, colr, ttxt = "NO THEME", AMBER, "No readable theme is active; choose one in the list below."
+  elseif S.wcLoaded then
+    label, colr, ttxt = "PREVIEW ACTIVE", { UK.ar, UK.ag, UK.ab }, "REAPER is showing the working copy with your changes."
   else
-    local pb = push_bold(1)
-    if R.ImGui_Button(ctx, "  PICKER  ") then
+    label, colr, ttxt = "ORIGINAL THEME", { 0.55, 0.60, 0.55 }, "REAPER is showing the original theme; the first change starts the preview."
+  end
+  local lwid = tw(label, 12) + 22
+  local sx = Wd - 14 - lwid
+  if sx > x + 70 then
+    -- circuit traces between the wordmark and the state
+    local tx = x + 60
+    if sx - tx > 90 then
+      trace({ { sx - 8, 16 }, { tx + 40, 16 }, { tx + 24, 32 } }, acid(0.55))
+      trace({ { sx - 8, 24 }, { tx + 66, 24 }, { tx + 58, 32 } }, acid(0.35))
+    end
+    led(sx + 6, 25, 3.4, S.T ~= nil, colr)
+    ptext(sx + 16, 18, label, C(colr[1], colr[2], colr[3], 1), 12)
+    hit("k_hdr", sx, 14, lwid, 22)
+    tipfor("k_hdr", ttxt)
+  end
+  rfill(14, HEAD_H - 3, Wd - 28, 1, dimc(0.35))
+end
+
+-- Toolbar row: PICKER / CANCEL PICKER, OPTIONS, theme and scale
+local function draw_toolbar(Wd)
+  local y = HEAD_H + 4
+  local optx = Wd - 14 - 96
+  if picker.armed then
+    if btn("k_cancel", 14, y, 128, 26, "CANCEL PICKER", true, false, "Stop the picker without locking a target.") then
+      picker.armed = false; S.hover = nil
+    end
+    ptext(152, y + 6, fit_text("Hover over text in the REAPER window - click or SHIFT locks it", 13, optx - 162), acid(1), 13)
+  else
+    if btn("k_picker", 14, y, 128, 26, "PICKER", false, true,
+        "Arm the picker, point at any text in the REAPER window and press Shift (or click) to lock that spot.") then
       if not R.GetThingFromPoint then set_status("The picker needs REAPER 6.x+ (GetThingFromPoint)")
       else picker.armed = true; picker.down = false; picker.shift = true; S.hover = nil end
     end
-    popf(pb)
-    tip("Find a spot in the theme: move the mouse over a text in the REAPER window.\n"
-      .. "SHIFT locks it without triggering anything in REAPER; a click works too.")
-    R.ImGui_SameLine(ctx)
-    R.ImGui_TextDisabled(ctx, "Find a spot in the theme")
+    ptext(152, y + 6, fit_text("Find a spot in the theme", 13, optx - 162), C(0.55, 0.60, 0.55), 13)
   end
-  R.ImGui_SameLine(ctx)
-  local ow = R.ImGui_CalcTextSize(ctx, "OPTIONS") + 16
-  R.ImGui_SetCursorPosX(ctx, math.max(R.ImGui_GetCursorPosX(ctx), R.ImGui_GetWindowWidth(ctx) - ow - 12))
-  draw_options()
+  if btn("k_opts", optx, y, 96, 26, "OPTIONS", R.ImGui_IsPopupOpen(ctx, "tt_opts"), false,
+      "Open the window options: UI size, AUTO FIT, tooltips and the window fonts.") then
+    UI.openOpts = true
+  end
+  local y2 = y + 36
+  if S.T then
+    local scl = string.format("SCALE %d%% -> LAYOUT %s", floor(S.uiscale * 100 + 0.5),
+      S.defLayout ~= "" and S.defLayout or "default")
+    local sw = tw(scl, 11)
+    ptext(14, y2 + 1, "THEME", acid(0.9), 11)
+    local tname = select(2, split_path(S.orig))
+    ptext(62, y2, fit_text(tname, 12, Wd - 14 - sw - 24 - 62), INKC, 12)
+    ptext_r(Wd - 14, y2 + 1, scl, acid(1), 11)
+    hit("k_scale", Wd - 14 - sw, y2 - 2, sw, 16)
+    tipfor("k_scale", "UI scale from the REAPER preferences and the mixer layout the editor uses to compute the fonts.")
+  end
+  rfill(14, HEAD_H + TOOL_H - 3, Wd - 28, 1, dimc(0.25))
+end
 
-  -- scrolling body; actions + status stay visible at the bottom
-  local footH = R.ImGui_GetFrameHeightWithSpacing(ctx) * 2 + R.ImGui_GetTextLineHeightWithSpacing(ctx) * 2 + 12
-  if R.ImGui_BeginChild(ctx, "body", 0, -footH) then
-    if S.target then draw_target() end
-    if S.sel and S.cur[S.sel] then
-      section("EDIT")
-      editor(S.sel)
+-- Footer: progress, BAKE THEME / DISCARD / RELOAD, counter, STATUS line
+local function draw_footer(Wd)
+  local y = 8
+  if S.job then
+    local frac = S.job.total > 0 and (S.job.pos / S.job.total) or 0
+    rfill(14, y, Wd - 28, 14, C(0.035, 0.038, 0.035), 2)
+    rfill(14, y, math.max(2, (Wd - 28) * frac), 14, acid(0.75), 2)
+    ptext(20, y, string.format("%s  %d / %d", S.job.name, S.job.pos, S.job.total), C(0.96, 0.98, 0.96), 11)
+    y = y + JOB_H
+  end
+  local yb = y
+  if S.T then
+    local n = changed_count()
+    local busy = S.job ~= nil
+    -- selectable target (BAKE TO: CREATE COPY / OVERWRITE ORIGINAL)
+    local asZip = (S.T.zip or next(S.ovr) ~= nil) and true or false
+    local bp, bmode, bnote = bake_target(asZip)
+    local bn = bp and select(2, split_path(bp)) or "(no free copy name)"
+    local btip = bmode == "overwrite"
+      and ("Write all changes back into " .. bn .. " and load it; the previous version is kept as " .. bn .. ".bak.")
+      or ("Write all changes to the new theme file " .. bn .. " and load it; the original stays untouched"
+        .. (bnote and " (element overrides need a zipped theme, so overwriting is not possible here)." or "."))
+    if btn("k_bake", 14, yb, 132, 28, "BAKE THEME", false, true, btip, busy or n == 0) then
+      request_bake()
     end
-    section("ALL FONTS")
-    draw_list()
-    splitter("##split")
-    if R.ImGui_CollapsingHeader(ctx, "ELEMENT OVERRIDES") then draw_elements() end
-    tip("Give any WALTER element (mcp.fxlist, tcp.label ...) a font of its own -\n"
-      .. "independent of other elements using the same font.")
+    if btn("k_discard", 154, yb, 92, 28, "DISCARD", false, false,
+        "Discard all changes and load the original theme again.", busy or n == 0) then
+      discard()
+    end
+    if btn("k_reload", 254, yb, 92, 28, "RELOAD", false, false,
+        "Read the active theme again, for example after switching themes or changing the UI scale in REAPER.", busy) then
+      init_theme(R.GetLastColorThemeFile())
+    end
+    local cnt = n .. " change" .. (n == 1 and "" or "s") .. (S.dirtyAt and "  (preview pending)" or "")
+    ptext(360, yb + 7, fit_text(cnt, 12, Wd - 374), n > 0 and acid(1) or C(0.55, 0.58, 0.55), 12)
+    -- BAKE TO row: choice of the target (saved), on the right the actual file name
+    local yt = yb + 36
+    ptext(14, yt + 4, "BAKE TO", acid(0.9), 11)
+    if btn("k_bt_copy", 70, yt, 112, 22, "CREATE COPY", bmode == "copy", false,
+        "Bake into a new theme file next to the original, numbered if the name is taken, so the original stays untouched.",
+        busy) then
+      set_bake_mode("copy", true)
+    end
+    local canOver = asZip == is_zip(S.orig)
+    if btn("k_bt_over", 188, yt, 158, 22, "OVERWRITE ORIGINAL", bmode == "overwrite", false,
+        canOver and "Bake back into the theme file you are editing; its previous version is kept as a .bak file next to it."
+          or "Not available for this theme: element overrides need a zipped theme, so an unzipped theme is baked as a copy.",
+        busy or not canOver) then
+      set_bake_mode("overwrite", true)
+    end
+    local tgt = (bmode == "overwrite") and (bn .. "  (old kept as .bak)") or (bn .. "  (new file)")
+    ptext(360, yt + 4, fit_text(tgt, 12, Wd - 374), C(0.78, 0.84, 0.76), 12)
+    hit("k_bt_file", 360, yt, math.max(20, Wd - 374), 22)
+    tipfor("k_bt_file", "File that BAKE THEME will write, depending on the BAKE TO choice.")
+  end
+  local ys = yb + 66
+  trace({ { 15, ys - 1 }, { 21, ys + 6 }, { 28, ys + 6 } }, acid(0.55))
+  ptext(38, ys, "STATUS //", acid(1), 11)
+  ptext(102, ys - 1, fit_text(S.status, 12, Wd - 102 - 14), INKC, 12)
+end
+
+local function draw_main()
+  local z = VIEW.zoom
+  local ww, wh = R.ImGui_GetWindowSize(ctx)
+  track_window(ww, wh)
+  save_view_pending(R.ImGui_IsMouseDown(ctx, 0))
+  S.guiHovered = R.ImGui_IsWindowHovered(ctx, R.ImGui_HoveredFlags_RootAndChildWindows())
+  local wx, wy = R.ImGui_GetWindowPos(ctx)
+  rect("window", wx, wy, wx + ww, wy + wh)
+  UK.mx, UK.my = R.ImGui_GetMousePos(ctx)
+  local mods = R.ImGui_GetKeyMods(ctx)
+  UK.shift = (mods & R.ImGui_Mod_Shift()) ~= 0
+  UK.ctrl = (mods & R.ImGui_Mod_Ctrl()) ~= 0
+
+  local gx, gy = R.ImGui_GetCursorScreenPos(ctx)
+  local cw0, ch0 = R.ImGui_GetContentRegionAvail(ctx)
+  -- Minimum area in design units (header, toolbar row, narrow EDIT, footer up to
+  -- RELOAD and counter). If the window is smaller at a fixed zoom, the area is made larger than the window and
+  -- the main window gets scrollbars (frame(): VIEW.overflow) instead of cutting off controls.
+  local footH0 = (FOOT_H + (S.job and JOB_H or 0)) * z
+  local cw = math.max(cw0, MIN_WD * z)
+  local ch = math.max(ch0, (HEAD_H + TOOL_H + MIN_BODY) * z + footH0)
+  VIEW.overflow = (cw > cw0 + 0.5) or (ch > ch0 + 0.5)
+  local Wd = cw / z
+  local dl = R.ImGui_GetWindowDrawList(ctx)
+  ground(dl, gx, gy, cw, ch)
+  rect("frame", gx, gy, gx + cw, gy + ch)
+  kit_at(dl, gx, gy)
+  draw_header(Wd)
+  kit_at(dl, gx, gy)
+  draw_toolbar(Wd)
+  local topH = (HEAD_H + TOOL_H) * z
+  rect("top", gx, gy, gx + cw, gy + topH)
+  rect("toolbar", gx, gy + HEAD_H * z, gx + cw, gy + topH)
+  if UI.openOpts == true then UI.openOpts = nil; R.ImGui_OpenPopup(ctx, "tt_opts") end
+  draw_options_popup(gx + cw - 14 * z, gy + (HEAD_H + 34) * z)
+
+  local footH = (FOOT_H + (S.job and JOB_H or 0)) * z
+  R.ImGui_SetCursorScreenPos(ctx, gx, gy + topH)
+  local bodyH = math.max(40 * z, ch - topH - footH)
+  rect("body", gx, gy + topH, gx + cw, gy + topH + bodyH)
+  if R.ImGui_BeginChild(ctx, "body", cw, bodyH) then
+    R.ImGui_Dummy(ctx, 1, 4 * z)
+    R.ImGui_Indent(ctx, 12 * z)
+    if not S.T then
+      draw_theme_chooser()
+    else
+      -- working copy made by the older TT_ThemeFonts script: its rtconfig
+      -- was rewritten and may lose scaling terms
+      if S.T.rtc and S.T.rtc:find("define_parameter%s+ttf_") then
+        local legacy = find_original(S.orig)
+        R.ImGui_TextColored(ctx, ACID, "Warning: working copy of the older TT_ThemeFonts script - rtconfig is modified.")
+        if legacy and norm(legacy) ~= norm(S.orig) then
+          R.ImGui_SameLine(ctx)
+          if R.ImGui_SmallButton(ctx, "Load original##legacy") then
+            if load_theme(legacy) then init_theme(legacy) end
+          end
+          tip("Load " .. select(2, split_path(legacy)) .. "; font changes of the old copy are not carried over.")
+        end
+      end
+      if S.target then draw_target() end
+      if S.sel and S.cur[S.sel] then draw_edit(S.sel) end
+      draw_list()
+      draw_overrides()
+    end
+    R.ImGui_Unindent(ctx, 12 * z)
     R.ImGui_EndChild(ctx)
   end
 
-  draw_actions()
-  draw_footer()
+  local fy = gy + ch - footH
+  rect("footer", gx, fy, gx + cw, gy + ch)
+  kit_at(dl, gx, fy)
+  rfill(14, 0, Wd - 28, 1, dimc(0.35))
+  draw_footer(Wd)
+  R.ImGui_SetCursorScreenPos(ctx, gx, fy)
+  R.ImGui_Dummy(ctx, cw, footH)
 end
 
 -- Floating label at the mouse pointer while the picker is active
@@ -2014,11 +2809,122 @@ local function draw_hover_tag()
   end
 end
 
+--------------------------------------------------------------------
+-- Test hooks (screenshot rig, dry run). Commands via ExtState
+-- NS/test_cmd, several separated by ";"; acknowledgement in NS/test_ack.
+-- Changes made by tests are not saved.
+--   picker | cancel | options:1|0 | ovr:1|0 | filter:<text> | size:<w>x<h>
+--   zoom:<percent> | autofit:1|0 | tips:1|0 | sel:<font key> | rects:<file>
+--   pickat:<x>,<y> (lock the target at a screen point) | grow:<px> | bold:1|0 (selected
+--   font) | bake | discard | reload | holdat:<n> (pause the job at step n, 0 = continue) | state:<file>
+--   (state as key=value after the frame). rects: also contains the controls (k_*) and list rows (row_*).
+--   baketarget:overwrite|copy (not saved); state: names baketarget, bakefile (target of the next
+--   bake), lastbake/lastbak (target and backup of the last bake)
+--------------------------------------------------------------------
+local function test_poll()
+  TEST.on = R.GetExtState(NS, "test_ok") == "20261001"
+  if not TEST.on then return end
+  local c = R.GetExtState(NS, "test_cmd")
+  if c == "" then return end
+  R.SetExtState(NS, "test_cmd", "", false)
+  for one in c:gmatch("[^;]+") do
+    local k, v = one:match("^([%w_]+):?(.*)$")
+    if k == "picker" then
+      if R.GetThingFromPoint then picker.armed = true; picker.down = false; picker.shift = true; S.hover = nil end
+    elseif k == "cancel" then picker.armed = false; S.hover = nil
+    elseif k == "options" then UI.openOpts = (v ~= "0")
+    elseif k == "ovr" then UI.ovrOpen = (v ~= "0")
+    elseif k == "filter" then S.elemFilter = v or ""
+    elseif k == "size" then
+      local w, h = (v or ""):match("^(%d+)x(%d+)$")
+      if w then TEST.size = { tonumber(w), tonumber(h) } end
+    elseif k == "zoom" then set_zoom((tonumber(v) or 100) / 100, false)
+    elseif k == "autofit" then set_autofit(v ~= "0", false)
+    elseif k == "tips" then set_tips(v ~= "0", false)
+    elseif k == "sel" then if S.cur[v] then S.sel = v end
+    elseif k == "rects" then TEST.dump = v
+    -- controls for the REAPER verification of BAKE/DISCARD and the manual images
+    elseif k == "pickat" then
+      local px_, py_ = (v or ""):match("^(%-?%d+),(%-?%d+)$")
+      -- clear S.sel first: if the point finds no theme font, a following grow changes nothing (instead of the old selection)
+      if px_ then picker.armed = false; S.sel = nil; lock_target(pick_at(tonumber(px_), tonumber(py_))) end
+    elseif k == "grow" then
+      local d = tonumber(v) or 0
+      if S.sel then set_font(S.sel, function(x) x.height = with_px(x, px(x) + d) end) end
+    elseif k == "bold" then
+      if S.sel then set_font(S.sel, function(x) x.weight = (v ~= "0") and 700 or 400 end) end
+    elseif k == "bake" then if S.T and not S.job and changed_count() > 0 then request_bake() end
+    elseif k == "discard" then if S.T and not S.job then discard() end
+    elseif k == "reload" then if not S.job then init_theme(R.GetLastColorThemeFile()) end
+    elseif k == "holdat" then S.holdAt = (tonumber(v) or 0) > 0 and tonumber(v) or nil
+    elseif k == "state" then TEST.state = v
+    -- set the bake target for the test (not saved)
+    elseif k == "baketarget" then set_bake_mode(v, false)
+    end
+  end
+  R.SetExtState(NS, "test_ack", c, false)
+end
+
+-- writes the rectangles of the last frame: "name x0 y0 x1 y1" in
+-- screen pixels (native), plus "zoom" and "imgui_window"
+local function test_state()
+  if not (TEST.on and TEST.state and TEST.state ~= "") then return end
+  local path = TEST.state
+  TEST.state = nil
+  local sel = S.sel and S.cur[S.sel]
+  write_file(path, table.concat({
+    "status=" .. tostring(S.status), "orig=" .. tostring(S.orig), "active=" .. tostring(R.GetLastColorThemeFile()),
+    "wcLoaded=" .. tostring(S.wcLoaded), "wcReady=" .. tostring(S.wcReady), "job=" .. (S.job and S.job.name or ""),
+    "jobpos=" .. (S.job and (S.job.pos .. "/" .. S.job.total) or ""), "changes=" .. (S.T and changed_count() or 0),
+    "sel=" .. tostring(S.sel), "selpx=" .. (sel and px(sel) or ""), "selweight=" .. (sel and sel.weight or ""),
+    "target=" .. (S.target and S.target.info or ""), "pending=" .. tostring(S.dirtyAt ~= nil),
+    "baketarget=" .. bake_mode(),
+    "origparams=" .. tostring(S.origParams),
+    "curparams=" .. tostring(R.ThemeLayout_GetParameter ~= nil and R.ThemeLayout_GetParameter(0) ~= nil),
+    "bakefile=" .. (S.T and (bake_target((S.T.zip or next(S.ovr) ~= nil) and true or false)) or ""),
+    "lastbake=" .. tostring(S.lastBake or ""), "lastbak=" .. tostring(S.lastBak or ""),
+  }, "\n") .. "\n")
+end
+
+local function test_dump()
+  if not (TEST.on and TEST.dump and TEST.dump ~= "") then return end
+  local path = TEST.dump
+  TEST.dump = nil
+  local out = { string.format("zoom %.2f", VIEW.zoom) }
+  local names = {}
+  for n in pairs(TEST.rects) do names[#names + 1] = n end
+  table.sort(names)
+  for _, n in ipairs(names) do
+    local r = TEST.rects[n]
+    local x0, y0, x1, y1 = r[1], r[2], r[3], r[4]
+    if n == "window" then out[#out + 1] = string.format("imgui_window %.1f %.1f %.1f %.1f", x0, y0, x1, y1) end
+    if R.ImGui_PointConvertNative then
+      x0, y0 = R.ImGui_PointConvertNative(ctx, x0, y0, true)
+      x1, y1 = R.ImGui_PointConvertNative(ctx, x1, y1, true)
+    end
+    out[#out + 1] = string.format("%s %d %d %d %d", n, floor(x0 + 0.5), floor(y0 + 0.5), floor(x1 + 0.5), floor(y1 + 0.5))
+  end
+  write_file(path, table.concat(out, "\n") .. "\n")
+end
+
 local function frame()
-  local nc, nv = push_theme()
-  local pf = pushf(FONTS.ui[OPT.ui], OPT.size)
-  R.ImGui_SetNextWindowSize(ctx, 800, 820, R.ImGui_Cond_FirstUseEver())
-  local visible, open = R.ImGui_Begin(ctx, "TT Theme Font Editor", true)
+  local z = VIEW.zoom
+  TEST.rects = {}
+  local nc, nv = push_theme(z)
+  local pf = pushf(FONTS.ui[OPT.ui], OPT.size * z)
+  R.ImGui_SetNextWindowSize(ctx, DES_W, DES_H, R.ImGui_Cond_FirstUseEver())
+  if TEST.size then
+    R.ImGui_SetNextWindowSize(ctx, TEST.size[1], TEST.size[2], R.ImGui_Cond_Always())
+    TEST.size = nil
+  end
+  -- main window without inner padding: header and footer reach the edge
+  R.ImGui_PushStyleVar(ctx, R.ImGui_StyleVar_WindowPadding(), 0, 0)
+  -- if the minimum area does not fit in the window (fixed high zoom), scrollbars also horizontally; otherwise none
+  local flags = R.ImGui_WindowFlags_NoCollapse()
+  if VIEW.overflow then flags = flags | R.ImGui_WindowFlags_HorizontalScrollbar()
+  else flags = flags | R.ImGui_WindowFlags_NoScrollbar() | R.ImGui_WindowFlags_NoScrollWithMouse() end
+  local visible, open = R.ImGui_Begin(ctx, WIN_TITLE, true, flags)
+  R.ImGui_PopStyleVar(ctx, 1)
   local ok, err = true, nil
   if visible then
     ok, err = pcall(draw_main)
@@ -2028,6 +2934,8 @@ local function frame()
   popf(pf)
   R.ImGui_PopStyleVar(ctx, nv)
   R.ImGui_PopStyleColor(ctx, nc)
+  pcall(test_dump)
+  pcall(test_state)
   if not ok then error(err, 0) end
   if not ok2 then error(err2, 0) end
   return open
@@ -2035,8 +2943,17 @@ end
 
 local errCount = 0
 local function loop()
+  test_poll()
   pick_poll()
   run_job()
+  -- queued bake (see BAKE THEME): only after successful preparation, dropped on error (status stays)
+  if S.bakePending and not S.job then
+    S.bakePending = nil
+    if S.T and (S.wcReady or not S.needFolder) then
+      S.dirtyAt = nil
+      start_bake()
+    end
+  end
   if S.dirtyAt and not S.job and R.time_precise() - S.dirtyAt >= DEBOUNCE
       and not R.ImGui_IsMouseDown(ctx, 0) then
     apply_preview()
@@ -2049,6 +2966,7 @@ local function loop()
     if errCount > 20 then return end
   end
   if ok and open == false then
+    abort_job("window closed")
     if changed_count() > 0 and S.wcLoaded then
       tlog("closed with unsaved changes - preview stays active")
     end
@@ -2059,14 +2977,21 @@ end
 
 local function main()
   if not R.ImGui_CreateContext then
-    R.MB("ReaImGui is missing (install it via ReaPack).", "TT Theme Font Editor", 0) return
+    R.MB("ReaImGui is missing (install it via ReaPack).", "TT-THEMEFONTEDITOR", 0) return
   end
   io.open(LOGF, "w"):close()
   load_opts()
+  load_view()
   init_theme(R.GetLastColorThemeFile())
+  -- context name (invisible) unchanged
   ctx = R.ImGui_CreateContext("TT Theme Font Editor")
   init_fonts()
+  -- also when the script ends (action run again, "Terminate instances"), abort running jobs cleanly
+  if R.atexit then R.atexit(function() abort_job("script ended") end) end
   R.defer(loop)
 end
 
 main()
+end
+
+run_gui()

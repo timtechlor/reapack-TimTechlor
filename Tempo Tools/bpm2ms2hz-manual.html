@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-BPM2MS2HZ Manual – Note Values to Milliseconds and Hertz for REAPER and the Browser</title>
+<meta name="description" content="User manual for TT-BPM2MS2HZ, a free tempo calculator by Tim Techlor: note values from 1/1 to 1/32 (plain, dotted, triplet) and whole bars as milliseconds, seconds and Hertz for delay times, LFO rates, release and sidechain. ReaScript for REAPER plus web app.">
+<meta name="tt-doc-name" content="TT-BPM2MS2HZ">
+<meta name="tt-doc-version" content="1.5.0">
+<meta name="tt-doc-date" content="2026-10-14">
+<link rel="canonical" href="https://timtechlor.de/docs/bpm2ms2hz-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-BPM2MS2HZ Manual – Note Values to Milliseconds and Hertz for REAPER and the Browser">
+<meta property="og:description" content="User manual for TT-BPM2MS2HZ, a free tempo calculator by Tim Techlor: note values from 1/1 to 1/32 (plain, dotted, triplet) and whole bars as milliseconds, seconds and Hertz for delay times, LFO rates, release and sidechain. ReaScript for REAPER plus web app.">
+<meta property="og:url" content="https://timtechlor.de/docs/bpm2ms2hz-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-bpm2ms2hz.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-BPM2MS2HZ — User Manual">
+<meta property="article:modified_time" content="2026-10-14">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-BPM2MS2HZ Manual – Note Values to Milliseconds and Hertz for REAPER and the Browser">
+<meta name="twitter:description" content="User manual for TT-BPM2MS2HZ, a free tempo calculator by Tim Techlor: note values from 1/1 to 1/32 (plain, dotted, triplet) and whole bars as milliseconds, seconds and Hertz for delay times, LFO rates, release and sidechain. ReaScript for REAPER plus web app.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-bpm2ms2hz.png">
+<meta name="twitter:image:alt" content="TT-BPM2MS2HZ — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/bpm2ms2hz-manual.html#article",
+   "headline": "TT-BPM2MS2HZ — User Manual",
+   "name": "TT-BPM2MS2HZ Manual – Note Values to Milliseconds and Hertz for REAPER and the Browser",
+   "description": "User manual for TT-BPM2MS2HZ, a free tempo calculator by Tim Techlor: note values from 1/1 to 1/32 (plain, dotted, triplet) and whole bars as milliseconds, seconds and Hertz for delay times, LFO rates, release and sidechain. ReaScript for REAPER plus web app.",
+   "url": "https://timtechlor.de/docs/bpm2ms2hz-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/bpm2ms2hz-manual.html",
+   "datePublished": "2026-10-14",
+   "dateModified": "2026-10-14",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-bpm2ms2hz.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "BPM to ms, BPM to Hz, delay time calculator, LFO rate calculator, REAPER script, ReaPack, tempo calculator, TT-BPM2MS2HZ",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/bpm2ms2hz-manual.html#software" },
+   "version": "1.5.0"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/bpm2ms2hz-manual.html#software",
+   "name": "TT-BPM2MS2HZ",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER); any web browser",
+   "softwareVersion": "1.5.0",
+   "description": "Converts note values at a given tempo into milliseconds and Hertz for delays, LFOs and compressors.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-BPM2MS2HZ", "item": "https://timtechlor.de/docs/bpm2ms2hz-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-BPM2MS2HZ</span></nav>
+      <div class="wordmark" style="--wm-n:12" role="img" aria-label="TT-BPM2MS2HZ">TT-BPM<span class="wm-alt">2</span>MS<span class="wm-alt">2</span>HZ</div>
+      <h1>TT-BPM2MS2HZ — User Manual</h1>
+      <div class="meta">ReaScript for REAPER + web app // Version 1.5.0 // TimTechlor</div>
+      <p class="lead">TT-BPM2MS2HZ turns the tempo into numbers you can type into a plug-in: every note value from 1/1 to 1/32 &mdash; plain, dotted and triplet &mdash; as <em>milliseconds</em> and <em>Hertz</em>, plus whole bars as seconds. It runs as a window inside REAPER that follows the project tempo, and in your browser with no install.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/bpm2ms2hz/tt-bpm2ms2hz-front.png" aria-label="Enlarge screenshot of the TT-BPM2MS2HZ user interface" title="Click to enlarge"><img src="img/bpm2ms2hz/tt-bpm2ms2hz-front.png" width="562" height="1037" alt="TT-BPM2MS2HZ window at 128 BPM: TEMPO panel with the tempo, FROM PROJECT switch and slider, below the NOTE VALUES table from 1/1 to 1/32 with milliseconds and Hertz" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#editions"><span class="num">01</span><span>Three editions</span></a></li>
+<li><a href="#install"><span class="num">02</span><span>Install</span></a></li>
+<li><a href="#window"><span class="num">03</span><span>The window at a glance</span></a></li>
+<li><a href="#tempo"><span class="num">04</span><span>Tempo</span></a></li>
+<li><a href="#table"><span class="num">05</span><span>Reading the tables</span></a></li>
+<li><a href="#copy"><span class="num">06</span><span>Copying values</span></a></li>
+<li><a href="#options"><span class="num">07</span><span>OPTIONS</span></a></li>
+<li><a href="#practice"><span class="num">08</span><span>In practice</span></a></li>
+<li><a href="#web"><span class="num">09</span><span>Web edition</span></a></li>
+<li><a href="#trouble"><span class="num">10</span><span>Troubleshooting</span></a></li>
+<li><a href="#changelog"><span class="num">11</span><span>Changelog</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="editions"><span class="num">01</span>Three editions</h2>
+<p>All three editions compute the same numbers with the same formulas. They differ only in where the tempo comes from and how you read the result.</p>
+<table>
+  <tr><th>Edition</th><th>Tempo from</th><th>Get it</th></tr>
+  <tr><td><b>REAPER window</b> (ReaImGui)</td><td>the project tempo, or a manual tempo</td><td>ReaPack package <code>TT-BPM2MS2HZ</code> (section 02); this manual describes it from section 03 on</td></tr>
+  <tr><td><b>Web edition</b></td><td>typed in, slider or TAP</td><td><a href="/BPM2MS2HZ/">timtechlor.de/BPM2MS2HZ</a> &mdash; runs in any browser, nothing to install (section 09)</td></tr>
+  <tr><td><b>Console edition</b></td><td>the project tempo</td><td><code>TT_BPM_Converter.lua</code>, download from the web edition; prints the table into the REAPER console</td></tr>
+</table>
+
+<h2 id="install"><span class="num">02</span>Install</h2>
+<ol>
+  <li>Install <a href="https://reapack.com/" rel="noopener">ReaPack</a> (one file into the UserPlugins folder, restart REAPER).</li>
+  <li>Extensions &rarr; ReaPack &rarr; Import repositories&hellip;, paste<br><code>https://raw.githubusercontent.com/timtechlor/reapack-TimTechlor/main/index.xml</code></li>
+  <li>Extensions &rarr; ReaPack &rarr; Browse packages, search for <b>BPM2MS2HZ</b> (the package is listed as <b>TT-BPM2MS2HZ</b>; up to version 1.0.0 it was called &ldquo;BPM2MS2HZ Calculator&rdquo;), install, Apply.</li>
+  <li>The window needs <b>ReaImGui</b> (&ldquo;ReaImGui: ReaScript binding for Dear ImGui&rdquo;, repository <i>ReaTeam Extensions</i>, which ReaPack ships with). Install it the same way and restart REAPER.</li>
+  <li>Run it from Actions &rarr; Show action list &rarr; search &ldquo;BPM2MS2HZ&rdquo;. Bind it to a key or a toolbar button if you use it often.</li>
+</ol>
+<div class="box" data-k="Update from 1.0.0">The file name and the saved settings stay the same, so an update through ReaPack keeps your key binding, toolbar button, time signature and options. On the first start, 1.5.0 sets the window to its new default size once.</div>
+<div class="box" data-k="Console edition">The console edition has no dependencies: Actions &rarr; Show action list &rarr; New action &rarr; Load ReaScript&hellip; and pick <code>TT_BPM_Converter.lua</code>. Each run clears the console and prints the table for the current project tempo.</div>
+
+<h2 id="window"><span class="num">03</span>The window at a glance</h2>
+<p>The window is drawn in the TimTechlor UI kit look, like the plug-in fronts: dark panels, Acid Green accents, LED switches. From top to bottom:</p>
+<ul>
+  <li><b>Header</b> &mdash; the name, the version (<code>v1.5.0</code>) and the <b>OPTIONS</b> button (section 07).</li>
+  <li><b>TEMPO</b> &mdash; the current tempo as a large number, the <b>FROM PROJECT</b> switch, the tempo slider and two info lines: the length of one beat in milliseconds and of one bar in seconds (section 04).</li>
+  <li><b>NOTE VALUES / BARS</b> &mdash; two tabs: note values from 1/1 to 1/32, or whole bars from 1 to 64 (section 05).</li>
+  <li><b>Footer</b> &mdash; &ldquo;Click any value to copy it to the clipboard&rdquo;; after a click it shows the copied value for three seconds (section 06).</li>
+</ul>
+<p>Hold the mouse over any control for a moment and a tooltip explains it. In a wide window the TEMPO panel and the table sit side by side; in a tall window they are stacked. The window picks the arrangement that shows everything at the larger size.</p>
+<figure class="shot"><img src="img/bpm2ms2hz/tt-bpm2ms2hz-wide-bars.png" alt="TT-BPM2MS2HZ in a wide window: TEMPO panel on the left, BARS tab on the right with the time signature buttons and bars 1 to 64 in seconds and Hertz" width="838" height="600" loading="lazy" decoding="async"><figcaption><span class="tag">WIDE</span><b>Wide window, BARS tab.</b> TEMPO on the left, the table on the right. The time signature buttons set the bar length.</figcaption></figure>
+
+<h2 id="tempo"><span class="num">04</span>Tempo</h2>
+<ul>
+  <li><b>FROM PROJECT</b> (LED on, number green) &mdash; the tempo follows the project tempo live, including tempo automation during playback.</li>
+  <li><b>Slider</b> &mdash; click or drag to set a manual tempo from 40 to 300&nbsp;BPM; it snaps to 0.1&nbsp;BPM. Touching the slider switches FROM PROJECT off and the number turns white. The mouse wheel over the slider moves the tempo by 1&nbsp;BPM, with <kbd>Shift</kbd> by 0.1&nbsp;BPM.</li>
+  <li>Switch <b>FROM PROJECT</b> on again to return to the project tempo.</li>
+  <li>The number flashes white briefly whenever the tempo changes.</li>
+</ul>
+
+<h2 id="table"><span class="num">05</span>Reading the tables</h2>
+<pre><code>ms  = 60000 / BPM &times; beats      (1 beat = 1 quarter note)
+Hz  = 1000 / ms</code></pre>
+<table>
+  <tr><th>Label</th><th>Meaning</th><th>Factor</th><th>Row colour</th></tr>
+  <tr><td><code>1/4</code></td><td>plain note value, here one beat</td><td>&times;1</td><td>green</td></tr>
+  <tr><td><code>1/4.</code></td><td>dotted</td><td>&times;1.5</td><td>grey</td></tr>
+  <tr><td><code>1/4T</code></td><td>triplet</td><td>&times;2/3</td><td>white</td></tr>
+</table>
+<p><b>NOTE VALUES</b> runs from 1/1 to 1/32, each with its dotted and triplet variant (both can be hidden in OPTIONS). Milliseconds have one decimal, Hertz three.</p>
+<p><b>BARS</b> lists 1, 2, 4, 8, 16, 32 and 64 bars as seconds and Hertz. Pick the time signature first with the buttons next to TIME SIG (4/4, 3/4, 5/4, 7/4, 6/8, 9/8, 12/8): a 6/8 bar is six eighth notes, so it is shorter than a 4/4 bar. The info line under the tempo slider uses the same time signature. The choice is saved.</p>
+<p>Example at 128&nbsp;BPM: one beat is 60000&nbsp;/&nbsp;128 = <b>468.75&nbsp;ms</b>, so 1/4 reads 468.8&nbsp;ms and 2.133&nbsp;Hz, and one 4/4 bar is 1.875&nbsp;s. At 120&nbsp;BPM: 1/4 = 500.0&nbsp;ms = 2.000&nbsp;Hz, 1/4. = 750.0&nbsp;ms, 1/4T = 333.3&nbsp;ms.</p>
+
+<h2 id="copy"><span class="num">06</span>Copying values</h2>
+<p>Click any value in the MS, SEC or HZ column: it is copied to the clipboard exactly as shown (for example <code>468.8</code>), and the footer confirms it with <code>&gt;&gt; copied: 468.8</code>. Paste it into the plug-in field with <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Cmd</kbd>+<kbd>V</kbd> on macOS). The value under the mouse lights up green before you click.</p>
+
+<h2 id="options"><span class="num">07</span>OPTIONS</h2>
+<p>The <b>OPTIONS</b> button in the header opens the OPTIONS box. While it is open, the rest of the window does not react to clicks; click OPTIONS again or anywhere outside the box to close it. Every setting is saved and survives REAPER restarts.</p>
+<figure class="shot"><img src="img/bpm2ms2hz/tt-bpm2ms2hz-options.png" alt="OPTIONS box of TT-BPM2MS2HZ: TOOLTIPS ON switch in the title row, UI SIZE buttons 100 to 300 percent, AUTO FIT ON switch, FONT SIZE minus and plus, DOTTED and TRIPLETS switches, WATERMARK switch" width="450" height="830" loading="lazy" decoding="async" style="max-width:min(100%,420px)"><figcaption><span class="tag">OPTIONS</span><b>The OPTIONS box.</b> Tooltips, window size, text size, note variants and watermark.</figcaption></figure>
+<table>
+  <tr><th>Control</th><th>What it does</th></tr>
+  <tr><td><b>TOOLTIPS ON / OFF</b></td><td>Shows or hides the tooltips of all controls. Default: on.</td></tr>
+  <tr><td><b>UI SIZE</b> 100&nbsp;/&nbsp;125&nbsp;/&nbsp;150&nbsp;/&nbsp;200&nbsp;/&nbsp;300&nbsp;%</td><td>Resizes the window so that its content is shown at that size. The highlighted button is the current size.</td></tr>
+  <tr><td><b>AUTO FIT ON / OFF</b></td><td>On (default): when you drag the window edge, the content rescales to the new window size &mdash; the largest whole percentage at which everything fits, 25 to 400&nbsp;% &mdash; and stays centred; no scrollbars. A UI SIZE button still sets a fixed size, which holds until you change the window again. Off: the size stays where it is; if the window is smaller than the content, scrollbars appear. Switching AUTO FIT on fits the content to the window at once. &ldquo;now&rdquo; shows the current size.</td></tr>
+  <tr><td><b>FONT SIZE</b> &minus; / +</td><td>Text size of the tempo number, the info lines and the tables, from 80 to 150&nbsp;% in 5&nbsp;% steps. The window rescales so that the larger tables still fit.</td></tr>
+  <tr><td><b>DOTTED 1/4.</b> / <b>TRIPLETS 1/4T</b></td><td>Show or hide the dotted and the triplet rows of NOTE VALUES.</td></tr>
+  <tr><td><b>WATERMARK</b></td><td>Shows or hides the faint Tim Techlor wordmark in the background.</td></tr>
+</table>
+
+<h2 id="practice"><span class="num">08</span>In practice</h2>
+<h3>Delay times</h3>
+<p>Read the MS column and type the value into a delay that has no host sync. At 128&nbsp;BPM the dotted eighth (<code>1/8.</code>, 351.6&nbsp;ms) is the classic ping-pong spacing; a plain 1/4 is 468.8&nbsp;ms.</p>
+<h3>LFO rates</h3>
+<p>The HZ column is the LFO speed that locks to the grid: at 128&nbsp;BPM, 1/4 = 2.133&nbsp;Hz and 1/16 = 8.533&nbsp;Hz. Auto-pan, tremolo and filter sweeps then move with the track instead of drifting against it.</p>
+<h3>Release and sidechain</h3>
+<p>Whole bars come as seconds: 1 bar = 1.875&nbsp;s at 128&nbsp;BPM. A compressor release of one bar keeps the pump breathing with the track instead of choking it; for a tight kick duck, start from the 1/8 or 1/16 value.</p>
+<h3>Arrangement</h3>
+<p>How long is a 16-bar break at 128&nbsp;BPM? The BARS tab says 30.000&nbsp;s. Useful for risers, transitions and for checking whether a loop fills exactly two bars.</p>
+
+<h2 id="web"><span class="num">09</span>Web edition</h2>
+<p>The web edition reproduces the console output of the REAPER console edition line by line. It lists bars from 1 to 32 and assumes 4/4.</p>
+<ul>
+  <li><b>Tempo</b> &mdash; type it into the BPM field or drag the slider. The table updates live.</li>
+  <li><b>TAP</b> &mdash; tap along with the beat; the tempo is averaged over the last taps. A pause of more than three seconds starts a new measurement.</li>
+  <li><b>COPY</b> &mdash; copies the console table as text.</li>
+  <li><b>Popup</b> &mdash; opens a compact window with only the tempo input and the live table, to pin next to your DAW.</li>
+</ul>
+<figure class="shot"><img src="img/bpm2ms2hz/bpm2ms2hz-web-console.png" alt="BPM2MS2HZ web edition in popup mode at 128 BPM: tempo field and slider on top, below the console table with note values 1/1 to 1/32 (plain, dotted, triplet) in milliseconds and Hertz and whole bars in seconds" width="626" height="1126" loading="lazy" decoding="async" style="max-width:min(100%,420px)"><figcaption><span class="tag">WEB</span><b>The web edition in popup mode at 128&nbsp;BPM.</b> Tempo on top, the console table below: note values in ms and Hz, whole bars in seconds and Hz.</figcaption></figure>
+
+<h2 id="trouble"><span class="num">10</span>Troubleshooting</h2>
+<ul>
+  <li>The window does not open and REAPER reports a missing ImGui function &mdash; ReaImGui is not installed, or REAPER was not restarted after installing it (section 02).</li>
+  <li>The content is tiny or huge &mdash; AUTO FIT scales it to the window. Drag the window edge, or click a UI SIZE button in OPTIONS.</li>
+  <li>The REAPER console says &ldquo;UI kit view failed, using the classic view&rdquo; &mdash; the window falls back to the plain 1.0.0 layout so you can keep working. Please report the message that follows it.</li>
+  <li>The console edition prints &ldquo;No valid project tempo found.&rdquo; &mdash; open or create a project and run it again.</li>
+  <li>The values do not match a tempo change later in the song &mdash; the window uses the tempo REAPER reports as current. For a section with a different tempo, set that tempo manually with the slider (or in the web edition).</li>
+  <li>COPY does nothing in the browser &mdash; the browser blocked clipboard access; open the page directly (not inside a frame) and allow clipboard access.</li>
+</ul>
+
+<h2 id="changelog"><span class="num">11</span>Changelog</h2>
+<h3>1.5.0 &mdash; TT-BPM2MS2HZ, UI kit look</h3>
+<ul>
+  <li>New name: TT-BPM2MS2HZ (formerly &ldquo;BPM2MS2HZ Calculator&rdquo;); file name and saved settings stay the same.</li>
+  <li>New look after the TimTechlor UI kit 7: panels, LED switches, tempo slider and value tables drawn like the plug-in fronts; version shown in the header.</li>
+  <li>Every control has a tooltip; OPTIONS &gt; TOOLTIPS ON / OFF switches them off.</li>
+  <li>NEW: OPTIONS &gt; AUTO FIT ON / OFF (default on): dragging the window edge rescales the content (25 to 400&nbsp;%); UI SIZE buttons 100 / 125 / 150 / 200 / 300&nbsp;% resize the window. Saved.</li>
+  <li>Wide windows show the TEMPO panel and the table side by side.</li>
+  <li>Time signature as buttons instead of a drop-down list; mouse wheel over the tempo slider: 1&nbsp;BPM (<kbd>Shift</kbd>: 0.1&nbsp;BPM).</li>
+</ul>
+<h3>1.0.0</h3>
+<ul>
+  <li>First release via ReaPack: REAPER window with NOTE VALUES and BARS tabs, project or manual tempo, click to copy, OPTIONS for font size, note variants and watermark.</li>
+</ul>
+  
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-BPM2MS2HZ v1.5.0</b> — ReaScript for REAPER + web app · Tim Techlor design series<br> Manual revision 1.5.0 · Free, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>

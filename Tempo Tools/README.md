@@ -1,4 +1,4 @@
-# Tim Techlor's BPM2MS2HZ Calculator for REAPER
+# TT-BPM2MS2HZ for REAPER
 
 ReaScript (Lua) · Dear ImGui tool window · converts your project tempo into milliseconds and Hz
 
@@ -8,7 +8,7 @@ ReaScript (Lua) · Dear ImGui tool window · converts your project tempo into mi
 
 ### What it does
 
-The BPM2MS2HZ Calculator is a compact tool window for REAPER that reads your
+TT-BPM2MS2HZ (formerly BPM2MS2HZ Calculator) is a compact tool window for REAPER that reads your
 project tempo and converts every note value into the two numbers plugins and
 hardware actually want:
 
@@ -111,7 +111,7 @@ font installation is required.
 
 ### Was das Script macht
 
-Der BPM2MS2HZ Calculator ist ein kompaktes Tool-Fenster für REAPER, das dein
+TT-BPM2MS2HZ (früher BPM2MS2HZ Calculator) ist ein kompaktes Tool-Fenster für REAPER, das dein
 Projekt-Tempo ausliest und jeden Notenwert in die beiden Zahlen umrechnet,
 die Plugins und Geräte tatsächlich wollen:
 
