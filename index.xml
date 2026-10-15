@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="c2f0581d78fbf7512fe5d741106bc69243b3ec19">
+<index version="1" name="TimTechlor ReaScripts" commit="3725ba234ba808a3afa7def8923bf79deb88ee7a">
+  <category name="MIDI Tools/TT-303PATGEN">
+    <reapack name="TT-303PATGEN Print Song Chain.lua" type="script" desc="TT-303PATGEN Print Song Chain">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Prints the whole SONG chain of a TT-303PATGEN instance (all cells, with their repeats) as one real MIDI item, so a finished arrangement of the eight slots becomes a fixed track. Turn on SEQ LINK in TT-303PATGEN first, select the target track, put the edit cursor where the item should start and run the script. It asks how many times the chain is printed in a row (1 = one pass). Slides are written as overlapping notes, ties as longer notes, accent and normal velocities as set in the plug-in (same rules as "TT-303PATGEN Print to MIDI Item", which must be installed next to this script). PROB and HUMANIZE are not printed.\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.1.0" author="TimTechlor" time="2026-10-15T15:58:11Z">
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20Song%20Chain.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TT-303PATGEN Print to MIDI Item.lua" type="script" desc="TT-303PATGEN Print to MIDI Item">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Prints the pattern of a TT-303PATGEN instance as a real MIDI item, so the live generator becomes a fixed track. Turn on SEQ LINK in TT-303PATGEN first (the script reads the pattern from the gmem namespace tt303pg), select the target track, put the edit cursor where the item should start, run the script and enter the number of bars. Slide is written as overlapping notes, ties as longer notes, accent and normal velocities as set in the plug-in. PROB and HUMANIZE are not printed (the item contains the pattern as written).\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.1.1" author="TimTechlor" time="2026-10-15T15:58:11Z">
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20to%20MIDI%20Item.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TT-303PATGEN.jsfx" type="effect" desc="TT-303PATGEN">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-303PATGEN\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIDI-only acid pattern generator for REAPER. Generates 303-style patterns (16 to 32 steps, note / octave / gate / tie / accent / slide / probability per step) and plays them as MIDI, synced to the host transport. Accent = velocity above the synth's threshold (default 127 vs. 64, threshold 65 as in the TT-303 1.5.0), slide = overlapping legato notes - exactly what the TT-303 expects in HOST mode, and what any other mono synth understands. Five algorithms (random walk, Markov, Euclid, motif+variation, classic mutation), ten scales plus a custom mask, seeded and reproducible, mutate / rotate / reverse / invert / double, eight pattern slots (A-H), song chain, 32 built-in style patterns plus 16 factory scenes, swing, humanize, MIDI transpose (C2 = original pitch) and an optional gmem link (namespace tt303pg). Operated from the drawn front panel; all parameters stay automatable.\par}
+}
+]]></description>
+        <link rel="website" href="https://timtechlor.de/docs/tt-303patgen-manual.html">Manual</link>
+      </metadata>
+      <version name="1.0.0" author="TimTechlor" time="2026-10-15T15:58:11Z">
+        <changelog><![CDATA[sorted by version (now 0.5.3, 0.5.2, 0.1.0 .. 0.5.1); @provides extended by the six manual images]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN.jsfx</source>
+        <source file="img/tt-ui-options/303patgen-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/img/tt-ui-options/303patgen-front.png</source>
+        <source file="img/tt-ui-options/303patgen-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/img/tt-ui-options/303patgen-options.png</source>
+        <source file="tt-303patgen-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/tt-303patgen-manual.html</source>
+        <source file="TT-303PATGEN Print to MIDI Item.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20to%20MIDI%20Item.lua</source>
+        <source file="TT-303PATGEN Print Song Chain.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20Song%20Chain.lua</source>
+        <source file="img/tt-303patgen/tt-303patgen-gallery.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-gallery.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-long.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-long.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-presets.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-song.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3725ba234ba808a3afa7def8923bf79deb88ee7a/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-song.png</source>
+      </version>
+    </reapack>
+  </category>
   <category name="Synths">
     <reapack name="TT-303 Acid Machine.jsfx" type="effect" desc="TT-303 Acid Machine">
       <metadata>
