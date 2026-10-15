@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-303PATGEN Manual – Acid Pattern Generator with MIDI Output for REAPER</title>
+<meta name="description" content="Reference manual for TT-303PATGEN, a free acid pattern generator JSFX for REAPER: seeded generators (random walk, Markov, Euclid, motif, classic mutation), ten scales, slide / tie / accent per step, eight slots with song chain, 32 style patterns, sample-accurate MIDI output for the TT-303 or any synth.">
+<meta name="tt-doc-name" content="TT-303PATGEN">
+<meta name="tt-doc-version" content="1.0.0">
+<meta name="tt-doc-date" content="2026-10-15">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-303patgen-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-303PATGEN Manual – Acid Pattern Generator for REAPER">
+<meta property="og:description" content="Reference manual for TT-303PATGEN, a free acid pattern generator JSFX for REAPER: seeded generators (random walk, Markov, Euclid, motif, classic mutation), ten scales, slide / tie / accent per step, eight slots with song chain, 32 style patterns, sample-accurate MIDI output for the TT-303 or any synth.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-303patgen-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-303patgen.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-303PATGEN — User Manual">
+<meta property="article:modified_time" content="2026-10-15">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-303PATGEN Manual – Acid Pattern Generator for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-303PATGEN, a free acid pattern generator JSFX for REAPER: seeded generators (random walk, Markov, Euclid, motif, classic mutation), ten scales, slide / tie / accent per step, eight slots with song chain, 32 style patterns, sample-accurate MIDI output for the TT-303 or any synth.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-303patgen.png">
+<meta name="twitter:image:alt" content="TT-303PATGEN — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-303patgen-manual.html#article",
+   "headline": "TT-303PATGEN — User Manual",
+   "name": "TT-303PATGEN Manual – Acid Pattern Generator for REAPER",
+   "description": "Reference manual for TT-303PATGEN, a free acid pattern generator JSFX for REAPER: seeded generators (random walk, Markov, Euclid, motif, classic mutation), ten scales, slide / tie / accent per step, eight slots with song chain, 32 style patterns, sample-accurate MIDI output for the TT-303 or any synth.",
+   "url": "https://timtechlor.de/docs/tt-303patgen-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-303patgen-manual.html",
+   "datePublished": "2026-10-15",
+   "dateModified": "2026-10-15",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-303patgen.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER acid pattern generator, TB-303 MIDI generator, JSFX MIDI generator, acid bassline generator, slide accent sequencer, euclidean rhythm generator, Markov melody generator, seeded random pattern",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-303patgen-manual.html#software" },
+   "version": "1.0.0"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-303patgen-manual.html#software",
+   "name": "TT-303PATGEN",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "1.0.0",
+   "description": "JSFX MIDI plug-in for REAPER: generates 303-style acid patterns (note, octave, gate, tie, accent, slide, probability per step), edits them on a piano-roll front panel and plays them as sample-accurate MIDI, synced to the host transport - for the TT-303 or any other synth.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-303PATGEN", "item": "https://timtechlor.de/docs/tt-303patgen-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303PATGEN</span></nav>
+      <div class="wordmark" style="--wm-n:12" role="img" aria-label="TT-303PATGEN">TT-303PATGEN</div>
+      <h1>TT-303PATGEN — User Manual</h1>
+      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.0.0 // TimTechlor</div>
+      <p class="lead">A pattern generator that thinks in <em>acid</em>: accents, slides, ties, octave pops and a tense b2 - created by seeded algorithms, sculpted by density, scale and range, mutated instead of re-rolled, stored in eight slots and played as sample-accurate MIDI. Built for the TT-303 in HOST mode, happy with any mono synth.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/303patgen-front.png" aria-label="Enlarge screenshot of the TT-303PATGEN user interface" title="Click to enlarge"><img src="img/tt-ui-options/303patgen-front.png" width="1131" height="803" alt="TT-303PATGEN user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#quickstart"><span class="num">02</span><span>Quick start</span></a></li>
+<li><a href="#panel"><span class="num">03</span><span>The front panel</span></a></li>
+<li><a href="#model"><span class="num">04</span><span>The pattern model</span></a></li>
+<li><a href="#generator"><span class="num">05</span><span>The generator</span></a></li>
+<li><a href="#seed"><span class="num">06</span><span>SEED &amp; LOCK</span></a></li>
+<li><a href="#edit"><span class="num">07</span><span>MUTATE &amp; edit operations</span></a></li>
+<li><a href="#slots"><span class="num">08</span><span>Slots, undo &amp; song chain</span></a></li>
+<li><a href="#library"><span class="num">09</span><span>The library</span></a></li>
+<li><a href="#presets"><span class="num">10</span><span>Preset bar &amp; user bank</span></a></li>
+<li><a href="#output"><span class="num">11</span><span>Output &amp; sync</span></a></li>
+<li><a href="#input"><span class="num">12</span><span>MIDI input, transpose &amp; panic</span></a></li>
+<li><a href="#tt303"><span class="num">13</span><span>Using it with the TT-303</span></a></li>
+<li><a href="#link"><span class="num">14</span><span>SEQ LINK (gmem)</span></a></li>
+<li><a href="#print"><span class="num">15</span><span>Print to MIDI Item</span></a></li>
+<li><a href="#automation"><span class="num">16</span><span>Automation &amp; parameters</span></a></li>
+<li><a href="#notes"><span class="num">17</span><span>Limits &amp; honest notes</span></a></li>
+<li><a href="#trouble"><span class="num">18</span><span>Troubleshooting</span></a></li>
+<li><a href="#changelog"><span class="num">19</span><span>Changelog</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">20</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>TT-303PATGEN is a MIDI effect. It contains no sound generator: it writes
+<em>patterns</em> and plays them as MIDI notes, locked to the host transport.
+A pattern has 1 to 32 steps; every step carries a note, an octave shift, a
+gate state (off, on or tie), an accent flag, a slide flag and a probability.
+That is exactly the vocabulary of a TB-303 sequencer, which makes the output
+a perfect match for the <b>TT-303</b> in HOST mode (velocity at or above the
+accent threshold = accent, overlapping notes = slide) &mdash; and it plays
+just as well on any other mono bass synth.</p>
+<p>The generator is deterministic. Every pattern comes from a 24-bit
+<code>SEED</code>; the same seed with the same settings always produces the
+same pattern, and the seed is always visible, so a good result can be found
+again. Instead of re-rolling a pattern you like, you <b>mutate</b> it: change a
+few steps, only in the range you choose.</p>
+
+<h2 id="quickstart"><span class="num">02</span>Quick start</h2>
+<ol>
+  <li>Insert <code>TT-303PATGEN</code> <b>before</b> the synth in the track&rsquo;s FX chain
+      (MIDI effects work top to bottom). For the TT-303 leave its <code>Mode</code> on HOST.</li>
+  <li>Press play. The demo pattern in slot <b>A</b> starts immediately &mdash; the
+      <code>RUN</code> toggle (top right) enables output.</li>
+  <li>Press <b>GENERATE</b>. A new pattern appears in the active slot, the
+      seed box shows its seed.</li>
+  <li>Shape the result with the GENERATOR knobs and the scale / root / algorithm
+      boxes, generate again, or press <b>MUTATE</b> to vary the current pattern.</li>
+  <li>Click in the piano roll to set notes, in the ACCENT / SLIDE / GATE rows to
+      edit the steps. Select steps by clicking or dragging the step numbers, then use the SELECTION buttons.
+      Play a MIDI key (C2 = original pitch) to transpose live.</li>
+  <li>Open the <b>GALLERY</b> tab and press <b>ROLL 8</b> to see eight candidates at once; <b>TRY</b> puts one into the slot.</li>
+  <li>Happy? Turn on <code>SEQ LINK</code> and run the ReaScript
+      <b>TT-303PATGEN Print to MIDI Item</b> to turn the pattern into a real MIDI item.</li>
+</ol>
+
+<h2 id="panel"><span class="num">03</span>The front panel</h2>
+<figure class="shot"><img src="img/tt-ui-options/303patgen-front.png" alt="Current suite front at 125% UI size, version 1.0.0"><figcaption>Current front in v1.0.0, at the default UI size of 125%.</figcaption></figure>
+<dl class="kv">
+  <dt>HEADER</dt><dd>Wordmark, the <b>preset bar</b> (see <a href="#presets">Preset bar &amp; user bank</a>), the
+  <code>OPTIONS</code> button, the <code>RUN</code> toggle and <code>PANIC</code>.</dd>
+  <dt>OPTIONS</dt><dd>The <code>OPTIONS</code> button in the header, right of the preset bar, opens a small box with the <b>COLOR</b> choice:
+  ten colour schemes (see below), the font and colour settings and the <code>TOOLTIPS ON / OFF</code> switch. Every control, including the preset bar
+  and the <code>OPTIONS</code> button, has a tooltip that appears after a short hover (about 0.35 s) and stays away while you drag; the switch turns all
+  tooltips off for this plug-in instance and is saved with the project.</dd>
+  <dt>TOOL ROW</dt><dd>Slots <b>A&ndash;H</b>, <code>UNDO</code> / <code>REDO</code> with the undo depth (e.g. 3/16), the
+  pattern length (<kbd>&minus;</kbd> value <kbd>+</kbd>, 1&ndash;32), <code>VIEW</code> (FIT / 1-16 / 17-32) and <code>SNAP</code>.
+  At the right end sits the <b>MIDI monitor</b>: last note sent, current step, ACC and SLIDE LEDs. It turns into
+  <code>WAITING FOR AUDIO</code> when commands are not being executed (see Troubleshooting) and into <code>BUSY</code> for a moment when the command queue is full.</dd>
+  <dt>PIANO ROLL</dt><dd>The whole pattern across the full width: with <code>VIEW FIT</code> every step of the pattern is visible at once
+  (up to 32 columns), <code>1-16</code> / <code>17-32</code> show one page with wider columns. The roll shows 25 semitone rows above <code>ROOT</code>;
+  the mouse wheel over the keyboard moves this window (<kbd>Shift</kbd> = one octave), the arrow buttons below it move it by an octave, and a note outside the window
+  is marked with a small arrow at the edge. Click = set note, drag = move it, click a note or right-click = remove it.
+  Accented notes are white, ties extend to the next step, slides are drawn as a connecting line, an orange dot marks a probability below 100 %.
+  The green column is the step that is playing. The number row above the roll selects steps (see <a href="#edit">MUTATE &amp; edit operations</a>).</dd>
+  <dt>STEP ROWS</dt><dd><code>ACCENT</code>, <code>SLIDE</code>, <code>GATE</code> (off / on / tie),
+  <code>OCT</code> (-1, 0, +1, +2) and <code>PROB</code> (0&ndash;100 %). Click a cell or drag across
+  cells to paint; right-click resets the cell.</dd>
+  <dt>SELECTION</dt><dd>Bottom left: copy / cut / paste / clear, rotate, reverse, invert, scale-degree and octave transpose, duplicate,
+  double, copy to another slot, and the step locks. Every button acts on the selected steps; without a selection it acts on the whole pattern.</dd>
+  <dt>DECK</dt><dd>Bottom right, with five tabs: <code>GENERATE</code> (the nine generator knobs, algorithm, root, scale, seed, MUT %, MUTATE properties and
+  range), <code>OUTPUT</code> (rate, channel, swing, gate length, velocities, humanize, threshold, octave, FOLLOW IN, SEQ LINK), <code>SONG</code>
+  (chain, chain editing, timeline, slot overview), <code>GALLERY</code> and <code>LIBRARY</code>. The big <b>GENERATE</b> and <b>MUTATE</b> buttons are always
+  visible next to the tabs. The arrow at the right edge collapses the deck: the roll then uses the whole height and shows the full range (-12 to +35 semitones
+  without scrolling) - the <b>FOCUS</b> view. Click a tab to open the deck again.</dd>
+</dl>
+<table>
+  <tr><th>Widget</th><th>Gesture</th><th>Behaviour</th></tr>
+  <tr><td>Knob</td><td>drag vertically</td><td>set value; <kbd>Shift</kbd> = fine</td></tr>
+  <tr><td></td><td>mouse wheel</td><td>one step per detent (1 unit; <code>HUM TIME</code> 0.1 ms)</td></tr>
+  <tr><td></td><td>right-click, double-click, <kbd>Ctrl</kbd>+click</td><td>reset to default</td></tr>
+  <tr><td>Slider (AMOUNT / FROM / TO)</td><td>drag horizontally / wheel</td><td>set value; one step per detent</td></tr>
+  <tr><td>Combo box</td><td>arrows / click / wheel</td><td>previous / next / step through the list</td></tr>
+  <tr><td>Step rows</td><td>click, drag</td><td>paint the value the first click chose</td></tr>
+  <tr><td>Step numbers</td><td>click, drag, <kbd>Shift</kbd>+click, double-click, right-click</td><td>select one step, a range, extend, all, clear the selection</td></tr>
+  <tr><td>Piano roll</td><td><kbd>Ctrl</kbd>+drag</td><td>select the steps under the frame (no note is set)</td></tr>
+  <tr><td>Piano roll</td><td><kbd>Alt</kbd> while setting or dragging a note</td><td>inverts SNAP for this edit</td></tr>
+  <tr><td>Keyboard (left of the roll)</td><td>mouse wheel, right-click</td><td>scroll the visible pitch window, back to ROOT..ROOT+24</td></tr>
+  <tr><td>Any control</td><td>hover</td><td>a tooltip explains it (<code>OPTIONS &gt; TOOLTIPS ON / OFF</code>)</td></tr>
+</table>
+<figure class="shot"><img src="img/tt-ui-options/303patgen-options.png" alt="TT-303PATGEN with the OPTIONS box open: ten colour swatches, the factory scheme ACID is marked" width="900" height="639"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header, then a swatch. A click outside the box closes it.</figcaption></figure>
+<p><b>Options / Color.</b> The <code>OPTIONS</code> button opens the box; <code>COLOR</code> offers ten schemes:
+ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (knob rings, active
+steps, LEDs), the second colour and, for RED to ICE, the slightly tinted panel background of the whole front at once. The choice applies
+<b>per plug-in instance</b>, is saved with the project and with FX-chain copies, and is not touched by the generator. The factory colour is <b>ACID</b>
+(the classic acid green). The colour is stored in the hidden parameter 64 (<code>UI Color</code>, 0&ndash;9).</p>
+
+
+<p><b>Style: font size and custom colours.</b> Below the swatches the box carries the style controls: <code>FONT SIZE</code> scales the two font slots in steps of about 8 % (range -4&ndash;+8) &mdash; <code>FONT 1</code> is the large title font, <code>FONT 2</code> is all other text; the current step is shown between the <code>-</code> and <code>+</code> buttons. The colour picker assigns a custom colour to <code>FONT 1</code>, <code>FONT 2</code> or the background <code>BG</code>: pick the target, then drag in the hue strip and the saturation/value field &mdash; every change applies live while you drag, and BG derives the panel, border and knob colours from the spacing of the active scheme. <code>RESET</code> restores the scheme value of the selected target, <code>RESET ALL</code> restores everything. If a custom text colour drops below a contrast of 3:1 against the background, the box shows a small warning. All style settings apply <b>per instance</b>, are stored with the project, the FX chain and REAPER presets &mdash; and are not part of the factory or user presets of the preset bar.</p>
+
+<h2 id="model"><span class="num">04</span>The pattern model</h2>
+<table>
+  <tr><th>Field</th><th>Values</th><th>Meaning</th></tr>
+  <tr><td>Note</td><td>semitones above ROOT</td><td>the piano-roll row; final MIDI note = 36 (C2) + ROOT + 12 x OCTAVE + note + input transpose</td></tr>
+  <tr><td>Octave</td><td>-1 / 0 / +1 / +2</td><td>shifts the step by whole octaves</td></tr>
+  <tr><td>Gate</td><td>off / on / tie</td><td><b>tie</b>: the previous note keeps sounding into this step, no new note-on</td></tr>
+  <tr><td>Accent</td><td>0 / 1</td><td>note is sent with <code>ACC VEL</code> instead of <code>NORM VEL</code></td></tr>
+  <tr><td>Slide</td><td>0 / 1</td><td>links this step to the <em>next</em> one: the next note-on is sent <em>before</em> this note-off</td></tr>
+  <tr><td>Probability</td><td>0&ndash;100 %</td><td>chance that the step plays; decided by a hash of seed, step and position, so playback is reproducible</td></tr>
+</table>
+<ul>
+  <li><b>Slide rule.</b> A slide only sounds if the next step is a normal gate step. Into a rest it is ignored,
+      into a tie the tie wins. A slide into the <em>same</em> pitch is played as a tie (holding a note; the
+      second accent is not retriggered). Slides work across the pattern end (last step into step 1).</li>
+  <li><b>Tie.</b> The note is released after the last step of the tie run plus the gate length. A tie
+      after a rest starts a new note.</li>
+  <li><b>Ranges.</b> A pattern can hold notes from 12 semitones below to 35 above ROOT; the generator stays
+      inside 0..<code>RANGE</code>.</li>
+</ul>
+
+<h2 id="generator"><span class="num">05</span>The generator</h2>
+<p><b>GENERATE</b> fills the active slot. Order of work: gate mask, ties, notes, accents, slides, octave jumps. (Since v0.8.0 the rhythm is drawn so that neighbouring notes exist for slides, DENS VAR can vary the note count and SLIDE counts notes, see below.)</p>
+<table>
+  <tr><th>Control</th><th>Range</th><th>Function</th></tr>
+  <tr><td><code>DENSITY</code></td><td>0&ndash;100 %</td><td>share of steps that play (gate on or tie), e.g. 50 % of 16 = 8 steps. With <code>DENS VAR</code> at 0 the count is exact; DENS VAR spreads it around that number</td></tr>
+  <tr><td><code>DENS VAR</code></td><td>0&ndash;100 %</td><td>(v0.8.0) spreads the number of playing steps symmetrically around DENSITY, at most half the pattern length at 100 (the average stays); default 25, 0 = exact count. CLASSIC MUT ignores it</td></tr>
+  <tr><td><code>ACCENT</code></td><td>0&ndash;100 %</td><td>chance that a normal gate step is accented</td></tr>
+  <tr><td><code>SLIDE</code></td><td>0&ndash;100 %</td><td>(v0.8.0) share of the playing steps that slide into the <em>next</em> normal gate step: 20 % of 8 notes = 2 slides (never more than there are neighbouring pairs). The rhythm is drawn so that such pairs exist (EUCLID joins onsets into pairs). Before v0.8.0 it was a 20 % chance per pair, 0.65 slides per pattern on average</td></tr>
+  <tr><td><code>OCT JUMP</code></td><td>0&ndash;100 %</td><td>chance of +1 octave (rarely +2); only if the note stays inside RANGE</td></tr>
+  <tr><td><code>REPEAT</code></td><td>0&ndash;100 %</td><td>tendency to repeat the previous note</td></tr>
+  <tr><td><code>RANGE</code></td><td>5&ndash;24 st</td><td>ambitus above ROOT; the base line lives in the first octave (up to 11 semitones), octave jumps add to it. No note leaves 0..RANGE</td></tr>
+  <tr><td><code>TENSION</code></td><td>0&ndash;100 %</td><td>share of dissonant tones: the minor second (b2) and the tritone. Only scales that contain them are affected (Phrygian, Blues, Phrygian Dominant, Chromatic, Whole Tone); the minor pentatonic has neither</td></tr>
+  <tr><td><code>SYNCOPATION</code></td><td>0&ndash;100 %</td><td>moves the weight of the rhythm from the downbeats to the offbeats</td></tr>
+  <tr><td><code>TIES</code></td><td>0&ndash;100 %</td><td>chance that a step right after a playing step becomes a tie</td></tr>
+</table>
+<p><b>Algorithms</b> (<code>ALGO</code>):</p>
+<table>
+  <tr><th>Algorithm</th><th>Rhythm</th><th>Melody</th></tr>
+  <tr><td>RANDOM WALK</td><td>weighted choice of DENSITY x length steps (downbeat-heavy, shifted by SYNCOPATION; DENS VAR varies the count, neighbours of a chosen step get more weight the higher SLIDE is)</td><td>small scale-degree steps preferred (weights 36 / 26 / 14 / 8 / 4 for 1&ndash;5 degrees), pulled to the root on strong steps</td></tr>
+  <tr><td>MARKOV</td><td>as above</td><td>transition table over the 12 pitch classes, counted from the plug-in&rsquo;s own 32 library patterns (+ smoothing), weighted by closeness</td></tr>
+  <tr><td>EUCLID+WALK</td><td>Euclidean rhythm E(k, n), first onset on step 1 (v0.8.0; before it ended each group), rotated by SYNCOPATION; with SLIDE &gt; 0 onsets are joined into pairs so slides can happen</td><td>random walk</td></tr>
+  <tr><td>MOTIF+VAR</td><td>as random walk</td><td>the first four steps form a motif, repeated in every bar with 25 % variation per note (70 % on the last step)</td></tr>
+  <tr><td>CLASSIC MUT</td><td>from a library pattern</td><td>a random library pattern, snapped to the chosen scale and RANGE, then every step is mutated with <code>MUTATE %</code> probability. Gate, accent and slide come from the library (DENSITY etc. are not used)</td></tr>
+</table>
+<p><b>Scales</b>: Minor Pentatonic, Natural Minor, Phrygian, Harmonic Minor, Dorian, Chromatic, Blues,
+Phrygian Dominant, Whole Tone and <b>Custom</b> (the 12 keys under the scale box). Every generated note lies
+inside the chosen scale &mdash; verified over 10&thinsp;000 patterns per scale.</p>
+
+<h2 id="seed"><span class="num">06</span>SEED &amp; LOCK</h2>
+<table>
+  <tr><th>LOCK</th><th>GENERATE does</th></tr>
+  <tr><td>ON</td><td>uses the shown seed: the same pattern every time (recall)</td></tr>
+  <tr><td>OFF</td><td>draws a new random seed, shows it, and generates from it: lock it to keep or re-create the result</td></tr>
+</table>
+<p>The seed is 24 bit (shown as <code>0xF4B2A7</code>). Mouse wheel over the box steps &plusmn;1
+(<kbd>Shift</kbd> = 16), right-click sets 0, <b>NEW</b> draws a fresh seed without generating. The generator uses
+an XorShift PRNG; per-step probability and humanize use a stateless hash of (seed, step, position), so they
+repeat exactly on every play.</p>
+
+<h2 id="edit"><span class="num">07</span>MUTATE &amp; edit operations</h2>
+<p><b>MUTATE</b> changes <code>AMOUNT</code> distinct steps inside the reroll range <code>FROM</code>..<code>TO</code>
+(e.g. FROM 9 to only vary the second half). Each chosen step gets <em>one</em> of the enabled properties
+(<code>NOTE</code> moves the note along the scale, <code>ACC</code> flips the accent, <code>SLIDE</code> flips the
+slide, <code>GATE</code> switches the step on or off). The mutation sequence is reproducible from seed and press
+count; every GENERATE starts it again.</p>
+<table>
+  <tr><th>Button</th><th>Operation</th></tr>
+  <tr><td><code>&lt;ROT</code> / <code>ROT&gt;</code></td><td>rotate the pattern one step (wraps around the length; slide flags travel with their step)</td></tr>
+  <tr><td><code>REV</code></td><td>reverse; slides are links between two steps, so they are moved to the mirrored link; ties stay attached to their note (twice = original)</td></tr>
+  <tr><td><code>INV</code></td><td>mirror the pitches around ROOT, snap to the scale, lift the whole pattern by octaves until nothing is below ROOT</td></tr>
+  <tr><td><code>DBL</code></td><td>double the length (16 becomes 32, second half = copy). Only for lengths up to 16</td></tr>
+  <tr><td><code>CLR</code></td><td>clear the slot</td></tr>
+</table>
+<p>These buttons (and their SELECTION versions below) are undoable with <code>UNDO</code>; <code>REDO</code> repeats an undone step.</p>
+<h3 id="selection">Selection and range operations (v0.7.0)</h3>
+<p>Click a step number to select that step, drag across the numbers for a range, <kbd>Shift</kbd>+click extends the selection,
+double-click selects all steps, right-click on the numbers clears it; <kbd>Ctrl</kbd>+drag in the roll selects the steps under the frame.
+A green band marks the selection over the roll and the step rows. The buttons of the SELECTION panel act on it; without a selection they
+act on the whole pattern (and use exactly the whole-pattern commands described above).</p>
+<table>
+  <tr><th>Button</th><th>On the selection</th></tr>
+  <tr><td><code>COPY</code> / <code>CUT</code> / <code>PASTE</code></td><td>copy the selected steps, cut them, paste at the start of the selection (step 1 without a selection), clipped at the pattern end.
+      Without a selection COPY / PASTE move the whole slot (length included) as before. The clipboard is shared by all slots, so this also copies steps between slots.</td></tr>
+  <tr><td><code>CLR</code></td><td>gate off; the pitches stay as ghost notes (ties that would hang on a cleared note are cleared with it)</td></tr>
+  <tr><td><code>&lt;ROT</code> / <code>ROT&gt;</code></td><td>rotate inside the selection (wraps within it)</td></tr>
+  <tr><td><code>REV</code> / <code>INV</code></td><td>reverse (slides move to the mirrored link, the link after the last selected step stays, ties stay attached) / mirror around ROOT and snap to the scale</td></tr>
+  <tr><td><code>ST-</code> / <code>ST+</code></td><td>one scale degree down / up (a tone that would leave -12..+35 stays)</td></tr>
+  <tr><td><code>OCT-</code> / <code>OCT+</code></td><td>octave field -1 / +1 (limits -1 and +2)</td></tr>
+  <tr><td><code>DUP</code></td><td>copy the selection directly behind itself (clipped at the pattern end)</td></tr>
+  <tr><td><code>TO SLOT</code> + <code>COPY&gt;</code></td><td>copy the selected steps into another slot at the same positions (a shorter target is extended; undoable)</td></tr>
+</table>
+<p><b>MUTATE inside the selection.</b> With a selection, <code>MUTATE</code> only touches the selected steps; the FROM / TO sliders are left alone and
+apply when nothing is selected. The line <i>MUTATE RANGE</i> in the GENERATE tab shows which range is active.</p>
+<p><b>SNAP</b> puts notes you set or drag onto the scale (ROOT + SCALE); hold <kbd>Alt</kbd> to invert it for one edit. It is off by default.</p>
+<h3 id="locks">Step locks (v0.7.0)</h3>
+<p><code>LOCK</code> in the SELECTION panel locks the selected steps (the whole pattern without a selection); a locked step is marked in orange above
+the number row. <code>GENERATE</code>, <code>MUTATE</code> and the <code>REROLL</code> buttons of the GALLERY leave locked steps unchanged, so you can keep the
+four notes you like and let the generator find the rest. <code>UNLK</code> unlocks, <code>CLEAR LOCKS</code> clears them for the active slot. Direct edits and
+the selection operations still change locked steps (they are your own hand), and rotating or reversing does not move the locks. Locks are saved with the project
+(they sit behind the preset bank; older versions of the plug-in simply ignore them). Loading a preset, scene or INIT clears them.</p>
+<h3 id="gallery">Gallery and partial reroll (v0.7.0)</h3>
+<p>The <code>GALLERY</code> tab draws <b>eight candidates</b> from the current generator settings for the length of the active slot
+(<code>ROLL 8</code>; with <code>AUTO</code> on, a new set appears by itself when a generator setting, the slot or the length changes). Every
+candidate is exactly what <code>GENERATE</code> would give with the seed shown on its card: <code>TRY</code> puts it into the active slot (SEED is set to its seed; with LOCK on,
+GENERATE then repeats it), <code>KEEP</code> copies it into the slot chosen in the <i>KEEP TO</i> box without touching the active slot. Both are undoable.
+The <code>REROLL</code> buttons change only a part of the pattern, each press a new random draw (since v0.8.0 they are real partial modes built from the generator): <code>NOTES</code> a new tone sequence over the existing rhythm (algorithm, TENSION, REPEAT, OCT JUMP, RANGE and scale as in GENERATE), <code>RHYTHM</code>
+a new rhythm (algorithm, DENSITY, DENS VAR, SYNCOPATION, TIES) with the pitch of every step kept - accents stay where the step still plays, slides are redrawn - <code>ACC+SLD</code> new accents (ACCENT %) and slides (SLIDE %) over the notes that play, <code>ALL</code> every unlocked step.
+The seed history (<code>&lt;</code> <code>&gt;</code> and the seed button) lists the last 16 seeds used; pressing the seed button generates the active slot with that seed.</p>
+<h3 id="keys">Keyboard (v0.7.0)</h3>
+<p>While the pointer is over the roll or the step rows (and no overlay such as the preset list or OPTIONS is open):
+<kbd>A</kbd> accent, <kbd>S</kbd> slide, <kbd>G</kbd> gate on / off, <kbd>T</kbd> tie, <kbd>O</kbd> octave field, <kbd>P</kbd> probability (100 / 75 / 50 / 25) for the step under the
+pointer; <kbd>L</kbd> toggles its lock; <kbd>C</kbd> <kbd>X</kbd> <kbd>V</kbd> copy / cut / paste, <kbd>R</kbd> reverse, <kbd>I</kbd> invert, <kbd>[</kbd> <kbd>]</kbd> rotate,
+<kbd>Z</kbd> undo, <kbd>Shift</kbd>+<kbd>Z</kbd> redo, <kbd>Del</kbd> clear, <kbd>&larr;</kbd> <kbd>&rarr;</kbd> move the selection, <kbd>&uarr;</kbd> <kbd>&darr;</kbd> transpose it by a scale degree.
+REAPER decides which keys reach a plug-in window; <kbd>Space</kbd> stays with the transport, and other keys depend on your keyboard shortcut setup. Every function is
+also available with the mouse.</p>
+
+<h2 id="slots"><span class="num">08</span>Slots, undo &amp; song chain</h2>
+<p>Eight slots A&ndash;H hold independent patterns (each with its own length). <code>COPY</code> and
+<code>PASTE</code> (in the SELECTION panel) move a pattern or a selection between slots. In normal mode the <b>active</b> slot plays.
+The <b>slot overview</b> in the SONG tab shows all eight patterns as small piano rolls; a click selects the slot.</p>
+<p><b>Undo ring.</b> <code>UNDO</code> goes back through the last <b>16 edits across all slots</b>, <code>REDO</code> forward again; the counter
+(e.g. 3/16) shows how many steps are available and the tooltip names the slot the next step changes. A new edit discards the redo steps.
+Loading a preset, a scene or INIT, and a REAPER undo, clear the ring.</p>
+<p><b>SONG</b> plays a chain of up to 16 entries instead: click a chain cell to step through empty, A..H;
+right-click sets the repeats 1&ndash;8 (<code>A3</code> = slot A three times). The chain ends at the first empty cell
+and loops. The position is computed from the transport position, so jumps and loops always land in the right place.
+The default chain is A A A B.</p>
+<p><b>Chain editing and timeline (SONG tab).</b> The underlined cell is the one the buttons act on (a click on a cell, or on its block in the timeline, selects it):
+<code>INSERT</code> puts a cell with the active slot behind it (the following cells move right, the last one drops out), <code>DELETE</code> removes it,
+<code>&lt;&lt;</code> / <code>&gt;&gt;</code> move it. Under the cells a timeline draws one block per cell, as wide as pattern length times repeats,
+and the line next to the buttons gives the chain length in steps and 4/4 bars at the current RATE.
+While the chain plays (v0.8.1), a bright playhead line runs along the timeline, a second line grows underneath it, and the cell that is playing is lit.</p>
+<figure class="shot"><img src="img/tt-303patgen/tt-303patgen-song.png" alt="TT-303PATGEN with slot C active after COPY and PASTE, the SONG tab open with the chain A3 B A, its timeline and the slot overview" width="1125" height="800"><figcaption><span class="tag">SLOTS</span><b>Slots and song chain.</b> Slot C holds a pasted copy; the SONG tab shows the chain A3 B A, its timeline and the eight slots.</figcaption></figure>
+<figure class="shot"><img src="img/tt-303patgen/tt-303patgen-long.png" alt="TT-303PATGEN showing all 32 steps of a doubled pattern at once in the piano roll (VIEW FIT)" width="1125" height="800"><figcaption><span class="tag">32 STEPS</span><b>Long patterns.</b> With VIEW FIT all 32 steps are visible at once; 1-16 / 17-32 give wider columns for one half.</figcaption></figure>
+<figure class="shot"><img src="img/tt-303patgen/tt-303patgen-gallery.png" alt="TT-303PATGEN with the GALLERY tab open: eight candidate patterns with their seeds, TRY and KEEP buttons and the REROLL buttons" width="1125" height="800"><figcaption><span class="tag">GALLERY</span><b>Eight candidates at once.</b> Each card is exactly what GENERATE gives with its seed.</figcaption></figure>
+<p>Slots, lengths and the chain are saved with the project and with FX presets (step locks only with the project). Loading a preset with an unknown
+format version keeps the defaults.</p>
+<p><b>REAPER undo.</b> Every pattern edit on the front panel (notes, step rows, GENERATE, MUTATE, the edit buttons, length,
+song chain, loading a preset) also creates a REAPER undo point (<i>Edit FX</i>) once you release the mouse button, and marks the
+project as changed &mdash; <kbd>Ctrl</kbd>+<kbd>Z</kbd> takes it back. The plug-in&rsquo;s own undo ring stays independent of it (and is cleared by a REAPER undo).</p>
+
+<h2 id="library"><span class="num">09</span>The library</h2>
+<p><b>Library tab (v0.7.0).</b> The <code>LIBRARY</code> tab of the deck shows all 32 style patterns as small piano rolls with their names; a click loads the
+pattern into the active slot (undoable). The factory scenes are still loaded from the FACTORY list of the preset bar.</p>
+<p>32 built-in patterns of 16 steps, <b>original style studies</b> written for this plug-in, not copies of any
+recording: <b>Roll</b> 1&ndash;8 (rolling 16ths, root pedal with octave pops, Voyager-like), <b>Sparse</b> 1&ndash;8
+(few notes, slides, offbeat accents, Acid-Tracks-like), <b>Drive</b> 1&ndash;8 (driving 16ths with the phrygian b2,
+Higher-State-like) and <b>Squelch</b> 1&ndash;8 (dirty root and b7 basslines, Phuture-like). Since 0.5.0 they are the
+<b>FACTORY</b> section of the preset bar: choosing one writes the pattern into the active slot as written (undoable); the
+CLASSIC MUT algorithm snaps a random one to your scale.</p>
+
+<h3 id="scenes">Factory scenes (v0.6.0)</h3>
+<p>Below the 32 library patterns the FACTORY list holds 16 <b>scenes</b> (<code>S01 &hellip;</code> to <code>S16 &hellip;</code>). A scene sets a whole musical
+starting point: generator, scale / root, mutate range, rate / swing / gate / humanize, seed, slots <b>A&ndash;D</b> with their lengths and the song chain.
+Slots E&ndash;H, the velocities and threshold (your synth calibration), <code>FOLLOW</code>, the MIDI channel, <code>RUN</code> and <code>SEQ LINK</code> are left alone.
+Press <code>GENERATE</code> or <code>MUTATE</code> after loading a scene and the results stay in its style. The number in the name is the suggested tempo (the tempo itself is set in the host);
+the table lists a matching TT-303 sound preset. A scene is one undo step.</p>
+<table>
+  <tr><th>Scene</th><th>Key / scale</th><th>Rate</th><th>BPM</th><th>TT-303 sound</th></tr>
+  <tr><td><code>S01 ACID TECHNO 140</code></td><td>A phrygian</td><td>1/16</td><td>140</td><td>SQUELCH</td></tr>
+  <tr><td><code>S02 HARD ACID 150</code></td><td>F# custom (R b2 b3 b5 5 b7)</td><td>1/16</td><td>150</td><td>SCREAM</td></tr>
+  <tr><td><code>S03 ACID HOUSE 124</code></td><td>G blues</td><td>1/16</td><td>124</td><td>DEEP</td></tr>
+  <tr><td><code>S04 PSY ACID 142</code></td><td>E phrygian dominant</td><td>1/16</td><td>142</td><td>SQUELCH</td></tr>
+  <tr><td><code>S05 MINIMAL ACID 128</code></td><td>D phrygian</td><td>1/16</td><td>128</td><td>DEEP</td></tr>
+  <tr><td><code>S06 ELECTRO ACID 130</code></td><td>C dorian</td><td>1/16</td><td>130</td><td>DEEP</td></tr>
+  <tr><td><code>S07 UK ACID 145</code></td><td>F minor pentatonic</td><td>1/16</td><td>145</td><td>SCREAM</td></tr>
+  <tr><td><code>S08 DUB ACID 118</code></td><td>D natural minor</td><td>1/8</td><td>118</td><td>DUB</td></tr>
+  <tr><td><code>S09 TRIPLET ACID 126</code></td><td>G harmonic minor</td><td>1/16T</td><td>126</td><td>SQUELCH</td></tr>
+  <tr><td><code>S10 MELODIC ACID 122</code></td><td>F# natural minor</td><td>1/16</td><td>122</td><td>DEEP</td></tr>
+  <tr><td><code>S11 HALFTIME ACID 140</code></td><td>C# blues</td><td>1/16</td><td>140</td><td>DUB</td></tr>
+  <tr><td><code>S12 RAVE HOOVER 136</code></td><td>B harmonic minor</td><td>1/16</td><td>136</td><td>HOOVER</td></tr>
+  <tr><td><code>S13 BODY ACID 125</code></td><td>C custom (R b2 b5 5 b7)</td><td>1/16</td><td>125</td><td>SCREAM</td></tr>
+  <tr><td><code>S14 LOFI ACID JAZZ 96</code></td><td>A# dorian</td><td>1/16</td><td>96</td><td>DEEP</td></tr>
+  <tr><td><code>S15 POLY ACID 3:4</code></td><td>E minor pentatonic</td><td>1/16</td><td>132</td><td>INIT</td></tr>
+  <tr><td><code>S16 EVOLVING PROB 132</code></td><td>F natural minor</td><td>1/16</td><td>132</td><td>SQUELCH</td></tr>
+</table>
+<p>S15 runs two slots of 12 and 10 steps against each other, so the loop only comes back to the start after several bars. That is intended.</p>
+
+<h2 id="presets"><span class="num">10</span>Preset bar &amp; user bank</h2>
+<figure class="shot"><img src="img/tt-303patgen/tt-303patgen-presets.png" alt="Header of TT-303PATGEN with the preset bar: previous, preset name with drop-down, next, SAVE and a menu button, left of the OPTIONS button, and the open preset list with FACTORY and USER sections" width="1125" height="310"><figcaption><span class="tag">PRESETS</span><b>The preset bar</b> sits in the header, directly left of <code>OPTIONS</code>: <code>&lt;</code> name <code>&gt;</code> <code>SAVE</code> <code>...</code>. The name opens the list with the FACTORY and USER sections.</figcaption></figure>
+<p>The bar loads and saves the <b>whole musical state</b> of the instance in one step: all generator, mutate and output settings, scale / root / custom mask, <code>SEED</code> and <code>LOCK</code>,
+the active slot, <b>all eight patterns</b> (with their lengths) and the <b>song chain</b>. Not part of a preset: the colour scheme (<code>OPTIONS</code>), the MIDI channel, <code>RUN</code>, <code>SEQ LINK</code>, the
+library list position and the hidden test parameters.</p>
+<table>
+  <tr><th>Control</th><th>Function</th></tr>
+  <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: first the 32 factory patterns and the 16 factory scenes, then the used user slots; wraps around and loads immediately.</td></tr>
+  <tr><td>Name field</td><td>Opens the list: <b>FACTORY</b> (the 32 library patterns, then the 16 scenes) and <b>USER</b> (32 slots, empty ones show <code>- empty -</code>). Mouse wheel scrolls, click loads. A <code>*</code> behind the name means the state differs from the loaded preset (the active slot alone does not count).</td></tr>
+  <tr><td><code>SAVE</code></td><td>Saves the current state into the selected user slot; with a factory preset (or none) selected, into the first free slot. A name box opens (up to 24 characters, default <code>User 07</code>): type, <kbd>Enter</kbd> or <code>OK</code> saves, <code>CANCEL</code> or a click outside cancels.</td></tr>
+  <tr><td><code>...</code></td><td><code>RENAME</code>, <code>COPY</code> (into the next free slot), <code>DELETE</code> (a second click confirms) for the selected user preset, and <code>INIT</code> (factory settings of all preset parameters; slots A&ndash;D get library patterns 1&ndash;4, the chain is A A A B).</td></tr>
+</table>
+<p><b>A factory pattern is one library pattern</b>: it is written into the active slot (exactly what the old <code>LOAD</code> did) and leaves every setting and all other slots alone. A <b>factory scene</b> sets a whole starting point, see the scenes in the library chapter.
+A user preset restores everything, including which slot is active, all eight patterns and the chain. Loading is applied inside the plug-in&rsquo;s audio callback, like every other pattern edit,
+so a running pattern never changes mid-step in a half-written state. Loading a preset resets the undo memory and the MUTATE counter (the next MUTATE with the same seed repeats the same variation).</p>
+<p><b>Where the user bank lives.</b> Plug-ins cannot write files, so the 32 user slots are part of the plug-in state: they are saved with the project, with FX-chain and track-template copies,
+and in every <b>REAPER preset</b> of this plug-in (the <code>+</code> button in the FX window toolbar). To take your bank to another project or computer, save a REAPER preset once
+(<code>+</code> &rarr; <i>Save preset</i>) and load it there: the whole bank comes with it. Each used user slot adds about 2 kB to the project (a full bank of 32 roughly 65 kB). Projects saved with earlier versions load unchanged with an empty bank.</p>
+<p><b>Typing names.</b> REAPER keeps <kbd>Space</kbd> for the transport, so type <kbd>Shift</kbd>+<kbd>Space</kbd> for a blank. Depending on your REAPER settings <kbd>Esc</kbd> closes the whole FX window; use <code>CANCEL</code> instead. (The <code>+</code> menu of the FX window also has <i>Send all keyboard input to plug-in</i>.)</p>
+
+<h2 id="output"><span class="num">11</span>Output &amp; sync</h2>
+<table>
+  <tr><th>Control</th><th>Range</th><th>Function</th></tr>
+  <tr><td><code>RATE</code></td><td>1/16, 1/8, 1/16T, 1/32</td><td>step length</td></tr>
+  <tr><td><code>SWING</code></td><td>50&ndash;75 %</td><td>delays every second step by (2 x SWING - 1) x step length</td></tr>
+  <tr><td><code>GATE LEN</code></td><td>5&ndash;100 %</td><td>note length as a share of a step (50 = half a step); a slide overlaps by half of it (at least one sample)</td></tr>
+  <tr><td><code>MIDI CH</code></td><td>1&ndash;16</td><td>output channel; changing it releases held notes</td></tr>
+  <tr><td><code>ACC VEL</code> / <code>NORM VEL</code></td><td>1&ndash;127</td><td>velocity of accented / normal steps (defaults 127 / 64; 127 / 90 before v0.5.7)</td></tr>
+  <tr><td><code>THRESH</code></td><td>1&ndash;127</td><td>the accent threshold of your synth (default 65 = TT-303 v1.5.0; 100 before). <code>INIT</code> uses the same defaults since v0.6.0. Keeps humanized velocities on the right side and drives the warning line</td></tr>
+  <tr><td><code>HUM TIME</code> / <code>HUM VEL</code></td><td>0&ndash;20 ms / 0&ndash;30</td><td>deterministic timing (&plusmn;) and velocity jitter; the plug-in looks ahead, so pulling notes early costs no latency. A step never starts before the previous one (at 1/32 or 1/16T with heavy swing a large HUM TIME is limited by this)</td></tr>
+  <tr><td><code>OCTAVE</code></td><td>-2&hellip;+2</td><td>transposes the output by octaves</td></tr>
+  <tr><td><code>SLOT QUANT</code></td><td>INSTANT, 1 BEAT, 1 / 2 / 4 BARS</td><td>(v0.8.0) a slot change from the slot buttons, the keys 1&ndash;8 or NOTE TRIG waits for the next beat / bar (counted from the project start in the current time signature); a blinking frame marks the waiting slot, clicking the playing slot again cancels. INSTANT, a stopped transport and SONG mode switch at once; automating SLOT is always immediate. The new slot continues at <i>step counter mod its length</i>, so it starts on its first step only if its length divides the bar</td></tr>
+  <tr><td><code>NOTE TRIG</code> / <code>TRIG BASE</code></td><td>OFF / ON, C0&ndash;G0 / C1&ndash;G1 / C3&ndash;G3 / C4&ndash;G4</td><td>(v0.8.0) eight consecutive incoming MIDI notes from the base switch the slots A&ndash;H (with SLOT QUANT). These notes neither transpose nor pass through; all other notes still transpose with FOLLOW IN. C0 = MIDI 12, C1 = 24, C3 = 48, C4 = 60; the default range C0&ndash;G0 lies below the FOLLOW reference C2</td></tr>
+</table>
+<p>Timing is sample-accurate: the plug-in schedules every note-on and note-off at its own sample offset from the
+host tempo and beat position; transport jumps, loops and tempo changes are followed. Measured against the exact
+grid at 120, 140 and 174 bpm, with swing 50 and 62, the note-on positions are identical to the sample.</p>
+
+<h2 id="input"><span class="num">12</span>MIDI input, transpose &amp; panic</h2>
+<ul>
+  <li><b>Transpose.</b> With <code>FOLLOW IN</code> on, an incoming note transposes the pattern: <b>C2 (MIDI 36)
+      is the original pitch</b>, C#2 is +1, and so on. Release all keys and the pattern returns to ROOT. Incoming notes
+      are <em>never</em> passed through (they would collide with the generated notes); with FOLLOW off they are ignored.</li>
+  <li><b>Pass-through.</b> All other MIDI (CC, pitch bend, ...) goes through unchanged.</li>
+  <li><b>No hanging notes.</b> Stop, pause, <code>RUN</code> off, a transport jump or loop, a change of the MIDI channel
+      and CC 123 / CC 120 all release every sounding note immediately.</li>
+</ul>
+
+<h2 id="tt303"><span class="num">13</span>Using it with the TT-303</h2>
+<ol>
+  <li>Put TT-303PATGEN above the TT-303 on the same track. In the TT-303 keep <code>Mode</code> = HOST.</li>
+  <li>The TT-303 reads velocity &ge; its <b>Accent from velocity</b> value (default 65 since v1.5.0, 100 before) as accent. The
+      defaults ACC VEL 127 and NORM VEL 64 are on the correct sides of 65; if you change the threshold in the TT-303, set
+      <code>THRESH</code> here to the same value. Projects saved with an older TT-303 keep their threshold of 100, and a PATGEN
+      saved before v0.5.7 keeps NORM VEL 90 / THRESH 100 &mdash; the warning line tells you when the two no longer match.</li>
+  <li>Overlapping notes are a slide in the TT-303; its <b>Slide time</b> sets the glide.</li>
+  <li>Do not use the TT-303&rsquo;s own SEQ mode at the same time.</li>
+</ol>
+<p>The plug-in&rsquo;s test suite renders PATGEN &rarr; TT-303 offline and measures the result: accented notes are
+clearly louder, a slide keeps the note running and glides the pitch, a retriggered octave jump does not.</p>
+
+<h2 id="link"><span class="num">14</span>SEQ LINK (gmem)</h2>
+<p>With <code>SEQ LINK</code> on, the active pattern is published in the gmem namespace <code>tt303pg</code> so another
+JSFX or script can read it. This is a <b>sender only</b>; nothing in the TT-303 reads it yet.</p>
+<table>
+  <tr><th>Index</th><th>Content</th></tr>
+  <tr><td><code>gmem[0]</code></td><td>30301 (magic)</td></tr>
+  <tr><td><code>gmem[1]</code></td><td>1 (protocol version)</td></tr>
+  <tr><td><code>gmem[2]</code></td><td>pattern length 1&ndash;32</td></tr>
+  <tr><td><code>gmem[3]</code></td><td>write counter (+1 after every complete write)</td></tr>
+  <tr><td><code>gmem[4 + 4 s + k]</code></td><td>step s (0..31), field k: 0 MIDI note (absolute, without input transpose), 1 gate (tie = 1), 2 accent, 3 slide</td></tr>
+  <tr><td><code>gmem[132..138]</code></td><td>extension: step length in beats, swing, gate length, ACC VEL, NORM VEL, channel, 1 = valid</td></tr>
+  <tr><td><code>gmem[139]</code>, <code>gmem[140 + s]</code></td><td>1 = tie flags valid; 1 when step s is a tie</td></tr>
+  <tr><td><code>gmem[200..202]</code></td><td>chain block (v0.7.0): 1 = valid, write counter, number of cells (up to the first empty one)</td></tr>
+  <tr><td><code>gmem[203 + 2 j]</code>, <code>[204 + 2 j]</code></td><td>chain cell j (0..15): slot 0..7, repeats 1..8</td></tr>
+  <tr><td><code>gmem[240 + 164 k + ...]</code></td><td>slot k (0..7): <code>+0</code> length, <code>+1 + 4 s</code> note, gate, accent, slide as in the pattern block, <code>+129 + s</code> tie flag</td></tr>
+</table>
+<p>A tie is exported as a slide of the previous step into the same pitch. Write the header last, read the counter twice
+to detect a torn read. The TT-303 stores 16 steps in the range C1&ndash;C3; longer or higher patterns must be clipped
+by the reader.</p>
+
+<h2 id="print"><span class="num">15</span>Print to MIDI Item</h2>
+<p>The ReaScript <code>TT-303PATGEN Print to MIDI Item.lua</code> (installed with the plug-in) turns the live generator
+into a real track. Turn on <code>SEQ LINK</code>, select the target track, put the edit cursor where the item should
+start, run the script and enter the number of bars. It writes the pattern as it plays: swing, gate length, slides as
+overlapping notes, ties as longer notes, accent and normal velocity, the MIDI channel. Probability and humanize are
+not printed. The result is compared note by note against the live output in the test suite.</p>
+<p>The second action <code>TT-303PATGEN Print Song Chain.lua</code> (v0.7.0) prints the <b>whole song chain</b> &mdash; all cells with their repeats &mdash; as one
+MIDI item: turn on <code>SEQ LINK</code>, select the track, place the edit cursor, run it and enter how many passes of the chain to print (1 = once). Slides and
+ties across the cell borders behave exactly as in SONG mode. It needs <code>TT-303PATGEN Print to MIDI Item.lua</code> next to it (both are installed together).</p>
+
+<h2 id="automation"><span class="num">16</span>Automation &amp; parameters</h2>
+<p>All controls are hidden JSFX sliders that stay automatable. Parameters 1&ndash;36 are the musical controls
+(slot, seed, lock, algorithm, scale, root, custom mask, the nine generator settings, mutate settings, rate, swing,
+gate length, channel, velocities, threshold, follow, run, humanize, song, SEQ LINK, octave, library index).
+The preset bar stores all of them except MIDI channel, run, SEQ LINK and library index.
+Parameter 64 is the hidden UI colour (scheme 0&ndash;9, see Options / Color). Parameters 37&ndash;63 are a command / diagnostic bus used by the automated tests (command, arguments, acknowledge,
+memory query, event log, statistics, block timing) &mdash; ignore them; commands and the event log only act while a test script has unlocked them, so automation on them does nothing. Patterns themselves are not parameters: they are saved with
+the project and with FX presets (and, in the user bank, with every preset you save).</p>
+
+<h2 id="notes"><span class="num">17</span>Limits &amp; honest notes</h2>
+<ul>
+  <li>MIDI output is only produced while the transport plays. There is no free-running audition mode yet.</li>
+  <li>The generator cannot judge <em>taste</em>. It makes musically shaped patterns from rules; whether one grooves is a
+      matter of your ears (seeds and MUTATE exist for that).</li>
+  <li>Euclid joins onsets into pairs for slides; at high densities there are fewer pairs than the SLIDE share asks for (never more slides than neighbouring pairs).</li>
+  <li>Tempo changes inside one audio block are not resolved; the tempo at the start of each block is used.</li>
+  <li>Changing the RATE while playing restarts the step counter at the current position (notes are released).</li>
+  <li>The keyboard shortcuts of the front only work for keys that REAPER passes to the plug-in window; <kbd>Space</kbd> always stays with the transport.</li>
+  <li>The pattern clipboard, selection, view settings and the gallery candidates are not saved; locks are saved with the project, not with presets.</li>
+  <li>A quantised slot change counts from the project start (beat 0), not from the start of the current pattern pass; a new slot continues at the step counter modulo its length. Seeds of v0.7.0 give different patterns now.</li>
+</ul>
+
+<h2 id="trouble"><span class="num">18</span>Troubleshooting</h2>
+<ul>
+  <li><b>Nothing plays</b> &mdash; check that the transport runs, <code>RUN</code> is on (not HALT), the plug-in sits
+      <em>before</em> the synth and the MIDI channel matches the synth.</li>
+  <li><b>No accents in the TT-303</b> &mdash; the TT-303 threshold is above ACC VEL, or NORM VEL is at or above it. The
+      line under the output panel warns about this.</li>
+  <li><b>Slides do not glide</b> &mdash; the next step must be a normal gate step; check the TT-303 slide time.</li>
+  <li><b>Every GENERATE looks different</b> &mdash; that is LOCK off. Turn LOCK on to repeat a seed.</li>
+  <li><b>The edit has no effect while stopped</b> &mdash; the plug-in applies edits inside its audio callback; it must be
+      active (not bypassed, not offline). The MIDI monitor says <code>WAITING FOR AUDIO</code> in that case.</li>
+  <li><b>The pattern sounds an octave too low or high</b> &mdash; ROOT and OCTAVE shift the output; C2 + ROOT is the base.</li>
+</ul>
+<h2 id="changelog">Changelog</h2>
+<h3>1.0.0 &mdash; First public release</h3>
+<ul>
+  <li>Released with ACID SEASON Drop 01. Same code as 0.9.0: generator, MIDI output, front and saved state are unchanged, so projects and presets saved with 0.9.x load as before.</li>
+</ul>
+<h3>0.9.0 &mdash; Fixes from a code review</h3>
+<ul>
+  <li>With step locks: GENERATE, TRY, re-generating with a seed and REROLL ALL no longer leave a tie on the discarded note of a locked step; the tie follows the locked step.</li>
+  <li>MUTATE passes a mutated note on to the ties behind it (as editing a note does).</li>
+  <li>REROLL RHYTHM keeps each step's PROB (like REROLL NOTES and ACC+SLD).</li>
+  <li>GALLERY AUTO also re-rolls the candidates when DENS VAR changes.</li>
+  <li>With HUM TIME above 0, a step whose humanized start falls into the next audio block now picks up that block's incoming-note transposition.</li>
+  <li>Undo from the host resets the mutate counter, so the next MUTATE draws what the plug-in's own UNDO would give.</li>
+  <li>The transposition buffer holds up to 256 changes per audio block (was 30): dense incoming MIDI at large audio buffers is transposed exactly.</li>
+</ul>
+<h3>0.8.2 &mdash; Internal: UI kit update</h3>
+<ul>
+  <li>The shared UI widget library was updated. No change to the front, the generator or the MIDI output.</li>
+</ul>
+<h3>0.8.1 &mdash; Playhead in the song timeline</h3>
+<ul>
+  <li>SONG tab: a running playhead in the chain timeline (bright vertical line plus a growing line underneath) and the playing cell is lit. Display only; the MIDI output is unchanged.</li>
+</ul>
+<h3>0.8.0 &mdash; Generator and slot switching</h3>
+<ul>
+  <li>SLIDE is the share of playing steps that slide; the rhythm is drawn so that neighbouring notes exist; EUCLID starts on step 1 and joins onsets into pairs for slides.</li>
+  <li>New DENS VAR knob (default 25) spreads the number of playing steps around DENSITY.</li>
+  <li>REROLL NOTES / RHYTHM / ACC+SLD are real partial modes built from the generator.</li>
+  <li>SLOT QUANT: quantised slot changes from the front, keys 1&ndash;8 and NOTE TRIG; NOTE TRIG: eight MIDI notes switch the slots A&ndash;H.</li>
+  <li>Seeds give different patterns than in 0.7.0 (saved patterns and presets are unaffected). With NOTE TRIG off and SLOT QUANT at INSTANT the MIDI output of a given pattern is unchanged.</li>
+</ul>
+<h3>0.7.0 &mdash; Workbench front</h3>
+<ul>
+  <li>New layout: all 32 steps in one roll (VIEW FIT), movable pitch window, FOCUS view, step selection with range operations (copy, cut, paste, clear, rotate, reverse, invert, scale degrees, octaves, duplicate, copy to slot, MUTATE in the selection), SNAP.</li>
+  <li>Undo ring of 16 steps across slots with REDO; MUT % slider on the front; WAITING FOR AUDIO and BUSY messages; hover keyboard.</li>
+  <li>Deck with the tabs GENERATE, OUTPUT, SONG, GALLERY, LIBRARY.</li>
+  <li>GALLERY: eight candidates at once, TRY / KEEP, AUTO, partial reroll, seed history. Step locks for GENERATE, MUTATE and the rerolls.</li>
+  <li>LIBRARY browser with previews; song chain editing, timeline, slot overview, chain length.</li>
+  <li>New action: TT-303PATGEN Print Song Chain (SEQ LINK chain block from gmem[200]).</li>
+  <li>Generator and MIDI output of unchanged patterns are unchanged.</li>
+</ul>
+<h3>0.6.2 &mdash; Review fixes, round 2</h3>
+<ul>
+  <li>STOP and PANIC also release a sustain-on (CC 64) that is still waiting in the output queue.</li>
+  <li>More than 30 input notes within one block keep their exact timing for the transpose.</li>
+  <li>Includes all fixes of 0.6.1.</li>
+</ul>
+<h3>0.6.1 &mdash; Review fixes</h3>
+<ul>
+  <li>STOP and PANIC release a held sustain pedal (CC 64) before the note-offs.</li>
+  <li>The output queue can no longer drop a note-off.</li>
+  <li>An input note transposes the pattern from its own timing position.</li>
+  <li>PRINT keeps ties as ties; REV keeps the probability of ties.</li>
+  <li>Loading a preset or scene applies rate, root and gate from the new state at once; a second load waits for the first.</li>
+  <li>The internal UNDO button also undoes direct note edits.</li>
+</ul>
+<h3>0.6.0 &mdash; Factory scenes</h3>
+<ul>
+  <li>16 factory scenes in the FACTORY list; INIT uses NORM VEL 64 / THRESH 65; ties follow their note on edit and reverse; less CPU.</li>
+  <li>OPTIONS &gt; AUTO FIT ON / OFF; UI size accepts 25 to 400 percent.</li>
+</ul>
+<h3>0.5.5 &mdash; UI size and saved options</h3>
+<ul>
+  <li>Default UI size 125%; OPTIONS adds 100%, 125%, 150%, 200%, 300% and a custom percentage field.</li>
+  <li>All OPTIONS settings persist per instance across reopening and project reloads.</li>
+</ul>
+
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v0.5.5</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/303patgen-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/303patgen-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+<p><b>Large font steps (v0.5.6).</b> Labels that sit in tight places (knob names and values, tabs, field labels, short help lines, the wordmark) only grow while they still fit their place; where a larger step would not fit, that label stays at the normal size, so nothing overlaps.</p>
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-303PATGEN v1.0.0</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>
