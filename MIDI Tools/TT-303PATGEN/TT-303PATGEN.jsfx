@@ -1,7 +1,7 @@
 desc:TT-303PATGEN
 // @description TT-303PATGEN - Acid pattern generator with MIDI output (TT-303 or any synth)
 // @author TimTechlor
-// @version 1.0.0
+// @version 1.0.1
 // @license MIT
 // @tags midi acid 303 pattern generator sequencer markov euclid slide accent
 // @link Manual https://timtechlor.de/docs/tt-303patgen-manual.html
@@ -30,6 +30,7 @@ desc:TT-303PATGEN
 //   (C2 = original pitch) and an optional gmem link (namespace tt303pg).
 //   Operated from the drawn front panel; all parameters stay automatable.
 // @changelog
+//   1.0.1 - Robustness fixes from a code review: damaged or truncated project data no longer leaves a half-loaded state (the generator falls back to defaults), a truncated preset bank is reported as BANK DAMAGED instead of silently emptying, and a zero time-signature numerator can no longer divide by zero. Sound, generator, MIDI output and the saved format are unchanged; projects saved with 1.0.0 load as before.
 //   1.0.0 - First public release (ACID SEASON Drop 01). Same code as 0.9.0: generator, MIDI output, front and saved state are unchanged, so projects and presets saved with 0.9.x load as before. Version number only.
 //   0.9.0 - Fixes from a code review and a longer test run: with step locks, GENERATE / TRY / seed re-generate / REROLL ALL no longer leave a tie on the discarded note of a locked step (the tie follows the locked step); MUTATE passes a mutated note on to the ties behind it; REROLL RHYTHM keeps each step's PROB (as the other reroll modes do); the gallery's AUTO mode also re-rolls when DENS VAR changes; with HUM TIME the transposition of an incoming note is applied to a step whose humanized start falls into the next block; undo from the host resets the mutate counter like the plug-in's own UNDO; the note-transposition buffer holds up to 256 changes per block (was 30), so dense incoming MIDI at large audio buffers is transposed exactly.
 //   0.8.2 - UI kit 7 inlined (shared widget library; new building blocks for text fit, knobs with value, tabs, pads, plots, scope, envelope, piano). No change to the front, the generator or the MIDI output.
@@ -1228,9 +1229,10 @@ function tt_pb_run(a, i, n) local(z, j) (
 
 // Read: one slot record (RLE) into the buffer, then take it over into slot j. Returns 1 = ok.
 function tt_pb_rdone(j, sw) local(u, i, i0, k, ok) (
-  u = 0; file_var(0, u);
-  ok = 1;
-  u > 0 ? (
+  u = 0; ok = 1;
+  // Review 17.10.2026: chunk ends before the slot word (truncated) = error (BANK DAMAGED) instead of a silently empty slot. History: u = 0; file_var(0, u); ok = 1;
+  file_avail(0) > 0 ? ( file_var(0, u); ) : ( ok = 0; );
+  u > 0 && ok ? (
     ok = file_mem(0, tt_pb_ebuf, TTPB_NW) == TTPB_NW;   // Review 11.10.2026: return value = words read; a truncated file is an error. History: file_mem(0, tt_pb_ebuf, TTPB_NW);
     memset(tt_pb_buf, 0, tt_pb_wps);
     i = 0;
@@ -3297,9 +3299,9 @@ function xtri(cx, cy, s, dir, fill) local(px, py, r, a1, a2, b1, b2, c1, c2) (
 // __UIKIT_END__
 uikit_accent(0.224, 1.000, 0.078);   // Produktakzent Acid #39FF14 (Kit-Default; Werks-Schema 0 ACID)
 tth_sync(slider64);                  // Color scheme from the hidden slider (theme module, options box)
-strcpy(#tt_ver, "v1.0.0");          // P25: the ONE version place in the code; the front draws #tt_ver (header row, 820/14)
+strcpy(#tt_ver, "v1.0.1");          // P25: the ONE version place in the code; the front draws #tt_ver (header line, 820/14)
 
-// ---------- Memory map (offsets, no overlaps) ----------
+// ---------- memory map (offsets, no overlaps) ----------
 PG_SER   = 1;        // serVer des @serialize-Formats
 M_PAT    = 0;        // 8 slots x 32 steps (packed words)            0..255
 M_LEN    = 256;      // Length per slot (1..32)                       256..263
@@ -5450,7 +5452,7 @@ function pg_firstStep(bp0) local(n) (
 
 // 0.8.0 (stage 5): boundary of the quantized change: first step from step n0 whose position lies on / behind the next unit boundary (beats)
 function pg_sqBound(n0) local(ub) (
-  ub = pg_sqUnit();
+  ub = max(0.01, pg_sqUnit());   // Review 17.10.2026 (B1): ts_num = 0 -> bpb = 0 -> division by zero
   pg_firstStep(ceil(pg_stepPos(n0) / ub - 0.000000001) * ub);
 );
 // Process request (in @block behind the transport evaluation: pg_active, pg_nextN, pg_bp0 apply to this block)
@@ -6236,10 +6238,12 @@ function ui_key(k) local(s, w, g, hs, v, np, d, n0, n1) (
 pg_serVer = PG_SER;
 file_var(0, pg_serVer);
 pg_serVer == PG_SER ? (
-  file_mem(0, M_PAT, 256);
-  file_mem(0, M_LEN, 8);
-  file_mem(0, M_CHS, 16);
-  file_mem(0, M_CHR, 16);
+  // Review 17.10.2026 (B2): check the number of words read; a truncated chunk (fewer than 296 words when reading) -> factory defaults instead of half-old data. Format unchanged.
+  pg_rdN = file_mem(0, M_PAT, 256);
+  pg_rdN += file_mem(0, M_LEN, 8);
+  pg_rdN += file_mem(0, M_CHS, 16);
+  pg_rdN += file_mem(0, M_CHR, 16);
+  (file_avail(0) >= 0 && pg_rdN < 296) ? pg_defaults();
   pg_validate();
   pg_linkSum = 0 - 1;
   // 0.7.0 (stage 1): clear the undo ring only when READING (REAPER undo, project load); when writing (undo points, saving) it stays
