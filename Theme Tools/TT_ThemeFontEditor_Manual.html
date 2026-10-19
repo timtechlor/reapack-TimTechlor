@@ -6,8 +6,8 @@
 <title>TT-THEMEFONTEDITOR Manual – Change REAPER Theme Font Sizes</title>
 <meta name="description" content="Free REAPER script to find and change theme font sizes: point at any text, see the WALTER font behind it, preview live and bake a new theme. Full user manual for TT-THEMEFONTEDITOR.">
 <meta name="tt-doc-name" content="TT-THEMEFONTEDITOR">
-<meta name="tt-doc-version" content="1.5.0">
-<meta name="tt-doc-date" content="2026-10-14">
+<meta name="tt-doc-version" content="1.5.1">
+<meta name="tt-doc-date" content="2026-10-19">
 <link rel="canonical" href="https://timtechlor.de/docs/TT_ThemeFontEditor_Manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-THEMEFONTEDITOR — User Manual">
-<meta property="article:modified_time" content="2026-10-14">
+<meta property="article:modified_time" content="2026-10-19">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-THEMEFONTEDITOR Manual – Change REAPER Theme Font Sizes">
@@ -45,8 +45,8 @@
    "description": "Free REAPER script to find and change theme font sizes: point at any text, see the WALTER font behind it, preview live and bake a new theme. Full user manual for TT-THEMEFONTEDITOR.",
    "url": "https://timtechlor.de/docs/TT_ThemeFontEditor_Manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/TT_ThemeFontEditor_Manual.html",
-   "datePublished": "2026-10-14",
-   "dateModified": "2026-10-14",
+   "datePublished": "2026-10-19",
+   "dateModified": "2026-10-19",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-theme-font-editor.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "TT-THEMEFONTEDITOR, REAPER theme font size, REAPER WALTER fonts, rtconfig, REAPER theme editor, ReaScript, ReaImGui, change REAPER font size, REAPER UI scaling",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/TT_ThemeFontEditor_Manual.html#software" },
-   "version": "1.5.0"
+   "version": "1.5.1"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-THEMEFONTEDITOR",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.5.0",
+   "softwareVersion": "1.5.1",
    "description": "ReaScript for REAPER that finds the theme font used by any text in the REAPER window and changes its size, weight and style.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,7 +228,7 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-THEMEFONTEDITOR</span></nav>
       <div class="wordmark" style="--wm-n:18" role="img" aria-label="TT-THEMEFONTEDITOR">TT-THEMEFONTEDITOR</div>
       <h1>TT-THEMEFONTEDITOR — User Manual</h1>
-      <div class="meta">ReaScript for REAPER // Version 1.5.0 // TimTechlor</div>
+      <div class="meta">ReaScript for REAPER // Version 1.5.1 // TimTechlor</div>
       <p class="lead">TT-THEMEFONTEDITOR is a ReaScript for REAPER that finds and changes the font sizes of the active theme without touching the theme itself. Point at any text in the REAPER window, see which theme font controls it, try a new size, weight or style live, and bake the result into a new theme file or back into the original.</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-theme-font-editor/tt-theme-font-editor-the-main-window-with-a-locked-target-in-target-a.webp" aria-label="Enlarge screenshot of the TT-THEMEFONTEDITOR user interface" title="Click to enlarge"><img src="img/tt-theme-font-editor/tt-theme-font-editor-the-main-window-with-a-locked-target-in-target-a.webp" width="1025" height="1223" alt="TT-THEMEFONTEDITOR window: header with version and preview state, PICKER and OPTIONS, the TARGET, EDIT and ALL FONTS panels and the BAKE THEME bar" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -329,7 +329,7 @@ REAPER right now.</p>
 <p>The window is titled <strong>TT-THEMEFONTEDITOR</strong> (initial size 800&times;820, freely
 resizable). From top to bottom:</p>
 <ul>
-<li><strong>Header.</strong> The name TT-THEMEFONTEDITOR with the version (<code>v1.5.0</code>), and on
+<li><strong>Header.</strong> The name TT-THEMEFONTEDITOR with the version (<code>v1.5.1</code>), and on
   the right an LED with the preview state: <strong>PREVIEW ACTIVE</strong> (REAPER shows the working copy with
   your changes), <strong>ORIGINAL THEME</strong> (no preview running yet) or <strong>NO THEME</strong>.</li>
 <li><strong>Tool row.</strong> <strong>PICKER</strong> (or <strong>CANCEL PICKER</strong> while armed) on the left with a
@@ -856,6 +856,13 @@ detection, picker results, status changes and errors, and is cleared on
 each script start.</p>
 
 <h2 id="changelog"><span class="num">19</span>Changelog</h2>
+<h3>1.5.1</h3>
+<ul>
+  <li>Fix: copying the settings of a theme whose section stands at the very top of <code>reaper-themeconfig.ini</code> no longer writes a broken section header.</li>
+  <li>Fix: if the old working folder cannot be renamed, it is no longer deleted in the background while the next edit may already be refilling it.</li>
+  <li>Fix: baking a zipped theme never deletes an existing temporary file; if all temporary names next to the theme are taken, the bake stops with &ldquo;No free temporary name&rdquo;.</li>
+  <li>Fix: the script starts even if its log file cannot be opened for writing.</li>
+</ul>
 <h3>1.5.0 &mdash; TT-THEMEFONTEDITOR, UI kit look</h3>
 <ul>
   <li>New name: TT-THEMEFONTEDITOR (formerly &ldquo;TT Theme Font Editor&rdquo;); file name, action and saved settings stay the same.</li>
@@ -875,7 +882,7 @@ each script start.</p>
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-THEMEFONTEDITOR v1.5.0</b> — ReaScript for REAPER · Tim Techlor design series<br> Manual revision 1.5.0 · Screenshots: REAPER 7, theme Default 7.0, window at 100 % UI size · License: MIT</div>
+  <div class="wrap"><b>TT-THEMEFONTEDITOR v1.5.1</b> — ReaScript for REAPER · Tim Techlor design series<br> Manual revision 1.5.1 · Screenshots: REAPER 7, theme Default 7.0, window at 100 % UI size · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

@@ -1,6 +1,6 @@
 -- @description TT-THEMEFONTEDITOR
 -- @author TimTechlor
--- @version 1.5.0
+-- @version 1.5.1
 -- @license MIT
 -- @tags theme fonts walter rtconfig imgui
 -- @provides
@@ -31,6 +31,12 @@
 --   img/tt-theme-font-editor/tt-theme-font-editor-the-options-popup-with-font-size-table-font-and-d.webp
 --   img/tt-theme-font-editor/tt-theme-font-editor-while-the-picker-is-armed-the-row-shows-cancel-pi.webp
 -- @changelog
+--   v1.5.1
+--   - FIX: a '%' in the theme name no longer breaks the preview or the bake; CREATE COPY of an unzipped theme without a ui_img line now points the copy to the existing image folder.
+--   - FIX: copying the settings of a theme whose section stands at the very top of reaper-themeconfig.ini no longer writes a broken section header ("[[Name]").
+--   - FIX: if the old working folder cannot be renamed, it is no longer deleted in the background while the next edit may already be refilling it.
+--   - FIX: baking a zipped theme never deletes an existing temporary file; if all temporary names are taken, the bake stops with a clear message.
+--   - FIX: the script starts even if its log file cannot be opened for writing.
 --   v1.5.0
 --   - NEW LOOK: panels, buttons, switches and the size slider now follow the TimTechlor UI kit 7.
 --   - NEW: every control has a tooltip; OPTIONS > TOOLTIPS ON / OFF switches them off (saved).
@@ -91,7 +97,7 @@
 -- namespace unchanged, so saved settings are kept).
 
 local R = reaper
-local VERSION = "1.5.0"
+local VERSION = "1.5.1"
 local NS = "TT_ThemeFontEditor"
 local EDIT_MARK = " (TT-Edit)"
 local BAKE_MARK = " (TimTechlor)"
@@ -442,11 +448,17 @@ local function patch_ini(ini, cur, base)
   return ini
 end
 
+-- The name goes into the replacement as a function result, not as replacement text: sanitize() keeps '%',
+-- and "%1" .. name raises "invalid use of % in replacement string" for a '%' in the theme name.
+-- If the [REAPER] section is missing, the line goes below the first section header "[color theme]".
 local function set_ui_img(ini, name)
   if ini:find("\nui_img%s*=") then
-    return (ini:gsub("(\nui_img%s*=%s*)[^\r\n]*", "%1" .. name, 1))
+    return (ini:gsub("(\nui_img%s*=%s*)[^\r\n]*", function(a) return a .. name end, 1))
   end
-  return (ini:gsub("(%[REAPER%][^\r\n]*\r?\n)", "%1ui_img=" .. name .. "\r\n", 1))
+  if ini:find("%[REAPER%]") then
+    return (ini:gsub("(%[REAPER%][^\r\n]*\r?\n)", function(a) return a .. "ui_img=" .. name .. "\r\n" end, 1))
+  end
+  return (ini:gsub("(%[color theme%][^\r\n]*\r?\n)", function(a) return a .. "ui_img=" .. name .. "\r\n" end, 1))
 end
 
 --------------------------------------------------------------------
@@ -611,8 +623,9 @@ local function parse_rtconfig(rtc, scale)
   local text = rtc:gsub("\\%s*\r?\n", " ")
   local macros, lines, cur = {}, {}, nil
   local stack, parent = {}, {}
-  for l in text:gmatch("[^\r\n]+") do
-    l = l:gsub(";.*$", "")
+  for raw in text:gmatch("[^\r\n]+") do
+    -- Loop variables are constant in newer Lua versions, so use a separate variable instead of 'l = ...'.
+    local l = raw:gsub(";.*$", "")
     local first, rest = l:match("^%s*(%S+)%s*(.-)%s*$")
     local lf = first and first:lower()
     if lf == "macro" then
@@ -664,7 +677,8 @@ local function parse_rtconfig(rtc, scale)
       for a in rest:gmatch("%S+") do
         args[#args + 1] = (a:gsub('^"(.*)"$', "%1"):gsub("^'(.*)'$", "%1"))
       end
-      for _, bl in ipairs(m.body) do
+      for _, bl0 in ipairs(m.body) do
+        local bl = bl0
         for pi, p in ipairs(m.params) do
           local a = (args[pi] or ""):gsub("%%", "%%%%")
           bl = bl:gsub("%f[%w_]" .. p:gsub("%W", "%%%0") .. "%f[^%w_]", a)
@@ -800,7 +814,8 @@ local function sync_themeconfig(fromName, toName)
   local function find_sec(name)
     local pat = name:gsub("(%W)", "%%%1")
     local s, e = txt:find("\n%[" .. pat .. "%]")
-    if not s then s, e = txt:find("^%[" .. pat .. "%]") end
+    if not s then s, e = txt:find("^%[" .. pat .. "%]"); if s then s = 0 end end
+    -- At the start of the file no line break precedes the section, so s = 0: txt:sub(1, ts) must not keep the first '['.
     return s, e
   end
   local s, e = find_sec(fromName)
@@ -1263,9 +1278,12 @@ local function cleanup_workcopy()
     -- rename first, then delete in the background. Otherwise rmdir would delete the folder under its
     -- own name while an immediately following change (e.g. baking again) was already refilling it.
     local del = S.wcFolder .. ".del" .. os.time()
-    local gone = os.rename(S.wcFolder, del) and del or S.wcFolder
-    -- remove the folder without a console window and without waiting
-    R.ExecProcess('cmd.exe /C rmdir /S /Q "' .. gone:gsub("/", "\\") .. '"', -1)
+    -- If the rename fails, do not delete the live folder in the background (a follow-up change may be refilling it already);
+    -- without .tt_ready it is refilled the next time anyway.
+    if os.rename(S.wcFolder, del) then
+      -- remove the folder without a console window and without waiting
+      R.ExecProcess('cmd.exe /C rmdir /S /Q "' .. del:gsub("/", "\\") .. '"', -1)
+    end
   end
   S.wcReady, S.wcLoaded, S.rtcSig = false, false, nil
 end
@@ -1297,7 +1315,12 @@ local function start_zip_job(final, items, closeSrc, mode, note)
     k = k + 1
     tmp = final:gsub("%.ReaperThemeZip$", ".tmp" .. k .. ".ReaperThemeZip")
   end
-  os.remove(tmp)
+  -- A free name needs no os.remove; if all 99 names are taken, stop instead of deleting the last .tmp.
+  if file_exists(tmp) then
+    if closeSrc then closeSrc() end
+    set_status("No free temporary name - remove old .tmp files next to the theme")
+    return
+  end
   local dst = zip_open(tmp, "w")
   if not dst then if closeSrc then closeSrc() end set_status("Could not create zip") return end
   local i = 0
@@ -1400,6 +1423,16 @@ local function start_bake()
     -- plain theme without overrides: new ini only, image folder stays the same
     local final, mode, note = bake_target(false)
     if not final then set_status("No free name for a copy (nothing baked)") return end
+    -- A plain theme without ui_img finds its image folder through the file stem (read_theme); a copy has a new stem,
+    -- so point the line at the existing folder, otherwise the copy loads without graphics.
+    -- OVERWRITE keeps the stem. If the line cannot be set, the copy is refused.
+    if mode ~= "overwrite" and T.assetDir and not ini:find("\nui_img%s*=") then
+      ini = set_ui_img(ini, select(2, split_path(T.assetDir)))
+      if not ini:find("\nui_img%s*=") then
+        set_status("Cannot set the image folder in the copy (nothing baked)")
+        return
+      end
+    end
     -- first write final.tmp and read it back, then swap as with the zip
     local tmp = final .. ".tmp"
     os.remove(tmp)
@@ -2979,7 +3012,7 @@ local function main()
   if not R.ImGui_CreateContext then
     R.MB("ReaImGui is missing (install it via ReaPack).", "TT-THEMEFONTEDITOR", 0) return
   end
-  io.open(LOGF, "w"):close()
+  do local lf = io.open(LOGF, "w"); if lf then lf:close() end end
   load_opts()
   load_view()
   init_theme(R.GetLastColorThemeFile())
