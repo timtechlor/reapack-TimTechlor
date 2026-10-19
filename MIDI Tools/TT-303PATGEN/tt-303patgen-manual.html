@@ -6,8 +6,8 @@
 <title>TT-303PATGEN Manual – Acid Pattern Generator with MIDI Output for REAPER</title>
 <meta name="description" content="Reference manual for TT-303PATGEN, a free acid pattern generator JSFX for REAPER: seeded generators (random walk, Markov, Euclid, motif, classic mutation), ten scales, slide / tie / accent per step, eight slots with song chain, 32 style patterns, sample-accurate MIDI output for the TT-303 or any synth.">
 <meta name="tt-doc-name" content="TT-303PATGEN">
-<meta name="tt-doc-version" content="1.0.1">
-<meta name="tt-doc-date" content="2026-10-17">
+<meta name="tt-doc-version" content="1.0.2">
+<meta name="tt-doc-date" content="2026-10-19">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-303patgen-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-303PATGEN — User Manual">
-<meta property="article:modified_time" content="2026-10-17">
+<meta property="article:modified_time" content="2026-10-19">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-303PATGEN Manual – Acid Pattern Generator for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-303PATGEN, a free acid pattern generator JSFX for REAPER: seeded generators (random walk, Markov, Euclid, motif, classic mutation), ten scales, slide / tie / accent per step, eight slots with song chain, 32 style patterns, sample-accurate MIDI output for the TT-303 or any synth.",
    "url": "https://timtechlor.de/docs/tt-303patgen-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-303patgen-manual.html",
-   "datePublished": "2026-10-17",
-   "dateModified": "2026-10-17",
+   "datePublished": "2026-10-19",
+   "dateModified": "2026-10-19",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-303patgen.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER acid pattern generator, TB-303 MIDI generator, JSFX MIDI generator, acid bassline generator, slide accent sequencer, euclidean rhythm generator, Markov melody generator, seeded random pattern",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-303patgen-manual.html#software" },
-   "version": "1.0.1"
+   "version": "1.0.2"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-303PATGEN",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.0.1",
+   "softwareVersion": "1.0.2",
    "description": "JSFX MIDI plug-in for REAPER: generates 303-style acid patterns (note, octave, gate, tie, accent, slide, probability per step), edits them on a piano-roll front panel and plays them as sample-accurate MIDI, synced to the host transport - for the TT-303 or any other synth.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,7 +228,7 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303PATGEN</span></nav>
       <div class="wordmark" style="--wm-n:12" role="img" aria-label="TT-303PATGEN">TT-303PATGEN</div>
       <h1>TT-303PATGEN — User Manual</h1>
-      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.0.1 // TimTechlor</div>
+      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.0.2 // TimTechlor</div>
       <p class="lead">A pattern generator that thinks in <em>acid</em>: accents, slides, ties, octave pops and a tense b2 - created by seeded algorithms, sculpted by density, scale and range, mutated instead of re-rolled, stored in eight slots and played as sample-accurate MIDI. Built for the TT-303 in HOST mode, happy with any mono synth.</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-ui-options/303patgen-front.png" aria-label="Enlarge screenshot of the TT-303PATGEN user interface" title="Click to enlarge"><img src="img/tt-ui-options/303patgen-front.png" width="1131" height="803" alt="TT-303PATGEN user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -295,7 +295,7 @@ few steps, only in the range you choose.</p>
 </ol>
 
 <h2 id="panel"><span class="num">03</span>The front panel</h2>
-<figure class="shot"><img src="img/tt-ui-options/303patgen-front.png" alt="Current suite front at 125% UI size, version 1.0.1"><figcaption>Current front in v1.0.1, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/303patgen-front.png" alt="Current suite front at 125% UI size, version 1.0.2"><figcaption>Current front in v1.0.2, at the default UI size of 125%.</figcaption></figure>
 <dl class="kv">
   <dt>HEADER</dt><dd>Wordmark, the <b>preset bar</b> (see <a href="#presets">Preset bar &amp; user bank</a>), the
   <code>OPTIONS</code> button, the <code>RUN</code> toggle and <code>PANIC</code>.</dd>
@@ -652,6 +652,11 @@ the project and with FX presets (and, in the user bank, with every preset you sa
   <li><b>The pattern sounds an octave too low or high</b> &mdash; ROOT and OCTAVE shift the output; C2 + ROOT is the base.</li>
 </ul>
 <h2 id="changelog">Changelog</h2>
+<h3>1.0.2 &mdash; Safer PRINT</h3>
+<ul>
+  <li>PRINT TO MIDI ITEM can no longer pick up a half-written pattern while you change the pattern: the link block is marked invalid during the rewrite and the print script reads it again.</li>
+  <li>Source comments cleaned up. Generator, MIDI output and the saved format are unchanged; projects saved with 1.0.1 load as before.</li>
+</ul>
 <h3>1.0.1 &mdash; Robustness fixes</h3>
 <ul>
   <li>Damaged or truncated project data no longer leaves a half-loaded state: the generator falls back to its defaults.</li>
@@ -750,7 +755,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-303PATGEN v1.0.1</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-303PATGEN v1.0.2</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.2 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

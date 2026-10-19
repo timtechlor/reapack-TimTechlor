@@ -1,7 +1,7 @@
 desc:TT-303PATGEN
 // @description TT-303PATGEN - Acid pattern generator with MIDI output (TT-303 or any synth)
 // @author TimTechlor
-// @version 1.0.1
+// @version 1.0.2
 // @license MIT
 // @tags midi acid 303 pattern generator sequencer markov euclid slide accent
 // @link Manual https://timtechlor.de/docs/tt-303patgen-manual.html
@@ -30,6 +30,7 @@ desc:TT-303PATGEN
 //   (C2 = original pitch) and an optional gmem link (namespace tt303pg).
 //   Operated from the drawn front panel; all parameters stay automatable.
 // @changelog
+//   1.0.2 - PRINT TO MIDI ITEM can no longer pick up a half-written pattern while the pattern is being changed (the link block is marked invalid during the rewrite and the print script reads again). Source comments cleaned up. Generator, sound of the output and saved state are unchanged.
 //   1.0.1 - Robustness fixes from a code review: damaged or truncated project data no longer leaves a half-loaded state (the generator falls back to defaults), a truncated preset bank is reported as BANK DAMAGED instead of silently emptying, and a zero time-signature numerator can no longer divide by zero. Sound, generator, MIDI output and the saved format are unchanged; projects saved with 1.0.0 load as before.
 //   1.0.0 - First public release (ACID SEASON Drop 01). Same code as 0.9.0: generator, MIDI output, front and saved state are unchanged, so projects and presets saved with 0.9.x load as before. Version number only.
 //   0.9.0 - Fixes from a code review and a longer test run: with step locks, GENERATE / TRY / seed re-generate / REROLL ALL no longer leave a tie on the discarded note of a locked step (the tie follows the locked step); MUTATE passes a mutated note on to the ties behind it; REROLL RHYTHM keeps each step's PROB (as the other reroll modes do); the gallery's AUTO mode also re-rolls when DENS VAR changes; with HUM TIME the transposition of an incoming note is applied to a step whose humanized start falls into the next block; undo from the host resets the mutate counter like the plug-in's own UNDO; the note-transposition buffer holds up to 256 changes per block (was 30), so dense incoming MIDI at large audio buffers is transposed exactly.
@@ -463,7 +464,7 @@ function tth_reset_tgt() (
 // HINWEIS: steht bewusst hinter tth_pick/tth_reset_tgt — EEL2 kompiliert Funktionsrumpf erst
 // on the first call; calling a function that is not yet defined is then a runtime error.
 // P25: base address of the test cells. Default 5190; a product whose gmem namespace holds its own data there
-// (TT-TRUEAB / TT-FREIRAUM: ring in namespace ttab) sets tth_gmb to a free area BEFORE the module.
+// (another TT plug-in / another TT plug-in: ring in namespace ttab) sets tth_gmb to a free area BEFORE the module.
 // The comments above name the default addresses (5190 = tth_gmb).
 tth_gmb == 0 ? ( tth_gmb = 5190; );
 // P25: test unlock of the suite. Test scripts first write the key 20261001 to gmem[tth_gmb - 1].
@@ -492,7 +493,7 @@ function tth_testcmd() (
       gmem[tth_gmb + 24] = tth_tipoff;
       gmem[tth_gmb + 25] = tth_uisize; gmem[tth_gmb + 26] = tth_panx; gmem[tth_gmb + 27] = tth_pany;
       gmem[tth_gmb + 28] = tth_ctgt; gmem[tth_gmb + 29] = SC; gmem[tth_gmb + 30] = tth_cur;
-      gmem[tth_gmb + 33] = tth_autooff;      // 10.10.2026 (31/32 used by TT-TRUEAB PRE)
+      gmem[tth_gmb + 33] = tth_autooff;      // 10.10.2026 (31/32 used by another TT plug-in)
       gmem[tth_gmb + 35] = gfx_w; gmem[tth_gmb + 36] = gfx_h; gmem[tth_gmb + 37] = tth_vbar + 2*tth_hbar;   // 10.10.2026: window size and scrollbars (test)
       gmem[tth_gmb] = 0;
     )
@@ -575,7 +576,7 @@ function tth_post(px, py, sc) local(bw, bh, pw, ph, x0, y0, i, sx, sy, sw, sh, c
   fs = max(9, floor(10*sc + 0.5));
   tth_fsCur != fs ? ( gfx_setfont(TTH_FONT, "Arial", fs); tth_fsCur = fs; ) : gfx_setfont(TTH_FONT);
   gfx_mode = 0;
-  // Box scaling: always small enough that the box fits completely into the window (P20: 640x520, but also TRUEAB 560x210)
+  // Box scaling: always small enough that the box fits completely into the window (P20: 640x520, but also another TT plug-in 560x210)
   // P22: the drop shadow (4/5*scb right/bottom) belongs to the drawn area and must be included in the clamp.
   tth_scb = max(0.4, min(sc, min((gfx_w - 14)/353, (gfx_h - 10)/357)));
   pw = 348*tth_scb; ph = 352*tth_scb;
@@ -1378,7 +1379,7 @@ function tt_pb_serialize() local(rd, m, ver, nu, sw, cu, ck, j, ok, m2, v2, m3, 
         );
       );
     );
-    // 1.5.2 (Review TT-KICK 0.13.2, B1): a still pending tt_pb_reset (load/INIT in the same frame) would delete the star just
+    // 1.5.2 (Review another TT plug-in 0.13.2, B1): a still pending tt_pb_reset (load/INIT in the same frame) would delete the star just
     // read again in tt_pb_track; the reference is taken anew anyway via tt_pb_chkok = 0.
     tt_pb_stk ? tt_pb_reset = 0;
     tt_pb_chkok = 0;
@@ -3299,7 +3300,7 @@ function xtri(cx, cy, s, dir, fill) local(px, py, r, a1, a2, b1, b2, c1, c2) (
 // __UIKIT_END__
 uikit_accent(0.224, 1.000, 0.078);   // Produktakzent Acid #39FF14 (Kit-Default; Werks-Schema 0 ACID)
 tth_sync(slider64);                  // Color scheme from the hidden slider (theme module, options box)
-strcpy(#tt_ver, "v1.0.1");          // P25: the ONE version place in the code; the front draws #tt_ver (header line, 820/14)
+strcpy(#tt_ver, "v1.0.2");          // P25: the ONE version place in the code; the front draws #tt_ver (header line, 820/14)
 
 // ---------- memory map (offsets, no overlaps) ----------
 PG_SER   = 1;        // serVer des @serialize-Formats
@@ -3392,7 +3393,7 @@ while (pg_ii < 2048) ( pg_sndCnt += (M_SN[pg_ii] != 0 ? 1 : 0); pg_ii += 1; );
 // XOR for positive 31-bit ints: EEL2 '^' is POWER, not XOR!
 function xorI(a, b) ( (a | b) - (a & b); );
 
-// XorShift32 (31-bit variant, pattern TT-LuckyMidiChance). Returns a float [0,1).
+// XorShift32 (31-bit variant, pattern another TT plug-in). Returns a float [0,1).
 function prng_next() local(t) (
   t = (prng_state * 8192) % 2147483648;
   prng_state = xorI(prng_state, t);
@@ -3965,7 +3966,7 @@ function pg_partRhythm(b, len) local(s, ss, old, e, last) (
   pg_fixTies(b, len);
 );
 
-// ---------- Output queue (pattern TT-LuckyMidiChance): absolute target time in samples, send sorted by time ----------
+// ---------- Output queue (pattern another TT plug-in): absolute target time in samples, send sorted by time ----------
 function pg_qPush(ta, a1, a2, a3) (
   pg_qN < QCAP ? (
     M_QT[pg_qN] = ta;
@@ -5776,6 +5777,7 @@ function pg_linkWrite() local(slot, len, s, ss, w, sum, g, nt, pv) (
   while (s < len) ( sum = (sum * 31 + M_PAT[slot * 32 + s]) % 2147483647; s += 1; );
   sum != pg_linkSum ? (
     pg_linkSum = sum;
+    gmem[138] = 0;   // 1.0.2: invalid while being written (like gmem[200] for the chain block), the print script reads again; gmem[138] = 1 and gmem[3] + 1 are only set after the data
     s = 0;
     while (s < len) (
       w = M_PAT[slot * 32 + s];
@@ -6002,7 +6004,7 @@ function pg_cell(x, y, w, h, st, hov) (
 
 // P26 (rework "overlaps at large font sizes"): OPTIONS FONT 1/2 lets the kit fonts grow up to level +8
 // (x 1.85). Labels in fixed boxes (knob columns 66 wide, value line 10 lower, monitor, labels in front of selection fields,
-// help lines, wordmark before the preset bar) then ran into each other (proof without REAPER: TT-ARPSEQ/tt_font_overlap.py,
+// help lines, wordmark before the preset bar) then ran into each other (proof without REAPER: another TT plug-in/tt_font_overlap.py,
 // level +8: 31 findings). Replacement fonts at the size of level 0 (smaller levels keep working): slot 12 = like slot 5 (mono
 // small), 13 = like slot 4 (mono), 14 = like slot 1 (wordmark). pg_fit chooses for a text in a box w x h (design grid)
 // the normal font as long as it fits, otherwise the replacement font. At level 0 everything fits (measured) -> image unchanged.
@@ -6251,7 +6253,7 @@ pg_serVer == PG_SER ? (
   pg_serRd ? ( pg_urClear(); pg_sqPend = 0; pg_rqSlot = 0; pg_mutCnt = 0; );   // Review 0.9.0 F6: mutation counter as with internal undo (Historie: without pg_mutCnt = 0)   // 0.8.0 (Review S5): a loaded host state discards pending slot changes
   tt_pb_serialize();   // 0.5.0: preset bank behind the old data (old projects end earlier: file_avail = 0 -> bank stays empty)
   // 0.7.0 (stage 3): step locks behind the bank, with version marker. Old projects end earlier (marker stays 0 -> locks unchanged),
-  // older plug-in versions never read the appendix. Deviates from the target form "tt_pb_serialize last" (precedent: FREIRAUM LEARN block).
+  // older plug-in versions never read the appendix. Deviates from the target form "tt_pb_serialize last" (precedent: another TT plug-in LEARN block).
   pg_lkMark = pg_serRd ? 0 : PG_LKMARK;
   file_var(0, pg_lkMark);
   (pg_serRd && pg_lkMark != PG_LKMARK) ? ( memset(PG_LK, 0, 16); );   // Review Codex 0.7.0 (R3): chunk without appendix = no locks
