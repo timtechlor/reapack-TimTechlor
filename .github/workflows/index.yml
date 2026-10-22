@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   index:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04    # ubuntu-latest zeigt seit 22.10.2026 auf 26.04 ohne Compiler (rugged-Gem scheitert)
     steps:
       - name: Checkout (volle Historie)
         uses: actions/checkout@v4
