@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-LuckyMidiChance Manual – Generative MIDI Processing for REAPER</title>
+<meta name="description" content="Reference manual for TT-LuckyMidiChance, a free generative MIDI JSFX for REAPER: seeded probability gate, bar-cycle conditions, strum and ratchet bursts, velocity/timing humanize, a Euclidean pattern gate and per-note mutation — deterministic chaos for MIDI tracks.">
+<meta name="tt-doc-name" content="TT-LuckyMidiChance">
+<meta name="tt-doc-version" content="1.6.0">
+<meta name="tt-doc-date" content="2026-10-14">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-luckymidichance-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-LuckyMidiChance Manual – Generative MIDI Processing for REAPER">
+<meta property="og:description" content="Reference manual for TT-LuckyMidiChance, a free generative MIDI JSFX for REAPER: seeded probability gate, bar-cycle conditions, strum and ratchet bursts, velocity/timing humanize, a Euclidean pattern gate and per-note mutation — deterministic chaos for MIDI tracks.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-luckymidichance-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-luckymidichance.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-LuckyMidiChance — User Manual">
+<meta property="article:modified_time" content="2026-10-14">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-LuckyMidiChance Manual – Generative MIDI Processing for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-LuckyMidiChance, a free generative MIDI JSFX for REAPER: seeded probability gate, bar-cycle conditions, strum and ratchet bursts, velocity/timing humanize, a Euclidean pattern gate and per-note mutation — deterministic chaos for MIDI tracks.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-luckymidichance.png">
+<meta name="twitter:image:alt" content="TT-LuckyMidiChance — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-luckymidichance-manual.html#article",
+   "headline": "TT-LuckyMidiChance — User Manual",
+   "name": "TT-LuckyMidiChance Manual – Generative MIDI Processing for REAPER",
+   "description": "Reference manual for TT-LuckyMidiChance, a free generative MIDI JSFX for REAPER: seeded probability gate, bar-cycle conditions, strum and ratchet bursts, velocity/timing humanize, a Euclidean pattern gate and per-note mutation — deterministic chaos for MIDI tracks.",
+   "url": "https://timtechlor.de/docs/tt-luckymidichance-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-luckymidichance-manual.html",
+   "datePublished": "2026-10-14",
+   "dateModified": "2026-10-14",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-luckymidichance.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER generative MIDI, MIDI probability plugin, euclidean sequencer, MIDI humanizer, ratchet effect, strum plugin, JSFX MIDI, seeded random music",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-luckymidichance-manual.html#software" },
+   "version": "1.6.0"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-luckymidichance-manual.html#software",
+   "name": "TT-LuckyMidiChance",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "1.6.0",
+   "description": "JSFX MIDI plug-in for REAPER: probability gating, bar-cycle conditions, strum and ratchet bursts, humanizing deviate, a Euclidean pattern gate and seedable per-note mutation — deterministic generative processing driven from a drawn front panel.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-LuckyMidiChance", "item": "https://timtechlor.de/docs/tt-luckymidichance-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-LuckyMidiChance</span></nav>
+      <div class="wordmark" style="--wm-n:18" role="img" aria-label="TT-LuckyMidiChance">TT-LUCKYMIDICHANCE</div>
+      <h1>TT-LuckyMidiChance — User Manual</h1>
+      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.6.0 // TimTechlor</div>
+      <p class="lead">A MIDI processor that injects <em>controlled chance</em>: notes pass or drop by probability, get gated by bar position and Euclidean patterns, burst into strums and ratchets, drift in velocity and timing — all driven by a seedable, deterministic random engine that reproduces exactly when you lock the seed, and all operated from a fully drawn front panel.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/lmc-front.png" aria-label="Enlarge screenshot of the TT-LuckyMidiChance user interface" title="Click to enlarge"><img src="img/tt-ui-options/lmc-front.png" width="923" height="590" alt="TT-LuckyMidiChance user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#quickstart"><span class="num">02</span><span>Quick start</span></a></li>
+<li><a href="#panel"><span class="num">03</span><span>The front panel</span></a></li>
+<li><a href="#presets"><span class="num">04</span><span>Preset bar &amp; user bank</span></a></li>
+<li><a href="#seed"><span class="num">05</span><span>SEED: FREE &amp; LOCKED</span></a></li>
+<li><a href="#chance"><span class="num">06</span><span>CHANCE: probability gate</span></a></li>
+<li><a href="#cond"><span class="num">07</span><span>COND: bar conditions</span></a></li>
+<li><a href="#burst"><span class="num">08</span><span>STRUM &amp; RATCHET</span></a></li>
+<li><a href="#deviate"><span class="num">09</span><span>DEVIATE: human jitter</span></a></li>
+<li><a href="#euclid"><span class="num">10</span><span>EUCLID pattern gate</span></a></li>
+<li><a href="#mutate"><span class="num">11</span><span>MUTATE</span></a></li>
+<li><a href="#practice"><span class="num">12</span><span>In practice</span></a></li>
+<li><a href="#midi"><span class="num">13</span><span>MIDI thru &amp; panic</span></a></li>
+<li><a href="#automation"><span class="num">14</span><span>Automation &amp; parameters</span></a></li>
+<li><a href="#options"><span class="num">15</span><span>Options / Color &amp; Font</span></a></li>
+<li><a href="#trouble"><span class="num">16</span><span>Troubleshooting</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">17</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>TT-LuckyMidiChance sits between your MIDI source and the instrument and
+decides — note by note — what happens to each event. It is not a random
+filter that gives different results every run: every stochastic decision
+comes from an internal 31-bit XorShift PRNG — a variant whose period runs
+out after at most ~150 million draws (not full-period, inaudible in
+practice) — and the stream is fully determined
+by <code>SEED</code>. A locked seed produces an identical performance on
+every play, bounce and project reload; seed 0 runs free.</p>
+<p>The unit is operated entirely from its drawn front panel (700×460, Tim
+Techlor design) — all 45 JSFX sliders are hidden by release policy but stay
+alive as the parameter/automation channel. The verdict chain per incoming
+note-on:</p>
+<pre><code>note on
+  → COND      bar-position gate   (host transport timeline)
+  → EUCLID    step-pattern gate   (16th-note grid)
+  → CHANCE    probability gate    (seeded draw)
+  → MUTATE    per-note hit        (flip / velocity / division)
+  → DEVIATE   velocity ±VEL DEV, delay +0…TIME DEV
+  → STRUM     chord-window spread (rank × TIME)
+  → RATCHET   replaces the note by a K-hit burst in one 16th
+  → QUEUE     time-sorted output, note-off tracking</code></pre>
+<p>COND is a hard rule; MUTATE works on the combined EUCLID and CHANCE
+result and can reverse it in both directions. The MONITOR strip draws this
+chain as stages and counts every dropped note under the stage that dropped
+it (<a href="#panel">section 03</a>).</p>
+<p>Events stay on their input channel — no MPE remapping, so drum racks and
+monosynths keep working — and the plug-in adds <b>zero latency</b>: every
+delay it creates is a scheduled event offset inside the MIDI stream.</p>
+
+<h2 id="quickstart"><span class="num">02</span>Quick start</h2>
+<ol>
+  <li>Insert <code>TT-LuckyMidiChance</code> <b>before</b> the instrument in
+      the track's FX chain (it is a MIDI-only FX — no audio passes through).</li>
+  <li>Make sure the header toggle reads <code>ENABLED</code> (click toggles
+      to <code>BYPASS</code>).</li>
+  <li>Leave <code>SEED</code> at <code>0000</code> (LED green = FREE) for
+      fresh variation every pass, or dial in any number 1–9999 to lock a
+      performance (LED amber = LOCKED).</li>
+  <li>Start with <code>CHANCE</code> ≈ 70 and <code>VEL DEV</code> ≈ 12 —
+      instant organic feel without touching your part.</li>
+  <li>Add <code>RATCHET DIV</code> 1/8 or 1/16 for trap-style rolls, or set
+      <code>EUCLID PULSES</code>/<code>STEPS</code> to gate notes onto a
+      rhythmic pattern.</li>
+  <li>Short on time? Pick one of the 13 factory presets in the
+      <a href="#presets">preset bar</a> (<code>Subtle Human</code> is a good start) and
+      save your own settings with <code>SAVE</code>.</li>
+</ol>
+
+<h2 id="panel"><span class="num">03</span>The front panel</h2>
+<p>Everything you touch is drawn by the plug-in — there is no slider page.
+Layout top to bottom:</p>
+<figure class="shot"><img src="img/tt-ui-options/lmc-front.png" alt="Current suite front at 125% UI size, version 1.6.0"><figcaption>Current front in v1.6.0, at the default UI size of 125%.</figcaption></figure>
+<dl class="kv">
+  <dt>HEADER</dt><dd>Wordmark <b>LUCKY MIDI CHANCE</b> with the subtitle
+  <i>MIDI PROBABILITY + GENERATIVE</i>; to its right the
+  <a href="#presets">preset bar</a> and the <code>OPTIONS</code> button. The second header
+  row holds the seed LED (green FREE / amber LOCKED), the SEED readout box with
+  <kbd>−</kbd> <kbd>+</kbd> and <kbd>FREE</kbd>, and at the far right the
+  <code>ENABLED</code>/<code>BYPASS</code> toggle. Mouse wheel over the readout steps ±1
+  (<kbd>Shift</kbd> = ±10), right-click resets to 0.</dd>
+  <dt>PROBABILITY</dt><dd>Top left: <code>CHANCE</code> knob, the
+  <code>COND MODE</code> combo (11 states), the <code>COND CYCLE</code>
+  combo (2–16 <code>BARS</code>), the COND state line (<code>OPEN</code> /
+  <code>CLOSED</code> with the bar in the cycle, <a href="#cond">section 07</a>) and the
+  <b>PASS</b> (green, a note-on is sent) / <b>DROP</b> (amber, a note is dropped) LEDs.</dd>
+  <dt>BURST &amp; SPREAD</dt><dd>Top right: <code>STRUM TIME</code> knob and
+  direction combo <code>UP/DOWN/ALT/RAND</code> with the <code>LAST STRUM</code>
+  readout; <code>RATCHET</code> division combo <code>OFF…1/16</code>, the
+  <code>DECAY %</code> knob and the <code>LAST xN</code> hit readout.</dd>
+  <dt>HUMAN DEVIATE</dt><dd>Bottom left: <code>VEL DEV</code> and
+  <code>TIME DEV</code> knobs, two range bars with a white mark for the last
+  note's actual values, and the <code>LAST NOTE</code> line.</dd>
+  <dt>EUCLID &amp; MUTATE</dt><dd>Bottom right: status readout
+  (<code>E(k,n) Rr</code> or <code>BYPASS</code>), the
+  <code>PULSES/STEPS/ROTATE</code> knobs, up to 32 step LEDs (with a ring
+  for the last checked note), the <code>MUTATE AMT</code> knob with value, the
+  <code>GATE FLIP/VEL/RATCH/ALL</code> target combo and the MUTATE hit LED.</dd>
+  <dt>MONITOR</dt><dd>Bottom strip: the processing chain
+  <code>IN &gt; COND &gt; EUCLID &gt; CHANCE &gt; MUTATE &gt; HUMAN &gt; STRUM &gt; RATCH &gt; OUT</code>
+  in the title row, the <code>DROPS</code> row, the <code>EV IN</code>, <code>EV OUT</code> and
+  <code>EV DROP</code> counters and <code>Q LOAD</code> with a level bar
+  (green below 60 % of the 512 queue slots, amber to 85 %, red beyond).</dd>
+</dl>
+<h3>Reading what happened to a note</h3>
+<p>The front shows both the settings and what they did to the last notes. All readouts below are display
+only: they draw no random numbers and change nothing in the MIDI stream. They reset together with
+the counters when playback starts.</p>
+<table>
+  <tr><th>Readout</th><th>Where</th><th>What it tells you</th></tr>
+  <tr><td>Chain stages</td><td>MONITOR title row</td><td>A bright name is a stage that is switched on, a dim one is off. The dot flashes when the stage handles a note: COND, EUCLID and CHANCE when they check one, MUTATE on a hit, HUMAN, STRUM and RATCH when they change a queued note, OUT when a note-on is sent. RATCH can light with RATCHET OFF when MUTATE picks a division.</td></tr>
+  <tr><td><code>DROPS</code></td><td>MONITOR, middle row</td><td>Every dropped note counted once, under one cause: <code>COND</code>, <code>EUCLID</code>, <code>CHANCE</code>, <code>MUTATE</code> or <code>QUEUE</code> (no room in the output queue). The five add up to <code>EV DROP</code>. If several gates reject the same note, COND wins, then a MUTATE gate flip, then EUCLID, then CHANCE. A note that MUTATE rescues is not a drop.</td></tr>
+  <tr><td>COND state</td><td>PROBABILITY, under COND CYCLE</td><td><code>OPEN</code> or <code>CLOSED</code> at the current play position and the bar within the cycle the mode counts, e.g. <code>BAR 2/4</code>; <code>FIRST BAR</code> / <code>NOT FIRST BAR</code> for FIRST. Stopped: <code>STOPPED: COND IDLE</code> (COND passes everything).</td></tr>
+  <tr><td>EUCLID ring</td><td>step LEDs</td><td>The white ring is the current 16th step. A short inner ring marks the step of the last checked note: green when it fell on a pulse, amber when EUCLID vetoed it (before MUTATE).</td></tr>
+  <tr><td>MUTATE LED</td><td>right of the target combo</td><td>Flashes on every MUTATE hit, also on notes that are dropped later.</td></tr>
+  <tr><td><code>LAST NOTE</code>, white marks</td><td>HUMAN DEVIATE</td><td>The last queued note's final velocity change (VEL DEV, MUTATE VEL and the 1–127 limit together) and its HUMAN delay; the white marks show the same values on the range bars.</td></tr>
+  <tr><td><code>LAST STRUM</code></td><td>BURST &amp; SPREAD</td><td>The strum delay the last queued note received, without the HUMAN delay.</td></tr>
+  <tr><td><code>LAST xN</code></td><td>under DECAY</td><td>The number of hits scheduled for the last queued note after MUTATE (<code>x1</code> = no ratchet). <code>EV OUT</code> counts the hits actually sent.</td></tr>
+</table>
+<div class="box" data-k="new in 1.6.0">The readouts above, the stage chain and the <code>DROPS</code> row are new in v1.6.0.
+The MUTATE target formerly labelled <code>CHANCE</code> is now shown as <code>GATE FLIP</code>; it is the same setting, so presets and projects are unchanged.
+The knobs in HUMAN DEVIATE and EUCLID &amp; MUTATE are centred in their panels, and the LED flashes no longer depend on the screen frame rate.
+MIDI processing and random sequences are unchanged: a locked SEED gives the same notes as in v1.5.1.</div>
+<table>
+  <tr><th>Widget</th><th>Gesture</th><th>Behaviour</th></tr>
+  <tr><td>Knob</td><td>drag vertically</td><td>set value; <kbd>Shift</kbd> = fine</td></tr>
+  <tr><td></td><td>mouse wheel</td><td>whole-number knobs (CHANCE, DECAY, VEL DEV, PULSES, STEPS, ROTATE, MUTATE AMT): one step per detent; STRUM TIME and TIME DEV: 2 % of the range per detent</td></tr>
+  <tr><td></td><td>right-click / double-click</td><td>reset to default</td></tr>
+  <tr><td>Button / toggle</td><td>click</td><td>set / toggle</td></tr>
+  <tr><td>Combo</td><td>click</td><td>on the name: next state (wraps); on an arrow: one step, no wrap</td></tr>
+  <tr><td></td><td>right-click</td><td>previous state (wraps)</td></tr>
+  <tr><td></td><td>mouse wheel</td><td>one step per detent, stops at the ends</td></tr>
+</table>
+<p>Every control on the front has a <b>tooltip</b> in English that appears after the mouse rests on it for a moment (not while you drag).
+<code>OPTIONS &gt; TOOLTIPS ON / OFF</code> switches them off per instance; the setting is saved with the project.</p>
+<div class="box" data-k="defaults">CHANCE 100 · SEED 0 · STRUM TIME 0 ·
+RATCHET DEC 0 · VEL/TIME DEV 0 · PULSES 0 · STEPS 16 · ROTATE 0 ·
+MUTATE AMT 0.</div>
+
+<h2 id="presets"><span class="num">04</span>Preset bar &amp; user bank</h2>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-presets.png" alt="TT-LuckyMidiChance front with the preset bar on the first header row (previous, name with drop-down, next, SAVE, menu) left of OPTIONS and the open preset list with the FACTORY and USER sections — User 01 loaded" width="700" height="460"><figcaption><span class="tag">PRESETS</span><b>The preset bar</b> sits on the first header row, directly left of <code>OPTIONS</code>: <code>&lt;</code> name <code>&gt;</code> <code>SAVE</code> <code>...</code>. The name opens the list with the FACTORY and USER sections; the preset in use is marked (<code>User 01</code> here).</figcaption></figure>
+<p>The bar loads and saves the <b>whole musical setting</b> of the instance in one step: <code>SEED</code>, <code>CHANCE</code>, the condition mode and cycle, strum time and direction,
+ratchet division and decay, velocity and time deviation, the three Euclid values and the mutate amount and target (parameters 2&ndash;16). Not part of a preset: the <code>ENABLED</code>/<code>BYPASS</code> switch
+(a preset must never silence the track), the colour scheme (<code>OPTIONS</code>) and the hidden diagnostic and test parameters.</p>
+<table>
+  <tr><th>Control</th><th>Function</th></tr>
+  <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: first the 13 factory presets, then the used user slots; wraps around and loads immediately.</td></tr>
+  <tr><td>Name field</td><td>Opens the list: <b>FACTORY</b> (13 presets) and <b>USER</b> (32 slots, empty ones show <code>- empty -</code>). Mouse wheel scrolls, click loads. A <code>*</code> behind the name means the settings differ from the loaded preset.</td></tr>
+  <tr><td><code>SAVE</code></td><td>Saves the current settings into the selected user slot; with a factory preset (or none) selected, into the first free slot. A name box opens (up to 24 characters, default <code>User 07</code>): type, <kbd>Enter</kbd> or <code>OK</code> saves, <code>CANCEL</code> or a click outside cancels.</td></tr>
+  <tr><td><code>...</code></td><td><code>RENAME</code>, <code>COPY</code> (into the next free slot) and <code>DELETE</code> (a second click confirms) for the selected user preset, and <code>INIT</code> (all preset parameters back to their defaults).</td></tr>
+</table>
+<table>
+  <tr><th>Factory preset</th><th>Settings</th><th>Use</th></tr>
+  <tr><td><code>Subtle Human</code></td><td>VEL DEV 12, TIME DEV 6 ms; everything else default</td><td>Organic feel without dropping a note; free seed.</td></tr>
+  <tr><td><code>Locked Groove</code></td><td>SEED 42, CHANCE 80, VEL DEV 10, TIME DEV 5 ms</td><td>A sparse but <em>reproducible</em> variation: the same notes drop on every play.</td></tr>
+  <tr><td><code>Euclid 5 of 8</code></td><td>EUCLID 5 pulses / 8 steps</td><td>Five of eight 16th steps pass (x.xx.xx.) — a classic rhythm gate.</td></tr>
+  <tr><td><code>Ratchet Roll</code></td><td>RATCHET 1/4, DECAY −40 %</td><td>Every note becomes a four-hit roll that fades out.</td></tr>
+  <tr><td><code>Strum Up 25ms</code></td><td>STRUM TIME 25 ms, UP</td><td>Chords roll upward, 25 ms per note.</td></tr>
+  <tr><td><code>Guitar Strum Alt</code></td><td>STRUM TIME 14 ms, ALT, VEL DEV 8, TIME DEV 2 ms</td><td>Guitar-style down/up strokes: the direction alternates with every strum group (a single note in between does not count as a group).</td></tr>
+  <tr><td><code>Harp Sweep 45ms</code></td><td>STRUM TIME 45 ms, UP, VEL DEV 6, TIME DEV 4 ms</td><td>Slow upward harp sweep through every chord, with a touch of human timing.</td></tr>
+  <tr><td><code>Chord Dice 30ms</code></td><td>STRUM TIME 30 ms, RAND, VEL DEV 6</td><td>Chord notes in a new random order every time, 30 ms apart; lock SEED for a repeatable order.</td></tr>
+  <tr><td><code>Fill Roll 4 Bars</code></td><td>COND FILL, 4 BARS, RATCHET 1/2, DECAY &minus;35 %, VEL DEV 8</td><td>A fill layer: silent except the last two quarter notes of every 4th bar, where each 16th becomes a two-hit roll. Feed a straight 16th snare or tom part on its own track.</td></tr>
+  <tr><td><code>Phrase Break 8 Bars</code></td><td>COND !FILL, 8 BARS</td><td>Everything passes except the last two quarter notes of every 8-bar phrase &mdash; the kick (or bass) drops out right before the next phrase.</td></tr>
+  <tr><td><code>Trap Hat Stutter</code></td><td>MUTATE 18 % RATCH, DECAY +25 %, VEL DEV 12</td><td>About one hat in six turns into a rising stutter roll of 2&ndash;16 hits inside its 16th; free seed, different on every play.</td></tr>
+  <tr><td><code>Tresillo 3-3-2</code></td><td>EUCLID 3 pulses / 8 steps, VEL DEV 8</td><td>Masks a straight 16th grid to the tresillo x..x..x. (3+3+2), repeating every two beats &mdash; rim, clap, perc or dembow hats.</td></tr>
+  <tr><td><code>Ghost Accents</code></td><td>MUTATE 40 % VEL, VEL DEV 6, TIME DEV 3 ms</td><td>Keeps every hit but turns roughly every third one into a ghost note or an accent, with a few ms of timing slack.</td></tr>
+</table>
+<p>A factory preset starts from the defaults (INIT) and changes only the listed parameters, so it never inherits settings from what you had before. <code>ENABLED</code> and the colour stay as they are.</p>
+<p><b>Where the user bank lives.</b> Plug-ins cannot write files, so the 32 user slots are part of the plug-in state: they are saved with the project, with FX-chain and track-template copies,
+and in every <b>REAPER preset</b> of this plug-in (the <code>+</code> button in the FX window toolbar). To take your bank to another project or computer, save a REAPER preset once
+(<code>+</code> &rarr; <i>Save preset</i>) and load it there: the whole bank comes with it. Projects saved with earlier versions load unchanged with an empty bank.</p>
+<p><b>Typing names.</b> REAPER keeps <kbd>Space</kbd> for the transport, so type <kbd>Shift</kbd>+<kbd>Space</kbd> for a blank. Depending on your REAPER settings <kbd>Esc</kbd> closes the whole FX window; use <code>CANCEL</code> instead. (The <code>+</code> menu of the FX window also has <i>Send all keyboard input to plug-in</i>.)</p>
+<p class="muted">The preset bar has the suite-standard 250-unit width on the 700&times;460 header; long names are shortened with <code>..</code> in the bar and shown in full in the list.</p>
+
+<h2 id="seed"><span class="num">05</span>SEED: FREE &amp; LOCKED</h2>
+<table>
+  <tr><th>SEED</th><th>LED</th><th>Behaviour</th></tr>
+  <tr><td><code>0000</code></td><td>green · FREE</td><td>Free-running: a fresh seed is drawn from time at every transport start — every pass differs</td></tr>
+  <tr><td><code>0001–9999</code></td><td>amber · LOCKED</td><td>Locked: identical decisions on every play from the same material — reproducible across plays, bounces, reloads and even between two instances</td></tr>
+</table>
+<p>The PRNG is re-seeded on every transport start <em>and</em> immediately
+when you change SEED in the panel, so A/B-ing two seeds is instant. Pause
+followed by resume counts as a transport start too: the counters reset and
+the random stream is re-seeded. With a locked seed, the same input after
+play start always yields the same
+decisions — the same notes drop, the same strums roll, the same mutations
+hit. Change one digit and the performance changes completely.</p>
+<p class="muted">Note: CHANCE, MUTATE hits and DEVIATE jitter draw from one
+stream; the <code>STRUM RAND</code> shuffle gets its own stream per chord, seeded from the same SEED and
+the chord's number since the transport start — a locked seed locks <em>everything</em>, not just
+CHANCE.</p>
+<div class="box" data-k="note">Since v1.4.0 the result does not depend on how REAPER cuts the audio
+into blocks: live playback, render, freeze and anticipative FX processing give the same decisions,
+<code>STRUM RAND</code> included. (Up to v1.3.5 the RAND shuffle shared the main stream and could
+change with the block size; projects that use a locked seed with STRUM RAND therefore play different
+— again reproducible — decisions in v1.4.0.) One detail stays: notes of a chord that arrive a few
+milliseconds apart across a block boundary join the open chord window in arrival order (section 08).</div>
+<p><b>What a locked seed locks.</b> The decisions depend on every parameter that consumes random
+draws, so locking SEED also locks the rest: switching CHANCE between 100 and below, or VEL DEV,
+TIME DEV or MUTATE AMT between zero and non-zero (also through automation) changes how many draws
+each note consumes and restarts the random sequence from that note on. Playback and render only
+match with the same parameter state.</p>
+<p class="muted">Two honest limits: on a loop region every pass draws its own decisions — the
+stream is re-seeded only at the transport start and on a SEED change, so a render from the loop
+start equals the first pass only. And starting playback mid-song decides differently from a run
+from bar 1.</p>
+
+<h2 id="chance"><span class="num">06</span>CHANCE: probability gate</h2>
+<table>
+  <tr><th>Control</th><th>Values</th><th>Function</th></tr>
+  <tr><td><code>CHANCE</code></td><td>0–100 %, def. 100</td><td>Per-note pass probability: each note-on draws against the seeded stream; 100 = all pass, 0 = all dropped</td></tr>
+</table>
+<p>At 100 the gate is open and costs no random draw. Below 100, dropped
+notes are removed completely — their note-off is swallowed too, so nothing
+hangs. The <b>PASS</b> (green) LED in the PROBABILITY panel flashes when a
+note-on is sent (each ratchet hit flashes), the <b>DROP</b> (amber) LED when
+a note is dropped; MONITOR &gt; <code>DROPS</code> &gt; <code>CHANCE</code> counts the
+notes this gate removed.</p>
+
+<h2 id="cond"><span class="num">07</span>COND: bar conditions</h2>
+<p>COND gates notes by <b>where in the song</b> they land — it reads the
+host transport, not the clip. The COND MODE combo steps through 11
+states:</p>
+<table>
+  <tr><th>Mode</th><th>Meaning</th></tr>
+  <tr><td><code>OFF</code></td><td>No condition (default)</td></tr>
+  <tr><td><code>1:2 · 2:2</code></td><td>Pass only in bar 1 / bar 2 of every 2-bar cycle</td></tr>
+  <tr><td><code>1:4 · 2:4 · 3:4 · 4:4</code></td><td>Pass only in bar n of every 4-bar cycle</td></tr>
+  <tr><td><code>FILL</code></td><td>Pass only in the last 2 quarter notes of the last bar of the COND CYCLE (in 2/4 and 3/8 that is the whole bar, so FILL equals LAST)</td></tr>
+  <tr><td><code>!FILL</code></td><td>Inverse of FILL — everything except those 2 quarter notes</td></tr>
+  <tr><td><code>FIRST</code></td><td>Pass only inside the bar where playback started</td></tr>
+  <tr><td><code>LAST</code></td><td>Pass only in the last bar of the COND CYCLE</td></tr>
+</table>
+<p>The <code>COND CYCLE</code> combo (2 / 4 / 8 / 16 bars) sets the cycle
+length used by <code>FILL</code>, <code>!FILL</code> and <code>LAST</code>
+— the 1:2…4:4 modes have their own fixed 2- or 4-bar grid. Bars are counted on the
+<b>project timeline</b>, and since v1.4.0 COND <b>follows time-signature changes</b>: whenever
+playback crosses a time-signature marker, a new bar starts there and is counted on (a partial bar
+before the marker counts as one bar, as in REAPER's ruler). Two honest details: the plug-in only
+learns a change by playing through it — if playback <em>starts behind</em> a change, bars are
+counted with the current time signature from the project start until the change has been passed
+once (loop over it, or start before it). The anchor table holds up to 64 learned changes per
+playback; further ones are not learned. And with the transport stopped COND passes everything,
+exactly like OFF. One measurement detail: COND reads the note's position on the time axis
+(±0.5 ms) — a note played 1–10 ms before the bar line still counts to the previous bar, and a
+chord sitting on the bar line can be split.</p>
+<p>The line under COND CYCLE shows the gate right now: <code>OPEN</code> or <code>CLOSED</code>
+and the bar within the cycle the mode counts (<code>BAR 1/2</code>…<code>BAR 4/4</code> for 1:2…4:4,
+<code>BAR n/CYCLE</code> for FILL, !FILL and LAST, <code>FIRST BAR</code> / <code>NOT FIRST BAR</code>
+for FIRST). With FILL and !FILL it switches inside the last bar of the cycle. It follows the play
+position block by block; each note is still decided at its exact position.</p>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-prob.png" alt="TT-LuckyMidiChance PROBABILITY panel — CHANCE knob at 80 %, COND MODE combo on 2:4, COND CYCLE combo on 4 BARS, COND state line, PASS and DROP LEDs" width="338" height="162"><figcaption><span class="tag">PROBABILITY</span><b>Gate and bar conditions.</b> The CHANCE knob, the COND MODE combo, the COND CYCLE combo and the COND state line — the PASS/DROP LEDs flash per note.</figcaption></figure>
+
+<h2 id="burst"><span class="num">08</span>STRUM &amp; RATCHET</h2>
+<table>
+  <tr><th>Control</th><th>Values</th><th>Function</th></tr>
+  <tr><td><code>STRUM TIME</code></td><td>0–100 ms, 0.1 steps</td><td>Spacing <em>per note</em>: within a 15 ms chord window, passing notes get sorted ranks and the k-th note is delayed k × TIME — a 4-note chord at 20 ms lands 0/20/40/60 ms</td></tr>
+  <tr><td><code>STRUM DIR</code></td><td>UP · DOWN · ALT · RAND</td><td>Rank order: low→high, high→low, alternating per chord (a single note does not count as a group; first UP), or a seeded shuffle</td></tr>
+  <tr><td><code>RATCHET DIV</code></td><td>OFF · 1/2 · 1/3 · 1/4 · 1/6 · 1/8 · 1/12 · 1/16</td><td>Replaces each note by a burst of N hits inside one 16th note at the note's position — the original note-off is swallowed, so the burst length follows tempo, not your finger</td></tr>
+  <tr><td><code>RATCHET DEC %</code></td><td>−100…+100</td><td>Linear velocity ramp across the burst hits: negative fades out (−50 % at vel 100 → 100/83/66/50), positive builds, clamped 1–127</td></tr>
+</table>
+<p>Strum note-offs are delayed by the same amount as their ons — chords
+stay intact, just rolled, and no note is ever moved earlier than it was
+played: when rank × TIME is smaller than the spread of the played onsets,
+the played order wins. A chord arriving across an audio-block boundary
+still joins the open window. Ratchet bursts consist of note-on/note-off
+pairs (off halfway to the next hit) and every hit counts in
+<code>EV OUT</code>. <code>LAST STRUM</code> shows the strum delay of the last queued
+note, <code>LAST xN</code> under DECAY its scheduled hits (MUTATE RATCH included).</p>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-burst.png" alt="TT-LuckyMidiChance BURST &amp; SPREAD panel — STRUM TIME knob at 0 ms with direction combo DOWN, RATCHET division combo 1/8 and DECAY % knob at +0 (factory preset Euclid 5 of 8)" width="338" height="162"><figcaption><span class="tag">BURST</span><b>Strum and ratchet.</b> STRUM TIME with its direction combo on the left, the RATCHET division combo and DECAY % ramp on the right.</figcaption></figure>
+
+<h2 id="deviate"><span class="num">09</span>DEVIATE: human jitter</h2>
+<table>
+  <tr><th>Control</th><th>Values</th><th>Function</th></tr>
+  <tr><td><code>VEL DEV</code></td><td>0–64, def. 0</td><td>Uniform ± velocity jitter around the played value, clamped 1–127</td></tr>
+  <tr><td><code>TIME DEV</code></td><td>0–50 ms, 0.1 steps</td><td>Random <em>late</em> per note: adds a seeded delay between 0 and TIME DEV. Never early — that is why the plug-in needs no lookahead and adds zero latency</td></tr>
+</table>
+<p>The two range bars under the knobs show the set ± window. The white mark
+on each bar and the <code>LAST NOTE</code> line show what the last queued note
+actually got: its final velocity change (MUTATE VEL and the 1–127 limit
+included) and its HUMAN delay; the bars light up with each such note. Both jitter sources draw from the
+master seed — a locked seed gives you the same “human” player every time,
+dragging and pushing identically on each bounce.</p>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-dev.png" alt="TT-LuckyMidiChance HUMAN DEVIATE panel — VEL DEV and TIME DEV knobs with range bars and the LAST NOTE line below" width="338" height="168"><figcaption><span class="tag">DEVIATE</span><b>Human jitter.</b> VEL DEV and TIME DEV knobs; the range bars underneath show the set window, the white marks and the LAST NOTE line the last note's values.</figcaption></figure>
+
+<h2 id="euclid"><span class="num">10</span>EUCLID pattern gate</h2>
+<p>EUCLID is a <b>gate, not a generator</b>: it distributes
+<code>PULSES</code> hits over a <code>STEPS</code>-long ring using the
+Bjorklund algorithm — the same maximally-even distribution as every
+classic Euclidean box — and lets a note pass only when its onset lands on
+a pulse step of the 16th-note grid. <code>ROTATE</code> shifts which step
+the pattern starts on.</p>
+<table>
+  <tr><th>Control</th><th>Values</th><th>Function</th></tr>
+  <tr><td><code>PULSES</code></td><td>0–32, def. 0</td><td>Active hits in the ring. <b>0 = EUCLID bypassed</b> (status shows <code>BYPASS</code>, no gating). PULSES above STEPS: every step of the ring is active, all notes pass</td></tr>
+  <tr><td><code>STEPS</code></td><td>1–32, def. 16</td><td>Ring length in 16th steps (16 = one 4/4 bar)</td></tr>
+  <tr><td><code>ROTATE</code></td><td>0–31, def. 0</td><td>Rotates the pattern (mod STEPS) — moves where the hits sit against the beat</td></tr>
+</table>
+<p>While transport plays, the step is the project's 16th-note position —
+the pattern repeats every STEPS sixteenths across the timeline. With
+transport stopped, a step counter advances per played note group (notes
+closer than ~15 ms share a step), so live playing is gated too. Notes on
+the same step share the verdict — a chord passes or drops together.</p>
+<p>The step LEDs show the rotated pattern (acid dot = pulse, white ring =
+current step). A short inner ring marks the step of the last checked note:
+green on a pulse, amber when EUCLID vetoed it; MONITOR &gt; <code>DROPS</code> &gt;
+<code>EUCLID</code> counts the vetoed notes. Classic references: <code>E(3,8)</code> = x..x..x.,
+<code>E(5,8)</code> = x.xx.xx., <code>E(7,16)</code> =
+x..x.x.x..x.x.x.</p>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-euclid.png" alt="TT-LuckyMidiChance EUCLID &amp; MUTATE panel — PULSES 5 / STEPS 8 / ROTATE 0 knobs, E(5,8) R0 status, step LEDs with the white step marker, MUTATE AMT knob, target combo and MUTATE hit LED" width="338" height="168"><figcaption><span class="tag">EUCLID</span><b>Pattern gate and mutation.</b> PULSES/STEPS/ROTATE knobs with the step-LED ring below; MUTATE AMT and its target combo at the bottom.</figcaption></figure>
+
+<h2 id="mutate"><span class="num">11</span>MUTATE</h2>
+<p>MUTATE is a <b>per-note seeded dice roll</b>, not a slow drift: every
+note-on draws once against <code>MUTATE AMT</code>; on a hit, the chosen
+target is perturbed for that note only.</p>
+<table>
+  <tr><th>MUTATE TGT</th><th>What a hit does</th></tr>
+  <tr><td><code>GATE FLIP</code></td><td>Reverses the combined EUCLID and CHANCE verdict — a dropped note plays, a passing note drops. COND still applies. (Labelled <code>CHANCE</code> up to v1.5.1; same setting.)</td></tr>
+  <tr><td><code>VEL</code></td><td>Offsets velocity by a seeded ±48 (clamped 1–127)</td></tr>
+  <tr><td><code>RATCH</code></td><td>Replaces the ratchet division for this note by a random one (1/2…1/16)</td></tr>
+  <tr><td><code>ALL</code></td><td>All three at once</td></tr>
+</table>
+<p><code>MUTATE AMT</code> (0–100 %) is the hit probability — low values
+give occasional “wrong” notes, high values reorganise whole passages.
+COND is never mutated: the bar condition is a hard rule. Like everything
+else, mutation is fully seeded — a locked SEED replays the same hits.
+The LED right of the target combo flashes on every hit; MONITOR &gt; <code>DROPS</code> &gt;
+<code>MUTATE</code> counts the notes a gate flip dropped (notes it rescued are not counted).</p>
+
+<h2 id="practice"><span class="num">12</span>In practice</h2>
+<p>Three recipes that show how the modules are meant to work together.
+Every control named here is documented in the sections above — what matters
+here is the order of moves and what to watch while it runs.</p>
+
+<h3>1 · A real-player lane — humanize only</h3>
+<p><b>Goal:</b> make a quantized keys, pad or drum lane feel played without
+losing a single note.</p>
+<ol>
+  <li>Leave <code>CHANCE</code> at 100, <code>EUCLID PULSES</code> at 0
+      (<code>BYPASS</code>), <code>RATCHET</code> OFF, <code>MUTATE AMT</code>
+      0 and <code>STRUM TIME</code> 0 — the whole verdict chain now passes
+      every note; only DEVIATE touches the events.</li>
+  <li>Play the loop and raise <code>VEL DEV</code> until the accents breathe
+      — 8–14 is the sweet spot; much beyond ~20 reads as sloppy rather than
+      human.</li>
+  <li>Add <code>TIME DEV</code> 3–8&nbsp;ms. It only ever adds lateness (that
+      is what keeps the unit zero-latency), so if the part drags, nudge the
+      clip a few milliseconds earlier instead of hoping for pushes.</li>
+  <li>Keep <code>SEED</code> FREE while writing; before printing, lock any
+      number so every bounce reuses exactly the same “player”.</li>
+</ol>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-wf-human.png" alt="TT-LuckyMidiChance live during playback in a humanizer-only setup — FREE seed, CHANCE 100, VEL DEV 12, TIME DEV 6.0, EV IN equals EV OUT" width="700" height="460"><figcaption><span class="tag">HUMANIZE</span><b>The humanizer lane, running.</b> FREE seed (green LED), CHANCE wide open, only DEVIATE engaged — EV IN equals EV OUT and the PASS LED flashes; nothing is dropped.</figcaption></figure>
+<p><b>Watch:</b> <code>EV IN</code> must equal <code>EV OUT</code> and
+<code>EV DROP</code> stays at 0 — if DROP moves, a gate you forgot is still
+on. The VEL/TIME range bars pulse with every note.</p>
+<p><b>Pitfalls:</b> a locked seed makes every replay identical — when you
+double-track, give the second take a different locked seed, otherwise
+both “players” deviate in perfect unison and the double sounds like one.
+Two FREE instances are no alternative: instances that start in the same
+audio block can draw the same sequence, because the free seed is read from
+the clock at ~1 ms resolution.
+Jitter applies per note-on, so held chords smear slightly — halve
+<code>TIME DEV</code> for chord material.</p>
+
+<h3>2 · Find it, lock it, print it — reproducible variation</h3>
+<p><b>Goal:</b> thin a busy loop into a controlled variation that survives
+bounce and reload bit-identically.</p>
+<ol>
+  <li>Set <code>CHANCE</code> 60–75 and, if you want phrase-level structure,
+      a <code>COND</code> — <code>2:4</code> passes only the second bar of
+      every four, <code>FILL</code>/<code>!FILL</code> gate the last two
+      quarter notes of the COND CYCLE's last bar.</li>
+  <li>Add <code>MUTATE AMT</code> ~15 on <code>VEL</code> or
+      <code>ALL</code> for occasional flipped verdicts and accents.</li>
+  <li><b>Lock the seed first:</b> dial any number ≥ 1 (amber LOCKED LED),
+      then step the SEED box +1 per looped pass — every number is a different
+      but perfectly repeatable arrangement.</li>
+  <li>When a pass lands, stop touching SEED: from that moment every replay,
+      freeze and bounce is identical — same drops, same mutation hits, same
+      deviate jitter, same RAND strum order.</li>
+  <li>Print via freeze/render-in-place; the committed take is exactly what
+      you auditioned.</li>
+</ol>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-wf-locked.png" alt="TT-LuckyMidiChance header and top panels during a locked-seed run — amber LOCKED LED, SEED 0042, CHANCE 80, COND 2:4, STRUM ALT, DROP LED lit" width="700" height="214"><figcaption><span class="tag">LOCKED</span><b>The locked workflow.</b> Amber LOCKED LED with seed 0042, COND 2:4 and STRUM ALT engaged, the amber DROP LED mid-flash — the verdict history of a reproducible take.</figcaption></figure>
+<p><b>Watch:</b> the PASS/DROP LEDs and the counters — expect
+<code>EV OUT + EV DROP ≈ EV IN</code> (ratchet bursts inflate EV OUT, see
+below). If the verdicts do not match your mental picture, the <code>DROPS</code>
+row in MONITOR tells you which stage is eating notes, and the COND line shows
+whether the bar condition is open right now.</p>
+<p><b>Pitfalls:</b> in FREE mode the drawn seed is never shown — a magic
+pass you hear while FREE cannot be recovered, so audition locked from the
+start (or freeze the moment you like it). Editing the clip changes the note
+stream, so the same seed then yields different decisions. Changing SEED
+mid-play reseeds instantly — ideal for A/B, but decisions before the edit
+do not repeat.</p>
+
+<h3>3 · Rolls and gates — ratchet meets euclid</h3>
+<p><b>Goal:</b> trap-style hi-hat rolls and grid-locked rhythmic gating.</p>
+<ol>
+  <li>Feed a steady 16th-note lane. Set <code>RATCHET DIV</code> to 1/8 or
+      1/16 — each note is replaced by a burst inside one 16th at the note’s
+      position, so rolls stay tempo-locked at any BPM.</li>
+  <li>Turn <code>RATCHET DEC %</code> negative (−30…−60) for fade-out rolls;
+      positive values build toward the next hit.</li>
+  <li>Layer the gate: <code>EUCLID PULSES 3 / STEPS 8</code> passes only
+      onsets on the x..x..x. pattern — an instant maximally-even rhythm.
+      <code>ROTATE</code> shifts the hits on or off the beat.</li>
+  <li>Rolls only where they belong: <code>COND FILL</code> (the last two
+      quarter notes of the cycle’s last bar) silences everything else, so run
+      the rolls as a fill layer on their own track — the <code>Fill Roll 4
+      Bars</code> factory preset is exactly that — and keep the straight line
+      on a second instance with <code>COND !FILL</code> (RATCHET off).</li>
+</ol>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-wf-rhythm.png" alt="TT-LuckyMidiChance right column live — STRUM 12 ms ALT, RATCHET 1/8 with DECAY −40, EUCLID E(3,8) R0 with three pulse LEDs and the white step marker" width="354" height="344"><figcaption><span class="tag">RHYTHM</span><b>Rolls and gates live.</b> RATCHET 1/8 with −40 decay, STRUM ALT at 12 ms, and E(3,8) running — three pulse LEDs lit, the white ring on the current 16th step.</figcaption></figure>
+<p><b>Watch:</b> the step-LED ring (white marker = current 16th) and
+<code>Q LOAD</code> — dense bursts fill the 512-slot queue quickly and the
+bar turns amber past 60 % and red past 85 % of its 512 slots. If a new note does not fit completely
+(a whole burst, or a note plus room for its later note-off), that new note is left out and counts in
+<code>EV DROP</code> and under <code>DROPS</code> &gt; <code>QUEUE</code> — notes already playing always get their note-off. <code>EV OUT</code> counts every burst hit
+individually, so it legitimately runs far ahead of <code>EV IN</code>.</p>
+<p><b>Pitfalls:</b> a burst always fits inside one 16th regardless of note
+length — the original note-off is swallowed, so for sustained rolls
+retrigger the note. EUCLID sits before CHANCE, STRUM and RATCHET in the
+verdict chain: a note on a dead step never reaches the burst. A strummed
+chord under ratchet becomes a staircase of mini-rolls (rank × TIME shifts
+each burst). With transport stopped the pattern advances per note group
+(~15&nbsp;ms) rather than along the timeline — judge the real alignment
+while the loop plays. If a burst ever hangs, a transport jump flushes
+everything instantly, a <code>CC&nbsp;123</code> its channel.</p>
+
+<h2 id="midi"><span class="num">13</span>MIDI thru &amp; panic</h2>
+<ul>
+  <li>Non-note traffic (CC, pitchbend, aftertouch, program change) passes
+      with its <b>original timing</b> — everything travels through one
+      time-sorted queue, so output order is always sample-correct.</li>
+  <li><b>Panic</b> fires on every transport start, a transport jump of
+      more than one bar (not while in BYPASS), switching <code>ENABLED → BYPASS</code> and a
+      sample-rate change: queued generated notes are discarded and a
+      note-off is sent for every note still sounding on the output, on all
+      channels — including notes you are still holding (their later
+      note-off is swallowed). No hangers. CC and pitchbend already in the
+      queue survive a panic, and anything scheduled up to the panic moment
+      still goes out first.</li>
+  <li><code>CC 123</code> (All Notes Off) and <code>CC 120</code> (All Sound
+      Off) are <b>passed on</b> to the instrument and clear only their own
+      channel: the unit first ends the notes it generates on that channel
+      (note-offs just before the CC), notes on other channels keep
+      playing. REAPER's own panic therefore reaches the instrument.</li>
+  <li>Note-offs are tracked per channel+note: a dropped note's off is
+      swallowed, a passed note's off is delivered (shifted by the same
+      strum/deviate delay as its on), and offs for notes the unit never
+      saw pass straight through. If the same key is struck again before
+      its note-off arrives (overlapping notes of the same pitch), the
+      note-offs still never go out before a delayed note-on of that key —
+      both notes end, possibly a little later than played.</li>
+  <li>Everything stays on the input channel — no MPE splitting, so drum
+      racks and channel-sensitive instruments keep working.</li>
+</ul>
+<div class="box" data-k="note">System-exclusive data passes through
+untouched in both modes — REAPER forwards SysEx events automatically
+while the input queue is drained (verified on REAPER 7.79: F0…F7 intact,
+sample offset preserved). With ENABLE off the unit is a plain MIDI thru with sample-exact timing; it only keeps track of held keys, so a note-off
+that the panic has already sent is not sent twice and switching back never leaves a note hanging.</div>
+
+<h2 id="automation"><span class="num">14</span>Automation &amp; parameters</h2>
+<p>All panel controls are ordinary JSFX parameters — hidden from the
+generic slider page by design, but fully exposed to REAPER: they appear in
+the parameter list for envelopes, MIDI/OSC learn, track controls and
+parameter modulation. Every panel gesture also reports itself as a real
+parameter change, so touch/latch/write automation recorded from the front
+panel works exactly like automating the slider.</p>
+<table>
+  <tr><th>Param #</th><th>Parameter</th><th>Panel control</th></tr>
+  <tr><td>1</td><td><code>ENABLE</code></td><td>Header toggle ENABLED/BYPASS</td></tr>
+  <tr><td>2</td><td><code>SEED (0=free)</code></td><td>Header readout, −/+/FREE, wheel, right-click</td></tr>
+  <tr><td>3</td><td><code>CHANCE %</code></td><td>PROBABILITY knob</td></tr>
+  <tr><td>4</td><td><code>COND MODE</code></td><td>COND MODE combo</td></tr>
+  <tr><td>5</td><td><code>COND BARS</code></td><td>COND CYCLE combo 2/4/8/16 BARS</td></tr>
+  <tr><td>6</td><td><code>STRUM TIME ms</code></td><td>STRUM TIME knob</td></tr>
+  <tr><td>7</td><td><code>STRUM DIR</code></td><td>UP/DOWN/ALT/RAND combo</td></tr>
+  <tr><td>8</td><td><code>RATCHET DIV</code></td><td>division combo OFF…1/16</td></tr>
+  <tr><td>9</td><td><code>RATCHET DEC %</code></td><td>DECAY % knob</td></tr>
+  <tr><td>10</td><td><code>VEL DEV</code></td><td>VEL DEV knob</td></tr>
+  <tr><td>11</td><td><code>TIME DEV ms</code></td><td>TIME DEV knob</td></tr>
+  <tr><td>12–14</td><td><code>EUCLID PULSES / STEPS / ROT</code></td><td>EUCLID knobs</td></tr>
+  <tr><td>15</td><td><code>MUTATE AMT %</code></td><td>MUTATE knob</td></tr>
+  <tr><td>16</td><td><code>MUTATE TGT</code></td><td>GATE FLIP/VEL/RATCH/ALL combo (value 0 = GATE FLIP)</td></tr>
+  <tr><td>40</td><td><code>UI Color</code></td><td>OPTIONS box, COLOR (colour scheme 0&ndash;9)</td></tr>
+</table>
+<p>Parameters 41&ndash;45 (<code>PB CMD/ARG/A/B/C</code>) are the test interface of the preset bank (save, load and check slots without the mouse); leave them alone.
+The commands that write (save, load, factory preset, INIT) only work while a test script has unlocked them; an envelope, MIDI learn or
+parameter modulation on parameter 41 does nothing to your presets.
+Parameters 17–39 (and only these besides 41&ndash;45; 40 is the colour scheme above) are a diagnostic/test bus used by the automated test
+harness: the <code>SNT</code> sanity tag, the live counters
+(<code>EV IN/OUT/DROP</code>, <code>Q LOAD</code>, <code>ACT</code>), a
+per-note query bus (<code>Q NOTE → Q STATUS/DELAY/VEL</code>), an event
+log of up to 2048 entries — it fills once, then stops
+(<code>LOG EN/IDX/KIND/M1–M3/T/N</code>) — and environment
+echoes (<code>SRATE</code>, <code>TEMPO</code>, <code>BEATSAMP</code>).
+Most are read-only outputs the DSP overwrites every block — automating
+them is pointless, and users can safely ignore them; the interesting ones
+are mirrored on the front panel anyway.</p>
+<figure class="shot"><img src="img/tt-luckymidichance/tt-luckymidichance-footer.png" alt="TT-LuckyMidiChance MONITOR strip — processing chain stages, DROPS row by cause, EV IN / EV OUT / EV DROP counters and Q LOAD with level bar" width="684" height="58"><figcaption><span class="tag">STATUS</span><b>The MONITOR strip.</b> The processing chain with stage LEDs, the DROPS row by cause, live EV IN/OUT/DROP statistics and Q LOAD with a level bar.</figcaption></figure>
+
+<h2 id="options"><span class="num">15</span>Options / Color &amp; Font</h2>
+<figure class="shot"><img src="img/tt-ui-options/lmc-options.png" alt="TT-LuckyMidiChance front with the OPTIONS box open — COLOR schemes row (ACID marked with a white frame), FONT SIZE controls for FONT 1 and FONT 2, and the CUSTOM COLOR picker with FONT 1 / FONT 2 / BG tabs, an HSV field and RESET / RESET ALL" width="700" height="447"><figcaption><span class="tag">OPTIONS</span><b>Colour, font and custom style.</b> The OPTIONS button sits on the first header row, directly right of the preset bar. The white frame marks the active scheme; the name of the scheme under the mouse is shown at the bottom left of the box.</figcaption></figure>
+<p>Click <b>OPTIONS</b> in the header to open the box. Under <b>COLOR</b> pick one of ten schemes: ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT or ICE.
+A click on a swatch changes the whole front at once (accent, dimmed accent, panel and ground tint, knob discs); the choice rides on hidden parameter <code>UI Color</code> (40).
+<b>FONT SIZE</b> offsets the two font slots in steps of ~8 % (<code>FONT 1 (TITLE)</code> for panel titles and the wordmark, <code>FONT 2 (TEXT)</code> for labels and values, −4…+8 each).
+Since v1.4.0 every text on the front grows only as far as its place allows: a label that would run into its neighbour stays at the largest step that fits (the texts inside buttons, combo boxes and the panel titles follow the setting freely).
+Under <b>CUSTOM COLOR</b> pick a target — <code>FONT 1</code>, <code>FONT 2</code> or <code>BG</code> (the background) — and dial it with the saturation/brightness field and the hue strip; the swatch on the right previews the target's active colour.
+<code>RESET</code> returns the chosen target to the scheme, <code>RESET ALL</code> clears every custom style.
+<b>TOOLTIPS ON / OFF</b> in the title row of the box turns the control tooltips on or off.
+Everything in the box applies <b>per plug-in instance</b> and is saved with the project and with FX chains; a click outside the box closes it. The factory colour of TT-LuckyMidiChance is <b>ACID</b>.
+The LOCKED seed LED uses the warning colour of the scheme (orange under ACID); the Q LOAD bar keeps fixed zones instead — green below 60 %, yellow to 85 %, red beyond — whatever the scheme. Colour has no effect on the MIDI processing.</p>
+
+<h2 id="trouble"><span class="num">16</span>Troubleshooting</h2>
+<ul>
+  <li>Notes go missing and you do not know why — read MONITOR &gt; <code>DROPS</code>: it names
+      the stage that dropped them (COND, EUCLID, CHANCE, MUTATE or QUEUE).</li>
+  <li>Everything passes regardless of settings — the header toggle is on
+      <code>BYPASS</code>, or the FX sits <b>after</b> the instrument in
+      the chain (it must see the MIDI before the instrument does).</li>
+  <li>Different results on every bounce — <code>SEED = 0000</code> is
+      free-running; lock any number for a reproducible performance.</li>
+  <li>EUCLID seems to do nothing — <code>PULSES = 0</code> bypasses the
+      gate (status reads <code>BYPASS</code>). Set PULSES ≥ 1. If notes
+      drop, check ROTATE: your onsets may land between pulses; notes
+      quantize to the nearest 16th step.</li>
+  <li>COND does nothing — it only works while transport plays; stopped, it
+      passes everything by design. Also check that the song position
+      actually reaches the gated bars.</li>
+  <li>FILL never triggers — FILL is the last <b>2 quarter notes</b> of the cycle's
+      last bar (in 2/4 and 3/8 the whole bar); make sure COND CYCLE matches your musical phrase length.</li>
+  <li>COND counts bars wrongly after a time-signature change — playback started behind the
+      change; start before it (or loop over it once) so the plug-in can learn where the new bars
+      begin.</li>
+  <li>Strum spreads a chord too far — <code>STRUM TIME</code> is the
+      <em>per-note</em> step, not the total: an n-note chord spreads
+      (n−1) × TIME. Halve it for bigger chords.</li>
+  <li>Ratchet notes hang or the queue fills during dense bursts — panic
+      clears automatically on transport start, transport jump or
+      ENABLE→off, and a <code>CC 123</code> flushes its channel (and is
+      passed on to the instrument). The <code>Q LOAD</code> bar turns
+      amber past 60 % and red past 85 % of the 512-slot queue: shorten
+      bursts or lower the ratchet division.</li>
+</ul>
+<section class="section">
+<h2 id="ui-size-settings"><span class="num">17</span>UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v1.3.5</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/lmc-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/lmc-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-LuckyMidiChance v1.6.0</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.6.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>
