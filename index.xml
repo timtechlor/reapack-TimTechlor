@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="5c86e9b2871d3eb848b4da669bc6bcb8591162de">
+<index version="1" name="TimTechlor ReaScripts" commit="7b2cb25c99b2c39473aebd732273184e3235a278">
   <category name="MIDI Tools/TT-303PATGEN">
     <reapack name="TT-303PATGEN Print Song Chain.lua" type="script" desc="TT-303PATGEN Print Song Chain">
       <metadata>
@@ -80,6 +80,168 @@
         <source file="img/tt-303patgen/tt-303patgen-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/e4d337a6aa43918b6b8169961074eed91536c6fa/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-presets.png</source>
         <source file="img/tt-303patgen/tt-303patgen-song.png">https://github.com/timtechlor/reapack-TimTechlor/raw/e4d337a6aa43918b6b8169961074eed91536c6fa/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-song.png</source>
       </version>
+      <version name="1.2.0" author="TimTechlor" time="2026-10-29T16:42:25Z">
+        <changelog><![CDATA[nach Versionen sortiert (stand 0.5.3, 0.5.2, 0.1.0 .. 0.5.1); @provides um die sechs Manual-Bilder]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN.jsfx</source>
+        <source file="img/tt-ui-options/303patgen-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/img/tt-ui-options/303patgen-front.png</source>
+        <source file="img/tt-ui-options/303patgen-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/img/tt-ui-options/303patgen-options.png</source>
+        <source file="tt-303patgen-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/tt-303patgen-manual.html</source>
+        <source file="TT-303PATGEN Print to MIDI Item.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20to%20MIDI%20Item.lua</source>
+        <source file="TT-303PATGEN Print Song Chain.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20Song%20Chain.lua</source>
+        <source file="img/tt-303patgen/tt-303patgen-gallery.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-gallery.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-long.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-long.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-presets.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-song.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-song.png</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="MIDI Tools/TT-KNOBMOVER">
+    <reapack name="TT-KNOBMOVER Import Regions.lua" type="script" desc="TT-KNOBMOVER: import regions (or markers) as sections">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Takes the regions of the project (or, if there are none, the markers) and turns them into the sections of a TT-KNOBMOVER: one section per region / marker, length in whole bars, section type guessed from the name (intro, verse, build, pre, drop, fill, break, outro ...), START BAR set to the bar of the first region. Works on the TT-KNOBMOVER of the first selected track, otherwise the first one in the project. A time selection limits the import to the regions / markers inside it. Undo with Ctrl+Z.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0.0" author="TimTechlor" time="2026-10-29T16:42:25Z">
+        <changelog><![CDATA[1.0.0 - First version (TT-KNOBMOVER 0.9.0).]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/TT-KNOBMOVER%20Import%20Regions.lua</source>
+      </version>
+    </reapack>
+    <reapack name="TT-KNOBMOVER Import Service.lua" type="script" desc="TT-KNOBMOVER: import service (makes the REGIONS button in the plug-in work)">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Start this action once (it keeps running in the background, also via a startup action). While it runs, the REGIONS button in the TT-KNOBMOVER header imports the project's regions / markers as sections - the plug-in cannot read project markers itself, this script does it for the instance whose button was pressed. Without the service, run "TT-KNOBMOVER: import regions (or markers) as sections" from the Action list instead. Stop it from the Action list (terminate instances) or by closing REAPER.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.0.0" author="TimTechlor" time="2026-10-29T16:42:25Z">
+        <changelog><![CDATA[1.0.0 - First version (TT-KNOBMOVER 0.9.0).]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/TT-KNOBMOVER%20Import%20Service.lua</source>
+      </version>
+    </reapack>
+    <reapack name="tt-knobmover.jsfx" type="effect" desc="TT-KNOBMOVER">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-KNOBMOVER\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Rides the knobs of a TT-303 (HOST mode) through a whole track by MIDI CC: cutoff (CC 74), resonance (71), env mod (73), decay (75) and accent (16), optionally volume (7). The song is an arrangement of sections (TEASE, ROLL, BUILD, PRE-DROP, DROP, FILL, BREAK, RESET); every section draws a line from START to END per knob, the cutoff swings on top. Class limits (DRIVER, MELODIC, SCREAM, LOW) act as a guide (green sweet-spot band): untouched sections follow the class table, edited sections and live overrides use the full 0-100 range. Each lane has its own LFO. Notes pass through unchanged. Operated entirely from the drawn front panel.\par}
+}
+]]></description>
+      </metadata>
+      <version name="1.1.1" author="TimTechlor" time="2026-10-29T16:42:25Z">
+        <changelog><![CDATA[1.1.1 - FIX: a class change request that was taken back before it ran no longer stays pending.
+        FIX: ride maps and the TRACKER preview no longer show a stale curve after a tempo change.
+        FIX: very long audio blocks no longer drop CC events (the MIDI merge now streams instead of a capped queue).
+        INFO: the SCREAM tooltip now says the class limits apply to sections you have not edited.
+        DOC: eight manual pictures are now declared in @provides.
+1.1.0 - Speed Bump Open (one-bar loop) and Evolve 4 Bars (four-bar loop): cutoff rides for basslines.
+1.0.0 - FIX: during playback, a class change glided the smoothed output of untouched sections outside the still-valid limits of the
+        new class for a long time (regression of the 0.9.5 fix). The smoothed value now respects the new limits from the first tick
+        after the change; edited sections and live overrides keep the full 0-100 range. The REAPER full test covers this with its own probe.
+0.9.6 - NEW: MOVEMENT is an LFO panel for the focus lane (cutoff, resonance, env mod, decay, accent): AMP (depth), RATE in SYNC (16th steps) or HZ, waveform, and a live picture of the LFO over the section.
+        Every lane has its own LFO now (until 0.9.5 only the cutoff swing could be set, the other lanes wobbled with fixed values).
+  - NEW: each node of a lane carries its own AMP and RATE: the start, every own point and the end. Choose the node with NODE, a handle or point in the map, or a mark in the LFO display;
+        depth and speed glide from node to node (the phase never jumps). ALL changes every node at once. The unit switch SYNC / HZ keeps the speed.
+  - NEW: RANDOM also rolls the LFO of each lane: shape, SYNC or HZ, and an own AMP / RATE for the start, each point and the end.
+  - NEW: PREVIEW opens a list of all factory presets (click the middle of the box); a right-click on the box returns to PREVIEW: OFF.
+  - UI: the FROM / TO handles in the lanes are half-rectangles inside their own section (FROM hollow on the right of the bar line, TO solid on the left), so neighbouring sections no longer overlap
+        and it is clear that they move up and down only.
+  - Saved with the project (layout 3; older projects still load) and in user presets. Without an own LFO every lane sounds exactly as in 0.9.5.
+  - FIX: the MOVEMENT preview of a lane without an own LFO now draws the wobble actually sent (fixed sine with its own phase and the absolute
+        step count), not a curve starting at phase 0 - untouched lanes 1-4 showed the wrong phase.
+  - FIX: test commands 7-15 clamp the section index to the real number of sections (a stray index could reach into unused memory).
+  - FIX: the import service now also raises the result counter when the instance is not found - the front saw that failure only after the next success.
+  - FIX: the TRACKER preview hint no longer promises a clamp to the class limits - they are a guide only, the full 0-100 range can be used.
+0.9.5 - NEW: DESK, PADS and TRACKER use the full height of the window: tall mixer strips and scene pads in DESK, big section pads and a larger XY field in PADS, 28 rows and tall section previews in TRACKER.
+        Flat buttons, switches and selectors; the window is 10 % wider (more room for the lanes); the LEN selector fits LEN 256 BARS.
+  - FIX: smoothed CC values in untouched sections respect the current class limits immediately after a class change; edited sections and live overrides retain the full 0-100 range.
+0.9.0 - NEW: own points in the lanes. Double-click a line (or a lane) of the selected section to add a point, drag it (quarter-bar grid, Shift = free and fine),
+        right-click or Alt+click deletes it; up to 16 points per lane and section; the lane bar next to PREVIEW joins them LINEAR / SMOOTH / STEPS, CLEAR removes them.
+        Saved with the project and in user presets, the TRACKER marks lanes that have points. NEW swing shape SAW DOWN (falls, then jumps up).
+  - NEW: the class limits are a guide, no longer a wall: once you edit a section, every knob, handle, point, XY field and table cell can use the whole lane 0-100
+        (the green sweet-spot band and the thin limit lines stay as a guide; untouched sections still follow the class table exactly).
+  - UI: taller lane area: MAP panel 522 -> 732 design pixels (+40.23%), RACK+ panel 226 -> 436; front 900 x 910 (125%: 1125 x 1138).
+  - NEW: MAX / key M maximizes one lane to the full height of the map (RACK+ and MAP) for fine editing; lane buttons at the left switch the lane. Crosshair with bar and value
+        under the pointer, value grid, bar lines that get finer with the zoom, bar numbers, a soft fill under the curve.
+  - NEW: flat look for buttons, switches, selectors, tabs and pads (LED switches, accent-filled active state, thin outlines); the window is 10 % wider (990 x 910 grid) so the lanes get more room;
+    the LEN selector is wider so LEN 256 BARS fits.
+  - NEW: RANDOM scope BLOCK (only the focus lane of the selected section); RANDOM got its own header row with an AMOUNT slider and a TARGET line; the map moved down a little.
+  - NEW: RANDOM (button, mouse wheel = amount, key R): rolls FROM / TO around the class table, swing shape / depth / period, ride and sometimes own points;
+        range SECTION / LANE / ALL; stays inside the class limits; volume lane and ON switches are never touched.
+  - NEW: REGIONS. The regions (or markers) of the REAPER project become the sections of the arrangement, through the ReaScripts "TT-KNOBMOVER Import Regions"
+        (one-off action) and "TT-KNOBMOVER Import Service" (makes the REGIONS button work). Types are guessed from the names, bars are rounded, START BAR is set.
+  - NEW: all 46 factory presets reworked, 16 new ones (Steps 32, Saw 32, Tri 64, Wub 48 in four classes): every section has a movement variant (shape, depth, period,
+        own points) relative to the class table, so a drop does not repeat the previous one; a class change re-applies the variants of unedited sections.
+  - Project and preset data now hold 232 words per section (layout version 2; projects and user presets from 0.8.0 and earlier still load).
+        A project that is read (load, undo) is handed to the single writer of the arrangement instead of being written directly.
+  - At the default settings and without variants the CC output is the same as in 0.8.0.
+  - FIX: stopping playback with the cursor back on the start position sends the start values again; choosing a section with FOLLOW SONG off sends its values while stopped;
+    the position display with REPEAT before START BAR shows 0; a truncated project state falls back to the factory arrangement in the chosen class.
+0.8.0 - Five views in one plug-in, chosen by tabs in the header: RACK+ (as before), MAP (the whole song as a large map with all six lanes,
+        including volume), DESK (one channel strip per knob with the FROM / TO range of the selected section, live value and CC meter,
+        eight scene pads), PADS (sixteen section pads and an XY field that rides cutoff and resonance by hand and springs back on release)
+        and TRACKER (every section as a row of numbers: FROM / TO per knob, length, swing, period, ride; drag, wheel or keys to edit).
+        Map zoom and scroll as in TT-ACIDLAB: + / - / FIT, Ctrl + mouse wheel zooms around the pointer, the wheel scrolls, scroll bar.
+        Keyboard: Left / Right select a section (Alt: length -/+ 1 bar), Home / End, [ and ] pick the lane, Up / Down change its TO value
+        (Alt: FROM), Page Up / Down by 10, O switches the lane on or off, Delete removes the section, + / - / F zoom.
+        Preset preview: any factory preset can be shown in the map without loading it and without sending anything; LOAD takes it over.
+        Pads and scene pads switch at the next bar (QUANTIZE NEXT BAR, can be turned off); with FOLLOW SONG off the chosen section loops.
+        Edits are handed to the audio thread atomically: the CC engine works on its own copy that is only taken over while the front
+        is not writing, so a block can no longer send a half-edited value (fix of the open finding from the external code review).
+        UI kit 7 modules.
+  - NEW: DESK > MOVE per lane (cutoff, resonance, env mod, decay, accent; 0 to 200 %, default 100 %): how strongly the lane swings around its FROM / TO line in every section. Saved with the project and in user presets.
+  - NEW: PADS > SCREAM (0 to 100 %, default 0): pushes resonance up and env mod down towards the scream class, inside the class limits.
+  - NEW: PADS > NOTE TRIGGER (default off, channel 16, base C2): notes BASE to BASE + 15 on the trigger channel select sections 1 to 16 like the pads (QUANTIZE applies) and are not passed on.
+  - At the default settings the CC output is the same as before.
+  - FIX: PASS NOTES off: an overlapping dropped note-on no longer overwrites a note-on that was passed on, so its note-off still goes through (no hanging note on the TT-303).
+  - FIX: a truncated project chunk falls back to the factory data instead of a half-loaded state; test commands 4 and 6 clamp their indices.
+0.3.0 - RIDE MAP: values can be edited vertically in the lanes (as in the MOVER tab of TT-ACIDLAB): drag the START (hollow) or END (solid) dot of the
+        selected section up or down, drag the line between them to move both together, Shift = fine; a FILL section turns into fixed values when edited.
+        The ring dots of the section knobs now mark the lowest and highest value the section really reaches (ramp plus swing, within the class limits) instead of the ramp ends; the START / END sliders are labelled FROM / TO (they stay the ramp ends, sound unchanged).
+0.2.0 - 46 factory presets (loops of 8 bars up to a 256-bar marathon, each in all four classes); arrangements up to 256 bars and 64 sections
+        (LEN list 8 to 256); knob rows in the SECTION and MOVEMENT panels moved down so the sweet-spot arcs no longer cross the panel title.
+        Fixes from the external code review: a MIDI channel change re-sends every lane on the new channel; slider changes re-evaluate at once
+        while stopped (SEND CC 7, START BAR, INTENSITY); playback started between two grid points sends the start values immediately;
+        SMOOTH never leaves the class limits after a class change; PASS NOTES: a note-off whose note-on was dropped is dropped too;
+        the preset modified-star uses two sums; a damaged chunk is no longer half-read; the position display follows REPEAT; the LEN box can
+        reach every list entry.
+  - NEW: OPTIONS > AUTO FIT ON / OFF (default on): dragging the window edge rescales the UI to the new window size; the UI SIZE buttons still set a fixed zoom until the window changes again. UI SIZE now accepts 25 to 400 percent. Saved per instance.
+0.1.0 - First version: front K6 RACK+ (ride map with section band and five lanes, five live knobs with
+        START / END per section, MOVEMENT with swing, period, ride and shape, section tools, output panel),
+        CC engine after the section tables of the TT-303 pattern generator, preset bar with six factory
+        presets, live override per knob.]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/tt-knobmover.jsfx</source>
+        <source file="TT-KNOBMOVER Import Regions.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/TT-KNOBMOVER%20Import%20Regions.lua</source>
+        <source file="TT-KNOBMOVER Import Service.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/TT-KNOBMOVER%20Import%20Service.lua</source>
+        <source file="tt_km_import.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/tt_km_import.lua</source>
+        <source file="tt-knobmover-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/tt-knobmover-manual.html</source>
+        <source file="img/tt-ui-options/knobmover-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-ui-options/knobmover-front.png</source>
+        <source file="img/tt-ui-options/knobmover-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-ui-options/knobmover-options.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-header.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-header.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-ridemap.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-ridemap.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-section.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-section.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-movement.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-movement.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-presets.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-preset-loaded.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-preset-loaded.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-tools.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-tools.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-max.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-max.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-map.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-map.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-desk.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-desk.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-pads.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-pads.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-tracker.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-tracker.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-zoom.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-zoom.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-points.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-points.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-preview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-preview.png</source>
+      </version>
     </reapack>
   </category>
   <category name="MIDI Tools/TT-LuckyMidiChance">
@@ -152,9 +314,10 @@
 {\pard \ql \f0 \sa180 \li0 \fi0 OPERATING MODES HOST Pure sound generator, played from the piano roll. Velocity >= threshold = accent, overlapping notes = slide. The same note again while held is ignored (Devil Fish: the first note-off ends it). Last note wins from a stack of 10 held notes (the oldest falls out); CC 64 (sustain) keeps the gate on while its value is >= 64 (Devil Fish). Accent threshold default 65; the DF button steps through the Devil Fish thresholds 65 / 80 / 100 / 120. SEQ Internal 16-step sequencer, four pattern banks A-D with copy function, random and mutation, shuffle, gate length. Runs on the project timeline or free (FREE RUN). MIDI notes transpose the pattern (C2 = original pitch). MIDI OUT also sends the sequence out. All four banks travel with the project.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Effect path: ahead of each of the three units \u8212- WaveShaper (Soft/Hard/ Fold/Fuzz), ping-pong delay, Freeverb reverb \u8212- sits an input EQ as a dual slider (lowcut left, highcut right, 0..20 kHz). After that compressor (-14 dB, 5:1) and master.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 The input EQ only shapes what is sent into each effect; the dry signal runs alongside untouched. On the drive what the EQ removes is added back after the WaveShaper, so a raised lowcut takes the bass out of the DISTORTION, not out of the output (drive off = transparent).\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 OPTIONS box: FONT SIZE (FONT 1/2) and a custom HSV colour picker (FONT 1 / FONT 2 / BG) with RESET / RESET ALL, live and per instance, with low-contrast warning; TOOLTIPS ON / OFF (saved with the project), tooltips on every control.\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 A slide into the same note ties (no retrigger, one note-on at SEQ OUT); pattern and bank edits create a REAPER undo point and UNDO restores the bank it was made in; the mouse wheel steps whole-number knobs one step at a time.\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 PRESETS: bar in the header, left of OPTIONS: [<] [name v] [>] [SAVE] [...]. FACTORY = INIT, TT-Groove, TT-BigBoy, TT-HiImTom!, TT-OffbeatBaby, TT-GoodStart (the default presets of the web version, each with its sound and the four pattern banks A-D); USER = 32 slots that travel with the project (@serialize, after the four pattern banks; old projects load with an empty bank). A user preset holds all sound sliders (2..20, 27..32, 34, 35), the pattern settings (length, shuffle, gate, active bank 21/22/23/25) AND the four pattern banks A-D. Not part of it: MODE, FREE RUN, SEQ OUT, MIDI THRU, UI Color, transport. A native REAPER preset file of this plugin carries the whole bank.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 v1.3 (P20): OPTIONS box gains FONT SIZE (FONT 1/2) and a custom HSV colour picker (FONT 1 / FONT 2 / BG) with RESET / RESET ALL, live, per instance, low-contrast warning; dim text contrast raised to WCAG >= 4.5; DSP unchanged.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 v1.3.2 (P23): OPTIONS box: TOOLTIPS ON / OFF (per instance, saved with the project); tooltips on every control (own small mechanism tip303_*, 0.35 s dwell, not while dragging); DSP/audio unchanged.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 v1.3.3 (P25): a slide into the SAME note ties again (no retrigger, one note-on at SEQ OUT), as documented; UNDO restores the bank it was made in; pattern and bank edits create a REAPER undo point; transport start keeps a sounding voice, FX tails, UNDO/COPY and a held transpose key; a tempo re-sync never fires a step twice; mouse wheel = one step on whole-number knobs; test commands need the test unlock.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 PRESETS (v1.2): bar in the header, left of OPTIONS: [<] [name v] [>] [SAVE] [...]. FACTORY (since 2.1.1) = INIT, TT-Groove, TT-BigBoy, TT-HiImTom!, TT-OffbeatBaby, TT-GoodStart (the default presets of the web version, each with its sound and the four pattern banks A-D); USER = 32 slots that travel with the project (@serialize, after the four pattern banks; old projects load with an empty bank). A user preset holds all sound sliders (2..20, 27..32, 34, 35), the pattern settings (length, shuffle, gate, active bank 21/22/23/25) AND the four pattern banks A-D. Not part of it: MODE, FREE RUN, SEQ OUT, MIDI THRU, UI Color, transport. A native REAPER preset file of this plugin carries the whole bank.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 MIDI: THRU at the top of the header passes INCOMING notes on to the output (CC and pitchbend always pass through anyway). SEQ OUT in the sequencer panel sends the SELF-GENERATED sequence out. Two different sources, hence two switches. In SEQ mode incoming notes are transpose commands \u8212- whoever also passes them on with THRU sends them out next to the sequence.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 SURFACE after the Tim Techlor design kit: Core Black, Core White, Acid Green #39FF14, traces at a 45 degree angle with solder pads. Wordmark in Zilap Orion, if installed. Labels sans-serif (Segoe UI / Helvetica Neue / DejaVu Sans / Arial), numeric values monospaced (Consolas / DejaVu Sans Mono / Menlo / Courier New). Which of these is present the script measures itself. The front computes in a fixed design grid and scales to the window size \u8212- to enlarge, just drag the FX window open. HiDPI is honoured via gfx_ext_retina. All internal JSFX sliders are hidden ("-" before the name), operation is exclusively via the device front.\par}
 }
@@ -384,6 +547,41 @@
         <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp</source>
         <source file="TT-303/TT-303_manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/TT-303_manual.html</source>
       </version>
+      <version name="2.1.4" author="TimTechlor" time="2026-10-29T16:42:25Z">
+        <changelog><![CDATA[2.1.4 - FIX: switching SEQ OUT off while a sequencer note was still playing dropped its note-off - the receiving
+        instrument kept the note hanging (for many steps on slide chains or 100 % gate). The pending note-off is
+        now sent once when SEQ OUT switches off. @provides header cleaned (stray PATGEN entries removed, keyboard
+        image added). Sound unchanged.
+2.1.3 - FIX: the space bar now always starts and stops the REAPER transport while the plugin window has focus (the plugin no longer asks REAPER for all keyboard input). Type a space in a name field with Shift+Space.
+2.1.2 - FIX: dragging quickly across the keyboard could leave a note hanging; the note-off of the previous key now follows immediately (the slide stays). The LO and HI handles of an effect EQ can be separated again when they sit on top of each other. Value labels under the sequencer knobs and the EQ strips keep their spacing at large UI sizes. The keyboard tooltip fits the window.
+2.1.1 - NEW: the factory presets are now the default presets of the web version (TT-Groove, TT-BigBoy, TT-HiImTom!, TT-OffbeatBaby, TT-GoodStart, INIT). Each one loads its sound AND its four pattern banks A-D (the previous INIT, DEEP, SQUELCH, SCREAM, HOOVER and DUB are gone). Mode, free run, SEQ OUT and MIDI THRU stay as they are; the tempo follows the host.
+2.1.0 - The keyboard in HOST mode is playable: click a key to play it, click lower on the key to play harder (accent from ACCENT VEL), drag to another key to slide. SLIDE moved from the effects row (it sat next to REVERB) into the SYNTHESIZER panel, now nine knob columns. CUTOFF, RESONANCE, ENV MOD and VOLUME are smoothed (5 ms, no zipper noise when turning with the mouse); MIDI CC takes effect at its sample offset. AUTO FIT: the UI zoom follows the window size again (switch in OPTIONS). Fixed: user presets lost Distortion ON/OFF; the reverb bypass could be corrupted while the SEQ front was open; the filter coefficient did not follow the resonance at the cutoff ceiling; the changed-star of the preset bar was lost after loading a project.
+2.0.0 - First ReaPack release since 1.07 (ACID SEASON, 05.10.2026). Renumbered from 1.5.0, because ReaPack reads 1.07 as 1.7 and would not offer 1.5.0 as an update. Same code as 1.5.0; all changes since 1.07 are listed below.
+1.5.0 - HOST mode aligned further with the Devil Fish MIDI In: note stack 10 deep (oldest falls out), sustain on CC 64 (gate stays on while CC 64 >= 64), accent velocity default 65 with the four Devil Fish thresholds 65/80/100/120 on a DF button. Existing projects and presets keep their stored accent velocity.
+1.4.1 - HOST mode as the Devil Fish MIDI In: a note-on for a key that is already on is ignored (no retrigger, no hanging note); the first note-off ends it.
+1.4.0 - HOST mode: an overlapping note of the same pitch was struck again (replaced by 1.4.1).
+1.3.4 - Persistent UI size and options; larger default, stable colours when zooming.]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303%20Acid%20Machine.jsfx</source>
+        <source file="TT-303/tt-303-jsfx-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/tt-303-jsfx-manual.html</source>
+        <source file="TT-303/img/tt-ui-options/303-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-ui-options/303-front.png</source>
+        <source file="TT-303/img/tt-ui-options/303-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-ui-options/303-options.png</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-drum-machine-panel-with-the-kit-dropdown-and-one-r.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-fx-panel-with-drive-delay-reverb-and-compressor-se.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-header-showing-the-tt-303-logo-the-accent-indicato.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-sequencer-panel-with-pattern-banks-a-to-d-the-note.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-synth-panel-with-the-eight-sound-shaping-knobs-the.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-midi.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-midi.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-presets.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-save.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-save.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-seq.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-seq.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-sequencer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-sequencer.png</source>
+        <source file="TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png</source>
+        <source file="TT-303/img/tt-303-acid-machine/tt-303-acid-machine-host-mode-keyboard-panel-with-the-playable-keyboard.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/img/tt-303-acid-machine/tt-303-acid-machine-host-mode-keyboard-panel-with-the-playable-keyboard.webp</source>
+        <source file="TT-303/TT-303_manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Synths/TT-303/TT-303_manual.html</source>
+      </version>
     </reapack>
   </category>
   <category name="Tempo Tools">
@@ -425,6 +623,25 @@
         <source file="img/bpm2ms2hz/tt-bpm2ms2hz-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-front.png</source>
         <source file="img/bpm2ms2hz/tt-bpm2ms2hz-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-options.png</source>
         <source file="img/bpm2ms2hz/tt-bpm2ms2hz-wide-bars.png">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-wide-bars.png</source>
+      </version>
+      <version name="1.5.1" author="Tim Techlor" time="2026-10-29T16:42:25Z">
+        <changelog><![CDATA[v1.5.1
+- FIX: toast and flash durations now measure real time (reaper.time_precise) instead of CPU time, so they last as intended under load.
+v1.5.0
+- New name: TT-BPM2MS2HZ (formerly "BPM2MS2HZ Calculator"); file name and saved settings stay the same.
+- New look after the TT UI kit 7: panels, LED switches, tempo slider and value tables drawn like the TimTechlor plugins.
+- Every control has a tooltip; OPTIONS > TOOLTIPS ON / OFF switches them off (saved).
+- NEW: OPTIONS > AUTO FIT ON / OFF (default on): dragging the window edge rescales the UI to the new window size (25 to 400 %); the UI SIZE buttons 100 / 125 / 150 / 200 / 300 % resize the window. Saved.
+- Wide windows show the tempo panel and the table side by side.
+- Mouse wheel over the tempo slider: 1 BPM per step (Shift: 0.1 BPM).
+- Version shown in the window header.]]></changelog>
+        <source main="main">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Tempo%20Tools/TT_BPM_Calculator.lua</source>
+        <source file="TT_Wordmark.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Tempo%20Tools/TT_Wordmark.png</source>
+        <source file="bpm2ms2hz-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Tempo%20Tools/bpm2ms2hz-manual.html</source>
+        <source file="img/bpm2ms2hz/bpm2ms2hz-web-console.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Tempo%20Tools/img/bpm2ms2hz/bpm2ms2hz-web-console.png</source>
+        <source file="img/bpm2ms2hz/tt-bpm2ms2hz-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-front.png</source>
+        <source file="img/bpm2ms2hz/tt-bpm2ms2hz-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-options.png</source>
+        <source file="img/bpm2ms2hz/tt-bpm2ms2hz-wide-bars.png">https://github.com/timtechlor/reapack-TimTechlor/raw/7b2cb25c99b2c39473aebd732273184e3235a278/Tempo%20Tools/img/bpm2ms2hz/tt-bpm2ms2hz-wide-bars.png</source>
       </version>
     </reapack>
   </category>
