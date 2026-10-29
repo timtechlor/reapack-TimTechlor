@@ -6,8 +6,8 @@
 <title>TT-303PATGEN Manual – Acid Pattern Generator with MIDI Output for REAPER</title>
 <meta name="description" content="Reference manual for TT-303PATGEN, a free acid pattern generator JSFX for REAPER: seeded generators (random walk, Markov, Euclid, motif, classic mutation), ten scales, slide / tie / accent per step, eight slots with song chain, 32 style patterns, sample-accurate MIDI output for the TT-303 or any synth.">
 <meta name="tt-doc-name" content="TT-303PATGEN">
-<meta name="tt-doc-version" content="1.0.2">
-<meta name="tt-doc-date" content="2026-10-19">
+<meta name="tt-doc-version" content="1.2.0">
+<meta name="tt-doc-date" content="2026-10-27">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-303patgen-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-303PATGEN — User Manual">
-<meta property="article:modified_time" content="2026-10-19">
+<meta property="article:modified_time" content="2026-10-27">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-303PATGEN Manual – Acid Pattern Generator for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-303PATGEN, a free acid pattern generator JSFX for REAPER: seeded generators (random walk, Markov, Euclid, motif, classic mutation), ten scales, slide / tie / accent per step, eight slots with song chain, 32 style patterns, sample-accurate MIDI output for the TT-303 or any synth.",
    "url": "https://timtechlor.de/docs/tt-303patgen-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-303patgen-manual.html",
-   "datePublished": "2026-10-19",
-   "dateModified": "2026-10-19",
+   "datePublished": "2026-10-27",
+   "dateModified": "2026-10-27",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-303patgen.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER acid pattern generator, TB-303 MIDI generator, JSFX MIDI generator, acid bassline generator, slide accent sequencer, euclidean rhythm generator, Markov melody generator, seeded random pattern",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-303patgen-manual.html#software" },
-   "version": "1.0.2"
+   "version": "1.2.0"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-303PATGEN",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.0.2",
+   "softwareVersion": "1.2.0",
    "description": "JSFX MIDI plug-in for REAPER: generates 303-style acid patterns (note, octave, gate, tie, accent, slide, probability per step), edits them on a piano-roll front panel and plays them as sample-accurate MIDI, synced to the host transport - for the TT-303 or any other synth.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,10 +228,10 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303PATGEN</span></nav>
       <div class="wordmark" style="--wm-n:12" role="img" aria-label="TT-303PATGEN">TT-303PATGEN</div>
       <h1>TT-303PATGEN — User Manual</h1>
-      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.0.2 // TimTechlor</div>
+      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.2.0 // TimTechlor</div>
       <p class="lead">A pattern generator that thinks in <em>acid</em>: accents, slides, ties, octave pops and a tense b2 - created by seeded algorithms, sculpted by density, scale and range, mutated instead of re-rolled, stored in eight slots and played as sample-accurate MIDI. Built for the TT-303 in HOST mode, happy with any mono synth.</p>
     </div>
-    <button type="button" class="hero-shot" data-full="img/tt-ui-options/303patgen-front.png" aria-label="Enlarge screenshot of the TT-303PATGEN user interface" title="Click to enlarge"><img src="img/tt-ui-options/303patgen-front.png" width="1131" height="803" alt="TT-303PATGEN user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/303patgen-front.png" aria-label="Enlarge screenshot of the TT-303PATGEN user interface" title="Click to enlarge"><img src="img/tt-ui-options/303patgen-front.png" width="1131" height="804" alt="TT-303PATGEN user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
   </div>
 </header>
 <div class="wrap layout">
@@ -257,7 +257,8 @@ nav.crumbs [aria-current] { color: var(--white); }
 <li><a href="#notes"><span class="num">17</span><span>Limits &amp; honest notes</span></a></li>
 <li><a href="#trouble"><span class="num">18</span><span>Troubleshooting</span></a></li>
 <li><a href="#changelog"><span class="num">19</span><span>Changelog</span></a></li>
-<li><a href="#ui-size-settings"><span class="num">20</span><span>UI Size & Saved Options</span></a></li>
+<li><a href="#bass20261027"><span class="num">20</span><span>TECHNO BASS and phrase scenes</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">21</span><span>UI Size & Saved Options</span></a></li>
     </ol>
   </nav>
   <main>
@@ -275,6 +276,10 @@ just as well on any other mono bass synth.</p>
 same pattern, and the seed is always visible, so a good result can be found
 again. Instead of re-rolling a pattern you like, you <b>mutate</b> it: change a
 few steps, only in the range you choose.</p>
+<p>What it is not: no synth (it makes no sound), no phrase library player, no
+arranger &mdash; and it needs REAPER&rsquo;s transport. It is the free-standing
+<em>pattern brain</em> in front of your favourite 303-style synth; paired with
+the TT-303 it forms a complete, free acid rig.</p>
 
 <h2 id="quickstart"><span class="num">02</span>Quick start</h2>
 <ol>
@@ -289,13 +294,15 @@ few steps, only in the range you choose.</p>
   <li>Click in the piano roll to set notes, in the ACCENT / SLIDE / GATE rows to
       edit the steps. Select steps by clicking or dragging the step numbers, then use the SELECTION buttons.
       Play a MIDI key (C2 = original pitch) to transpose live.</li>
-  <li>Open the <b>GALLERY</b> tab and press <b>ROLL 8</b> to see eight candidates at once; <b>TRY</b> puts one into the slot.</li>
+  <li>Open the <b>GALLERY</b> tab and press <b>ROLL 8</b> to see eight candidates at once; <b>TRY</b> puts one into the slot.
+      Or start from a curated scene: the FACTORY list of the preset bar holds <code>S01</code>&ndash;<code>S40</code>, each a whole
+      musical starting point (generator, scale, tempo suggestion, matching TT-303 sound).</li>
   <li>Happy? Turn on <code>SEQ LINK</code> and run the ReaScript
       <b>TT-303PATGEN Print to MIDI Item</b> to turn the pattern into a real MIDI item.</li>
 </ol>
 
 <h2 id="panel"><span class="num">03</span>The front panel</h2>
-<figure class="shot"><img src="img/tt-ui-options/303patgen-front.png" alt="Current suite front at 125% UI size, version 1.0.2"><figcaption>Current front in v1.0.2, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/303patgen-front.png" alt="Current suite front at 125% UI size, version 1.2.0"><figcaption>Current front in v1.2.0, at the default UI size of 125%.</figcaption></figure>
 <dl class="kv">
   <dt>HEADER</dt><dd>Wordmark, the <b>preset bar</b> (see <a href="#presets">Preset bar &amp; user bank</a>), the
   <code>OPTIONS</code> button, the <code>RUN</code> toggle and <code>PANIC</code>.</dd>
@@ -319,7 +326,7 @@ few steps, only in the range you choose.</p>
   <dt>SELECTION</dt><dd>Bottom left: copy / cut / paste / clear, rotate, reverse, invert, scale-degree and octave transpose, duplicate,
   double, copy to another slot, and the step locks. Every button acts on the selected steps; without a selection it acts on the whole pattern.</dd>
   <dt>DECK</dt><dd>Bottom right, with five tabs: <code>GENERATE</code> (the nine generator knobs, algorithm, root, scale, seed, MUT %, MUTATE properties and
-  range), <code>OUTPUT</code> (rate, channel, swing, gate length, velocities, humanize, threshold, octave, FOLLOW IN, SEQ LINK), <code>SONG</code>
+  range), <code>OUTPUT</code> (rate, channel, swing, gate length, velocities, humanize, threshold, octave, FOLLOW IN, SEQ LINK, LINK ID), <code>SONG</code>
   (chain, chain editing, timeline, slot overview), <code>GALLERY</code> and <code>LIBRARY</code>. The big <b>GENERATE</b> and <b>MUTATE</b> buttons are always
   visible next to the tabs. The arrow at the right edge collapses the deck: the roll then uses the whole height and shows the full range (-12 to +35 semitones
   without scrolling) - the <b>FOCUS</b> view. Click a tab to open the deck again.</dd>
@@ -338,7 +345,7 @@ few steps, only in the range you choose.</p>
   <tr><td>Keyboard (left of the roll)</td><td>mouse wheel, right-click</td><td>scroll the visible pitch window, back to ROOT..ROOT+24</td></tr>
   <tr><td>Any control</td><td>hover</td><td>a tooltip explains it (<code>OPTIONS &gt; TOOLTIPS ON / OFF</code>)</td></tr>
 </table>
-<figure class="shot"><img src="img/tt-ui-options/303patgen-options.png" alt="TT-303PATGEN with the OPTIONS box open: ten colour swatches, the factory scheme ACID is marked" width="900" height="639"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header, then a swatch. A click outside the box closes it.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/303patgen-options.png" alt="TT-303PATGEN with the OPTIONS box open: ten colour swatches, the factory scheme ACID is marked" width="900" height="640"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header, then a swatch. A click outside the box closes it.</figcaption></figure>
 <p><b>Options / Color.</b> The <code>OPTIONS</code> button opens the box; <code>COLOR</code> offers ten schemes:
 ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (knob rings, active
 steps, LEDs), the second colour and, for RED to ICE, the slightly tinted panel background of the whole front at once. The choice applies
@@ -500,9 +507,9 @@ Higher-State-like) and <b>Squelch</b> 1&ndash;8 (dirty root and b7 basslines, Ph
 CLASSIC MUT algorithm snaps a random one to your scale.</p>
 
 <h3 id="scenes">Factory scenes (v0.6.0)</h3>
-<p>Below the 32 library patterns the FACTORY list holds 16 <b>scenes</b> (<code>S01 &hellip;</code> to <code>S16 &hellip;</code>). A scene sets a whole musical
+<p>Below the 32 library patterns the FACTORY list holds 40 <b>scenes</b> (<code>S01 &hellip;</code> to <code>S40 &hellip;</code>). A scene sets a whole musical
 starting point: generator, scale / root, mutate range, rate / swing / gate / humanize, seed, slots <b>A&ndash;D</b> with their lengths and the song chain.
-Slots E&ndash;H, the velocities and threshold (your synth calibration), <code>FOLLOW</code>, the MIDI channel, <code>RUN</code> and <code>SEQ LINK</code> are left alone.
+In S01&ndash;S24 slots E&ndash;H stay as they are; S25&ndash;S40 load all eight slots. The velocities and threshold (your synth calibration), <code>FOLLOW</code>, the MIDI channel, <code>RUN</code> and <code>SEQ LINK</code> are left alone.
 Press <code>GENERATE</code> or <code>MUTATE</code> after loading a scene and the results stay in its style. The number in the name is the suggested tempo (the tempo itself is set in the host);
 the table lists a matching TT-303 sound preset. A scene is one undo step.</p>
 <table>
@@ -523,18 +530,45 @@ the table lists a matching TT-303 sound preset. A scene is one undo step.</p>
   <tr><td><code>S14 LOFI ACID JAZZ 96</code></td><td>A# dorian</td><td>1/16</td><td>96</td><td>DEEP</td></tr>
   <tr><td><code>S15 POLY ACID 3:4</code></td><td>E minor pentatonic</td><td>1/16</td><td>132</td><td>INIT</td></tr>
   <tr><td><code>S16 EVOLVING PROB 132</code></td><td>F natural minor</td><td>1/16</td><td>132</td><td>SQUELCH</td></tr>
+  <tr><td><code>S17 PEAKTIME OFFBEAT 132</code></td><td>D phrygian</td><td>1/16</td><td>132</td><td>INIT</td></tr>
+  <tr><td><code>S18 PEAKTIME DRIVE 134</code></td><td>E phrygian</td><td>1/16</td><td>134</td><td>SQUELCH</td></tr>
+  <tr><td><code>S19 ROLLING TRAIN 140</code></td><td>F phrygian</td><td>1/16</td><td>140</td><td>SQUELCH</td></tr>
+  <tr><td><code>S20 ROLLING OCTAVE 142</code></td><td>C custom (R b2 2 b3 3 4 5 6 b7)</td><td>1/16</td><td>142</td><td>SQUELCH</td></tr>
+  <tr><td><code>S21 MELODIC ARP 126</code></td><td>E dorian</td><td>1/16</td><td>126</td><td>DEEP</td></tr>
+  <tr><td><code>S22 TWO-BAR HOOKS 125</code></td><td>C# custom (R 2 3 4 b5 5 6 7)</td><td>1/16</td><td>125</td><td>DEEP</td></tr>
+  <tr><td><code>S23 EVOLUTION ROLL 143</code></td><td>D phrygian</td><td>1/16</td><td>143</td><td>SQUELCH</td></tr>
+  <tr><td><code>S24 PEDAL POINT 124</code></td><td>D custom (R b2 b3 4 5 b6 b7)</td><td>1/16</td><td>124</td><td>DEEP</td></tr>
+  <tr><td><code>S25 RUBBER BOUNCE</code></td><td>Custom phrase scale</td><td>1/16</td><td>125</td><td>DEEP</td></tr>
+  <tr><td><code>S26 WALKING GROOVE</code></td><td>Custom phrase scale</td><td>1/16</td><td>124</td><td>DEEP</td></tr>
+  <tr><td><code>S27 GARAGE SHUFFLE</code></td><td>Custom phrase scale</td><td>1/16</td><td>126</td><td>DEEP</td></tr>
+  <tr><td><code>S28 FUNKY OCTAVES</code></td><td>Custom phrase scale</td><td>1/16</td><td>125</td><td>DEEP</td></tr>
+  <tr><td><code>S29 MINIMAL STAB</code></td><td>Custom phrase scale</td><td>1/16</td><td>127</td><td>DEEP</td></tr>
+  <tr><td><code>S30 TRIBAL 3-3-2</code></td><td>Custom phrase scale</td><td>1/16</td><td>124</td><td>DEEP</td></tr>
+  <tr><td><code>S31 DISCO OCTAVES</code></td><td>Custom phrase scale</td><td>1/16</td><td>124</td><td>DEEP</td></tr>
+  <tr><td><code>S32 CHORD ROOT MOVER</code></td><td>Custom phrase scale</td><td>1/16</td><td>125</td><td>DEEP</td></tr>
+  <tr><td><code>S33 HYPNOTIC 3</code></td><td>Custom phrase scale</td><td>1/16</td><td>132</td><td>DEEP</td></tr>
+  <tr><td><code>S34 ROLL CALL ANSWER</code></td><td>Custom phrase scale</td><td>1/16</td><td>138</td><td>DEEP</td></tr>
+  <tr><td><code>S35 BERLIN TIED</code></td><td>Custom phrase scale</td><td>1/16</td><td>130</td><td>DEEP</td></tr>
+  <tr><td><code>S36 DETROIT RIFF</code></td><td>Custom phrase scale</td><td>1/16</td><td>128</td><td>DEEP</td></tr>
+  <tr><td><code>S37 OFFBEAT STUTTER</code></td><td>Custom phrase scale</td><td>1/16</td><td>134</td><td>DEEP</td></tr>
+  <tr><td><code>S38 PEAK HOOK</code></td><td>Custom phrase scale</td><td>1/16</td><td>135</td><td>DEEP</td></tr>
+  <tr><td><code>S39 POLYMETER 5</code></td><td>Custom phrase scale</td><td>1/16</td><td>136</td><td>DEEP</td></tr>
+  <tr><td><code>S40 DRIVING FIFTHS</code></td><td>Custom phrase scale</td><td>1/16</td><td>133</td><td>DEEP</td></tr>
 </table>
 <p>S15 runs two slots of 12 and 10 steps against each other, so the loop only comes back to the start after several bars. That is intended.</p>
+<p><b>Techno bass scenes S17&ndash;S24 (v1.1.0).</b> Each slot holds one classic techno bassline: offbeat and 8-bass patterns, the rolling &ldquo;train&rdquo; (the two 16ths after each kick left out), octave rolls with slides, minor arps, two-bar hooks that resolve at the end of bar two (32-step slots), S23 as a four-stage roll that builds over its chain and S24 as a pedal point that only reveals the chord roots later. Where a pattern goes below its root, the scene root sits lower and the scale is a custom mask, so the notes stay where they belong. Ghost notes play as normal notes.</p>
 
 <h2 id="presets"><span class="num">10</span>Preset bar &amp; user bank</h2>
 <figure class="shot"><img src="img/tt-303patgen/tt-303patgen-presets.png" alt="Header of TT-303PATGEN with the preset bar: previous, preset name with drop-down, next, SAVE and a menu button, left of the OPTIONS button, and the open preset list with FACTORY and USER sections" width="1125" height="310"><figcaption><span class="tag">PRESETS</span><b>The preset bar</b> sits in the header, directly left of <code>OPTIONS</code>: <code>&lt;</code> name <code>&gt;</code> <code>SAVE</code> <code>...</code>. The name opens the list with the FACTORY and USER sections.</figcaption></figure>
 <p>The bar loads and saves the <b>whole musical state</b> of the instance in one step: all generator, mutate and output settings, scale / root / custom mask, <code>SEED</code> and <code>LOCK</code>,
-the active slot, <b>all eight patterns</b> (with their lengths) and the <b>song chain</b>. Not part of a preset: the colour scheme (<code>OPTIONS</code>), the MIDI channel, <code>RUN</code>, <code>SEQ LINK</code>, the
-library list position and the hidden test parameters.</p>
+the active slot, <b>all eight patterns</b> (with their lengths) and the <b>song chain</b>. Not part of a preset: the colour scheme (<code>OPTIONS</code>), the MIDI channel, <code>RUN</code>, <code>SEQ LINK</code> and <code>LINK ID</code> (per-instance routing), the
+library list position and the hidden test parameters. Since v1.0.4 a preset also records which <b>generator generation</b> wrote it;
+a preset saved by an older one shows <code>SEED SAVED BY GEN v1</code> at the seed box &mdash; its stored patterns still play as saved,
+but its seed re-draws a different pattern (the generator changed in v0.8.0).</p>
 <table>
   <tr><th>Control</th><th>Function</th></tr>
-  <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: first the 32 factory patterns and the 16 factory scenes, then the used user slots; wraps around and loads immediately.</td></tr>
-  <tr><td>Name field</td><td>Opens the list: <b>FACTORY</b> (the 32 library patterns, then the 16 scenes) and <b>USER</b> (32 slots, empty ones show <code>- empty -</code>). Mouse wheel scrolls, click loads. A <code>*</code> behind the name means the state differs from the loaded preset (the active slot alone does not count).</td></tr>
+  <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: first the 32 factory patterns and the 40 factory scenes, then the used user slots; wraps around and loads immediately.</td></tr>
+  <tr><td>Name field</td><td>Opens the list: <b>FACTORY</b> (the 32 library patterns, then the 40 scenes) and <b>USER</b> (32 slots, empty ones show <code>- empty -</code>). Mouse wheel scrolls, click loads. A <code>*</code> behind the name means the state differs from the loaded preset (the active slot alone does not count).</td></tr>
   <tr><td><code>SAVE</code></td><td>Saves the current state into the selected user slot; with a factory preset (or none) selected, into the first free slot. A name box opens (up to 24 characters, default <code>User 07</code>): type, <kbd>Enter</kbd> or <code>OK</code> saves, <code>CANCEL</code> or a click outside cancels.</td></tr>
   <tr><td><code>...</code></td><td><code>RENAME</code>, <code>COPY</code> (into the next free slot), <code>DELETE</code> (a second click confirms) for the selected user preset, and <code>INIT</code> (factory settings of all preset parameters; slots A&ndash;D get library patterns 1&ndash;4, the chain is A A A B).</td></tr>
 </table>
@@ -586,12 +620,26 @@ grid at 120, 140 and 174 bpm, with swing 50 and 62, the note-on positions are id
 </ol>
 <p>The plug-in&rsquo;s test suite renders PATGEN &rarr; TT-303 offline and measures the result: accented notes are
 clearly louder, a slide keeps the note running and glides the pitch, a retriggered octave jump does not.</p>
+<p><b>Other synths.</b> The same MIDI works on any mono bass line. Two things to check in your synth&rsquo;s manual:
+which velocity reads as <em>accent</em> (set <code>THRESH</code> to it and keep <code>NORM VEL</code> below /
+<code>ACC VEL</code> at or above it &mdash; the output tab warns if the three do not line up), and whether
+<em>overlapping</em> notes glide (legato/mono-glide on). Examples: the TT-303 in HOST mode (threshold 65 since
+v1.5.0) is the reference; 303-style clones with velocity accent and overlap glide (e.g. D16 Phoscyon in its host/velocity
+modes, Behringer TD-3 via MIDI accent) respond the same way; on a plain synth without accent/slide handling the pattern
+still plays, just without accents and glides.</p>
 
 <h2 id="link"><span class="num">14</span>SEQ LINK (gmem)</h2>
 <p>With <code>SEQ LINK</code> on, the active pattern is published in the gmem namespace <code>tt303pg</code> so another
 JSFX or script can read it. This is a <b>sender only</b>; nothing in the TT-303 reads it yet.</p>
+<p><b>Several instances (v1.0.4).</b> Every instance owns one block, picked with the <code>LINK ID</code> box next to
+<code>SEQ LINK</code>: ID 1 is the block below (unchanged since v0.2.0), ID <i>n</i> writes the same layout starting
+at <code>gmem[(n-1) x 3000]</code> &mdash; all addresses in the table are relative to that base. Give every instance
+you want to read (e.g. by the print actions) its own ID. Each instance also writes two <b>presence cells</b> &mdash;
+even with SEQ LINK off: <code>[base+198]</code> holds the plug-in version x 100 and <code>[base+199]</code> a heartbeat
+that changes every audio block, so a reader can tell a running instance from stale data, and &ldquo;SEQ LINK off&rdquo;
+from &ldquo;no plug-in&rdquo;. Plug-ins older than v1.0.4 write no presence cells; their block at ID 1 is read as before.</p>
 <table>
-  <tr><th>Index</th><th>Content</th></tr>
+  <tr><th>Index (relative to base)</th><th>Content</th></tr>
   <tr><td><code>gmem[0]</code></td><td>30301 (magic)</td></tr>
   <tr><td><code>gmem[1]</code></td><td>1 (protocol version)</td></tr>
   <tr><td><code>gmem[2]</code></td><td>pattern length 1&ndash;32</td></tr>
@@ -602,6 +650,7 @@ JSFX or script can read it. This is a <b>sender only</b>; nothing in the TT-303 
   <tr><td><code>gmem[200..202]</code></td><td>chain block (v0.7.0): 1 = valid, write counter, number of cells (up to the first empty one)</td></tr>
   <tr><td><code>gmem[203 + 2 j]</code>, <code>[204 + 2 j]</code></td><td>chain cell j (0..15): slot 0..7, repeats 1..8</td></tr>
   <tr><td><code>gmem[240 + 164 k + ...]</code></td><td>slot k (0..7): <code>+0</code> length, <code>+1 + 4 s</code> note, gate, accent, slide as in the pattern block, <code>+129 + s</code> tie flag</td></tr>
+  <tr><td><code>gmem[198]</code>, <code>gmem[199]</code></td><td>(v1.0.4) presence: plug-in version x 100, heartbeat counter (always written, even with SEQ LINK off)</td></tr>
 </table>
 <p>A tie is exported as a slide of the previous step into the same pitch. Write the header last, read the counter twice
 to detect a torn read. The TT-303 stores 16 steps in the range C1&ndash;C3; longer or higher patterns must be clipped
@@ -611,17 +660,26 @@ by the reader.</p>
 <p>The ReaScript <code>TT-303PATGEN Print to MIDI Item.lua</code> (installed with the plug-in) turns the live generator
 into a real track. Turn on <code>SEQ LINK</code>, select the target track, put the edit cursor where the item should
 start, run the script and enter the number of bars. It writes the pattern as it plays: swing, gate length, slides as
-overlapping notes, ties as longer notes, accent and normal velocity, the MIDI channel. Probability and humanize are
-not printed. The result is compared note by note against the live output in the test suite.</p>
+overlapping notes, ties as longer notes, accent and normal velocity, the MIDI channel.</p>
+<p><b>Several instances (v1.0.4).</b> The dialog&rsquo;s second field takes a <code>SEQ LINK ID</code> (the box next to
+SEQ LINK in the OUTPUT tab); 0 = auto picks the first running instance that publishes a block. The script finds running
+instances by their heartbeat, so its messages distinguish &ldquo;no plug-in&rdquo;, &ldquo;SEQ LINK off&rdquo; and
+&ldquo;stale data&rdquo; instead of failing silently.</p>
+<p><b>What is not printed.</b> <code>PROB</code> (per-step probability), <code>HUMANIZE</code> and the
+<code>FOLLOW</code> input transposition are <em>live playback</em> features: the item contains the pattern as written,
+at the pattern&rsquo;s own pitch &mdash; fixed MIDI has no dice and no keyboard input. The printed item carries a note
+saying exactly that. The result is compared note by note against the live output in the test suite.</p>
 <p>The second action <code>TT-303PATGEN Print Song Chain.lua</code> (v0.7.0) prints the <b>whole song chain</b> &mdash; all cells with their repeats &mdash; as one
 MIDI item: turn on <code>SEQ LINK</code>, select the track, place the edit cursor, run it and enter how many passes of the chain to print (1 = once). Slides and
-ties across the cell borders behave exactly as in SONG mode. It needs <code>TT-303PATGEN Print to MIDI Item.lua</code> next to it (both are installed together).</p>
+ties across the cell borders behave exactly as in SONG mode. It needs <code>TT-303PATGEN Print to MIDI Item.lua</code> next to it (both are installed together);
+the SEQ LINK ID field and the same &ldquo;not printed&rdquo; note apply.</p>
 
 <h2 id="automation"><span class="num">16</span>Automation &amp; parameters</h2>
 <p>All controls are hidden JSFX sliders that stay automatable. Parameters 1&ndash;36 are the musical controls
 (slot, seed, lock, algorithm, scale, root, custom mask, the nine generator settings, mutate settings, rate, swing,
 gate length, channel, velocities, threshold, follow, run, humanize, song, SEQ LINK, octave, library index).
-The preset bar stores all of them except MIDI channel, run, SEQ LINK and library index.
+Parameter 69 is the hidden SEQ LINK ID (1&ndash;8, see SEQ LINK).
+The preset bar stores all of them except MIDI channel, run, SEQ LINK, LINK ID and library index.
 Parameter 64 is the hidden UI colour (scheme 0&ndash;9, see Options / Color). Parameters 37&ndash;63 are a command / diagnostic bus used by the automated tests (command, arguments, acknowledge,
 memory query, event log, statistics, block timing) &mdash; ignore them; commands and the event log only act while a test script has unlocked them, so automation on them does nothing. Patterns themselves are not parameters: they are saved with
 the project and with FX presets (and, in the user bank, with every preset you save).</p>
@@ -637,6 +695,8 @@ the project and with FX presets (and, in the user bank, with every preset you sa
   <li>The keyboard shortcuts of the front only work for keys that REAPER passes to the plug-in window; <kbd>Space</kbd> always stays with the transport.</li>
   <li>The pattern clipboard, selection, view settings and the gallery candidates are not saved; locks are saved with the project, not with presets.</li>
   <li>A quantised slot change counts from the project start (beat 0), not from the start of the current pattern pass; a new slot continues at the step counter modulo its length. Seeds of v0.7.0 give different patterns now.</li>
+  <li>A custom scale mask with no tone selected falls back to <code>ROOT</code> alone (mask 0 is read as &ldquo;root only&rdquo;), so the generator always lands on the tonic instead of producing no notes.</li>
+  <li>SEQ LINK publishes the pattern, not the performance: readers see notes, gates, accents, slides and ties &mdash; not the dice of <code>PROB</code>, the <code>HUMANIZE</code> jitter or the <code>FOLLOW</code> transposition.</li>
 </ul>
 
 <h2 id="trouble"><span class="num">18</span>Troubleshooting</h2>
@@ -652,6 +712,34 @@ the project and with FX presets (and, in the user bank, with every preset you sa
   <li><b>The pattern sounds an octave too low or high</b> &mdash; ROOT and OCTAVE shift the output; C2 + ROOT is the base.</li>
 </ul>
 <h2 id="changelog">Changelog</h2>
+<h3>1.1.0 &mdash; Techno bass scenes</h3>
+<ul>
+  <li>Eight new factory scenes <code>S17</code>&ndash;<code>S24</code> with techno basslines (peaktime, rolling, melodic, two-bar hooks, an evolving roll chain and a pedal-point progression); the FACTORY list now holds 56 entries.</li>
+  <li>Library patterns, generator, MIDI output and the saved format are unchanged; projects saved with 1.0.6 load as before.</li>
+</ul>
+<h3>1.0.6 &mdash; Second review round</h3>
+<ul>
+  <li>Switching SEQ LINK off now invalidates the published blocks, so the print actions report &ldquo;SEQ LINK off&rdquo; instead of printing the last published pattern.</li>
+  <li>Preset SAVE and scene loading capture the state inside <code>@block</code> (no torn preset while a command is running), and the gmem write counters self-heal from corrupt values.</li>
+  <li>Print actions validate the published data strictly (finite, in range), wait longer for the instance heartbeat (large audio buffers), count bars by the real measure borders when the time signature changes, and reject fractional bar / pass counts.</li>
+  <li>Generator, MIDI output and the saved format are unchanged; projects saved with 1.0.5 load as before.</li>
+</ul>
+<h3>1.0.5 &mdash; Review fixes</h3>
+<ul>
+  <li>Robustness: the LINK ID is clamped before the gmem write, SEQ LINK diagnostics read this instance&rsquo;s own block, the &ldquo;preset from another generator&rdquo; note fires for any known different generation, and the print actions retry the validity check once so a rewrite in progress is not mistaken for SEQ LINK off or stale data.</li>
+  <li>Generator, MIDI output and the saved format are unchanged; projects saved with 1.0.4 load as before.</li>
+</ul>
+<h3>1.0.4 &mdash; SEQ LINK instances &amp; seed generations</h3>
+<ul>
+  <li>New <code>LINK ID</code> box (OUTPUT tab): several TT-303PATGEN instances can publish to SEQ LINK at once, each on its own block (ID 1&ndash;8). Every instance writes a version + heartbeat cell even with SEQ LINK off, so the print actions can tell &ldquo;no plug-in&rdquo;, &ldquo;SEQ LINK off&rdquo; and &ldquo;stale data&rdquo; apart and let you pick the instance (new dialog field; 0 = auto).</li>
+  <li>Presets and the seed history now record the generator generation; a preset saved by an older generator shows a note at the SEED box (its seed re-draws differently, stored patterns are unaffected).</li>
+  <li>Print scripts: clearer error messages, and the printed item now carries a note stating that PROB / HUMANIZE / FOLLOW transposition are live-only.</li>
+  <li>Generator, MIDI output and the saved format are unchanged; projects saved with 1.0.3 load as before.</li>
+</ul>
+<h3>1.0.3 &mdash; SEQ LINK hardened</h3>
+<ul>
+  <li>The SEQ LINK writer raises the write counter before the valid flag and the chain print re-checks the flag after reading, so a rewrite starting mid-read can no longer pass as stable. UI kit 8 inlined. Generator and output unchanged.</li>
+</ul>
 <h3>1.0.2 &mdash; Safer PRINT</h3>
 <ul>
   <li>PRINT TO MIDI ITEM can no longer pick up a half-written pattern while you change the pattern: the link block is marked invalid during the rewrite and the print script reads it again.</li>
@@ -729,10 +817,10 @@ the project and with FX presets (and, in the user bank, with every preset you sa
   <li>Default UI size 125%; OPTIONS adds 100%, 125%, 150%, 200%, 300% and a custom percentage field.</li>
   <li>All OPTIONS settings persist per instance across reopening and project reloads.</li>
 </ul>
-
+<h2 id="bass20261027">1.2.0 — Bass patterns</h2><p>TECHNO BASS selects offbeat, 8-bass, double-hit, train, tumbling, 3-3-2, polymeter and speed-bump rhythms. DENSITY and SYNCOPATION weight the families; REPEAT sets the root pedal, TENSION adds b2 where the scale allows it. Slot roles repeat A call, B variation, C answer, D fill. Generate in each slot with a locked seed to keep the common core. Ghost candidates play at normal velocity without accent. New scenes S25-S40 contain complete phrases and alternate answers; these scenes own slots A-H, while S01-S24 still preserve E-H. 72 factory entries in total.</p>
 <section class="section">
 <h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
-<p>Updated in <b>v0.5.5</b>. New instances open at <b>125%</b> UI size for clearer text.
+<p>Updated in <b>v1.2.0</b>. New instances open at <b>125%</b> UI size for clearer text.
 The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
 <figure class="shot"><img src="img/tt-ui-options/303patgen-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
 <p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
@@ -755,7 +843,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-303PATGEN v1.0.2</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.2 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-303PATGEN v1.2.0</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.2.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

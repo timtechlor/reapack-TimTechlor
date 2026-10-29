@@ -1,6 +1,6 @@
 -- @description TT-BPM2MS2HZ (note values to milliseconds and Hertz)
 -- @author Tim Techlor
--- @version 1.5.0
+-- @version 1.5.1
 -- @license MIT
 -- @provides
 --   TT_Wordmark.png
@@ -28,6 +28,8 @@
 --   Requires the ReaPack extension "ReaImGui: ReaScript binding for Dear
 --   ImGui" (cfillion, repository "ReaTeam Extensions").
 -- @changelog
+--   v1.5.1
+--   - FIX: toast and flash durations now measure real time (reaper.time_precise) instead of CPU time, so they last as intended under load.
 --   v1.5.0
 --   - New name: TT-BPM2MS2HZ (formerly "BPM2MS2HZ Calculator"); file name and saved settings stay the same.
 --   - New look after the TT UI kit 7: panels, LED switches, tempo slider and value tables drawn like the TimTechlor plugins.
@@ -37,37 +39,37 @@
 --   - Mouse wheel over the tempo slider: 1 BPM per step (Shift: 0.1 BPM).
 --   - Version shown in the window header.
 --[[====================================================================
-  TT-BPM2MS2HZ for REAPER  ·  GUI  ·  v1.5.0
+  TT-BPM2MS2HZ for REAPER  ·  GUI  ·  v1.5.1
   =====================================================================
-  Converts note values at the project tempo into milliseconds and Hertz.
+  Rechnet Notenwerte aus dem Projekttempo in Millisekunden und Hertz um.
 
     ms  =  60000 / BPM * beats      (1 beat = 1 quarter note)
     Hz  =  1000 / ms
 
-  Structure:
-    - Data and calculation: DIVISIONS, VARIANTS,
+  Aufbau (14.10.2026, v1.5.0):
+    - Daten und Rechnung (unveraendert seit 1.0.0): DIVISIONS, VARIANTS,
       BAR_COUNTS, SIGNATURES, note_rows(), bar_rows().
-    - UI kit layer: copy of the TimTechlor UI kit 7 layer,
-      rewritten for the ImGui shim (require 'imgui' '0.10').
-      Drawing happens in the design grid via the DrawList,
-      the scale follows the window size (AUTO FIT).
-    - Classic view as a fallback if the
-      kit view throws an error (message in the REAPER console).
-  Settings: ExtState namespace 'TT_BPM_Calculator' (do not
-  change), keys: tips, autofit, zoom, layout = '3'.
-  Test hook: global table TT_BPM2MS2HZ_HOOK (tests/screenshots only):
-    .defaults (do not load settings), .nosave (save nothing),
-    .notitle (window without title bar), .diag (receives sc/mode/W/H each
-    frame), .pending = { tab = 1|2, options = bool, winsize = {w, h},
+    - Kit-Schicht: Kopie aus another TT plug-in/TT_ThemeAdjuster.lua 0.2.0
+      (Kit-7-Portierung), auf den ImGui-Shim (require 'imgui' '0.10')
+      umgeschrieben. Gezeichnet wird im Designraster ueber die DrawList,
+      der Massstab folgt der Fenstergroesse (AUTO FIT).
+    - Klassische Ansicht (Oberflaeche 1.0.0) als Rueckfall, falls die
+      Kit-Ansicht einen Fehler wirft (Meldung in der REAPER-Konsole).
+  Einstellungen: ExtState-Namespace 'TT_BPM_Calculator' (seit 1.0.0, nicht
+  aendern), neu: tips, autofit, zoom, layout = '3'.
+  Test-Hook: globale Tabelle TT_BPM2MS2HZ_HOOK (nur Tests/Screenshots):
+    .defaults (Einstellungen nicht laden), .nosave (nichts speichern),
+    .notitle (Fenster ohne Titelleiste), .diag (bekommt sc/mode/W/H je
+    Frame), .pending = { tab = 1|2, options = bool, winsize = {w, h},
     winpos = {x, y} }
-    is applied in the next frame and cleared.
+    wird im naechsten Frame uebernommen und geloescht.
 
   Requires: ReaPack -> "Dear ImGui bindings" (cfillion)
   https://github.com/cfillion/reaimgui
   Optional: TT_Wordmark.png next to this script (watermark)
 ====================================================================]]
 
-local VERSION = "1.5.0"
+local VERSION = "1.5.1"
 
 --------------------------------------------------------------------
 -- Load ImGui (ReaPack package "Dear ImGui bindings")
@@ -86,7 +88,7 @@ if not ok then
   return
 end
 
-local HOOK = TT_BPM2MS2HZ_HOOK   -- nil in normal operation
+local HOOK = TT_BPM2MS2HZ_HOOK   -- nil im normalen Betrieb
 
 --------------------------------------------------------------------
 -- Constants & palette (Tim Techlor design guide)
@@ -134,9 +136,9 @@ local state = {
   dotted     = true,
   triplet    = true,
   watermark  = true,
-  --
-  tab        = 1,      -- 1 = NOTE VALUES, 2 = BARS (not saved)
-  options    = false,  -- OPTIONS box open
+  -- seit 1.5.0
+  tab        = 1,      -- 1 = NOTE VALUES, 2 = BARS (nicht gespeichert, wie 1.0.0)
+  options    = false,  -- OPTIONS-Box offen
   tips       = true,
   autofit    = true,
   zoom       = 1.0,
@@ -148,13 +150,13 @@ local state = {
 local SETTINGS = 'TT_BPM_Calculator'
 
 local function save_settings()
-  if HOOK and HOOK.nosave then return end   -- screenshot run: do not touch the user's settings
+  if HOOK and HOOK.nosave then return end   -- Screenshot-Lauf: Einstellungen des Nutzers nicht anfassen
   reaper.SetExtState(SETTINGS, 'font_scale', string.format('%.2f', state.font_scale), true)
   reaper.SetExtState(SETTINGS, 'dotted',    state.dotted    and '1' or '0', true)
   reaper.SetExtState(SETTINGS, 'triplet',   state.triplet   and '1' or '0', true)
   reaper.SetExtState(SETTINGS, 'watermark', state.watermark and '1' or '0', true)
   reaper.SetExtState(SETTINGS, 'sig_ix',    tostring(state.sig_ix), true)
-  --
+  -- seit 1.5.0
   reaper.SetExtState(SETTINGS, 'tips',      state.tips      and '1' or '0', true)
   reaper.SetExtState(SETTINGS, 'autofit',   state.autofit   and '1' or '0', true)
   reaper.SetExtState(SETTINGS, 'zoom',      string.format('%.2f', state.zoom), true)
@@ -201,9 +203,9 @@ local function col_w(base)
 end
 
 --------------------------------------------------------------------
--- Calculation (extracted as a row list)
+-- Rechnung (unveraendert seit 1.0.0, nur als Zeilenliste herausgezogen)
 --------------------------------------------------------------------
--- Note values: up to three variants per division; text as copied to the clipboard (%.1f ms, %.3f Hz)
+-- Notenwerte: je Teilung bis zu drei Varianten; Text wie die Zwischenablage (%.1f ms, %.3f Hz)
 local function note_rows()
   local beat_ms = 60000 / state.bpm
   local rows = {}
@@ -227,7 +229,7 @@ local function note_rows()
   return rows
 end
 
--- Bars: bar length from the time signature (6/8 = six eighths), seconds and Hz with %.3f
+-- Takte: Taktlaenge aus der Taktart (6/8 = sechs Achtel), Sekunden und Hz mit %.3f
 local function bar_rows()
   local sig = SIGNATURES[state.sig_ix]
   local beat_sec = 60 / state.bpm
@@ -267,7 +269,7 @@ do
   font_brand = font_brand or font_bold
 end
 
--- Kit font: Inter Medium (Windows font folder, user fonts, macOS); otherwise the system font
+-- Kit-Schrift: Inter Medium wie der Theme Adjuster (Windows-Schriftordner, Benutzer-Schriften, macOS); sonst Systemschrift
 local FONT_UI
 do
   local cands = {
@@ -335,7 +337,7 @@ local wordmark = load_image('TT_Wordmark.png')
 local function copy_value(value)
   ImGui.SetClipboardText(ctx, value)
   state.toast   = value
-  state.toast_t = os.clock()
+  state.toast_t = reaper.time_precise()
 end
 
 local function set_sync(sync)
@@ -349,15 +351,15 @@ local function set_manual_bpm(bpm)
 end
 
 -- ==================================================================================================================
--- UI kit 7 look: copy of the TimTechlor UI kit 7 layer, rewritten for the ImGui shim
--- (R.ImGui_X(...) -> ImGui.X(...), constants as
--- values). Differences from the original, otherwise identical:
---   * ptext/tw: optional font key (FONTS: ui, mono, monob) for the number columns
---   * hit: minimum size 1 px (InvisibleButton requires w, h > 0)
---   * tipfor: switch state.tips instead of TIPS_ON
---   * dropped: knob (no rotary knob here)
--- The widgets follow the UI kit 7 widgets: panel, led, btn, toggle, hslider; tooltips after 0.35 s,
--- drag with Shift = fine, right/double/Ctrl click = default value, mouse wheel.
+-- UIKit-7-Look: Kopie aus another TT plug-in/TT_ThemeAdjuster.lua 0.2.0, Kit-7-Portierung (Abschnitt "UIKit-7-Look
+-- (ReaImGui-Portierung)"), 14.10.2026 auf den ImGui-Shim umgeschrieben (R.ImGui_X(...) -> ImGui.X(...), Konstanten als
+-- Werte). Abweichungen von der Vorlage, sonst gleich:
+--   * ptext/tw: optionaler Schrift-Schluessel (FONTS: ui, mono, monob) fuer die Zahlenspalten
+--   * hit: Mindestgroesse 1 px (InvisibleButton verlangt w, h > 0)
+--   * tipfor: Schalter state.tips statt TIPS_ON
+--   * entfallen: knob (hier kein Drehknopf)
+-- Die Widgets folgen _shared/tt-uikit.jsfx-inc (UKIT_VER 7): panel, led, btn, toggle, hslider; Tooltips nach 0,35 s,
+-- Ziehen mit Shift = fein, Rechts-/Doppel-/Strg-Klick = Standardwert, Mausrad.
 -- ==================================================================================================================
 local floor = math.floor
 local UK = { sc = 1, ox = 0, oy = 0, dl = nil, ar = 0.2235, ag = 1.0, ab = 0.0784, mxd = 0, myd = 0, shift = false, ctrl = false }
@@ -377,7 +379,7 @@ local function Y(y) return UK.oy + y * UK.sc end
 local function Z(v) return v * UK.sc end
 local function lw() local w = floor(UK.sc + 0.5); return w < 1 and 1 or w end
 
--- ---- Text (pixel size = design size * scale, rounded to an integer)
+-- ---- Text (Pixelgroesse = Designgroesse * Massstab, ganzzahlig gerundet)
 local TWC = {}
 local function tw(s, size, font)
   size = size or 13
@@ -410,7 +412,7 @@ local function spaced(x, y, s, colr, size, sp)
   return x
 end
 
--- ---- Primitives
+-- ---- Primitive
 local function rfill(x, y, w, h, colr, r)
   ImGui.DrawList_AddRectFilled(UK.dl, X(x), Y(y), X(x + w), Y(y + h), colr, Z(r or 0))
 end
@@ -420,7 +422,7 @@ local function rline(x, y, w, h, colr, r)
 end
 local function circ(cx, cy, r, colr) ImGui.DrawList_AddCircleFilled(UK.dl, X(cx), Y(cy), Z(r), colr, 0) end
 local function line(x1, y1, x2, y2, colr, th) ImGui.DrawList_AddLine(UK.dl, X(x1), Y(y1), X(x2), Y(y2), colr, th or lw()) end
--- vertical gradient, also with rounded corners (bands with a clip rectangle)
+-- senkrechter Verlauf, auch mit abgerundeten Ecken (Baender mit Clip-Rechteck)
 local function grad(x, y, w, h, r1, g1, b1, r2, g2, b2, rad, a)
   if (rad or 0) == 0 then
     local c1, c2 = C(r1, g1, b1, a), C(r2, g2, b2, a)
@@ -438,7 +440,7 @@ local function grad(x, y, w, h, r1, g1, b1, r2, g2, b2, rad, a)
   end
 end
 
--- ---- Input
+-- ---- Eingabe
 local function hit(id, x, y, w, h)
   ImGui.SetCursorScreenPos(ctx, X(x), Y(y))
   ImGui.InvisibleButton(ctx, id, math.max(1, Z(w)), math.max(1, Z(h)))
@@ -520,8 +522,8 @@ local function toggle(id, x, y, w, h, on, label, tiptxt)
   return clicked
 end
 
--- Slider drawing of the kit (hslider), here without its own input: the tempo input sets the value absolutely from
--- the mouse position (see tempo_slider), so only the drawing is used.
+-- Schieber-Zeichnung der Vorlage (hslider), hier ohne eigene Eingabe: die Tempo-Eingabe setzt wie 1.0.0 absolut auf
+-- die Mausposition (siehe tempo_slider), darum nur das Bild.
 local function hslider_draw(x, y, w, h, t, hot)
   local ty = y + h * 0.5 - 2
   rfill(x - 1, ty - 1, w + 2, 6, C(0, 0, 0, 0.5), 3)
@@ -535,26 +537,26 @@ local function hslider_draw(x, y, w, h, t, hot)
   rfill(hx - 0.5, y + 2, 1, h - 4, acid(1))
 end
 -- ==================================================================================================================
--- End of the kit layer
+-- Ende der Kit-Kopie
 -- ==================================================================================================================
 
 --------------------------------------------------------------------
--- Kit view: layout in the design grid (values at 100 % UI size)
+-- Kit-Ansicht: Layout im Designraster (Werte bei 100 % UI-Groesse)
 --------------------------------------------------------------------
 local MARG, GAP, HEAD, FOOT = 12, 10, 40, 34
-local COL1 = 336              -- width of the table column (and of the single-column view)
-local COL_T = 300             -- width of the tempo panel in the wide view
+local COL1 = 336              -- Breite der Tabellenspalte (und der einspaltigen Ansicht)
+local COL_T = 300             -- Breite des Tempo-Panels in der breiten Ansicht
 local TABS_H = 24
-local OPT_W, OPT_H = 318, 196 -- OPTIONS box
+local OPT_W, OPT_H = 318, 196 -- OPTIONS-Box
 local ZOOMS = { 1.0, 1.25, 1.5, 2.0, 3.0 }
-local WIN_RESIZE = nil        -- factor applied to the window size in the next frame
-local WIN_DES = nil           -- { design width, design height, margin x, margin y } from the last frame
-local HOLD = nil              -- zoom button with AUTO FIT on: the zoom holds until the next window change
-local WIN_SET = nil           -- fixed window size for the next frame (test hook only)
-local WIN_POS = nil           -- fixed window position for the next frame (test hook only)
+local WIN_RESIZE = nil        -- Faktor, der im naechsten Frame auf die Fenstergroesse angewendet wird
+local WIN_DES = nil           -- { Designbreite, Designhoehe, Rand x, Rand y } aus dem letzten Frame
+local HOLD = nil              -- Zoom-Taste bei AUTO FIT an: Zoom gilt bis zur naechsten Fensteraenderung
+local WIN_SET = nil           -- feste Fenstergroesse fuer den naechsten Frame (nur Test-Hook)
+local WIN_POS = nil           -- feste Fensterposition fuer den naechsten Frame (nur Test-Hook)
 local GRAY = C(0.45, 0.48, 0.45)
 
--- Variant colors in the kit (full = acid, dotted = gray, triplet = white)
+-- Farben der Varianten im Kit (gleiche Rollen wie 1.0.0: voll = Acid, punktiert = grau, Triole = weiss)
 local KV = {
   full    = { label = function() return acid(1) end,              value = function() return C(0.180, 0.640, 0.110) end },
   dotted  = { label = function() return C(0.47, 0.48, 0.49) end,  value = function() return C(0.86, 0.90, 0.85) end },
@@ -564,11 +566,11 @@ local KV = {
 local function sizes()
   local f = state.font_scale
   local z = {
-    bpm  = 34 * f,             -- large tempo number (mono bold)
-    info = 11 * f,             -- info lines below the slider
-    row  = floor(17 * f + 0.5),-- table row
-    tbl  = 13 * f,             -- table text (mono)
-    hdr  = 11 * f,             -- column header
+    bpm  = 34 * f,             -- grosse Tempozahl (Mono fett)
+    info = 11 * f,             -- Infozeilen unter dem Schieber
+    row  = floor(17 * f + 0.5),-- Tabellenzeile
+    tbl  = 13 * f,             -- Tabellentext (Mono)
+    hdr  = 11 * f,             -- Spaltenkopf
   }
   z.tempo_h = 30 + z.bpm * 1.2 + 6 + 22 + 10 + 18 + 10 + 2 * (z.info + 5) + 6
   return z
@@ -579,13 +581,13 @@ local function n_note_rows()
 end
 
 local function table_h(z)
-  -- always the larger of the two tables, so that a tab change does not change the scale
+  -- immer die groessere der beiden Tabellen, damit ein Tabwechsel den Massstab nicht aendert
   local notes = 30 + z.hdr + 10 + n_note_rows() * z.row + 8
   local bars = 30 + 30 + z.hdr + 10 + #BAR_COUNTS * z.row + 8
   return math.max(notes, bars)
 end
 
--- mode 1 = one column (narrow/tall), mode 2 = tempo on the left, table on the right (wide)
+-- mode 1 = eine Spalte (schmal/hoch), mode 2 = Tempo links, Tabelle rechts (breit)
 local function layout_for(mode, z)
   local th = table_h(z)
   if mode == 2 then
@@ -608,7 +610,7 @@ local function layout_for(mode, z)
   }
 end
 
--- ---- Background, header, footer
+-- ---- Grund, Kopf, Fuss
 local function ground(cw, ch)
   local dl, ox, oy = UK.dl, UK.gx, UK.gy
   local top, bot = C(0.068, 0.073, 0.068), C(0.038, 0.041, 0.038)
@@ -621,7 +623,7 @@ local function ground(cw, ch)
   ImGui.DrawList_AddRectFilledMultiColor(dl, ox + cw - bw, oy, ox + cw, oy + ch, zz, k, k, zz)
 end
 
--- Watermark (OPTIONS > WATERMARK): faint wordmark image at the bottom right
+-- Wasserzeichen (OPTIONS > WATERMARK): Schriftzug-Bild blass unten rechts, wie 1.0.0
 local function watermark_draw(W, H)
   if not (wordmark and state.watermark) then return end
   local wm_w = math.min(W * 0.9, 300)
@@ -640,7 +642,7 @@ local function header(W)
   rfill(MARG, HEAD - 5, W - 2 * MARG, 1, dimc(0.35))
 end
 
--- Circuit traces with solder pads (decoration)
+-- Leiterbahnen mit Loetpunkten (Dekor wie 1.0.0)
 local function traces(x, y)
   for i = 0, 2 do
     local bx = x + i * 16
@@ -653,21 +655,21 @@ local function footer(W, y)
   local gw = W - 2 * MARG
   ImGui.DrawList_AddRectFilledMultiColor(UK.dl, X(MARG), Y(y), X(MARG + gw), Y(y + 1.5),
     acid(0.85), acid(0), acid(0), acid(0.85))
-  if state.toast and (os.clock() - state.toast_t) < 3 then
+  if state.toast and (reaper.time_precise() - state.toast_t) < 3 then
     ptext(MARG + 2, y + 5, '>>  copied:  ' .. state.toast, acid(1), 11, 'mono')
   else
     ptext(MARG + 2, y + 5, 'Click any value to copy it to the clipboard', GRAY, 11, 'mono')
   end
-  -- second line: circuit traces + brand tag on the right
+  -- zweite Zeile: Leiterbahnen + Markenzeichen rechts (wie 1.0.0)
   local tag = '// BPM2MS2HZ'
   local tx = W - MARG - tw(tag, 11, 'mono')
   traces(tx - 56, y + 31)
   ptext(tx, y + 19, tag, acid(0.60), 11, 'mono')
 end
 
--- ---- Tempo panel
--- Slider: a click/drag sets the value absolutely from the mouse position (40..300 BPM, 0.1 BPM grid) and
--- switches to manual tempo; mouse wheel: 1 BPM, with Shift 0.1 BPM.
+-- ---- Tempo-Panel
+-- Schieber: wie 1.0.0 setzt ein Klick/Zug den Wert absolut auf die Mausposition (40..300 BPM, 0.1-BPM-Raster) und
+-- schaltet auf manuelles Tempo; neu (1.5.0): Mausrad 1 BPM, mit Shift 0.1 BPM.
 local function tempo_slider(x, y, w, h)
   local hov, act = hit("s_bpm", x - 6, y - 3, w + 12, h + 6)
   if act then
@@ -690,8 +692,8 @@ local function p_tempo(x, y, w, h, z)
   panel(x, y, w, h, "TEMPO")
   local cx = x + w / 2
   local yy = y + 30
-  -- large tempo number, the unit counts toward the centering
-  local flashing  = (os.clock() - state.flash_t) < 0.35
+  -- grosse Tempozahl, Einheit zaehlt zur Zentrierung (wie 1.0.0)
+  local flashing  = (reaper.time_precise() - state.flash_t) < 0.35
   local bpm_color = flashing and C(0.93, 0.93, 0.93) or (state.sync and acid(1) or C(0.93, 0.93, 0.93))
   local bpm_text  = string.format('%.2f', state.bpm)
   local tw_b, tw_u = tw(bpm_text, z.bpm, 'monob'), tw('BPM', 13)
@@ -701,7 +703,7 @@ local function p_tempo(x, y, w, h, z)
   hit("t_bpm", bx, yy, tw_b + 8 + tw_u, z.bpm * 1.1)
   tipfor("t_bpm", "Current tempo in BPM: green follows the project tempo, white is a manual tempo (40 to 300 BPM).")
   yy = yy + z.bpm * 1.2 + 6
-  -- sync switch, centered below the number
+  -- Sync-Schalter, mittig unter der Zahl
   if toggle("t_sync", cx - 75, yy, 150, 22, state.sync, "FROM PROJECT",
       "On: the tempo follows the project tempo live, including tempo automation; off: manual tempo from the slider.") then
     set_sync(not state.sync)
@@ -709,7 +711,7 @@ local function p_tempo(x, y, w, h, z)
   yy = yy + 22 + 10
   tempo_slider(x + 16, yy, w - 32, 18)
   yy = yy + 18 + 10
-  -- info lines
+  -- Infozeilen (Text wie 1.0.0)
   local sig = SIGNATURES[state.sig_ix]
   local beat_ms = 60000 / state.bpm
   local bar_sec = 60 / state.bpm * sig[1] * 4 / sig[2]
@@ -717,7 +719,7 @@ local function p_tempo(x, y, w, h, z)
   ptext_c(cx, yy + z.info + 5, string.format('1 bar (%d/%d) = %.3f s', sig[1], sig[2], bar_sec), C(0.47, 0.48, 0.49), z.info, 'mono')
 end
 
--- ---- Tabs and tables
+-- ---- Tabs und Tabellen
 local function p_tabs(x, y, w)
   local bw = (w - 6) / 2
   if btn("tab_notes", x, y, bw, TABS_H, "NOTE VALUES", state.tab == 1, false,
@@ -730,13 +732,13 @@ local function p_tabs(x, y, w)
   end
 end
 
--- Columns: label on the left, values right-aligned (mono)
+-- Spalten: Bezeichnung links, Werte rechtsbuendig (Mono)
 local function columns(x, w)
   local x0 = x + 14
   return x0, x0 + (w - 28) * 0.62, x + w - 14
 end
 
--- Width of the label column: longest row label at the current table font size + spacing, at least 70
+-- Breite der Beschriftungsspalte: laengste Zeilenbeschriftung bei der aktuellen Tabellenschrift + Abstand, mindestens 70
 local function labw(rows, z)
   local m = 70
   for _, r in ipairs(rows) do
@@ -788,7 +790,7 @@ local function p_bars(x, y, w, h, z)
   panel(x, y, w, h, string.format("BARS  %d/%d", sig[1], sig[2]))
   local x0, c1, c2 = columns(x, w)
   local yy = y + 30
-  -- Time signature: chips instead of a combo box (same list, saved)
+  -- Taktart: Chips statt Combo (gleiche Liste, gespeichert wie 1.0.0)
   ptext(x0, yy + 5, 'TIME SIG', acid(1), 11)
   local cx = x0 + 62
   local cw = (x + w - 14 - cx - 6 * 3) / #SIGNATURES
@@ -815,7 +817,7 @@ local function p_bars(x, y, w, h, z)
   end
 end
 
--- ---- OPTIONS box (overlay)
+-- ---- OPTIONS-Box (Overlay)
 local function pct(v) return string.format("%d%%", floor(v * 100 + 0.5)) end
 
 local function set_zoom(f)
@@ -827,7 +829,7 @@ end
 
 local function p_options(x, y)
   local w, h = OPT_W, OPT_H
-  -- shadow + box
+  -- Schatten + Box
   rfill(x + 3, y + 4, w, h, C(0, 0, 0, 0.45), 5)
   panel(x, y, w, h, "OPTIONS")
   if toggle("o_tips", x + w - 128, y + 3, 118, 18, state.tips, state.tips and "TOOLTIPS ON" or "TOOLTIPS OFF",
@@ -837,7 +839,7 @@ local function p_options(x, y)
   end
   local lx, yy = x + 12, y + 32
   local lab = C(0.72, 0.78, 0.70)
-  -- UI SIZE: zoom buttons
+  -- UI SIZE: Zoom-Tasten
   ptext(lx, yy + 4, "UI SIZE", lab, 11)
   for i, f in ipairs(ZOOMS) do
     if btn("o_z" .. i, lx + 64 + (i - 1) * 45, yy, 41, 22, pct(f), math.abs(UK.sc - f) < 0.005, false,
@@ -855,7 +857,7 @@ local function p_options(x, y)
   end
   ptext(lx + 210, yy + 4, "now " .. pct(UK.sc), GRAY, 11)
   yy = yy + 32
-  -- FONT SIZE (80..150 %, step 5 %): tempo number, info lines and tables
+  -- FONT SIZE (seit 1.0.0, 80..150 %, Schritt 5 %): Tempozahl, Infozeilen und Tabellen
   ptext(lx, yy + 4, "FONT SIZE", lab, 11)
   if btn("o_fdn", lx + 64, yy, 30, 22, "-", false, false, "Smaller text in the tempo display and the tables, down to 80 %.") then
     state.font_scale = math.max(0.80, state.font_scale - 0.05)
@@ -890,7 +892,7 @@ local function p_options(x, y)
   return w, h
 end
 
--- ---- whole kit view
+-- ---- ganze Kit-Ansicht
 local ZOOM_DIRTY = false
 local function draw_ui_kit(cw, ch)
   local mx, my = ImGui.GetMousePos(ctx)
@@ -908,8 +910,8 @@ local function draw_ui_kit(cw, ch)
   if s2 > s1 then Lo, fit, mode = L2, s2, 2 else Lo, fit, mode = L1, s1, 1 end
   local W, H = Lo.W, Lo.H
 
-  -- AUTO FIT: largest whole percentage at which everything fits in the window (25..400 %). A zoom button holds until the
-  -- next window change (HOLD: remember the window size two frames after the size change, any deviation releases it).
+  -- AUTO FIT: groesster ganzer Prozentwert, bei dem alles ins Fenster passt (25..400 %). Eine Zoom-Taste gilt bis zur
+  -- naechsten Fensteraenderung (HOLD: Fenstermass zwei Frames nach dem Groessenwechsel merken, jede Abweichung loest).
   if HOLD then
     HOLD.n = HOLD.n + 1
     if HOLD.n == 3 then HOLD.cw, HOLD.ch = cw, ch
@@ -919,7 +921,7 @@ local function draw_ui_kit(cw, ch)
   if state.autofit and not HOLD then
     sc = floor(fit * 100 + 0.0001) / 100
     if sc < 0.25 then sc = 0.25 elseif sc > 4 then sc = 4 end
-    -- the fitted zoom becomes the saved zoom (AUTO FIT OFF keeps it), saved only once the mouse is released
+    -- Review R2: angepasster Zoom = gespeicherter Zoom (AUTO FIT AUS behaelt ihn), gespeichert erst, wenn die Maus los ist
     if math.abs(sc - state.zoom) > 0.001 then state.zoom = sc; ZOOM_DIRTY = true end
     if ZOOM_DIRTY and not ImGui.IsMouseDown(ctx, 0) then ZOOM_DIRTY = false; save_settings() end
   else
@@ -940,7 +942,7 @@ local function draw_ui_kit(cw, ch)
   ground(math.max(cw, W * sc), math.max(ch, H * sc))
   watermark_draw(W, H)
   header(W)
-  -- while the OPTIONS box is open the front is locked (clicks go only to the box and the OPTIONS button)
+  -- bei offener OPTIONS-Box ist die Front gesperrt (Klicks gehen nur an die Box und den OPTIONS-Knopf)
   local locked = state.options
   if locked then ImGui.BeginDisabled(ctx, true); UK.disabled = true end
   p_tempo(Lo.tempo[1], Lo.tempo[2], Lo.tempo[3], Lo.tempo[4], z)
@@ -952,19 +954,19 @@ local function draw_ui_kit(cw, ch)
   if state.options then
     local ox, oy = math.max(MARG, W - MARG - OPT_W), HEAD - 2
     p_options(ox, oy)
-    -- a click outside the box and the OPTIONS button closes it
+    -- Klick neben Box und OPTIONS-Knopf schliesst
     if ImGui.IsMouseClicked(ctx, 0) then
       local inbox = UK.mxd >= ox and UK.mxd <= ox + OPT_W and UK.myd >= oy and UK.myd <= oy + OPT_H
       local inbtn = UK.mxd >= W - MARG - 76 and UK.mxd <= W - MARG and UK.myd >= 9 and UK.myd <= 31
       if not inbox and not inbtn then state.options = false end
     end
   end
-  -- content size for the scrollbars (only when a fixed zoom is larger than the window)
+  -- Inhaltsgroesse fuer die Scrollleisten (nur bei festem Zoom groesser als das Fenster)
   ImGui.SetCursorScreenPos(ctx, gx, gy)
   ImGui.Dummy(ctx, math.max(1, W * sc), math.max(1, H * sc))
 end
 
--- Style colors of the kit view
+-- Stilfarben der Kit-Ansicht (wie der Theme Adjuster)
 local function acid_a(a) return 0x39FF1400 | math.floor(255 * a + 0.5) end
 local KIT_COLS = {
   { ImGui.Col_WindowBg, 0x0D0E0DFF }, { ImGui.Col_ChildBg, 0x0D0E0DFF }, { ImGui.Col_PopupBg, 0x121412FF },
@@ -986,7 +988,7 @@ local function kit_frame()
   ImGui.PushFont(ctx, FONT_UI, 14)
 
   ImGui.SetNextWindowSize(ctx, MARG * 2 + COL1, 700, ImGui.Cond_FirstUseEver)
-  -- once, to the new start size (kit view: 100 % single column)
+  -- einmalig auf die neue Startgroesse (1.5.0, Kit-Ansicht: 100 % einspaltig)
   if reaper.GetExtState(SETTINGS, 'layout') ~= '3' and not (HOOK and HOOK.nosave) then
     ImGui.SetNextWindowSize(ctx, MARG * 2 + COL1, 700, ImGui.Cond_Always)
     reaper.SetExtState(SETTINGS, 'layout', '3', true)
@@ -1014,7 +1016,7 @@ local function kit_frame()
     local ok_k, err = pcall(draw_ui_kit, cw, ch)
     if not ok_k then
       if UK.disabled then ImGui.EndDisabled(ctx); UK.disabled = false end
-      -- close open font/clip stacks of the kit view before the classic view takes over
+      -- offene Font-/Clip-Stapel der Kit-Ansicht schliessen, bevor die klassische Ansicht uebernimmt (Review R1)
       while (UK.fonts or 0) > 0 do ImGui.PopFont(ctx); UK.fonts = UK.fonts - 1 end
       while (UK.clips or 0) > 0 and UK.dl do ImGui.DrawList_PopClipRect(UK.dl); UK.clips = UK.clips - 1 end
       KIT_ERR = tostring(err)
@@ -1029,7 +1031,7 @@ local function kit_frame()
 end
 
 --------------------------------------------------------------------
--- Classic view (fallback only, used if the kit view fails)
+-- Klassische Ansicht (Oberflaeche 1.0.0, nur noch Rueckfall bei einem Fehler der Kit-Ansicht)
 --------------------------------------------------------------------
 local STYLE_COLORS = {
   { ImGui.Col_WindowBg,             BLACK },
@@ -1231,7 +1233,7 @@ local function draw_header()
     draw_options_popup()
   end
 
-  local flashing  = (os.clock() - state.flash_t) < 0.35
+  local flashing  = (reaper.time_precise() - state.flash_t) < 0.35
   local bpm_color = flashing and WHITE or (state.sync and ACID or WHITE)
   local bpm_text  = string.format('%.2f', state.bpm)
 
@@ -1395,7 +1397,7 @@ local function draw_footer()
   draw_gradient_separator()
   ImGui.PushFont(ctx, font_mono, fs(12))
   ImGui.PushTextWrapPos(ctx, 0)
-  if state.toast and (os.clock() - state.toast_t) < 3 then
+  if state.toast and (reaper.time_precise() - state.toast_t) < 3 then
     ImGui.TextColored(ctx, ACID, '>>  copied:  ' .. state.toast)
   else
     ImGui.TextColored(ctx, DIM, 'Click any value to copy it to the clipboard')
@@ -1458,7 +1460,7 @@ local function frame()
   end
   if state.bpm ~= state.last_bpm then
     state.last_bpm = state.bpm
-    state.flash_t  = os.clock()
+    state.flash_t  = reaper.time_precise()
   end
 
   local open
