@@ -61,7 +61,7 @@ Updates later: **Extensions → ReaPack → Synchronize packages**.
 | 🧬 | **TT-303PATGEN** | JSFX + ReaScripts | Pattern generator for the 303: it knows where the accent goes. Print patterns to MIDI items or whole song chains. | [📖](https://timtechlor.de/docs/tt-303patgen-manual.html) |
 | ⏱️ | **TT-BPM2MS2HZ** | ReaScript (Lua) | Note values to milliseconds and Hertz, synced to the project tempo. | [📖](https://timtechlor.de/docs/bpm2ms2hz-manual.html) |
 | 🔤 | **TT-THEMEFONTEDITOR** | ReaScript (Lua) | Find and change theme fonts with a picker – as a copy or baked into the original theme. | [📖](https://timtechlor.de/docs/TT_ThemeFontEditor_Manual.html) |
-| 🎨 | **Clean & Flat Acid** | REAPER theme | Dark graphite panels, one acid-green accent, flat buttons, and a theme adjuster. | [📖](https://timtechlor.de/docs/tt-reapertheme-manual.html) |
+| 🎨 | **Clean & Flat Acid** | REAPER theme | Dark graphite panels, one acid-green accent, flat buttons, and a theme adjuster. | [📖](https://timtechlor.de/docs/clean-flat-acid-manual.html) |
 
 More are on the way – see [ACID SEASON](https://timtechlor.de/acid-season/) for the schedule.
 
