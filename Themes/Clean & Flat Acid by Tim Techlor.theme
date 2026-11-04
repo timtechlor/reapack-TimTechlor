@@ -1,0 +1,28 @@
+@description Clean & Flat Acid by Tim Techlor
+@version 1.0.0
+@author Tim Techlor
+@metapackage
+@provides
+  [theme] Clean & Flat Acid by Tim Techlor.ReaperThemeZip
+  [theme] Clean & Flat Acid by Tim Techlor note colors (colorblind).png
+  [script main] Tim Techlor_theme_adjuster.lua
+  [script] TT_ThemeAdjuster.lua
+  [script main] TT_ThemeAdjuster_Apply.lua
+  [script] TT_Logo_T.png
+  [data] toolbar_icons/tt_*.png
+  [data] toolbar_icons/150/tt_*.png
+  [data] toolbar_icons/200/tt_*.png
+@link Manual https://timtechlor.de/docs/tt-reapertheme-manual.html
+@link Tip https://paypal.me/timtechlor
+@about
+  # Clean & Flat Acid
+  A REAPER theme: dark graphite panels, one acid-green accent, flat square buttons.
+  The theme runs on its own. The adjuster window needs ReaImGui 0.10+.
+  Baking fonts, the selection frame and the logo watermark need js_ReaScriptAPI.
+  The UI-scale buttons and the silent startup action need the SWS extension.
+  All three are in the ReaTeam Extensions repository.
+  ReaPack installs the scripts next to each other under Scripts/TimTechlor ReaScripts/Themes/.
+  Load "Tim Techlor Theme Adjuster" once. After that, Options > Themes > Theme Adjuster opens it while this theme is selected.
+@changelog
+  1.0.0
+  - First release

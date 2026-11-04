@@ -61,6 +61,7 @@ Updates later: **Extensions → ReaPack → Synchronize packages**.
 | 🧬 | **TT-303PATGEN** | JSFX + ReaScripts | Pattern generator for the 303: it knows where the accent goes. Print patterns to MIDI items or whole song chains. | [📖](https://timtechlor.de/docs/tt-303patgen-manual.html) |
 | ⏱️ | **TT-BPM2MS2HZ** | ReaScript (Lua) | Note values to milliseconds and Hertz, synced to the project tempo. | [📖](https://timtechlor.de/docs/bpm2ms2hz-manual.html) |
 | 🔤 | **TT-THEMEFONTEDITOR** | ReaScript (Lua) | Find and change theme fonts with a picker – as a copy or baked into the original theme. | [📖](https://timtechlor.de/docs/TT_ThemeFontEditor_Manual.html) |
+| 🎨 | **Clean & Flat Acid** | REAPER theme | Dark graphite panels, one acid-green accent, flat buttons, and a theme adjuster. | [📖](https://timtechlor.de/docs/tt-reapertheme-manual.html) |
 
 More are on the way – see [ACID SEASON](https://timtechlor.de/acid-season/) for the schedule.
 
@@ -71,6 +72,7 @@ More are on the way – see [ACID SEASON](https://timtechlor.de/acid-season/) fo
 | TT-303 Acid Machine, TT-303PATGEN | REAPER with JSFX (built in) |
 | TT-BPM2MS2HZ | [ReaImGui](https://github.com/cfillion/reaimgui) – via the **ReaTeam Extensions** repository |
 | TT-THEMEFONTEDITOR | ReaImGui 0.10+ and js_ReaScriptAPI – both via **ReaTeam Extensions** |
+| Clean & Flat Acid | The theme itself needs nothing else. The adjuster needs ReaImGui 0.10+, js_ReaScriptAPI and SWS, all via **ReaTeam Extensions** |
 
 ---
 
