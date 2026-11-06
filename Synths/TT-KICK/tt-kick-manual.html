@@ -1,0 +1,1415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-KICK Manual – Segment Fusion Kick Designer for REAPER</title>
+<meta name="description" content="Reference manual for TT-KICK, a free hybrid kick designer JSFX for REAPER: three sequential segments (transient, body, tail) fused by equal-power crossfades, each switchable between a phase-coherent synth engine and your own sample, with live capture into slots, a master chain, INIT plus 44 factory kick designs and a 32-slot user preset bank, per-lane preset browsers, 20-step undo and a built-in 4/4 player.">
+<meta name="tt-doc-name" content="TT-KICK Kick Machine">
+<meta name="tt-doc-version" content="1.1.0">
+<meta name="tt-doc-date" content="2026-10-26">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-kick-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-KICK Kick Machine Manual – Segment Fusion Kick Designer for REAPER">
+<meta property="og:description" content="Reference manual for TT-KICK, a free hybrid kick designer JSFX for REAPER: three sequential segments (transient, body, tail) fused by equal-power crossfades, each switchable between a phase-coherent synth engine and your own sample, with live capture into slots, a master chain, INIT plus 44 factory kick designs and a 32-slot user preset bank, per-lane preset browsers, 20-step undo and a built-in 4/4 player.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-kick-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-kick.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-KICK Kick Machine — User Manual">
+<meta property="article:modified_time" content="2026-10-26">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-KICK Kick Machine Manual – Segment Fusion Kick Designer for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-KICK, a free hybrid kick designer JSFX for REAPER: three sequential segments (transient, body, tail) fused by equal-power crossfades, each switchable between a phase-coherent synth engine and your own sample, with live capture into slots, a master chain, INIT plus 44 factory kick designs and a 32-slot user preset bank, per-lane preset browsers, 20-step undo and a built-in 4/4 player.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-kick.png">
+<meta name="twitter:image:alt" content="TT-KICK Kick Machine — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-kick-manual.html#article",
+   "headline": "TT-KICK Kick Machine — User Manual",
+   "name": "TT-KICK Kick Machine Manual – Segment Fusion Kick Designer for REAPER",
+   "description": "Reference manual for TT-KICK, a free hybrid kick designer JSFX for REAPER: three sequential segments (transient, body, tail) fused by equal-power crossfades, each switchable between a phase-coherent synth engine and your own sample, with live capture into slots, a master chain, INIT plus 44 factory kick designs and a 32-slot user preset bank, per-lane preset browsers, 20-step undo and a built-in 4/4 player.",
+   "url": "https://timtechlor.de/docs/tt-kick-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-kick-manual.html",
+   "datePublished": "2026-10-26",
+   "dateModified": "2026-10-26",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-kick.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER kick designer, kick drum synth, kick sampler, JSFX kick, hybrid kick plugin, 808 909 kick, REAPER drum instrument, kick capture",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-kick-manual.html#software" },
+   "version": "1.1.0"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-kick-manual.html#software",
+   "name": "TT-KICK Kick Machine",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "1.1.0",
+   "description": "Hybrid kick designer JSFX instrument for REAPER: three sequential segments (transient, body, tail) joined by equal-power crossfades, each switchable between a phase-coherent synth engine and your own sample, with live input capture, master chain, factory presets, undo and a built-in 4/4 player.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-KICK Kick Machine", "item": "https://timtechlor.de/docs/tt-kick-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-KICK Kick Machine</span></nav>
+      <div class="wordmark" style="--wm-n:7" role="img" aria-label="TT-KICK Kick Machine">TT-KICK</div>
+      <h1>TT-KICK Kick Machine — User Manual</h1>
+      <div class="meta">JSFX instrument for REAPER // Version 1.1.0 // TimTechlor</div>
+      <p class="lead">One kick, three sequential segments — <em>crossfading instead of layering.</em> A hybrid kick designer for REAPER: every segment is either a synth engine or your own sample (loaded or captured live), and the synth path stays phase-coherent across the segment boundaries by construction.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/kick-front.png" aria-label="Enlarge screenshot of the TT-KICK Kick Machine user interface" title="Click to enlarge"><img src="img/tt-ui-options/kick-front.png" width="1168" height="917" alt="TT-KICK Kick Machine user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#sounds"><span class="num">02</span><span>Sound examples</span></a></li>
+<li><a href="#quickstart"><span class="num">03</span><span>Quick start</span></a></li>
+<li><a href="#segments"><span class="num">04</span><span>The three segments</span></a></li>
+<li><a href="#editor"><span class="num">05</span><span>Editing conventions</span></a></li>
+<li><a href="#synth"><span class="num">06</span><span>Synth engines &amp; phase</span></a></li>
+<li><a href="#capture"><span class="num">07</span><span>Capture (CAP)</span></a></li>
+<li><a href="#master"><span class="num">08</span><span>Master rack</span></a></li>
+<li><a href="#player"><span class="num">09</span><span>Player &amp; MIDI</span></a></li>
+<li><a href="#kits"><span class="num">10</span><span>Sample kits &amp; loaders</span></a></li>
+<li><a href="#presets"><span class="num">11</span><span>Presets, undo, system page</span></a></li>
+<li><a href="#export"><span class="num">12</span><span>Exporting a kick</span></a></li>
+<li><a href="#options"><span class="num">13</span><span>Options / Color</span></a></li>
+<li><a href="#recipes"><span class="num">14</span><span>Recipes &amp; quick reference</span></a></li>
+<li><a href="#release"><span class="num">15</span><span>Release notes</span></a></li>
+<li><a href="#trouble"><span class="num">16</span><span>Troubleshooting</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">17</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>TT-KICK builds one kick from <b>three sequential segments on the time axis</b> —
+TRANSIENT (the click), BODY (the punch) and TAIL (the room) — joined by
+<b>equal-power crossfades</b>. Unlike layered kick tools, the segments play one
+after another, so each stage can be crafted without the stages fighting each
+other.</p>
+<p>Every segment is <b>switchable between SYNTHESIZED and SAMPLE</b>: mix your own
+sample attack with a synthesized body, or run the whole kick purely from the
+synth engines — no sample pack required (a fresh instance is all-synth and
+sounds immediately). The synth path carries its oscillators
+<b>phase-coherent across the segment boundaries</b>: a successor segment starts
+at the exact phase its predecessor holds at the boundary — phase-continuous by
+construction, not by phase-offset tinkering.</p>
+<p>A fourth row below the lanes — <b>FUSION</b> — always shows the kick as it is
+currently built: the segments in sequence on one output time axis, the
+crossfade zones shaded, and the total chain length in milliseconds. Where a
+segment starts on that axis is set by the crossfade of its boundary and, if you
+want it, by the lane's <b>OFFSET</b> (see <i>The time axis and OFFSET</i> in
+section 04).</p>
+<figure class="shot"><svg viewBox="0 0 720 250" role="img" aria-label="Equal-power crossfade: the two gain curves and their constant summed power" style="width:100%;max-width:720px;height:auto;background:#090c08;border:1px solid #2c3b2a" font-family="Consolas,monospace" font-size="13"><polyline fill="none" stroke="#4dd8ff" stroke-width="2.5" points="60.0,36.0 73.1,36.1 86.2,36.4 99.4,36.8 112.5,37.4 125.6,38.2 138.8,39.2 151.9,40.3 165.0,41.6 178.1,43.1 191.2,44.7 204.4,46.5 217.5,48.5 230.6,50.6 243.8,52.9 256.9,55.4 270.0,58.0 283.1,60.7 296.2,63.6 309.4,66.7 322.5,69.9 335.6,73.2 348.8,76.7 361.9,80.3 375.0,84.0 388.1,87.9 401.2,91.9 414.4,96.0 427.5,100.2 440.6,104.5 453.8,108.9 466.9,113.4 480.0,118.0 493.1,122.7 506.2,127.5 519.4,132.3 532.5,137.2 545.6,142.2 558.8,147.3 571.9,152.4 585.0,157.6 598.1,162.8 611.2,168.0 624.4,173.3 637.5,178.6 650.6,183.9 663.8,189.3 676.9,194.6 690.0,200.0"/><polyline fill="none" stroke="#ff4fd8" stroke-width="2.5" points="60.0,200.0 73.1,194.6 86.2,189.3 99.4,183.9 112.5,178.6 125.6,173.3 138.8,168.0 151.9,162.8 165.0,157.6 178.1,152.4 191.2,147.3 204.4,142.2 217.5,137.2 230.6,132.3 243.8,127.5 256.9,122.7 270.0,118.0 283.1,113.4 296.2,108.9 309.4,104.5 322.5,100.2 335.6,96.0 348.8,91.9 361.9,87.9 375.0,84.0 388.1,80.3 401.2,76.7 414.4,73.2 427.5,69.9 440.6,66.7 453.8,63.6 466.9,60.7 480.0,58.0 493.1,55.4 506.2,52.9 519.4,50.6 532.5,48.5 545.6,46.5 558.8,44.7 571.9,43.1 585.0,41.6 598.1,40.3 611.2,39.2 624.4,38.2 637.5,37.4 650.6,36.8 663.8,36.4 676.9,36.1 690.0,36.0"/><polyline fill="none" stroke="#39FF14" stroke-width="2.5" points="60.0,36.0 73.1,36.0 86.2,36.0 99.4,36.0 112.5,36.0 125.6,36.0 138.8,36.0 151.9,36.0 165.0,36.0 178.1,36.0 191.2,36.0 204.4,36.0 217.5,36.0 230.6,36.0 243.8,36.0 256.9,36.0 270.0,36.0 283.1,36.0 296.2,36.0 309.4,36.0 322.5,36.0 335.6,36.0 348.8,36.0 361.9,36.0 375.0,36.0 388.1,36.0 401.2,36.0 414.4,36.0 427.5,36.0 440.6,36.0 453.8,36.0 466.9,36.0 480.0,36.0 493.1,36.0 506.2,36.0 519.4,36.0 532.5,36.0 545.6,36.0 558.8,36.0 571.9,36.0 585.0,36.0 598.1,36.0 611.2,36.0 624.4,36.0 637.5,36.0 650.6,36.0 663.8,36.0 676.9,36.0 690.0,36.0"/><polyline fill="none" stroke="#8a9a86" stroke-width="1.5" stroke-dasharray="5 4" points="60.0,36.0 73.1,42.7 86.2,49.1 99.4,55.2 112.5,61.1 125.6,66.6 138.8,71.9 151.9,76.9 165.0,81.6 178.1,86.0 191.2,90.1 204.4,93.9 217.5,97.5 230.6,100.8 243.8,103.8 256.9,106.5 270.0,108.9 283.1,111.0 296.2,112.9 309.4,114.4 322.5,115.7 335.6,116.7 348.8,117.4 361.9,117.9 375.0,118.0 388.1,117.9 401.2,117.4 414.4,116.7 427.5,115.7 440.6,114.4 453.8,112.9 466.9,111.0 480.0,108.9 493.1,106.5 506.2,103.8 519.4,100.8 532.5,97.5 545.6,93.9 558.8,90.1 571.9,86.0 585.0,81.6 598.1,76.9 611.2,71.9 624.4,66.6 637.5,61.1 650.6,55.2 663.8,49.1 676.9,42.7 690.0,36.0"/><rect x="60" y="36" width="630" height="164" fill="none" stroke="#2c3b2a"/><text x="22" y="204" fill="#cfe8c8">0</text><text x="22" y="122" fill="#cfe8c8">0.5</text><text x="22" y="40" fill="#cfe8c8">1</text><text x="60" y="228" fill="#cfe8c8">position in the crossfade (outgoing lane to incoming lane)</text><text x="60" y="20" fill="#4dd8ff">outgoing (cos)</text><text x="210" y="20" fill="#ff4fd8">incoming (sin)</text><text x="360" y="20" fill="#39FF14">power sum = 1</text><text x="510" y="20" fill="#8a9a86">dashed: linear fade</text></svg><figcaption><span class="tag">EQUAL POWER</span><b>Why the joins do not dip.</b> The outgoing lane follows a cosine, the incoming lane a sine, so their squared gains always add up to 1. A linear fade would lose 3 dB of power in the middle of every join (dashed).</figcaption></figure>
+
+<figure class="shot"><img src="img/tt-ui-options/kick-front.png" alt="The TT-KICK front at 125% UI size, version 1.1.0"><figcaption>The TT-KICK front in v1.1.0 at the default UI size of 125%.</figcaption></figure>
+
+<h2 id="sounds"><span class="num">02</span>Sound examples</h2>
+<p>All <b>44 factory kicks</b>, each as <b>eight hits</b> (two bars of four on the floor) at <b>130 BPM</b> with its natural tail. Filter by family, click a waveform to jump,
+and compare. All clips share one export gain, so louder kicks stay louder; there is no normalisation, EQ, compression or mastering on any clip.</p>
+<p>The clips are <b>rendered offline from the plug-in&rsquo;s own code</b> (the same EEL2 source that REAPER runs, played by an interpreter), not recorded in REAPER, so the
+sound in your project can differ in small details. Each kick is the factory preset at its default settings, played at the ROOT note with velocity 110.</p>
+<style>.kk-sound-player .ttp-art img{object-fit:contain;background:#090c08}</style>
+<style>
+.ttp { --acc: var(--acid, #39FF14); --acc-d: rgba(57,255,20,.55); --acc-f: rgba(57,255,20,.10); --ln: var(--line-bright, #2c3a27);
+  position: relative; margin: 26px 0 30px; border: 1px solid var(--ln); border-radius: 4px; overflow: hidden; color: #fff;
+  background: radial-gradient(120% 160% at 0% 0%, rgba(57,255,20,.08), transparent 52%), linear-gradient(160deg, #0f170c 0%, #060806 62%);
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 26px 44px -30px rgba(0,0,0,.95); transition: border-color .3s ease, box-shadow .3s ease; }
+.ttp::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--acc), transparent 72%); opacity: .6; }
+.ttp.is-playing { border-color: var(--acc-d); box-shadow: 0 0 0 1px rgba(57,255,20,.12), 0 0 40px -12px rgba(57,255,20,.35), 0 26px 44px -30px rgba(0,0,0,.95); }
+.ttp button { font: inherit; color: inherit; }
+.ttp-now { display: grid; grid-template-columns: 152px minmax(0, 1fr); gap: 22px; padding: 20px; align-items: center; }
+.ttp-art { position: relative; width: 152px; aspect-ratio: 1 / 1; border: 1px solid var(--acc-d); border-radius: 3px; overflow: hidden; background: #000; }
+.ttp-art img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.85) brightness(.72); transform: scale(1.02);
+  transition: transform 8s linear, filter .5s ease; }
+.ttp.is-playing .ttp-art img { filter: saturate(1.2) brightness(1); transform: scale(1.16); }
+.ttp-art::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 1px, transparent 1px 3px), radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,.55)); }
+.ttp-play { position: absolute; z-index: 2; inset: 0; margin: auto; width: 66px; height: 66px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center; background: conic-gradient(var(--acc) calc(var(--p, 0) * 1turn), rgba(255,255,255,.16) 0);
+  box-shadow: 0 0 26px rgba(57,255,20,.32); transition: transform .15s ease, box-shadow .2s ease; }
+.ttp-play::before { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: rgba(0,0,0,.8); }
+.ttp-play::after { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 2px solid var(--acc); opacity: 0; pointer-events: none; }
+.ttp.is-beat .ttp-play::after { animation: ttp-beat var(--beat, .5s) linear var(--beat-delay, 0s) infinite; }
+.ttp-play:hover { transform: scale(1.07); box-shadow: 0 0 34px rgba(57,255,20,.5); }
+.ttp-play:focus-visible, .ttp-btn:focus-visible, .ttp-chip:focus-visible, .ttp-row:focus-visible, .ttp-wave:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.ttp-play svg { position: relative; width: 26px; height: 26px; fill: var(--acc); filter: drop-shadow(0 0 6px rgba(57,255,20,.6)); }
+.ttp .i-pause, .ttp.is-playing .i-play { display: none; }
+.ttp.is-playing .i-pause { display: block; }
+@keyframes ttp-beat { 0% { opacity: .8; transform: scale(.9); } 70% { opacity: 0; transform: scale(1.32); } 100% { opacity: 0; transform: scale(1.32); } }
+.ttp-body { min-width: 0; }
+.ttp-kicker { display: flex; align-items: center; gap: 10px; font: 11px/1 var(--mono, monospace); letter-spacing: .16em; text-transform: uppercase; color: var(--acc); }
+.ttp-live { display: inline-flex; align-items: center; gap: 6px; color: #8C8C8C; }
+.ttp-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #3a3a3a; }
+.ttp.is-playing .ttp-live { color: var(--acc); }
+.ttp.is-playing .ttp-live::before { background: var(--acc); box-shadow: 0 0 8px var(--acc); animation: ttp-blink 1s steps(2, start) infinite; }
+@keyframes ttp-blink { to { visibility: hidden; } }
+.ttp-title { margin: 8px 0 2px; font-size: 1.55rem; line-height: 1.15; font-weight: 700; letter-spacing: .01em; color: #fff; overflow-wrap: anywhere; }
+.ttp-desc { margin: 0; color: #a9a9a9; font-size: .92rem; line-height: 1.45; }
+.ttp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ttp-chips span { font: 11px/1 var(--mono, monospace); letter-spacing: .08em; text-transform: uppercase; color: #a9a9a9; border: 1px solid var(--ln); border-radius: 2px; padding: 4px 7px; }
+.ttp-chips span:first-child { color: var(--acc); border-color: var(--acc-d); }
+.ttp-wave { position: relative; height: 78px; margin-top: 14px; cursor: pointer; touch-action: none; border-radius: 2px; }
+.ttp-wave canvas { display: block; width: 100%; height: 100%; }
+.ttp-tip { position: absolute; top: 0; left: 0; transform: translate(-50%, -110%); padding: 2px 6px; font: 11px/1.3 var(--mono, monospace); color: var(--acc);
+  background: #000; border: 1px solid var(--acc-d); border-radius: 2px; opacity: 0; pointer-events: none; transition: opacity .12s; white-space: nowrap; }
+.ttp-wave.is-hover .ttp-tip { opacity: 1; }
+.ttp-foot { display: flex; align-items: center; gap: 10px; margin-top: 8px; font: 12px/1 var(--mono, monospace); color: #8C8C8C; letter-spacing: .06em; }
+.ttp-foot .ttp-t { color: var(--acc); min-width: 3.2em; }
+.ttp-foot .ttp-sp { flex: 1 1 auto; }
+.ttp-btn { display: inline-grid; place-items: center; width: 32px; height: 28px; padding: 0; cursor: pointer; background: transparent;
+  border: 1px solid var(--ln); border-radius: 2px; transition: border-color .15s, background .15s; }
+.ttp-btn svg { width: 14px; height: 14px; fill: #cfcfcf; }
+.ttp-btn:hover { border-color: var(--acc); background: var(--acc-f); }
+.ttp-btn:hover svg { fill: var(--acc); }
+.ttp-btn.ttp-auto { width: auto; padding: 0 8px; font: 10px/1 var(--mono, monospace); letter-spacing: .12em; color: #8C8C8C; }
+.ttp-btn.ttp-auto[aria-pressed="true"] { color: var(--acc); border-color: var(--acc-d); }
+.ttp-count { color: #cfcfcf; white-space: nowrap; }
+.ttp-err { display: none; margin-top: 8px; font: 12px/1.4 var(--mono, monospace); color: #ff6b6b; }
+.ttp.is-error .ttp-err { display: block; }
+.ttp-filter { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 20px 14px; }
+.ttp .ttp-chip { cursor: pointer; padding: 5px 9px; background: transparent; border: 1px solid var(--ln); border-radius: 2px;
+  font: 11px/1 var(--mono, monospace); letter-spacing: .1em; text-transform: uppercase; color: #a9a9a9; transition: all .15s; }
+.ttp-chip b { color: inherit; font-weight: 400; opacity: .6; margin-left: 4px; }
+.ttp .ttp-chip:hover { border-color: var(--acc); color: var(--acc); }
+.ttp .ttp-chip[aria-pressed="true"] { background: var(--acc); border-color: var(--acc); color: #000; }
+.ttp-tracks { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ln); max-height: 404px; overflow: auto;
+  scrollbar-width: thin; scrollbar-color: #2c3a27 transparent; }
+.ttp-tracks li { margin: 0; padding: 0; }
+.ttp-tracks li + li { border-top: 1px solid #131813; }
+.ttp-tracks li[hidden] { display: none; }
+.ttp-row { display: grid; grid-template-columns: 30px minmax(0, 1fr) 128px 92px 34px 38px; gap: 14px; align-items: center; width: 100%; margin: 0;
+  padding: 9px 20px 9px 18px; text-align: left; cursor: pointer; background: transparent; border: 0; border-left: 2px solid transparent; transition: background .15s; }
+.ttp-row:hover { background: rgba(57,255,20,.05); }
+.ttp-tracks .is-active .ttp-row { background: linear-gradient(90deg, rgba(57,255,20,.14), transparent 75%); border-left-color: var(--acc); }
+.ttp-idx { display: inline-flex; align-items: center; }
+.ttp-n { font: 12px/1 var(--mono, monospace); color: #6f6f6f; }
+.ttp-eq { display: none; align-items: flex-end; gap: 2px; height: 12px; }
+.ttp-eq i { width: 3px; height: 100%; background: var(--acc); transform-origin: bottom; transform: scaleY(.3); }
+.ttp.is-playing .is-active .ttp-eq { display: inline-flex; }
+.ttp.is-playing .is-active .ttp-n { display: none; }
+.ttp.is-playing .is-active .ttp-eq i { animation: ttp-eq .9s ease-in-out infinite; }
+.ttp-eq i:nth-child(2) { animation-delay: -.3s !important; } .ttp-eq i:nth-child(3) { animation-delay: -.6s !important; }
+@keyframes ttp-eq { 0%, 100% { transform: scaleY(.25); } 50% { transform: scaleY(1); } }
+.ttp-tracks .is-active .ttp-n { color: var(--acc); }
+.ttp-name { min-width: 0; }
+.ttp-name b { display: block; font-size: .95rem; line-height: 1.25; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ttp-name small { display: block; font-size: .8rem; line-height: 1.35; color: #8C8C8C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ttp-mini { display: block; width: 100%; height: 26px; }
+.ttp-tag { justify-self: start; font: 10px/1 var(--mono, monospace); letter-spacing: .1em; text-transform: uppercase; color: #8C8C8C; border: 1px solid #222; padding: 4px 6px; border-radius: 2px; white-space: nowrap; }
+.ttp-bpm, .ttp-len { font: 12px/1 var(--mono, monospace); color: #8C8C8C; text-align: right; }
+.ttp-tracks .is-active .ttp-bpm, .ttp-tracks .is-active .ttp-len { color: #cfcfcf; }
+.ttp-single .ttp-now { grid-template-columns: 128px minmax(0, 1fr); }
+.ttp-single .ttp-art { width: 128px; }
+.ttp-single .ttp-play { width: 58px; height: 58px; }
+@media (max-width: 680px) {
+  .ttp-now, .ttp-single .ttp-now { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 16px; }
+  .ttp-art, .ttp-single .ttp-art { width: 100%; aspect-ratio: 16 / 7; }
+  .ttp-play, .ttp-single .ttp-play { width: 58px; height: 58px; }
+  .ttp-title { font-size: 1.3rem; }
+  .ttp-wave { height: 66px; }
+  .ttp-foot { flex-wrap: wrap; row-gap: 10px; }
+  .ttp-filter { padding: 0 16px 12px; }
+  .ttp-row { grid-template-columns: 26px minmax(0, 1fr) 38px; padding: 9px 16px 9px 14px; }
+  .ttp-mini, .ttp-tag, .ttp-bpm { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ttp *, .ttp *::before, .ttp *::after { animation: none !important; transition: none !important; }
+}
+@media print { .ttp-filter, .ttp-tracks { display: none; } }
+</style>
+<script>
+(function () {
+  var ICON = { play: '<svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>',
+               pause: '<svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>' };
+  var all = [];
+  function fmt(t) { if (!isFinite(t) || t < 0) t = 0; var m = Math.floor(t / 60), s = Math.floor(t % 60); return m + ':' + (s < 10 ? '0' : '') + s; }
+  function dec(p) { var a = []; for (var i = 0; i < p.length; i++) a.push(parseInt(p.charAt(i), 36) / 35); return a; }
+  function css(el, k, d) { var v = getComputedStyle(el).getPropertyValue(k).trim(); return v || d; }
+
+  // Wellenform: Balken oben, gespiegelter Schatten unten; gespielt = Akzent mit Glow, Hover = halbhell; Taktraster aus BPM
+  function draw(cv, pk, o) {
+    var r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    var w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+    if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+    var c = cv.getContext('2d'); c.clearRect(0, 0, w, h);
+    var bw = Math.max(1, Math.round(o.bar * dpr)), gap = Math.max(1, Math.round(o.gap * dpr)), n = Math.max(1, Math.floor(w / (bw + gap)));
+    var base = Math.round(h * (o.mirror ? .68 : .5)), top = base - 2 * dpr, bot = h - base - 1 * dpr;
+    if (o.grid && o.bpm && o.dur) {
+      c.fillStyle = 'rgba(255,255,255,.06)';
+      for (var k = 1; k * 240 / o.bpm < o.dur; k++) c.fillRect(Math.round(k * 240 / o.bpm / o.dur * w), 0, Math.max(1, dpr), h);
+    }
+    var acc = o.acc, g = c.createLinearGradient(0, 0, w, 0);
+    g.addColorStop(0, 'rgba(57,255,20,.55)'); g.addColorStop(1, acc);
+    for (var i = 0; i < n; i++) {
+      var a = Math.floor(i / n * pk.length), b = Math.max(a + 1, Math.floor((i + 1) / n * pk.length)), v = 0;
+      for (var j = a; j < b; j++) if (pk[j] > v) v = pk[j];
+      var f = (i + .5) / n, x = i * (bw + gap), hh = Math.max(dpr, v * top);
+      var played = f <= o.prog, hov = o.hov >= 0 && f <= o.hov;
+      c.fillStyle = played ? g : hov ? 'rgba(57,255,20,.32)' : o.rest;
+      c.fillRect(x, base - hh, bw, hh);
+      if (o.mirror) { c.globalAlpha = played ? .32 : .5; c.fillRect(x, base + dpr, bw, Math.max(dpr, v * bot * .9)); c.globalAlpha = 1; }
+    }
+    if (o.prog > 0 && o.head) {
+      var px = Math.round(o.prog * w);
+      c.shadowColor = acc; c.shadowBlur = 10 * dpr; c.fillStyle = '#fff'; c.fillRect(px - dpr, 0, 2 * dpr, h); c.shadowBlur = 0;
+    }
+  }
+
+  function Player(root) {
+    var me = this, data = JSON.parse(root.querySelector('script.ttp-data').textContent);
+    me.root = root; me.tracks = data.tracks; me.base = data.base || ''; me.art = data.art || '';
+    me.list = root.classList.contains('ttp-list'); me.i = 0; me.hov = -1; me.auto = true; me.pending = -1;
+    me.audio = root.querySelector('audio'); me.cv = root.querySelector('.ttp-wave canvas'); me.wave = root.querySelector('.ttp-wave');
+    me.tip = root.querySelector('.ttp-tip'); me.acc = css(root, '--acc', '#39FF14');
+    me.tracks.forEach(function (t) { t.pk = dec(t.peaks); });
+    me.rows = [].slice.call(root.querySelectorAll('.ttp-tracks li'));
+    me.minis = me.rows.map(function (li) { return li.querySelector('canvas'); });
+    var q = function (s) { return root.querySelector(s); };
+    me.el = { title: q('.ttp-title'), desc: q('.ttp-desc'), chips: q('.ttp-chips'), t: q('.ttp-t'), d: q('.ttp-d'), count: q('.ttp-count'), live: q('.ttp-live') };
+    q('.ttp-play').addEventListener('click', function () { me.toggle(); });
+    var bp = q('.ttp-prev'), bn = q('.ttp-next'), ba = q('.ttp-auto');
+    if (bp) bp.addEventListener('click', function () { me.step(-1); });
+    if (bn) bn.addEventListener('click', function () { me.step(1); });
+    if (ba) ba.addEventListener('click', function () { me.auto = !me.auto; ba.setAttribute('aria-pressed', me.auto); });
+    me.rows.forEach(function (li, k) {
+      li.querySelector('.ttp-row').addEventListener('click', function () {
+        if (k === me.i && me.audio.src) { me.toggle(); } else { me.load(k, true); }
+      });
+    });
+    [].forEach.call(root.querySelectorAll('.ttp-chip'), function (ch) {
+      ch.addEventListener('click', function () {
+        [].forEach.call(root.querySelectorAll('.ttp-chip'), function (x) { x.setAttribute('aria-pressed', x === ch); });
+        var tag = ch.getAttribute('data-tag');
+        me.rows.forEach(function (li, k) { li.hidden = !!tag && me.tracks[k].tag !== tag; });
+        me.drawMinis();
+      });
+    });
+    // Seek: Zeigen, Ziehen, Tastatur
+    var seekAt = function (e) { var r = me.wave.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); };
+    me.wave.addEventListener('pointerdown', function (e) { me.drag = true; me.wave.setPointerCapture(e.pointerId); me.seek(seekAt(e)); });
+    me.wave.addEventListener('pointermove', function (e) {
+      var f = seekAt(e); me.hov = f; me.wave.classList.add('is-hover');
+      me.tip.style.left = (f * 100) + '%'; me.tip.textContent = fmt(f * me.dur());
+      if (me.drag) me.seek(f); else me.paint();
+    });
+    me.wave.addEventListener('pointerup', function () { me.drag = false; });
+    me.wave.addEventListener('pointerleave', function () { me.hov = -1; me.wave.classList.remove('is-hover'); me.paint(); });
+    me.wave.addEventListener('keydown', function (e) {
+      var d = me.dur(), t = me.audio.currentTime || 0, k = e.key;
+      if (k === 'ArrowRight' || k === 'ArrowLeft') { me.seek(Math.min(1, Math.max(0, (t + (k === 'ArrowRight' ? 1 : -1)) / d))); e.preventDefault(); }
+      else if (k === 'Home' || k === 'End') { me.seek(k === 'Home' ? 0 : .999); e.preventDefault(); }
+      else if (k === ' ' || k === 'Enter') { me.toggle(); e.preventDefault(); }
+    });
+    var A = me.audio;
+    A.addEventListener('play', function () { all.forEach(function (p) { if (p !== me) p.audio.pause(); }); me.state(true); });
+    A.addEventListener('playing', function () { me.sync(); });
+    A.addEventListener('seeked', function () { me.sync(); });
+    A.addEventListener('pause', function () { me.state(false); });
+    A.addEventListener('loadedmetadata', function () {
+      if (me.pending >= 0) { A.currentTime = me.pending * A.duration; me.pending = -1; }
+      me.el.d.textContent = fmt(A.duration);
+    });
+    A.addEventListener('ended', function () {
+      if (me.list && me.auto && me.next(1) >= 0) { me.load(me.next(1), true); } else { A.currentTime = 0; me.paint(); }
+    });
+    A.addEventListener('error', function () {
+      var t = me.tracks[me.i];
+      if (me.base && !me.fell) { me.fell = true; A.src = me.base + t.src; if (me.want) A.play().catch(function () {}); }
+      else { root.classList.add('is-error'); me.state(false); }
+    });
+    me.load(0, false);
+    if (window.ResizeObserver) new ResizeObserver(function () { me.paint(); me.drawMinis(); }).observe(root);
+    else window.addEventListener('resize', function () { me.paint(); me.drawMinis(); });
+  }
+  Player.prototype.dur = function () { var d = this.audio.duration; return isFinite(d) && d > 0 ? d : this.tracks[this.i].dur; };
+  Player.prototype.next = function (dir) {
+    var k = this.i;
+    for (var s = 0; s < this.tracks.length; s++) { k += dir; if (k < 0 || k >= this.tracks.length) return -1; if (!this.rows[k] || !this.rows[k].hidden) return k; }
+    return -1;
+  };
+  Player.prototype.step = function (dir) {
+    if (dir < 0 && this.audio.currentTime > 2) { this.audio.currentTime = 0; return; }
+    var k = this.next(dir); if (k >= 0) this.load(k, !this.audio.paused || this.root.classList.contains('is-playing'));
+  };
+  Player.prototype.load = function (k, play) {
+    var t = this.tracks[k], A = this.audio;
+    this.i = k; this.fell = false; this.pending = -1; this.root.classList.remove('is-error');
+    A.src = t.src; A.preload = 'none';
+    this.el.title.textContent = t.title;
+    this.el.desc.textContent = t.desc;
+    this.el.chips.innerHTML = '';
+    var self = this;
+    [t.bpm + ' BPM', t.preset != null && t.preset !== '' ? 'Preset ' + t.preset : '', t.tag].filter(Boolean).forEach(function (s) { var sp = document.createElement('span'); sp.textContent = s; self.el.chips.appendChild(sp); });
+    this.el.t.textContent = '0:00'; this.el.d.textContent = fmt(t.dur);
+    if (this.el.count) this.el.count.textContent = ('0' + (k + 1)).slice(-2) + ' / ' + ('0' + this.tracks.length).slice(-2);
+    this.root.querySelector('.ttp-play').setAttribute('aria-label', 'Play ' + t.title);
+    this.wave.setAttribute('aria-valuemax', Math.round(t.dur)); this.wave.setAttribute('aria-valuenow', 0);
+    this.root.style.setProperty('--beat', (60 / t.bpm) + 's');
+    this.rows.forEach(function (li, j) { li.classList.toggle('is-active', j === k); li.querySelector('.ttp-row').setAttribute('aria-current', j === k ? 'true' : 'false'); });
+    if (this.rows[k]) { var li = this.rows[k], ul = li.parentNode, lr = li.getBoundingClientRect(), ur = ul.getBoundingClientRect(); if (lr.top < ur.top || lr.bottom > ur.bottom) ul.scrollTop += lr.top - ur.top - (ul.clientHeight - li.offsetHeight) / 2; }
+    this.paint(); this.drawMinis();
+    if (play) { this.want = true; A.play().catch(function () {}); }
+  };
+  Player.prototype.toggle = function () {
+    var A = this.audio;
+    if (A.paused) { this.want = true; A.play().catch(function () {}); } else { this.want = false; A.pause(); }
+  };
+  Player.prototype.seek = function (f) {
+    var A = this.audio;
+    if (A.readyState >= 1 && isFinite(A.duration)) { A.currentTime = f * A.duration; }
+    else { this.pending = f; this.want = true; A.play().catch(function () {}); }
+    this.paint(f);
+  };
+  Player.prototype.sync = function () {
+    // Beat-Puls am Takt der Datei ausrichten (alle Beispiele beginnen auf Schlag 1)
+    var beat = 60 / this.tracks[this.i].bpm, r = this.root;
+    r.style.setProperty('--beat-delay', (-((this.audio.currentTime || 0) % beat)) + 's');
+    r.classList.remove('is-beat'); void r.offsetWidth; if (!this.audio.paused) r.classList.add('is-beat');
+  };
+  Player.prototype.state = function (on) {
+    var me = this, t = me.tracks[me.i];
+    me.root.classList.toggle('is-playing', on); if (!on) me.root.classList.remove('is-beat');
+    me.root.querySelector('.ttp-play').setAttribute('aria-label', (on ? 'Pause ' : 'Play ') + t.title);
+    if (me.el.live) me.el.live.textContent = on ? 'Playing' : 'Ready';
+    if (on) {
+      var tick = function () { me.paint(); if (!me.audio.paused) me.raf = requestAnimationFrame(tick); };
+      cancelAnimationFrame(me.raf); me.raf = requestAnimationFrame(tick);
+      if ('mediaSession' in navigator && window.MediaMetadata) {
+        try {
+          navigator.mediaSession.metadata = new MediaMetadata({ title: t.title, artist: me.root.getAttribute('data-artist') || 'TimTechlor',
+            album: 'Sound examples', artwork: me.art ? [{ src: new URL(me.art, location.href).href, sizes: '640x640', type: 'image/jpeg' }] : [] });
+          navigator.mediaSession.setActionHandler('play', function () { me.toggle(); });
+          navigator.mediaSession.setActionHandler('pause', function () { me.toggle(); });
+          navigator.mediaSession.setActionHandler('previoustrack', me.list ? function () { me.step(-1); } : null);
+          navigator.mediaSession.setActionHandler('nexttrack', me.list ? function () { me.step(1); } : null);
+        } catch (e) {}
+      }
+    } else { cancelAnimationFrame(me.raf); me.paint(); }
+  };
+  Player.prototype.paint = function (force) {
+    var A = this.audio, d = this.dur(), t = this.tracks[this.i];
+    var p = typeof force === 'number' ? force : (this.pending >= 0 ? this.pending : Math.min(1, (A.currentTime || 0) / d));
+    this.root.style.setProperty('--p', p.toFixed(4));
+    this.el.t.textContent = fmt(p * d);
+    this.wave.setAttribute('aria-valuenow', Math.round(p * d)); this.wave.setAttribute('aria-valuetext', fmt(p * d) + ' of ' + fmt(d));
+    draw(this.cv, t.pk, { bar: 2, gap: 1, mirror: true, grid: true, head: true, bpm: t.bpm, dur: d, prog: p, hov: this.hov, acc: this.acc, rest: 'rgba(255,255,255,.17)' });
+    var m = this.minis[this.i];
+    if (m && !this.rows[this.i].hidden) draw(m, t.pk, { bar: 1, gap: 1, mirror: false, prog: p, hov: -1, acc: this.acc, rest: 'rgba(255,255,255,.22)' });
+  };
+  Player.prototype.drawMinis = function () {
+    var me = this;
+    me.minis.forEach(function (m, k) {
+      if (!m || me.rows[k].hidden || k === me.i) return;
+      draw(m, me.tracks[k].pk, { bar: 1, gap: 1, mirror: false, prog: 0, hov: -1, acc: me.acc, rest: 'rgba(255,255,255,.22)' });
+    });
+    if (me.minis[me.i]) me.paint();
+  };
+  function init() { [].forEach.call(document.querySelectorAll('[data-ttp]'), function (r) { if (!r.ttp) { r.ttp = new Player(r); all.push(r.ttp); } }); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+<div class="kk-sound-player"><div class="ttp ttp-list" data-ttp data-artist="TT-KICK" role="region" aria-label="Factory kick examples"><div class="ttp-now"><div class="ttp-art"><img src="img/tt-ui-options/kick-front.png" alt="" width="640" height="640" loading="lazy"><button type="button" class="ttp-play" aria-label="Play 909 TIGHT"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></button></div><div class="ttp-body"><div class="ttp-kicker"><span>TT-KICK // 44 factory kicks, eight hits each</span><span class="ttp-live">Ready</span></div><div class="ttp-title">909 TIGHT</div><p class="ttp-desc">Punchy club kick — tail ≈ 110 ms, sub ≈ 45 Hz</p><div class="ttp-chips"><span>130 BPM</span><span>Preset 1</span><span>909</span></div><div class="ttp-wave" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><canvas></canvas><span class="ttp-tip">0:00</span></div><div class="ttp-foot"><span class="ttp-t">0:00</span><span>/</span><span class="ttp-d">0:05</span><span class="ttp-sp"></span><button type="button" class="ttp-btn ttp-prev" aria-label="Previous example"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM20 5v14L9 12z"/></svg></button><button type="button" class="ttp-btn ttp-next" aria-label="Next example"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM4 5v14l11-7z"/></svg></button><button type="button" class="ttp-btn ttp-auto" aria-pressed="true" title="Play the next example automatically">AUTO</button><span class="ttp-count"></span></div><div class="ttp-err">Audio file not found. The examples are online at timtechlor.de/docs.</div></div></div><div class="ttp-filter" role="group" aria-label="Filter by family"><button type="button" class="ttp-chip" aria-pressed="true" data-tag="">All<b>44</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="909">909<b>7</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="808">808<b>4</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="HARD">HARD<b>6</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="RUMBLE">RUMBLE<b>5</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="MINIMAL">MINIMAL<b>6</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="ROLL">ROLL<b>4</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="DEEP">DEEP<b>5</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="CHAR">CHAR<b>7</b></button></div><ol class="ttp-tracks"><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">01</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>909 TIGHT</b><small>Punchy club kick — tail ≈ 110 ms, sub ≈ 45 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">909</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">02</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>909 PUNCH</b><small>Punchy club kick — tail ≈ 160 ms, sub ≈ 51 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">909</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">03</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>909 DEEP</b><small>Punchy club kick — tail ≈ 300 ms, sub ≈ 48 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">909</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">04</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>909 SOFT</b><small>Punchy club kick — tail ≈ 230 ms, sub ≈ 49 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">909</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">05</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>808 SUB</b><small>Round sub kick — tail ≈ 740 ms, sub ≈ 46 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">808</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">06</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>808 LONG</b><small>Round sub kick — tail ≈ 1150 ms, sub ≈ 48 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">808</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">07</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>808 PUNCHY</b><small>Round sub kick — tail ≈ 510 ms, sub ≈ 47 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">808</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">08</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>HARD TECHNO</b><small>Hard, driven kick — tail ≈ 210 ms, sub ≈ 52 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">HARD</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">09</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>HARDER</b><small>Hard, driven kick — tail ≈ 190 ms, sub ≈ 51 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">HARD</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">10</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>HARDCORE</b><small>Hard, driven kick — tail ≈ 170 ms, sub ≈ 49 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">HARD</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">11</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>INDUSTRIAL</b><small>Hard, driven kick — tail ≈ 400 ms, sub ≈ 50 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">HARD</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">12</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>MACHINE FUNK</b><small>Punchy club kick — tail ≈ 150 ms, sub ≈ 53 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">909</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">13</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>RUMBLE DEEP</b><small>Kick with a built-in rumble tail — tail ≈ 1300 ms, sub ≈ 46 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">RUMBLE</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">14</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>RUMBLE FAST</b><small>Kick with a built-in rumble tail — tail ≈ 740 ms, sub ≈ 49 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">RUMBLE</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">15</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>RUMBLE DRY</b><small>Kick with a built-in rumble tail — tail ≈ 950 ms, sub ≈ 49 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">RUMBLE</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">16</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>RUMBLE DARK</b><small>Kick with a built-in rumble tail — tail ≈ 1430 ms, sub ≈ 44 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">RUMBLE</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">17</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>MINIMAL CLUB</b><small>Tight, dry club kick — tail ≈ 120 ms, sub ≈ 55 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">MINIMAL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">18</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>DUB DRY</b><small>Tight, dry club kick — tail ≈ 190 ms, sub ≈ 48 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">MINIMAL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">19</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>CLUB PUNCH</b><small>Tight, dry club kick — tail ≈ 190 ms, sub ≈ 53 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">MINIMAL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">20</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>BERGHAIN</b><small>Tight, dry club kick — tail ≈ 490 ms, sub ≈ 50 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">MINIMAL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">21</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>ROLL TIGHT</b><small>Short kick for rolling patterns — tail ≈ 70 ms, sub ≈ 30 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">ROLL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">22</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>ROLL SHARP</b><small>Short kick for rolling patterns — tail ≈ 70 ms, sub ≈ 30 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">ROLL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">23</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>ROLL DEEP</b><small>Short kick for rolling patterns — tail ≈ 90 ms, sub ≈ 49 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">ROLL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">24</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>SUB FOCUS</b><small>Deep, sub-focused kick — tail ≈ 450 ms, sub ≈ 44 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">DEEP</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">25</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>DEEP MELODIC</b><small>Deep, sub-focused kick — tail ≈ 690 ms, sub ≈ 45 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">DEEP</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">26</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>SOFT DEEP</b><small>Deep, sub-focused kick — tail ≈ 840 ms, sub ≈ 45 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">DEEP</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">27</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>ACID GLIDE</b><small>Character kick — tail ≈ 320 ms, sub ≈ 51 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">CHAR</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">28</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>REVERSE BLOOM</b><small>Character kick — tail ≈ 1000 ms, sub ≈ 45 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">CHAR</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">29</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>WAREHOUSE</b><small>Character kick — tail ≈ 570 ms, sub ≈ 49 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">CHAR</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">30</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>CLICK MINIMAL</b><small>Character kick — tail ≈ 90 ms, sub ≈ 55 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">CHAR</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">31</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>909 SLAM</b><small>Punchy club kick — tail ≈ 200 ms, sub ≈ 51 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">909</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">32</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>909 CLICKY</b><small>Punchy club kick — tail ≈ 120 ms, sub ≈ 53 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">909</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">33</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>808 TIGHT</b><small>Round sub kick — tail ≈ 370 ms, sub ≈ 46 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">808</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">34</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>HARD SCOOP</b><small>Hard, driven kick — tail ≈ 240 ms, sub ≈ 50 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">HARD</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">35</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>NOISE INDUSTRIAL</b><small>Hard, driven kick — tail ≈ 430 ms, sub ≈ 49 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">HARD</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">36</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>RUMBLE SUB</b><small>Kick with a built-in rumble tail — tail ≈ 1240 ms, sub ≈ 44 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">RUMBLE</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">37</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>MINIMAL DRY</b><small>Tight, dry club kick — tail ≈ 100 ms, sub ≈ 55 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">MINIMAL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">38</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>CLUB WARM</b><small>Tight, dry club kick — tail ≈ 230 ms, sub ≈ 51 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">MINIMAL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">39</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>ROLL SOFT</b><small>Short kick for rolling patterns — tail ≈ 70 ms, sub ≈ 80 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">ROLL</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">40</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>SUB RUMBLE</b><small>Deep, sub-focused kick — tail ≈ 1520 ms, sub ≈ 42 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">DEEP</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">41</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>DEEP PUNCH</b><small>Deep, sub-focused kick — tail ≈ 390 ms, sub ≈ 48 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">DEEP</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">42</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>TECHNO CLASSIC</b><small>Character kick — tail ≈ 240 ms, sub ≈ 51 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">CHAR</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">43</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>WAREHOUSE TIGHT</b><small>Character kick — tail ≈ 350 ms, sub ≈ 51 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">CHAR</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">44</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>REVERSE RISE</b><small>Character kick — tail ≈ 1570 ms, sub ≈ 44 Hz</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">CHAR</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li></ol><script type="application/json" class="ttp-data">{"base": "https://timtechlor.de/docs/", "art": "img/tt-ui-options/kick-front.png", "tracks": [{"title": "909 TIGHT", "desc": "Punchy club kick — tail ≈ 110 ms, sub ≈ 45 Hz", "src": "audio/tt-kick/01-909-tight.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "wvui62000000000000000000nztoa30000000000000000008yttg51000000000000000000sxsm92000000000000000000hxtsd50000000000000000000vvuj72000000000000000000mzqra30000000000000000004xtvg510000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "909", "preset": 1}, {"title": "909 PUNCH", "desc": "Punchy club kick — tail ≈ 160 ms, sub ≈ 51 Hz", "src": "audio/tt-kick/02-909-punch.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "wyrwpkd51000000000000000oyutsmh820000000000000009zwrvoic50000000000000000sytvske72000000000000000gzwrvnha30000000000000000vxrxqkd51000000000000000lywtsng820000000000000004yxsupkd500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "909", "preset": 2}, {"title": "909 DEEP", "desc": "Punchy club kick — tail ≈ 300 ms, sub ≈ 48 Hz", "src": "audio/tt-kick/03-909-deep.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "wywnuuroonkjic7300000000nywrrwtpmnmjhf94100000008zytouwsnlmmifc6200000000sywprvuqnlllhc9310000000gyxtnvtrpmkkkea6100000000vyuouurpomkkic7300000000lzwrrvspooljif95100000004yxvnuvrnnnlihc63000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "909", "preset": 3}, {"title": "909 SOFT", "desc": "Punchy club kick — tail ≈ 230 ms, sub ≈ 49 Hz", "src": "audio/tt-kick/04-909-soft.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xwttgilkgc83000000000000nxtxjfklie951000000000007zvwpehlkgb62000000000000swvvigkkie94100000000000fzuxngjkifb62000000000000vxtthiljgc84000000000000kyuvlfkliea52000000000004xwuseilkgb730000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "909", "preset": 4}, {"title": "808 SUB", "desc": "Round sub kick — tail ≈ 740 ms, sub ≈ 46 Hz", "src": "audio/tt-kick/05-808-sub.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "nqommjijlmrnmpmlolkmjjkhnvppxdktyvvunlnmlnkkmijkirsvsngquzuusllomknkkmijkpuulvcptvztspllollnjklhkittrtmiuuwyrqnkmoklmjkkhkssukvbqwuxwponlmnklmilkhluspwhjuxuxtnnnlmnjmliljissvprcpwxtwqlnnknmjmkiliijfifffcebb96410000000000000000000000000000000000000000000000000000000000000000000000", "tag": "808", "preset": 5}, {"title": "808 LONG", "desc": "Round sub kick — tail ≈ 1150 ms, sub ≈ 48 Hz", "src": "audio/tt-kick/06-808-long.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "jnkkjhggfebehjlimikjjkhkmrrolsndousnsnqigb779bhhnovqynyctstnosnofd868bdjisqvrpxmlwqrmqqmkdb76adgklssrwttduupqnsnlgb967cejkqqvwnyglxroqnskkd9779ffmlvssrxphswooqpqiha878bghnosuylzcpuumqppmhe878aehknoqqqqonjhfegefeeedecebdacaaa89786431000000000000000000000000000000000000000000000000", "tag": "808", "preset": 6}, {"title": "808 PUNCHY", "desc": "Round sub kick — tail ≈ 510 ms, sub ≈ 47 Hz", "src": "audio/tt-kick/07-808-punchy.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "uzuttrnntvtsstspoqolllhdmzwttrqnpuwusrsspnpoljkfcxxvtprppruvusqrspnookiidqzvuqsopstuvurqrrpmnnjighxxussqnsuttuurpqrommmigeuxvtssnouvtsttrppqnlmlhelzwusspmqvvtsttropqnklkfdxwwsrronswvsrstqoopmklida510000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "808", "preset": 7}, {"title": "HARD TECHNO", "desc": "Hard, driven kick — tail ≈ 210 ms, sub ≈ 52 Hz", "src": "audio/tt-kick/08-hard-techno.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "zxrsrponkg50000000000000nvsrtqonlib1000000000000bwvourpnmje50000000000000rururponkh81000000000000gxtrtqpnmjc30000000000000uvqtrponkg60000000000000lwsrsqonmjb20000000000006vvqtrpomkg500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "HARD", "preset": 8}, {"title": "HARDER", "desc": "Hard, driven kick — tail ≈ 190 ms, sub ≈ 51 Hz", "src": "audio/tt-kick/09-harder.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "zxsnpppnj700000000000000oxtlpqpnle10000000000000bwuopqpomi700000000000000svsnqqpnkc10000000000000ixtopqpomg400000000000000vusnpqpnk800000000000000mwumoqpome200000000000007xsrnqpomj7000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "HARD", "preset": 9}, {"title": "HARDCORE", "desc": "Hard, driven kick — tail ≈ 170 ms, sub ≈ 49 Hz", "src": "audio/tt-kick/10-hardcore.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "zvprqpnj7000000000000000ouroqqpmc100000000000000bvumrqoni2000000000000000ruorqpnla000000000000000ivspqpomg2000000000000000uuorqpnj8000000000000000lvroqpomd1000000000000007vtnqqpni50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "HARD", "preset": 10}, {"title": "INDUSTRIAL", "desc": "Hard, driven kick — tail ≈ 400 ms, sub ≈ 50 Hz", "src": "audio/tt-kick/11-industrial.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "zzuttqqrqqppoooonljh7100nwusuqqqqqqqpoononlid200bwvsvrqqqpppqpoonnmje6000swussrrqqppppponmmmh9200hwvtsrrrqqppppponmlkd4000vvuttqrrqqppooponlki7100lwvrvqqqrqqppoooomljd3006wvtusqqqqqqpponoomjg70000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "HARD", "preset": 11}, {"title": "MACHINE FUNK", "desc": "Punchy club kick — tail ≈ 150 ms, sub ≈ 53 Hz", "src": "audio/tt-kick/12-machine-funk.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "wxptqkd40000000000000000oxuorng81000000000000000ayvosqjb40000000000000000sxsqsme61000000000000000gzwmuoh920000000000000000vwqtrkd40000000000000000lyvpsnh810000000000000005xxpsqkd400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "909", "preset": 12}, {"title": "RUMBLE DEEP", "desc": "Kick with a built-in rumble tail — tail ≈ 1300 ms, sub ≈ 46 Hz", "src": "audio/tt-kick/13-rumble-deep.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "kmjj8fjmomlnnllnlklmjkmkmpnsgprstrnmmiffcaabeggjmoqsqoywvwrmkgb9acdcdfhhkomrvkuzwuupkieaabddcdhiilspqrpxzvssmifcaabdddeijjornvouxytrqkgdaabcdeefjjjrptosvxxspoiebabccdefgkknsqspwwxwqnlfcaacccefghlklonnqnnpmmnjkiggfdffdfedecddbdbbbab9a98865210000000000000000000000000000000000000000", "tag": "RUMBLE", "preset": 13}, {"title": "RUMBLE FAST", "desc": "Kick with a built-in rumble tail — tail ≈ 740 ms, sub ≈ 49 Hz", "src": "audio/tt-kick/14-rumble-fast.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "oqnqppqqpoppqpnmmnnmlkllorrnwuxzxurpooonmmmnmlkklsppuvuxyxtqonnoomllmmlkkpurmxwwwxwspnmnoomllmmljkssmuxxwwwuromnnnomlllmljpuqnwxywvuspnnnnnnmlllmlmrslwvyywusqononmmnmlklllsppsvvzywtqoooonmmnmlkklkiiiigghgddb7410000000000000000000000000000000000000000000000000000000000000000000000", "tag": "RUMBLE", "preset": 14}, {"title": "RUMBLE DRY", "desc": "Kick with a built-in rumble tail — tail ≈ 950 ms, sub ≈ 49 Hz", "src": "audio/tt-kick/15-rumble-dry.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "lmmfkonmmnnnmllmmkjklljjoroonzyvrpnjfcbdfjnnnpqnksosfvzytqnlhdbcfhkopoppmnsplrxywsolifcbehilppooolrpslwxwvrmjgdbdgikmqqonnqsokuxwutpkhecbeiklnqqnmoqornyxusrnjfcbcgkmmorpmlrqsfvzwtqplhdbcehlnnorolkkjhhiiggigfffededcdb9953100000000000000000000000000000000000000000000000000000000000", "tag": "RUMBLE", "preset": 15}, {"title": "RUMBLE DARK", "desc": "Kick with a built-in rumble tail — tail ≈ 1430 ms, sub ≈ 44 Hz", "src": "audio/tt-kick/16-rumble-dark.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "imjjgiihlolmollnlknkjmkjmsnojillnmrrqvuswttwsstopqqomfmikjjmmnsutywvztutnqpopdllhljjnoouutzvvysuqorrjlgmjiljkoppvvuzvwwrtoqomqcklijljlpqrxuvzuxuqrmspngikkiklkmrrsyuxyuxsqqoqnoeljkilllnsruyuyxtwqpojjieeb9accdhfjjilimikighdeddebdbcbbbab9a8a797866321000000000000000000000000000000000", "tag": "RUMBLE", "preset": 16}, {"title": "MINIMAL CLUB", "desc": "Tight, dry club kick — tail ≈ 120 ms, sub ≈ 55 Hz", "src": "audio/tt-kick/17-minimal-club.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "zxhod4000000000000000000ozmoh71000000000000000008yvklb3000000000000000000txlng6100000000000000000gyslla2000000000000000000xxgoe4000000000000000000lyqoi71000000000000000004ywjmc30000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "MINIMAL", "preset": 17}, {"title": "DUB DRY", "desc": "Tight, dry club kick — tail ≈ 190 ms, sub ≈ 48 Hz", "src": "audio/tt-kick/18-dub-dry.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xwwnbggc8300000000000000nztubeie95100000000000007yuygahhb6200000000000000rxwoaeie8310000000000000ezvvfcggb5100000000000000uwwnbfgd8300000000000000lzuudehea5100000000000004yvwkbhgb73000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "MINIMAL", "preset": 18}, {"title": "CLUB PUNCH", "desc": "Tight, dry club kick — tail ≈ 190 ms, sub ≈ 53 Hz", "src": "audio/tt-kick/19-club-punch.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xxwhnolhb400000000000000nywokqnid6100000000000009zxuhqokf8300000000000000txxjoplhb510000000000000hzwrjpnje8200000000000000wxvioolhb400000000000000mzvqkpnje7200000000000004ywwfoplga4000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "MINIMAL", "preset": 19}, {"title": "BERGHAIN", "desc": "Tight, dry club kick — tail ≈ 490 ms, sub ≈ 50 Hz", "src": "audio/tt-kick/20-berghain.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "yywtqttssrrssqppqponnnjgpzxvqsutssrrrsrppppomnmhgzxvsputttsrrqrrpoopnmmleuywvpttsstsrqqrrpoopnlljkzxursutsstsrqqqrponpnljfwywtqutssrssrqpqqpnnomjiozvwqsutsrrrsrqppqonnolifyyvtrtutsrrrsrqppqonmnkfa200000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "MINIMAL", "preset": 20}, {"title": "ROLL TIGHT", "desc": "Short kick for rolling patterns — tail ≈ 70 ms, sub ≈ 30 Hz", "src": "audio/tt-kick/21-roll-tight.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "zvk400000000000000000000qxr700000000000000000000czwd100000000000000000000vxm500000000000000000000kxvc100000000000000000000xwk400000000000000000000oxra000000000000000000006zvh2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "ROLL", "preset": 21}, {"title": "ROLL SHARP", "desc": "Short kick for rolling patterns — tail ≈ 70 ms, sub ≈ 30 Hz", "src": "audio/tt-kick/22-roll-sharp.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xqj300000000000000000000qum800000000000000000000cypf000000000000000000000tsl500000000000000000000iymd000000000000000000000xqj400000000000000000000nwma000000000000000000005zoi1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "ROLL", "preset": 22}, {"title": "ROLL DEEP", "desc": "Short kick for rolling patterns — tail ≈ 90 ms, sub ≈ 49 Hz", "src": "audio/tt-kick/23-roll-deep.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "ypnb10000000000000000000qulh500000000000000000009zmlb10000000000000000000tsmf40000000000000000000ixlk710000000000000000000vqoc20000000000000000000mxli500000000000000000006xqmb100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "ROLL", "preset": 23}, {"title": "SUB FOCUS", "desc": "Deep, sub-focused kick — tail ≈ 450 ms, sub ≈ 44 Hz", "src": "audio/tt-kick/24-sub-focus.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xzvuptqowusvspsomojjfb72lzyuqrsqqxusurornmnhic846zxwrsrrssxtruroqmllgg962rywttsosttwtqtpoqklkfd74dzyvurroutuwsqtoopjlhda41uywtrtppwtuvqqsnonjkec73jzxusrtosxsuvpqrmolijc944wyvuqsspvwstupqqlnkiga720000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "DEEP", "preset": 24}, {"title": "DEEP MELODIC", "desc": "Deep, sub-focused kick — tail ≈ 690 ms, sub ≈ 45 Hz", "src": "audio/tt-kick/25-deep-melodic.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "qsppplkknoupqrmqompknlklmzwtlxlamvtxpqqmqnmoknkkmswsvqubhsvtvoqqmqmmojnjlttvwlxhemwutsnqpmqlnmkmimvxsrwo8mpyssrnqonpkollliutuxowbfrsyqrqnqmnokoklkmzuvlxl8nsvwprpnqmonlnjmjttwvpvbftswtornoplplmmjmhkgiggedb9631000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "DEEP", "preset": 25}, {"title": "SOFT DEEP", "desc": "Deep, sub-focused kick — tail ≈ 840 ms, sub ≈ 45 Hz", "src": "audio/tt-kick/26-soft-deep.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "lolliigeiklojmkjlilijihjisosop9npxuxtnleeffkhjhikprrkubhrrztwplicehgkhkhimrqnuiaottzsumjfcfhikhkgkortms8isuwxrsjhedihjihjgrrqiuhfmvtyurogfdejhkhiijprsmr9lpxtyrqkfeegkhkgjhqspjvfhotxuxoohdffijijgjfifhfgefdecdab9a763100000000000000000000000000000000000000000000000000000000000000000", "tag": "DEEP", "preset": 26}, {"title": "ACID GLIDE", "desc": "Character kick — tail ≈ 320 ms, sub ≈ 51 Hz", "src": "audio/tt-kick/27-acid-glide.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "wxvpvurqponmkie820000000nyvrtvsqqponmjfa400000009zvuqwtrppoonlhc610000000sxxmxurqponnmjf830000000gzvstwsqpoonmkhb510000000vxvqwurqponmkif820000000mywquvtqpponljgb400000004yxupvurqpoomkhd7200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "CHAR", "preset": 27}, {"title": "REVERSE BLOOM", "desc": "Character kick — tail ≈ 1000 ms, sub ≈ 45 Hz", "src": "audio/tt-kick/28-reverse-bloom.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "figgcabb9bbbeddgefhfgihhlookreceddccegjopqvwuwzxuwslrmaefdccdghlqrrvxvwzxwrskqfbefcbcfijmssswyvwzvwqlsiccfecbdgjlotttxyvwywqspndddedbceilmquuuxyvwywplrfdddeccdfknorwuuyyvvxqprmaeeddcdehmpptwvvyyvuunjkjjlljlmkkmmllnnllnnkif8100000000000000000000000000000000000000000000000000000000", "tag": "CHAR", "preset": 28}, {"title": "WAREHOUSE", "desc": "Character kick — tail ≈ 570 ms, sub ≈ 49 Hz", "src": "audio/tt-kick/29-warehouse.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xxvrvvusssssrqqqqponoomlszwuswvtsrrssrqppqponoommyywpuwvtsrrrsrqpppponnomuywtrwvutsrrqrrqpopponnooyyuqwvtttsrrqqrqpoopnmmnxwwrvwusstsrqqqrqooopnmmszvvrwvtsrssrqqqrqonopnmmyyvrvwusrrrsrqqpqqonnonllmifb30000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "CHAR", "preset": 29}, {"title": "CLICK MINIMAL", "desc": "Character kick — tail ≈ 90 ms, sub ≈ 55 Hz", "src": "audio/tt-kick/30-click-minimal.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "wusf30000000000000000000nxpl700000000000000000008yrrb10000000000000000000rvsh40000000000000000000hzpo800000000000000000000utsf30000000000000000000mxql800000000000000000004yrqe200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "CHAR", "preset": 30}, {"title": "909 SLAM", "desc": "Punchy club kick — tail ≈ 200 ms, sub ≈ 51 Hz", "src": "audio/tt-kick/31-909-slam.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xzushnomha20000000000000ozuwjmonjd40000000000000ayxvojoolg710000000000000tyvuhmpnjb20000000000000gzwwlkoolg600000000000000wxutgnomib20000000000000myvwjlonke500000000000005zxvpioolh9200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "909", "preset": 31}, {"title": "909 CLICKY", "desc": "Punchy club kick — tail ≈ 120 ms, sub ≈ 53 Hz", "src": "audio/tt-kick/32-909-clicky.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "ywmqg5000000000000000000nzntj81000000000000000009ztrnc3000000000000000000txoqh6100000000000000000iyrrmc3000000000000000000wxmqh6100000000000000000nxrsla2000000000000000005yvppe40000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "909", "preset": 32}, {"title": "808 TIGHT", "desc": "Round sub kick — tail ≈ 370 ms, sub ≈ 46 Hz", "src": "audio/tt-kick/33-808-tight.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "uyvtqidlttqpqokjg9510000kzwtqnehputqopojgd6200006xxvrrggnrttpnonhd9310000pzuttjdlqrsspmnlfb610000czxttodhqsrrrolljc8300000txwsricmtsqrqnkkg9510000jyvusnegquspqqmjid6300004wxttqielturopplhf94100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "808", "preset": 33}, {"title": "HARD SCOOP", "desc": "Hard, driven kick — tail ≈ 240 ms, sub ≈ 50 Hz", "src": "audio/tt-kick/34-hard-scoop.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "zwtsopponkhb300000000000nvttpnooomje600000000000bwvrsnoonmlh8100000000000rvsvoooonlje300000000000gwutqooonmjh8000000000000twssoopomkhc300000000000lwstqnponmjf7000000000006vvrtnoponlha2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "HARD", "preset": 34}, {"title": "NOISE INDUSTRIAL", "desc": "Hard, driven kick — tail ≈ 430 ms, sub ≈ 49 Hz", "src": "audio/tt-kick/35-noise-industrial.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "zwutpmppppooponmmnljic30nvvrslnqqpoooponmmnlif61bwusunmoqqppoooonmlmkgb20qvutqmnppqpponnonmllid60gwusronpppppponnonlkkg820tvsspnopppopponmnmljjc40kwursmoqppoopponmnmkih716vwstolpqppooopnmmnmjhc200000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "HARD", "preset": 35}, {"title": "RUMBLE SUB", "desc": "Kick with a built-in rumble tail — tail ≈ 1240 ms, sub ≈ 44 Hz", "src": "audio/tt-kick/36-rumble-sub.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "ikjig8diknlkmljlkikjikjhlpmllpkmsquvswuruqpqkkiddlkmdjhhltswyuyvrupoojigcimlfihhjputxxuytrtonnihfflklekfjlsvtywuxsrsmnlggdllkejifmouvuzvuwqrqlmjfffllkekgipqwvvzuuuprpklheelkldjjfnqryvwytutoqnjkfdc98addhhilimjjifgdeecebdbcbab9b8a7978653200000000000000000000000000000000000000000000", "tag": "RUMBLE", "preset": 36}, {"title": "MINIMAL DRY", "desc": "Tight, dry club kick — tail ≈ 100 ms, sub ≈ 55 Hz", "src": "audio/tt-kick/37-minimal-dry.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xtkh50000000000000000000oxil910000000000000000007yond30000000000000000000svki81000000000000000000eynkd30000000000000000000utki60000000000000000000kzhla20000000000000000004vsmf400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "MINIMAL", "preset": 37}, {"title": "CLUB WARM", "desc": "Tight, dry club kick — tail ≈ 230 ms, sub ≈ 51 Hz", "src": "audio/tt-kick/38-club-warm.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xyuwuonmjf94000000000000nzwuwqomkgb62000000000008zxswspolid73000000000000syuuvqonkf94100000000000hyxrwronlic62000000000000vyuvvonmjf94000000000000mywsyqomkhc62000000000004yxrytpnlie940000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "MINIMAL", "preset": 38}, {"title": "ROLL SOFT", "desc": "Short kick for rolling patterns — tail ≈ 70 ms, sub ≈ 80 Hz", "src": "audio/tt-kick/39-roll-soft.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "yxa100000000000000000000qyk3000000000000000000009yv8000000000000000000000uxh100000000000000000000izq4000000000000000000000wxc100000000000000000000nyo3000000000000000000006yv81000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "ROLL", "preset": 39}, {"title": "SUB RUMBLE", "desc": "Deep, sub-focused kick — tail ≈ 1520 ms, sub ≈ 42 Hz", "src": "audio/tt-kick/40-sub-rumble.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "jljihhjjmnkolmnknkklimjkmposi9fcfejjmpntquttwrwrvvsspfnlmmmoknkknlqrswtztzvtvekokolnnknjknmsruwvywxtxkklokokolkmjmnnurxuxwxypvdmlmlokoklljnopvsytyvxrwkllnlnnlojllkposutytzxwqsepkokolmnjmllrpvtwwvysvoqjkgfeaa7799dcgfihjikhjgiefbdbcac9b9b8a898887867543210000000000000000000000000000", "tag": "DEEP", "preset": 40}, {"title": "DEEP PUNCH", "desc": "Deep, sub-focused kick — tail ≈ 390 ms, sub ≈ 48 Hz", "src": "audio/tt-kick/41-deep-punch.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "vywtkouvvtstspnplgd62000lzxtpjsuvwtrsspnojd930007yxwshrtuvvtqqrommga51000rywvkotutuvtqqrnkkd73000ezyurjsuuttusppqmjh941000uyvtkouvutsuspppkhd62000kzwvpisvwusstroooif930004wyvthptvwusrtqnomgc610000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "DEEP", "preset": 41}, {"title": "TECHNO CLASSIC", "desc": "Character kick — tail ≈ 240 ms, sub ≈ 51 Hz", "src": "audio/tt-kick/42-techno-classic.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xyxpbkoomie8200000000000oywvchmonkga4000000000009zyvlckoomid6100000000000txvu8inomkg9300000000000hzxwgemonlhc6100000000000wywpaknomje9300000000000mzuwfhmonkgb5100000000005yxvobkoomid72000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "CHAR", "preset": 42}, {"title": "WAREHOUSE TIGHT", "desc": "Character kick — tail ≈ 350 ms, sub ≈ 51 Hz", "src": "audio/tt-kick/43-warehouse-tight.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "xzvonqqrqppooomje8200000ozvujpqrrqponnnlha400000azxwjnqqqqqponmlje6100000tywqkqqqqpqponljh9200000hzwvjpqqqppppomkhe5000000wxvpnqqqqppopoljf9200000myxujpqrqqpooonkhc5000005yxwlnqrrqqponnmje72000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "CHAR", "preset": 43}, {"title": "REVERSE RISE", "desc": "Character kick — tail ≈ 1570 ms, sub ≈ 44 Hz", "src": "audio/tt-kick/44-reverse-rise.mp3", "bpm": 130, "dur": 5.2923125, "peaks": "ehgeda9988a9bbbdbecdfdffikmdnkhgegihklkpoospqtprrprsgsrmllhiheeabbfijppqvvtyrwzxrqmhigdd9cchjkqqrxwswtxyvpojgiecb9ddjkmsrtxsxuwwxtnmighdcabefllotrvytsxxvwqlkhggbc9dfinmqusxuwszwuunjjgfeabafgkonsuswxuwwsqnfcb753258acgghllloqoqspmmjhijhhjigiihhjigiigghfc9400000000000000000000000000", "tag": "CHAR", "preset": 44}]}</script><audio preload="none"></audio></div>
+</div>
+<h3>What is inside a hit</h3>
+<p>The pictures below show one hit of five different designs: the waveform on top, the spectrogram (frequency on a logarithmic axis, 20&nbsp;Hz to 2&nbsp;kHz) below,
+and the three segments shaded on the time axis exactly as FUSION shows them.</p>
+<figure class="shot"><img src="img/tt-kick/anatomy_909_tight.png" alt="Waveform and spectrogram of 909 TIGHT with the three segments marked" width="1200" height="640"><figcaption><span class="tag">909 TIGHT</span><b>Anatomy of 909 TIGHT.</b> A short click, a pitch-swept body and a brief tail. The spectrogram shows the body sweeping down into the sub region while the transient is still ringing.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/anatomy_808_sub.png" alt="Waveform and spectrogram of 808 SUB with the three segments marked" width="1200" height="640"><figcaption><span class="tag">808 SUB</span><b>Anatomy of 808 SUB.</b> The body carries the whole sound: a long sub with a slow decay and no distinct transient.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/anatomy_rumble_deep.png" alt="Waveform and spectrogram of RUMBLE DEEP with the three segments marked" width="1200" height="640"><figcaption><span class="tag">RUMBLE DEEP</span><b>Anatomy of RUMBLE DEEP.</b> The tail (S3) keeps the sub alive between the hits.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/anatomy_roll_tight.png" alt="Waveform and spectrogram of ROLL TIGHT with the three segments marked" width="1200" height="640"><figcaption><span class="tag">ROLL TIGHT</span><b>Anatomy of ROLL TIGHT.</b> Everything is short, so the pattern stays clear at fast tempos.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/anatomy_reverse_bloom.png" alt="Waveform and spectrogram of REVERSE BLOOM with the three segments marked" width="1200" height="640"><figcaption><span class="tag">REVERSE BLOOM</span><b>Anatomy of REVERSE BLOOM.</b> S3 runs backward: the tail swells into the next hit instead of decaying.</figcaption></figure>
+<h2 id="quickstart"><span class="num">03</span>Quick start</h2>
+<ol>
+  <li>Drop <code>TT-KICK</code> from your effects browser onto a track
+      (REAPER 7.x; it is an instrument — feed it MIDI).</li>
+  <li><code>Play instantly:</code> the factory state is pure <b>SYNTH</b> on all
+      three lanes — press a note (or switch the built-in player on) and a
+      complete kick sounds with <b>no kit loaded</b>.</li>
+  <li><code>Use your own samples:</code> run one of the
+      <b>TT-KICK Load Kit</b> actions (section 10) with the TT-KICK window
+      focused (or its track selected) and assign one file per slot — that
+      instance loads the kit at once. Or click a lane's
+      <b>CAP</b> and record a source straight into the slot (section 07).</li>
+  <li>Watch the <b>FUSION</b> row for the assembled result, shape the master rack
+      (section 08), dial in the player (section 09), pick a preset
+      (section 11).</li>
+</ol>
+<div class="box" data-k="No sound?">Check the kit status readout in the top
+right (<code>KIT n/3</code>), make sure the lane is
+set to SAMPLE with a loaded slot (or to SYNTH), that its <b>M</b>ute is off
+(and it is not left out by another lane's <b>S</b>olo), and that the master
+OUT gain is up. In SYNC mode the player only runs while the REAPER transport
+plays.</div>
+
+
+<figure class="shot"><img src="img/tt-kick/header.png" alt="The TT-KICK header: logo, UNDO, trigger LED, kit status, the preset bar, OPTIONS and the MAIN, SYS and EXPERT tabs" width="1125" height="85"><figcaption><span class="tag">HEADER</span>Row 2: the preset bar (INIT + 44 factory kicks + 32 user slots) left of OPTIONS; row 1: 20-step UNDO, the trigger LED (lights on every kick) and the kit status: <b>KIT 3/3</b> means all three slots carry samples.</figcaption></figure>
+
+<h2 id="segments"><span class="num">04</span>The three segments</h2>
+<table>
+  <tr><th>Lane</th><th>Role</th><th>Recommended (REC)</th><th>Synth engine</th></tr>
+  <tr><td>S1 · TRANSIENT</td><td>Attack / click</td><td>0–30 ms</td><td>Click oscillator + noise burst</td></tr>
+  <tr><td>S2 · BODY</td><td>The punch</td><td>5–150 ms</td><td>Pitch-envelope oscillator (core)</td></tr>
+  <tr><td>S3 · TAIL</td><td>Room / sub tail</td><td>10–1500 ms</td><td>Sine + drift + room component</td></tr>
+</table>
+<p>The lane header carries the segment title plus <b>M</b>ute, <b>S</b>olo and
+<b>MAX</b>imize. Below it sit the <b>SYNTH|SAMPLE</b> switch, <b>REV</b>
+(reverse), <b>CAP</b> (record into the slot, section 07), <b>RAND</b>
+(randomize the lane within musical bounds — CTRL+click resets it to INIT) and
+a <b>GAIN</b> fader (0–200 %). The <b>START</b> and <b>LENGTH</b> flags cut
+the sample window — on SYNTH lanes there is no start offset and the LENGTH
+flag sets the window duration against a per-type maximum (60 ms transient /
+500 ms body / 2000 ms tail). The <b>crossfade diamonds</b> (0–100 ms) at the
+window edges edit two independent fades: the right-edge diamond
+is the lane's <b>XF-OUT</b> (its exit fade into the next segment — on the
+TAIL it doubles as the kick's fade-out), the left-edge diamond of lanes 2/3
+is that lane's <b>XF-IN</b> (the entry side of the same boundary). A shared
+boundary fades over the <i>minimum</i> of the previous lane's XF-OUT, the
+following lane's XF-IN and both window durations. Empty or unplayable slots
+simply drop out of the chain — the remaining segments play on.</p>
+<p>The status line under each waveform shows the file name plus
+<code>S/L/XF</code> values on SAMPLE, or the engine name plus
+<code>F/C/XF</code> values on SYNTH (section 06) — with the
+<code>DUR (REC)</code> check right-aligned in the same row. A muted lane is
+dimmed, title included; an engaged lane filter warns
+<code>FILTER ON</code> in the compact view (the knobs
+only exist in EXPERT mode). White lines inside a box are
+the playheads of sounding voices; a kick trigger fires up to three chained
+spans, and the 24-voice pool keeps about 8 kicks overlapping before stealing —
+enough for long tails at every player rate up to 1/8 at 174 BPM
+(stolen voices get a 64-frame fade-out, never a hard cut).</p>
+<h3>Mute / Solo (M / S)</h3>
+<p>The <b>M</b> and <b>S</b> buttons in every lane header are always visible —
+also on collapsed strips. <b>Mute</b> takes its lane out of the kick chain;
+<b>Solo</b> leaves only the soloed lanes playing (any solo drops all
+non-soloed lanes like mutes, and mute wins over solo on the same lane). The
+FUSION row follows the gate — it closes the chain without the excluded
+lanes — while each lane's own DUR readout stays. The gate applies to
+triggered kicks only: <b>CAP recording and lane audition ignore it</b>, so a
+muted lane can still be captured into or previewed. CTRL+click returns a
+button to its default (off). Solo lights warning-orange when active.</p>
+<h3>Lane maximize (MAX)</h3>
+<p><b>MAX</b> blows one lane up to fill the whole lane area: its controls move
+into a toolbar row and the waveform box grows to full width and height for
+precise flag, diamond and zoom work (the EXPERT knob row stays on board). The
+other two lanes collapse to thin strips showing title, M/S, MAX and a short
+SYNTH/SAMPLE + DUR info. Click a strip — or its own MAX — to switch the
+maximized lane; MAX on the big lane returns to the three-lane view. The state
+is a pure view setting: it is not saved with the project and never enters the
+undo ring.</p>
+<h3>EXPERT mode — the knob row</h3>
+<p>The <b>EXPERT</b> switch next to MAIN|SYS (saved with the project, kept
+across presets and undo like the tooltip switch) reveals an indented row of
+eleven knobs under every lane. The waveform box shrinks to make room. Slots
+0–3 hold the lane's <b>engine</b> parameters on SYNTH lanes —
+<b>F0</b>/<b>F1</b> (logarithmic sweep start/target, per-type ranges), then
+<b>NOISE</b> on S1, <b>CURVE</b> on S2 and <b>DRIFT</b>+<b>ROOM</b> on S3 —
+and read <code>NO ENGINE KNOBS (SAMPLE)</code> on SAMPLE lanes. Slots 4–10 are
+the same on every lane and mode: <b>PITCH</b> (±24 st detune), <b>LEN</b>
+(window length — SYNTH shows milliseconds, SAMPLE per-mille of the slot),
+<b>OFFSET</b> (start of the lane on the time axis, in ms — see the next
+section), <b>XF-IN</b> and <b>XF-OUT</b> (the split boundary fades, 0–100 ms;
+<b>XF-IN on S1 is locked dim</b> — the chain head has no predecessor and the
+kick head always gets a short anti-click fade), and the lane filter
+<b>CUT</b>/<b>RES</b> (below). Drag a knob vertically (120 px = full travel,
+SHIFT = fine), CTRL+click resets it; all values are drawn under the knob and
+freeze into the trigger snapshot like every span parameter.</p>
+<h3>The time axis and OFFSET</h3>
+<p>The three lanes sit on one output time axis. Without OFFSET, a lane starts
+where the lane before it ends, <i>minus</i> the shared crossfade of that boundary:
+the two overlap by exactly the fade length. <b>OFFSET</b> moves the start of a lane
+from that place, in milliseconds with 0.1&nbsp;ms steps (default 0).</p>
+<ul>
+  <li><b>Positive</b> — the lane starts <i>later</i>. If the offset is bigger than the
+      crossfade, a gap of silence opens between the two lanes (the earlier lane
+      fades out, nothing plays, the later lane fades in). The fade lengths stay the
+      ones of the boundary (<code>min(XF-OUT, XF-IN, both durations)</code>).</li>
+  <li><b>Negative</b> — the lane starts <i>earlier</i> and overlaps the lane before it more
+      than the crossfade alone would. It never starts before the lane before it.
+      Where the lane before it is already short (for example S1 at 6&nbsp;ms), a
+      negative OFFSET on the next lane has nothing left to give.</li>
+  <li><b>S1 (the head of the chain)</b> has no lane before it: its OFFSET runs
+      0&hellip;+100&nbsp;ms and delays the whole kick, silence in front. S2 and S3 run
+      &minus;100&hellip;+100&nbsp;ms.</li>
+  <li>Every lane after a moved lane moves with it, because each one is placed relative
+      to the end of the one before. The total length shown in FUSION and WAVE includes
+      the offsets, and <b>FIT LENGTH TO</b> counts them.</li>
+  <li>For synth lanes the hand-over of the oscillator phase uses the frames the earlier
+      lane has really played at the start of the next one, so a phase-continuous
+      boundary stays phase-continuous with any OFFSET.</li>
+</ul>
+<figure class="shot"><svg viewBox="0 0 720 310" role="img" aria-label="Lane OFFSET: overlap, gap and longer overlap between BODY and TAIL" style="width:100%;max-width:720px;height:auto;background:#090c08;border:1px solid #2c3b2a" font-family="Consolas,monospace" font-size="13"><text x="8" y="44" fill="#cfe8c8">OFFSET 0</text><polygon fill="#39FF14" fill-opacity=".35" stroke="#39FF14" points="150,80 150,24 290,24 330,80"/><polygon fill="#ff4fd8" fill-opacity=".35" stroke="#ff4fd8" points="290,80 330,24 690,24 690,80"/><text x="160" y="42" fill="#cfe8c8">S2 BODY</text><text x="346" y="42" fill="#cfe8c8">S3 TAIL</text><text x="280" y="98" fill="#4dd8ff">overlap = crossfade</text><text x="8" y="140" fill="#cfe8c8">OFFSET +20 ms</text><polygon fill="#39FF14" fill-opacity=".35" stroke="#39FF14" points="150,176 150,120 290,120 330,176"/><polygon fill="#ff4fd8" fill-opacity=".35" stroke="#ff4fd8" points="322,176 362,120 690,120 690,176"/><text x="160" y="138" fill="#cfe8c8">S2 BODY</text><text x="378" y="138" fill="#cfe8c8">S3 TAIL</text><text x="312" y="194" fill="#4dd8ff">gap of silence</text><text x="8" y="236" fill="#cfe8c8">OFFSET -20 ms</text><polygon fill="#39FF14" fill-opacity=".35" stroke="#39FF14" points="150,272 150,216 290,216 330,272"/><polygon fill="#ff4fd8" fill-opacity=".35" stroke="#ff4fd8" points="258,272 298,216 690,216 690,272"/><text x="160" y="234" fill="#cfe8c8">S2 BODY</text><text x="314" y="234" fill="#cfe8c8">S3 TAIL</text><text x="248" y="290" fill="#4dd8ff">longer overlap</text></svg><figcaption><span class="tag">OFFSET</span><b>Moving a lane on the time axis.</b> At 0 the lanes overlap by their crossfade. A positive OFFSET slides the lane later and opens a gap, a negative OFFSET starts it earlier and lengthens the overlap.</figcaption></figure>
+
+<p>With OFFSET 0 on all lanes the kick is bit-for-bit the same as before the control
+existed, and projects saved without it load with 0. OFFSET is part of the lane state:
+it is saved with the project, restored by undo, and stored in user presets (factory
+kicks are all at 0; the 14 lane presets and <b>RAND</b> leave it alone, while the lane
+preset <b>INIT</b> and CTRL+click on RAND reset the whole lane, OFFSET included). You can also drag it in the wave: in the <b>WAVE page</b> and in <b>FUSION
+EXPAND</b> every lane has a small <b>start grip</b> (a triangle) at the foot of the
+lane's start, one step higher per lane because S1 and S2 often start at the same
+point. Drag it sideways to set OFFSET, double-click or CTRL+click it for 0.</p>
+<h3>Lane filter (CUT / RES)</h3>
+<p>Each lane carries its own <b>resonant low-pass</b> — a 2-pole TPT
+state-variable design (the same math as the master FILTER stage):
+<b>CUT</b> sweeps 40 Hz–16 kHz exponentially, <b>RES</b> drives Q 0.5–8.
+The knobs only exist in EXPERT mode, but the filter keeps working in the
+compact view, which then flags <code>LANE FILTER ACTIVE - SEE EXPERT</code>.
+At the default (CUT fully open = 16 kHz, RES = 0) the stage is
+<b>bypassed bit-exactly</b> — no processing happens at all; just below the
+stop the wet amount eases in quadratically, so there is no level jump at the
+top of the travel. The state lives <b>per voice</b>: overlapping hits of the
+same lane never push each other through the filter and stay click-free —
+that is what distinguishes it from the master FILTER, which sees the summed
+output.</p>
+<h3>DUR / REC — the duration check</h3>
+<p>Every lane prints <code>DUR &lt;ms&gt; (REC &lt;lo&gt;-&lt;hi&gt;)</code>
+right-aligned in its status line: the segment's effective output duration —
+at reference pitch ROOT — next to the recommended range for its role (the REC
+column above); on a tight layout the <code>(REC …)</code> part shortens away
+first. <b>DUR is green inside the range and orange outside</b>; a slot that
+cannot play shows <code>DUR -</code>. On the INIT preset all three lanes read
+green: the factory synth windows are <b>6 / 100 / 280 ms</b>
+(S1/S2/S3), inside their recommended ranges.</p>
+<h3>The FUSION row</h3>
+<p>Below the lanes, the <b>FUSION</b> row shows the kick exactly as the chain
+builds it at the ROOT note: the segments in sequence on the output time axis,
+the equal-power crossfade overlaps shaded behind them. It draws the
+<b>real waveform</b>, rendered from the lanes (see <i>The wave view</i> below);
+until the first preview is ready it shows envelope bars. The header prints the total length (<code>FUSION - 312.5 MS</code>).
+The row mirrors the M/S gate &mdash; muted or non-soloed lanes drop out and the
+chain closes without them. Three switches in the header choose the view:</p>
+<ul>
+  <li><b>SUM</b> (default) &mdash; the finished kick as one wave. Each moment is
+      coloured by the lane that is loudest there, so you see where S1 hands over
+      to S2 and S2 to S3.</li>
+  <li><b>STACK</b> &mdash; one row per lane at its real place in the kick, the sum
+      underneath. The crossfade zones run through all rows.</li>
+  <li><b>EXPAND</b> &mdash; FUSION fills the whole lane area (the lanes are hidden
+      while it is on). In SUM you get one big wave with the next player hit as a
+      red line, in STACK tall rows with M / S, <b>OPEN</b> (back to MAIN with that
+      lane maximized), DUR and GAIN per lane. In both you edit right in the wave:
+      drag a lane's <b>END flag</b> to change its length (the lanes after it move
+      along), drag a <b>diamond</b> at a lane border to set that crossfade (it sets
+      XF-OUT of the earlier lane and XF-IN of the later one to the same value,
+      0&ndash;100 ms) and the diamond at the end for the fade-out of the kick.
+      the <b>start grip</b> (triangle at the foot of a lane's start) moves that lane
+      in time (OFFSET, double-click resets it). CTRL+click resets a flag, diamond or
+      grip. A click on the SUM wave plays the kick, a click on a STACK row plays that
+      lane.</li>
+</ul>
+<p><b>FIT LENGTH TO / FIT NOW</b> sit in the row's header. Choosing a note
+(<b>1/1, 1/2, 1/4, 1/4T, 1/8, 1/8T, 1/16</b>) scales the lane lengths of all
+playing lanes once, with one common factor, so the whole kick — the total shown in
+the title — lasts that note at the current host tempo (120 BPM if none is
+reported). The proportions between the lanes stay as they are and the crossfades
+are respected. Synth lanes stop at their type maximum (60 / 500 / 2000 ms), sample
+lanes at the end of their slot, so very long notes may fall short. Later tempo
+changes do not rescale anything; <b>FIT NOW</b> applies the selected note again
+after you edited lanes or changed the tempo. Muted lanes are left untouched, and
+the change is a normal undoable edit.</p>
+<p><b>AUTO</b> (left of FIT LENGTH TO, saved per instance; not the OPTIONS zoom) fits automatically: while it is on, every preset load &mdash; arrows, list or user slot &mdash; fits the new kick to the selected note at the current tempo, in the same undo step as the load. Switch it off to keep presets exactly as stored.</p>
+
+
+<figure class="shot"><img src="img/tt-kick/lanes.png" alt="The three segment lanes S1 TRANSIENT, S2 BODY, S3 TAIL with synth engines armed" width="780" height="594"><figcaption><span class="tag">SEGMENT LANES</span><b>Three lanes, one kick.</b> Each lane is a full sound slot: SYNTH&#8644;SAMPLE switch, REVERSE, GAIN, waveform editor and the live engine readouts.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/fusion.png" alt="The FUSION row showing the rendered kick waveform, coloured by lane, and the total length" width="771" height="92"><figcaption><span class="tag">FUSION ROW</span><b>The result, live.</b> The FUSION strip under the lanes shows the rendered kick - segments sequenced on the time axis, joined by equal-power crossfades, coloured by the loudest lane - with the total length readout.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/fusion_stack.png" alt="FUSION in STACK view: one row each for S1, S2 and S3 at their place in the kick, the sum below" width="775" height="152"><figcaption><span class="tag">FUSION STACK</span><b>Who plays when.</b> STACK gives every lane its own row on the shared time axis, the sum below; the shaded zones are the crossfades.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/fusion_expand.png" alt="FUSION expanded over the lane area in STACK view, with M, S and OPEN per lane and draggable flags and diamonds" width="775" height="740"><figcaption><span class="tag">FUSION EXPAND</span><b>Edit in the wave.</b> EXPAND lets FUSION fill the lane area: drag END flags for lane lengths and diamonds for the crossfades, click a row to hear that lane.</figcaption></figure>
+
+<h3>The wave view</h3>
+<p>TT-KICK shows the <b>real waveform</b> of every lane and of the finished kick.
+It is rendered in the background from the lanes, with the same chain, crossfades
+and phase hand-over as the sound, at velocity 127 and at the ROOT note &mdash;
+<i>before</i> the master section, so FILTER, DRIVE, CLIP and OUT GAIN are not in
+it (the OUT SCOPE shows the output after them). No hit is needed: after every edit
+the preview renders again within a fraction of a second (a 0.3&nbsp;s kick takes
+about 0.25&nbsp;s, long tails up to about 0.5&nbsp;s). It does not change the sound
+in any way. The three lanes keep their colours everywhere &mdash; S1 lime, S2 the
+accent colour, S3 mint in the ACID scheme; the colours follow
+<b>OPTIONS &gt; colour scheme</b>.</p>
+<h3>Lane boxes: ENV / WAVE / BOTH</h3>
+<p>Every lane header has three small switches for its wave box. <b>ENV</b> shows
+the pitch and level curves of a SYNTH lane, the sample of a SAMPLE lane. <b>WAVE</b> shows the rendered wave of this lane, as it
+sounds inside the kick (with its fades). <b>BOTH</b> (default) draws the wave
+dimmed with the curves on top. The wave sits in the lane window, so zoom, skew,
+pan and the flags work as before; a reversed lane shows its wave the way the
+window plays. A muted lane still shows its wave, dimmed, rendered on its own.</p>
+<figure class="shot"><img src="img/tt-kick/lanes_wave.png" alt="The three lanes with the WAVE switch on: each lane box shows the rendered waveform of its lane" width="775" height="579"><figcaption><span class="tag">LANE WAVES</span><b>See each segment.</b> With WAVE (or BOTH) every lane box shows the waveform that lane adds to the kick.</figcaption></figure>
+<h3>The WAVE page</h3>
+<p>The <b>WAVE</b> tab in the header (between MAIN and SYS) shows the whole kick
+on one time line, like a dedicated kick editor; the player, master rack and scope
+stay on the right.</p>
+<ul>
+  <li><b>The wave</b> &mdash; S1, S2 and S3 sit as coloured bands behind the kick.
+      <b>SUM</b> draws the finished kick coloured by the loudest lane,
+      <b>LAYERS</b> the three lane waves on top of each other. A <b>red line</b>
+      marks the next hit of the player at its RATE and the host tempo &mdash; you
+      see at once whether the tail runs into the next kick.</li>
+  <li><b>Editing</b> &mdash; END flags and crossfade diamonds work as in FUSION
+      EXPAND. A click selects the lane under the mouse and plays the kick.</li>
+  <li><b>Zoom</b> &mdash; the mouse wheel zooms around the pointer, SHIFT+wheel
+      scrolls, dragging the background scrolls a zoomed view, <b>FIT</b> shows the
+      kick and the next hit again. The <b>overview</b> strip under the wave shows
+      the visible part as a frame; click or drag it to move there.</li>
+  <li><b>LUPE</b> &mdash; a magnifier for the first 20&nbsp;ms (the transient and
+      the S1&nbsp;&gt;&nbsp;S2 crossfade, only a few pixels wide on the full kick).
+      Switch it off with LUPE; it hides while you are zoomed in closer than
+      60&nbsp;ms.</li>
+  <li><b>Segment strip</b> &mdash; below the wave, the tabs S1 / S2 / S3 pick a lane.
+      The strip has the lane's own controls (SYNTH/SAMPLE, REV, CAP, RAND, GAIN,
+      M / S, the lane preset browser), its readout and DUR, the EXPERT knob row
+      (always open here) and the lane alone on its own time scale, normalised to
+      its peak. START / END / XF / PEAK on the left tell where the lane sits in
+      the kick. The <b>PEAK</b> readout under the wave is the level of the rendered
+      kick before the master; above 0&nbsp;dB it turns orange.</li>
+</ul>
+<p>All view switches (ENV/WAVE/BOTH, SUM/STACK, EXPAND, LAYERS, LUPE and the
+page) are saved per instance and never create an undo step. Lengths and
+crossfades you drag in the wave are normal, undoable edits.</p>
+<figure class="shot"><img src="img/tt-kick/wave_page.png" alt="The WAVE page: the whole kick on one time line with coloured S1, S2, S3 bands, the next player hit as a red line, a magnifier for the first 20 ms and the segment strip of the selected lane" width="1125" height="875"><figcaption><span class="tag">WAVE PAGE</span><b>The kick as one piece.</b> The whole kick on one time line, the next player hit in red, the LUPE for the transient and, below, the selected lane with its controls.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/wave_layers.png" alt="WAVE page in LAYERS view: the waves of S1, S2 and S3 drawn on top of each other" width="775" height="465"><figcaption><span class="tag">LAYERS</span><b>Look into the crossfades.</b> LAYERS draws the three lane waves on top of each other, so you see how body and tail overlap.</figcaption></figure>
+
+<h2 id="editor"><span class="num">05</span>Editing conventions</h2>
+<ul>
+  <li><b>Drag the START/LENGTH flags</b> in a lane to cut the sample window.
+      START is SAMPLE-only — on SYNTH lanes the LENGTH flag sets the window
+      duration against the type maximum.</li>
+  <li><b>Diamond markers</b> set the crossfades: the diamond at a window's right
+      edge is that lane's <b>XF-OUT</b> (its fade into the next segment), the
+      diamond at the left edge of lanes 2/3 is that lane's <b>XF-IN</b> — the
+      same boundary handled from the entry side (0–100 ms each; the boundary
+      fades over the smaller of the two).</li>
+  <li><b>Lane zoom:</b> every lane has its own zoom bar — under GAIN in the
+      normal view, at the right end of the tool row in a maximized lane.
+      <b>-</b> and <b>+</b> zoom out and in around the middle (1&times; to
+      64&times;), the readout next to them shows the factor. <b>FIT</b>
+      (ZOOM FIT, lit while on) makes the view follow the lane window: the
+      window fills the box with a small margin and the view adapts when LEN
+      or START change. Any manual zoom or scroll switches FIT off; click it
+      again to snap back. While zoomed, a <b>scroll bar</b> under the wave
+      moves the view (click to jump, drag the thumb).</li>
+  <li><b>Mouse wheel</b> zooms horizontally around the pointer (up to 64&times;),
+      <b>CTRL + wheel</b> scrolls a zoomed view, <b>Shift + wheel</b> skews the
+      waveform vertically (up to 16&times;) — a <code>Z/SK</code> readout in the
+      box corner of a SAMPLE lane reports the factors — and dragging the dimmed
+      background pans a zoomed view.</li>
+  <li><b>Millisecond ruler:</b> every wave box — the normal
+      lanes, a maximized lane and the FUSION row — draws vertical scale
+      lines in the background. The tick spacing follows the zoom on a 1-2-5
+      ladder (0.5 / 1 / 2 / 5 / 10 / 25 / 50 / 100 / 250 / 500 / 1000 /
+      2500&nbsp;ms, at least 55&nbsp;px apart), with fainter half-alpha
+      intermediate lines when there is room. Integer ms labels sit at the
+      bottom edge, and the lane start is drawn as the stronger line. The
+      ruler shares the waveform's mapping, so zoom, skew and pan move
+      content and scale together.</li>
+  <li><b>Click the waveform</b> to select the segment (acid frame) — releasing
+      without a drag auditions it solo; on SYNTH lanes you hear the engine
+      itself. A pan drag never fires the audition, and the audition ignores
+      the M/S gate.</li>
+  <li><b>Drag an EXPERT knob vertically</b> to change it — the value follows the
+      movement relative to where you grabbed it (120 px = full travel);
+      holding SHIFT gives a 4&times; finer ratio. A click without movement
+      changes nothing. The <b>mouse wheel</b> steps it too: one unit per notch
+      on short ranges (PITCH, XF-IN/OUT, the narrow F0/F1 ranges), 2&nbsp;% of the
+      travel per notch on the long ones (LEN, CUT, RES, NOISE/CURVE/DRIFT/ROOM,
+      wide F0/F1 — on the log scale).</li>
+  <li><b>Mouse wheel on the other controls</b>: the master knobs and the lane
+      GAIN / SWING sliders move 2&nbsp;% of their travel per notch, the RATE and
+      CLIP combos step one entry, the lane preset name box steps the lane
+      bank.</li>
+  <li><b>CTRL+click resets</b> almost everything: all master and lane faders
+      (incl. SWING), the START/END flags, the crossfade diamonds, every EXPERT
+      knob and the M/S buttons return to their default — one shared default
+      table feeds both the reset and the INIT state, so they can never
+      diverge. CTRL+click on <b>RAND</b> resets the whole lane to INIT.</li>
+  <li><b>Hover any control</b> for a short tooltip in a floating panel (English,
+      up to three lines — CTRL lines highlight in acid). Every control of the
+      front has one, including the preset bar, the OPTIONS button and the
+      read-only displays (trigger LED, kit status, player status, meters,
+      scope, FUSION row). Tooltips stay out of the way while you drag and can
+      be switched off with <b>OPTIONS &gt; TOOLTIPS ON / OFF</b> (saved with the
+      project); the SYS page's INTERFACE section only shows that state.</li>
+  <li>Edits never disturb a sounding kick — the span parameters (window, fades,
+      gain, pitch, curve) are frozen at trigger time and apply to the next hit.
+      The exception are the small synth parameters NOISE, DRIFT and ROOM
+      (section 06), which are read live.</li>
+  <li>Every ended drag or button edit pushes one undo state (section 11), and
+      so does every mouse-wheel step that changes a value; pure view changes
+      (zoom, skew, pan, lane selection, page, lane maximize, the wave view
+      switches ENV/WAVE/BOTH, SUM/STACK, EXPAND, LAYERS, LUPE) never create one.
+      Each pushed state also gives REAPER an undo point
+      (<i>Edit FX</i>), so the project is marked as changed.</li>
+</ul>
+
+<h2 id="synth"><span class="num">06</span>Synth engines &amp; phase</h2>
+<p>The three engines are tuned to their segment role:</p>
+<ul>
+  <li><b>S1 TRANSIENT — click oscillator + noise burst:</b> a sine click with a
+      fast internal decay, blended with a noise burst. The noise is a
+      deterministic position hash, so every trigger renders bit-identically.</li>
+  <li><b>S2 BODY — pitch-envelope oscillator:</b> the core of the kick; the
+      frequency glides from F0 to F1 across the window along the curve set by
+      C (0–1000 ‰ → exponent 0.125…16; 500 ≈ the classic kick sweep).</li>
+  <li><b>S3 TAIL — sine + drift + room:</b> a sustained sine under a slow
+      amplitude drift (≈5–14 Hz), plus a room component — a slightly detuned
+      beating copy and a noise share that lives in the decay.</li>
+</ul>
+<p>A SYNTH lane draws the engine's <b>frequency trajectory</b> F0&nbsp;→&nbsp;F1
+inside the window (bright curve) over its dim internal amplitude envelope,
+labelled <code>CLICK OSC + NOISE BURST</code>, <code>PITCH-ENV OSCILLATOR</code>
+or <code>SINE + DRIFT + ROOM</code>. The readout
+<code>&lt;F0&gt;&gt;&lt;F1&gt; HZ &nbsp;&lt;note&gt;&gt;&lt;note&gt; &nbsp;&lt;dur&gt; MS &nbsp;PHASE LINK</code> sits
+in the box, and the status line below shows
+<code>ENGINE: &lt;name&gt; &nbsp;F &lt;f0&gt;&gt;&lt;f1&gt; &nbsp;C &lt;curve&gt; &nbsp;XF &lt;ms&gt; MS</code>.</p>
+<p><b>PHASE LINK</b> is the phase-coherence badge: chained synth segments share
+one phase trajectory — the oscillator phase is a closed-form function of
+position, so a successor starts at the exact phase its predecessor holds at the
+boundary and the fusion stays click-free and tight. The chain head, and a synth
+segment following a sample, start at phase 0 by convention; a per-segment phase
+offset (PH) exists in the serialized state. A reversed synth segment runs the
+same trajectory backwards. Keytrack and the played note scale the engine
+frequencies — window durations stay absolute in time. The per-lane PITCH knob
+(section 04) detunes a single engine ±24 st on top of keytrack.</p>
+<div class="box" data-k="Engine parameters">The <b>EXPERT</b> knob row under each
+lane exposes F0/F1 (the label shows the nearest note, e.g. <code>F0 A4</code> for
+440&nbsp;Hz, with C4 = MIDI note 60 as in the ROOT display; the value below stays in Hz), the per-engine control (NOISE / CURVE / DRIFT + ROOM), PITCH,
+LEN, XF-IN/XF-OUT and the lane filter CUT/RES (section 04). Only the per-segment
+phase offset (PH) is serialized without a control — presets and undo write it,
+the front deliberately has no knob for it. All lane parameters apply from the
+next hit; the exception are <b>NOISE</b> (S1) and <b>DRIFT</b> / <b>ROOM</b> (S3),
+which the engine reads live: turning them while a kick rings changes that kick
+at once.</div>
+
+
+<figure class="shot"><img src="img/tt-kick/lane_transient.png" alt="S1 TRANSIENT lane with the click oscillator plus noise burst engine" width="780" height="196"><figcaption><span class="tag">S1 · CLICK + NOISE</span>The transient engine: a fast click oscillator over a noise burst, shaped by a steep decay. The readouts show F0&gt;F1, curve, crossfade and the phase-link status.</figcaption></figure>
+
+
+<figure class="shot"><img src="img/tt-kick/lane_body.png" alt="S2 BODY lane with the pitch envelope oscillator engine" width="780" height="196"><figcaption><span class="tag">S2 · PITCH-ENV OSC</span>The body engine - the punch of the kick: F0 glides to F1 through the curve exponent, the envelope carries the decay.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/lane_tail.png" alt="S3 TAIL lane with the sine plus drift and room engine" width="780" height="196"><figcaption><span class="tag">S3 · SINE + DRIFT + ROOM</span>The tail engine: a sub sine with slow amplitude drift and a room component for the space behind the punch.</figcaption></figure>
+<h2 id="capture"><span class="num">07</span>Capture (CAP)</h2>
+<p>Each lane carries a <b>CAP</b> button (next to REV) that records
+the plug-in's audio input straight into that lane's sample slot — no file
+dialog, no disk, no Lua. Capture ignores the M/S gate: a muted lane can be
+recorded into, and the audition of its result plays regardless.</p>
+<ol>
+  <li>Click <b>CAP</b> on a lane — the waveform box blinks
+      <code>REC ARMED - PLAY YOUR SOURCE</code> and the input is now monitored
+      at the output so you can aim.</li>
+  <li>Play the source into the plug-in's audio input (the track's input or
+      items before it on the track). Recording starts when the mono input
+      exceeds <b>−40 dBFS</b> for three consecutive samples — the two samples
+      just before the threshold crossing are kept, so the attack is not cut.</li>
+  <li>Recording stops after <b>8 s</b>, after <b>1 s of silence</b> (with at
+      least 0.2 s captured), or at the bank limit at very high sample rates —
+      the silent tail is trimmed back, a 32-frame fade is applied, and the
+      lane switches to <b>SAMPLE</b> automatically.</li>
+  <li>Clicking CAP again on the armed/recording lane <b>aborts</b> (discards).
+      Arming another lane moves the arm; a running recording is never
+      interrupted by a different lane.</li>
+</ol>
+<div class="box warn" data-k="Volatile">Captured audio lives in RAM only. It
+survives kit reloads of the other slots — and assigning a file to that same slot
+replaces the capture (even if it is the very same WAV that was there before) —
+but it does <b>not</b> survive a sample-rate change or a project reload.
+Captures are never serialized: after reopening the project the slot goes back to
+the file path it had before the recording, so it is empty only if no WAV was
+assigned to it. Bounce the result to a WAV — e.g. via the Export action — if you
+want to keep it.</div>
+<p>Outside an armed/active capture the input is not passed through and the
+instrument stays bit-identical to a pure kick generator — silent on MIDI-only
+tracks. If the extended memory is unavailable (embedded/limited hosts) the
+button shows <code>N/A</code> instead of arming.</p>
+
+
+
+
+<h2 id="master"><span class="num">08</span>Master rack</h2>
+<table>
+  <tr><th>Stage</th><th>Controls</th><th>What they do</th></tr>
+  <tr><td>FILTER</td><td>ON · CUT · RES · BEEF</td><td>Resonant 24 dB/oct low-pass (two TPT state-variable stages): CUT sweeps 40 Hz–16 kHz exponentially, RES drives Q 0.5–14, and BEEF pulls the resonance peak up to three octaves below the cutoff — a bass-heavy bump while the HF rolloff stays.</td></tr>
+  <tr><td>DRIVE</td><td>ON · PROT · BEEF · GLUE</td><td>BEEF is a parallel bass-band drive (one-pole split ≈140 Hz into a level-matched waveshaper, up to ~+27 dB into the knee); GLUE is a sum saturation on top. <b>PUNCH PROTECT</b> keeps the dry remainder — punch and mids — out of the shaper; switched off, the band morphs to the full signal for classic all-over drive. GLUE deliberately touches everything, so bit-exact transparency needs <b>BEEF=0 and GLUE=0</b>.</td></tr>
+  <tr><td>CLIP</td><td>ON · SOFT/HARD · CEIL</td><td>Final clipper as a creative tool: SOFT is a true tanh knee (linear below 0.7, continuous slope), HARD a flat clamp; CEIL sets the ceiling −36…0 dBFS and is enforced explicitly. The SOFT / HARD selector is drawn dimmed while CLIP is off (it has no effect then).</td></tr>
+  <tr><td>OUT</td><td>GAIN · meters · scope</td><td>Output level −24…+24 dB with an exact 0 dB centre detent; peak/RMS metering (~300 ms ballistics, the peak tick turns red on overs) and the OUT SCOPE — it always shows the post-chain output. No final limiter: the ceiling is the clipper's job.</td></tr>
+</table>
+<p>All stage switches and faders are click-free — every change glides over a
+~20 ms slew, and bypassed stages keep tracking the live signal so re-engaging
+never jumps. Every fader resets to its factory value on CTRL+click (the
+shared default table, section 05).</p>
+
+
+<figure class="shot"><img src="img/tt-kick/master.png" alt="The master rack: filter, drive with punch protect, clipper and output gain" width="295" height="275"><figcaption><span class="tag">MASTER RACK</span>Filter (cut/reso/beef), parallel band drive with punch protect, soft/hard clipper and output gain with peak/RMS metering.</figcaption></figure>
+
+
+
+
+<figure class="shot"><img src="img/tt-kick/scope.png" alt="The output scope strip" width="295" height="150"><figcaption><span class="tag">OUT SCOPE</span>Always shows the post-chain output - what you render is what you see here.</figcaption></figure>
+<h2 id="player"><span class="num">09</span>Player &amp; MIDI</h2>
+<ul>
+  <li><b>MIDI:</b> a note-on triggers the whole segment chain — the note sets
+      the pitch relative to ROOT (when keytrack is on), velocity sets the
+      level. Note-off is ignored (one-shot), CC 120/123 kill all voices, and
+      everything else (CC, pitch bend, clock) passes through.</li>
+  <li><b>PLAYER:</b> the built-in 4/4 player fires the chain at ROOT pitch on
+      the rate grid — <b>1/1, 1/2, 1/4 or 1/8</b> — at a constant velocity
+      (every kick equally loud). <b>SYNC</b> follows the project timeline: it
+      plays only while the transport runs and re-anchors on real position jumps
+      (<code>SYNCED BAR n.m</code>). <b>FREE RUN</b> ignores the transport
+      state — it still runs at the host tempo
+      (<code>FREE RUN n BPM</code>, 120 BPM if none is reported).</li>
+  <li><b>SWING</b> shifts the off-grid (odd) eighths later by SWING/200 of an
+      eighth — 66.7 % lands exactly on the triplet point (TT-303 convention:
+      on-grid eighths stay strict). At rates 1/1–1/4 every hit sits on an
+      on-grid eighth, so swing is deliberately inaudible there. CTRL+click on
+      the fader returns it to 0 %.</li>
+  <li><b>BPM→ms reference:</b> the panel prints a live note-length table for the
+      host tempo — <code>1/4 @ 125.0 = 480.0 MS</code> with the
+      <code>1/2</code> and <code>1/8</code> values below — so segment lengths
+      and crossfades can be tuned against the groove.</li>
+  <li><b>ROOT &amp; DETECT:</b> ROOT is the keytrack base (−/+ steppers with a
+      note readout). <b>DETECT</b> is a one-shot autocorrelation of the BODY
+      segment — the loaded window on SAMPLE, the settled fundamental at the
+      window's end on SYNTH. The result line reports the source (SMP/SYN), the
+      detected note, the cent offset, Hz and a <b>CONF</b>idence percentage;
+      ROOT is written only at CONF ≥ 30 %, otherwise the panel answers
+      <code>NO BODY SIGNAL</code> instead of guessing. An octave guard picks
+      the first strong correlation peak rather than a subharmonic.</li>
+  <li><b>KEYTRK:</b> the global keytrack switch — OFF pins every note to ROOT
+      (factor 1 on any key), and the header flags <code>KTRK OFF</code>.</li>
+  <li><b>Header readouts:</b> a TRIG LED with the last note and its source
+      (<code>MIDI</code>/<code>PLAYER</code>/<code>LANE</code>), and the kit
+      state (<code>KIT n/3</code>).</li>
+</ul>
+
+
+<figure class="shot"><img src="img/tt-kick/player.png" alt="The player panel: on/sync/free, rate, root note with detect, keytrack and swing, plus the live BPM-to-milliseconds reference" width="295" height="290"><figcaption><span class="tag">PLAYER PANEL</span>4/4 player with SYNC/FREE and swing, root note with DETECT, keytrack - and the live tempo reference: 1/4 @ 125.0 BPM = 480.0 ms, with 1/2 and 1/8 alongside.</figcaption></figure>
+
+
+
+
+<h2 id="kits"><span class="num">10</span>Sample kits &amp; loaders</h2>
+<p>JSFX has no file dialogs, so kit assignment runs through companion
+ReaScripts. A loader sends the kit to <b>one</b> TT-KICK instance:
+the TT-KICK window that has (or last had) the focus, otherwise the first TT-KICK
+on the selected track. So every instance can carry its own kit. The script waits
+for the instance to confirm (it then reports the track) and adds one undo point
+<code>TT-KICK: assign kit</code>. If the instance does not answer (audio engine
+stopped, FX bypassed or offline), it loads the kit as soon as it runs again.
+Each file is resampled to the project rate, mixed to mono and capped at
+20 s per slot. The assigned paths travel inside the project — after a reload
+the WAVs are pulled from the stored paths again. A new instance starts without a
+kit (it plays the synth lanes). The protocol carries 255 characters per path: a longer
+path is <b>rejected</b> with a message naming the slot (that slot keeps its previous
+sample), and if no slot can be loaded nothing is sent and no undo point is set.</p>
+<table>
+  <tr><th>Action</th><th>Workflow</th><th>Notes</th></tr>
+  <tr><td><code>TT-KICK Load Kit</code></td><td>Three file dialogs — pick one WAV per slot (1&nbsp;=&nbsp;TRANSIENT, 2&nbsp;=&nbsp;BODY, 3&nbsp;=&nbsp;TAIL)</td><td>Cancelling a dialog keeps that slot; cancelling all three changes nothing. Exact control per slot.</td></tr>
+  <tr><td><code>TT-KICK Load Kit (Folder)</code></td><td>Pick any one file inside a kit folder — the script scans the folder (*.wav/*.aif/*.aiff) and maps files to slots by name, then asks for confirmation</td><td>Stem matching: <code>trans/click/att</code> → TRANSIENT, <code>body/mid/punch</code> → BODY, <code>tail/sub/room/end</code> → TAIL; leftover slots fill alphabetically, surplus files are ignored (listed in the confirmation). Copies the kit files into the folder and pushes it onto Recent Kits.</td></tr>
+  <tr><td><code>TT-KICK Load Kit (from Items)</code></td><td>Drop up to 3 audio files onto a track as items, select them, run the action — selection order becomes slot order (track, then position, then lane)</td><td>MIDI items and items without a file source are skipped; the confirmation lists the mapping before writing. Pushes the slot-1 folder onto Recent Kits.</td></tr>
+  <tr><td><code>TT-KICK Recent Kits</code></td><td>Zero-dialog re-load: a menu lists the last 8 kit folders and activates the chosen one</td><td>Works across projects; loads into the target instance like the other loaders. Folders whose copy of <code>tt-kick-kit.bin</code> is missing are greyed out; kits assigned via the plain Load Kit action are not listed (it writes no folder copy).</td></tr>
+</table>
+<p>Install the scripts once via <b>Actions → Show action list → New action →
+Load ReaScript</b>, then run them from the action list (or bind them to
+keys/toolbar).</p>
+<div class="box" data-k="Conventions">An empty kit line leaves the slot
+untouched (sampler convention) — assigning fewer slots never clears the others,
+and captured slots are only replaced when their own slot gets a new path
+assignment. An unreadable file flags the slot <code>LOAD ERROR</code>. Keep
+paths reachable: the loader stores absolute paths, so moving the WAVs breaks
+the kit on next load.</div>
+
+<h2 id="presets"><span class="num">11</span>Presets, undo, system page</h2>
+<h3>Preset bar &amp; user bank</h3>
+<figure class="shot"><img src="img/tt-kick/tt-kick-presets.png" alt="Header of TT-KICK with the preset bar in the second header row: previous, preset name with drop-down, next, SAVE and a menu button, left of the OPTIONS button, and the open preset list with the FACTORY section" width="318" height="328"><figcaption><span class="tag">PRESETS</span><b>The preset bar</b> sits in the second header row, directly left of <code>OPTIONS</code>: <code>&lt;</code> name <code>&gt;</code> <code>SAVE</code> <code>...</code>. The name opens the list with the FACTORY (INIT plus 44 kicks) and USER (32 slots) sections.</figcaption></figure>
+<p>The bar loads and saves the <b>whole kick</b> in one step: all lane and segment
+data of the three lanes (including the lane preset assignments), the master rack
+(filter, drive, clipper, output) and the player head (rate, sync, root, swing,
+keytrack) — exactly what a factory preset replaces. Not part of a preset: the kit
+paths (sample assignments stay), the colour scheme (<code>OPTIONS</code>), the player
+ON switch, the page, the lane selection and the TOOLTIPS / EXPERT switches. The
+<b>lane view</b> (zoom, skew, scroll position and ZOOM FIT) is stored with a user
+preset and comes back when you load it, but changing it never marks a preset as
+modified. Factory presets and INIT open with ZOOM FIT on all three lanes. Presets load with UNDO like every other edit. A running
+player keeps running when you load a factory preset or INIT; a factory preset still sets rate, sync, swing and
+keytrack, but leaves your <b>ROOT</b> note alone (it belongs to your kit and the DETECT result, not to the sound design); <b>INIT</b> is the way back
+to the factory state and still resets ROOT to C2. User presets load ROOT exactly as saved, and so does a project.
+With keytrack on, MIDI notes are transposed relative to ROOT: the factory presets are tuned so that C2 plays the
+designed pitch, with another ROOT it is the ROOT key that does. The built-in player always fires at ROOT and is not affected.</p>
+<table>
+  <tr><th>Control</th><th>Function</th></tr>
+  <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: INIT and the 44 factory kicks first, then the used user slots; wraps around and loads immediately.</td></tr>
+  <tr><td>Name field</td><td>Opens the list: <b>FACTORY</b> (INIT + 44 kicks) and <b>USER</b> (32 slots, empty ones show <code>- empty -</code>). Mouse wheel scrolls, click loads, a click outside just closes. A <code>*</code> behind the name means the state differs from the loaded preset.</td></tr>
+  <tr><td><code>SAVE</code></td><td>Saves the current kick into the selected user slot; with a factory preset (or none) selected, into the first free slot. A name box opens (up to 24 characters, default <code>User 02</code>): type, <kbd>Enter</kbd> or <code>OK</code> saves, <code>CANCEL</code> or a click outside cancels.</td></tr>
+  <tr><td><code>...</code></td><td><code>RENAME</code>, <code>COPY</code> (into the next free slot) and <code>DELETE</code> (a second click confirms) for the selected user preset.</td></tr>
+</table>
+<figure class="shot"><img src="img/tt-kick/tt-kick-presets-entry.png" alt="The SAVE PRESET name box of TT-KICK with the default name User 01, OK and CANCEL" width="315" height="117"><figcaption><span class="tag">SAVE</span><b>Name box.</b> Enter confirms, Shift+Space types a blank, CANCEL (or a click outside) leaves everything unchanged.</figcaption></figure>
+<p><b>Where the user bank lives.</b> Plug-ins cannot write files, so the 32 user slots are part of the
+plug-in state: they are saved with the project, with FX-chain and track-template copies, and in every
+<b>REAPER preset</b> of this plug-in (the <code>+</code> button in the FX window toolbar). To take your bank to
+another project or computer, save a REAPER preset once (<code>+</code> &rarr; <i>Save preset</i>) and load it there: the
+whole bank comes with it.</p>
+<p><b>Typing names.</b> REAPER keeps <kbd>Space</kbd> for the transport, so type <kbd>Shift</kbd>+<kbd>Space</kbd> for a blank.
+Depending on your REAPER settings <kbd>Esc</kbd> closes the whole FX window; use <code>CANCEL</code> instead. (The <code>+</code> menu of the
+FX window also has <i>Send all keyboard input to plug-in</i>.)</p>
+<p>The factory bank holds <b>INIT</b> (the factory state) plus 44 designs in eight families:
+<b>909</b> (7), <b>808</b> (4), <b>HARD</b> (6), <b>RUMBLE</b> (5),
+<b>MINIMAL</b> (6), <b>DEEP</b> (5), <b>ROLL</b> (4) and <b>CHAR</b> (7 &mdash;
+glide, reverse, warehouse and classic characters). Every one of them is purely
+synthesized &mdash; license-free, and they sound with no kit loaded; each candidate
+has a short transient, a pitch-swept body and a tail designed for its style.
+Level and mix balance were checked on real REAPER renders, but a kick always
+has to work with your bass line, so judge the presets in your own arrangement. On the SYSTEM page the <b>FACTORY PRESETS</b>
+panel still groups the collection into tabs: pick a family, click a name to load it
+(the bar follows).</p>
+<p><b>Choose a tail for the groove:</b> ROLL and dry MINIMAL sounds leave short gaps for fast patterns;
+909 and CLUB sounds are balanced starting points. The long 808, DEEP, RUMBLE and REVERSE designs
+are intentional effects. At faster tempos or with a continuous bass line, shorten S3 TAIL or
+make space for it in the bass arrangement. REVERSE BLOOM and REVERSE RISE run S3 backward.
+Check the kick with bass and hats at your actual project tempo.</p>
+
+<h3>Factory kicks at a glance</h3>
+<table>
+  <tr><th>Family</th><th>Kicks</th></tr>
+  <tr><td>909 (7)</td><td>909 TIGHT, 909 PUNCH, 909 DEEP, 909 SOFT, MACHINE FUNK, 909 SLAM, 909 CLICKY</td></tr>
+  <tr><td>808 (4)</td><td>808 SUB, 808 LONG, 808 PUNCHY, 808 TIGHT</td></tr>
+  <tr><td>HARD (6)</td><td>HARD TECHNO, HARDER, HARDCORE, INDUSTRIAL, HARD SCOOP, NOISE INDUSTRIAL</td></tr>
+  <tr><td>RUMBLE (5)</td><td>RUMBLE DEEP, RUMBLE FAST, RUMBLE DRY, RUMBLE DARK, RUMBLE SUB</td></tr>
+  <tr><td>MINIMAL (6)</td><td>MINIMAL CLUB, DUB DRY, CLUB PUNCH, BERGHAIN, MINIMAL DRY, CLUB WARM</td></tr>
+  <tr><td>DEEP (5)</td><td>SUB FOCUS, DEEP MELODIC, SOFT DEEP, SUB RUMBLE, DEEP PUNCH</td></tr>
+  <tr><td>ROLL (4)</td><td>ROLL TIGHT, ROLL SHARP, ROLL DEEP, ROLL SOFT</td></tr>
+  <tr><td>CHAR (7)</td><td>ACID GLIDE, REVERSE BLOOM, WAREHOUSE, CLICK MINIMAL, TECHNO CLASSIC, WAREHOUSE TIGHT, REVERSE RISE</td></tr>
+</table>
+<p>Every factory kick as a waveform of its first 900&nbsp;ms, grouped by family, with the measured tail length (time until the hit has dropped 40&nbsp;dB below its peak) and the sub frequency of the body. The numbers are measured on the rendered hit, they are not preset settings.</p>
+<figure class="shot"><img src="img/tt-kick/gallery_909.png" alt="Waveforms of the 909 factory kicks" width="1196" height="712"><figcaption><span class="tag">909</span><b>Family 909.</b> </figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/gallery_808.png" alt="Waveforms of the 808 factory kicks" width="1196" height="388"><figcaption><span class="tag">808</span><b>Family 808.</b> </figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/gallery_hard.png" alt="Waveforms of the HARD factory kicks" width="1196" height="550"><figcaption><span class="tag">HARD</span><b>Family HARD.</b> </figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/gallery_rumble.png" alt="Waveforms of the RUMBLE factory kicks" width="1196" height="550"><figcaption><span class="tag">RUMBLE</span><b>Family RUMBLE.</b> </figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/gallery_minimal.png" alt="Waveforms of the MINIMAL factory kicks" width="1196" height="550"><figcaption><span class="tag">MINIMAL</span><b>Family MINIMAL.</b> </figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/gallery_deep.png" alt="Waveforms of the DEEP factory kicks" width="1196" height="550"><figcaption><span class="tag">DEEP</span><b>Family DEEP.</b> </figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/gallery_roll.png" alt="Waveforms of the ROLL factory kicks" width="1196" height="388"><figcaption><span class="tag">ROLL</span><b>Family ROLL.</b> </figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/gallery_char.png" alt="Waveforms of the CHAR factory kicks" width="1196" height="712"><figcaption><span class="tag">CHAR</span><b>Family CHAR.</b> </figcaption></figure>
+
+<p>The names describe a style, not a promise: use them as starting points and bend
+them with the lanes, the EXPERT knobs and the master rack.</p>
+
+<h3>Lane preset browsers</h3>
+<p>Every lane header carries its <b>own small preset browser</b> —
+<code>&lt; n/14 NAME &gt;</code> on the right. The three lanes have three
+independent banks of 14 lane presets each, one level below the factory kicks:
+<b>S1</b> holds attacks and clicks (NEEDLE, RIM CLICK, METAL EDGE …),
+<b>S2</b> tonal bodies (TIGHT 909, ACID GLIDE, 808 ROUND …) and <b>S3</b> tails
+(STUB, TECH TAIL, HEAVY SUB …). The banks are ordered by character: S1 from dark to
+bright, S2 and S3 from short to long. The arrows step through the lane's bank,
+the mouse wheel steps too, and clicking the name opens the lane's list:</p>
+<figure class="shot"><img src="img/tt-kick/lane_browser.png" alt="TT-KICK lane preset browser: prev and next arrows around a name box showing 0/14 INIT in the S1 TRANSIENT header" width="280" height="35"><figcaption><span class="tag">LANE BROWSER</span><b>&lt; n/14 NAME &gt; in every lane header.</b> Index, current lane preset, prev/next — mouse wheel steps as well. The collapsed lane strips keep a compact version of the same browser.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kick/lane_menu.png" alt="TT-KICK lane preset dropdown open on S1 TRANSIENT: INIT highlighted plus 14 entries from NEEDLE to WOOD KNOCK B" width="218" height="398"><figcaption><span class="tag">LANE LIST</span><b>Click the name for the lane's bank.</b> INIT plus 14 entries; the current one is highlighted, a click loads it and closes the list, a click outside just closes. Lane presets are undoable like any edit.</figcaption></figure>
+<p>A lane preset is a <b>recipe for exactly that lane</b>: it sets the 16 engine
+parameters of the segment (level, pitch, length, fades, phase, sweep, curve,
+noise/drift/room, the lane filter) and switches the lane to SYNTH — your sample
+window, MUTE/SOLO and everything else stay untouched; the lane's zoom switches
+to ZOOM FIT so the new window is in view.
+Position <b>0 = INIT</b> resets the lane to the factory state (CTRL+click on
+the name does the same). After loading, the usual edit rules apply: dragging
+any lane control (or running DETECT) adds an asterisk <code>*</code> in the
+name box — the entry is modified since load. The starred state survives save
+and reload, and UNDO walks lane preset changes back like any other step.</p>
+<p>The whole state rides in <code>@serialize</code> (blob 'KICK' v8, 994 words, followed by the user bank).
+<b>UNDO</b>
+(header and SYSTEM page) walks back through the last 20 edit states: a
+snapshot is pushed when a drag or a button edit ends — preset changes
+included. Lane view (zoom/skew/pan, maximize), segment selection, the current
+page and the interface switches never enter the ring, and there is
+deliberately no redo.</p>
+<p>The <b>SYSTEM</b> page (MAIN|SYS tabs in the header) hosts the factory preset
+row, the undo depth readout (<code>n/20 SAVED</code>), a short export guide,
+the <b>INTERFACE</b> section and the status block. INTERFACE shows the
+<b>TOOLTIPS ON/OFF</b> state (switched in the OPTIONS box; saved with the project, default on) next to a compact recap of the editing conventions — hover hints, CTRL+click reset,
+RAND and MAX. Both interface settings are pure view settings: EXPERT (header)
+and TOOLTIPS are serialized but kept out of the undo diff and survive preset
+changes untouched. The status block lists sample rate, serialize format,
+sample RAM incl. the undo head, kit slots, last trigger source and note,
+player/swing/keytrack state — plus a navigation hint and build info.</p>
+<div class="box" data-k="For script authors">Two hidden mirror sliders expose
+state to ReaScripts (FX → Lua, never read back): <code>slider63</code> = root
+note, <code>slider64</code> = last loaded factory preset index. The export
+action uses them to pitch and name the rendered item. Two hidden request
+parameters take data from scripts (Lua → FX) for exactly one instance:
+<code>Kit request</code> (slider 70, used by the loader actions) and
+<code>Lane request</code> (slider 71): a script writes the 16 sound parameters of
+up to three lanes (the lane preset format) plus the lane's OFFSET in ms (one more
+value per lane) to shared memory and sets the
+parameter to a new serial number. Values are clamped to the lane ranges, the
+import is one undo step, and an old value (project reload, undo, copied
+instance) is never applied again.</div>
+
+<h2 id="export"><span class="num">12</span>Exporting a kick</h2>
+<p>Select the track holding TT-KICK, put the edit cursor at the start (or make a
+time selection), then run <b>TT-KICK Export Kick.lua</b> from the action list.
+The script fires a single trigger note at the current ROOT pitch across the
+export range — the time selection, or four bars from the cursor — and renders
+it in place through the track's FX chain ("Item: apply track/take FX"). The
+resulting audio item is named <code>TTKICK_&lt;preset&gt;.wav</code> after the
+last loaded factory preset (<code>kick</code> as fallback): the REAPER-native
+equivalent of drag &amp; drop export — drag the item wherever you need it.
+Cursor position, time selection and your item selection are restored.</p>
+
+<h2 id="options"><span class="num">13</span>Options / Color</h2>
+<figure class="shot"><img src="img/tt-ui-options/kick-options.png" alt="TT-KICK with the OPTIONS box open: ten colour swatches, the FONT SIZE steppers and the CUSTOM COLOR picker with FONT 1, FONT 2 and BG targets" width="1408" height="1105"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header (left of MAIN | SYS | EXPERT), then a swatch. Below the schemes sit the FONT SIZE steppers and the CUSTOM COLOR picker. A click outside the box closes it.</figcaption></figure>
+<p><b>Options / Color.</b> The <code>OPTIONS</code> button opens the box; <code>COLOR</code> offers ten schemes:
+ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (active switches,
+knob rings, waveforms, LEDs), the warning colour (a DUR outside its target range, SOLO) and, for RED to ICE, the slightly tinted panel
+background of the whole front at once &mdash; on both pages (MAIN and SYS) and in EXPERT mode. The choice applies
+<b>per plug-in instance</b>, is saved with the project and with FX-chain copies, and is not touched by factory presets,
+lane presets, RAND or undo. The factory colour is <b>ACID</b> (the classic acid green). The colour is stored in the hidden
+slider 65 (<code>UI Color</code>, 0&ndash;9); it is the third listed parameter after the two Lua mirrors.</p>
+<p><b>TOOLTIPS ON / OFF</b> sits at the right of the OPTIONS box's title bar. Every control of the front shows a
+tooltip after you hover it briefly; the switch turns them off for this instance and is saved with the project. The SYS
+page just shows its state.</p>
+<p><b>FONT SIZE</b> scales the two font slots independently: <b>FONT 1 (TITLE)</b> is the panel/headline
+slot, <b>FONT 2 (TEXT)</b> feeds all four text slots &mdash; each steps &minus;4&hellip;+8 around the kit
+default (<code>+0</code>). <b>CUSTOM COLOR</b> overrides a scheme per target: pick <b>FONT 1</b>,
+<b>FONT 2</b> or <b>BG</b> (panel background) and drag the HSV field and the hue strip; the preview swatch
+on the right shows the current pick, the label under the box names the active scheme. <b>RESET</b> clears the
+selected target back to the scheme, <b>RESET ALL</b> clears every override and both font steps. Font steps and
+custom colours are also <b>per instance</b> and ride in the same serialized style block &mdash; presets, RAND
+and undo never touch them either.</p>
+<p><b>Font steps above +2:</b> the TT-KICK front has a fixed grid of rows; from step +3 on, texts would run
+into their neighbours. The front therefore draws with at most <b>+2</b> for FONT 1 and FONT 2,
+even if OPTIONS is set higher (the setting itself is kept and shown as chosen). For a bigger front use
+<b>UI SIZE</b>, which scales everything together.</p>
+
+<h2 id="recipes"><span class="num">14</span>Recipes &amp; quick reference</h2>
+<h3>Four ways to start</h3>
+<ul>
+  <li><b>From a factory kick.</b> Load a preset from the family closest to your genre,
+      press a note and look at the FUSION row. Change one lane at a time: S2 BODY
+      decides the weight, S1 TRANSIENT the click, S3 TAIL how long the kick rings.</li>
+  <li><b>Your own click on a synth body.</b> Set S1 to SAMPLE and load or capture a short
+      click, keep S2 and S3 on SYNTH. Cut the sample window with the START and LENGTH
+      flags so it ends before the body takes over, then set the crossfade diamond between
+      S1 and S2 until the hand-over is smooth.</li>
+  <li><b>Fit the tail to the groove.</b> Switch the player on, open the WAVE page and watch
+      the red line: it marks the next hit. If the tail runs past it, shorten S3 or choose a
+      note in <b>FIT LENGTH TO</b> and let AUTO keep every loaded preset in tempo.</li>
+  <li><b>Record a source.</b> Click <b>CAP</b> on a lane, play a hit into the track input and
+      the recording lands in the slot by itself. Bounce what you want to keep with the
+      Export action, because captures are not saved with the project.</li>
+</ul>
+<h3>Quick reference</h3>
+<table>
+  <tr><th>You want to&hellip;</th><th>Do this</th></tr>
+  <tr><td>reset a control</td><td>CTRL+click it (RAND: resets the whole lane to INIT)</td></tr>
+  <tr><td>change a value finely</td><td>SHIFT+drag an EXPERT knob</td></tr>
+  <tr><td>zoom a lane</td><td>- / + in the lane's zoom bar or the mouse wheel (up to 64&times;); FIT fits the lane window; CTRL+wheel or the scroll bar scrolls; SHIFT+wheel skews the wave vertically</td></tr>
+  <tr><td>hear one lane alone</td><td>Click its waveform, or use S (solo)</td></tr>
+  <tr><td>take a lane out</td><td>M (mute); CAP and the audition still work on a muted lane</td></tr>
+  <tr><td>see the finished kick</td><td>FUSION row; EXPAND for the large editable view</td></tr>
+  <tr><td>move a lane on the time axis (gap or more overlap)</td><td>OFFSET knob in EXPERT, or drag the lane's start grip in the WAVE page; double-click the grip for 0</td></tr>
+  <tr><td>fit the kick to a note length</td><td>FIT LENGTH TO, then FIT NOW after later edits (AUTO does it on every preset load)</td></tr>
+  <tr><td>undo</td><td>UNDO in the header (20 steps, no redo)</td></tr>
+  <tr><td>type a space in a name</td><td>SHIFT+Space</td></tr>
+  <tr><td>take the user bank along</td><td>Save a REAPER preset of the plug-in (the + button) and load it elsewhere</td></tr>
+  <tr><td>hide the hints</td><td>OPTIONS &rarr; TOOLTIPS OFF</td></tr>
+</table>
+
+<h2 id="release"><span class="num">15</span>Release notes</h2>
+<p><b>TT-KICK 1.1.0</b> adds <b>OFFSET</b> per lane (see <i>The time axis and OFFSET</i>): the
+start of every lane can be moved on the time axis, in milliseconds, with an EXPERT knob and a
+grip in the WAVE page and FUSION EXPAND. At 0 the kick sounds exactly as in 1.0.x.
+<b>TT-KICK 1.0.0</b> was the first release; the sound engine was verified by measurement, the
+front, the loader scripts and the state handling were checked in REAPER.</p>
+<ul>
+  <li><b>Sound:</b> three sequential lanes with phase-coherent synth engines or samples
+      (loaded or captured live), equal-power crossfades, master rack with filter, drive and
+      clipper, 24 voices, INIT plus 44 factory kicks, 14 curated lane presets per lane.</li>
+  <li><b>Editing:</b> EXPERT knobs incl. OFFSET, lane filter, mute / solo, RAND, lane maximize, 20-step
+      undo, CTRL+click reset and tooltips on every control.</li>
+  <li><b>Wave view:</b> the real waveform of every lane and of the finished kick, FUSION
+      SUM / STACK / EXPAND with draggable flags and diamonds, the WAVE page with the next
+      player hit, LAYERS and LUPE; FIT LENGTH TO with AUTO.</li>
+  <li><b>Workflow:</b> built-in 4/4 player (SYNC / FREE RUN, swing), DETECT ROOT, 32-slot user
+      bank in the project and in REAPER presets, loader actions per instance (Load Kit,
+      Folder, from Items, Recent Kits) and the Export action; scripts can hand lane sounds to
+      one instance through the hidden Lane request parameter (section 11).</li>
+  <li><b>Front:</b> ten colour schemes, font sizes, UI SIZE 25&ndash;400&nbsp;% with AUTO FIT.</li>
+</ul>
+<h3>Known limits</h3>
+<ul>
+  <li>The per-segment phase offset (PH) is serialized and written by presets and undo; the
+      front has no control for it.</li>
+  <li>Capture is volatile (RAM only, never serialized) and capped at 8 s &mdash;
+      ~7.3 s at 192 kHz, less at 384 kHz; the button shows <code>N/A</code> if
+      the extended memory is unavailable.</li>
+  <li>Kit assignment needs the Lua actions &mdash; there is intentionally no in-plugin file
+      dialog. Kits loaded with the plain <code>TT-KICK Load Kit</code> do not appear in
+      Recent Kits (no folder copy). The undo ring has no redo.</li>
+  <li>The wave preview renders a kick up to about 10 s; a longer chain is cut off in the preview
+      only (the sound is not affected).</li>
+  <li>A seek from a bar line that has just fired onto another bar line within 0.02 of an
+      eighth (about 5&nbsp;ms at 120&nbsp;BPM) cannot be told apart from a loop wrap and counts
+      as the same transition.</li>
+  <li>With strongly overlapping lanes (long crossfades) the total length is not strictly
+      monotonic in the FIT scale factor; <b>FIT NOW</b> then lands within about 0.5&nbsp;ms of
+      the nearest reachable length instead of exactly on the note.</li>
+  <li>Layout and legibility below 100&nbsp;% UI size are not tuned (AUTO FIT still works
+      down to 25&nbsp;%, the function is kept).</li>
+</ul>
+
+<h2 id="trouble"><span class="num">16</span>Troubleshooting</h2>
+<ul>
+  <li>A loader reports that TT-KICK did not answer or found no TT-KICK — click into the
+      TT-KICK window (or select its track) and run it again; the audio engine must be running.</li>
+  <li>A loader says <code>Path longer than 255 characters</code> &mdash; that slot was skipped and
+      keeps its previous sample; move the WAV to a shorter path and load it again.</li>
+  <li><code>EMPTY SLOT - ASSIGN WITH TT-KICK Load Kit.lua</code> — the slot has
+      no path; <code>LOAD ERROR - NOT A READABLE WAV/AIFF</code> — the assigned
+      file is unreadable or the path moved; reassign via a loader.</li>
+  <li><code>DETECT: NO BODY SIGNAL</code> — the body is too quiet or toneless
+      (confidence under 30 %); <code>BODY TOO SHORT</code> — lengthen
+      the body window; <code>LOADING - TRY AGAIN</code> — a kit scan is still
+      running.</li>
+  <li>Orange <code>DUR</code> values — the segment sits outside its recommended
+      range; fine if deliberate. On INIT all lanes read green (the factory
+      windows are 6/100/280 ms, inside their ranges).</li>
+  <li>Player shows <code>SYNC - WAITING FOR TRANSPORT</code> — SYNC mode only
+      plays while the transport runs; switch to FREE RUN for an always-on
+      beat.</li>
+  <li><code>CAP</code> shows <code>N/A</code> — the host denied the extended
+      sample memory; capturing is unavailable, everything else still works.</li>
+  <li>A recording never starts — the input must exceed −40 dBFS at the
+      plug-in's pins: check that audio actually reaches the track input or
+      items before the FX (MIDI-only tracks carry no audio).</li>
+  <li>A lane stays silent — check its <b>M/S buttons</b> first (a muted or
+      non-soloed lane drops out of the chain; audition still plays it), then
+      its SYNTH|SAMPLE state (SAMPLE needs a loaded slot or a committed
+      capture), its window length, and the master OUT gain;
+      <code>KTRK OFF</code> in the header is only a reminder that every
+      note sounds at ROOT pitch.</li>
+  <li>A lane sounds darker than expected — its lane filter may be engaged:
+      the compact view flags <code>FILTER ON</code>;
+      open EXPERT and set CUT fully right / RES to 0 (or CTRL+click both) to
+      bypass it bit-exactly.</li>
+</ul>
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v1.1.0</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/kick-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/kick-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-KICK Kick Machine v1.1.0</b> — JSFX instrument for REAPER · Tim Techlor design series<br> Manual revision 1.1.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>

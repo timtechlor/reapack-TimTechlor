@@ -1,0 +1,1228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-RUMBLER Manual – Techno Rumble Machine for REAPER</title>
+<meta name="description" content="Reference manual for TT-RUMBLER, a free rumble machine JSFX effect for REAPER: it builds the pumping techno sub-bass layer from the kick in front of it — shown together with the kick in a bar-synced dual-trace scope — VERB, NOISE and PITCH engines gated by a tempo-synced AHDR envelope, resonant low cut, parallel band drive, high cut with ENV DEPTH sweep, auto gain, clipper, 22 factory presets and up to 19 undo steps.">
+<meta name="tt-doc-name" content="TT-RUMBLER Rumble Machine">
+<meta name="tt-doc-version" content="1.1.0">
+<meta name="tt-doc-date" content="2026-10-26">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-rumbler-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-RUMBLER Rumble Machine Manual – Techno Rumble Machine for REAPER">
+<meta property="og:description" content="Reference manual for TT-RUMBLER, a free rumble machine JSFX effect for REAPER: it builds the pumping techno sub-bass layer from the kick in front of it — shown together with the kick in a bar-synced dual-trace scope — VERB, NOISE and PITCH engines gated by a tempo-synced AHDR envelope, resonant low cut, parallel band drive, high cut with ENV DEPTH sweep, auto gain, clipper, 22 factory presets and up to 19 undo steps.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-rumbler-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-rumbler.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-RUMBLER Rumble Machine — User Manual">
+<meta property="article:modified_time" content="2026-10-26">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-RUMBLER Rumble Machine Manual – Techno Rumble Machine for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-RUMBLER, a free rumble machine JSFX effect for REAPER: it builds the pumping techno sub-bass layer from the kick in front of it — shown together with the kick in a bar-synced dual-trace scope — VERB, NOISE and PITCH engines gated by a tempo-synced AHDR envelope, resonant low cut, parallel band drive, high cut with ENV DEPTH sweep, auto gain, clipper, 22 factory presets and up to 19 undo steps.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-rumbler.png">
+<meta name="twitter:image:alt" content="TT-RUMBLER Rumble Machine — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-rumbler-manual.html#article",
+   "headline": "TT-RUMBLER Rumble Machine — User Manual",
+   "name": "TT-RUMBLER Rumble Machine Manual – Techno Rumble Machine for REAPER",
+   "description": "Reference manual for TT-RUMBLER, a free rumble machine JSFX effect for REAPER: it builds the pumping techno sub-bass layer from the kick in front of it — shown together with the kick in a bar-synced dual-trace scope — VERB, NOISE and PITCH engines gated by a tempo-synced AHDR envelope, resonant low cut, parallel band drive, high cut with ENV DEPTH sweep, auto gain, clipper, 22 factory presets and up to 19 undo steps.",
+   "url": "https://timtechlor.de/docs/tt-rumbler-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-rumbler-manual.html",
+   "datePublished": "2026-10-26",
+   "dateModified": "2026-10-26",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-rumbler.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER rumble plugin, techno rumble, kick rumble, JSFX effect, sub bass generator, kikzilla alternative, rumble machine, free JSFX",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-rumbler-manual.html#software" },
+   "version": "1.1.0"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-rumbler-manual.html#software",
+   "name": "TT-RUMBLER Rumble Machine",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "1.1.0",
+   "description": "Rumble machine JSFX effect for REAPER: builds the pumping techno sub-bass layer from the kick in front of it in the FX chain, with kick and rumble together in a bar-synced scope — VERB/NOISE/PITCH engines gated by a tempo-synced AHDR envelope, resonant low cut, parallel band drive, high cut with ENV DEPTH sweep, feed-forward auto gain, clipper, 22 factory presets and up to 19 undo steps.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-RUMBLER Rumble Machine", "item": "https://timtechlor.de/docs/tt-rumbler-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-RUMBLER Rumble Machine</span></nav>
+      <div class="wordmark" style="--wm-n:10" role="img" aria-label="TT-RUMBLER Rumble Machine">TT-RUMBLER</div>
+      <h1>TT-RUMBLER Rumble Machine — User Manual</h1>
+      <div class="meta">JSFX effect for REAPER // Version 1.1.0 // TimTechlor</div>
+      <p class="lead">The pumping sub-bass layer under your kick — <em>built from the kick itself.</em> A rumble machine for REAPER: it listens to the kick running through it, re-triggers a tempo-synced envelope on every hit and gates a VERB, NOISE or PITCH engine into the signature techno rumble. A Kikzilla-Lite-style chain with every parameter on the front — plus a PITCH engine no Kikzilla has.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/rumbler-front.png" aria-label="Enlarge screenshot of the TT-RUMBLER Rumble Machine user interface" title="Click to enlarge"><img src="img/tt-ui-options/rumbler-front.png" width="1129" height="916" alt="TT-RUMBLER Rumble Machine user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#sounds"><span class="num">02</span><span>Sound examples</span></a></li>
+<li><a href="#quickstart"><span class="num">03</span><span>Quick start</span></a></li>
+<li><a href="#signalflow"><span class="num">04</span><span>Signal flow</span></a></li>
+<li><a href="#trigger"><span class="num">05</span><span>Trigger</span></a></li>
+<li><a href="#engines"><span class="num">06</span><span>Engines</span></a></li>
+<li><a href="#envelope"><span class="num">07</span><span>Envelope</span></a></li>
+<li><a href="#filter"><span class="num">08</span><span>Filter &amp; drive</span></a></li>
+<li><a href="#mix"><span class="num">09</span><span>Mix &amp; clipper</span></a></li>
+<li><a href="#scope"><span class="num">10</span><span>Scope &amp; tempo readout</span></a></li>
+<li><a href="#presets"><span class="num">11</span><span>Presets</span></a></li>
+<li><a href="#editing"><span class="num">12</span><span>Editing, undo &amp; tips</span></a></li>
+<li><a href="#options"><span class="num">13</span><span>Options / Color</span></a></li>
+<li><a href="#tips"><span class="num">14</span><span>Tips &amp; tricks</span></a></li>
+<li><a href="#limits"><span class="num">15</span><span>Limitations &amp; notes</span></a></li>
+<li><a href="#changes"><span class="num">16</span><span>Version history</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">17</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>The rumble is the rolling sub-bass carpet that carries a modern techno
+track — classically built by copying the kick, running the copy through a
+long dark reverb, gating it with an envelope that re-fires on every hit,
+low-passing it hard and ducking it against the dry kick. TT-RUMBLER packs
+that whole chain into a single plug-in with every stage on the front: a
+trigger detector that listens to the kick, three rumble engines
+(<b>VERB</b> / <b>NOISE</b> / <b>PITCH</b>), a tempo-synced AHDR envelope
+with independent START, ATTACK, HOLD and RELEASE times in milliseconds, a resonant filter block with
+an envelope-driven high cut, and a mix stage with feed-forward auto gain
+and a clipper.</p>
+<p>It is an <b>effect, not an instrument</b>: it processes the audio that
+reaches it — put a kick in front of it (TT-KICK is the obvious partner, but
+any kick source works) and it does the rest. The engines run on the mono
+mid signal and the rumble is duplicated to L/R — an authentic mono sub —
+while the dry kick passes through in stereo, scaled by the KICK fader
+(delayed by the reported engine latency since 0.9.2, see LATENCY below).
+The third engine, <b>PITCH</b>, is the feature no dedicated rumble tool
+offers: it drops the kick itself by up to two octaves, so the rumble is
+literally built out of your own kick's body.</p>
+<p>All 28 sound parameters live on one 900&nbsp;×&nbsp;700 panel — no tabs,
+no menus. Since 0.7.0 the <b>scope</b> is the centre piece: it draws the
+incoming kick and the rumble together on one bar, so you see the swell
+against the kick while you turn the knobs. Underneath the controls sit in
+five groups — <b>TRIGGER</b>, <b>ENGINE</b>, <b>ENVELOPE</b> (with a curve
+preview), <b>FILTER</b> and <b>MIX</b>. The header carries the trigger LED,
+up to 19 UNDO steps, the preset bar (INIT + 22 factory designs and a 32-slot
+user bank) and the OPTIONS button (colours, UI size, font sizes and the
+tooltip switch).</p>
+<figure class="shot"><img src="img/tt-ui-options/rumbler-front.png" alt="Current suite front at 125% UI size, version 1.1.0"><figcaption>Current front in v1.1.0, at the default UI size of 125%.</figcaption></figure>
+
+<h2 id="sounds"><span class="num">02</span>Sound examples</h2>
+<p>The same <b>TT-KICK 909 TIGHT</b> kick at <b>130 BPM</b>, through the sound of the factory bank:
+the dry reference plus six presets, each as <b>kick + rumble</b> and <b>rumble only</b>. Each clip contains two bars plus the tail. Use the engine filters
+to shorten the list, or click the waveform to jump to a beat.</p>
+<p>The named factory presets are the starting points. For these comparisons, <b>THRESHOLD</b> is
+set to &minus;15 dBFS, <b>KICK</b> to 100% and <b>OUT</b> to 0 dB. The kick enters at &minus;6 dBFS peak.
+All clips share one export gain; there is no individual loudness normalisation, added effect or mastering.
+The solo clips isolate the rumble through the same output clipper. Headphones or speakers that reproduce
+the low bass help with the darker examples.</p>
+<style>.rmb-sound-player .ttp-art img{object-fit:contain;background:#090c08}</style>
+<style>
+.ttp { --acc: var(--acid, #39FF14); --acc-d: rgba(57,255,20,.55); --acc-f: rgba(57,255,20,.10); --ln: var(--line-bright, #2c3a27);
+  position: relative; margin: 26px 0 30px; border: 1px solid var(--ln); border-radius: 4px; overflow: hidden; color: #fff;
+  background: radial-gradient(120% 160% at 0% 0%, rgba(57,255,20,.08), transparent 52%), linear-gradient(160deg, #0f170c 0%, #060806 62%);
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 26px 44px -30px rgba(0,0,0,.95); transition: border-color .3s ease, box-shadow .3s ease; }
+.ttp::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--acc), transparent 72%); opacity: .6; }
+.ttp.is-playing { border-color: var(--acc-d); box-shadow: 0 0 0 1px rgba(57,255,20,.12), 0 0 40px -12px rgba(57,255,20,.35), 0 26px 44px -30px rgba(0,0,0,.95); }
+.ttp button { font: inherit; color: inherit; }
+.ttp-now { display: grid; grid-template-columns: 152px minmax(0, 1fr); gap: 22px; padding: 20px; align-items: center; }
+.ttp-art { position: relative; width: 152px; aspect-ratio: 1 / 1; border: 1px solid var(--acc-d); border-radius: 3px; overflow: hidden; background: #000; }
+.ttp-art img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.85) brightness(.72); transform: scale(1.02);
+  transition: transform 8s linear, filter .5s ease; }
+.ttp.is-playing .ttp-art img { filter: saturate(1.2) brightness(1); transform: scale(1.16); }
+.ttp-art::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 1px, transparent 1px 3px), radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,.55)); }
+.ttp-play { position: absolute; z-index: 2; inset: 0; margin: auto; width: 66px; height: 66px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center; background: conic-gradient(var(--acc) calc(var(--p, 0) * 1turn), rgba(255,255,255,.16) 0);
+  box-shadow: 0 0 26px rgba(57,255,20,.32); transition: transform .15s ease, box-shadow .2s ease; }
+.ttp-play::before { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: rgba(0,0,0,.8); }
+.ttp-play::after { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 2px solid var(--acc); opacity: 0; pointer-events: none; }
+.ttp.is-beat .ttp-play::after { animation: ttp-beat var(--beat, .5s) linear var(--beat-delay, 0s) infinite; }
+.ttp-play:hover { transform: scale(1.07); box-shadow: 0 0 34px rgba(57,255,20,.5); }
+.ttp-play:focus-visible, .ttp-btn:focus-visible, .ttp-chip:focus-visible, .ttp-row:focus-visible, .ttp-wave:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.ttp-play svg { position: relative; width: 26px; height: 26px; fill: var(--acc); filter: drop-shadow(0 0 6px rgba(57,255,20,.6)); }
+.ttp .i-pause, .ttp.is-playing .i-play { display: none; }
+.ttp.is-playing .i-pause { display: block; }
+@keyframes ttp-beat { 0% { opacity: .8; transform: scale(.9); } 70% { opacity: 0; transform: scale(1.32); } 100% { opacity: 0; transform: scale(1.32); } }
+.ttp-body { min-width: 0; }
+.ttp-kicker { display: flex; align-items: center; gap: 10px; font: 11px/1 var(--mono, monospace); letter-spacing: .16em; text-transform: uppercase; color: var(--acc); }
+.ttp-live { display: inline-flex; align-items: center; gap: 6px; color: #8C8C8C; }
+.ttp-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #3a3a3a; }
+.ttp.is-playing .ttp-live { color: var(--acc); }
+.ttp.is-playing .ttp-live::before { background: var(--acc); box-shadow: 0 0 8px var(--acc); animation: ttp-blink 1s steps(2, start) infinite; }
+@keyframes ttp-blink { to { visibility: hidden; } }
+.ttp-title { margin: 8px 0 2px; font-size: 1.55rem; line-height: 1.15; font-weight: 700; letter-spacing: .01em; color: #fff; overflow-wrap: anywhere; }
+.ttp-desc { margin: 0; color: #a9a9a9; font-size: .92rem; line-height: 1.45; }
+.ttp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ttp-chips span { font: 11px/1 var(--mono, monospace); letter-spacing: .08em; text-transform: uppercase; color: #a9a9a9; border: 1px solid var(--ln); border-radius: 2px; padding: 4px 7px; }
+.ttp-chips span:first-child { color: var(--acc); border-color: var(--acc-d); }
+.ttp-wave { position: relative; height: 78px; margin-top: 14px; cursor: pointer; touch-action: none; border-radius: 2px; }
+.ttp-wave canvas { display: block; width: 100%; height: 100%; }
+.ttp-tip { position: absolute; top: 0; left: 0; transform: translate(-50%, -110%); padding: 2px 6px; font: 11px/1.3 var(--mono, monospace); color: var(--acc);
+  background: #000; border: 1px solid var(--acc-d); border-radius: 2px; opacity: 0; pointer-events: none; transition: opacity .12s; white-space: nowrap; }
+.ttp-wave.is-hover .ttp-tip { opacity: 1; }
+.ttp-foot { display: flex; align-items: center; gap: 10px; margin-top: 8px; font: 12px/1 var(--mono, monospace); color: #8C8C8C; letter-spacing: .06em; }
+.ttp-foot .ttp-t { color: var(--acc); min-width: 3.2em; }
+.ttp-foot .ttp-sp { flex: 1 1 auto; }
+.ttp-btn { display: inline-grid; place-items: center; width: 32px; height: 28px; padding: 0; cursor: pointer; background: transparent;
+  border: 1px solid var(--ln); border-radius: 2px; transition: border-color .15s, background .15s; }
+.ttp-btn svg { width: 14px; height: 14px; fill: #cfcfcf; }
+.ttp-btn:hover { border-color: var(--acc); background: var(--acc-f); }
+.ttp-btn:hover svg { fill: var(--acc); }
+.ttp-btn.ttp-auto { width: auto; padding: 0 8px; font: 10px/1 var(--mono, monospace); letter-spacing: .12em; color: #8C8C8C; }
+.ttp-btn.ttp-auto[aria-pressed="true"] { color: var(--acc); border-color: var(--acc-d); }
+.ttp-count { color: #cfcfcf; white-space: nowrap; }
+.ttp-err { display: none; margin-top: 8px; font: 12px/1.4 var(--mono, monospace); color: #ff6b6b; }
+.ttp.is-error .ttp-err { display: block; }
+.ttp-filter { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 20px 14px; }
+.ttp .ttp-chip { cursor: pointer; padding: 5px 9px; background: transparent; border: 1px solid var(--ln); border-radius: 2px;
+  font: 11px/1 var(--mono, monospace); letter-spacing: .1em; text-transform: uppercase; color: #a9a9a9; transition: all .15s; }
+.ttp-chip b { color: inherit; font-weight: 400; opacity: .6; margin-left: 4px; }
+.ttp .ttp-chip:hover { border-color: var(--acc); color: var(--acc); }
+.ttp .ttp-chip[aria-pressed="true"] { background: var(--acc); border-color: var(--acc); color: #000; }
+.ttp-tracks { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ln); max-height: 404px; overflow: auto;
+  scrollbar-width: thin; scrollbar-color: #2c3a27 transparent; }
+.ttp-tracks li { margin: 0; padding: 0; }
+.ttp-tracks li + li { border-top: 1px solid #131813; }
+.ttp-tracks li[hidden] { display: none; }
+.ttp-row { display: grid; grid-template-columns: 30px minmax(0, 1fr) 128px 92px 34px 38px; gap: 14px; align-items: center; width: 100%; margin: 0;
+  padding: 9px 20px 9px 18px; text-align: left; cursor: pointer; background: transparent; border: 0; border-left: 2px solid transparent; transition: background .15s; }
+.ttp-row:hover { background: rgba(57,255,20,.05); }
+.ttp-tracks .is-active .ttp-row { background: linear-gradient(90deg, rgba(57,255,20,.14), transparent 75%); border-left-color: var(--acc); }
+.ttp-idx { display: inline-flex; align-items: center; }
+.ttp-n { font: 12px/1 var(--mono, monospace); color: #6f6f6f; }
+.ttp-eq { display: none; align-items: flex-end; gap: 2px; height: 12px; }
+.ttp-eq i { width: 3px; height: 100%; background: var(--acc); transform-origin: bottom; transform: scaleY(.3); }
+.ttp.is-playing .is-active .ttp-eq { display: inline-flex; }
+.ttp.is-playing .is-active .ttp-n { display: none; }
+.ttp.is-playing .is-active .ttp-eq i { animation: ttp-eq .9s ease-in-out infinite; }
+.ttp-eq i:nth-child(2) { animation-delay: -.3s !important; } .ttp-eq i:nth-child(3) { animation-delay: -.6s !important; }
+@keyframes ttp-eq { 0%, 100% { transform: scaleY(.25); } 50% { transform: scaleY(1); } }
+.ttp-tracks .is-active .ttp-n { color: var(--acc); }
+.ttp-name { min-width: 0; }
+.ttp-name b { display: block; font-size: .95rem; line-height: 1.25; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ttp-name small { display: block; font-size: .8rem; line-height: 1.35; color: #8C8C8C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ttp-mini { display: block; width: 100%; height: 26px; }
+.ttp-tag { justify-self: start; font: 10px/1 var(--mono, monospace); letter-spacing: .1em; text-transform: uppercase; color: #8C8C8C; border: 1px solid #222; padding: 4px 6px; border-radius: 2px; white-space: nowrap; }
+.ttp-bpm, .ttp-len { font: 12px/1 var(--mono, monospace); color: #8C8C8C; text-align: right; }
+.ttp-tracks .is-active .ttp-bpm, .ttp-tracks .is-active .ttp-len { color: #cfcfcf; }
+.ttp-single .ttp-now { grid-template-columns: 128px minmax(0, 1fr); }
+.ttp-single .ttp-art { width: 128px; }
+.ttp-single .ttp-play { width: 58px; height: 58px; }
+@media (max-width: 680px) {
+  .ttp-now, .ttp-single .ttp-now { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 16px; }
+  .ttp-art, .ttp-single .ttp-art { width: 100%; aspect-ratio: 16 / 7; }
+  .ttp-play, .ttp-single .ttp-play { width: 58px; height: 58px; }
+  .ttp-title { font-size: 1.3rem; }
+  .ttp-wave { height: 66px; }
+  .ttp-foot { flex-wrap: wrap; row-gap: 10px; }
+  .ttp-filter { padding: 0 16px 12px; }
+  .ttp-row { grid-template-columns: 26px minmax(0, 1fr) 38px; padding: 9px 16px 9px 14px; }
+  .ttp-mini, .ttp-tag, .ttp-bpm { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ttp *, .ttp *::before, .ttp *::after { animation: none !important; transition: none !important; }
+}
+@media print { .ttp-filter, .ttp-tracks { display: none; } }
+</style>
+<script>
+(function () {
+  var ICON = { play: '<svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>',
+               pause: '<svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>' };
+  var all = [];
+  function fmt(t) { if (!isFinite(t) || t < 0) t = 0; var m = Math.floor(t / 60), s = Math.floor(t % 60); return m + ':' + (s < 10 ? '0' : '') + s; }
+  function dec(p) { var a = []; for (var i = 0; i < p.length; i++) a.push(parseInt(p.charAt(i), 36) / 35); return a; }
+  function css(el, k, d) { var v = getComputedStyle(el).getPropertyValue(k).trim(); return v || d; }
+
+  // Wellenform: Balken oben, gespiegelter Schatten unten; gespielt = Akzent mit Glow, Hover = halbhell; Taktraster aus BPM
+  function draw(cv, pk, o) {
+    var r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    var w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+    if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+    var c = cv.getContext('2d'); c.clearRect(0, 0, w, h);
+    var bw = Math.max(1, Math.round(o.bar * dpr)), gap = Math.max(1, Math.round(o.gap * dpr)), n = Math.max(1, Math.floor(w / (bw + gap)));
+    var base = Math.round(h * (o.mirror ? .68 : .5)), top = base - 2 * dpr, bot = h - base - 1 * dpr;
+    if (o.grid && o.bpm && o.dur) {
+      c.fillStyle = 'rgba(255,255,255,.06)';
+      for (var k = 1; k * 240 / o.bpm < o.dur; k++) c.fillRect(Math.round(k * 240 / o.bpm / o.dur * w), 0, Math.max(1, dpr), h);
+    }
+    var acc = o.acc, g = c.createLinearGradient(0, 0, w, 0);
+    g.addColorStop(0, 'rgba(57,255,20,.55)'); g.addColorStop(1, acc);
+    for (var i = 0; i < n; i++) {
+      var a = Math.floor(i / n * pk.length), b = Math.max(a + 1, Math.floor((i + 1) / n * pk.length)), v = 0;
+      for (var j = a; j < b; j++) if (pk[j] > v) v = pk[j];
+      var f = (i + .5) / n, x = i * (bw + gap), hh = Math.max(dpr, v * top);
+      var played = f <= o.prog, hov = o.hov >= 0 && f <= o.hov;
+      c.fillStyle = played ? g : hov ? 'rgba(57,255,20,.32)' : o.rest;
+      c.fillRect(x, base - hh, bw, hh);
+      if (o.mirror) { c.globalAlpha = played ? .32 : .5; c.fillRect(x, base + dpr, bw, Math.max(dpr, v * bot * .9)); c.globalAlpha = 1; }
+    }
+    if (o.prog > 0 && o.head) {
+      var px = Math.round(o.prog * w);
+      c.shadowColor = acc; c.shadowBlur = 10 * dpr; c.fillStyle = '#fff'; c.fillRect(px - dpr, 0, 2 * dpr, h); c.shadowBlur = 0;
+    }
+  }
+
+  function Player(root) {
+    var me = this, data = JSON.parse(root.querySelector('script.ttp-data').textContent);
+    me.root = root; me.tracks = data.tracks; me.base = data.base || ''; me.art = data.art || '';
+    me.list = root.classList.contains('ttp-list'); me.i = 0; me.hov = -1; me.auto = true; me.pending = -1;
+    me.audio = root.querySelector('audio'); me.cv = root.querySelector('.ttp-wave canvas'); me.wave = root.querySelector('.ttp-wave');
+    me.tip = root.querySelector('.ttp-tip'); me.acc = css(root, '--acc', '#39FF14');
+    me.tracks.forEach(function (t) { t.pk = dec(t.peaks); });
+    me.rows = [].slice.call(root.querySelectorAll('.ttp-tracks li'));
+    me.minis = me.rows.map(function (li) { return li.querySelector('canvas'); });
+    var q = function (s) { return root.querySelector(s); };
+    me.el = { title: q('.ttp-title'), desc: q('.ttp-desc'), chips: q('.ttp-chips'), t: q('.ttp-t'), d: q('.ttp-d'), count: q('.ttp-count'), live: q('.ttp-live') };
+    q('.ttp-play').addEventListener('click', function () { me.toggle(); });
+    var bp = q('.ttp-prev'), bn = q('.ttp-next'), ba = q('.ttp-auto');
+    if (bp) bp.addEventListener('click', function () { me.step(-1); });
+    if (bn) bn.addEventListener('click', function () { me.step(1); });
+    if (ba) ba.addEventListener('click', function () { me.auto = !me.auto; ba.setAttribute('aria-pressed', me.auto); });
+    me.rows.forEach(function (li, k) {
+      li.querySelector('.ttp-row').addEventListener('click', function () {
+        if (k === me.i && me.audio.src) { me.toggle(); } else { me.load(k, true); }
+      });
+    });
+    [].forEach.call(root.querySelectorAll('.ttp-chip'), function (ch) {
+      ch.addEventListener('click', function () {
+        [].forEach.call(root.querySelectorAll('.ttp-chip'), function (x) { x.setAttribute('aria-pressed', x === ch); });
+        var tag = ch.getAttribute('data-tag');
+        me.rows.forEach(function (li, k) { li.hidden = !!tag && me.tracks[k].tag !== tag; });
+        me.drawMinis();
+      });
+    });
+    // Seek: Zeigen, Ziehen, Tastatur
+    var seekAt = function (e) { var r = me.wave.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); };
+    me.wave.addEventListener('pointerdown', function (e) { me.drag = true; me.wave.setPointerCapture(e.pointerId); me.seek(seekAt(e)); });
+    me.wave.addEventListener('pointermove', function (e) {
+      var f = seekAt(e); me.hov = f; me.wave.classList.add('is-hover');
+      me.tip.style.left = (f * 100) + '%'; me.tip.textContent = fmt(f * me.dur());
+      if (me.drag) me.seek(f); else me.paint();
+    });
+    me.wave.addEventListener('pointerup', function () { me.drag = false; });
+    me.wave.addEventListener('pointerleave', function () { me.hov = -1; me.wave.classList.remove('is-hover'); me.paint(); });
+    me.wave.addEventListener('keydown', function (e) {
+      var d = me.dur(), t = me.audio.currentTime || 0, k = e.key;
+      if (k === 'ArrowRight' || k === 'ArrowLeft') { me.seek(Math.min(1, Math.max(0, (t + (k === 'ArrowRight' ? 1 : -1)) / d))); e.preventDefault(); }
+      else if (k === 'Home' || k === 'End') { me.seek(k === 'Home' ? 0 : .999); e.preventDefault(); }
+      else if (k === ' ' || k === 'Enter') { me.toggle(); e.preventDefault(); }
+    });
+    var A = me.audio;
+    A.addEventListener('play', function () { all.forEach(function (p) { if (p !== me) p.audio.pause(); }); me.state(true); });
+    A.addEventListener('playing', function () { me.sync(); });
+    A.addEventListener('seeked', function () { me.sync(); });
+    A.addEventListener('pause', function () { me.state(false); });
+    A.addEventListener('loadedmetadata', function () {
+      if (me.pending >= 0) { A.currentTime = me.pending * A.duration; me.pending = -1; }
+      me.el.d.textContent = fmt(A.duration);
+    });
+    A.addEventListener('ended', function () {
+      if (me.list && me.auto && me.next(1) >= 0) { me.load(me.next(1), true); } else { A.currentTime = 0; me.paint(); }
+    });
+    A.addEventListener('error', function () {
+      var t = me.tracks[me.i];
+      if (me.base && !me.fell) { me.fell = true; A.src = me.base + t.src; if (me.want) A.play().catch(function () {}); }
+      else { root.classList.add('is-error'); me.state(false); }
+    });
+    me.load(0, false);
+    if (window.ResizeObserver) new ResizeObserver(function () { me.paint(); me.drawMinis(); }).observe(root);
+    else window.addEventListener('resize', function () { me.paint(); me.drawMinis(); });
+  }
+  Player.prototype.dur = function () { var d = this.audio.duration; return isFinite(d) && d > 0 ? d : this.tracks[this.i].dur; };
+  Player.prototype.next = function (dir) {
+    var k = this.i;
+    for (var s = 0; s < this.tracks.length; s++) { k += dir; if (k < 0 || k >= this.tracks.length) return -1; if (!this.rows[k] || !this.rows[k].hidden) return k; }
+    return -1;
+  };
+  Player.prototype.step = function (dir) {
+    if (dir < 0 && this.audio.currentTime > 2) { this.audio.currentTime = 0; return; }
+    var k = this.next(dir); if (k >= 0) this.load(k, !this.audio.paused || this.root.classList.contains('is-playing'));
+  };
+  Player.prototype.load = function (k, play) {
+    var t = this.tracks[k], A = this.audio;
+    this.i = k; this.fell = false; this.pending = -1; this.root.classList.remove('is-error');
+    A.src = t.src; A.preload = 'none';
+    this.el.title.textContent = t.title;
+    this.el.desc.textContent = t.desc;
+    this.el.chips.innerHTML = '';
+    var self = this;
+    [t.bpm + ' BPM', t.preset != null && t.preset !== '' ? 'Preset ' + t.preset : '', t.tag].filter(Boolean).forEach(function (s) { var sp = document.createElement('span'); sp.textContent = s; self.el.chips.appendChild(sp); });
+    this.el.t.textContent = '0:00'; this.el.d.textContent = fmt(t.dur);
+    if (this.el.count) this.el.count.textContent = ('0' + (k + 1)).slice(-2) + ' / ' + ('0' + this.tracks.length).slice(-2);
+    this.root.querySelector('.ttp-play').setAttribute('aria-label', 'Play ' + t.title);
+    this.wave.setAttribute('aria-valuemax', Math.round(t.dur)); this.wave.setAttribute('aria-valuenow', 0);
+    this.root.style.setProperty('--beat', (60 / t.bpm) + 's');
+    this.rows.forEach(function (li, j) { li.classList.toggle('is-active', j === k); li.querySelector('.ttp-row').setAttribute('aria-current', j === k ? 'true' : 'false'); });
+    if (this.rows[k]) { var li = this.rows[k], ul = li.parentNode, lr = li.getBoundingClientRect(), ur = ul.getBoundingClientRect(); if (lr.top < ur.top || lr.bottom > ur.bottom) ul.scrollTop += lr.top - ur.top - (ul.clientHeight - li.offsetHeight) / 2; }
+    this.paint(); this.drawMinis();
+    if (play) { this.want = true; A.play().catch(function () {}); }
+  };
+  Player.prototype.toggle = function () {
+    var A = this.audio;
+    if (A.paused) { this.want = true; A.play().catch(function () {}); } else { this.want = false; A.pause(); }
+  };
+  Player.prototype.seek = function (f) {
+    var A = this.audio;
+    if (A.readyState >= 1 && isFinite(A.duration)) { A.currentTime = f * A.duration; }
+    else { this.pending = f; this.want = true; A.play().catch(function () {}); }
+    this.paint(f);
+  };
+  Player.prototype.sync = function () {
+    // Beat-Puls am Takt der Datei ausrichten (alle Beispiele beginnen auf Schlag 1)
+    var beat = 60 / this.tracks[this.i].bpm, r = this.root;
+    r.style.setProperty('--beat-delay', (-((this.audio.currentTime || 0) % beat)) + 's');
+    r.classList.remove('is-beat'); void r.offsetWidth; if (!this.audio.paused) r.classList.add('is-beat');
+  };
+  Player.prototype.state = function (on) {
+    var me = this, t = me.tracks[me.i];
+    me.root.classList.toggle('is-playing', on); if (!on) me.root.classList.remove('is-beat');
+    me.root.querySelector('.ttp-play').setAttribute('aria-label', (on ? 'Pause ' : 'Play ') + t.title);
+    if (me.el.live) me.el.live.textContent = on ? 'Playing' : 'Ready';
+    if (on) {
+      var tick = function () { me.paint(); if (!me.audio.paused) me.raf = requestAnimationFrame(tick); };
+      cancelAnimationFrame(me.raf); me.raf = requestAnimationFrame(tick);
+      if ('mediaSession' in navigator && window.MediaMetadata) {
+        try {
+          navigator.mediaSession.metadata = new MediaMetadata({ title: t.title, artist: me.root.getAttribute('data-artist') || 'TimTechlor',
+            album: 'Sound examples', artwork: me.art ? [{ src: new URL(me.art, location.href).href, sizes: '640x640', type: 'image/jpeg' }] : [] });
+          navigator.mediaSession.setActionHandler('play', function () { me.toggle(); });
+          navigator.mediaSession.setActionHandler('pause', function () { me.toggle(); });
+          navigator.mediaSession.setActionHandler('previoustrack', me.list ? function () { me.step(-1); } : null);
+          navigator.mediaSession.setActionHandler('nexttrack', me.list ? function () { me.step(1); } : null);
+        } catch (e) {}
+      }
+    } else { cancelAnimationFrame(me.raf); me.paint(); }
+  };
+  Player.prototype.paint = function (force) {
+    var A = this.audio, d = this.dur(), t = this.tracks[this.i];
+    var p = typeof force === 'number' ? force : (this.pending >= 0 ? this.pending : Math.min(1, (A.currentTime || 0) / d));
+    this.root.style.setProperty('--p', p.toFixed(4));
+    this.el.t.textContent = fmt(p * d);
+    this.wave.setAttribute('aria-valuenow', Math.round(p * d)); this.wave.setAttribute('aria-valuetext', fmt(p * d) + ' of ' + fmt(d));
+    draw(this.cv, t.pk, { bar: 2, gap: 1, mirror: true, grid: true, head: true, bpm: t.bpm, dur: d, prog: p, hov: this.hov, acc: this.acc, rest: 'rgba(255,255,255,.17)' });
+    var m = this.minis[this.i];
+    if (m && !this.rows[this.i].hidden) draw(m, t.pk, { bar: 1, gap: 1, mirror: false, prog: p, hov: -1, acc: this.acc, rest: 'rgba(255,255,255,.22)' });
+  };
+  Player.prototype.drawMinis = function () {
+    var me = this;
+    me.minis.forEach(function (m, k) {
+      if (!m || me.rows[k].hidden || k === me.i) return;
+      draw(m, me.tracks[k].pk, { bar: 1, gap: 1, mirror: false, prog: 0, hov: -1, acc: me.acc, rest: 'rgba(255,255,255,.22)' });
+    });
+    if (me.minis[me.i]) me.paint();
+  };
+  function init() { [].forEach.call(document.querySelectorAll('[data-ttp]'), function (r) { if (!r.ttp) { r.ttp = new Player(r); all.push(r.ttp); } }); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+<div class="rmb-sound-player"><div class="ttp ttp-list" data-ttp data-artist="TT-RUMBLER" role="region" aria-label="Rumble sound examples"><div class="ttp-now"><div class="ttp-art"><img src="img/tt-ui-options/rumbler-front.png" alt="" width="640" height="640" loading="lazy"><button type="button" class="ttp-play" aria-label="Play Dry kick reference"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></button></div><div class="ttp-body"><div class="ttp-kicker"><span>TT-RUMBLER // Same kick, nine characters</span><span class="ttp-live">Ready</span></div><div class="ttp-title">Dry kick reference</div><p class="ttp-desc">TT-KICK 909 TIGHT, no rumble</p><div class="ttp-chips"><span>130 BPM</span><span>REFERENCE</span></div><div class="ttp-wave" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><canvas></canvas><span class="ttp-tip">0:00</span></div><div class="ttp-foot"><span class="ttp-t">0:00</span><span>/</span><span class="ttp-d">0:05</span><span class="ttp-sp"></span><button type="button" class="ttp-btn ttp-prev" aria-label="Previous example"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM20 5v14L9 12z"/></svg></button><button type="button" class="ttp-btn ttp-next" aria-label="Next example"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM4 5v14l11-7z"/></svg></button><button type="button" class="ttp-btn ttp-auto" aria-pressed="true" title="Play the next example automatically">AUTO</button><span class="ttp-count"></span></div><div class="ttp-err">Audio file not found. The examples are online at timtechlor.de/docs.</div></div></div><div class="ttp-filter" role="group" aria-label="Filter by engine"><button type="button" class="ttp-chip" aria-pressed="true" data-tag="">All<b>13</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="REFERENCE">REFERENCE<b>1</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="VERB">VERB<b>6</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="NOISE">NOISE<b>2</b></button><button type="button" class="ttp-chip" aria-pressed="false" data-tag="PITCH">PITCH<b>4</b></button></div><ol class="ttp-tracks"><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">01</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>Dry kick reference</b><small>TT-KICK 909 TIGHT, no rumble</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">REFERENCE</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">02</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>ROLLING / kick + rumble</b><small>MODAL — Resonant room tail</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">VERB</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">03</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>ROLLING / rumble only</b><small>MODAL — Resonant room tail</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">VERB</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">04</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>INDUSTRIAL / kick + rumble</b><small>WALL — Dense wall with DIRTY cut and drive</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">VERB</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">05</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>INDUSTRIAL / rumble only</b><small>WALL — Dense wall with DIRTY cut and drive</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">VERB</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">06</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>SUB CLOUD / kick + rumble</b><small>BLOOM — Longer, diffuse swell</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">VERB</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">07</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>SUB CLOUD / rumble only</b><small>BLOOM — Longer, diffuse swell</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">VERB</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">08</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>BOOM E1 / kick + rumble</b><small>CLASSIC — Dark filtered noise</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">NOISE</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">09</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>BOOM E1 / rumble only</b><small>CLASSIC — Dark filtered noise</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">NOISE</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">10</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>FIFTH DOWN / kick + rumble</b><small>TIGHT — Kick body seven semitones down, short window</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">PITCH</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">11</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>FIFTH DOWN / rumble only</b><small>TIGHT — Kick body seven semitones down, short window</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">PITCH</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">12</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>SUB OCTAVE / kick + rumble</b><small>DEEP — The kick one octave down</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">PITCH</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li><li><button type="button" class="ttp-row" aria-current="false"><span class="ttp-idx"><span class="ttp-n">13</span><span class="ttp-eq" aria-hidden="true"><i></i><i></i><i></i></span></span><span class="ttp-name"><b>SUB OCTAVE / rumble only</b><small>DEEP — The kick one octave down</small></span><canvas class="ttp-mini" aria-hidden="true"></canvas><span class="ttp-tag">PITCH</span><span class="ttp-bpm">130</span><span class="ttp-len">0:05</span></button></li></ol><script type="application/json" class="ttp-data">{"base": "https://timtechlor.de/docs/", "art": "img/tt-ui-options/rumbler-front.png", "tracks": [{"title": "Dry kick reference", "desc": "TT-KICK 909 TIGHT, no rumble", "src": "audio/tt-rumbler/dry-kick.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "vwtoimqolh60000000000000kzuqlfrpnkc10000000000004ywsnhnqolh50000000000000qxuqjjrpmib0000000000000dzvrnfrpnke40000000000000vwtpimqolh70000000000000kzuqlfrpnkc10000000000003xwsnhnqolh500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "REFERENCE", "preset": null}, {"title": "ROLLING / kick + rumble", "desc": "MODAL — Resonant room tail", "src": "audio/tt-rumbler/verb-modal-mix.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "vwtpjoqnprjdf82578655510kzvrldqnmsqdgd34897646304ywrqhmnnqsjfg63798645510qxuplfskmsqeh92589754520dzvsoeqnnrqggd43788645300vwtqkkpmqrkef82688655510kzusldqnmsqdfc34897545303xwrqilomqsief737886454100000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "VERB", "preset": 1}, {"title": "ROLLING / rumble only", "desc": "MODAL — Resonant room tail", "src": "audio/tt-rumbler/verb-modal-solo.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "004ecedcnltrvg5afgdaaa20025bgfhefnwrxr79hjfb8c500148iahhcmowvwd6eihd8b910036edghegkxszj4agifa9b400159gbiednrtxq96fhfd9b610037fceiblmvtvg5cggdaa920026afehdemuqvq78gieb8b500147gbggblnutve6dhgc8a9100000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "VERB", "preset": 1}, {"title": "INDUSTRIAL / kick + rumble", "desc": "WALL — Dense wall with DIRTY cut and drive", "src": "audio/tt-rumbler/verb-wall-mix.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "uvvrhoruxqc9752000000000kzstqflrtui97530000000003xvuqkjopwpd7431000000000qxvsnfkuttg9532000000000dyturhlqsvla6431000000000uvwsjjnqwqc8532000000000kzrupglrtui96430000000003xwurkioqvpc74310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "VERB", "preset": 5}, {"title": "INDUSTRIAL / rumble only", "desc": "WALL — Dense wall with DIRTY cut and drive", "src": "audio/tt-rumbler/verb-wall-solo.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "06lyrlslxvonhc600000000006kwwtntoxpnhb710000000004jrzsnwjwrqha820000000001enwwsrorxlmd9600000000006lrztntoxpnfa720000000001eqyupvjvvnkc8500000000007lwxtnsowonfb710000000004hsyrowiwspja830000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "VERB", "preset": 5}, {"title": "SUB CLOUD / kick + rumble", "desc": "BLOOM — Longer, diffuse swell", "src": "audio/tt-rumbler/verb-bloom-mix.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "vwtoinqpkf67645567662134lzuqmgromib47345445743135xwsnjmpnjf57524546763124qxupkkqokga6724545674213dzvrniromjc48334446663124vwtoknpojg77624555663213kzuqlhrolhb57334456743135xwsnjmqnjg576245467631242111233210000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "VERB", "preset": 8}, {"title": "SUB CLOUD / rumble only", "desc": "BLOOM — Longer, diffuse swell", "src": "audio/tt-rumbler/verb-bloom-solo.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "00022nj89kkwshknrtsp96bhc2129muh9j9jvbiljjotif4dg4125iyleeidumajljourc58g9124brtgck9ov7fkjmpvi83df3145izkeffezecjjjqrod4ag7025btsffidtp8fkkosse75fc1248kxkck8kxcfjikruid4cf3125gwodeiduo9gliouqd68g9444afc741000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "VERB", "preset": 8}, {"title": "BOOM E1 / kick + rumble", "desc": "CLASSIC — Dark filtered noise", "src": "audio/tt-rumbler/noise-classic-mix.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "vwtoimqolh83423224332212kzuqlfrpnkc34223242221124ywsnhnqoli52124223224322qxuqjjrpmjc1153334231122dzvrnfrpnje53351334412221vwtpimqoli62145133222221kzuqlfrpnke34322322222124xwsnhmqolg432335222342221000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "NOISE", "preset": 9}, {"title": "BOOM E1 / rumble only", "desc": "CLASSIC — Dark filtered noise", "src": "audio/tt-rumbler/noise-classic-solo.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "0000000027ijpcjgeskmag7a72000000057jpcckeodcg76db50000000484b8erbbiecqmdf9100000009a65wlilseh98de8300000008eehju9kirtagbe85100000019lg6rw9jnfdgee9d300000006pinkfdmeecgb7b9600000004cjjbnkzbffipfca6100000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "NOISE", "preset": 9}, {"title": "FIFTH DOWN / kick + rumble", "desc": "TIGHT — Kick body seven semitones down, short window", "src": "audio/tt-rumbler/pitch-tight-mix.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "0mqxri6jxo8a3000000000000ctuor4avtcb41000000000002qotta7jzi791000000000000irvmn5ett6a40000000000005uops7aouh871000000000000mqupg8jun892000000000000ctsmp5bsrca41000000000000potqc9jwi781000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "PITCH", "preset": 18}, {"title": "FIFTH DOWN / rumble only", "desc": "TIGHT — Kick body seven semitones down, short window", "src": "audio/tt-rumbler/pitch-tight-solo.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "02jwzslrwvni50000000000000fpxujovqsj710000000000006jwtojqvome20000000000000gousdqpsof71000000000000ajstiisqml910000000000001gqsngmpqje40000000000000dksohkqmnh610000000000004gqpmglqmid2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "PITCH", "preset": 18}, {"title": "SUB OCTAVE / kick + rumble", "desc": "DEEP — The kick one octave down", "src": "audio/tt-rumbler/pitch-deep-mix.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "00mxvtjplvmjk83000000000008vzqplltrgm94100000000000quvskmmwene6200000000000hxvnnnhvmij83100000000003svupjkmwao84100000000000lwtrimktlii73000000000007uypnjlrqfl73100000000000putrimmthkf620000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "PITCH", "preset": 16}, {"title": "SUB OCTAVE / rumble only", "desc": "DEEP — The kick one octave down", "src": "audio/tt-rumbler/pitch-deep-solo.mp3", "bpm": 130, "dur": 5.2923129251700685, "peaks": "001uznsrmpqpmf6100000000000jwrrnjrpolf61000000000008svkrkjoomic4100000000000mtlqmjnmlje6100000000000dpsipglnmjf82000000000001nshmmhkkkic5100000000000fqmmjgmlkid51000000000006mqimigjkjgb41000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "tag": "PITCH", "preset": 16}]}</script><audio preload="none"></audio></div>
+</div>
+<h2 id="quickstart"><span class="num">03</span>Quick start</h2>
+<ol>
+  <li>Insert <code>TT-RUMBLER</code> on the kick track <b>right after the
+      kick source</b> in the FX chain (e.g. after TT-KICK) — it needs the
+      kick's audio on its input.</li>
+  <li>Set <b>THRESHOLD</b> (default −3 dBFS — the input follower, i.e. the LEVEL bar, must reach it, see section 05) so the <b>TRIG</b> LED blinks
+      once per kick hit — the LEVEL bar shows the follower against the
+      white threshold mark; the scope status in its top right corner reads
+      <code>ABOVE THR</code> while the follower is over the threshold.</li>
+  <li>Watch the <b>scope</b> (section 10): the white <b>KICK IN</b> trace
+      should show every hit, and the accent-coloured <b>RUMBLE</b> trace
+      should swell inside the green gate bands.</li>
+  <li>Push the <b>RUMBLE</b> fader up (≈70 %), start with <b>START</b> at <b>170.9 ms</b> — the rumble swells
+      after the kick punch instead of covering it.</li>
+  <li>Pick an engine: <b>VERB</b> for the classic room rumble,
+      <b>NOISE</b> for a textured bed, <b>PITCH</b> to drop the kick's own
+      body into the sub.</li>
+  <li>Leave <b>AUTO GAIN</b> on (it holds the rumble ≈6 dB under the kick)
+      and park <b>HIGH CUT</b> in the 40–120 Hz sweet spot.</li>
+</ol>
+<div class="box" data-k="No rumble?">Check that kick audio actually
+reaches the plug-in — TT-RUMBLER hears what is on its input pins, so it
+must sit <b>behind</b> the kick generator, not in front of it. Then make
+sure the LEVEL bar crosses the white THRESHOLD mark on each hit (the TRIG
+LED must blink), that the RUMBLE fader is up, and that START is not
+delayed so long that the swell lands after the next kick. With SRC on
+<code>MIDI</code> the audio trigger is off — feed notes or switch back to
+<code>AUDIO</code>.</div>
+
+<h2 id="signalflow"><span class="num">04</span>Signal flow</h2>
+<pre><code>                     +---------------------------------------------------+
+IN (kick audio from   | TRIGGER — peak follower 0.5 ms / 50 ms,           |
+ the FX chain before, | threshold −60…0 dBFS, ~3 dB hysteresis,           |
+ e.g. TT-KICK)        | 30 ms debounce — AUDIO / AUDIO+MIDI / MIDI        |
+        |             +-----------------------+---------------------------+
+        |                                     | re-fires the AHDR envelope
+        |                                     | (sample-accurate)
+        |                                     v
+        +--&gt; [DRY KICK ── KICK fader]    [ENGINE: VERB | NOISE | PITCH]
+        |        (stereo, untouched)          |  (mono mid signal)
+        |                                     v
+        |                               AHDR gate (env value EC_VAL)
+        |                                     v
+        |                               LOW CUT (resonant HP 20–200 Hz)
+        |                                     v
+        |                               DRIVE (parallel band ~140 Hz)
+        |                                     v
+        |              +--&gt; HIGH CUT (LP 30–2000 Hz, CUT TYPE)  &lt;-- ENV DEPTH
+        |              |      (envelope opens it up to +4 oct)  (0–4 oct)
+        |              |                      |
+        |              |                AUTO GAIN (feed-forward peak-hold,
+        |              |                ~6 dB under kick, freezes on breaks)
+        |              |                      v
+        |              +-------------- RUMBLE fader (mono → L/R)
+        |                                     |
+        +--------------- SUM ---------------+
+                               |
+                         CLIPPER (soft clip at CEILING, CLIP LED)
+                               |
+                         OUT −12…+12 dB → ±2.0 safety clamp → OUT PINS</code></pre>
+<p>Every kick hit re-fires the envelope, the envelope gates the engine and
+— via <b>ENV DEPTH</b> — sweeps the high cut upward while the rumble
+swells. AUTO GAIN measures both paths between triggers (feed-forward, so
+it cannot pump with the beat) and sits <i>before</i> the RUMBLE fader, so
+the fader always stays a pure level control.</p>
+<p>The <b>scope</b> reads three taps of this chain: <b>KICK IN</b> is the mono
+mid signal at the input (before the KICK fader), <b>RUMBLE</b> is the engine
+path after AUTO GAIN and the RUMBLE fader, and <b>SUM</b> is the final output
+after OUT and the clipper (before the safety clamp). The envelope value that
+gates the engine is drawn as the <b>GATE</b> line — details in section 10.</p>
+
+<h2 id="trigger"><span class="num">05</span>Trigger</h2>
+<table>
+  <tr><th>Control</th><th>Range</th><th>What it does</th></tr>
+  <tr><td>THRESH</td><td>−60…0 dBFS<br>(default −3)</td><td>Audio trigger level. The peak follower (0.5 ms attack / 50 ms release) must drop ~3 dB <i>below</i> the threshold to re-arm — the hysteresis keeps one hit from double-firing — and a 30 ms debounce enforces a minimum gap between triggers.</td></tr>
+  <tr><td>SRC</td><td>AUDIO · A+M · MIDI</td><td>Trigger source. <b>AUDIO</b> = the input follower only; <b>MIDI</b> = note-ons only; <b>A+M</b> = both. MIDI hits are sample-accurate (queued per block), and a MIDI hit briefly holds the audio follower off (≈250 ms) so the same event cannot fire twice.</td></tr>
+  <tr><td>LEVEL bar</td><td>−60…0 dBFS log</td><td>The follower level with a white mark at the threshold — above the mark the trigger can fire. The numeric LVL/THR readout sits under it.</td></tr>
+  <tr><td>TRIG LED</td><td>100 ms latch</td><td>Lights on every fired trigger — a big one in the panel, a small one in the header.</td></tr>
+</table>
+<p><b>Default since 0.2.0: THRESH −3 dBFS.</b> The follower must actually exceed the threshold, so the kick has to peak above roughly −2.4 dBFS at the input of TT-RUMBLER (measured with a synthetic kick and the exact follower: peaks of −3 dBFS and below do not fire). For quieter kicks lower THRESH (CTRL+click resets it to −3 dB).</p>
+<p>TT-RUMBLER is an FX plug-in: all incoming MIDI (notes, CC, pitch bend,
+clock) passes straight through — notes only <i>additionally</i> fire the
+envelope when SRC allows them. A trigger restarts the envelope from the
+START phase and re-anchors the auto-gain measurement window.</p>
+
+<h2 id="engines"><span class="num">06</span>Engines</h2>
+<p>Three engines, one active at a time — the MODE buttons select the
+source, CHARACTER refines it, and only the knobs the selected engine
+actually reads are shown. Switching the engine flushes its buffers, so an
+old tail never repeats into the new engine.</p>
+<table>
+  <tr><th>Engine</th><th>Characters</th><th>Knobs</th><th>Source</th></tr>
+  <tr><td><b>VERB</b></td><td>MODAL · WALL · BLOOM</td><td>DECAY · FOCUS · DENSE</td><td>Feedback-delay network excited by the kick</td></tr>
+  <tr><td><b>NOISE</b></td><td>CLASSIC · GRIT · RUBBLE</td><td>TONE</td><td>Colored noise bed</td></tr>
+  <tr><td><b>PITCH</b></td><td>TIGHT · DEEP · GRAIN</td><td>PITCH (0…−24 st)</td><td>The kick itself, pitched down</td></tr>
+</table>
+
+<h3>VERB — a dark room on the kick</h3>
+<p>The mono mid feeds a 200 Hz low-pass exciter into four parallel
+feedback comb filters plus two allpasses. <b>DECAY</b> sets the comb
+feedback as a T60 time (0.2–8 s — the readout is the <i>nominal</i>
+value, see section 15), <b>FOCUS</b> parks the damping pivot between 40
+and 400 Hz (lower = darker room), <b>DENSE</b> (0–100 %) controls the
+diffusion — low values thin the comb tails out.</p>
+<ul>
+  <li><b>MODAL</b> — the combs ring tonal (a T60 bonus on two of the four
+      combs, ~32–48 ms delay set). The "singing room".</li>
+  <li><b>WALL</b> — short, dense, diffuse (~23–41 ms set). Tightest verb
+      tail.</li>
+  <li><b>BLOOM</b> — long delays (~53–74 ms), T60 ×1.5 and a softened
+      input, so the room swells late behind the kick.</li>
+</ul>
+
+<h3>NOISE — a textured bed</h3>
+<p>A deterministic generator (Park-Miller LCG) feeds the noise character;
+<b>TONE</b> (40–2000 Hz) shifts the colour. Since 0.6.0 the noise level does not depend
+on the project sample rate (before, it was 3&nbsp;dB quieter at 96&nbsp;kHz and 6&nbsp;dB
+quieter at 192&nbsp;kHz than at 48&nbsp;kHz).</p>
+<ul>
+  <li><b>CLASSIC</b> — a three-stage one-pole cascade: the dark,
+      brown-ish colour that is the classic rumble bed.</li>
+  <li><b>GRIT</b> — clipped white noise; TONE drives the internal
+      saturation. Raw edge.</li>
+  <li><b>RUBBLE</b> — bandpass growl (Q ≈ 1.4); TONE sets the band's
+      middle.</li>
+</ul>
+
+<h3>PITCH — the kick's own body, dropped (the USP)</h3>
+<p>The input runs through a 32768-sample ring buffer read by two heads a
+half window apart, blended with a Hann half-period crossfade (the weights
+sum to exactly 1, so transitions are click-free; reads are cubic-interpolated,
+with a linear fallback right next to the write head — see section 15).
+<b>PITCH</b> sets 0…−24 semitones — −12 st doubles the
+kick into an octave-down sub shadow. Since 0.6.0 the knob snaps to <b>whole
+semitones</b> (dragging snaps, one mouse-wheel notch = one semitone). Projects saved
+with an off-grid value from 0.5.x load and sound unchanged until you turn the knob;
+the readout keeps one decimal, so such a value shows as e.g. <code>-11.8 ST</code>. The window <b>phase-locks to every
+trigger</b>: at fire time head A sits at full weight exactly W/2 behind
+the write head, so each kick lands identically in the shifted tail —
+deterministic punch instead of beat-to-beat level lottery. The envelope
+restart waits the same ~W/2, keeping gate and shifted flag in sync.</p>
+<ul>
+  <li><b>TIGHT</b> — window ×0.5, least lag.</li>
+  <li><b>DEEP</b> — window ×1, the sub default.</li>
+  <li><b>GRAIN</b> — window ×2, lo-fi drone character.</li>
+</ul>
+<p>At 0 st the engine deliberately still runs through the buffer — the
+latency stays constant and switching pitches never clicks. The inherent
+lag (~W/2 samples, ≈21/43/85&nbsp;ms on TIGHT/DEEP/GRAIN at 48&nbsp;kHz) is
+compensated since 0.9.2: the plug-in delays the dry kick by the same amount
+and reports the latency to the host, so the rumble starts <i>together</i> with
+the kick. <b>In plain terms: you do nothing.</b> REAPER shifts the whole
+plug-in back by the reported latency, the two signals line up at START
+0&nbsp;ms, and even a rumble that is routed to its own channel (section 09)
+stays in time. The only choice the button offers: <b>LAT AUTO</b> follows the
+engine (0&nbsp;ms for VERB/NOISE, ~W/2 for PITCH); <b>LAT FIXED</b> always
+reports one window, so the latency — and REAPER's compensation — never jumps
+while you switch engines or characters live. See section 15 for details.</p>
+
+<h2 id="envelope"><span class="num">07</span>Envelope</h2>
+<p><b>START, ATTACK, HOLD and RELEASE are independent millisecond times.</b>
+Changing one stage leaves the other three unchanged. There is no automatic squeezing,
+and a tempo change leaves every stored time unchanged.</p>
+<table>
+<tr><th>Stage</th><th>Range</th><th>Behaviour</th></tr>
+<tr><td>START</td><td>0–24000 ms</td><td>Delay before the swell; leaves room for the kick transient.</td></tr>
+<tr><td>ATTACK</td><td>0–24000 ms</td><td>Rise to full level.</td></tr>
+<tr><td>HOLD</td><td>0–24000 ms</td><td>Time at full level.</td></tr>
+<tr><td>RELEASE</td><td>0–24000 ms</td><td>Fall to zero.</td></tr>
+</table>
+<p>Drag a time knob for a broad adjustment, hold <b>SHIFT</b> for a fine drag.
+The wheel changes a time by <b>1 ms</b> per notch; <b>SHIFT + wheel</b> changes it by
+<b>0.1 ms</b>. Values show one decimal. At zero, ATTACK and RELEASE still use a minimum
+of one audio sample to keep the curve calculation safe. The gate output keeps its 1.5 ms smoothing.</p>
+<p><b>FIT TO</b> scales the four times once to the selected note at the current host tempo,
+preserving their proportions. <b>FIT NOW</b> repeats that adjustment, including when the note
+selection has not changed. Available notes: <code>1/1 · 1/2 · 1/4 · 1/4T · 1/8 · 1/8T · 1/16</code>.
+The fit does not stay linked to tempo. If all four stages are zero, fitting assigns the duration to HOLD.
+Note values count quarter notes: 1/1 is four quarter notes regardless of the time signature.</p>
+<p><b>INIT:</b> START 170.9 ms, ATTACK 136.8 ms, HOLD 51.3 ms, RELEASE 102.6 ms.
+Factory timings retain their effective 0.8.0 sound at 130 BPM, now as fixed times.
+Old projects and user presets convert their former percentages, including squeezing,
+to effective millisecond values once at the tempo at which they load. Save the converted
+project or preset to retain these fixed times. Later tempo changes no longer retime the envelope.</p>
+<p><b>T</b> under the scope is the four-stage total. The small curve uses that total as its
+horizontal span; its S/A/H/R markers show the stage proportions.</p>
+<p><b>CURVE</b> (−500…+500) bends the attack and release exponent:
+p&nbsp;=&nbsp;2<sup>3·c·0.002</sup> — negative values give a sharp knee
+with a long tail, positive values a fast snap. A 1.5 ms smoothing pole on
+the gate output keeps re-triggers and time edits smooth, and a
+time edit mid-flight hands the running envelope to the
+right next section instead of jumping. Every trigger restarts the
+envelope from START — the pumping comes from the re-triggered gate, not
+from a compressor.</p>
+
+<h2 id="filter"><span class="num">08</span>Filter &amp; drive</h2>
+<table>
+  <tr><th>Control</th><th>Range</th><th>What it does</th></tr>
+  <tr><td>LOW CUT</td><td>20–200 Hz</td><td>Resonant high-pass on the engine output — cleans the kick's click and top end off the rumble.</td></tr>
+  <tr><td>LC RES</td><td>Q 0.5–8</td><td>Resonance of the low cut — a tuned bump right at the cutoff that can sing.</td></tr>
+  <tr><td>HIGH CUT</td><td>30–2000 Hz</td><td>Low-pass on the rumble — the main tonal control. The typical techno spot is 40–120 Hz.</td></tr>
+  <tr><td>HC RESO</td><td>Q 0.5–8</td><td>Resonance of the high cut — adds a whistle edge to the sweep.</td></tr>
+  <tr><td>DRIVE</td><td>0–100 %</td><td>Parallel saturation band around ~140 Hz — thickens the rumble while the top of the band passes clean. At 0 the stage is bypassed bit-exactly.</td></tr>
+  <tr><td>ENV DEPTH</td><td>0–4 oct</td><td>The envelope opens the high cut as the rumble swells — the "rolling pressure" move (the filter opens from e.g. 45 to 90 Hz and closes again). Hard-limited inside at 30 Hz to 0.45·srate.</td></tr>
+  <tr><td>CUT TYPE</td><td>CLEAN · COMB · DIRTY</td><td>High-cut character: <b>CLEAN</b> is a linear state-variable filter, <b>COMB</b> adds a 35 % delay line at the cutoff (industrial edge), <b>DIRTY</b> is a stabilized tanh SVF (raw, grittier). The COMB delay follows the cutoff between 40 and 1000&nbsp;Hz at any sample rate (0.6.0; above ~164&nbsp;kHz the lower limit rises to ~47&nbsp;Hz).</td></tr>
+</table>
+
+<h2 id="mix"><span class="num">09</span>Mix &amp; clipper</h2>
+<table>
+  <tr><th>Control</th><th>Range</th><th>What it does</th></tr>
+  <tr><td>KICK / RUMBLE switches</td><td>on / off</td><td>The <b>KICK</b> and <b>RUMBLE</b> switches left of the faders turn the outputs on and off (lit = audible). Off = mute of that output only, with a ~5–10 ms soft ramp (no click): with KICK off the dry kick is silent while trigger and engine keep running; with RUMBLE off the engine, AUTO GAIN and the trigger keep running, so switching it back on causes no settling. MIDI pass-through is untouched. A muted fader and its percentage are dimmed. The switches are a listening/working tool: they are <b>not part of presets</b> (loading a preset leaves them alone, UNDO ignores them), are stored in the project/FX-chain state, and both default to on. Older projects load with both on.</td></tr>
+  <tr><td>KICK / RUMBLE</td><td>0–100 %</td><td>Horizontal faders. KICK is the dry kick (stereo, untouched); RUMBLE is the engine level (mono, duplicated to L/R) sitting after AUTO GAIN in the chain.</td></tr>
+  <tr><td>AUTO GAIN</td><td>on/off (default on)</td><td>Feed-forward peak-hold: measures the kick's peak and the rumble's peak <i>before</i> its own VCA between triggers, then aims the rumble ≈6 dB under the kick — it only attenuates and glides over ~2 s, so it cannot pump with the beat. If no trigger fires for 3 s or the kick drops below −45 dBFS, the gain <b>freezes</b> — breakdown tails are never cut. The <code>AG n%</code> readout shows the current gain.</td></tr>
+  <tr><td>OUT</td><td>−12…+12 dB</td><td>Final level, bipolar — the middle is unity gain.</td></tr>
+  <tr><td>CLIPPER + CEILING</td><td>on/off · −12…0 dBFS</td><td>Soft clip on the sum at the ceiling; the CLIP LED latches 100 ms on hits. Behind OUT a last-resort ±2.0 safety clamp catches extreme settings.</td></tr>
+  <tr><td>SUM trace</td><td>—</td><td>The final output as heard — after OUT and the clipper, before the ±2.0 clamp — is the scope's optional <b>SUM</b> trace (section 10). Until 0.6.1 it was the only trace of the OUT SCOPE strip.</td></tr>
+</table>
+
+<h3>Hearing the rumble on its own channel</h3>
+<p>The KICK and RUMBLE switches exist for exactly this: both outputs are
+built separately inside the plug-in before they are summed. To process the
+rumble on its own mixer channel (extra EQ, its own compressor, a sidechain
+of its own — separate processing that one summed stereo output cannot
+offer):</p>
+<ol>
+  <li><b>Kick track:</b> your kick source with TT-RUMBLER inserted. Switch
+      <b>RUMBLE off</b> — this track keeps the dry kick only. Trigger and
+      engine keep running while muted, so nothing has to settle when you
+      switch it back on.</li>
+  <li><b>Rumble track:</b> a new track receiving the same kick (route the
+      kick track to it), with a second TT-RUMBLER set to <b>KICK off</b> —
+      this track carries the rumble only. Both instances trigger identically
+      from the same kick and each reports its own latency, so the two tracks
+      stay aligned: VERB and NOISE are 0&nbsp;ms anyway; with PITCH use the
+      same character on both instances, or set both to LAT FIXED.</li>
+  <li>Process the rumble track freely; the kick track keeps its punch
+      untouched. A send from the rumble track back into the kick bus blends
+      them again.</li>
+</ol>
+<p>A single insert also works, if you prefer one track: use REAPER's FX pin
+connector to run the plug-in on channels 3/4 of a 4-channel track (self-send
+the kick 1/2&thinsp;&rarr;&thinsp;3/4, KICK switch off), then route channels
+3/4 of the track to the rumble destination. The two-track recipe above is
+easier to set up and still readable in six months. With <b>SRC = MIDI</b> and
+no kick ahead of the plug-in, the engine waits for the note instead — the
+routing works the same way.</p>
+
+<h2 id="scope"><span class="num">10</span>Scope &amp; tempo readout</h2>
+<p>The big panel at the top (new in 0.7.0) shows what happens <i>in time</i>:
+the incoming kick and the rumble on <b>one bar</b>, drawn on the same scale, so
+you can see the rumble swell and fall against every hit. It is a display only —
+it never changes the sound.</p>
+<figure class="shot"><img src="img/tt-rumbler/rmb_v07_scope.png" width="900" height="309" alt="The scope of TT-RUMBLER v1.1.0 in FIXED view at 125 BPM: the white KICK IN trace, the accent-coloured RUMBLE trace, the dotted GATE line and the green gate bands with the A, H and R markers over four beats" loading="lazy"><figcaption><span class="tag">SCOPE</span><b>FIXED view at 125 BPM</b> with a four-on-the-floor test kick: the white <b>KICK IN</b> trace, the accent-coloured <b>RUMBLE</b> trace, the dotted <b>GATE</b> line and the green gate bands. The row below holds the trace and view switches, the envelope readouts and the tempo block.</figcaption></figure>
+<h3>Traces</h3>
+<table>
+  <tr><th>Trace</th><th>Look</th><th>What it shows</th></tr>
+  <tr><td><b>KICK IN</b> (CH1)</td><td>white, thin</td><td>The incoming kick as the engines hear it: the mono mid signal <i>before</i> the KICK fader.</td></tr>
+  <tr><td><b>RUMBLE</b> (CH2)</td><td>accent colour, wide</td><td>The rumble path <i>after</i> AUTO GAIN and the RUMBLE fader — what you add under the kick.</td></tr>
+  <tr><td><b>SUM</b></td><td>grey, thin (off by default)</td><td>The final output: after OUT and the clipper, before the ±2.0 safety clamp.</td></tr>
+  <tr><td><b>GATE</b></td><td>dotted accent line (on by default)</td><td>The envelope value that gates the engine: <code>1.0</code> sits on the 0 dB line, <code>0</code> on the centre line.</td></tr>
+</table>
+<p>The four switches left under the screen (<b>KICK</b>, <b>RUMBLE</b>, <b>SUM</b>,
+<b>GATE</b>) show or hide a trace; a hidden trace is dimmed in the legend.
+All traces share one linear amplitude scale: the centre line is silence
+(<code>-INF</code>), the top and bottom lines are full scale (0&nbsp;dB, ±1.0)
+and the lines between are ±0.5 (−6&nbsp;dB). The screen is divided into 1024
+columns per bar, and each column draws the lowest and highest sample of its
+slice — a kick shows as a decaying band, a long rumble as a swelling one.
+Values beyond full scale are clipped at the screen edge.</p>
+<h3>Gate bands and timing</h3>
+<p>The green bands mark the <b>gate window</b> of the envelope for every cycle
+of the selected FIT TO reference grid inside the bar: from the end of START through ATTACK, HOLD and
+RELEASE using the actual millisecond durations. These are reference bands; the GATE trace shows actual triggers and retriggers. Thin lines
+divide <b>A | H | R</b>; the letters appear when a bar holds at most eight
+cycles and the section is wide enough. Beat numbers sit along the bottom
+edge, the time axis under the screen counts milliseconds.</p>
+<p>The <b>bar length</b> comes from the host's time signature (4/4 = 4 beats,
+6/8 = 3 beats; 4 beats when the host reports none). While the transport runs
+the scope locks to the project position; while it is stopped it keeps running
+with the host tempo, because the plug-in listens to its input either way.
+The status line in the top centre reads, for example,
+<code>FIXED // 1 BAR = 4 BEATS // 125 BPM // 1920 MS</code>; the label in the
+top right corner shows <code>ABOVE THR</code> or <code>BELOW THR</code> for the
+trigger follower against THRESHOLD.</p>
+<h3>FIXED and ROLL</h3>
+<ul>
+  <li><b>FIXED</b> (default) — one bar stands still. The position inside the
+      bar decides the column, so the same beat always lands at the same place;
+      a white <b>cursor</b> sweeps from left to right and redraws every column
+      with fresh data, with a small gap in front of it that separates new from
+      old. The axis runs <code>0 … bar length</code> in ms. Best for judging
+      timing: kick, gate and swell stay lined up bar after bar.</li>
+  <li><b>ROLL</b> — the same data as a scrolling tape: the right edge is
+      <i>now</i>, the left edge is one bar ago, and the axis runs
+      <code>−bar length … 0</code>. Best for watching changes (a knob turn, a
+      new engine) travel through the picture.</li>
+</ul>
+<p>The trace switches and FIXED / ROLL are <b>display settings</b>: they are
+not stored in the project, not part of presets and set no undo point. Every
+new instance opens in FIXED with KICK, RUMBLE and GATE on and SUM off.</p>
+<h3>Readout row and tempo block</h3>
+<p>The row under the switches carries the envelope readouts — <b>T</b> (the
+sum of the four envelope stages in ms),
+<b>GRID</b> (the selected FIT TO note duration at the current tempo),
+<b>AG</b> (current AUTO GAIN) and the <b>CLIP</b> LED — followed by the new
+<b>tempo block</b> taken from the BPM2MS2HZ calculator:</p>
+<table>
+  <tr><th>Field</th><th>Meaning</th><th>Formula</th></tr>
+  <tr><td>BPM</td><td>The host tempo (below 10&nbsp;BPM the plug-in calculates with 120, as everywhere else)</td><td>—</td></tr>
+  <tr><td>1/2 · 1/4 · 1/8</td><td>Length of that straight note value in milliseconds, and the matching repetition rate in Hz</td><td><code>ms = 60000 / BPM × beats</code> (1/2 = 2 beats, 1/4 = 1, 1/8 = 0.5)<br><code>Hz = 1000 / ms</code></td></tr>
+</table>
+<p>At 125&nbsp;BPM the block reads 960.0&nbsp;ms / 1.042&nbsp;Hz for 1/2,
+480.0&nbsp;ms / 2.083&nbsp;Hz for 1/4 and 240.0&nbsp;ms / 4.167&nbsp;Hz for 1/8 —
+the same numbers the <b>BPM2MS2HZ Calculator</b> script gives. Dotted and
+triplet values are not shown; use the calculator for those. The LVL / THR
+numbers that used to sit in this row live in the TRIGGER panel.</p>
+
+<h2 id="presets"><span class="num">11</span>Presets</h2>
+<p>The <b>preset bar</b> in the header (left of OPTIONS) is the same in every
+TimTechlor plugin: <code>[&lt;] [ name &#9662; ] [&gt;] [SAVE] [...]</code>.
+The list holds <b>INIT</b> (the factory state) plus the <b>22 factory
+designs</b> (section FACTORY) and <b>32 user slots</b> (section USER). Every
+preset (factory or user) writes the 28 sound parameters and is undoable:
+<b>UNDO</b> next to the bar steps back over a preset load like over any edit.
+An asterisk <code>*</code> behind the name means the sound was edited since
+the preset was loaded. Every factory preset was designed against a Python
+transcript of the engine and passes an offline level/pump/clip gate.
+The 22 factory designs follow a kick-rumble guide for roughly 135&ndash;145 BPM (BOOM E1 is the one design kept from the earlier bank); FAST 148 is the short design for 145&ndash;150 BPM. Every factory preset loads fixed millisecond times, independent of the current tempo.</p>
+<p><b>Migration:</b> the factory bank was replaced in 0.9.2, and 1.0.0 removed three designs after the user hearing round (SCHRANZ, RUBBLE ROLL, GRAIN SMEAR) &mdash; the later slots shifted down. A project that stored a factory preset by number therefore loads a different design than before if you load that number again; the sound parameters saved in the project stay as they are until you load a preset. Your own user presets are unaffected. Projects saved before 0.9.2 open with LATENCY AUTO.</p>
+<p><b>Preset menu.</b> Click the name in the header to open FACTORY (INIT and 22 designs) and USER (32 slots). Scroll with the mouse wheel and click a name to load it; click outside to close.</p>
+<h3>Loading, saving, managing</h3>
+<ul>
+  <li><code>&lt;</code> / <code>&gt;</code> step through the factory presets and then the used user slots (with wrap-around) and load at once.</li>
+  <li>Click the name to open the dropdown (mouse wheel scrolls three rows per notch); a click on a row loads it. A click outside closes the list without triggering the control underneath.</li>
+  <li><b>SAVE</b> stores the current sound in the selected user slot; with a factory preset selected it takes the first free slot. A name box opens (default <code>User 01</code>, up to 24 characters): type the name, <kbd>Enter</kbd> = OK. Backspace works; a space needs <kbd>Shift</kbd>+<kbd>Space</kbd> (REAPER keeps plain <kbd>Space</kbd> for the transport); <kbd>Esc</kbd> may close the whole FX window depending on your REAPER settings &mdash; use the <b>CANCEL</b> button instead.</li>
+  <li><b>...</b> opens a small menu for a selected user preset: <b>RENAME</b>, <b>COPY</b> (into the next free slot) and <b>DELETE</b> (asks for a second click).</li>
+  <li>Not part of a preset: the KICK / RUMBLE mute switches, the colour scheme and the OPTIONS style settings (font steps, custom colours), the tooltip switch.</li>
+</ul>
+<h3>Where the user presets live</h3>
+<p>JSFX cannot write files, so the user bank is part of the plugin state
+(<code>@serialize</code>): it is saved with the project, in FX chains and
+track templates. To carry it to other projects or computers use REAPER's own
+preset button in the FX window (<b>+</b> &rarr; <i>Save preset...</i>): a native
+REAPER preset file of this plugin contains the whole bank, and loading that
+preset restores all 32 slots. Projects saved with an older version open with an
+empty bank and an unchanged sound. Each used slot adds well under 1 kB to the project.</p>
+<table>
+  <tr><th>#</th><th>Name</th><th>Engine · Character</th><th>Character of the design</th></tr>
+  <tr><td>0</td><td>INIT</td><td>VERB · MODAL</td><td>Neutral defaults — VERB T60 3 s, 1/4 envelope, HC ~80 Hz.</td></tr>
+  <tr><td>1</td><td>ROLLING</td><td>VERB · MODAL</td><td>T60 3 s, FOCUS 60 Hz, LC 30 Hz / HC 150 Hz, 20 % drive — the all-round rolling rumble.</td></tr>
+  <tr><td>2</td><td>HYPNOSIS</td><td>VERB · WALL</td><td>T60 4 s, slow bloom (ATT 125, HLD 150, REL 270 ms), HC 110 Hz.</td></tr>
+  <tr><td>3</td><td>TIGHT PULSE</td><td>VERB · MODAL</td><td>T60 1.8 s, short clean pulse (ATT 50, HLD 70, REL 130 ms), HC 170 Hz.</td></tr>
+  <tr><td>4</td><td>OFFBEAT</td><td>VERB · BLOOM</td><td>T60 3.5 s; the kick stays free (START 75 ms) and the bass answers after it.</td></tr>
+  <tr><td>5</td><td>INDUSTRIAL</td><td>VERB · WALL</td><td>T60 2.5 s, DIRTY cut with 45 % drive (ATT 40, HLD 75, REL 140 ms).</td></tr>
+  <tr><td>6</td><td>RAW 135</td><td>VERB · MODAL</td><td>T60 3.5 s, raw and dark for hypnotic 135 BPM (ATT 110, HLD 130, REL 250 ms).</td></tr>
+  <tr><td>7</td><td>PEAK TIME</td><td>VERB · WALL</td><td>T60 2.2 s for 142 BPM, DIRTY cut with 30 % drive (ATT 70, HLD 95, REL 185 ms).</td></tr>
+  <tr><td>8</td><td>SUB CLOUD</td><td>VERB · BLOOM</td><td>T60 5 s deep cloud (ATT 140, HLD 150, REL 300 ms), HC 90 Hz.</td></tr>
+  <tr><td>9</td><td>BOOM E1</td><td>NOISE · CLASSIC</td><td>The “E1 boom” chest-pressure recipe: HC 45 Hz with 15 % reso, LC 86 Hz with a small LC bump.</td></tr>
+  <tr><td>10</td><td>NOISE BED</td><td>NOISE · CLASSIC</td><td>Even noise bed, TONE 70 Hz (ATT 80, HLD 100, REL 200 ms).</td></tr>
+  <tr><td>11</td><td>GRIT MID</td><td>NOISE · GRIT</td><td>TONE 180 Hz, DIRTY cut at 25 % drive — mid rumble (80–300 Hz) for small systems.</td></tr>
+  <tr><td>12</td><td>COMB METAL</td><td>NOISE · RUBBLE</td><td>TONE 180 Hz through the COMB cut, metallic tuning.</td></tr>
+  <tr><td>13</td><td>HYPNO NOISE</td><td>NOISE · CLASSIC</td><td>TONE 55 Hz, dark and slow (ATT 110, HLD 120, REL 200 ms).</td></tr>
+  <tr><td>14</td><td>TRIPLET</td><td>NOISE · CLASSIC</td><td>TONE 90 Hz, short triplet shape (FIT TO 1/4T, ATT 55, HLD 55, REL 120 ms).</td></tr>
+  <tr><td>15</td><td>DIRTY SUB</td><td>NOISE · CLASSIC</td><td>TONE 60 Hz, DIRTY cut with 40 % drive (ATT 75, HLD 95, REL 190 ms).</td></tr>
+  <tr><td>16</td><td>SUB OCTAVE</td><td>PITCH · DEEP</td><td>The kick one octave down (−12 st), HC 100 Hz (ATT 70, HLD 110, REL 220 ms).</td></tr>
+  <tr><td>17</td><td>DEEP SEA</td><td>PITCH · DEEP</td><td>Two octaves down (−24 st), slow bloom (ATT 120, HLD 150, REL 260 ms), rumble at 95 %.</td></tr>
+  <tr><td>18</td><td>FIFTH DOWN</td><td>PITCH · TIGHT</td><td>−7 st, TIGHT window (ATT 60, HLD 80, REL 160 ms), HC 130 Hz.</td></tr>
+  <tr><td>19</td><td>HARD DROP</td><td>PITCH · DEEP</td><td>−12 st, DIRTY cut with 45 % drive, short and hard (ATT 35, HLD 70, REL 130 ms).</td></tr>
+  <tr><td>20</td><td>OFFBEAT SUB</td><td>PITCH · TIGHT</td><td>−12 st, TIGHT; the kick stays free (START 70 ms) and the sub answers after it.</td></tr>
+  <tr><td>21</td><td>TONAL 41</td><td>PITCH · DEEP</td><td>−24 st with the COMB cut — a tonal sub (ATT 100, HLD 120, REL 240 ms).</td></tr>
+  <tr><td>22</td><td>FAST 148</td><td>VERB · MODAL</td><td>T60 2 s, HC 120 Hz — a short, tight rumble for 145&ndash;150 BPM (START 8, ATT 45, HLD 60, REL 120 ms).</td></tr>
+</table>
+
+<h2 id="editing"><span class="num">12</span>Editing, undo &amp; tips</h2>
+<ul>
+  <li><b>Drag a knob vertically</b> — 170 px (in design units) is a full
+      travel; a click without movement changes nothing. Holding
+      <kbd>SHIFT</kbd> gives a ~5× finer ratio (900 px travel), and the
+      mouse wheel nudges ±2 % of the range per notch; in the time knobs
+      (START / ATTACK / HOLD / RELEASE) the wheel steps 1&nbsp;ms and
+      <kbd>SHIFT</kbd> + wheel 0.1&nbsp;ms.</li>
+  <li><b>Faders:</b> drag the handle — the value follows the drag relative
+      to where you grabbed it, so a stray click never jumps the level;
+      <kbd>SHIFT</kbd> switches to a 6× finer drag mid-move.</li>
+  <li><b>CTRL+click resets</b> every knob and fader to its default — a
+      right-click or a double-click does the same. One
+      shared default table feeds both the reset and the INIT preset, so
+      they can never diverge.</li>
+  <li><b>Hover any control</b> &mdash; knobs, faders, drop-downs, switches,
+      the envelope display, the scope, the preset bar and the OPTIONS
+      button &mdash; for a tooltip in a floating panel; it appears as soon
+      as the pointer rests on the element; texts run up to four lines.
+      <code>OPTIONS</code> &gt; <b>TOOLTIPS ON / OFF</b> turns the tooltips
+      off for this plug-in instance (saved with the project; the TIPS
+      switch of v0.5.3 and older is gone, older projects keep their
+      setting); tooltips hide while you drag.</li>
+  <li><b>UNDO</b> walks back through up to 19 edits (a 20-slot ring with one
+      slot used by the pending click snapshot) — every
+      ended drag, button or drop-down edit, right-click reset and mouse-wheel
+      step pushes one snapshot, preset changes included. Pure interface state
+      (tooltips, colour scheme, style settings) and the KICK / RUMBLE
+      switches survive a restore untouched, and there is deliberately no
+      redo.</li>
+  <li><b>REAPER knows about every edit</b> (v0.5.4): each change — knob,
+      wheel, reset, switch, colour, preset load, UNDO — creates one REAPER
+      undo point (<i>Edit FX</i>) and marks the project as changed, so REAPER
+      asks before closing an unsaved project and <kbd>Ctrl</kbd>+<kbd>Z</kbd>
+      in REAPER steps back over RUMBLER edits as well.</li>
+  <li>The FIT TO drop-down: the <code>&lt;</code> and
+      <code>&gt;</code> arrows step towards the ends, a click on the name
+      cycles with wrap-around (right-click steps back) and the mouse wheel
+      steps ±1. The same
+      drop-down widget drives SRC, MODE, CHARACTER and CUT TYPE. The
+      preset bar in the header is described in section 11.</li>
+  <li>Continuous controls glide over ~20 ms slews. Discrete engine,
+      character and cut-type changes use a 5 ms raised-cosine correction
+      to join the previous rumble value while the new engine and filters run.
+      VERB character changes still clear the old tank.</li>
+</ul>
+
+<h2 id="options"><span class="num">13</span>Options / Color</h2>
+<figure class="shot"><img src="img/tt-ui-options/rumbler-options.png" alt="TT-RUMBLER v1.1.0 with the OPTIONS box open: ten colour swatches with the factory scheme ACID marked, FONT SIZE steps for the title and text fonts, and the CUSTOM COLOR picker with FONT 1 / FONT 2 / BG targets" width="900" height="730"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header (right of the preset bar), then a swatch. A click outside the box closes it.</figcaption></figure>
+<p>The <code>OPTIONS</code> button opens a box with three areas plus the tooltip switch. <b>COLOR</b>: ten schemes &mdash;
+ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (knob rings, envelope curve,
+active buttons, LEDs, panel lines), the second colour (the CLIP LED) and, for RED to ICE, the slightly tinted background and panel greys of the whole front at once.
+<b>FONT SIZE</b> steps the title font (FONT&nbsp;1) and the text fonts (FONT&nbsp;2) independently, −4…+8 steps around the design size.
+At large steps a front text that would run into its neighbour or over a panel edge is drawn one or more steps smaller (0.6.0) &mdash; everything else keeps the chosen size.
+<b>TOOLTIPS ON / OFF</b> (top right of the box) shows or hides the hover tooltips of the whole front &mdash; the one tooltip switch since v0.5.4 (the header TIPS button is gone; older projects keep their setting).
+<b>CUSTOM COLOR</b> is an HSV picker that overrides the scheme for one target — FONT&nbsp;1 (title), FONT&nbsp;2 (text) or BG (background) —
+with <b>RESET</b> for the current target and <b>RESET ALL</b> for everything; the scheme name sits at the bottom left of the box.
+Everything applies <b>per plug-in instance</b> and is saved with the project and with FX-chain copies (the scheme rides in a spare word of the
+state blob, the style values follow the preset bank in the same state;
+projects saved with an older version open in ACID). None of it is part of the presets and none of it is touched by the <b>UNDO</b> button &mdash; loading a preset never
+changes your look. The factory colour is <b>ACID</b> (the classic acid green, identical to versions before 0.3.0). The colour and style settings have no effect on the audio.</p>
+
+<h2 id="tips"><span class="num">14</span>Tips &amp; tricks</h2>
+<ul>
+  <li><b>START around 100–180 ms, ATTACK around 80–180 ms:</b> the rumble swells like a
+      vacuum <i>after</i> the kick punch instead of eating it — the
+      signature techno move, straight from the Kikzilla demos.</li>
+  <li><b>HIGH CUT sweet spot 40–120 Hz:</b> real-world rumble settings sit
+      around 45–80 Hz; a touch of HC RESO (~15 %) adds an edge the sweep
+      can whistle on.</li>
+  <li><b>ENV DEPTH 15–25 % (≈0.6–1 oct)</b> opens the filter with the
+      swell and closes it again — the "rolling pressure" feel where the
+      bass physically rolls toward the listener.</li>
+  <li><b>FIT TO a triplet</b> (1/4T, 1/8T) for shorter stage times against a
+      straight kick grid — try TRIPLET or ROLLING.</li>
+  <li><b>Brown noise is the rumble colour:</b> NOISE on CLASSIC with TONE
+      down at 40–80 Hz is the classic bed; RUBBLE adds a tonal growl.</li>
+  <li><b>LC RES doubles as a tuned sub bump</b> — a little resonance at
+      the low cut punches the rumble's bottom octave.</li>
+  <li><b>COMB at a higher HIGH CUT = industrial</b>; DIRTY with moderate
+      DRIVE (10–40 %) = raw. Keep DRIVE modest — the mud zone lives at
+      150–300 Hz.</li>
+  <li><b>PITCH:</b> TIGHT for timing-critical drops, GRAIN for drones;
+      around −7 st the two heads chop the sub into a glitch texture
+      (FIFTH DOWN).</li>
+</ul>
+
+<h2 id="limits"><span class="num">15</span>Limitations &amp; notes</h2>
+<ul>
+  <li><b>PITCH latency and LATENCY (PDC) — since 0.9.2:</b> the pitched flag trails the kick by
+      about W/2 samples — ≈21 ms on TIGHT, ≈43 ms on DEEP and ≈85 ms on GRAIN at 48&nbsp;kHz. The
+      envelope restart waits the same amount, so the gate and the shifted tail stay aligned. To let the
+      rumble start together with the kick, the plug-in <b>delays the dry kick by the engine latency and
+      reports it to the host (plug-in delay compensation)</b>. The ENGINE panel shows the reported
+      latency in ms next to the <b>LAT AUTO / LAT FIXED</b> button: <b>AUTO</b> follows the engine (PITCH
+      as above, VERB and NOISE 0&nbsp;ms), <b>FIXED</b> always reports one window (about 85&nbsp;ms at
+      48&nbsp;kHz), so the latency never changes when you switch engine or character. The setting is saved per
+      instance (projects from before 0.9.2 open as AUTO).</li>
+  <li><b>START 0&nbsp;ms is not instant for VERB and NOISE:</b> the rumble starts together with the
+      kick, but the engines need a moment to build up. NOISE speaks after about 3&ndash;6&nbsp;ms; VERB needs
+      about 30&ndash;60&nbsp;ms to become audible (10&nbsp;% of its peak at about 37&nbsp;ms in MODAL, 29&nbsp;ms in WALL, 59&nbsp;ms in
+      BLOOM, with the default reverb settings) because the reverb modes have to ring up. This is the sound of the engine,
+      not latency (START 0&nbsp;ms, ATT 1&nbsp;ms; the lab model and the REAPER host agree within 1&nbsp;ms).</li>
+  <li><b>The DECAY readout is the nominal T60:</b> the comb-loop damping
+      is not compensated in the formula, so the effective tail runs
+      shorter at low FOCUS settings (measured ≈2.8–5.1 s at FOCUS 70 Hz
+      with DECAY 8 s) and close to nominal at high FOCUS.</li>
+  <li><b>Playback start does not reset the sound</b> (0.6.0): reverb tails, the
+      PITCH ring and the envelope keep running when you press play, so a ringing
+      tail is not cut off. If REAPER does not process FX while stopped, a tail that
+      was frozen at stop finishes when playback resumes &mdash; as with any reverb.
+      Loading the plug-in or changing the sample rate still starts from silence.</li>
+  <li><b>Trigger spacing (re-arm):</b> after a hit the follower must fall about 3&nbsp;dB
+      <i>below</i> THRESHOLD before the next trigger can fire, so the smallest kick spacing
+      that gives two triggers depends on THRESHOLD and the kick's decay. Measured with a natural
+      kick: about 84&nbsp;ms at −3&nbsp;dB, 125&nbsp;ms at −6&nbsp;dB, 201&nbsp;ms at −12&nbsp;dB and
+      350&nbsp;ms at −24&nbsp;dB. 1/16 kicks at 140&nbsp;BPM (107&nbsp;ms) therefore need THRESHOLD
+      at −3&nbsp;dB or higher. A DC offset on the input larger than the hysteresis can block re-arming
+      for good, and with THRESHOLD above about −0.5&nbsp;dBFS even a full-scale kick no longer fires.
+      The LEVEL bar shows exactly what the trigger sees.</li>
+  <li><b>PITCH and fast hit sequences:</b> the PITCH envelope restart waits W/2 (≈21 / 43 / 85&nbsp;ms
+      on TIGHT / DEEP / GRAIN) and a new trigger replaces a restart that is still pending. With
+      GRAIN a sequence of kicks or notes 55–80&nbsp;ms apart therefore starts the envelope only for the
+      last one (8 triggers, 1 start in the test); DEEP is affected below about 43&nbsp;ms, TIGHT never.
+      Likewise a PITCH kick played up to 20 / 40 / 80&nbsp;ms (TIGHT / DEEP / GRAIN) before a loop jump,
+      stop or pause gets no envelope — a pending restart is disarmed on purpose at those moments.</li>
+  <li><b>SRC = A+M has no MIDI debounce:</b> a MIDI note that arrives 5–100&nbsp;ms after the audio onset
+      restarts the envelope a second time (the gate dips briefly), and an audio kick that follows its MIDI
+      note by more than 250&nbsp;ms (the hold has expired) fires again. MIDI notes 1–25&nbsp;ms apart each
+      restart the envelope. Feed one source per hit, or use SRC = AUDIO or MIDI.</li>
+  <li><b>Engines are mono by design:</b> they run on the mid signal and
+      the rumble is duplicated to L/R — an authentic mono sub. The dry
+      kick stays stereo.</li>
+  <li><b>The envelope display is read-only in v1</b> — edit with the
+      knobs; the curve and section markers follow.</li>
+  <li><b>The scope is a picture, not a meter:</b> it draws 1024 columns per bar
+      (about 1.9&nbsp;ms each at 125&nbsp;BPM), each as the lowest and highest
+      sample of its slice, so a single click narrower than a column shows only as
+      a thin line. Its view settings (traces, FIXED / ROLL) are not saved with
+      the project.</li>
+  <li>Undo has no redo; the 20-deep ring covers sound edits only. State
+      serializes as a 66-word blob ('RMBL' v2) into the project and into
+      native REAPER presets; the colour scheme (0.3.0) is stored in one of its spare words.
+      Since 0.4.0 the user preset bank follows that blob in the same state,
+      and since 0.5.0 the OPTIONS style settings (font steps, custom
+      colours) ride at the end of the bank block — per instance, never
+      per preset.</li>
+</ul>
+
+<h2 id="changes"><span class="num">16</span>Version history</h2>
+<h3>1.1.0 &mdash; FAST 148</h3>
+<ul>
+<li>New factory design <b>FAST 148</b> (VERB · MODAL, T60 2 s, HC 120 Hz, START 8 / ATT 45 / HLD 60 / REL 120 ms) for fast techno at 145&ndash;150 BPM. It is appended as number 22; the numbers of all other designs stay.</li>
+</ul>
+<h3>1.0.0 &mdash; release bank</h3>
+<ul>
+<li><b>Three factory presets removed</b> after the user hearing round (25.10.2026): SCHRANZ and RUBBLE ROLL (NOISE) and GRAIN SMEAR (PITCH). The bank is now INIT + 21 designs (8 VERB / 7 NOISE / 6 PITCH); the later slots shifted down. The GRAIN window stays available as an engine character, just without a factory preset. Sound of the remaining presets is unchanged.</li>
+<li>Version raised to 1.0.0 for the Drop 04 release. The sound examples now show the dry kick and six presets of the new bank.</li>
+</ul>
+<h3>0.9.4 &mdash; serialize safety</h3>
+<p>A project save no longer clamps parameters or clears the modified star; state validation now runs only when a chunk is read. The AHDR curve tooltip describes the millisecond times (0&ndash;24000 ms, independent of tempo). Sound is unchanged.</p>
+<h3>0.9.3 &mdash; tooltips and load safety</h3>
+<p>Tooltips for the CLIP LED and the KICK / RUMBLE percent readouts. A project state cut off inside the parameter block loads the factory state instead of a mix of old and stored values. The latency delay line can no longer read one word past its ring in a rounding edge case. The About text now says that the dry kick is delayed since 0.9.2. Sound is unchanged.</p>
+<h3>0.9.2 &mdash; latency compensation, new factory bank, fine wheel</h3>
+<ul>
+<li><b>LATENCY (PDC):</b> the dry kick is delayed by the engine latency and reported to the host, so the rumble starts with the kick at START 0&nbsp;ms. LAT AUTO follows the engine; LAT FIXED always reports one window. Saved per instance.</li>
+<li><b>New factory bank:</b> 23 factory presets replaced after the kick-rumble guide; BOOM E1 is kept in slot 9. All times in milliseconds.</li>
+<li>SHIFT + wheel now tracks the modifier before any text-entry dialog has been opened. This keyboard fix itself leaves the audio unchanged; the audio changes of 0.9.2 are the LATENCY delay of the dry kick and the new presets listed above (an earlier note, &ldquo;audio code unchanged&rdquo;, referred only to the keyboard fix).</li>
+</ul>
+<h3>0.9.1 &mdash; reliable legacy loading</h3>
+<p>Old percentage-based states convert at the actual tempo of the first audio block. Saving before audio starts preserves the old state until it can be converted safely. Old user presets use the audio engine's current tempo.</p>
+<h3>0.9.0 &mdash; millisecond envelope</h3>
+<ul><li>START, ATTACK, HOLD and RELEASE now use independent milliseconds. No automatic squeezing or tempo scaling.</li>
+<li>Wheel adjustment: 1 ms; SHIFT + wheel: 0.1 ms. FIT TO / FIT NOW scale the current shape once to a musical note.</li>
+<li>Old project states and user presets convert their effective times at load tempo. Factory timings retain the 130 BPM sound.</li>
+<li>19 manual sound examples: one dry kick and all nine engine characters, each as kick + rumble and rumble only.</li></ul>
+<h3>0.8.0 &mdash; pitch accuracy and switching</h3>
+<ul>
+  <li>PITCH uses cubic interpolation between samples. Close to the write head it falls back to linear interpolation to avoid reading unwritten audio. Ring indices wrap safely even after floating-point rounding. This adds no latency. A triggered window change now updates the playback rate in the same sample.</li>
+  <li>Discrete engine, character and cut-type changes use a 5 ms raised-cosine correction to join the previous rumble output. Continuous controls keep their existing smoothing.</li>
+  <li>DRIVE skips its shaper at zero and caches its exact gain compensation at steady settings. Factory parameter values, saved state and the dry kick path are unchanged.</li>
+  <li>UNDO is described as up to 19 edits in a 20-slot ring.</li>
+</ul>
+<h3>0.7.1 &mdash; shared UI kit 7</h3>
+<ul>
+  <li>Internal update of the shared UI kit (version 7). Sound, presets, saved state and the front are unchanged.</li>
+</ul>
+<h3>0.7.0 &mdash; scope front</h3>
+<ul>
+  <li><b>New front:</b> the scope is the centre piece and shows the incoming <b>KICK</b> and the <b>RUMBLE</b> together on one scale, optionally the <b>SUM</b> and the envelope <b>GATE</b> line, with the green gate windows (A / H / R) drawn over every cycle of LENGTH. <b>FIXED</b> holds one bar still while a cursor redraws it, <b>ROLL</b> scrolls (section 10).</li>
+  <li>The controls sit in five groups underneath: TRIGGER, ENGINE, ENVELOPE (with a curve preview), FILTER, MIX. Every control, tooltip, value range and undo behaviour is unchanged.</li>
+  <li><b>Tempo block</b> from the BPM2MS2HZ calculator: host BPM plus ms and Hz for 1/2, 1/4 and 1/8.</li>
+  <li>Sound, presets and the saved state are unchanged: projects and presets from 0.6.x open and sound the same. The scope view settings are not saved.</li>
+</ul>
+<h3>0.6.1 &mdash; review fixes</h3>
+<ul>
+  <li>PITCH: the first hit after a CHARACTER or preset change is no longer up to 8.6&nbsp;dB too quiet.</li>
+  <li>Clicking OPTIONS no longer loads a neighbouring preset when the window shows scrollbars; a mouse button held down from the preset bar no longer triggers a click elsewhere.</li>
+  <li>The modified star survives reloading a project and undo; stray keystrokes no longer end the preset name entry.</li>
+  <li>Invalid (NaN) values in a damaged project are cleaned up on load; the VERB tail no longer leaves denormal numbers behind after silence.</li>
+</ul>
+<h3>0.6.0 &mdash; sound points</h3>
+<ul>
+  <li>DARK CARPET and SUB DROP open their gate again (START 10&nbsp;% / 20&nbsp;%); PITCH snaps to whole semitones; NOISE level and COMB range are independent of the sample rate; playback start no longer resets the sound; large font steps no longer overlap.</li>
+</ul>
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v0.5.5</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/rumbler-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/rumbler-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-RUMBLER Rumble Machine v1.1.0</b> — JSFX effect for REAPER · Tim Techlor design series<br> Manual revision 1.1.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>
