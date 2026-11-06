@@ -1,5 +1,5 @@
 @description Clean & Flat Acid by Tim Techlor
-@version 1.0.0
+@version 1.0.1
 @author Tim Techlor
 @metapackage
 @provides
@@ -24,5 +24,7 @@
   ReaPack installs the scripts next to each other under Scripts/TimTechlor ReaScripts/Themes/.
   Load "Tim Techlor Theme Adjuster" once. After that, Options > Themes > Theme Adjuster opens it while this theme is selected.
 @changelog
+  1.0.1
+  - The TIM TECHLOR wordmark now stays visible in the transport bar at mid widths, for example at 200 % UI scale.
   1.0.0
   - First release

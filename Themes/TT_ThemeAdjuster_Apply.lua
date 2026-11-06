@@ -1,5 +1,5 @@
 -- @description TT Theme Adjuster - apply saved adjustments silently (use as REAPER startup action)
--- @version 1.0.0
+-- @version 1.0.1
 -- Re-applies the last values of TT_ThemeAdjuster (colours and layout parameters) without opening a window.
 -- If SELECTION FRAME or LOGO WATERMARK was on, those overlays keep drawing. ReaImGui is not required.
 -- Set it up once: SWS "Set global startup action" (or add a line to Scripts/__startup.lua).
