@@ -87,7 +87,7 @@ desc:TT-KNOBMOVER
 //           including volume), DESK (one channel strip per knob with the FROM / TO range of the selected section, live value and CC meter,
 //           eight scene pads), PADS (sixteen section pads and an XY field that rides cutoff and resonance by hand and springs back on release)
 //           and TRACKER (every section as a row of numbers: FROM / TO per knob, length, swing, period, ride; drag, wheel or keys to edit).
-//           Map zoom and scroll as in TT-ACIDLAB: + / - / FIT, Ctrl + mouse wheel zooms around the pointer, the wheel scrolls, scroll bar.
+//           Map zoom and scroll as in another TT plug-in: + / - / FIT, Ctrl + mouse wheel zooms around the pointer, the wheel scrolls, scroll bar.
 //           Keyboard: Left / Right select a section (Alt: length -/+ 1 bar), Home / End, [ and ] pick the lane, Up / Down change its TO value
 //           (Alt: FROM), Page Up / Down by 10, O switches the lane on or off, Delete removes the section, + / - / F zoom.
 //           Preset preview: any factory preset can be shown in the map without loading it and without sending anything; LOAD takes it over.
@@ -101,7 +101,7 @@ desc:TT-KNOBMOVER
 //     - At the default settings the CC output is the same as before.
 //     - FIX: PASS NOTES off: an overlapping dropped note-on no longer overwrites a note-on that was passed on, so its note-off still goes through (no hanging note on the TT-303).
 //     - FIX: a truncated project chunk falls back to the factory data instead of a half-loaded state; test commands 4 and 6 clamp their indices.
-//   0.3.0 - RIDE MAP: values can be edited vertically in the lanes (as in the MOVER tab of TT-ACIDLAB): drag the START (hollow) or END (solid) dot of the
+//   0.3.0 - RIDE MAP: values can be edited vertically in the lanes (as in the MOVER tab of another TT plug-in): drag the START (hollow) or END (solid) dot of the
 //           selected section up or down, drag the line between them to move both together, Shift = fine; a FILL section turns into fixed values when edited.
 //           The ring dots of the section knobs now mark the lowest and highest value the section really reaches (ramp plus swing, within the class limits) instead of the ramp ends; the START / END sliders are labelled FROM / TO (they stay the ramp ends, sound unchanged).
 //   0.2.0 - 46 factory presets (loops of 8 bars up to a 256-bar marathon, each in all four classes); arrangements up to 256 bars and 64 sections
@@ -5917,7 +5917,7 @@ function kv_pvBuild(n) local(p) (
   kv_useMain();
 );
 
-// ---------- Waagerechte Ansicht der Kurvenkarte (0.8.0, aus TT-ACIDLAB): Zoom >= 1, erster sichtbarer Takt kv_b0 ----------
+// ---------- Waagerechte Ansicht der Kurvenkarte (0.8.0, aus another TT plug-in): Zoom >= 1, erster sichtbarer Takt kv_b0 ----------
 function kv_zmax() ( max(1, min(64, kv_tot/2)); );       // mindestens 2 Takte sichtbar
 function kv_view() (
   kv_zoom = max(1, min(kv_zmax(), kv_zoom));
@@ -6175,7 +6175,7 @@ function kv_lfoDraw(x, y, w, h, k) local(sg, ln, i, j, t, amx, yc, ex, nn, nn2, 
   xstr(x + 5, y + 3, #kv_s);
 );
 
-// v0.3.0 (aus dem MOVER-Tab der TT-ACIDLAB): Treffer auf die Griffe (START links / ENDE rechts je Abschnitt) und die Linie dazwischen.
+// v0.3.0 (aus dem MOVER-Tab der another TT plug-in): Treffer auf die Griffe (START links / ENDE rechts je Abschnitt) und die Linie dazwischen.
 // 0.8.0: nl Lanes, Zoom (kv_bx). Ergebnis: kv_hW = 0 START, 1 ENDE, 2 Linienmitte, -1 kein Treffer; kv_hI = Abschnitt, kv_hK = Lane.
 // 0.9.0: kv_hW = 3 = eigener Punkt (kv_hP = Index) des GEWAEHLTEN Abschnitts; Punkte haben Vorrang vor den Griffen.
 // y0/st/h = obere Kante der ersten Lane, Lane-Abstand, Lanehoehe. Griffe haben Vorrang vor der Linie.
@@ -6282,7 +6282,7 @@ function kv_doRandom() local(n) (
     );
   );
 );
-// ---------- Tastatur (0.8.0, wie der MOVER-Tab der TT-ACIDLAB) ----------
+// ---------- Tastatur (0.8.0, wie der MOVER-Tab der another TT plug-in) ----------
 // Links/Rechts = Abschnitt waehlen (Alt: Laenge -/+ 1 Takt), Pos1/Ende = erster/letzter, [ ] = Fokus-Lane, Auf/Ab = TO der Fokus-Lane +-1
 // (Alt: FROM), Bild auf/ab = +-10, O = Lane im Abschnitt an/aus, Entf = Abschnitt loeschen, + / - = Zoom, F = ganze Kette.
 // Tastencodes von gfx_getchar: 1818584692 'left', 1919379572 'rght', 30064 'up', 1685026670 'down', 1885828464 'pgup', 1885824110 'pgdn',
@@ -6347,7 +6347,7 @@ function kv_cell(id, x, y, w, h, val, vmn, vmx, def, sel) local(nv, hot, sh, act
 // ---------- Kurvenkarte mit Abschnittsband (RACK+ und MAP; 0.8.0 als Funktion, mit Zoom, Rollbalken und Vorschau) ----------
 // x0/w = Kartenbereich, bandY = Oberkante des Abschnittsbands, ly0/st/lh = erste Lane, Lane-Abstand, Lanehoehe, nl = Anzahl Lanes (5 oder 6),
 // sbY = Rollbalken (nur bei Zoom > 1). Bearbeiten nur am Hauptmodell (bei aktiver Vorschau nur ansehen, zoomen, rollen).
-// Aus dem MOVER-Tab der TT-ACIDLAB (v0.3.0): Griff START (hohl) / ENDE (voll) ziehen = Wert, Linienmitte ziehen = beide gemeinsam (Abstand
+// Aus dem MOVER-Tab der another TT plug-in (v0.3.0): Griff START (hohl) / ENDE (voll) ziehen = Wert, Linienmitte ziehen = beide gemeinsam (Abstand
 // bleibt, die Klassengrenzen stoppen beide), Umschalt = fein (1/6 der Strecke). Ein FILL-Abschnitt wird dabei in feste Werte ueberfuehrt (km_unrel).
 function kv_mapUI(x0, w, bandY, ly0, st, lh, nl, sbY) local(i, p, xa, xb, cx, cw, k, y, ya, yb, hs, best, bar, nv, sh, lo, hi, dv, dd, sgd, thx, thw, ph, es, ee, ah, xc, xd, np, pp, j, t0, t1, v0, v1, ci, ck, nx, ox, oy, ln, a0, dbl, px, py, ly, ry0, mx_on, bh, lit, hv, bb, hc) (
   kv_mx0 = x0;  kv_mw = w;
@@ -7809,7 +7809,7 @@ kv_nv != slider10 ? ( tt_slset(10, kv_nv); );
 colAcid(1);  sprintf(#kv_s, "%d %%", slider10);  xstr(916, 882, #kv_s);
 tt_hov(780, 866, 170, 28, "Rounds off jumps between values (a slew of up to 8 steps). 0 = off.");
 
-// ---------- Tastatur (0.8.0, wie der MOVER-Tab der TT-ACIDLAB) ----------
+// ---------- Tastatur (0.8.0, wie der MOVER-Tab der another TT plug-in) ----------
 // Nur ohne offenes Overlay (OPTIONS, Zoom-Eingabefeld, Preset-Dropdown, Namenseingabe): die lesen gfx_getchar selbst (in tth_post/tt_pb_post).
 (!tth_open && !tth_edit && !tt_pb_open && !tt_pb_hold) ? (
   kv_c = gfx_getchar();  kv_n = 0;
