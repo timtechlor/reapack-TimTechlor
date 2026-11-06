@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="7b2cb25c99b2c39473aebd732273184e3235a278">
+<index version="1" name="TimTechlor ReaScripts" commit="1fc7370df444297e5e547f7f15798ed4ab204bf3">
   <category name="MIDI Tools/TT-303PATGEN">
     <reapack name="TT-303PATGEN Print Song Chain.lua" type="script" desc="TT-303PATGEN Print Song Chain">
       <metadata>
@@ -584,6 +584,186 @@
       </version>
     </reapack>
   </category>
+  <category name="Synths/TT-KICK">
+    <reapack name="tt-kick.jsfx" type="effect" desc="TT-KICK Kick Machine v1.1.0">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-KICK Kick Machine v1.1.0\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Kick designer for techno. One kick, three sequential segments on the time axis (TRANSIENT / BODY / TAIL), joined by equal-power crossfades - crossfading instead of layering. Each segment is either SYNTHESIZED or a loaded or captured SAMPLE; the synth path carries its phase across the segment boundaries - phase-coherent by construction, not by offset knobs. The factory state is pure SYNTH on all lanes: a fresh instance plays a complete kick with no kit loaded.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == PLAYING == MIDI: a note-on fires the whole kick chain - TRANSIENT into BODY into TAIL, sequenced on the time axis with equal-power crossfades at the boundaries. Slots left empty drop out of the chain without a click. The note sets the pitch (keytrack base = ROOT, default C2), velocity sets the gain. Note-off is ignored (one-shot). KEYTRACK OFF pins every note to ROOT - factor 1 on any key. DETECT ROOT (player panel) analyzes the BODY segment - loaded sample or rendered synth - and writes ROOT one-shot with the detected note, cent offset and confidence on display. PLAYER: built-in 4/4 player, rate 1/1..1/8, constant velocity; SYNC follows the project timeline (plays while the transport runs), FREE RUN ignores it. SWING delays the off-grid eighths by SWING/200 of an eighth (66.7 % lands on the triplet point). Clicking a lane's waveform auditions that segment - on SYNTH lanes you hear the engine itself. 24 voices; a stolen voice fades out.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == SYNTH ENGINES == Each lane's SYNTH|SAMPLE switch is live. TRANSIENT renders a click oscillator + noise burst, BODY a pitch-envelope oscillator (f0 -> f1, curve-shaped), TAIL a sine with drift and a room component. Chained synth segments share one phase trajectory: a successor starts at the exact phase its predecessor holds at the boundary - no phase jump inside or across the crossfade. The chain's phase starts at 0; a synth segment following a SAMPLE segment also starts at phase 0. Lane length sets the synth window duration (per-type maximum); PITCH and the played note scale the engine frequencies.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == EDITING == Each lane carries its segment window: drag the START/LENGTH flags to trim, drag the diamond markers at the window edges to set the crossfade lengths (the end fade on TAIL is the kick's fade-out), REV flips the window, GAIN sets the segment level. Every lane has its own zoom: - / + zoom out and in, FIT (ZOOM FIT) makes the view follow the lane window, a scroll bar under the wave moves the zoomed view. Mouse wheel over a waveform = zoom at the pointer, CTRL+wheel = scroll, SHIFT+wheel = vertical skew, dragging the dimmed background pans the zoomed view. Presets store the zoom; factory and lane presets open with ZOOM FIT on every lane. Vertical lines with ms labels sit behind every waveform. Edits while a kick plays apply to the next trigger - running voices are frozen at trigger time, so drags never stutter. Hover any control for a short hint (OPTIONS -> TOOLTIPS ON/OFF). CTRL+click resets a fader, flag, diamond or knob to its INIT value.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == LANE TOOLS == M / S take a lane out of the kick chain (mute) or leave only soloed lanes in it. MAX blows one lane up to fill the whole lane area (the others collapse to strips). RAND draws a fresh, musically bounded random setting for the lane (CTRL+click = INIT). EXPERT opens a row of knobs under every lane: the engine knobs (F0, F1 with the nearest note, e.g. F0 A4 = 440 Hz, and NOISE / CURVE / DRIFT + ROOM), PITCH, LEN, OFFSET, XF-IN, XF-OUT and a LANE FILTER (CUT / RES, a 2-pole low-pass on that lane's voices only; fully open it is bypassed bit-exactly). XF-IN and XF-OUT are independent: a boundary fades over min(XF-OUT of the earlier lane, XF-IN of the later lane). OFFSET moves the start of a lane on the time axis, in ms with 0.1 ms steps. Without it a lane starts where the one before ends, minus the shared crossfade. A positive OFFSET starts it later and leaves a gap of silence between the lanes, a negative OFFSET starts it earlier and overlaps the lanes more (S2 / S3: -100..+100 ms). On S1 (the head of the chain) a positive OFFSET (0..+100 ms) delays the whole kick. Every lane after a moved lane moves with it. At 0 on all lanes the kick is exactly the same as before. In the WAVE page and in FUSION EXPAND a grip at the foot of each lane start drags OFFSET sideways (double-click or CTRL+click = 0). Every lane header carries a preset browser < NAME >: INIT plus 14 curated entries per lane (S1 transient, S2 body, S3 tail). A lane preset sets only the 16 sound parameters; window, view, MUTE / SOLO stay. A "*" marks a sound edited after loading.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == WAVE VIEW == The kick is shown as its real waveform, rendered from the lanes before the master section (filter, drive, clip and OUT are not in it) at velocity 127. The preview renders silently in the background after every edit; no hit is needed and the sound is unchanged. S1 / S2 / S3 carry their own colours, derived from the OPTIONS colour scheme.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Lane boxes: ENV / WAVE / BOTH in every lane header. ENV = the curves, WAVE = the rendered wave of this lane, BOTH = both (default). A muted lane shows its wave dimmed.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab FUSION: the row below the lanes shows the assembled kick and its total length. SUM = the finished kick as one wave, coloured by the loudest lane; STACK = one row per lane at its real place in the kick plus the sum. EXPAND lets FUSION fill the lane area: drag the END flags (lane length) and the diamonds (crossfade between two lanes, end fade) right in the wave; click plays the kick, click on a STACK row plays that lane, OPEN jumps to the lane. Each lane shows DUR against its recommended range (REC): green = inside, orange = outside.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab FIT LENGTH TO / FIT NOW (FUSION header): scales the playing lanes once, in proportion, so the kick lasts a chosen note length (1/1 .. 1/16 incl. triplets) at the current tempo. AUTO (saved per instance) fits after every preset load, in the same undo step.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab WAVE page (header tab): the whole kick on one time line with the next player hit as a red line, SUM or LAYERS, a LUPE for the first 20 ms, wheel zoom, SHIFT+wheel scroll, overview strip and FIT. Below sits the selected lane with its controls and the EXPERT knob row, plus that lane alone on its own time scale. All view switches are saved per instance and never create undo steps; the edits in the wave are normal, undoable edits.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == CAPTURE == Each lane has a CAP button (next to REV): record incoming audio straight into that lane's sample slot - no file dialog, no disk. Click CAP (lane shows "REC ARMED - PLAY YOUR SOURCE"), then play the source into the plugin's audio input (track input or items before this FX). Recording starts when the mono input exceeds -40 dB for 3 samples in a row, stops after 8 s, or after 1 s of silence (min. 0.2 s recorded); the silent tail is trimmed. Click CAP again on the armed/recording lane = ABORT (discard). On commit the lane switches to SAMPLE automatically. Outside an armed or running capture the input is not passed through. Captured slots are VOLATILE: they survive kit reloads (other slots reloading does not touch them; a new path assigned to that very slot replaces the capture), but NOT a sample-rate change and NOT a project reload - they are never written to the project. Bounce the result to a WAV if you want to keep it.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == LOADING SAMPLES == The front has no file dialogs (JSFX limitation). Run a Lua loader script ("TT-KICK Load Kit", "(Folder)", "(from Items)"; Actions -> Load ReaScript): it assigns the WAVs to the slots (TRANSIENT / BODY / TAIL) and hands the kit to ONE TT-KICK instance - the TT-KICK window that has (or last had) the focus, otherwise the first TT-KICK on the selected track; every instance can carry its own kit. Cancelling a dialog keeps the current slot assignment; a path longer than 255 characters is rejected with a message. The paths travel with the project - after a reload the WAVs are pulled from the stored paths again. "TT-KICK Recent Kits" re-loads a kit folder from a menu. Scripts can also hand lane sounds (lane preset format) to one instance through the hidden "Lane request (Lua)" parameter (one undo step).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == MASTER CHAIN == The summed kick runs through four rack stages on the right: FILTER - resonant LP (two TPT state-variable stages); BEEF biases the resonance peak up to 3 octaves BELOW the cutoff. DRIVE - BEEF is a parallel bass-band drive: the band is shaped while the remainder passes the BEEF stage undistorted (PUNCH PROTECT; switch it off to drive the full signal). GLUE is a sum saturation on top and deliberately touches the remainder too - bit-exact transparency therefore needs BEEF=0 AND GLUE=0. CLIP - soft/hard clipper with ceiling (the SOFT/HARD selector is dimmed while CLIP is off). OUT - gain plus peak/RMS metering, scope below. Every switch and fader rides on a ~20 ms slew - no step ever reaches the audio, stages keep tracking the signal while bypassed.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == PRESETS / UNDO / SYSTEM == Header row 2, left of OPTIONS: [<] [ name v ] [>] [SAVE] [...]. The dropdown lists FACTORY (INIT + 44 kicks in eight families: 909 / 808 / HARD / RUMBLE / MINIMAL / DEEP / ROLL / CHAR, all pure synth, license-free) and USER (32 slots). A preset writes the full state (all lane and segment data, master chain, player head) and keeps the kit paths; a factory preset keeps your ROOT note, INIT resets it to C2. SAVE stores everything a factory preset replaces (not kit paths, colour, lane view, player ON, page). The user bank rides in the project and in every native REAPER preset of this plugin (+ button). "*" = edited. UNDO (header + SYSTEM page) walks back the last 20 edit states: a snapshot is pushed when a drag ends or a button edit lands; each step also marks the REAPER project as changed. SYSTEM holds the factory preset families, the undo depth readout, live MIDI/SYNC status and build info. EXPORT: run "TT-KICK Export Kick.lua" from the action list - it renders the kick over 4 bars (or the current time selection) into an item named TTKICK_.wav on the selected track.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == OPTIONS == The OPTIONS button in the header opens a box with ten colour schemes (ACID = factory, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT, ICE), font size, custom colours, UI SIZE (25..400 %), AUTO FIT ON/OFF (the UI zoom follows the window size) and TOOLTIPS ON/OFF. Everything is stored per plugin instance and saved with the project; presets, RAND and undo never touch it.\par}
+}
+]]></description>
+        <link rel="website" href="https://timtechlor.de/docs/tt-kick-manual.html">Manual</link>
+      </metadata>
+      <version name="1.1.0" author="TimTechlor" time="2026-11-06T02:14:47Z">
+        <changelog><![CDATA[1.1.0 - NEW: OFFSET per lane (EXPERT knob row and a start grip in the WAVE page / FUSION EXPAND): moves the start of a lane on the time axis, -100..+100 ms (S1: 0..+100 ms), 0.1 ms steps - positive = later (a gap), negative = earlier (more overlap); the lanes after it move with it. Default 0 = the kick sounds exactly as in 1.0.1. FIT LENGTH TO and the WAVE preview include it. Saved with the project and in user presets (older projects load with 0). Lane import: one more value per lane.
+Review 30.10.2026: FIX sample rebuild slot publication, truncated state rejection, preset undo snapshots and delta-based XF dragging (format/version unchanged).
+1.0.1 - NEW: hidden parameter 'Lane request (Lua)' - a ReaScript can write lane sounds (the 16 sound parameters of up to three lanes, like a lane preset) into exactly one TT-KICK instance; values are range-checked, one undo step, old values are never applied again.
+1.0.0 - NEW: first release. Three sequential lanes (TRANSIENT / BODY / TAIL) with equal-power crossfades, each SYNTH (phase-coherent engines) or SAMPLE (loaded via Lua actions or captured live); EXPERT knobs (F0 / F1 with note names), lane filter, mute / solo, RAND and lane preset browsers; per-lane zoom with - / + / ZOOM FIT and scroll bar, stored in presets; FUSION row with SUM / STACK / EXPAND, FIT LENGTH TO and AUTO; WAVE view of the real waveform with the WAVE page; master rack (filter, drive, clip, output); built-in 4/4 player with SYNC / FREE RUN and swing; INIT + 44 factory kicks and a 32-slot user bank; 20-step undo; OPTIONS with ten colour schemes, UI SIZE, AUTO FIT and tooltips; sample loaders per instance and an export action.]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/tt-kick.jsfx</source>
+        <source file="img/tt-ui-options/kick-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-ui-options/kick-front.png</source>
+        <source file="img/tt-ui-options/kick-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-ui-options/kick-options.png</source>
+        <source file="TT-KICK Load Kit.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/TT-KICK%20Load%20Kit.lua</source>
+        <source file="TT-KICK Load Kit (Folder).lua">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/TT-KICK%20Load%20Kit%20(Folder).lua</source>
+        <source file="TT-KICK Load Kit (from Items).lua">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/TT-KICK%20Load%20Kit%20(from%20Items).lua</source>
+        <source file="TT-KICK Export Kick.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/TT-KICK%20Export%20Kick.lua</source>
+        <source file="TT-KICK Recent Kits.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/TT-KICK%20Recent%20Kits.lua</source>
+        <source file="tt-kick-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/tt-kick-manual.html</source>
+        <source file="img/tt-kick/header.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/header.png</source>
+        <source file="img/tt-kick/lanes.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/lanes.png</source>
+        <source file="img/tt-kick/fusion.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/fusion.png</source>
+        <source file="img/tt-kick/lane_transient.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/lane_transient.png</source>
+        <source file="img/tt-kick/lane_body.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/lane_body.png</source>
+        <source file="img/tt-kick/lane_tail.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/lane_tail.png</source>
+        <source file="img/tt-kick/lane_browser.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/lane_browser.png</source>
+        <source file="img/tt-kick/lane_menu.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/lane_menu.png</source>
+        <source file="img/tt-kick/player.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/player.png</source>
+        <source file="img/tt-kick/master.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/master.png</source>
+        <source file="img/tt-kick/scope.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/scope.png</source>
+        <source file="img/tt-kick/wave_page.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/wave_page.png</source>
+        <source file="img/tt-kick/wave_layers.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/wave_layers.png</source>
+        <source file="img/tt-kick/fusion_stack.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/fusion_stack.png</source>
+        <source file="img/tt-kick/fusion_expand.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/fusion_expand.png</source>
+        <source file="img/tt-kick/lanes_wave.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/lanes_wave.png</source>
+        <source file="img/tt-kick/tt-kick-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/tt-kick-presets.png</source>
+        <source file="img/tt-kick/tt-kick-presets-entry.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-KICK/img/tt-kick/tt-kick-presets-entry.png</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Synths/TT-RUMBLER">
+    <reapack name="tt-rumbler.jsfx" type="effect" desc="TT-RUMBLER Rumble Machine v1.1.0">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-RUMBLER Rumble Machine v1.1.0\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Techno rumble machine - part of the TimTechlor line (TT-303 Acid Machine = bass, Kick = the kick, TT-RUMBLER = the rumble under it). It builds the pumping sub-bass layer from the kick signal sitting right before it in the FX chain (e.g. Kick) - Kikzilla-Lite-style chain, fully open parameters, plus a PITCH engine no Kikzilla has.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == SIGNAL FLOW == In -> trigger detect -> [DRY: KICK fader] + [ENGINE (VERB | NOISE | PITCH) -> AHDR gate -> LOW CUT -> DRIVE -> HIGH CUT + ENV DEPTH -> auto gain -> RUMBLE fader] -> sum -> clipper -> OUT. The engines run on the mono mid signal; the rumble output is mono duplicated to L/R, the dry kick stays stereo.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == TRIGGER == AUDIO follows the input peak (0.5 ms attack / 50 ms release) with ~3 dB hysteresis and a 30 ms debounce. TRIGGER = AUDIO / AUDIO+MIDI / MIDI: note-ons can fire the envelope as well (sample-accurate via block queue).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == ENVELOPE == START / ATTACK / HOLD / RELEASE are independent times in ms. START is a pure delay before the attack, so the rumble swells after the kick punch instead of eating it. CURVE shapes attack and release (p = 2^(3*c), -500 -> 0.125, +500 -> 8). FIT TO scales the four durations once to a note at the current tempo; later tempo changes never rescale the stored times.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == ENGINES == VERB - 4 feedback combs + damping + 2 allpasses (MODAL / WALL / BLOOM), DECAY = T60 (nominal - loop damping shortens the tail at low FOCUS), FOCUS = damping pivot 40..400 Hz, DENSE = diffusion. NOISE - LCG noise (CLASSIC 3x one-pole cascade / GRIT clipped / RUBBLE bandpass), TONE = colour. PITCH - the kick itself through a 32768-sample ring, v0.8.0: cubic read-head interpolation; a window change also updates the playback rate in the same sample. Discrete engine, character and cut-type switches have a 5 ms click guard. two read heads, Hann half-period crossfade, 0..-24 st (whole semitones since v0.6.0). Characters TIGHT / DEEP / GRAIN scale the window x0.5 / x1 / x2. Inherent latency is ~W/2 samples (about 21-85 ms at 48 kHz, by character); the envelope restart is delayed by the same amount and the window phase locks to each kick onset, so gate and shifted tail stay aligned and deterministic. Since v0.9.2 the dry kick is delayed by the same engine latency and reported to the host (PDC), so kick and rumble start together (LATENCY AUTO / FIXED).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == OPTIONS / COLOR == OPTIONS button in the header (right of the preset bar) opens a box with 10 colour schemes (accent, second colour, tinted ground); per plugin instance, saved with the project, not touched by presets or UNDO. Factory scheme: ACID. v0.5.0: the box also carries FONT SIZE steps and a custom colour picker (FONT 1 / FONT 2 / BG) - saved per instance as well. v0.5.4: OPTIONS > TOOLTIPS ON / OFF is the one tooltip switch (the TIPS switch in the header is gone; older projects keep their setting).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == PRESET BAR / USER BANK (v0.4.0) == Header bar left of OPTIONS: [<] [name v] [>] [SAVE] [...]. The dropdown lists FACTORY (INIT + the 21 factory presets) and USER (32 slots, kept in the plugin state: project, FX chain, track template and every native REAPER preset file). A preset = the 28 sound parameters (not KICK/RUMBLE switches, colour, tips). Loading a preset can be undone with UNDO.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == SCOPE / TEMPO (v0.7.0) == The scope at the top draws the incoming KICK (white) and the RUMBLE (accent colour) together on one scale, optionally the SUM (final output) and the envelope GATE line, with the gate windows (A/H/R) of every LENGTH cycle drawn as bands. FIXED holds one bar still while a cursor redraws it, ROLL scrolls (left = oldest). Bar length follows the host time signature. The trace and view switches are display settings only (not saved, no undo point). The row under the scope shows the host BPM and the length of 1/2, 1/4 and 1/8 notes in ms and Hz (ms = 60000 / BPM x beats, Hz = 1000 / ms).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == FILTER / MIX == MIX: the KICK / RUMBLE switches left of the faders mute (lit = audible); off mutes only the output (soft ramp), the trigger, engine and AUTO GAIN keep running. Not stored in presets. LOW CUT resonant HP, DRIVE parallel band (~140 Hz), HIGH CUT CLEAN / COMB / DIRTY with ENV DEPTH opening it up to 4 octaves, AUTO GAIN (feed-forward peak-hold, rumble ~6 dB under the kick, freezes in breakdowns), clipper with ceiling + clip LED, OUT +-12 dB and a +-2.0 safety clamp behind it.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 == STATE / MILESTONES == v0.1.0 is feature-complete (M1-M5): the 66-word parameter blob rides @serialize (v3 since 0.9.0: magic + version + 64 words), a 20-slot undo ring (up to 19 edits) lives in memory, and INIT + 21 factory presets (8 VERB / 7 NOISE / 6 PITCH, designed in the tt-rumbler_lab.py transcript) sit in the header preset bar (v0.4.0). Every panel parameter is a draggable widget with tooltips. v0.5.4: every edit (drag, wheel, reset, switch, colour, preset load, UNDO) is reported to REAPER - one undo point, project marked as changed.\par}
+}
+]]></description>
+        <link rel="website" href="https://timtechlor.de/docs/tt-rumbler-manual.html">Manual</link>
+      </metadata>
+      <version name="1.1.0" author="TimTechlor" time="2026-11-06T02:14:47Z">
+        <changelog><![CDATA[v1.1.0 (2026-10-26) NEW: factory preset FAST 148 [VERB/MODAL] - short T60 2 s rumble with HC 120 Hz
+        for 145-150 BPM (START 8, ATT 45, HLD 60, REL 120 ms); appended as preset 22, the other numbers stay.
+        FIX (Review 30.10.2026): preserve bank/style on restore before init, validate before DSP seeds,
+        and cancel pending legacy time conversion when presets or FIT supply milliseconds. State format unchanged.
+v1.0.0 (2026-10-25) RELEASE: three factory presets removed after the user hearing round
+        (Abnahme matrix): SCHRANZ ("very noisy, no real rumble") and RUBBLE ROLL (failed) and GRAIN
+        SMEAR (failed). The bank is now INIT + 21 presets (8 VERB / 7 NOISE / 6 PITCH); later slots
+        shifted down by one or three, so a project that stored a factory preset by number loads a
+        different design than before - your own user presets are unaffected. The GRAIN window stays
+        available as an engine character. Sound of the remaining presets unchanged. Same state raises
+        the version to 1.0.0 for the Drop 04 release; UI kit 8, no other changes.
+        FIX (review round 6): the preset bar kept its old factory count (PBK_NF 25) and listed three
+        phantom "TONAL 41" entries after the removal; it now follows PSET_N (22 entries).
+v0.9.4 (2026-10-24) FIX: a project save no longer clamps parameters or clears the modified star - state validation and
+        the star reset now run only when a chunk is READ, as the code already claimed. FIX: the AHDR curve tooltip now
+        describes the ms times (0-24000, independent of tempo) instead of the percentage model dropped in 0.9.0. Sound unchanged.
+v0.9.3 (2026-10-17) FIX: tooltips added for the CLIP LED and the KICK / RUMBLE percent readouts; a project chunk cut off inside the parameter block now loads the factory state instead of a mix of old and stored values; the latency delay line can no longer read one word past its ring in a rounding edge case. About text updated (dry kick is delayed since 0.9.2). Sound unchanged.
+v0.9.2 (2026-10-15) FIX: query the graphics keyboard state each frame without consuming typed characters, so SHIFT+wheel works before opening any preset or OPTIONS text entry (this fix itself does not touch the audio). NEW: 23 factory presets replaced after the kick-rumble guide (BOOM E1 kept, slot 9): rolling, hypnotic, tight, offbeat, industrial, raw, peak-time, noise, grit, comb, pitch layers; all times in ms for roughly 135-145 BPM.
+  - NEW: LATENCY (PITCH shifts the kick by half its window): the kick is now delayed by the engine latency and reported to the host (PDC), so the rumble starts exactly with the kick at START 0 ms. LAT AUTO follows the engine (VERB/NOISE 0 ms), LAT FIXED always reports one window (about 85 ms at 48 kHz) so the latency never changes when the engine or character is switched. Saved per instance.
+v0.9.1 (2026-10-15) FIX: legacy envelope conversion waits for the first audio block and its actual host tempo. Before processing, pending legacy states remain v2 when saved; old user presets use the last audio-block tempo. Fixes 120-BPM fallback during project loading and stale tempo during live state restore.
+v0.9.0 (2026-10-15) START / ATTACK / HOLD / RELEASE use independent milliseconds (0-24000 ms), with 1 ms wheel and 0.1 ms fine wheel. No automatic squeezing or tempo scaling. FIT TO scales once to a note. Old projects and user presets convert their effective times at load tempo; factory timings preserve their 130 BPM sound. State v3 / preset layout 2, same memory map and word counts.
+v0.8.0 (2026-10-15) PITCH: more accurate cubic read heads (causal fallback near the write head, no added latency); ring indices wrap safely even after floating-point rounding; playback rate now follows a triggered window change in the same sample instead of waiting for the next block. Engine, character and cut-type changes join the previous output through a 5 ms raised-cosine correction. DRIVE skips the inactive shaper and caches the exact gain compensation. UNDO tooltip correctly describes up to 19 edits in its 20-slot ring. Saved state, factory values and dry path unchanged.
+v0.7.1 (2026-10-14) INTERNAL: UI kit 7 modules (shared building blocks); no change to sound or presets.
+v0.7.0 (2026-10-09) New front: the scope is now the centre piece. It shows the incoming KICK and the RUMBLE together on one scale, optionally the SUM and the envelope GATE line, with the S/A/H/R gate windows drawn over every beat. FIXED view holds one bar still while a cursor redraws it; ROLL scrolls. The controls sit in five groups underneath (TRIGGER, ENGINE, ENVELOPE with a curve preview, FILTER, MIX). Sound and presets unchanged.
+  - NEW: OPTIONS > AUTO FIT ON / OFF (default on): dragging the window edge rescales the UI to the new window size; the UI SIZE buttons still set a fixed zoom until the window changes again. UI SIZE now accepts 25 to 400 percent. Saved per instance.
+v0.6.1 (2026-10-09) PITCH: the first hit after a CHARACTER or preset change is no longer up to 8.6 dB too quiet (the delay is now planned with the new window size); clicking OPTIONS no longer loads a neighbouring preset when the window shows scrollbars; a mouse button held down from the preset bar no longer triggers a click elsewhere; the modified-star survives reloading a project and undo; stray keystrokes no longer end the preset name entry; invalid (NaN) values in a damaged project are cleaned up on load; VERB tail no longer leaves denormal numbers behind after silence.
+v0.6.0 (2026-10-02) P26: factory presets DARK CARPET (START 10 %) and SUB DROP (START 20 %) open their gate again under a straight 4/4 kick (with 50 % they stayed silent / barely came through); PITCH snaps to whole semitones (one wheel notch = one semitone; saved off-grid values load and sound unchanged until turned); the rumble keeps running when playback starts (no more buffer flush at every transport start - tails ring out, no click); NOISE level and COMB range no longer depend on the sample rate (identical at 48 kHz; at 96/192 kHz NOISE was 3/6 dB quieter, at 44.1 kHz 0.4 dB louder); large OPTIONS font steps no longer make front texts overlap (texts that do not fit are drawn a step smaller)
+0.5.5 - Persistent UI size and options; larger default, stable colours when zooming.
+v0.5.4 (2026-10-02) P25 review fixes: every edit now tells REAPER (undo point "Edit FX", project marked as changed - before, closing REAPER after RUMBLER-only edits lost them without asking); UNDO also records mouse-wheel moves and right-click resets; OPTIONS > TOOLTIPS is the one tooltip switch (header TIPS switch removed, old projects keep their setting); header version no longer slides onto UNDO at some window sizes; MIX divider no longer crosses the faders; tooltips show up to four lines; PITCH shows one decimal (it always played continuously); loading a preset or UNDO no longer touches the KICK/RUMBLE switches or the colour for a moment; CLIPPER OFF / DRIVE 0 settle to exact bypass after ~0.2 s instead of ~15 s; first PITCH hit after a sample-rate change uses the new window; shared modules updated (THEME 4 / UIKIT 4); DSP otherwise unchanged
+v0.5.3 (2026-10-01) P23: OPTIONS box: TOOLTIPS ON / OFF (per instance, saved with the project; the TIPS switch in the header is the same setting); tooltips on every control incl. the preset bar and the OPTIONS button; DSP/audio unchanged
+v0.5.2 (2026-10-01) P22 review fixes: ENGINE=PITCH no longer loads as NOISE when a project chunk is read before @init (validateState gated on rmbInit); PITCH window size changes on CHARACTER now apply at the next trigger instead of jumping the read position mid-tail (click); dead per-sample peak computation removed. Sound unchanged with steady settings.
+v0.5.1 (2026-10-01) P22: OPTIONS box: fully clamped inside the window incl. shadow; footer no longer overlaps the colour picker; user preset bank stays loadable when the chunk was saved with fewer slots; DSP/audio unchanged
+v0.5.0 (2026-10-01) P21: front rebuilt on the shared v2 UI kit
+(tt-uikit.jsfx-inc, spliced into @init): uikit_begin + cached
+ground, panel2 panels with title bar, knob2 / hslider / combo /
+toggle widgets; header with wordmark, subtitle, preset bar and
+OPTIONS - same look and handling as the other TimTechlor plugins.
+The inhouse kit copies (xrect .. btn) and the old cell-knob
+system (kbArc/knob/kbTxtDraw/kbTipCell/kbHzTxt) plus the vFade
+fader are gone.
+unchanged: CTRL+click = default, SHIFT = fine, right/double-
+click = default, tooltips (TIPS), UNDO, KICK/RUMBLE mute,
+theme/preset bar. OPTIONS now also holds FONT SIZE steps and a
+custom colour picker (FONT 1 / FONT 2 / BG, theme v2), saved per
+instance via the preset module v2 style block. DSP, serialize
+blob and user bank untouched - every section except @gfx is
+byte-identical (besides the spliced THEME/PRESETS/UIKIT module
+blocks and the APP_VER string).
+v0.4.0 (2026-09-30) P17: unified preset bar in the header (left of
+OPTIONS) replaces the < NAME > stepper: factory list (INIT + 24)
+plus a 32-slot user bank saved with the project/FX chain/native
+REAPER presets (appended after the 66-word blob, blob format
+unchanged, old projects load with an empty bank). UNDO also
+reverts loading a preset. Audio unchanged.
+v0.3.0 (2026-09-30) P14: OPTIONS box with COLOR (10 schemes:
+ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT,
+ICE) - button in the header right of UNDO; factory scheme is
+ACID (look identical to v0.2.0). The choice lives per
+instance in the serialized reserve word +35 (blob v2 unchanged,
+old projects load as ACID), is not part of presets/undo.
+Audio unchanged.
+v0.2.0 (2026-09-30) P15: new defaults THRESHOLD -3 dBFS and
+START 50 % (INIT and all 24 factory presets, CTRL+click reset);
+MIX: KICK / RUMBLE on/off switches (mute with ~5-10 ms ramp,
+engine/trigger/AUTO GAIN keep running, not part of presets;
+params +28/+29, blob v2, v1 blobs load with both on);
+fixed @serialize load path (project/preset state was discarded
+on load: file_avail is 0/1 in read mode, magic is float32).
+v0.1.0 (2026-09-30) initial DSP core build M1/M2:
+audio/MIDI trigger with hysteresis + debounce, VERB /
+NOISE / PITCH engines, proportional tempo-synced AHDR
+(START = delay), resonant low cut, parallel band drive,
+high cut CLEAN/COMB/DIRTY with ENV DEPTH, feed-forward
+auto gain with freeze, clipper + ceiling, OUT with
+safety clamp, 64-word serialize blob v1, undo ring,
+preset infrastructure (INIT + WAREHOUSE).
+M3 (same day, Devin): full front in @gfx - header with
+preset stepper/UNDO/TIPS, TRIGGER (threshold knob, SRC,
+follower LED bar, big TRIG LED), ENGINE (mode +
+character buttons, engine-gated knobs), ENVELOPE
+(AHDR curve display + 5 knobs + LENGTH stepper),
+FILTER (6 knobs + CUT TYPE), MIX (2 vertical faders,
+OUT/CEILING knobs, AUTO GAIN/CLIPPER, CLIP LED),
+output scope and footer. Tooltips runtime-toggleable.
+M4/M5: 24 factory presets, lab-QA green; PITCH window phase-locks per kick.]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-RUMBLER/tt-rumbler.jsfx</source>
+        <source file="img/tt-ui-options/rumbler-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-RUMBLER/img/tt-ui-options/rumbler-front.png</source>
+        <source file="img/tt-ui-options/rumbler-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-RUMBLER/img/tt-ui-options/rumbler-options.png</source>
+        <source file="tt-rumbler-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-RUMBLER/tt-rumbler-manual.html</source>
+        <source file="img/tt-rumbler/rmb_v2_full.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-RUMBLER/img/tt-rumbler/rmb_v2_full.png</source>
+        <source file="img/tt-rumbler/rmb_v2_dropdown.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-RUMBLER/img/tt-rumbler/rmb_v2_dropdown.png</source>
+        <source file="img/tt-rumbler/rmb_v2_options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/1fc7370df444297e5e547f7f15798ed4ab204bf3/Synths/TT-RUMBLER/img/tt-rumbler/rmb_v2_options.png</source>
+      </version>
+    </reapack>
+  </category>
   <category name="Tempo Tools">
     <reapack name="TT_BPM_Calculator.lua" type="script" desc="TT-BPM2MS2HZ (note values to milliseconds and Hertz)">
       <metadata>
@@ -761,6 +941,277 @@ v1.5.0
         <source file="img/tt-theme-font-editor/tt-theme-font-editor-the-main-window-with-a-locked-target-in-target-a.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/cbb25d2ca2d93ac382676fdf791e9209e34853dd/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-the-main-window-with-a-locked-target-in-target-a.webp</source>
         <source file="img/tt-theme-font-editor/tt-theme-font-editor-the-options-popup-with-font-size-table-font-and-d.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/cbb25d2ca2d93ac382676fdf791e9209e34853dd/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-the-options-popup-with-font-size-table-font-and-d.webp</source>
         <source file="img/tt-theme-font-editor/tt-theme-font-editor-while-the-picker-is-armed-the-row-shows-cancel-pi.webp">https://github.com/timtechlor/reapack-TimTechlor/raw/cbb25d2ca2d93ac382676fdf791e9209e34853dd/Theme%20Tools/img/tt-theme-font-editor/tt-theme-font-editor-while-the-picker-is-armed-the-row-shows-cancel-pi.webp</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Themes">
+    <reapack name="Clean &amp; Flat Acid by Tim Techlor.theme" type="theme" desc="Clean &amp; Flat Acid by Tim Techlor">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 Clean & Flat Acid\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A REAPER theme: dark graphite panels, one acid-green accent, flat square buttons. The theme runs on its own. The adjuster window needs ReaImGui 0.10+. Baking fonts, the selection frame and the logo watermark need js_ReaScriptAPI. The UI-scale buttons and the silent startup action need the SWS extension. All three are in the ReaTeam Extensions repository. ReaPack installs the scripts next to each other under Scripts/TimTechlor ReaScripts/Themes/. Load "Tim Techlor Theme Adjuster" once. After that, Options > Themes > Theme Adjuster opens it while this theme is selected.\par}
+}
+]]></description>
+        <link rel="website" href="https://paypal.me/timtechlor">Tip</link>
+      </metadata>
+      <version name="1.0.0" author="Tim Techlor" time="2026-11-06T02:14:46Z">
+        <changelog><![CDATA[1.0.0
+- First release]]></changelog>
+        <source type="theme" file="Clean &amp; Flat Acid by Tim Techlor.ReaperThemeZip">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/Clean%20&amp;%20Flat%20Acid%20by%20Tim%20Techlor.ReaperThemeZip</source>
+        <source type="theme" file="Clean &amp; Flat Acid by Tim Techlor note colors (colorblind).png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/Clean%20&amp;%20Flat%20Acid%20by%20Tim%20Techlor%20note%20colors%20(colorblind).png</source>
+        <source main="main" type="script" file="Tim Techlor_theme_adjuster.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/Tim%20Techlor_theme_adjuster.lua</source>
+        <source type="script" file="TT_ThemeAdjuster.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/TT_ThemeAdjuster.lua</source>
+        <source main="main" type="script" file="TT_ThemeAdjuster_Apply.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/TT_ThemeAdjuster_Apply.lua</source>
+        <source type="script" file="TT_Logo_T.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/TT_Logo_T.png</source>
+        <source type="data" file="toolbar_icons/tt_add.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_add.png</source>
+        <source type="data" file="toolbar_icons/tt_arranger.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_arranger.png</source>
+        <source type="data" file="toolbar_icons/tt_autoscroll.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_autoscroll.png</source>
+        <source type="data" file="toolbar_icons/tt_bpm2ms.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_bpm2ms.png</source>
+        <source type="data" file="toolbar_icons/tt_child_color.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_child_color.png</source>
+        <source type="data" file="toolbar_icons/tt_chordgun.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_chordgun.png</source>
+        <source type="data" file="toolbar_icons/tt_color.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_color.png</source>
+        <source type="data" file="toolbar_icons/tt_cpu.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_cpu.png</source>
+        <source type="data" file="toolbar_icons/tt_edit.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_edit.png</source>
+        <source type="data" file="toolbar_icons/tt_fontsizer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_fontsizer.png</source>
+        <source type="data" file="toolbar_icons/tt_grid_1_1.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_grid_1_1.png</source>
+        <source type="data" file="toolbar_icons/tt_grid_1_16.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_grid_1_16.png</source>
+        <source type="data" file="toolbar_icons/tt_grid_1_16t.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_grid_1_16t.png</source>
+        <source type="data" file="toolbar_icons/tt_grid_1_2.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_grid_1_2.png</source>
+        <source type="data" file="toolbar_icons/tt_grid_1_32.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_grid_1_32.png</source>
+        <source type="data" file="toolbar_icons/tt_grid_1_4.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_grid_1_4.png</source>
+        <source type="data" file="toolbar_icons/tt_grid_1_8.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_grid_1_8.png</source>
+        <source type="data" file="toolbar_icons/tt_grid_settings.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_grid_settings.png</source>
+        <source type="data" file="toolbar_icons/tt_layouts.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_layouts.png</source>
+        <source type="data" file="toolbar_icons/tt_m_deselect.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_deselect.png</source>
+        <source type="data" file="toolbar_icons/tt_m_drum.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_drum.png</source>
+        <source type="data" file="toolbar_icons/tt_m_dup_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_dup_down.png</source>
+        <source type="data" file="toolbar_icons/tt_m_dup_right.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_dup_right.png</source>
+        <source type="data" file="toolbar_icons/tt_m_dup_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_dup_up.png</source>
+        <source type="data" file="toolbar_icons/tt_m_erase.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_erase.png</source>
+        <source type="data" file="toolbar_icons/tt_m_filter.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_filter.png</source>
+        <source type="data" file="toolbar_icons/tt_m_humanize.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_humanize.png</source>
+        <source type="data" file="toolbar_icons/tt_m_mute.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_mute.png</source>
+        <source type="data" file="toolbar_icons/tt_m_note_names.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_note_names.png</source>
+        <source type="data" file="toolbar_icons/tt_m_note_vel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_note_vel.png</source>
+        <source type="data" file="toolbar_icons/tt_m_paint.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_paint.png</source>
+        <source type="data" file="toolbar_icons/tt_m_pencil.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_pencil.png</source>
+        <source type="data" file="toolbar_icons/tt_m_pencil_drag.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_pencil_drag.png</source>
+        <source type="data" file="toolbar_icons/tt_m_preview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_preview.png</source>
+        <source type="data" file="toolbar_icons/tt_m_quantize.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_quantize.png</source>
+        <source type="data" file="toolbar_icons/tt_m_select.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_select.png</source>
+        <source type="data" file="toolbar_icons/tt_m_vel_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_vel_down.png</source>
+        <source type="data" file="toolbar_icons/tt_m_vel_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_vel_up.png</source>
+        <source type="data" file="toolbar_icons/tt_m_zoom_content.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_zoom_content.png</source>
+        <source type="data" file="toolbar_icons/tt_m_zoom_loop.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_zoom_loop.png</source>
+        <source type="data" file="toolbar_icons/tt_m_zoom_sel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_m_zoom_sel.png</source>
+        <source type="data" file="toolbar_icons/tt_marker.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_marker.png</source>
+        <source type="data" file="toolbar_icons/tt_media.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_media.png</source>
+        <source type="data" file="toolbar_icons/tt_midi_new.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_midi_new.png</source>
+        <source type="data" file="toolbar_icons/tt_midi_reset.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_midi_reset.png</source>
+        <source type="data" file="toolbar_icons/tt_mixer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_mixer.png</source>
+        <source type="data" file="toolbar_icons/tt_mx_tuner.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_mx_tuner.png</source>
+        <source type="data" file="toolbar_icons/tt_navigator.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_navigator.png</source>
+        <source type="data" file="toolbar_icons/tt_options_colors.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_options_colors.png</source>
+        <source type="data" file="toolbar_icons/tt_panic_all.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_panic_all.png</source>
+        <source type="data" file="toolbar_icons/tt_panic_sel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_panic_sel.png</source>
+        <source type="data" file="toolbar_icons/tt_panic_stop.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_panic_stop.png</source>
+        <source type="data" file="toolbar_icons/tt_pitch_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_pitch_down.png</source>
+        <source type="data" file="toolbar_icons/tt_pitch_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_pitch_up.png</source>
+        <source type="data" file="toolbar_icons/tt_projbay.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_projbay.png</source>
+        <source type="data" file="toolbar_icons/tt_region.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_region.png</source>
+        <source type="data" file="toolbar_icons/tt_regionmgr.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_regionmgr.png</source>
+        <source type="data" file="toolbar_icons/tt_render.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_render.png</source>
+        <source type="data" file="toolbar_icons/tt_sel_time.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sel_time.png</source>
+        <source type="data" file="toolbar_icons/tt_slicer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_slicer.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_01.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_01.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_02.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_02.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_03.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_03.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_06.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_06.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_08.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_08.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_11.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_11.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_12.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_12.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_14.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_14.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_16.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_16.png</source>
+        <source type="data" file="toolbar_icons/tt_sw_18black.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_sw_18black.png</source>
+        <source type="data" file="toolbar_icons/tt_theme_clearview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_theme_clearview.png</source>
+        <source type="data" file="toolbar_icons/tt_theme_flatmad.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_theme_flatmad.png</source>
+        <source type="data" file="toolbar_icons/tt_theme_mytaste.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_theme_mytaste.png</source>
+        <source type="data" file="toolbar_icons/tt_theme_neptune.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_theme_neptune.png</source>
+        <source type="data" file="toolbar_icons/tt_theme_next.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_theme_next.png</source>
+        <source type="data" file="toolbar_icons/tt_theme_prev.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_theme_prev.png</source>
+        <source type="data" file="toolbar_icons/tt_themeadj.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_themeadj.png</source>
+        <source type="data" file="toolbar_icons/tt_trackmgr.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_trackmgr.png</source>
+        <source type="data" file="toolbar_icons/tt_vkb.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_vkb.png</source>
+        <source type="data" file="toolbar_icons/tt_zoom_items.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_zoom_items.png</source>
+        <source type="data" file="toolbar_icons/tt_zoom_out.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_zoom_out.png</source>
+        <source type="data" file="toolbar_icons/tt_zoom_time.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/tt_zoom_time.png</source>
+        <source type="data" file="toolbar_icons/150/tt_add.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_add.png</source>
+        <source type="data" file="toolbar_icons/150/tt_arranger.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_arranger.png</source>
+        <source type="data" file="toolbar_icons/150/tt_autoscroll.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_autoscroll.png</source>
+        <source type="data" file="toolbar_icons/150/tt_bpm2ms.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_bpm2ms.png</source>
+        <source type="data" file="toolbar_icons/150/tt_child_color.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_child_color.png</source>
+        <source type="data" file="toolbar_icons/150/tt_chordgun.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_chordgun.png</source>
+        <source type="data" file="toolbar_icons/150/tt_color.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_color.png</source>
+        <source type="data" file="toolbar_icons/150/tt_cpu.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_cpu.png</source>
+        <source type="data" file="toolbar_icons/150/tt_edit.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_edit.png</source>
+        <source type="data" file="toolbar_icons/150/tt_fontsizer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_fontsizer.png</source>
+        <source type="data" file="toolbar_icons/150/tt_grid_1_1.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_grid_1_1.png</source>
+        <source type="data" file="toolbar_icons/150/tt_grid_1_16.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_grid_1_16.png</source>
+        <source type="data" file="toolbar_icons/150/tt_grid_1_16t.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_grid_1_16t.png</source>
+        <source type="data" file="toolbar_icons/150/tt_grid_1_2.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_grid_1_2.png</source>
+        <source type="data" file="toolbar_icons/150/tt_grid_1_32.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_grid_1_32.png</source>
+        <source type="data" file="toolbar_icons/150/tt_grid_1_4.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_grid_1_4.png</source>
+        <source type="data" file="toolbar_icons/150/tt_grid_1_8.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_grid_1_8.png</source>
+        <source type="data" file="toolbar_icons/150/tt_grid_settings.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_grid_settings.png</source>
+        <source type="data" file="toolbar_icons/150/tt_layouts.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_layouts.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_deselect.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_deselect.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_drum.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_drum.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_dup_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_dup_down.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_dup_right.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_dup_right.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_dup_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_dup_up.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_erase.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_erase.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_filter.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_filter.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_humanize.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_humanize.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_mute.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_mute.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_note_names.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_note_names.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_note_vel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_note_vel.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_paint.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_paint.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_pencil.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_pencil.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_pencil_drag.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_pencil_drag.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_preview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_preview.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_quantize.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_quantize.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_select.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_select.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_vel_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_vel_down.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_vel_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_vel_up.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_zoom_content.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_zoom_content.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_zoom_loop.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_zoom_loop.png</source>
+        <source type="data" file="toolbar_icons/150/tt_m_zoom_sel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_m_zoom_sel.png</source>
+        <source type="data" file="toolbar_icons/150/tt_marker.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_marker.png</source>
+        <source type="data" file="toolbar_icons/150/tt_media.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_media.png</source>
+        <source type="data" file="toolbar_icons/150/tt_midi_new.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_midi_new.png</source>
+        <source type="data" file="toolbar_icons/150/tt_midi_reset.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_midi_reset.png</source>
+        <source type="data" file="toolbar_icons/150/tt_mixer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_mixer.png</source>
+        <source type="data" file="toolbar_icons/150/tt_mx_tuner.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_mx_tuner.png</source>
+        <source type="data" file="toolbar_icons/150/tt_navigator.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_navigator.png</source>
+        <source type="data" file="toolbar_icons/150/tt_options_colors.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_options_colors.png</source>
+        <source type="data" file="toolbar_icons/150/tt_panic_all.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_panic_all.png</source>
+        <source type="data" file="toolbar_icons/150/tt_panic_sel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_panic_sel.png</source>
+        <source type="data" file="toolbar_icons/150/tt_panic_stop.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_panic_stop.png</source>
+        <source type="data" file="toolbar_icons/150/tt_pitch_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_pitch_down.png</source>
+        <source type="data" file="toolbar_icons/150/tt_pitch_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_pitch_up.png</source>
+        <source type="data" file="toolbar_icons/150/tt_projbay.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_projbay.png</source>
+        <source type="data" file="toolbar_icons/150/tt_region.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_region.png</source>
+        <source type="data" file="toolbar_icons/150/tt_regionmgr.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_regionmgr.png</source>
+        <source type="data" file="toolbar_icons/150/tt_render.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_render.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sel_time.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sel_time.png</source>
+        <source type="data" file="toolbar_icons/150/tt_slicer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_slicer.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_01.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_01.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_02.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_02.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_03.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_03.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_06.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_06.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_08.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_08.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_11.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_11.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_12.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_12.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_14.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_14.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_16.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_16.png</source>
+        <source type="data" file="toolbar_icons/150/tt_sw_18black.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_sw_18black.png</source>
+        <source type="data" file="toolbar_icons/150/tt_theme_clearview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_theme_clearview.png</source>
+        <source type="data" file="toolbar_icons/150/tt_theme_flatmad.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_theme_flatmad.png</source>
+        <source type="data" file="toolbar_icons/150/tt_theme_mytaste.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_theme_mytaste.png</source>
+        <source type="data" file="toolbar_icons/150/tt_theme_neptune.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_theme_neptune.png</source>
+        <source type="data" file="toolbar_icons/150/tt_theme_next.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_theme_next.png</source>
+        <source type="data" file="toolbar_icons/150/tt_theme_prev.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_theme_prev.png</source>
+        <source type="data" file="toolbar_icons/150/tt_themeadj.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_themeadj.png</source>
+        <source type="data" file="toolbar_icons/150/tt_trackmgr.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_trackmgr.png</source>
+        <source type="data" file="toolbar_icons/150/tt_vkb.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_vkb.png</source>
+        <source type="data" file="toolbar_icons/150/tt_zoom_items.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_zoom_items.png</source>
+        <source type="data" file="toolbar_icons/150/tt_zoom_out.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_zoom_out.png</source>
+        <source type="data" file="toolbar_icons/150/tt_zoom_time.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/150/tt_zoom_time.png</source>
+        <source type="data" file="toolbar_icons/200/tt_add.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_add.png</source>
+        <source type="data" file="toolbar_icons/200/tt_arranger.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_arranger.png</source>
+        <source type="data" file="toolbar_icons/200/tt_autoscroll.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_autoscroll.png</source>
+        <source type="data" file="toolbar_icons/200/tt_bpm2ms.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_bpm2ms.png</source>
+        <source type="data" file="toolbar_icons/200/tt_child_color.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_child_color.png</source>
+        <source type="data" file="toolbar_icons/200/tt_chordgun.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_chordgun.png</source>
+        <source type="data" file="toolbar_icons/200/tt_color.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_color.png</source>
+        <source type="data" file="toolbar_icons/200/tt_cpu.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_cpu.png</source>
+        <source type="data" file="toolbar_icons/200/tt_edit.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_edit.png</source>
+        <source type="data" file="toolbar_icons/200/tt_fontsizer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_fontsizer.png</source>
+        <source type="data" file="toolbar_icons/200/tt_grid_1_1.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_grid_1_1.png</source>
+        <source type="data" file="toolbar_icons/200/tt_grid_1_16.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_grid_1_16.png</source>
+        <source type="data" file="toolbar_icons/200/tt_grid_1_16t.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_grid_1_16t.png</source>
+        <source type="data" file="toolbar_icons/200/tt_grid_1_2.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_grid_1_2.png</source>
+        <source type="data" file="toolbar_icons/200/tt_grid_1_32.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_grid_1_32.png</source>
+        <source type="data" file="toolbar_icons/200/tt_grid_1_4.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_grid_1_4.png</source>
+        <source type="data" file="toolbar_icons/200/tt_grid_1_8.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_grid_1_8.png</source>
+        <source type="data" file="toolbar_icons/200/tt_grid_settings.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_grid_settings.png</source>
+        <source type="data" file="toolbar_icons/200/tt_layouts.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_layouts.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_deselect.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_deselect.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_drum.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_drum.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_dup_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_dup_down.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_dup_right.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_dup_right.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_dup_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_dup_up.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_erase.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_erase.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_filter.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_filter.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_humanize.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_humanize.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_mute.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_mute.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_note_names.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_note_names.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_note_vel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_note_vel.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_paint.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_paint.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_pencil.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_pencil.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_pencil_drag.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_pencil_drag.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_preview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_preview.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_quantize.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_quantize.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_select.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_select.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_vel_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_vel_down.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_vel_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_vel_up.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_zoom_content.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_zoom_content.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_zoom_loop.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_zoom_loop.png</source>
+        <source type="data" file="toolbar_icons/200/tt_m_zoom_sel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_m_zoom_sel.png</source>
+        <source type="data" file="toolbar_icons/200/tt_marker.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_marker.png</source>
+        <source type="data" file="toolbar_icons/200/tt_media.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_media.png</source>
+        <source type="data" file="toolbar_icons/200/tt_midi_new.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_midi_new.png</source>
+        <source type="data" file="toolbar_icons/200/tt_midi_reset.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_midi_reset.png</source>
+        <source type="data" file="toolbar_icons/200/tt_mixer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_mixer.png</source>
+        <source type="data" file="toolbar_icons/200/tt_mx_tuner.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_mx_tuner.png</source>
+        <source type="data" file="toolbar_icons/200/tt_navigator.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_navigator.png</source>
+        <source type="data" file="toolbar_icons/200/tt_options_colors.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_options_colors.png</source>
+        <source type="data" file="toolbar_icons/200/tt_panic_all.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_panic_all.png</source>
+        <source type="data" file="toolbar_icons/200/tt_panic_sel.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_panic_sel.png</source>
+        <source type="data" file="toolbar_icons/200/tt_panic_stop.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_panic_stop.png</source>
+        <source type="data" file="toolbar_icons/200/tt_pitch_down.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_pitch_down.png</source>
+        <source type="data" file="toolbar_icons/200/tt_pitch_up.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_pitch_up.png</source>
+        <source type="data" file="toolbar_icons/200/tt_projbay.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_projbay.png</source>
+        <source type="data" file="toolbar_icons/200/tt_region.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_region.png</source>
+        <source type="data" file="toolbar_icons/200/tt_regionmgr.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_regionmgr.png</source>
+        <source type="data" file="toolbar_icons/200/tt_render.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_render.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sel_time.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sel_time.png</source>
+        <source type="data" file="toolbar_icons/200/tt_slicer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_slicer.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_01.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_01.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_02.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_02.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_03.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_03.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_06.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_06.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_08.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_08.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_11.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_11.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_12.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_12.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_14.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_14.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_16.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_16.png</source>
+        <source type="data" file="toolbar_icons/200/tt_sw_18black.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_sw_18black.png</source>
+        <source type="data" file="toolbar_icons/200/tt_theme_clearview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_theme_clearview.png</source>
+        <source type="data" file="toolbar_icons/200/tt_theme_flatmad.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_theme_flatmad.png</source>
+        <source type="data" file="toolbar_icons/200/tt_theme_mytaste.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_theme_mytaste.png</source>
+        <source type="data" file="toolbar_icons/200/tt_theme_neptune.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_theme_neptune.png</source>
+        <source type="data" file="toolbar_icons/200/tt_theme_next.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_theme_next.png</source>
+        <source type="data" file="toolbar_icons/200/tt_theme_prev.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_theme_prev.png</source>
+        <source type="data" file="toolbar_icons/200/tt_themeadj.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_themeadj.png</source>
+        <source type="data" file="toolbar_icons/200/tt_trackmgr.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_trackmgr.png</source>
+        <source type="data" file="toolbar_icons/200/tt_vkb.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_vkb.png</source>
+        <source type="data" file="toolbar_icons/200/tt_zoom_items.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_zoom_items.png</source>
+        <source type="data" file="toolbar_icons/200/tt_zoom_out.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_zoom_out.png</source>
+        <source type="data" file="toolbar_icons/200/tt_zoom_time.png">https://github.com/timtechlor/reapack-TimTechlor/raw/35ce9899b22fb86dd3cf4547a700a86c1ed86e56/Themes/toolbar_icons/200/tt_zoom_time.png</source>
       </version>
     </reapack>
   </category>
