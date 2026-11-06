@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="e3064e1e6b2ebd2a2c7af76ee383f16cacbc87ad">
+<index version="1" name="TimTechlor ReaScripts" commit="db1b29566191fec07b3f5aceb57836882413ea70">
   <category name="MIDI Tools/TT-303PATGEN">
     <reapack name="TT-303PATGEN Print Song Chain.lua" type="script" desc="TT-303PATGEN Print Song Chain">
       <metadata>
