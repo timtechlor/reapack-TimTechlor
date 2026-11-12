@@ -1,5 +1,5 @@
 -- @description TT Theme Adjuster (Tim Techlor REAPER theme: background, accent, items, contrast - live)
--- @version 1.0.1
+-- @version 1.0.2
 -- @author Tim Techlor
 -- @about
 --   Live adjuster for the Tim Techlor REAPER theme: background lift, tint, panel steps, grid,
@@ -14,13 +14,15 @@
 --   SWS for the UI scale buttons and the startup action. UNDO ALL returns the theme defaults.
 --   GENERATED FILE: edit TT_ThemeAdjuster.lua.tpl and run gen_adjuster.py.
 -- @changelog
+--   1.0.2 Theme: FX parameters, embedded FX UIs and lists placed in the bottom section of the track panel
+--         now start below the input row instead of covering pan and input. No adjuster changes.
 --   1.0.1 Theme: the TIM TECHLOR wordmark stays visible in the transport bar at mid widths (for example 200 % UI scale). No adjuster changes.
 --   1.0.0 First public build. Live background, grid, accent, items, track colours, fonts and UI scale.
 --         BAKE THEME writes Clean & Flat Acid (Adjusted). The theme menu opens this adjuster.
 --         With the startup action, a selection frame or logo watermark that was switched on stays drawn.
 
 local R = reaper
-local VERSION = "1.0.1"
+local VERSION = "1.0.2"
 local NS = "TT_ThemeAdjuster"
 local APPLY_ONLY = rawget(_G, "TT_ADJ_APPLY_ONLY") == true
 

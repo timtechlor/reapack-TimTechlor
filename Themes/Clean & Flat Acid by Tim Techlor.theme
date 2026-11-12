@@ -1,5 +1,5 @@
 @description Clean & Flat Acid by Tim Techlor
-@version 1.0.1
+@version 1.0.2
 @author Tim Techlor
 @metapackage
 @provides
@@ -24,6 +24,9 @@
   ReaPack installs the scripts next to each other under Scripts/TimTechlor ReaScripts/Themes/.
   Load "Tim Techlor Theme Adjuster" once. After that, Options > Themes > Theme Adjuster opens it while this theme is selected.
 @changelog
+  1.0.2
+  - FX parameters in the track panel no longer cover the pan and input rows. They, embedded FX UIs and lists placed in the bottom section now start below the input row.
+  - On short tracks without room for a parameter row, the parameters stay hidden instead of being squeezed.
   1.0.1
   - The TIM TECHLOR wordmark now stays visible in the transport bar at mid widths, for example at 200 % UI scale.
   1.0.0
