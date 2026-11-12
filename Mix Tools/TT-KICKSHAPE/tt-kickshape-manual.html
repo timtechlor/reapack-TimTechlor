@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-KICKSHAPE Manual – Drawable Volume &amp; Sidechain Shaper for REAPER</title>
+<meta name="description" content="Reference manual for TT-KICKSHAPE, a free drawable volume and sidechain shaper JSFX for REAPER: a curve editor with 8 slots, 22 presets and one-click ducking shapes the volume, triggered by host beat, MIDI note, audio transient or a free clock. Includes a 3-band Linkwitz-Riley split, a low-pass target and the curve as MIDI CC output.">
+<meta name="tt-doc-name" content="TT-KICKSHAPE">
+<meta name="tt-doc-version" content="1.0.1">
+<meta name="tt-doc-date" content="2026-11-09">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-kickshape-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-KICKSHAPE Manual – Drawable Volume &amp; Sidechain Shaper for REAPER">
+<meta property="og:description" content="Reference manual for TT-KICKSHAPE, a free drawable volume and sidechain shaper JSFX for REAPER: a curve editor with 8 slots, 22 presets and one-click ducking shapes the volume, triggered by host beat, MIDI note, audio transient or a free clock. Includes a 3-band Linkwitz-Riley split, a low-pass target and the curve as MIDI CC output.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-kickshape-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-kickshape.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-KICKSHAPE — User Manual">
+<meta property="article:modified_time" content="2026-11-09">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-KICKSHAPE Manual – Drawable Volume &amp; Sidechain Shaper for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-KICKSHAPE, a free drawable volume and sidechain shaper JSFX for REAPER: a curve editor with 8 slots, 22 presets and one-click ducking shapes the volume, triggered by host beat, MIDI note, audio transient or a free clock. Includes a 3-band Linkwitz-Riley split, a low-pass target and the curve as MIDI CC output.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-kickshape.png">
+<meta name="twitter:image:alt" content="TT-KICKSHAPE — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-kickshape-manual.html#article",
+   "headline": "TT-KICKSHAPE — User Manual",
+   "name": "TT-KICKSHAPE Manual – Drawable Volume &amp; Sidechain Shaper for REAPER",
+   "description": "Reference manual for TT-KICKSHAPE, a free drawable volume and sidechain shaper JSFX for REAPER: a curve editor with 8 slots, 22 presets and one-click ducking shapes the volume, triggered by host beat, MIDI note, audio transient or a free clock. Includes a 3-band Linkwitz-Riley split, a low-pass target and the curve as MIDI CC output.",
+   "url": "https://timtechlor.de/docs/tt-kickshape-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-kickshape-manual.html",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-kickshape.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER volume shaper, sidechain without compressor, kickstart alternative, LFOTool alternative, trance gate JSFX, drawable curve ducking, MIDI CC LFO REAPER, JSFX",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-kickshape-manual.html#software" },
+   "version": "1.0.1"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-kickshape-manual.html#software",
+   "name": "TT-KICKSHAPE",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "1.0.1",
+   "description": "JSFX plug-in for REAPER that shapes the volume with a drawable curve: sidechain pumping without a compressor, trance gates and tremolos, triggered by host beat, MIDI note, audio transient or a free clock, with a 3-band split, a low-pass target and the curve as MIDI CC.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-KICKSHAPE", "item": "https://timtechlor.de/docs/tt-kickshape-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-KICKSHAPE</span></nav>
+      <div class="wordmark" style="--wm-n:12" role="img" aria-label="TT-KICKSHAPE">TT-KICKSHAPE</div>
+      <h1>TT-KICKSHAPE — User Manual</h1>
+      <div class="meta">JSFX plug-in for REAPER // Version 1.0.1 // TimTechlor</div>
+      <p class="lead">TT-KICKSHAPE draws the volume. A curve you edit with the mouse is played back on every trigger — by the host beat, a MIDI note, an audio transient or a free clock — and multiplies the signal. That is sidechain pumping without a compressor, a trance gate, a tremolo or a swell, sample-accurate for beat and MIDI triggers, with a separate depth per frequency band and the curve available as MIDI CC.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/kickshape-front.png" aria-label="Enlarge screenshot of the TT-KICKSHAPE user interface" title="Click to enlarge"><img src="img/tt-ui-options/kickshape-front.png" width="1252" height="879" alt="TT-KICKSHAPE user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#quickstart"><span class="num">02</span><span>Quick start</span></a></li>
+<li><a href="#triggers"><span class="num">03</span><span>Trigger modes</span></a></li>
+<li><a href="#curve"><span class="num">04</span><span>Curve, slots &amp; presets</span></a></li>
+<li><a href="#presets"><span class="num">05</span><span>Preset bar &amp; user bank</span></a></li>
+<li><a href="#shape"><span class="num">06</span><span>Shaping the gain</span></a></li>
+<li><a href="#bands"><span class="num">07</span><span>Stereo &amp; 3-band split</span></a></li>
+<li><a href="#target"><span class="num">08</span><span>Low-pass target</span></a></li>
+<li><a href="#cc"><span class="num">09</span><span>MIDI CC output</span></a></li>
+<li><a href="#latency"><span class="num">10</span><span>Latency, routing &amp; lookahead</span></a></li>
+<li><a href="#controls"><span class="num">11</span><span>Controls</span></a></li>
+<li><a href="#readout"><span class="num">12</span><span>Hidden readouts</span></a></li>
+<li><a href="#practice"><span class="num">13</span><span>In practice</span></a></li>
+<li><a href="#trouble"><span class="num">14</span><span>Troubleshooting</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">15</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>A compressor-based sidechain reacts to a signal and needs threshold, ratio,
+attack and release to approximate the shape you actually want. TT-KICKSHAPE
+skips the approximation: you <b>draw</b> the volume curve, and the plug-in plays
+it back every time it is triggered. The result is the same as a perfectly tuned
+kick sidechain — or a trance gate, an offbeat duck, a swell, a tremolo — with
+exact timing and no detector in the way.</p>
+<pre><code>trigger  →  curve phase 0..1  →  c = curve(phase)
+gain = max( 1 − DEPTH · (1 − c'), floor )     c' = c, or 1 − c with INVERT
+gain → 1-pole SMOOTH → multiplies the signal (or one band, or a low-pass cutoff)</code></pre>
+<figure class="shot"><img src="img/tt-ui-options/kickshape-front.png" alt="Current suite front at 125% UI size, version 1.0.1"><figcaption>Current front in v1.0.1, at the default UI size of 125%.</figcaption></figure>
+
+<h2 id="quickstart"><span class="num">02</span>Quick start</h2>
+<ol>
+  <li>Insert <code>TT-KICKSHAPE</code> on the track that should pump (bass, pad, bus).
+      A new instance starts in <b>BEAT</b> mode with the preset <b>Classic Pump</b>
+      on a quarter-note grid: press play and the track ducks on every beat.</li>
+  <li>Pick another shape in the <b>preset bar</b> in the header (arrows, or click the name for the list) or
+      draw your own: click on the curve to add a point, drag points, right-click a
+      point to delete it, Alt-drag inside a segment for its tension, double-click a segment to reset its tension.</li>
+  <li>Set the length with <b>RATE</b> (1/32 … 8 bars, triplets and dotted values).
+      <b>DEPTH</b> scales the effect, <b>SMOOTH</b> rounds sharp edges against clicks.</li>
+  <li>For a sidechain from a <em>kick track</em> instead of the beat grid: switch to
+      <b>MIDI</b> (a note-on restarts the curve) or <b>AUDIO</b> (a transient does).</li>
+</ol>
+
+<h2 id="triggers"><span class="num">03</span>Trigger modes</h2>
+<table>
+  <tr><th>Mode</th><th>The curve restarts …</th><th>Timing</th></tr>
+  <tr><td><code>BEAT</code></td><td>continuously, locked to the host position; one period = <code>RATE</code></td><td>sample-accurate, drift-free (phase re-derived from <code>beat_position</code> every block)</td></tr>
+  <tr><td><code>MIDI</code></td><td>on every note-on that passes the channel / note filter</td><td>sample-accurate (measured: 0 samples offset)</td></tr>
+  <tr><td><code>AUDIO</code></td><td>when the transient detector fires</td><td>follows the transient; <code>LOOKAHEAD</code> makes the curve start <em>before</em> it</td></tr>
+  <tr><td><code>FREE</code></td><td>continuously, at a free rate in Hz (0.05–20)</td><td>restarts on transport play; runs while stopped</td></tr>
+</table>
+<h3>BEAT</h3>
+<p><code>RATE</code> is the length of the curve: <code>1/32T … 1/2 dot</code> (dot = dotted) and
+<code>1, 2, 4, 8 bars</code> (bars follow the project time signature). <code>OFFSET</code>
+shifts the grid in sixteenth notes, <code>PHASE</code> shifts the start inside the curve.
+Changing <code>RATE</code> while playing keeps the phase continuous (measured jump
+&lt; 1e-13); the grid re-locks at the next play or seek. When the transport stops the
+phase <b>freezes</b> (so the gain stays where it was); <code>RUN WHILE STOPPED</code>
+keeps the clock running at the host tempo instead.</p>
+<h3>MIDI</h3>
+<p>A note-on restarts the curve at exactly its sample. <code>MIDI CH</code> and
+<code>NOTE</code> filter which notes count (ALL = any). Note-offs are ignored: the curve
+runs out to its end value and stays there until the next trigger. The curve length is
+<code>LENGTH</code> — a note value (<code>SYNC</code>) or milliseconds (<code>MS</code>).
+<code>THRU</code> decides whether notes are passed on; controllers, pitch bend and clock
+always pass. <code>WAIT</code> chooses what a trigger during a running curve does:
+off = restart at once, on = it is remembered and starts exactly when the running curve
+ends. Only one trigger is remembered; it is dropped again when <code>WAIT</code> is switched off or the trigger mode changes.</p>
+<h3>AUDIO</h3>
+<p>A peak at or above <code>THRESH</code> (−60…0 dB) starts the curve. After a trigger the
+detector is locked for <code>HOLD</code> ms <em>and</em> until its 10 ms envelope has fallen
+6 dB below the threshold, so a decaying kick cannot retrigger itself. <code>DETECT ON</code>
+selects the source: the sidechain pins 3/4, the main input, or <code>AUTO</code> (pins 3/4 as
+soon as they carry signal). An audio trigger can only fire when the transient has
+<em>arrived</em> — use <code>LOOKAHEAD</code> (0–10 ms) to delay the audio and start the
+curve earlier; it reports the delay to REAPER (PDC). Without lookahead the plug-in adds no latency.</p>
+<h3>FREE</h3>
+<p>A free-running clock at <code>RATE</code> Hz. The phase restarts at transport play.</p>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-trigger.png" alt="TRIGGER panels of the MIDI, AUDIO and FREE modes: channel, note, thru, threshold, hold, lookahead, length, retrigger and rate controls" width="955" height="284"><figcaption><span class="tag">TRIGGER</span><b>The TRIGGER panel follows the mode.</b> Left: MIDI (channel, note, THRU, LENGTH, WAIT). Middle: AUDIO (THRESH, HOLD, LOOKAHEAD, DETECT ON). Right: FREE (rate in Hz).</figcaption></figure>
+
+<h2 id="curve"><span class="num">04</span>Curve, slots &amp; presets</h2>
+<p>The editor holds up to 32 points; each segment has its own tension (Alt-drag it up or
+down, double-click resets). The grid snaps points in time (<code>X GRID</code>: off, 1/4 … 1/32 of the
+length) and level (<code>Y GRID</code>); hold <kbd>Shift</kbd> to place a point without snapping.
+The vertical line is the playhead. A thin white line shows the <em>effective</em> curve after
+TENSION, INVERT, DEPTH and MIN LEVEL. The number under the editor is the real gain in dB
+right now.</p>
+<p><b>Slots A–H</b> each hold a complete curve and are saved with the project (they are
+part of the plug-in state, so presets you save in REAPER carry all eight). <code>COPY</code> /
+<code>PASTE</code> move a curve between slots. Curve edits mark the project as changed and can be undone with REAPER&rsquo;s undo, one step per mouse gesture. A <b>preset</b> is a built-in curve that is
+<em>loaded into the active slot</em>; a star after its name marks a curve you edited since (the star is worked out from the curves again when a project loads, so it survives a reload).</p>
+<p>The <b>22 preset curves</b> are the factory list of the preset bar (next chapter); a new instance fills the slots as listed below the table.</p>
+<table>
+  <tr><th>Preset</th><th>Made for</th><th>Shape</th></tr>
+  <tr><td>Classic Pump</td><td>any RATE</td><td>steep dive to 6 %, exponential recovery</td></tr>
+  <tr><td>Hard Gate</td><td>any</td><td>open for the first half, closed for the second</td></tr>
+  <tr><td>Trance Gate 1/16</td><td>1 bar</td><td>16 alternating steps</td></tr>
+  <tr><td>Triplet Gate</td><td>1 bar</td><td>12 alternating triplet-eighth steps</td></tr>
+  <tr><td>Offbeat Duck</td><td>1/4</td><td>dip on the “and” of every beat</td></tr>
+  <tr><td>Half-Time Swell</td><td>1–2 bars</td><td>slow swell, sudden cut</td></tr>
+  <tr><td>Reverse Saw</td><td>any</td><td>curved swell</td></tr>
+  <tr><td>Sine Wobble</td><td>any</td><td>cosine, 17 points</td></tr>
+  <tr><td>Fast Pump</td><td>1/4</td><td>very short dive, recovery within 60 %</td></tr>
+  <tr><td>Long Breathe</td><td>1 bar</td><td>soft dip and rise</td></tr>
+  <tr><td>Stutter 8ths</td><td>1 bar</td><td>8 short dips</td></tr>
+  <tr><td>Trap Chop</td><td>1 bar</td><td>irregular 16-step gate</td></tr>
+  <tr><td>Ramp Up / Ramp Down</td><td>any</td><td>linear ramps</td></tr>
+  <tr><td>Pluck</td><td>any</td><td>instant rise, curved decay</td></tr>
+  <tr><td>Saw x2</td><td>1/2</td><td>two falling ramps per period</td></tr>
+  <tr><td>Sidechain Kick 4/4</td><td>1 bar</td><td>four dips, one per beat</td></tr>
+  <tr><td>Flat / Triangle</td><td>any</td><td>constant 1 / up and down</td></tr>
+  <tr><td>Hold Duck</td><td>any RATE</td><td>fast dive, stays down for a quarter of the length, soft recovery</td></tr>
+  <tr><td>Soft Duck</td><td>any RATE</td><td>fast dive, S-shaped recovery</td></tr>
+  <tr><td>Punch Duck</td><td>any RATE</td><td>the first 6 % pass untouched, then the dive (keeps the attack)</td></tr>
+</table>
+<p>Factory presets are code, not saved data: they never overwrite anything you did not
+load yourself. A new instance fills the slots with Classic Pump, Trance Gate, Sine
+Wobble, Offbeat Duck, Fast Pump, Reverse Saw, Trap Chop and Sidechain Kick.</p>
+<h3>QUICK: ducking shapes with one click</h3>
+<p>The column of eight small tiles right of the editor holds the classic sidechain ducking
+shapes. Each tile shows its curve; a click loads it into the active slot, exactly like
+picking the factory preset from the preset bar. From top to bottom: <b>Classic Pump</b>,
+<b>Fast Pump</b>, <b>Long Breathe</b>, <b>Ramp Up</b> (linear recovery), <b>Reverse Saw</b>
+(late recovery), <b>Hold Duck</b>, <b>Soft Duck</b> and <b>Punch Duck</b>. All eight are
+single dips over one curve length, so they work with any RATE or LENGTH. The tile whose
+shape sits unchanged in the slot is outlined; hover a tile for its name.</p>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-gate.png" alt="Curve editor showing the Trance Gate preset with the playhead" width="926" height="305"><figcaption><span class="tag">CURVE</span><b>Trance Gate 1/16 on a one-bar period.</b> The playhead runs left to right; the readout below shows the gain in dB.</figcaption></figure>
+
+<h3>WAVE and SIMPLE view</h3>
+<p><b>WAVE</b> (top right of the curve panel) draws the waveform of the trigger signal behind the curve: in AUDIO mode the signal that feeds the detector, i.e. the source chosen with <code>DETECT ON</code> (sidechain pins 3/4, the main input, or with AUTO whichever of the two is active at the moment; MAIN or AUTO therefore do not always mean an external sidechain), in the other modes the input. It is folded onto one curve length and smoothed over the passes, so a steady kick pattern shows the kick shape and you can place the recovery of the curve on its tail. The display is scaled to its loudest column. In AUDIO mode an <b>orange THRESH line</b> is drawn on both sides of the mirrored waveform, on the same scale: every peak that reaches the line can start the curve. If the threshold lies above every peak in view, the line sits at the edge and turns faint; lower <code>THRESH</code> until the kick peaks cross it.</p>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-wave.png" alt="Curve editor with WAVE on in AUDIO mode: the kick waveform behind the curve and the orange THRESH line" width="1220" height="402"><figcaption><span class="tag">WAVE</span><b>WAVE with the THRESH line.</b> Kick on the sidechain pins; the orange line marks the detector threshold on the scale of the waveform.</figcaption></figure>
+<p><b>SIMPLE</b> switches to a reduced front: the curve editor grows, the QUICK shapes stay at its right, and the bottom panel shows only <b>DEPTH</b> and <b>LENGTH</b> (plus THRESH in AUDIO mode). Trigger mode and curve slot stay in the top bar. Switch SIMPLE off to get SHAPE, STEREO, BANDS and CC OUT back; nothing is lost or reset. The view is saved with the project.</p>
+<p><b>DUCKED</b> (next to SC SOLO in the title row of the curve panel) draws what the shaper does to the signal: the input as a thin white outline, the output after ducking filled in the accent colour, both folded onto one curve length and scaled to the loudest input column. Where the filled shape sinks below the outline, the signal is ducked.</p>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-ducked.png" alt="Curve editor with DUCKED on: input outline and the ducked output filled" width="1220" height="402"><figcaption><span class="tag">DUCKED</span><b>The ducked waveform.</b> White outline = input, filled = output after the shaper.</figcaption></figure>
+<h3>Checking the sidechain: level meters and SC SOLO</h3>
+<p>The status bar shows an <b>SC</b> level meter (L / R) next to IN and OUT: it reads the sidechain pins 3/4, so you see at once whether the sidechain signal arrives. The meter always reads pins 3/4, even when the detector listens to the main input; <b>SC SOLO</b> and <b>WAVE</b> follow the source the detector really uses. <b>SC SOLO</b> (title row of the curve panel) replaces the output by the detection signal, i.e. the sidechain pins 3/4 (with DETECT = MAIN in AUDIO mode, or when DETECT = AUTO has fallen back to it, the main input), so you can hear exactly what the detector hears. SC SOLO is not saved and is always off after loading a project; while it is on, the output is not shaped. If nothing is connected to pins 3/4 you hear silence.</p>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-simple.png" alt="Simple view: large curve editor with the QUICK shapes and a bottom panel with DEPTH and LENGTH"><figcaption><span class="tag">SIMPLE</span><b>Simple view.</b> Big curve editor, QUICK shapes, DEPTH and LENGTH.</figcaption></figure>
+
+<h2 id="presets"><span class="num">05</span>Preset bar &amp; user bank</h2>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-presets.png" alt="Header of TT-KICKSHAPE with the preset bar: previous, preset name with drop-down, next, SAVE and a menu button, left of the OPTIONS button, and the open preset list with FACTORY and USER sections" width="1222" height="327"><figcaption><span class="tag">PRESETS</span><b>The preset bar</b> sits in the header, directly left of <code>OPTIONS</code>: <code>&lt;</code> name <code>&gt;</code> <code>SAVE</code> <code>...</code>. The name opens the list with the FACTORY and USER sections.</figcaption></figure>
+<p>The bar loads and saves the <b>whole sound</b> of the instance in one step: all timing, shape, stereo, target, band and detector settings plus <b>all eight curve slots</b>
+with their preset names. Not part of a preset: the colour scheme (<code>OPTIONS</code>), the grid snapping of the editor, the MIDI channel / note filter and <code>THRU</code>,
+the CC number and channel, <code>RUN WHILE STOPPED</code> and the hidden test parameters.</p>
+<table>
+  <tr><th>Control</th><th>Function</th></tr>
+  <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: first the 22 factory presets, then the used user slots; wraps around and loads immediately.</td></tr>
+  <tr><td>Name field</td><td>Opens the list: <b>FACTORY</b> (22 curves) and <b>USER</b> (32 slots, empty ones show <code>- empty -</code>). Mouse wheel scrolls, click loads. A <code>*</code> behind the name means the state differs from the loaded preset.</td></tr>
+  <tr><td><code>SAVE</code></td><td>Saves the current state into the selected user slot; with a factory preset (or none) selected, into the first free slot. A name box opens (up to 24 characters, default <code>User 07</code>): type, <kbd>Enter</kbd> or <code>OK</code> saves, <code>CANCEL</code> or a click outside cancels.</td></tr>
+  <tr><td><code>...</code></td><td><code>RENAME</code>, <code>COPY</code> (into the next free slot), <code>DELETE</code> (a second click confirms) for the selected user preset, and <code>INIT</code> (factory settings of all preset parameters and the default slot curves).</td></tr>
+</table>
+<p><b>A factory preset loads a curve into the active slot</b> and leaves every other setting alone (exactly like the old preset selector). A user preset restores everything, including
+which slot is active and all eight slot curves.</p>
+<p><b>Where the user bank lives.</b> Plug-ins cannot write files, so the 32 user slots are part of the plug-in state: they are saved with the project, with FX-chain and track-template copies,
+and in every <b>REAPER preset</b> of this plug-in (the <code>+</code> button in the FX window toolbar). To take your bank to another project or computer, save a REAPER preset once
+(<code>+</code> &rarr; <i>Save preset</i>) and load it there: the whole bank comes with it. Projects saved with earlier versions load unchanged with an empty bank.</p>
+<p><b>Typing names and keyboard focus.</b> REAPER keeps <kbd>Space</kbd> for the transport, so type <kbd>Shift</kbd>+<kbd>Space</kbd> for a blank in a name. <kbd>Space</kbd> always starts and stops playback, also while this window has the focus. Depending on your REAPER settings <kbd>Esc</kbd> closes the whole FX window; use <code>CANCEL</code> to leave an entry field.</p>
+
+<h2 id="shape"><span class="num">06</span>Shaping the gain</h2>
+<table>
+  <tr><th>Control</th><th>Range</th><th>Function</th></tr>
+  <tr><td><code>DEPTH</code></td><td>0–100 %, def. 100</td><td><code>gain = 1 − DEPTH · (1 − c)</code>. <b>0 % is bit-exact transparent</b> (tested on noise, with every target).</td></tr>
+  <tr><td><code>SMOOTH</code></td><td>0–50 ms, def. 2</td><td>One-pole smoothing of the gain, applied last. At 2 ms the gain never jumps more than 0.0104 per sample (48 kHz).</td></tr>
+  <tr><td><code>INVERT</code></td><td>off / on</td><td>Mirrors the curve (<code>c' = 1 − c</code>) before the depth, so DEPTH 0 stays transparent.</td></tr>
+  <tr><td><code>PHASE</code></td><td>0–100 %</td><td>Start offset inside the curve (BEAT / FREE: shifts the phase; MIDI / AUDIO: the curve starts this far in).</td></tr>
+  <tr><td><code>TENSION</code></td><td>−1 … +1</td><td>Added to the tension of every segment (result limited to ±1).</td></tr>
+  <tr><td><code>MIN LEVEL</code></td><td>−96 dB (= −inf) … 0 dB</td><td>Floor of the gain, applied after the depth: <code>max(gain, floor)</code>. 0 dB switches the effect off.</td></tr>
+</table>
+
+<h2 id="bands"><span class="num">07</span>Stereo &amp; 3-band split</h2>
+<p><code>LINK</code> (default on) gives both channels the same curve. With LINK off,
+<code>L/R OFFSET</code> delays the right channel’s curve by that share of the length —
+a ping-pong pump; in MIDI/AUDIO mode the run is extended by the offset so the right
+channel finishes its curve.</p>
+<p><code>3-BAND SPLIT</code> divides the signal at <code>X1</code> (40–400 Hz) and <code>X2</code>
+(400 Hz–8 kHz) with 4th-order Linkwitz-Riley filters. Each band has its own
+<code>DEPTH</code> (multiplied by the global DEPTH) plus <code>M</code> (mute) and <code>S</code>
+(solo). The typical use: duck only the bass region under a kick and leave the top untouched.
+The low band passes an all-pass at X2, so the three bands add up to a flat magnitude
+response (measured ±0.013 dB from 60 Hz to 16 kHz; the null test against the input passed
+through the same two all-passes is −135 dB).</p>
+<div class="box" data-k="good to know">A linear-phase-free split cannot be phase-transparent: with the split
+on, even at DEPTH 0 the signal leaves through two all-passes (amplitude identical, phase rotated
+around X1 and X2). The bit-exact bypass applies with the split <em>off</em>. Also mind the
+skirts: a sine 80 Hz with X1 = 150 Hz lies only 0.9 octaves below the crossover, so 75 % low-band depth gives
+−10.3 dB instead of −12 dB there (−11.9 dB with X1 = 300 Hz).</div>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-bands.png" alt="TARGET / BANDS / CC OUT panel with the 3-band split enabled, crossover knobs and per-band depth with mute and solo" width="313" height="283"><figcaption><span class="tag">BANDS</span><b>3-band split.</b> Crossovers X1/X2, per-band depth with M/S, the low-pass target (RANGE / FREQ) and the CC output.</figcaption></figure>
+
+<h3>FREQ view: the split by frequency</h3>
+<p><b>FREQ</b> (title row of the curve panel, next to CURVE) replaces the curve editor by a frequency display from 20 Hz to 20 kHz, in the manner of multiband shaper plug-ins: the live spectrum of the input (grey), of the sidechain pins 3/4 (white line) and of the output after ducking (accent colour), and the three bands as coloured zones (LOW orange, MID green, HIGH pink). In each band a bar falls from the top with the current gain of that band, so you see which band ducks when. Muted bands and bands outside a solo are dimmed.</p>
+<p>The two white <b>crossover lines</b> are the split frequencies: drag the line with the mouse to move <code>X1</code> (40–400 Hz) or <code>X2</code> (400 Hz–8 kHz); right-click a line to return to 150 Hz or 2500 Hz. The lines keep a distance of at least 1.25 times between X1 and X2. The same values are on the X1 and X2 knobs below the plot, together with <code>3-BAND SPLIT</code>, the depth of each band and M / S. With the split off the zones stay visible but dimmed, and the audio is unchanged. The FREQ view is only a display: switching it on or off never changes the sound. The setting is saved with the project; the spectrum is only computed while FREQ is shown.</p>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-freq.png" alt="FREQ view: spectrum, three coloured band zones, live band gains and the two draggable crossover lines" width="1220" height="402"><figcaption><span class="tag">FREQ</span><b>FREQ view.</b> Spectrum, bands with live gain, crossover lines X1 / X2 and the band controls below.</figcaption></figure>
+<figure class="shot"><img src="img/tt-kickshape/tt-kickshape-freq-full.png" alt="Whole TT-KICKSHAPE front in the FREQ view with the 3-band split on" width="1258" height="884"><figcaption><span class="tag">FREQ</span><b>The whole front in the FREQ view.</b> The band panel at the bottom right holds the same controls as the strip under the plot.</figcaption></figure>
+<h3>Band LEN: different lengths per band</h3>
+<p>With 3-BAND SPLIT on, the small <b>LEN</b> knob next to each band depth knob sets how much of the curve that band uses: at 100 % the band follows the whole curve, at 50 % it reads the curve at double speed and is back at the end value after half the length. Use it to duck the highs short and let the bass breathe longer. The editor shows the shortened curves as thin orange (LOW), green (MID) and pink (HIGH) lines. At 100 % everywhere the audio path is bit-identical to earlier versions. LEN only acts on the volume target. Limit: LEN compresses the time of the one shared curve for each band; there is no separate curve per band.</p>
+
+<h2 id="target"><span class="num">08</span>Low-pass target</h2>
+<p><code>TARGET</code> chooses what the curve controls: <code>VOLUME</code> (default),
+<code>LP FILTER</code> (shown as <code>LP (beta)</code>) or <code>BOTH</code>. The low-pass is a 12 dB/oct state-variable filter
+whose cutoff follows the gain: <code>cutoff = FREQ · 2^(−RANGE · (1 − gain))</code>. At gain 1 the cutoff is
+<code>FREQ</code>; a full dip lowers it by <code>RANGE</code> octaves. At gain 1 the filter is blended out exactly
+(bit-exact). <b>Beta:</b> the target is verified against the analytic filter response (within 0.1 dB at
+1 kHz cutoff), but not yet tuned by ear. With the split on, the low-pass acts on the summed output.</p>
+
+<h2 id="cc"><span class="num">09</span>MIDI CC output</h2>
+<p><code>CC OUT</code> sends the current curve value (after DEPTH, INVERT, MIN LEVEL, before SMOOTH)
+as a controller, 0–127, on <code>CC #</code> / <code>CH</code>. A value is sent only when it changes
+(at most one per block), so a constant curve sends nothing after the first message. Use it to
+modulate a synth filter or a send from the same curve that ducks the volume — the LFOTool
+principle. Measured: value = round(127 · curve) exactly, position and value identical at the
+receiver. MIDI that enters the plug-in still passes through.</p>
+
+<h2 id="latency"><span class="num">10</span>Latency, routing &amp; lookahead</h2>
+<ul>
+  <li>The plug-in adds <b>no latency</b> (BEAT, MIDI, FREE; AUDIO with LOOKAHEAD 0). With LOOKAHEAD &gt; 0 in AUDIO mode
+      the audio is delayed by that time and the plug-in reports it, so REAPER realigns everything: the curve
+      then starts 0–10 ms before the transient. In the other modes LOOKAHEAD does nothing. LOOKAHEAD is not meant to be automated: every change clears the delay and re-aligns the delay compensation.</li>
+  <li><b>When a LOOKAHEAD change takes effect:</b> the delay and the latency reported to REAPER always change
+      together, and a change applies at once &ndash; whether it comes from the parameter, automation, a preset, a project
+      load or from the LOOKAHEAD knob and the TRIGGER MODE buttons on the plug-in front. No playback start is needed;
+      REAPER takes the new latency over while stopped, while playing and in the render. Only when REAPER is not processing
+      the track at all (for example with &ldquo;Run FX when stopped&rdquo; switched off) does a change made on the
+      front wait for the next playback start; until then the <code>LAT</code> readout is shown in the accent colour and the
+      AUDIO panel says <code>New LOOKAHEAD applies at next play.</code> The latency for a given setting is the same as before.</li>
+  <li><b>Sidechain pins:</b> the plug-in has four inputs; pins 3/4 are the sidechain. Send the trigger track to
+      channels 3/4 of the plug-in’s track (set that track to 4 channels), then pick <code>DETECT ON: SC 3/4</code>
+      (or AUTO).</li>
+  <li><b>Example: bass as the target, kick as the trigger.</b> Put TT-KICKSHAPE on the bass track and set that track to 4 channels. On the kick track add a send to the bass track and route its audio to channels 3/4 (the kick keeps playing to the master as usual). In the plug-in choose <code>TRIGGER MODE: AUDIO</code> and <code>DETECT ON: SC 3/4</code>. The <b>SC</b> meter in the status bar now moves with every kick; <b>SC SOLO</b> lets you hear exactly the signal the detector hears (the bass is silent while it is on); switch it off again. With <b>WAVE</b> on, the orange line shows <code>THRESH</code> against the kick peaks. Start from a QUICK shape, then adjust <code>LENGTH</code> and <code>DEPTH</code> until the bass makes room for the kick.</li>
+  <li><b>MIDI:</b> feed the note-ons from a MIDI track (MIDI-only send) or the track’s own MIDI input. In MIDI mode, notes are removed
+      from the output unless <code>THRU</code> is on.</li>
+</ul>
+
+<h2 id="controls"><span class="num">11</span>Controls</h2>
+<p>All sliders are hidden by design; the drawn front (1000×700 design grid, redrawn at the selected UI SIZE) is the interface.
+Knobs: drag vertically, <kbd>Shift</kbd> = fine, mouse wheel (one notch = one step on selectors such as RATE and on the small whole-number knobs OFFSET, MIDI CH, NOTE, CC # and CH; 2 % of the range on all other knobs, e.g. about 400 Hz on FREQ or 80 ms on LENGTH, rounded to the knob&rsquo;s resolution), right-click / double-click / <kbd>Ctrl</kbd>-click = default.
+The front only writes a parameter when you operate it: an open window never rounds or rewrites automated values. Every change you make on the front can be undone with REAPER&rsquo;s undo &mdash; curve edits (one undo step per mouse gesture), <code>PASTE</code>, QUICK tiles and preset loads included.
+Hover any control for a tooltip (it appears after a short moment). <code>OPTIONS &gt; TOOLTIPS ON / OFF</code> switches the tooltips off per instance; the setting is saved with the project.</p>
+<table>
+  <tr><th>Area</th><th>Controls</th></tr>
+  <tr><td>Header</td><td>Trigger mode BEAT / MIDI / AUDIO / FREE · slots A–H · COPY / PASTE · preset bar (&lt; name &gt; SAVE ...) · OPTIONS (COLOR, style, TOOLTIPS)</td></tr>
+  <tr><td>Editor</td><td>Curve · QUICK tiles (8 ducking shapes, click loads)</td></tr>
+  <tr><td>Editor strip</td><td>X GRID, Y GRID · TRIG LED · GAIN readout · IN / OUT meters (L, R) · latency in samples</td></tr>
+  <tr><td>TRIGGER</td><td>BEAT: RATE, OFFSET, RUN WHILE STOPPED · MIDI: MIDI CH, NOTE, THRU, SYNC/MS + LENGTH, WAIT · AUDIO: THRESH, HOLD, LOOKAHEAD, DETECT ON, LENGTH, WAIT · FREE: RATE (Hz)</td></tr>
+  <tr><td>SHAPE / STEREO</td><td>DEPTH, SMOOTH, PHASE, TENSION, MIN LEVEL, INVERT, LINK, L/R OFFSET</td></tr>
+  <tr><td>TARGET / BANDS / CC OUT</td><td>TARGET, 3-BAND SPLIT, RANGE, FREQ, X1, X2 (also in the FREQ view), LOW / MID / HIGH depth with M and S, CC OUT, CC #, CH</td></tr>
+</table>
+
+<figure class="shot"><img src="img/tt-ui-options/kickshape-options.png" alt="TT-KICKSHAPE header with the OPTIONS box open: ten colour swatches, the factory scheme CYAN is marked" width="926" height="677"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header, then a swatch. A click outside the box closes it.</figcaption></figure>
+<p><b>Options / Color.</b> The <code>OPTIONS</code> button at the right end of the header (right of the preset bar) opens the box; <code>COLOR</code> offers ten schemes:
+ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (curve, knob rings, active buttons, LEDs, meters),
+the second colour and, for RED to ICE, the slightly tinted panel background of the whole front at once. The choice applies <b>per plug-in instance</b>, is saved with the project
+and with FX-chain copies, and is not touched by preset or slot changes (it is not part of a preset). The factory colour is <b>CYAN</b>. The colour is stored in the hidden parameter 58
+(<code>UI Color</code>, 0–9).</p>
+
+<p><b>Style: font size and custom colours.</b> Below the swatches the box carries the style controls: <code>FONT SIZE</code> scales the two font slots in steps of about 8 % (range -4&ndash;+8) &mdash; <code>FONT 1</code> is the large title font, <code>FONT 2</code> is all other text; the current step is shown between the <code>-</code> and <code>+</code> buttons. The colour picker assigns a custom colour to <code>FONT 1</code>, <code>FONT 2</code> or the background <code>BG</code>: pick the target, then drag in the hue strip and the saturation/value field &mdash; every change applies live while you drag, and BG derives the panel, border and knob colours from the spacing of the active scheme. <code>RESET</code> restores the scheme value of the selected target, <code>RESET ALL</code> restores everything. If a custom text colour drops below a contrast of 3:1 against the background, the box shows a small warning. All style settings apply <b>per instance</b>, are stored with the project, the FX chain and REAPER presets &mdash; and are not part of the factory or user presets of the preset bar.</p>
+<p><b>Font steps above +2:</b> the TT-KICKSHAPE front has a fixed grid of rows; from step +3 on, texts would run into their neighbours. Since v0.7.0 the front therefore draws with at most <b>+2</b> for FONT 1 and FONT 2, even if OPTIONS is set higher (the setting itself is kept and shown as chosen). For a bigger front use <b>UI SIZE</b>, which scales everything together.</p>
+
+<h2 id="readout"><span class="num">12</span>Hidden readouts</h2>
+<p>Sliders 46–56 (Q IDX … Q CMD) are a test interface used by the regression suite (phase, gain, trigger and CC
+logs, slot checksums); <code>PRESET LOAD</code> (slider 44, 0–22) is a momentary parameter for automation: 1–22 loads factory curve 1–22 (the order of the factory list) into the active slot and
+it jumps back to 0; 0 does nothing. The Q CMD commands that write the user bank (save, load, INIT) only run while a test script has released them, so host automation cannot overwrite the bank. Slider 58 (<code>UI Color</code>) stores the colour scheme of the OPTIONS box. None of the other sliders are needed in normal use.</p>
+
+<h2 id="practice"><span class="num">13</span>In practice</h2>
+<ul>
+  <li><b>Kick sidechain on the beat:</b> BEAT, RATE 1/4, preset Classic Pump or Sidechain Kick 4/4 (RATE 1 bar), DEPTH 70–100 %, SMOOTH 1–3 ms.</li>
+  <li><b>Kick sidechain from the actual kick:</b> MIDI mode with the kick’s MIDI on the sidechain track, or AUDIO mode with the kick routed to pins 3/4, LENGTH 1/4 or 300 ms.</li>
+  <li><b>Trance gate:</b> BEAT, 1 bar, Trance Gate 1/16, MIN LEVEL −inf, SMOOTH 1 ms; L/R OFFSET 25 % with LINK off for stereo movement.</li>
+  <li><b>Duck only the low end:</b> 3-BAND SPLIT on, LOW 100 %, MID 30 %, HIGH 0 %, X1 around 200–300 Hz.</li>
+  <li><b>Modulate a filter with the same curve:</b> CC OUT on CC 74, map it in your synth.</li>
+</ul>
+<h3>Curves for typical jobs</h3>
+<p>Six jobs, one curve each — every name is in the preset bar, and all but the
+Trance Gate are QUICK tiles too:</p>
+<table>
+  <tr><th>Job</th><th>Curve</th><th>Setting</th></tr>
+  <tr><td>Short kick</td><td>Fast Pump</td><td>RATE 1/4 — the dive is over by 60 % of the length, so the track is back up before the next beat.</td></tr>
+  <tr><td>Long kick</td><td>Classic Pump</td><td>RATE 1/2 — the exponential recovery follows the kick tail over the whole length.</td></tr>
+  <tr><td>Breakbeat</td><td>Punch Duck</td><td>AUDIO mode, kick on pins 3/4 — every syncopated hit retriggers the curve, and the first 6 % passing untouched keep the attack (Soft Duck for a gentler push).</td></tr>
+  <tr><td>Vocal gate</td><td>Trance Gate 1/16</td><td>RATE 1 bar, MIN LEVEL −inf, SMOOTH 1 ms — the chopped-vocal sound.</td></tr>
+  <tr><td>Pad pump</td><td>Long Breathe</td><td>RATE 1 bar — soft dip and slow rise, a pad breathes instead of ducking.</td></tr>
+  <tr><td>Sub tight</td><td>Fast Pump</td><td>3-BAND SPLIT on, LOW 100 %, MID 30 %, HIGH 0 %, X1 around 200–300 Hz — only the low band ducks, the kick stays audible.</td></tr>
+</table>
+
+<h2 id="trouble"><span class="num">14</span>Troubleshooting</h2>
+<ul>
+  <li>The gain stays low while the transport is stopped — BEAT freezes the phase; enable <code>RUN WHILE STOPPED</code> or use FREE.</li>
+  <li>Nothing happens in MIDI mode — check the channel / note filter (ALL), that notes actually reach the track, and that <code>MIDI CH</code> counts channels 1–16.</li>
+  <li>AUDIO mode fires too often or never — raise or lower <code>THRESH</code>, raise <code>HOLD</code>; with a sidechain send use <code>DETECT ON: SC 3/4</code>.</li>
+  <li>Clicks on hard edges — raise <code>SMOOTH</code> (1–3 ms is usually enough).</li>
+  <li>Gate presets look rounded — the editor draws the drawn points; the playback curve is an 8192-step table, so an edge is up to 0.012 % of the length wide.</li>
+  <li>CPU: measured by rendering 48 s of stereo noise offline in REAPER (rough guide, one core of a desktop PC), the shaper costs about 0.3 % of a core with BEAT or AUDIO volume shaping, about 1 % with the 3-band split, and up to about 2 % with the split and the low-pass target on both channels. The FREQ view calculates its spectrum (three FFTs of 4096 points) in the interface thread, and only while it is shown; the audio thread writes the three ring buffers and, while the view is open, copies them once per interface frame for the display. Real-time measurements with very small audio blocks are not part of these figures.</li>
+  <li>With audio blocks of 64 to 256 samples a curve or TENSION change reaches the audio after about 12 ms, because the curve is baked in small steps; the old curve keeps playing until then, so there is no click. Constant automation of TENSION can make the curve lag slightly behind the knob at these block sizes.</li>
+  <li>The three bands do not sum to the input — expected, see “good to know”: the sum is an all-passed copy (flat magnitude).</li>
+</ul>
+<h2 id="ui-size-settings"><span class="num">15</span>UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v0.6.2</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/kickshape-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/kickshape-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-KICKSHAPE v1.0.1</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>
