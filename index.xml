@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="db1b29566191fec07b3f5aceb57836882413ea70">
+<index version="1" name="TimTechlor ReaScripts" commit="759a75adab4a76767a46294075edcaac28833b4c">
   <category name="MIDI Tools/TT-303PATGEN">
     <reapack name="TT-303PATGEN Print Song Chain.lua" type="script" desc="TT-303PATGEN Print Song Chain">
       <metadata>
@@ -289,6 +289,85 @@
         <source file="img/tt-luckymidichance/tt-luckymidichance-wf-human.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5c86e9b2871d3eb848b4da669bc6bcb8591162de/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-human.png</source>
         <source file="img/tt-luckymidichance/tt-luckymidichance-wf-locked.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5c86e9b2871d3eb848b4da669bc6bcb8591162de/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-locked.png</source>
         <source file="img/tt-luckymidichance/tt-luckymidichance-wf-rhythm.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5c86e9b2871d3eb848b4da669bc6bcb8591162de/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-rhythm.png</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Mix Tools/TT-KICKSHAPE">
+    <reapack name="tt-kickshape.jsfx" type="effect" desc="TT-KICKSHAPE Volume Shaper 1.0.1">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 TT-KICKSHAPE\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A drawable curve shapes the volume (sidechain pumping without a compressor). Trigger by host beat, MIDI note, audio transient or free-running clock. Optional 3-band split (Linkwitz-Riley 4) with depth per band, low-pass target, 8 curve slots, 22 preset curves, 8 one-click ducking shapes and the curve as MIDI CC output. Sample-accurate for BEAT and MIDI triggers. AUDIO triggers follow the transient (use LOOKAHEAD for a pre-trigger, it adds plug-in delay compensation). What sets it apart: free and REAPER-native; sample-accurate BEAT and MIDI triggers; a 3-band split with its own depth, mute, solo and curve length per band; a FREQ view with spectrum, live band gain and draggable crossovers; sidechain level meters and SC SOLO to hear what the detector hears; a waveform view with the ducked output; the curve as MIDI CC output.\par}
+}
+]]></description>
+        <link rel="website" href="https://timtechlor.de/docs/tt-kickshape-manual.html">Manual</link>
+      </metadata>
+      <version name="1.0.1" author="TimTechlor" time="2026-11-12T19:44:47Z">
+        <changelog><![CDATA[1.0.1 - Robustness and thread hygiene (code review 09.11.2026). No parameter, sound or saved-data changes.
+  - FIX: the front (preset bar, QUICK tiles, INIT) now uses its own copies of the preset-curve functions, so a
+    preset load via automation can no longer race a front action into a mixed curve.
+  - FIX: switching the active curve slot during an in-progress curve rebuild restarts immediately instead of
+    finishing the old rebuild first (faster audible switch with small block sizes).
+  - FIX: a truncated project chunk falls back to the default curve slots instead of a half-loaded state.
+1.0.0 - First release version. FIX: the scroll position no longer creates an undo point when the pan changes without
+  user input (project reload, AUTO FIT / UI SIZE zoom change). Sound, parameters and saved data unchanged.
+0.9.12 - FREQ view reads a block copy of the spectrum; moving the scrollbars marks the project changed. No sound change.
+0.9.11 - Flat UI: all controls now draw in the flat style of the shared UI kit 8 (knobs, sliders, buttons, toggles, combos, tabs; same layout, same behaviour, DSP unchanged)
+0.9.10 - Softer TARGET switching, sidechain NaN/Inf guard, robust TARGET value
+  - FIX: switching TARGET between VOLUME and LP FILTER no longer snaps the gain multiplication on/off - it crossfades with a 5 ms time constant like the BANDS and LP switches already do (R002).
+  - FIX: the sidechain pins 3/4 are now cleaned of NaN/Inf before the detector sees them (same 1e6 bound as the main input) - a bad sidechain signal could stall the envelope detector (R011).
+  - FIX: a fractional automated TARGET value is now quantized to VOLUME / LP FILTER / BOTH instead of silently acting as a mix (R010).
+0.9.9 - Threshold line in WAVE, clearer manual, no sound change
+  - NEW: in AUDIO mode WAVE draws the THRESH level as an orange line (both sides of the mirrored waveform) on the same scale as the waveform, so you can see which peaks of the trigger signal cross the threshold. The line sits at the edge and turns faint when the threshold is above every peak in view.
+  - DOC: the manual explains the routing (bass as target, kick on sidechain pins 3/4), what WAVE and SC SOLO follow (the real detector source, including the AUTO fall-back), the SC meters, the CPU cost of the views and the real-time edge cases.
+  - DOC: the ReaPack text lists what sets the plug-in apart. No change to the sound, parameters or saved data (bit-exact, measured).
+0.9.5 - FREQ view for the 3-band split, sidechain input shown and solo-able, ducked waveform
+  - NEW: curve panel > FREQ shows the spectrum (input, sidechain pins 3/4, output), the three bands, the live gain of each band and the two crossover lines. Drag a line with the mouse (right-click = default) or use the X1 / X2 knobs below the plot; band depth, mute and solo are there too.
+  - NEW: SC SOLO outputs the detection signal (sidechain pins 3/4, or the main input when DETECT = MAIN or when AUTO falls back to it) instead of the shaped signal, to check what the detector hears. Not saved, always off after loading.
+  - NEW: SC level meters (L / R) in the status bar.
+  - NEW: DUCKED draws the input (outline) and the shaped output (filled) over the curve, so the ducking is visible in the waveform.
+0.9.0 - Band LEN limit documented, small-block behaviour documented; no sound change
+  - CHANGE: the band LEN tooltips and the manual now say that LEN compresses the time of the one shared curve per band (no separate curve per band).
+  - DOC: curve changes (TENSION, edits) reach the audio about 11 ms later at any block size from 64 to 512 samples (bake runs in steps of at least 1024 entries per block).
+0.8.0 - Waveform, simple view, band lengths; Space always starts the transport
+  - NEW: WAVE shows the waveform of the trigger signal (sidechain pins 3/4 in AUDIO mode, else the input) behind the curve, smoothed over the cycles.
+  - NEW: SIMPLE view (button top right of the curve panel): bigger curve editor with the QUICK shapes, DEPTH and LENGTH; all other controls come back with FULL.
+  - NEW: LEN knobs next to the band depth knobs: each band can read the curve in compressed time (e.g. highs duck short, bass longer). 100 % = unchanged; coloured lines in the editor show the shortened curves.
+  - CHANGE: the plug-in no longer asks REAPER for all keyboard input: the space bar always starts and stops the transport, also while this window has the focus.
+  - FIX: non-integer automation of TRIG MODE and RATE is rounded the same way in display and audio.
+  - FIX: the mouse wheel on the band LEN sliders moves them about 2 percent of the range per notch instead of 0.1 percent.
+0.7.3 - Robustness and CPU: curve bake and the white line no longer share function memory with the UI thread, the front no longer writes the trigger mode; a damaged curve (NaN, unordered points) falls back to Classic Pump and NaN in smoothers/filters heals itself; integer parameters are rounded in the audio block; BANDS / LP target start with cleared filter states; output guard 1e6 like the input; CC OUT precedes the MIDI pass-through; TRIG LED lasts ~120 ms at every sample rate; LENGTH shows ms in MS mode; PASTE takes over the preset name; test interface only active with the test key, LP coefficients cached, no re-bake and no name registration on transport start, denormals avoided; TENSION snapped to 0.01 and the curve bake runs incrementally into a second buffer (no CPU spike while TENSION moves); band split uses cached crossover coefficients; sound unchanged
+  - NEW: OPTIONS > AUTO FIT ON / OFF (default on): dragging the window edge rescales the UI to the new window size; the UI SIZE buttons still set a fixed zoom until the window changes again. UI SIZE now accepts 25 to 400 percent. Saved per instance.
+  - FIX: the curve editor tooltip now says that a double-click on a segment resets its tension; tooltips for the TRIG LED and the SC 3/4 LED; a NaN/Inf value in a loaded user preset falls back to the factory default of that parameter; shared UI kit updated (version 7, no visible change).
+0.7.2 - Font cap now via the shared UI kit (uk_fsmax); no visible change at steps 0..+2.
+0.7.1 - A LOOKAHEAD change made on the front (knob, TRIGGER MODE) applies at once again, without a playback start: the delay and the reported latency are also updated from the audio block, but only when the value changes (measured in REAPER 7.79: the change is taken over without transport, during playback and by the render); parameter, automation and preset changes as before; latency per setting unchanged
+0.7.0 - LOOKAHEAD latency is reported from a fixed place (init/parameter change): automation, presets and parameter changes apply at once, a change on the front applies at the next playback start (LAT turns accent-coloured and a hint shows while it waits); reported latency per setting unchanged; front texts fit up to FONT SIZE +2 (larger steps draw at +2 - use UI SIZE), FREE-mode text no longer runs into the SHAPE panel, INVERT/target combo/rate names fit ("1/16 dot", "LP (beta)")
+0.6.2 - Persistent UI size and options; larger default, stable colours when zooming.
+0.6.1 - Mouse wheel: wide knobs (FREQ, X1, X2, HOLD, LENGTH, THRESH, DEPTH ...) move by 2 % of their range per notch again, small integer knobs (OFFSET, MIDI CH, NOTE, CC #, CH) by one step; THRESH and MIN LEVEL now in 0.1 dB steps like their parameters; an open window no longer rounds or rewrites parameters on its own (automation stays untouched, a loaded user preset no longer shows the "changed" star at once); curve edits, QUICK shapes, PASTE and preset loads create an undo point and mark the project as changed; a drag that crosses the preset bar or OPTIONS keeps going; test commands only with the test key of the suite; DSP unchanged
+0.6.0 - QUICK strip right of the curve editor: 8 classic sidechain ducking shapes with a live thumbnail, one click loads the shape into the current slot; 3 new factory curves (Hold Duck, Soft Duck, Punch Duck, now 22); OPTIONS box: TOOLTIPS ON / OFF (per instance, saved with the project), tooltips appear after a short hover and wrap in narrow windows; version shown on the front. Fixes: the "edited" star survives a project reload, mouse wheel moves stepped knobs by exactly one step and no longer jumps after scrolling elsewhere, a trigger queued by WAIT is dropped when WAIT or the trigger mode changes, the OPTIONS box stays open on transport start, loading a state with fewer user presets clears the remaining slots; curve DSP unchanged
+0.5.2 - OPTIONS box: fully clamped inside the window incl. shadow; footer no longer overlaps the colour picker; user preset bank stays loadable when the chunk was saved with fewer slots; DSP/audio unchanged
+0.5.1 - OPTIONS box: FONT SIZE for FONT 1 (titles) and FONT 2 (text), custom HSV colour picker for FONT 1 / FONT 2 / BG with RESET / RESET ALL, live, per instance, low-contrast warning; dim text contrast raised to WCAG >= 4.5 in all 10 schemes; DSP unchanged
+0.5.0 - Preset bar left of OPTIONS: 19 factory presets + user bank with 32 slots (saved with the project and in native REAPER presets), SAVE / RENAME / COPY / DELETE / INIT
+0.4.0 - OPTIONS box with COLOR (10 schemes, factory = CYAN, per instance, hidden slider 58)
+0.3.0 - MIDI CC output of the curve, audio-trigger lookahead (0-10 ms, PDC)
+0.2.0 - 3-band split (LR4) with depth / mute / solo per band, low-pass target (VOLUME / LP FILTER / BOTH, beta)
+0.1.0 - Core: curve editor, 8 slots, 19 presets, BEAT / MIDI / AUDIO / FREE trigger, DEPTH / SMOOTH / INVERT / PHASE / TENSION / MIN LEVEL, LINK + L/R offset, meters, tooltips]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/tt-kickshape.jsfx</source>
+        <source file="img/tt-ui-options/kickshape-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-ui-options/kickshape-front.png</source>
+        <source file="img/tt-ui-options/kickshape-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-ui-options/kickshape-options.png</source>
+        <source file="tt-kickshape-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/tt-kickshape-manual.html</source>
+        <source file="img/tt-kickshape/tt-kickshape-gate.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-gate.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-trigger.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-trigger.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-bands.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-bands.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-presets.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-simple.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-simple.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-wave.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-wave.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-freq.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-freq.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-freq-full.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-freq-full.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-ducked.png">https://github.com/timtechlor/reapack-TimTechlor/raw/759a75adab4a76767a46294075edcaac28833b4c/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-ducked.png</source>
       </version>
     </reapack>
   </category>
