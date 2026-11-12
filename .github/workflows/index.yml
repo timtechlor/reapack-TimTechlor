@@ -36,12 +36,15 @@ jobs:
         run: |
           # --rebuild: Index von Null aus der kompletten Historie neu aufbauen.
           # Idempotent, fuer ein Repo dieser Groesse vernachlaessigbar langsam.
+          # --amend: bestehende Versionen aus dem jeweils letzten Commit uebernehmen (12.11.2026). Ohne --amend
+          # bleibt bei unveraenderter Versionsnummer der Inhalt des ersten Commits im Index stehen, auch wenn
+          # ein spaeterer Commit Changelog oder Dateien korrigiert hat.
           # --no-commit: Commit macht der naechste Step nur bei echter Aenderung
           # (reapack-index --commit wuerde sonst pro Lauf einen Leer-Commit setzen).
           reapack-index \
             --name "TimTechlor ReaScripts" \
             --url-template 'https://github.com/timtechlor/reapack-TimTechlor/raw/$commit/$path' \
-            --rebuild --no-commit
+            --rebuild --amend --no-commit
 
       - name: index.xml committen und pushen (nur bei Aenderung)
         run: |
