@@ -1,23 +1,781 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, follow">
-<title>Not released yet | Tim Techlor</title>
+<title>TT-KNOBMOVER Manual – MIDI CC Ride for the TT-303 in REAPER</title>
+<meta name="description" content="Reference manual for TT-KNOBMOVER, a JSFX MIDI plug-in for REAPER that rides the knobs of a TT-303 through a whole track: cutoff, resonance, env mod, decay and accent follow an arrangement of sections (tease, roll, build, pre-drop, drop, fill, break, reset) with a line from start to end per knob, a cutoff swing and a gentle wobble, with class limits as a guide and full 0–100 % editing. Five views (rack, map, desk, pads, tracker), ride map with zoom and preset preview, own points in the lanes, a RANDOM button, import of project regions and markers, five live knobs with override, keyboard editing, 64 factory presets up to 256 bars.">
+<meta name="tt-doc-name" content="TT-KNOBMOVER">
+<meta name="tt-doc-version" content="1.1.1">
+<meta name="tt-doc-date" content="2026-10-29">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-knobmover-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-KNOBMOVER Manual – MIDI CC Ride for the TT-303 in REAPER">
+<meta property="og:description" content="Reference manual for TT-KNOBMOVER, a JSFX MIDI plug-in for REAPER that rides the knobs of a TT-303 through a whole track: cutoff, resonance, env mod, decay and accent follow an arrangement of sections (tease, roll, build, pre-drop, drop, fill, break, reset) with a line from start to end per knob, a cutoff swing and a gentle wobble, with class limits as a guide and full 0–100 % editing. Five views (rack, map, desk, pads, tracker), ride map with zoom and preset preview, own points in the lanes, a RANDOM button, import of project regions and markers, five live knobs with override, keyboard editing, 64 factory presets up to 256 bars.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-knobmover-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-knobmover.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-KNOBMOVER — User Manual">
+<meta property="article:modified_time" content="2026-10-29">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-KNOBMOVER Manual – MIDI CC Ride for the TT-303 in REAPER">
+<meta name="twitter:description" content="Reference manual for TT-KNOBMOVER, a JSFX MIDI plug-in for REAPER that rides the knobs of a TT-303 through a whole track: cutoff, resonance, env mod, decay and accent follow an arrangement of sections (tease, roll, build, pre-drop, drop, fill, break, reset) with a line from start to end per knob, a cutoff swing and a gentle wobble, with class limits as a guide and full 0–100 % editing. Five views (rack, map, desk, pads, tracker), ride map with zoom and preset preview, own points in the lanes, a RANDOM button, import of project regions and markers, five live knobs with override, keyboard editing, 64 factory presets up to 256 bars.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-knobmover.png">
+<meta name="twitter:image:alt" content="TT-KNOBMOVER — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-knobmover-manual.html#article",
+   "headline": "TT-KNOBMOVER — User Manual",
+   "name": "TT-KNOBMOVER Manual – MIDI CC Ride for the TT-303 in REAPER",
+   "description": "Reference manual for TT-KNOBMOVER, a JSFX MIDI plug-in for REAPER that rides the knobs of a TT-303 through a whole track: cutoff, resonance, env mod, decay and accent follow an arrangement of sections (tease, roll, build, pre-drop, drop, fill, break, reset) with a line from start to end per knob, a cutoff swing and a gentle wobble, with class limits as a guide and full 0–100 % editing. Five views (rack, map, desk, pads, tracker), ride map with zoom and preset preview, own points in the lanes, a RANDOM button, import of project regions and markers, five live knobs with override, keyboard editing, 64 factory presets up to 256 bars.",
+   "url": "https://timtechlor.de/docs/tt-knobmover-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-knobmover-manual.html",
+   "datePublished": "2026-10-29",
+   "dateModified": "2026-10-29",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-knobmover.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "TT-303 automation, MIDI CC automation REAPER, acid filter sweep, cutoff automation JSFX, build up drop arrangement, TB-303 style automation, REAPER MIDI JSFX, resonance sweep, acid bass",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-knobmover-manual.html#software" },
+   "version": "1.1.1"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-knobmover-manual.html#software",
+   "name": "TT-KNOBMOVER",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "1.1.1",
+   "description": "JSFX MIDI plug-in for REAPER that sends MIDI CC for cutoff, resonance, env mod, decay and accent to a TT-303 and moves them through an arrangement of sections with lines, swing and wobble, with full-range editing, maximizable lanes, own points, RANDOM, region import, live override and 64 presets.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-KNOBMOVER", "item": "https://timtechlor.de/docs/tt-knobmover-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
 <style>
-body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #000; color: #e8e8e8;
-  font: 16px/1.6 system-ui, sans-serif; text-align: center; padding: 24px; box-sizing: border-box; }
-h1 { color: #39FF14; font: 700 22px/1.3 ui-monospace, monospace; letter-spacing: .12em; margin: 0 0 14px; }
-a { color: #39FF14; }
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
 </style>
 </head>
 <body>
-<main>
-<h1>NOT RELEASED YET</h1>
-<p>This page belongs to a tool of the ACID SEASON that has not dropped yet.<br>
-A new tool drops every Thursday at 18:00 Berlin time.</p>
-<p><a href="/acid-season/">See what is out now &rarr;</a> &nbsp; <a href="/acid-season/#newsletter">Get notified &rarr;</a></p>
-</main>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-KNOBMOVER</span></nav>
+      <div class="wordmark" style="--wm-n:12" role="img" aria-label="TT-KNOBMOVER">TT-KNOBMOVER</div>
+      <h1>TT-KNOBMOVER — User Manual</h1>
+      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.1.1 // TimTechlor</div>
+      <p class="lead">TT-KNOBMOVER moves the knobs of a TT-303 for you. You describe the track as sections (tease, roll, build, pre-drop, drop, fill, break, reset); for each section and each knob the plug-in draws a line from a start to an end value, adds a swing on the cutoff and a gentle wobble on the rest, and sends the result as MIDI CC. Five views show the same arrangement as a rack, a large map, a mixing desk, performance pads or a tracker table, and you can grab any knob and take over live. Place your own points in the lanes, roll new values with RANDOM, or take the sections from the regions of your project.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/knobmover-front.png" aria-label="Enlarge screenshot of the TT-KNOBMOVER user interface" title="Click to enlarge"><img src="img/tt-ui-options/knobmover-front.png" width="1203" height="1179" alt="TT-KNOBMOVER user interface: ride map with section band and five CC lanes, five live knobs with start and end, movement, section tools and output" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#quickstart"><span class="num">02</span><span>Quick start</span></a></li>
+<li><a href="#front"><span class="num">03</span><span>The front: RACK+</span></a></li>
+<li><a href="#views"><span class="num">04</span><span>More views: MAP, DESK, PADS, TRACKER</span></a></li>
+<li><a href="#keys"><span class="num">05</span><span>Zoom &amp; keyboard</span></a></li>
+<li><a href="#sections"><span class="num">06</span><span>Sections, lanes &amp; classes</span></a></li>
+<li><a href="#editing"><span class="num">07</span><span>Editing the arrangement</span></a></li>
+<li><a href="#points"><span class="num">08</span><span>Own points, RANDOM &amp; import</span></a></li>
+<li><a href="#override"><span class="num">09</span><span>Live override</span></a></li>
+<li><a href="#output"><span class="num">10</span><span>Output &amp; timing</span></a></li>
+<li><a href="#presets"><span class="num">11</span><span>Presets</span></a></li>
+<li><a href="#math"><span class="num">12</span><span>How the values are made</span></a></li>
+<li><a href="#limits"><span class="num">13</span><span>Limits &amp; notes</span></a></li>
+<li><a href="#trouble"><span class="num">14</span><span>Troubleshooting</span></a></li>
+<li><a href="#changelog"><span class="num">15</span><span>Changelog</span></a></li>
+<li><a href="#bass20261027"><span class="num">16</span><span>Short bass rides</span></a></li>
+<li><a href="#review111"><span class="num">17</span><span>Reliability fixes</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">18</span><span>UI Size &amp; Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>An acid line lives from its filter. Over a whole track the cutoff opens in the build, snaps shut at the break, the
+resonance leans in for the drop. Doing that with automation lanes means drawing five curves for every track and
+redrawing them when the arrangement changes. TT-KNOBMOVER turns it around: you describe the <b>arrangement</b>, and the
+curves follow.</p>
+<p>The plug-in is a MIDI effect. It sits in front of a <b>TT-303</b> on the same track, passes your notes through
+unchanged and adds MIDI CC messages for the five knobs the TT-303 understands:</p>
+<pre><code>CC 74  CUTOFF     CC 71  RESONANCE     CC 73  ENV MOD     CC 75  DECAY     CC 16  ACCENT     (CC 7  VOLUME, optional)</code></pre>
+<p>The track is a list of <b>sections</b>. Every section has its own start and end value for every knob and a
+movement (a swing on the cutoff, a wobble on the others). A <b>class</b> (DRIVER, MELODIC, SCREAM, LOW) sets the
+suggested ranges and defaults. Untouched sections follow those ranges; once you edit a section, its lanes can use the full 0–100 % range. The green sweet-spot band and thin limit lines remain visible as guides.
+The section tables and limits are the ones of the TT-303 pattern generator, which makes the plug-in a good partner
+for generated patterns, but it works with any MIDI that plays the TT-303.</p>
+<pre><code>transport position → arrangement (sections) → line + swing + wobble → class range (untouched) or 0–100 % (edited)
+→ INTENSITY / SMOOTH → MIDI CC on the chosen channel (only when a value changes)
+
+your notes ─────────────────────────────────────────────────────────→ passed through</code></pre>
+<div class="box" data-k="Not an automation envelope">The ride is computed from the song position, not recorded. Change the arrangement
+and the whole course changes with it; change the tempo or move a section and nothing has to be redrawn. It complements REAPER's own automation instead of replacing it: the output is 7-bit MIDI CC on a fixed map (74, 71, 73, 75, 16, optional 7) meant for a TT-303. For other targets or finer curves, keep drawing native automation.</div>
+
+<h2 id="quickstart"><span class="num">02</span>Quick start</h2>
+<ol>
+  <li>On the track that plays your acid line, insert <code>TT-KNOBMOVER</code> <b>before</b> the TT-303, so the MIDI
+      passes KNOBMOVER first. Notes from a MIDI item or a keyboard go straight through. The TT-303 must be in <b>HOST</b> mode
+      (it plays the notes it receives) and listen on the channel set under <b>MIDI CH</b> (default 1) &ndash; its knobs then follow the CC messages.</li>
+  <li>Open the preset bar in the header and pick a starting point, for example <b>Driver Single Drop 48</b>
+      (48 bars: tease, roll, build, pre-drop, drop, fill, reset). Or keep the default, which is the 32-bar arrangement of
+      <b>Driver 32 Bars</b>. To compare presets without sending anything, use <b>PREVIEW</b> in the title bar of the ride map first
+      (see <a class="xref" href="#preview">Preset preview</a>).</li>
+  <li>Start playback from the beginning of your track. The ride map moves a white playhead across the lanes; the five
+      knobs show the values being sent, and the TT-303 knobs turn with them.</li>
+  <li>Click a section in the ride map (or in any lane) to select it. The knob panel shows its <b>FROM</b> and
+      <b>TO</b> values; drag the sliders, or drag the dots in the lanes, to change how the section moves.</li>
+  <li>Pull the arrangement into shape: drag section edges to move a boundary by whole bars, use <b>SPLIT</b>,
+      <b>+ ADD</b> and <b>DELETE</b>, or set the total length with <b>LEN</b> in the top row. Already marked the parts of the song with
+      regions in REAPER? <a class="xref" href="#points">Import them</a> as sections.</li>
+  <li>Bend a line with your own points (double-click it), or press <b>RANDOM</b> for a new take on the section
+      (<a class="xref" href="#points">Own points, RANDOM &amp; import</a>).</li>
+  <li>Grab a knob during playback to take over that one value (see <a class="xref" href="#override">Live override</a>);
+      right-click it to hand it back to the ride.</li>
+  <li>Save your own arrangement with <b>SAVE</b> in the preset bar.</li>
+</ol>
+<div class="box" data-k="A lane that does not move">A white <b>OVR</b> on a knob means you have taken that lane over by hand (see <a class="xref" href="#override">Live override</a>):
+right-click the knob to give it back to the ride. RACK+ is the view to start with; the other four views show the same arrangement for other ways of working.</div>
+<div class="box" data-k="Playback starts anywhere">You do not have to start at the beginning. Start playback in the middle of a track and the plug-in
+sends the values for that position at once, so the TT-303 never plays a note with the wrong filter.</div>
+
+<h2 id="front"><span class="num">03</span>The front: RACK+</h2>
+<p>The front is drawn on a 900 × 910 grid (1125 × 1138 pixels at the default UI size of 125 %). All settings live on it;
+there is nothing hidden behind sliders. Five <b>tabs</b> in the header switch between views of the same arrangement:
+<b>RACK+</b> (described here), <b>MAP</b>, <b>DESK</b>, <b>PADS</b> and <b>TRACKER</b> (see <a class="xref" href="#views">More views</a>).
+The header, the top row and the OUTPUT panel are the same in every view; the chosen view is saved with the plug-in.</p>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-header.png" alt="Header and top row: wordmark, preset bar, OPTIONS, PANIC, class, length, follow song, repeat, start bar and the position display" width="1105" height="118"><figcaption><span class="tag">HEADER</span><b>Header and top row.</b> View tabs in the middle, preset bar and OPTIONS at the upper right, PANIC below them. The top row holds CLASS, the total LEN, FOLLOW SONG, REPEAT, START BAR and the display with the current bar and section.</figcaption></figure>
+<h3>Top row</h3>
+<table>
+<tr><th>Control</th><th>What it does</th></tr>
+<tr><td><b>CLASS</b></td><td>DRIVER, MELODIC, SCREAM or LOW. Sets the guide ranges and default values of sections you have not edited (see <a class="xref" href="#classes">Classes</a>).</td></tr>
+<tr><td><b>LEN</b></td><td>Total length in bars: 8, 16, 24, 32, 48, 64, 96, 128, 192 or 256. The last section grows or shrinks. If the length sits between two list entries, the box shows the next higher one and the left arrow goes to the next lower one.</td></tr>
+<tr><td><b>FOLLOW SONG</b></td><td>On: the arrangement runs along the project timeline from <b>START</b>. Off: the selected section loops on its own, which is the quickest way to audition one section.</td></tr>
+<tr><td><b>REPEAT</b></td><td>On: after the last bar the arrangement starts over. Off: the last values are held.</td></tr>
+<tr><td><b>START</b></td><td>The project bar where the arrangement begins (1 = project start). <b>-</b> and <b>+</b> or the mouse wheel change it. Before the start bar the plug-in sends the first values.</td></tr>
+<tr><td>Display</td><td>Current position as <code>BAR b.beat / total</code> and the section it is in. Short messages (copied, no room, panic sent) appear here too.</td></tr>
+</table>
+<h3>Ride map</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-ridemap.png" alt="The ride map: a band of coloured sections above five lanes for cutoff, resonance, env mod, decay and accent with a white playhead" width="1085" height="545"><figcaption><span class="tag">RIDE MAP</span><b>The whole course on one screen.</b> The band shows the sections, the five lanes below show what will be sent: the line of every section plus swing and wobble. The selected section is framed and shaded. The title bar holds the preset preview and the zoom buttons.</figcaption></figure>
+<ul>
+  <li><b>Section band.</b> One block per section, coloured by type and labelled with its code and name when there is room. <b>Click</b> a block to select it. <b>Drag the edge</b> between two blocks to move the boundary by whole bars; the two sections share their bars, the total stays the same.</li>
+  <li><b>Lanes.</b> From top: CUT (CC 74), RES (71), ENV (73), DEC (75), ACC (16). The left label shows the CC number and the value being sent right now. The <b>green band</b> is the sweet spot, the <b>thin lines</b> are the class limits, the <b>bright curve</b> is the ride (INTENSITY and RIDE included). A click in a lane selects the section too.</li>
+  <li><b>Dots and line.</b> The selected section shows a hollow handle (FROM, start of the ramp) and a solid handle (TO, end) in every lane. Both are narrow, tall half-rectangles inside their own section (FROM right of the bar line, TO left of it), so the handles of neighbouring sections never overlap; they move up and down only. Drag a handle up or down to change that value, drag the line between them to move both together; <b>Shift</b> = fine steps. The value is shown next to the pointer while you drag. <b>Double-click</b> a line to add an own point and bend it (see <a class="xref" href="#points">Own points</a>).</li>
+  <li><b>Lane bar</b> sits left of PREVIEW: the focus lane, number of own points, connection mode, <b>CLEAR</b> and <b>MAX</b>. <b>RANDOM</b> has its own second row with scope, button, <b>AMOUNT</b> slider and <b>TARGET</b> readout (see <a class="xref" href="#points">Own points, RANDOM &amp; import</a>).</li>
+  <li><b>Playhead.</b> The white line follows the song position (with FOLLOW SONG off, the loop inside the selected section).</li>
+  <li><b>Zoom and preview</b> sit in the title bar of the map: <b>-</b>, <b>+</b> and <b>FIT</b>, and the <b>PREVIEW</b> box with <b>LOAD</b> (see <a class="xref" href="#keys">Zoom &amp; keyboard</a> and <a class="xref" href="#preview">Preset preview</a>).</li>
+</ul>
+<h3 id="lane-height">Lane height and MAX</h3>
+<p>The lane window is taller at the same UI size: the MAP panel is 732 design pixels high (previously 522, over 40 % more), and the RACK+ ride-map panel is 436 pixels (previously 226). The extra space goes to the lanes; the controls below move down.</p>
+<p>For detailed editing, click <b>MAX</b>, press <b>M</b>, or click the small maximize symbol beside a lane name. That lane fills the map height. Buttons at the left choose another lane; click the lit button, MAX or M again to restore all lanes. MAP includes VOLUME; in RACK+ choose one of the five visible CC lanes.</p>
+<p>The pointer crosshair shows the bar position, percentage and MIDI CC value (0–127). Horizontal value lines, a soft fill under the curve, bar numbers and bar lines help place points; the time grid gets finer as you zoom in. Use Shift while dragging for fine values and free point timing. <b>FIT</b> fits the song horizontally; <b>AUTO FIT</b> in OPTIONS fits the whole front to the host window.</p>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-max.png" alt="MAP with the cutoff lane maximized, lane selector buttons at the left and the value and time grid" width="1125" height="1138"><figcaption><span class="tag">MAX</span>One lane at full map height. Select another lane on the left; MAX or M restores the full lane stack.</figcaption></figure>
+<h3>Section knobs</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-section.png" alt="Section panel with five live knobs, each with sweet-spot arc, limit ticks and two ring dots, START and END sliders and ON switches" width="750" height="267"><figcaption><span class="tag">SECTION</span><b>Live values and the section&rsquo;s start and end.</b> The knob shows the value being sent. The green arc outside is the sweet spot, the white ticks are the class limits, the hollow ring dot marks the lowest value of the section and the solid dot marks the highest value reached by the selected section.</figcaption></figure>
+<ul>
+  <li><b>Live knob.</b> Turns with the ride. Drag it to take over (<a class="xref" href="#override">override</a>).</li>
+  <li><b>FROM / TO</b> (v0.3.0; called START / END before). The value the ramp of the knob has at the beginning and at the end of the section; the line between them is what the section does, and the swing rides on top of it. The two <b>ring dots</b> of the knob show what the section really reaches: the hollow dot is the lowest and the solid dot the highest value (ramp plus swing, within 0–100 % for an edited section), the bright arc between them is the range. The sliders cover 0–100 %; class limits are visual guides. Double-click or Ctrl+click puts back the value from the class table. A FILL section (A4) starts where the previous section ended until you touch one of its values.</li>
+  <li><b>ON.</b> Switches the lane for this section. Off: no CC for this knob while the section plays; the TT-303 keeps its last value. <b>Shift+click</b> switches the lane in all sections.</li>
+</ul>
+<h3>Movement</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-movement.png" alt="Movement panel: LFO picture, AMP and RATE knobs, SYNC or HZ, waveform, node selector and the build-up and fill switches" width="320" height="267"><figcaption><span class="tag">MOVEMENT</span><b>The LFO of the focus lane.</b> Applies to the selected section and the lane with the bright frame in the map (click a lane, or [ and ]).</figcaption></figure>
+<p>Every lane from cutoff to accent has its own <b>LFO</b>: a wave that rides on top of the line from FROM to TO. The panel shows it over the whole section (scaled to its deepest node); the orange marks are the <b>nodes</b> with their depth. A <b>node</b> is the start of the section, one of the lane's own points, or the end. Each node has its own <b>AMP</b> and <b>RATE</b>; between two nodes both change smoothly (the phase never jumps), so one section can start slow and shallow and end fast and deep, or change speed at every point you placed.</p>
+<table>
+<tr><th>Control</th><th>Range</th><th>What it does</th></tr>
+<tr><td><b>AMP</b></td><td>0–72</td><td>Depth of the LFO around the line, in percent of the knob range, for the chosen node. 0 is a straight line. Right-click = default (class table for the cutoff, a gentle value for the other lanes).</td></tr>
+<tr><td><b>RATE</b></td><td>SYNC 1–64 steps / HZ 0.05–20</td><td>Speed of the LFO for the chosen node. In <b>SYNC</b> it is the length of one cycle in 16th steps (16 steps = one bar in 4/4) and follows the tempo; in <b>HZ</b> it is cycles per second (free, with the project tempo only used to convert).</td></tr>
+<tr><td><b>SYNC / HZ</b></td><td>switch</td><td>Unit of RATE for this lane in this section. Switching keeps the speed (at the current tempo).</td></tr>
+<tr><td><b>SHAPE</b></td><td>SINE, TRIANGLE, SAW UP, SQUARE, SAW DOWN</td><td>Waveform of this lane's LFO. SAW UP rises and jumps back at the end of every cycle; SAW DOWN is its mirror image: it falls and jumps up.</td></tr>
+<tr><td><b>NODE</b></td><td>START, POINT 1…16, END</td><td>Which node AMP and RATE edit. You can also click a handle or an own point in the map, or a mark in the LFO picture. A new point starts with the depth and speed the LFO has at that place.</td></tr>
+<tr><td><b>ALL</b></td><td>switch</td><td>On: AMP and RATE change every node of the lane in the section at once.</td></tr>
+<tr><td><b>RIDE</b></td><td>0–200 %</td><td>How strongly the four lanes besides the cutoff wobble in this section (DESK, PADS and TRACKER; it scales their AMP). 100 % is the default, 0 makes them straight lines.</td></tr>
+<tr><td><b>BUILD-UP BEFORE DROP</b></td><td>switch</td><td>On an A3 DROP: puts a 2-bar PRE-DROP in front of it, or removes it. The bars come from the section before. The switch lights when a PRE-DROP is there.</td></tr>
+<tr><td><b>FILL ON A4</b></td><td>switch</td><td>On an A3 DROP: ends it with a 2-bar A4 FILL that continues from the last values, or removes it. The bars come from the drop.</td></tr>
+</table>
+<h3>Section tools and output</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-tools.png" alt="Section tools with type, length, split, copy, paste, reset to class, delete and add, and the output panel with channel, rate, pass notes, CC 7, intensity and smooth" width="1085" height="167"><figcaption><span class="tag">TOOLS</span><b>Section tools</b> (upper row) and <b>output</b> (lower row).</figcaption></figure>
+
+<h2 id="views"><span class="num">04</span>More views: MAP, DESK, PADS, TRACKER</h2>
+<p>All views edit the same arrangement and send the same CC; a preset sounds the same whichever view is open. Pick the view that suits the job.</p>
+<h3>MAP</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-map.png" alt="MAP view: the section band above six tall lanes for cutoff, resonance, env mod, decay, accent and volume" width="1125" height="1138"><figcaption><span class="tag">MAP</span><b>The whole song as a large map</b>, with the sixth lane: <b>VOLUME</b> (CC 7).</figcaption></figure>
+<p>The map of RACK+ in large, with all six lanes. Everything works as in the ride map (select, drag edges, drag dots and lines, zoom, preview).
+The volume lane can be shaped here like any other lane; it is sent when <b>SEND CC 7</b> is on. The line under the map lists the selected section in numbers.</p>
+<h3>DESK</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-desk.png" alt="DESK view: six channel strips with range bars, meters, live knobs and ON switches, eight scene pads on the right" width="1125" height="1138"><figcaption><span class="tag">DESK</span><b>One channel strip per knob</b> and eight scene pads.</figcaption></figure>
+<ul>
+  <li><b>Range bar.</b> The tall bar shows 0 to 100 % of the knob with the sweet spot (green) and the class limits (white ticks). The hollow handle is <b>FROM</b>, the solid handle is <b>TO</b> of the selected section: drag them (Shift = fine). The white line is the value being sent.</li>
+  <li><b>Meter.</b> The last CC value sent on the lane (0 to 127).</li>
+  <li><b>Live knob</b> and <b>ON</b> work as in RACK+ (override; lane on or off in the section, Shift+click = all sections).</li>
+  <li><b>MOVE.</b> The small slider at the foot of each strip (cutoff, resonance, env mod, decay, accent) sets how strongly that lane swings or wobbles around its FROM&nbsp;/&nbsp;TO line, in every section of the song: 100&nbsp;% as set, 0&nbsp;% a straight line, 200&nbsp;% double. Right-click or double-click puts back 100&nbsp;%. The ramp itself (FROM&nbsp;/&nbsp;TO) does not change; volume has no swing and no MOVE.</li>
+  <li><b>Scenes.</b> Eight pads per page select a section, with <b>QUANTIZE NEXT BAR</b> at the next bar while playing (an orange bar marks the waiting pad). Turn <b>FOLLOW SONG</b> off and the chosen section loops: the pads switch scenes live. <b>RIDE</b> and <b>SWING</b> belong to the selected section.</li>
+</ul>
+<h3>PADS</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-pads.png" alt="PADS view: sixteen section pads on the left, an XY field for cutoff and resonance with a trail on the right" width="1125" height="1138"><figcaption><span class="tag">PADS</span><b>Sections as pads</b>, cutoff and resonance by hand.</figcaption></figure>
+<ul>
+  <li><b>Pads.</b> Sixteen sections per page as big pads. A click selects the section, with QUANTIZE at the next bar. <b>LOOP SECTION</b> is FOLLOW SONG off: the selected section loops and the pads become a live scene switcher. With FOLLOW SONG on the pads only select for editing.</li>
+  <li><b>XY field.</b> Cutoff left to right, resonance bottom to top, with the sweet spot (green box), the class limits and a trail of the last moments. Drag inside it to ride both knobs by hand (a live override); let go and the ride takes over again. <b>HOLD</b> keeps the values after you let go, <b>RELEASE</b> frees every override.</li>
+  <li><b>RIDE (INTENSITY)</b> and <b>SMOOTH</b> are the same controls as in the OUTPUT panel, big for performing.</li>
+  <li><b>SCREAM</b> (between RIDE and SMOOTH) pushes resonance up and env mod down towards the values of the SCREAM class drop (resonance about 96&nbsp;%, env mod about 5&nbsp;%): 0&nbsp;% off, 100&nbsp;% all the way. Untouched sections keep the class limits (LOW resonance stops at 70&nbsp;%); edited sections can reach the SCREAM target across 0–100&nbsp;%. A hand override (XY field, live knobs) wins.</li>
+  <li><b>NOTE TRIGGER</b> plays the pads from MIDI: with it on, the notes from <b>BASE</b> to BASE&nbsp;+&nbsp;15 on the trigger channel (<b>CH</b>) select sections 1 to 16, exactly like a click on the pad (QUANTIZE applies). These notes are not passed on to the TT-303; every other note passes as before. Defaults: off, channel 16, base C2 (note 36; REAPER names middle C as C4). Keep the trigger channel apart from the bass notes. With NOTE TRIGGER on, pads 1 to 16 show their note. A trigger note takes effect from the next audio block at the earliest; with QUANTIZE at the next bar after the note.</li>
+</ul>
+<h3>TRACKER</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-tracker.png" alt="TRACKER view: a table with one row per section and columns for type, length, from and to of six knobs, swing, period and ride, with a preview of the selected section below" width="1125" height="1138"><figcaption><span class="tag">TRACKER</span><b>The arrangement as numbers</b>, with a preview of the selected section.</figcaption></figure>
+<ul>
+  <li>One row per section: number (<code>&gt;</code> = playing now), <b>TYPE</b>, <b>LEN</b>, FROM and TO of all six knobs, <b>SWG</b> (swing depth), <b>PER</b> (period) and <b>RIDE</b>.</li>
+  <li>Change a value: drag it up or down (Shift = fine) or use the mouse wheel; double-click or right-click puts back the class table value. Double-click TYPE for the next type (Shift for the previous); a new type loads that type&rsquo;s class values, like RESET TO CLASS.</li>
+  <li>Grey numbers: the lane is off in that section. Dim numbers: a FILL section that still follows the section before. A small square in the corner of a TO cell marks a lane that has own points in that section.</li>
+  <li>The wheel over the number column or the scroll bar scrolls the table (20 rows are visible, up to 64 sections). Below the table, six small graphs show how each knob moves through the selected section.</li>
+</ul>
+
+<h2 id="keys"><span class="num">05</span>Zoom &amp; keyboard</h2>
+<h3>Zoom and scroll (RACK+ and MAP)</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-zoom.png" alt="Zoomed ride map showing a few bars in detail with the scroll bar below the lanes" width="1085" height="545"><figcaption><span class="tag">ZOOM</span><b>Zoomed in:</b> fewer bars, more detail, scroll bar below the lanes.</figcaption></figure>
+<ul>
+  <li><b>+</b> and <b>-</b> in the title bar zoom in and out around the middle; <b>Ctrl + mouse wheel</b> over the map zooms around the pointer. At most two bars fill the map.</li>
+  <li>While zoomed, the <b>mouse wheel</b> scrolls along the song, and a <b>scroll bar</b> appears under the lanes (drag it or click beside the handle).</li>
+  <li><b>FIT</b> (lit while zoomed) shows the whole arrangement again.</li>
+</ul>
+<h3>Keyboard</h3>
+<p>With the plug-in window focused (and no text field or list open):</p>
+<table>
+<tr><th>Key</th><th>What it does</th></tr>
+<tr><td><b>Left / Right</b></td><td>Select the previous / next section (the zoomed map follows).</td></tr>
+<tr><td><b>Alt + Left / Right</b></td><td>Make the selected section one bar shorter / longer (the next section gives or takes the bar).</td></tr>
+<tr><td><b>Home / End</b></td><td>First / last section.</td></tr>
+<tr><td><b>[ and ]</b></td><td>Previous / next lane. The chosen lane is green in the map, the desk and the tracker; a click into a lane chooses it too.</td></tr>
+<tr><td><b>Up / Down</b></td><td>TO value of the chosen lane in the selected section +1 / -1 (in TRACKER: the focused cell). <b>Alt</b> = the other end (FROM).</td></tr>
+<tr><td><b>Page Up / Page Down</b></td><td>The same in steps of 10.</td></tr>
+<tr><td><b>O</b></td><td>Switch the chosen lane on or off in the selected section.</td></tr>
+<tr><td><b>Delete</b></td><td>Delete the selected section.</td></tr>
+<tr><td><b>M</b></td><td>Maximize the focus lane in RACK+ or MAP, or restore all lanes.</td></tr>
+<tr><td><b>R</b></td><td>RANDOM: the same as the button (range and amount as set).</td></tr>
+<tr><td><b>+ / - / F</b></td><td>Zoom in, zoom out, whole arrangement.</td></tr>
+</table>
+<p>Editing values can use 0–100 %; every change is one undo step. The space bar always starts and stops the transport, also while the plug-in window has the focus.</p>
+
+<h2 id="sections"><span class="num">06</span>Sections, lanes &amp; classes</h2>
+<h3 id="types">Section types</h3>
+<table>
+<tr><th>Code</th><th>Name</th><th>Role in the arrangement</th></tr>
+<tr><td><b>A0</b></td><td>TEASE</td><td>The quiet start: filter nearly closed, little resonance push, soft accents.</td></tr>
+<tr><td><b>A1</b></td><td>ROLL</td><td>The line gets going; cutoff starts to open.</td></tr>
+<tr><td><b>A2</b></td><td>BUILD</td><td>Tension: cutoff climbs, resonance and accents rise.</td></tr>
+<tr><td><b>PRE</b></td><td>PRE-DROP</td><td>The last bars before a drop: cutoff and resonance at their peak, decay short.</td></tr>
+<tr><td><b>A3</b></td><td>DROP</td><td>The main section: cutoff holds mid-range and swings wide, resonance high, accents hard.</td></tr>
+<tr><td><b>A4</b></td><td>FILL</td><td>A short push after the drop. It starts at the last values of the section before and moves on from there.</td></tr>
+<tr><td><b>BRK</b></td><td>BREAK</td><td>The breather: cutoff back low, decay long.</td></tr>
+<tr><td><b>A5</b></td><td>RESET</td><td>The outro: cutoff and accents fall back, resonance relaxes.</td></tr>
+</table>
+<p>Changing a section&rsquo;s <b>TYPE</b> loads the values of that type from the class table. The colours of the band follow the
+colour scheme of the plug-in (OPTIONS).</p>
+<h3 id="classes">Classes and limits</h3>
+<p>These class ranges govern untouched sections and guide RANDOM. Editing a section unlocks 0–100 % for every lane in that section, including swing and wobble; the class lines and sweet-spot band stay visible. RESET TO CLASS restores the table values and class-range behaviour.</p>
+<table>
+<tr><th>Class</th><th>Cutoff</th><th>Resonance</th><th>Env mod</th><th>Decay</th><th>Accent</th><th>Typical use</th></tr>
+<tr><td><b>DRIVER</b></td><td>0–72</td><td>80–100</td><td>0–32</td><td>5–50</td><td>40–100</td><td>The default for driving acid lines.</td></tr>
+<tr><td><b>MELODIC</b></td><td>0–72</td><td>80–100</td><td>0–24</td><td>5–50</td><td>40–100</td><td>Lines with a melody: less env mod so the notes keep their shape.</td></tr>
+<tr><td><b>SCREAM</b></td><td>0–72</td><td>85–100</td><td>0–12</td><td>5–50</td><td>40–100</td><td>High resonance with little env mod: the line screams instead of snapping.</td></tr>
+<tr><td><b>LOW</b></td><td>0–30</td><td>45–70</td><td>0–15</td><td>5–30</td><td>35–70</td><td>Bass lines that must stay below the rest.</td></tr>
+</table>
+<p>All values are the positions of the TT-303 knobs in percent. The green <b>sweet-spot band</b> in the lanes marks where these knobs sound best
+(cutoff 0–50, resonance 80–100, env mod 0–40, decay 5–50, accent 40–100); the upper cutoff range up to 72 is for tension only.</p>
+<p>When you change the class, sections you have <b>not edited</b> load the values of the new class. Sections you have touched keep their values
+and retain the full 0–100 % range; they are not clamped to the new class limits.</p>
+<h3 id="tab">Default values (DRIVER)</h3>
+<p>Start → end per section, in percent. The cutoff swing is given as depth / period in steps.</p>
+<table>
+<tr><th>Section</th><th>Cutoff</th><th>Swing</th><th>Resonance</th><th>Env mod</th><th>Decay</th><th>Accent</th></tr>
+<tr><td>A0 TEASE</td><td>0 → 24</td><td>8 / 32</td><td>80 → 85</td><td>5 → 9</td><td>12 → 16</td><td>45 → 55</td></tr>
+<tr><td>A1 ROLL</td><td>8 → 46</td><td>14 / 32</td><td>84 → 90</td><td>10 → 16</td><td>22 → 30</td><td>65 → 72</td></tr>
+<tr><td>A2 BUILD</td><td>26 → 62</td><td>18 / 16</td><td>88 → 96</td><td>13 → 20</td><td>28 → 36</td><td>72 → 80</td></tr>
+<tr><td>PRE PRE-DROP</td><td>44 → 72</td><td>0</td><td>94 → 99</td><td>20 → 30</td><td>22 → 12</td><td>90 → 96</td></tr>
+<tr><td>A3 DROP</td><td>32 → 38</td><td>32 / 16</td><td>92 → 98</td><td>16 → 26</td><td>20 → 26</td><td>86 → 92</td></tr>
+<tr><td>A4 FILL</td><td colspan="6">starts at the end of the previous section; end = start + 26 (cutoff), + 6 (resonance), + 4 (env mod), − 8 (decay), + 8 (accent), then clamped</td></tr>
+<tr><td>BRK BREAK</td><td>14 → 42</td><td>12 / 24</td><td>90 → 96</td><td>7 → 11</td><td>38 → 48</td><td>50 → 58</td></tr>
+<tr><td>A5 RESET</td><td>42 → 4</td><td>0</td><td>86 → 80</td><td>8 → 5</td><td>14 → 10</td><td>55 → 45</td></tr>
+</table>
+<p>MELODIC, SCREAM and LOW have their own tables with the same structure; load one and look at the START and END sliders to see them.</p>
+
+<h2 id="editing"><span class="num">07</span>Editing the arrangement</h2>
+<table>
+<tr><th>Action</th><th>How</th><th>Result</th></tr>
+<tr><td>Select a section</td><td>Click its block in the band, click inside a lane, a pad (DESK, PADS) or a row (TRACKER), or use Left / Right</td><td>The panels below show it.</td></tr>
+<tr><td>Change a value</td><td>FROM / TO sliders, the dots in the map, the handles in DESK, a cell in TRACKER, or Up / Down</td><td>Uses the full 0–100 % range; marks the section as edited. Class limits remain visible as guides.</td></tr>
+<tr><td>Move a boundary</td><td>Drag the edge between two blocks in the band</td><td>Whole bars, both sections keep at least one bar.</td></tr>
+<tr><td>Change a length</td><td><b>LEN</b> box under SECTION TOOLS</td><td>The next section gives or takes the bars; for the last section the total changes (up to 256 bars).</td></tr>
+<tr><td>Change the type</td><td><b>TYPE</b> box (the mouse wheel is switched off here on purpose)</td><td>Loads the class values of the new type. Length stays.</td></tr>
+<tr><td><b>SPLIT</b></td><td>Selected section with at least 2 bars</td><td>Two halves with the same values.</td></tr>
+<tr><td><b>+ ADD</b></td><td>Adds a 4-bar ROLL behind the selected section</td><td>The new section is selected. Refused when 256 bars or 64 sections are reached.</td></tr>
+<tr><td><b>DELETE</b></td><td>Removes the selected section</td><td>Its bars go to the section before (to the next one for the first section). The last remaining section cannot be deleted.</td></tr>
+<tr><td><b>COPY / PASTE</b></td><td>Copy the values of a section, paste them into another</td><td>Type, values and movement are copied; the length of the target stays.</td></tr>
+<tr><td><b>RESET TO CLASS</b></td><td>Selected section</td><td>Throws away your edits and loads the class table again.</td></tr>
+<tr><td><b>BUILD-UP / FILL</b></td><td>Switches in MOVEMENT (A3 only)</td><td>Insert or remove the PRE-DROP in front of, or the FILL behind, a drop.</td></tr>
+<tr><td>Bend a line</td><td>Double-click it in the map (<a class="xref" href="#points">own points</a>)</td><td>Adds a point you can drag; right-click deletes it.</td></tr>
+<tr><td><b>RANDOM</b></td><td>Button or key R</td><td>New values that fit the section type and class (see <a class="xref" href="#points">RANDOM</a>).</td></tr>
+<tr><td>Import regions</td><td>REGIONS button or the Action</td><td>Takes the sections from the regions / markers of the project.</td></tr>
+</table>
+<p>Every edit is one undo step in REAPER (Edit &rarr; Undo). The arrangement is saved with the project.</p>
+
+<h2 id="points"><span class="num">08</span>Own points, RANDOM &amp; import</h2>
+<h3>Own points in the lanes</h3>
+<p>Until 0.8.0 every knob drew a straight line from FROM to TO in each section (plus swing and wobble). Now you can <b>bend that line</b>: place your own points
+in a lane and the line runs FROM &rarr; point 1 &rarr; point 2 &hellip; &rarr; TO. That gives a filter that holds back and then opens late, dips and comes back, climbs in steps, or pumps the resonance &ndash;
+anything a hand-drawn automation curve could do, but tied to the section so it moves with the arrangement.</p>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-points.png" alt="Ride map with a stepped cutoff in the selected build section: own points joined as steps, the lane bar with CLEAR and RANDOM above the map" width="1085" height="545"><figcaption><span class="tag">POINTS</span><b>Own points.</b> The selected section shows its points as round dots; the lane bar (upper left of the map) joins them as straight segments, a smooth curve or steps.</figcaption></figure>
+<ul>
+  <li><b>Add a point:</b> double-click on the line of a section, or anywhere in its lane. The point lands on a quarter-bar grid at the height of the pointer (hold <b>Shift</b> for a free position) and sticks to the pointer: keep the button down to place it exactly.</li>
+  <li><b>Move a point:</b> drag it. It cannot pass its neighbours, stays between FROM and TO in time and inside 0–100 % in value; <b>Shift</b> = free position and fine steps in value.</li>
+  <li><b>Delete a point:</b> right-click it or Alt+click it. <b>CLEAR</b> in the lane bar removes all points of the focus lane in the selected section (<b>Shift+click</b>: in all sections).</li>
+  <li><b>Lane bar:</b> the box shows the focus lane (green in the map; [ and ] or a click in a lane change it), the number of own points and how they are joined:
+      <b>LINEAR</b> = straight segments, <b>SMOOTH</b> = a soft curve (cosine), <b>STEPS</b> = every value is held until the next point (the last step ends at TO).</li>
+  <li>Up to <b>16 points</b> per lane and section. Points are positions inside the section (0 to 100 % of its length), so they stretch when you change the length or move an edge. They are saved with the project, in user presets and in the preset preview, and the
+      small dots of other sections show where they are.</li>
+  <li><b>Swing and wobble ride on top.</b> For an exact curve set SWING to 0 (cutoff) or RIDE / MOVE to 0 (other lanes). The ring dots on the knobs include the points.</li>
+  <li>SPLIT and COPY / PASTE copy the points with the section, RESET TO CLASS and a new TYPE remove them, a class change keeps them (they are values, like FROM and TO).</li>
+</ul>
+<h3>RANDOM</h3>
+<p><b>RANDOM</b> rolls a new take that still sounds like the section it is in, instead of throwing numbers anywhere:</p>
+<ul>
+  <li>FROM and TO of every lane land <b>around the class table values</b> for the section type, up to 45 % of the class range away at full amount. A type with a clear direction keeps it (a BUILD still climbs, a RESET still falls);
+      ROLL, BUILD and BREAK join the end of the previous section half of the time.</li>
+  <li>The cutoff swing gets a new <b>shape</b> (all five), a depth around the table value and a period from a musical list (2, 3, 4, 6, 8, 12, 16, 24 or 32 steps); RIDE changes by up to 60 % of the amount.</li>
+  <li>Sometimes <b>own points</b> appear (cutoff more often than the other lanes), joined linearly, smoothly or in steps.</li>
+  <li>The <b>LFO of every lane</b> is rolled too: with growing probability a lane gets its own LFO with a shape, SYNC or HZ, and its own AMP and RATE at the start, at every point and at the end, so the speed and depth of the ride change from point to point.</li>
+  <li>Everything stays inside the class limits. The volume lane and the ON switches are never touched. Ctrl+Z undoes a roll; every press is one undo step.</li>
+</ul>
+<p>The separate RANDOM row contains the scope selector, RANDOM button, <b>AMOUNT</b> slider and <b>TARGET</b> readout:</p>
+<table>
+<tr><th>Scope</th><th>What changes</th></tr>
+<tr><td>SECTION</td><td>All five movement lanes in the selected section.</td></tr>
+<tr><td>LANE</td><td>The focus lane across all sections.</td></tr>
+<tr><td>ALL</td><td>The whole arrangement.</td></tr>
+<tr><td>BLOCK</td><td>Only the focus lane in the selected section, for example just its Env Mod. The LFO of that lane is rolled with it (the cutoff also its swing shape, depth and period).</td></tr>
+</table>
+<p><b>AMOUNT</b> is 0–100 %, default 50; drag the slider or use the wheel over the AMOUNT area in steps of 5. At 0 nothing changes. <b>TARGET</b> names the affected lane and section before you roll. Press <b>R</b> to use the same scope and amount.
+
+RANDOM is switched off while a preset preview is shown.</p>
+<h3 id="import">Import regions and markers from REAPER</h3>
+<p>If you have already marked the parts of your song with <b>regions</b> (or <b>markers</b>) in REAPER, you can take them over as the sections of the arrangement. A JSFX cannot read project markers, so two small ReaScripts do the reading;
+they come with the plug-in (REAPER Action list: <i>TT-KNOBMOVER: import regions (or markers) as sections</i> and <i>TT-KNOBMOVER: import service</i>).</p>
+<ul>
+  <li><b>One-off action:</b> run <i>TT-KNOBMOVER: import regions (or markers) as sections</i> from the Action list (give it a shortcut or a toolbar button). It reads the project and sends the sections to the TT-KNOBMOVER on the
+      <b>first selected track</b> (otherwise the first one in the project). The plug-in shows <i>IMPORTED n SECTIONS</i> in its display.</li>
+  <li><b>REGIONS button:</b> start <i>TT-KNOBMOVER: import service</i> once per REAPER session (it keeps running in the background). Then the <b>REGIONS</b> button in the header of the plug-in does the import for that very instance &ndash;
+      without the service the button only reminds you of the action.</li>
+</ul>
+<table>
+<tr><th>Project</th><th>Becomes</th></tr>
+<tr><td>Regions (or, if there are none, markers)</td><td>One section each, in time order. With markers a section runs from one marker to the next; the last one to a marker named <code>end</code> (or the end of the project).</td></tr>
+<tr><td>Position and length</td><td>Rounded to whole bars (bar length from the time signature at the first region). <b>START</b> is set to the bar of the first region. A gap between two regions is closed by the section before it; an overlap is cut at the next start; anything shorter than a bar gets one bar.</td></tr>
+<tr><td>Name</td><td>The type is guessed from the words of the name: <i>intro, tease, start</i> = TEASE; <i>verse, groove, loop</i> = ROLL; <i>build, riser, rise</i> = BUILD; <i>pre, pre-drop</i> = PRE-DROP; <i>drop, chorus, hook</i> = DROP; <i>fill</i> = FILL; <i>break, breakdown, bridge</i> = BREAK; <i>outro, end, fade, reset</i> = RESET. You can also use the codes <i>A0 &hellip; A5, BRK, PRE</i>. Without a match: ROLL. Change a type afterwards in the TYPE box.</td></tr>
+<tr><td>Time selection</td><td>If one is set, only regions / markers inside it are imported.</td></tr>
+<tr><td>Limits</td><td>64 sections and 256 bars; what does not fit is cut off.</td></tr>
+</table>
+<p>The import <b>replaces</b> the arrangement (values from the class tables, FOLLOW SONG on, selection on the first section) and is one undo step (Ctrl+Z in REAPER). Loading a project never imports anything by itself.
+The plug-in counts bars with one time signature; tempo changes inside the song are fine, a time-signature change shifts the boundaries (see <a class="xref" href="#limits">Limits</a>).</p>
+
+<h2 id="override"><span class="num">09</span>Live override</h2>
+<p>Each of the five big knobs can be taken over while the song plays. <b>Drag</b> a knob (up raises, Shift for fine steps, the mouse wheel works too) and
+that lane sends your value instead of the ride, over the full 0–100 % range. The label shows <b>OVR</b> and the value in white.</p>
+<ul>
+  <li><b>Release:</b> right-click, double-click or Ctrl+click the knob. The lane returns to the ride at once.</li>
+  <li>An override holds until you release it, across sections. It is not saved with the project or with presets.</li>
+  <li>Smoothing still applies, so the knob does not jump.</li>
+  <li>The XY field in PADS sets an override for cutoff and resonance while you drag and releases it when you let go (unless HOLD is on).</li>
+</ul>
+<div class="box" data-k="Careful with the wheel">Scrolling the mouse wheel over a knob counts as turning it and sets an override. If a lane seems stuck, look for the white OVR label.</div>
+
+<h2 id="output"><span class="num">10</span>Output &amp; timing</h2>
+<table>
+<tr><th>Control</th><th>What it does</th></tr>
+<tr><td><b>MIDI CH</b></td><td>Channel 1–16 for the CC messages. Changing it re-sends every lane on the new channel at once.</td></tr>
+<tr><td><b>RATE</b></td><td>How often a lane is looked at: 1/32, 1/64 (default), 1/128 or 1/256 note. A message is only sent when the 0–127 value actually changed, so a slow ride sends far fewer messages than the grid suggests.</td></tr>
+<tr><td><b>PASS NOTES</b></td><td>On: incoming notes pass through unchanged. Off: notes are dropped (a note that is already sounding is still released properly). All other MIDI always passes.</td></tr>
+<tr><td><b>SEND CC 7</b></td><td>Also sends the volume lane as CC 7. It is a flat 100 % line until you shape it in MAP, DESK or TRACKER; flat, it is handy to put the TT-303 volume to a known value.</td></tr>
+<tr><td><b>INTENSITY</b></td><td>0–200 %. Scales every movement: the cutoff swing and the wobble of the other lanes. 100 % is as set, 0 gives straight lines.</td></tr>
+<tr><td><b>SMOOTH</b></td><td>0–100 %. Rounds off jumps between values with a slew of up to 8 steps. 0 is off.</td></tr>
+<tr><td><b>PANIC</b></td><td>Sends All Notes Off (CC 123) on all 16 channels, forgets the notes it is holding and re-sends every lane.</td></tr>
+</table>
+<h3>When values are sent</h3>
+<ul>
+  <li><b>While playing</b> on the grid set by RATE, anchored at the start of the arrangement.</li>
+  <li><b>At the start of playback</b> immediately, for every lane, even when you start between two grid points. A note on the first beat therefore never plays with an old filter.</li>
+  <li><b>While stopped</b> whenever the cursor moves or you change something (section values, class, INTENSITY, SEND CC 7 and so on): the TT-303 follows the cursor, which is handy for auditioning a position.</li>
+  <li><b>After a jump</b> (loop, cursor) smoothing starts fresh so the value does not glide across the jump.</li>
+</ul>
+<p>The CC messages are mixed into the MIDI stream in time order. When a CC and a note fall on the same sample, the CC goes first.</p>
+
+<h2 id="presets"><span class="num">11</span>Presets</h2>
+<p>The preset bar sits in the header, left of <code>OPTIONS</code>. <b>64 factory presets</b> are built in, plus 32 slots for your own.</p>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-presets.png" alt="Open preset list showing the factory section with Driver 32 Bars, Melodic 32 Bars, Scream 32 Bars and more" width="345" height="322"><figcaption><span class="tag">PRESETS</span><b>The factory list.</b> The name opens the list; scroll for the rest, then the USER section.</figcaption></figure>
+<table>
+<tr><th>Arrangement</th><th>Bars</th><th>Sections</th><th>Character</th></tr>
+<tr><td>32 Bars <i>(four classes)</i></td><td>32</td><td>8</td><td>The standard club arrangement: tease, roll, build, pre-drop, drop, fill, break, reset.</td></tr>
+<tr><td>16 Bars / 64 Bars <i>(Driver)</i></td><td>16 / 64</td><td>8 / 12</td><td>A short version and a long one with a second drop.</td></tr>
+<tr><td>Loop 8</td><td>8</td><td>5</td><td>Roll, build, pre-drop, drop, fill. REPEAT is on: a loop for jamming.</td></tr>
+<tr><td>Tease Intro 24</td><td>24</td><td>5</td><td>A lead-in that ends at the first short drop.</td></tr>
+<tr><td>Fill Storm 32</td><td>32</td><td>11</td><td>Short drops, each followed by a fill.</td></tr>
+<tr><td>Single Drop 48</td><td>48</td><td>7</td><td>One long build and one drop, then reset.</td></tr>
+<tr><td>Slow Burn 64</td><td>64</td><td>6</td><td>Sixteen bars of tease, sixteen of roll, a 20-bar build and a short drop at the end. Smoothing at 20 %.</td></tr>
+<tr><td>Break Heavy 64</td><td>64</td><td>15</td><td>Three drops separated by long breaks.</td></tr>
+<tr><td>Double Drop 96</td><td>96</td><td>13</td><td>Two 16-bar drops with a break and a second build between them.</td></tr>
+<tr><td>Extended 128</td><td>128</td><td>18</td><td>Three drops, the way a long DJ mix is built.</td></tr>
+<tr><td>Epic 192</td><td>192</td><td>18</td><td>16-bar intro stages, three drops of 16 to 24 bars, a long reset.</td></tr>
+<tr><td>Marathon 256</td><td>256</td><td>24</td><td>The longest arrangement the plug-in holds: four drops, one of 32 bars.</td></tr>
+</table>
+<p>Except for the first six, every arrangement is available in <b>all four classes</b> (the name starts with the class). Presets set the class,
+the arrangement and a few output values (intensity, smoothing, rate, repeat). The intensity starts at 100 % for DRIVER and MELODIC, 120 % for SCREAM and 80 % for LOW; these are starting
+points, change them to taste.</p>
+<h3 id="styles">Movement styles (new in 0.9.0)</h3>
+<p>Until 0.8.0 every factory preset moved the cutoff the same way: a sine swing around the straight line. Now each section of a preset has its own <b>variant</b>: a different swing shape, depth and period and,
+where it helps, own points that bend the line. A variant is described relative to the class table and the class range, so it fits all four classes and follows a class change (as long as you have not edited the section).
+Inside a preset the variants rotate, so the second drop does not repeat the first. A style decides which variants a preset uses:</p>
+<table>
+<tr><th>Style</th><th>Character</th></tr>
+<tr><td><b>Tri</b></td><td>Triangle sweeps: even up-and-down filter movement, fast flutter in the pre-drops and fills.</td></tr>
+<tr><td><b>Saw</b></td><td>Sawtooth ramps in both directions: rising sweeps that jump back, falling sweeps that jump up (SAW DOWN), saw risers in the fills.</td></tr>
+<tr><td><b>Steps</b></td><td>Staircases and gates: stepped builds, square-wave cuts, a ladder in the drops, gate flutter in the fills.</td></tr>
+<tr><td><b>Morph</b></td><td>Slow, soft movement: long periods, late rises, double humps, dips in the breaks; a little smoothing.</td></tr>
+<tr><td><b>Mix</b></td><td>Every section different: sine, triangle, saw and square in turn, stairs and curves. Good for long arrangements.</td></tr>
+<tr><td><b>Wub</b></td><td>Hard waves for the drops: falling saws, square cuts, resonance pumping and accent ratchets; intensity +10 %.</td></tr>
+</table>
+<p>The style shows in the name only for the extra presets (<i>Steps 32, Saw 32, Tri 64, Wub 48</i>, each in all four classes); the others use the style that suits their arrangement. <b>RESET TO CLASS</b> brings a section back to the plain sine movement of the class table.</p>
+<h3>Finding a preset</h3>
+<table>
+<tr><th>Looking for&hellip;</th><th>Try</th></tr>
+<tr><td>A loop to jam over</td><td>Loop 8; Fill Storm 32; Driver 16 Bars</td></tr>
+<tr><td>The standard club arrangement</td><td>32 Bars (four classes), and the Steps 32 / Saw 32 variants of it</td></tr>
+<tr><td>One big drop</td><td>Single Drop 48; Wub 48 for the hard version; Tease Intro 24 for a lead-in</td></tr>
+<tr><td>Long tracks with several drops</td><td>Double Drop 96, Extended 128, Epic 192, Marathon 256; Tri 64</td></tr>
+<tr><td>Slow, atmospheric movement</td><td>Slow Burn 64; Break Heavy 64; the Morph style</td></tr>
+<tr><td>Basslines that stay low</td><td>All presets starting with <b>Low</b> (untouched class LOW sections: cutoff limited to 30 %)</td></tr>
+<tr><td>High resonance, screaming lines</td><td>All presets starting with <b>Scream</b></td></tr>
+</table>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-preset-loaded.png" alt="TT-KNOBMOVER with the preset Driver Single Drop 48 loaded: forty-eight bars with one long build and one drop" width="1125" height="1138"><figcaption><span class="tag">LOADED</span><b>Driver Single Drop 48</b> loaded: 48 bars, tease to build, one drop, fill, reset.</figcaption></figure>
+<h3 id="preview">Preset preview</h3>
+<figure class="shot"><img src="img/tt-knobmover/tt-knobmover-preview.png" alt="Ride map in preview mode: the curves of a factory preset in orange with the note PREVIEW - NOT SENT" width="1085" height="545"><figcaption><span class="tag">PREVIEW</span><b>Look before you load.</b> The curves of the previewed preset are drawn in orange; nothing is sent.</figcaption></figure>
+<p>The <b>PREVIEW</b> box in the title bar of the map (RACK+ and MAP) shows any factory preset in the map <b>without loading it</b>: your arrangement and
+the CC output stay as they are, nothing reaches the TT-303. <b>Click the middle of the box</b> to open a list of all presets and pick one (click beside the list to close it). The arrows or the mouse wheel step through the presets, and a <b>right-click</b> on the box jumps back to <b>PREVIEW: OFF</b>. The display in the
+top row says PREVIEW ONLY. <b>LOAD</b> takes the previewed preset over (one undo step), <b>PREVIEW: OFF</b> returns to your arrangement. Editing in the map is
+paused while a preview is shown; zoom and scroll still work.</p>
+<h3>Your own presets</h3>
+<ul>
+  <li><b>SAVE</b> stores the current state in a user slot and asks for a name. <b>...</b> offers rename, copy and delete.</li>
+  <li>A preset stores: class, the whole arrangement (all sections with all values and own points), REPEAT, START BAR, RATE, SEND CC 7, INTENSITY, SMOOTH, MOVE and SCREAM.
+      It does <b>not</b> store FOLLOW SONG, MIDI CH, PASS NOTES, the colour scheme or live overrides, so loading a preset never changes your routing.</li>
+  <li>An asterisk behind the name shows that the state differs from the loaded preset.</li>
+  <li>The user bank lives in the plug-in state: it is saved with the project, travels with FX chains and track templates, and is part of every native REAPER FX preset file.</li>
+</ul>
+
+<h2 id="math"><span class="num">12</span>How the values are made</h2>
+<p>For readers who want to know exactly what is sent. Time is counted in 16th <b>steps</b> from the start of the arrangement
+(16 steps = 1 bar in 4/4; the bar length follows the time signature of the project).</p>
+<pre><code>t      = position inside the section, 0 at its first step, 1 at its end
+line   = START + (END - START) * t                       (no own points)
+line   = polyline START -> P1 -> ... -> END over t           (own points: LINEAR; SMOOTH eases each segment with
+                                                              0.5 - 0.5*cos(pi*f); STEPS holds the last point's value until the next)
+
+CUTOFF : value = line + SWING * INTENSITY * MOVE[CUT] * wave( steps_in_section / PERIOD )
+others : value = line + amp * RIDE * INTENSITY * MOVE[lane] * sin( 2*pi * steps / period + CC )
+VOLUME : value = line (no swing or wobble)
+
+        lane       amp   period (steps)
+        RESONANCE  1.5   40
+        ENV MOD    1.0   31
+        DECAY      1.5   53
+        ACCENT     2.0   37
+
+SCREAM : RES / ENV move towards the SCREAM DROP table midpoint, scaled by SCREAM
+value  = clamp(value, 0, 100) if section edited, else clamp(value, class min, class max)
+smooth : v += (value - v) * (1 - exp(-dt / (SMOOTH * 0.08 steps)))      (SMOOTH 0 = off)
+CC     = round( v * 127 / 100 )</code></pre>
+<p>INTENSITY, RIDE, MOVE and SCREAM are factors in these formulas (100 % = 1). SCREAM is applied before the range limit; a live override replaces the computed lane value. The wobble phase is the CC number in radians, so the four lanes never wobble in step. <code>wave</code> is a sine, a triangle, a rising saw, a square wave
+or a falling saw that starts at zero (SQUARE starts high) and has the period given by PERIOD. Own points replace the line; swing and wobble work on top. The result stays within 0–100 % in edited sections; untouched sections retain the class limits.
+Without movement variants or edits, the default output matches 0.8.0.</p>
+<p>With movement variants disabled and sections untouched, the values follow the arrangement generator of the TT-303 pattern tools value for value: the same lines, swing, wobble, limits and rounding. We checked that by comparing
+every value on a 1/32-note grid for every factory arrangement in all four classes, over up to 256 bars, against the generator. Two things of the generator are not part of the plug-in: the per-piece decay offsets of the
+generator&rsquo;s recipes, and the shortening of the wobble period for pieces under about seven bars.</p>
+
+<h2 id="limits"><span class="num">13</span>Limits &amp; notes</h2>
+<ul>
+  <li><b>Size:</b> up to 64 sections and 256 bars per arrangement, up to 16 own points per lane and section.</li>
+  <li><b>Time signature:</b> the import from regions also counts bars with one signature (the one at the first region).</li>
+  <li><b>Time signature:</b> a bar is counted with the signature at the start of each audio block. A time-signature change in the middle of the project moves the section boundaries; for a track in one signature nothing changes.</li>
+  <li><b>One instance per synth.</b> Two KNOBMOVERs in front of the same TT-303 would both send CC and fight over the knobs.</li>
+  <li><b>Only the TT-303 knobs listed above</b> are driven. Anything else that listens to CC 74, 71, 73, 75, 16 or 7 on the chosen channel will move as well.</li>
+  <li><b>Editing while playing</b> is safe: the CC engine works on its own copy of the arrangement and only takes over a change once the front has finished writing it (since 0.8.0; before, one audio block could read a half-changed arrangement).</li>
+  <li><b>Pads with QUANTIZE</b> switch at the next bar of the project (counted from START BAR), not at the end of the current section.</li>
+  <li><b>Very high rates at very high tempos</b> can produce more than 1000 CC messages in one block; the surplus is dropped and the next block continues.</li>
+  <li>The sliders of the plug-in are hidden on purpose (REAPER would create an undo step every time you open the window with visible sliders); the front offers every function.</li>
+</ul>
+
+<h2 id="trouble"><span class="num">14</span>Troubleshooting</h2>
+<table>
+<tr><th>Symptom</th><th>Cause and fix</th></tr>
+<tr><td>The TT-303 knobs do not move</td><td>TT-KNOBMOVER must come before the TT-303 in the FX chain of the same track. Check the channel (MIDI CH) and that the transport is running or the cursor is moved.</td></tr>
+<tr><td>One lane does nothing</td><td>Look for a white <b>OVR</b> label on its knob (right-click to release) and for a switched-off <b>ON</b> in the selected section. Shift+click ON switches a lane for all sections.</td></tr>
+<tr><td>The ride ends too early or repeats</td><td>Check the total <b>LEN</b>, <b>START</b> and <b>REPEAT</b>. After the last bar without REPEAT the last values are held.</td></tr>
+<tr><td>The ride starts at the wrong bar</td><td><b>START</b> is the project bar where the arrangement begins. With FOLLOW SONG off, the selected section loops instead of following the song.</td></tr>
+<tr><td>Notes are missing</td><td>PASS NOTES is off. Switch it on, or leave it off when another track plays the notes.</td></tr>
+<tr><td>Values seem to jump after a class change</td><td>Edited sections keep their values over 0–100 %. Untouched sections reload the class table and its movement variants. <b>RESET TO CLASS</b> loads the new class values for the selected section.</td></tr>
+<tr><td>A note hangs</td><td>Press <b>PANIC</b>. It sends All Notes Off on all channels.</td></tr>
+<tr><td>REGIONS says <i>RUN ACTION: KNOBMOVER IMPORT</i></td><td>The helper service is not running. Run the action <i>TT-KNOBMOVER: import service</i> once, or use <i>TT-KNOBMOVER: import regions (or markers) as sections</i> from the Action list.</td></tr>
+<tr><td>The import takes the wrong plug-in or nothing happens</td><td>The action works on the TT-KNOBMOVER of the first selected track; select the track first. A project without regions and without markers has nothing to import (a message box says so).</td></tr>
+<tr><td>I cannot add a point</td><td>The lane already has 16 points in that section, or a preset preview is shown (switch it off), or you clicked once only &ndash; points need a double-click.</td></tr>
+<tr><td>RANDOM does nothing</td><td>The amount is 0 (use the AMOUNT slider or its mouse wheel), the preview is on, or LANE / BLOCK targets the volume lane (volume is never rolled).</td></tr>
+</table>
+
+<h2 id="changelog"><span class="num">15</span>Changelog</h2>
+<h3>1.0.0 — Smoothing respects the class limits after a change</h3>
+<p>One fix: during playback, a class change glided the smoothed output of untouched sections outside the still-valid limits of the new class for a long time (a regression of the 0.9.5 fix). The smoothed value now respects the new limits from the first tick after the change; edited sections and live overrides keep the full 0&ndash;100 range. The automated REAPER full test covers this case with its own probe.</p>
+<h3>0.9.6 — LFO per lane and node, new handles, preset list</h3>
+<p>The MOVEMENT panel became an <b>LFO panel</b> for the focus lane: <b>AMP</b> (depth), <b>RATE</b> in <b>SYNC</b> (16th steps) or <b>HZ</b>, the waveform and a picture of the LFO over the section. Every lane has its own LFO now, not only the cutoff. Each <b>node</b> of a lane (the start, every own point, the end) carries its own AMP and RATE, and both glide from node to node, so a lane can speed up, slow down and swell inside one section. <b>RANDOM</b> rolls the LFOs as well. <b>PREVIEW</b> opens a list of the factory presets and a right-click returns to OFF. The FROM / TO handles are half-rectangles inside their own section and no longer overlap. Without an own LFO the output is value for value the same as in 0.9.5.</p>
+<h3>0.9.5 — Full-height DESK, PADS and TRACKER, flat look, wider window</h3>
+<p>DESK, PADS and TRACKER now use the whole height of the window: the DESK strips and the scene pads are much taller, PADS has big section pads and a larger XY field, and the TRACKER shows 28 rows with tall section previews. Buttons, switches, selectors, tabs and pads have a flat look; the window is 10 % wider, so the lanes get more room, and the LEN selector fits LEN 256 BARS. Sound and CC output are unchanged.</p>
+<h3>0.9.0 — Own points, RANDOM, region import, new movement styles</h3>
+<p><b>22 October update:</b> taller lane windows (MAP over 40 % taller, RACK+ also enlarged), MAX / M and lane selector, pointer crosshair with bar / percent / CC, value grid and zoom-dependent bar grid, full 0–100 % editing with class guides, separate RANDOM row with BLOCK, AMOUNT and TARGET. Controls below the map move down; AUTO FIT and manual UI zoom remain available.</p>
+<p><b>Own points in the lanes:</b> double-click a line to bend it; points are joined linearly, smoothly or in steps (lane bar next to PREVIEW), up to 16 per lane and section, saved with the project and in user presets.
+New swing shape <b>SAW DOWN</b>. <b>RANDOM</b> (button and key R) rolls new values that fit the section type and class, for the section, a lane or the whole arrangement, with an amount.
+<b>REGIONS:</b> project regions (or markers) become the sections of the arrangement, through two ReaScripts that come with the plug-in (one-off action and background service).
+<b>Presets:</b> all factory presets were reworked: each section has its own movement variant (sine, triangle, saw up and down, square, stairs, curves, resonance pumping), 16 new presets (Steps 32, Saw 32, Tri 64, Wub 48 in all four classes), 62 in total.
+Without own points and with the old sine variants the CC output is value for value the same as in 0.8.0.</p>
+<p>Also: a project or preset that is read (load, undo) is now handed to the single writer of the arrangement instead of being written directly (closes the open review finding), a truncated project state falls back to the factory arrangement,
+a note-on that arrives for a key that is already held while PASS NOTES is off no longer leaves a hanging note on the TT-303, after a stop the start values are sent again even when the cursor returns to the start, choosing a section with FOLLOW SONG off sends its values while stopped, the position display with REPEAT before START BAR shows 0, a truncated project state falls back to the factory arrangement in the chosen class, and the manual describes the first-steps chain (TT-303 in HOST mode, MIDI channel, the OVR label).</p>
+<h3>0.8.0 — Five views, zoom, keys, preset preview</h3>
+<p>Five views in one plug-in, chosen by tabs in the header: <b>RACK+</b> (as before), <b>MAP</b> (large map with all six lanes, including volume),
+<b>DESK</b> (channel strips with FROM / TO handles, live value and CC meter, eight scene pads), <b>PADS</b> (sixteen section pads, XY field for cutoff and
+resonance that springs back on release) and <b>TRACKER</b> (every section as a row of numbers). Map zoom and scroll (+ / - / FIT, Ctrl + wheel, wheel, scroll bar)
+and keyboard editing. Preset preview in the map without loading or sending. Pads switch at the next bar (QUANTIZE NEXT BAR).
+Edits are handed to the audio thread atomically, so a block can no longer send a half-edited value. UI kit 7.
+New in DESK: <b>MOVE</b> per lane (0 to 200&nbsp;%, default 100&nbsp;%), how strongly the lane swings around its FROM / TO line; saved with the project and in user presets.
+New in PADS: <b>SCREAM</b> (0 to 100&nbsp;%, default 0) pushes resonance up and env mod down towards the scream class, inside the class limits;
+<b>NOTE TRIGGER</b> (default off, channel 16, base C2): notes BASE to BASE + 15 on the trigger channel select sections 1 to 16 like the pads and are not passed on.
+At the default settings the CC output is the same as before.</p>
+<h3>0.3.0 — Edit in the lanes, real extremes on the ring</h3>
+<p>The values of the selected section can be edited directly in the ride map lanes: drag the hollow (FROM) or solid (TO) dot up or down, drag the line between them to move both together, hold <b>Shift</b> for fine steps; the value is shown while dragging, and a FILL section turns into fixed values when edited (as with the sliders). The ring dots of the section knobs now mark the lowest and highest value the section really reaches (ramp plus swing) instead of the ramp ends; the sliders are labelled FROM / TO. The sound is unchanged.</p>
+<h3>0.2.0 — Presets and long arrangements</h3>
+<p>46 factory presets (loops of 8 bars up to a 256-bar marathon, each in all four classes). Arrangements up to 256 bars and 64 sections; LEN list 8 to 256.
+Knob rows in the SECTION and MOVEMENT panels moved down so the sweet-spot arcs no longer cross the panel title. Fixes from an external code review:
+a MIDI channel change re-sends every lane on the new channel; changes made while stopped (SEND CC 7, START BAR, INTENSITY) take effect at once; playback started between two
+grid points sends the start values immediately; SMOOTH never leaves the class limits after a class change; a note-off whose note-on was dropped by PASS NOTES is dropped too;
+the preset modified-star detects more changes; a damaged project state is no longer half-read; the position display follows REPEAT; the LEN box can reach every list entry.</p>
+<h3>0.1.0 — Initial version</h3>
+<p>Front with ride map, five live knobs with START/END per section, MOVEMENT, section tools and output; CC engine after the section tables of the TT-303 pattern generator;
+preset bar with six factory presets; live override per knob.</p>
+<h2 id="bass20261027">1.1.0 — Bass patterns</h2><p>Two short repeating factory rides: Speed Bump Open rises from 15 to 85 percent cutoff over one bar (an exponential curve approximated by three points), then resets. Evolve 4 Bars rises 20 to 70 over three bars and falls to 25 in bar four. ENV MOD accompanies it because TT-303 has no drive CC. These authored curves may exceed the usual class sweetspot limits. The factory bank holds 64 presets.</p><h2 id="review111">1.1.1 — Reliability fixes</h2><p>Withdrawn class changes are cancelled before they can replace the current class. Large audio blocks send every scheduled CC change without truncating the event tail, with MIDI Thru kept in sample order. Hz-mode LFO plots refresh when the tempo changes. The SCREAM tooltip qualifies its class-limit behaviour, and the package includes the missing manual screenshots.</p>
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v1.1.1</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/knobmover-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/knobmover-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-KNOBMOVER v1.1.1</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.1.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
 </body>
 </html>
