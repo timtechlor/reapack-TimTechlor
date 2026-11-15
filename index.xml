@@ -424,7 +424,7 @@
   (latch + RC) with audible accent tail, 6 ms release
 - SLIDE time now sets the arrival time (~95 %) instead of the time constant
 - Square with pitch-dependent duty; 7-tap half-band decimation
-- Hotter distortion (more drive and presence tilt) and +12 dB output
+- Stronger distortion (more drive and presence tilt) and +12 dB output
   make-up: 1.07 is noticeably louder than 1.0 - lower VOLUME if needed
 - New EQ defaults: drive EQ fully open, delay 300 Hz-2.8 kHz,
   reverb 300 Hz-2.5 kHz (header and INIT)
@@ -465,7 +465,7 @@
   when zooming
 1.07
 - Sound engine recalibrated against reference recordings; slide time
-  sets the arrival time; hotter distortion and +12 dB output make-up
+  sets the arrival time; stronger distortion and +12 dB output make-up
   (noticeably louder); several HOST/SEQ fixes]]></changelog>
         <source>https://github.com/timtechlor/reapack-TimTechlor/raw/55c179c87c2eeb43138033af5a75ffe7da105527/Synths/TT-303%20Acid%20Machine.jsfx</source>
         <source file="TT-303/tt-303-jsfx-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/55c179c87c2eeb43138033af5a75ffe7da105527/Synths/TT-303/tt-303-jsfx-manual.html</source>
@@ -527,7 +527,7 @@
   when zooming
 1.07
 - Sound engine recalibrated against reference recordings; slide time
-  sets the arrival time; hotter distortion and +12 dB output make-up
+  sets the arrival time; stronger distortion and +12 dB output make-up
   (noticeably louder); several HOST/SEQ fixes]]></changelog>
         <source>https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303%20Acid%20Machine.jsfx</source>
         <source file="TT-303/tt-303-jsfx-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/dd3c0f1553e027b5f642649728dd685b4d476387/Synths/TT-303/tt-303-jsfx-manual.html</source>
@@ -601,7 +601,7 @@
   when zooming
 1.07
 - Sound engine recalibrated against reference recordings; slide time
-  sets the arrival time; hotter distortion and +12 dB output make-up
+  sets the arrival time; stronger distortion and +12 dB output make-up
   (noticeably louder); several HOST/SEQ fixes]]></changelog>
         <source>https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303%20Acid%20Machine.jsfx</source>
         <source file="TT-303/tt-303-jsfx-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/c2f0581d78fbf7512fe5d741106bc69243b3ec19/Synths/TT-303/tt-303-jsfx-manual.html</source>
