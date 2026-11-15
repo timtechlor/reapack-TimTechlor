@@ -1,10 +1,11 @@
 @description Clean & Flat Acid by Tim Techlor
-@version 1.0.2
+@version 1.0.3
 @author Tim Techlor
 @metapackage
 @provides
   [theme] Clean & Flat Acid by Tim Techlor.ReaperThemeZip
   [theme] Clean & Flat Acid by Tim Techlor note colors (colorblind).png
+  [theme] TT_Splash.png
   [script main] Tim Techlor_theme_adjuster.lua
   [script] TT_ThemeAdjuster.lua
   [script main] TT_ThemeAdjuster_Apply.lua
@@ -19,11 +20,15 @@
   A REAPER theme: dark graphite panels, one acid-green accent, flat square buttons.
   The theme runs on its own. The adjuster window needs ReaImGui 0.10+.
   Baking fonts, the selection frame and the logo watermark need js_ReaScriptAPI.
+  TT_Splash.png is a splash screen in the theme style: Preferences > General > Splash screen image.
   The UI-scale buttons and the silent startup action need the SWS extension.
   All three are in the ReaTeam Extensions repository.
   ReaPack installs the scripts next to each other under Scripts/TimTechlor ReaScripts/Themes/.
   Load "Tim Techlor Theme Adjuster" once. After that, Options > Themes > Theme Adjuster opens it while this theme is selected.
 @changelog
+  1.0.3
+  - Ships TT_Splash.png, a splash screen in the theme style (ColorThemes folder). Set it under Preferences > General.
+  - No changes to the theme itself or the adjuster.
   1.0.2
   - FX parameters in the track panel no longer cover the pan and input rows. They, embedded FX UIs and lists placed in the bottom section now start below the input row.
   - On short tracks without room for a parameter row, the parameters stay hidden instead of being squeezed.

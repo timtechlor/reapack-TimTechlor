@@ -1,17 +1,18 @@
 -- @description Tim Techlor Theme Adjuster
--- @version 1.0.2
+-- @version 1.0.3
 -- @author Tim Techlor
 -- @about
 --   Opens the Tim Techlor Theme Adjuster from Options > Themes > Theme Adjuster / Color Controls.
 --   The theme names this file in rtconfig (adjuster_script). The window itself is TT_ThemeAdjuster.lua
 --   in Scripts/TimTechlor. Load this file once from the action list; after that the menu finds it.
 -- @changelog
+--   1.0.3 Version follows the theme. No changes to the menu entry.
 --   1.0.2 Version follows the theme. No changes to the menu entry.
 --   1.0.1 Version follows the theme. No changes to the menu entry.
 --   1.0.0 Menu entry for the Tim Techlor theme. Runs TT_ThemeAdjuster.lua.
 
 local R = reaper
-local VERSION = "1.0.2"
+local VERSION = "1.0.3"
 local sep = package.config:sub(1, 1)
 
 local function dirname(p)
