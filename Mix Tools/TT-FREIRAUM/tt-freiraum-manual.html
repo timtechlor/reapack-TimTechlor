@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-FREIRAUM Manual – Surgical Spectral Ducking for REAPER</title>
+<meta name="description" content="Reference manual for TT-FREIRAUM, a free surgical spectral ducking JSFX for REAPER: frequency-precise sidechain ducking with three attack/release zones, per-band trims, SC pre-EQ, lookahead, learn snapshot, delta/solo audition and a live spectral display — sidechain via channels 3/4 or cross-track over shared memory with the included TT-FREIRAUM SEND.">
+<meta name="tt-doc-name" content="TT-FREIRAUM">
+<meta name="tt-doc-version" content="1.0.0">
+<meta name="tt-doc-date" content="2026-11-17">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-freiraum-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-FREIRAUM Manual – Surgical Spectral Ducking for REAPER">
+<meta property="og:description" content="Reference manual for TT-FREIRAUM, a free surgical spectral ducking JSFX for REAPER: frequency-precise sidechain ducking with three attack/release zones, per-band trims, SC pre-EQ, lookahead, learn snapshot, delta/solo audition and a live spectral display — sidechain via channels 3/4 or cross-track over shared memory with the included TT-FREIRAUM SEND.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-freiraum-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-freiraum.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-FREIRAUM — User Manual">
+<meta property="article:modified_time" content="2026-11-17">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-FREIRAUM Manual – Surgical Spectral Ducking for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-FREIRAUM, a free surgical spectral ducking JSFX for REAPER: frequency-precise sidechain ducking with three attack/release zones, per-band trims, SC pre-EQ, lookahead, learn snapshot, delta/solo audition and a live spectral display — sidechain via channels 3/4 or cross-track over shared memory with the included TT-FREIRAUM SEND.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-freiraum.png">
+<meta name="twitter:image:alt" content="TT-FREIRAUM — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-freiraum-manual.html#article",
+   "headline": "TT-FREIRAUM — User Manual",
+   "name": "TT-FREIRAUM Manual – Surgical Spectral Ducking for REAPER",
+   "description": "Reference manual for TT-FREIRAUM, a free surgical spectral ducking JSFX for REAPER: frequency-precise sidechain ducking with three attack/release zones, per-band trims, SC pre-EQ, lookahead, learn snapshot, delta/solo audition and a live spectral display — sidechain via channels 3/4 or cross-track over shared memory with the included TT-FREIRAUM SEND.",
+   "url": "https://timtechlor.de/docs/tt-freiraum-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-freiraum-manual.html",
+   "datePublished": "2026-11-17",
+   "dateModified": "2026-11-17",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-freiraum.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER spectral ducking, spectral ducking per frequency band, sidechain EQ ducking, frequency carving plugin, JSFX, dynamic EQ sidechain, cross track ducking REAPER, gmem sidechain",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-freiraum-manual.html#software" },
+   "version": "1.0.0"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-freiraum-manual.html#software",
+   "name": "TT-FREIRAUM",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "1.0.0",
+   "description": "JSFX plug-in for REAPER that carves space in the spectrum of the main signal wherever the sidechain has energy: three attack/release zones, surgical trims, SC pre-EQ, lookahead, learn snapshot and delta/zone-solo audition — sidechain via channels 3/4 or a shared-memory link fed by the included TT-FREIRAUM SEND.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-FREIRAUM", "item": "https://timtechlor.de/docs/tt-freiraum-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-FREIRAUM</span></nav>
+      <div class="wordmark" style="--wm-n:11" role="img" aria-label="TT-FREIRAUM">TT-FREIRAUM</div>
+      <h1>TT-FREIRAUM — User Manual</h1>
+      <div class="meta">JSFX plug-in for REAPER // Version 1.0.0 // TimTechlor</div>
+      <p class="lead">TT-FREIRAUM ducks the main signal <em>per frequency bin</em>: wherever the sidechain has energy, exactly that spectral region is carved out — and nothing else. Three zones with their own attack/release, surgical trims, a pre-EQ on the sidechain and a hybrid ballistics model that ducks faster than the analysis frame go well beyond a broadband ducker.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/freiraum-front.png" aria-label="Enlarge screenshot of the TT-FREIRAUM user interface" title="Click to enlarge"><img src="img/tt-ui-options/freiraum-front.png" width="1131" height="786" alt="TT-FREIRAUM user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#quickstart"><span class="num">02</span><span>Quick start</span></a></li>
+<li><a href="#sidechain"><span class="num">03</span><span>Sidechain routing</span></a></li>
+<li><a href="#zones"><span class="num">04</span><span>Zones &amp; ballistics</span></a></li>
+<li><a href="#engine"><span class="num">05</span><span>Spectral engine</span></a></li>
+<li><a href="#preeq"><span class="num">06</span><span>SC pre-EQ &amp; gate</span></a></li>
+<li><a href="#controls"><span class="num">07</span><span>Controls &amp; display</span></a></li>
+<li><a href="#presets"><span class="num">08</span><span>Presets</span></a></li>
+<li><a href="#audition"><span class="num">09</span><span>Audition &amp; solo</span></a></li>
+<li><a href="#learn"><span class="num">10</span><span>Learn snapshot</span></a></li>
+<li><a href="#latency"><span class="num">11</span><span>Latency &amp; lookahead</span></a></li>
+<li><a href="#readout"><span class="num">12</span><span>Hidden readouts</span></a></li>
+<li><a href="#practice"><span class="num">13</span><span>In practice</span></a></li>
+<li><a href="#trouble"><span class="num">14</span><span>Troubleshooting</span></a></li>
+<li><a href="#changelog"><span class="num">15</span><span>Changelog</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">16</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>A broadband ducker turns the volume down when the sidechain hits — the whole
+signal, including the parts that do not conflict. TT-FREIRAUM works spectrally:
+it analyses the sidechain every 10.7 ms (512-sample hop at 48 kHz, 11.6 ms at
+44.1 kHz) and removes energy from the main signal <b>only at the frequencies
+the sidechain actually occupies</b>.</p>
+<pre><code>main out = main in  −  Σ  ( zone activity(t) × removed zone spectrum )</code></pre>
+<p>The removed energy is reconstructed per zone through its own overlap-add
+path and scaled by a per-sample time-domain activity — a hybrid of spectral
+weights (updated per hop) and analogue-style envelopes (updated per sample).
+A kick ducking a bass removes only the kick's bins; the bass's own harmonics
+in between keep playing. And because the <em>removed</em> part exists as a
+real signal, DELTA audition and ZONE SOLO come free, without phase errors.</p>
+<figure class="shot"><img src="img/tt-ui-options/freiraum-front.png" alt="Current suite front at 125% UI size, version 1.0.0"><figcaption>Current front in v1.0.0, at the default UI size of 125%.</figcaption></figure>
+
+<h2 id="quickstart"><span class="num">02</span>Quick start</h2>
+<ol>
+  <li>Insert <code>TT-FREIRAUM</code> on the track that should make room
+      (e.g. pads, guitars, a busy bus). The <a href="#presets">preset bar</a> in the header offers factory starting points.</li>
+  <li>Feed the sidechain over <b>channels 3/4</b> — the recommended and
+      better path: add a send from the competing track to this track with
+      destination channels 3/4, and set this track to 4 channels.
+      <b>SC SOURCE</b> stays on <code>CH</code>. (The alternative without a
+      send — <b>SC SOURCE</b> <code>GMEM</code> plus
+      <code>TT-FREIRAUM SEND</code> on the source track — is described in
+      <a href="#sidechain">section 03</a>.)</li>
+  <li>Watch the header LED: it must read <code>SC CH 3/4 SIGNAL</code>
+      (on the link: <code>SC GMEM LINK OK</code>). Then raise <b>AMOUNT</b> — the display
+      shows the main spectrum, the sidechain spectrum and the live cut
+      curve.</li>
+  <li>Press <b>DELTA</b> to hear exactly what is being removed, and trim
+      the three zones to taste.</li>
+</ol>
+
+<h2 id="sidechain"><span class="num">03</span>Sidechain routing</h2>
+<p>The plug-in exposes four input pins — Main L/R on 1/2, SC L/R on 3/4 —
+and two ways to fill the sidechain pair. <b>Channels 3/4 is the recommended one</b>; the GMEM link is the
+alternative for cases where a send is not practical:</p>
+<table>
+  <tr><th>SC SOURCE</th><th>Path</th><th>Use case / cost</th></tr>
+  <tr><td><code>CH</code> (default, recommended)</td><td>Sample-synchronous pins 3/4 of the plug-in. Send the source to channels 3/4 and set the receiving track to 4 channels.</td><td>Standard send routing on one track/bus; lowest latency (4608 + LOOKAHEAD only)</td></tr>
+  <tr><td><code>GMEM</code></td><td>Shared ring buffer in the <code>ttab</code> gmem namespace, written by <code>TT-FREIRAUM SEND</code> on the source track</td><td>Ducking across tracks and busses without rewiring — e.g. sidechain straight from a subgroup or FX return. Costs latency: a fixed 2048-sample guard on this track, and 12288 samples on the source track while <code>ALIGN</code> is on in the sender (needed for on-time ducking during playback, see below). REAPER compensates both</td></tr>
+</table>
+<div class="box" data-k="Recommended: CH 3/4">Route the sidechain over channels 3/4 whenever you can. It is the better path: sample-synchronous with the main signal by design, 2048 samples less reported latency on this track, and no extra plug-in and no extra latency on the source track. The GMEM link saves the send. In the tests it gave the same result as channels 3/4, in the render and during playback, but only with <code>ALIGN</code> on in the sender, which adds 12288 samples of latency to the source track, and it relies on both plug-ins getting the project time from REAPER (details in the box below). All examples in this manual therefore use channels 3/4.</div>
+<h3>TT-FREIRAUM SEND: the sender of the GMEM link</h3>
+<p><code>TT-FREIRAUM SEND</code> is part of TT-FREIRAUM, not a separate product: it installs with it, carries the same
+version number and appears in the FX browser as a second entry. It has two switches. <code>SEND</code> streams the track's audio into the link.
+<code>ALIGN</code> (on by default) makes the sender report 12288 samples of latency: the audio passes through unchanged, delayed by exactly
+that amount, and REAPER compensates it like any plug-in latency. The panel shows the
+K-weighted input level, the link status (<code>SENDING</code> or <code>SEND OFF</code>) and a block counter as proof of life.
+<code>COLLISION</code> appears when a second sender writes to the same link: the receiver then gets mixed audio, so keep one
+sender per project switched on.</p>
+<figure class="shot"><img src="img/tt-freiraum/fr_send_on.png" alt="TT-FREIRAUM SEND panel while sending — SEND ON and ALIGN ON switches lit, input level in LUFS with meter, status SENDING and the block counter" width="540" height="165"><figcaption><span class="tag">SENDER</span><b>TT-FREIRAUM SEND, sending.</b> The panel on the sidechain source track: the <code>SEND ON</code> and <code>ALIGN ON</code> switches, the K-weighted input level in LUFS, the status <code>SENDING</code> and the running block counter.</figcaption></figure>
+<figure class="shot"><img src="img/tt-freiraum/fr_send_off.png" alt="TT-FREIRAUM SEND panel switched off — SEND OFF switch, ALIGN ON switch, input level still shown, status SEND OFF" width="540" height="165"><figcaption><span class="tag">SENDER</span><b>Switched off.</b> With <code>SEND OFF</code> nothing is written and the link is released; TT-FREIRAUM stops ducking (less than 1&nbsp;dB left in the test render). The audio on the sender's own track keeps passing through unchanged, and the level display keeps running.</figcaption></figure>
+<p><b>Why ALIGN.</b> During playback REAPER plays a track early by the latency its plug-ins report. FREIRAUM reports
+6656 samples in <code>GMEM</code> mode (plus <code>LOOK</code>), so its track runs ahead of a sender track without latency, and the
+sidechain audio it needs has not been played yet. The ducking then comes late by FREIRAUM's latency minus 2048 samples plus one audio
+block: measured 4736 samples = 107&nbsp;ms at 44.1&nbsp;kHz with 128-sample blocks and <code>LOOK</code> 0. With <code>ALIGN</code> on,
+the sender's track runs ahead as well, and the ring always holds what FREIRAUM needs; 12288 samples cover every <code>LOOK</code>
+setting and audio blocks up to 4096 samples. Switch <code>ALIGN</code> off only for a track you play or monitor live: it then has no
+latency, the ducking arrives late while you listen, and offline renders still match channels 3/4.</p>
+<p>For <code>GMEM</code> mode the sender must be switched on (<code>SEND ON</code>) — the link carries the
+unprocessed audio itself, not just a level. Internally FREIRAUM then delays
+the main signal by 2048 samples before analysis, because the sender may run
+before or after it inside the same audio block. While the transport runs, both plug-ins stamp the
+project time of each block, and FREIRAUM takes the offset between the two tracks from it; with the
+transport stopped it falls back to the measured counter difference. It never reads beyond what the
+sender has confirmed as written (with <code>ALIGN</code> off that is why the ducking is late during playback). If the sender stops
+updating for ~250 ms (bypassed, track offline), the link is declared stale
+and the plug-in falls back to silence on the sidechain: no ducking, clean
+passthrough. Until then it never reads ring data the sender has not written
+yet — such samples count as silence, so a stopped sender cannot replay
+seconds-old sidechain audio. With several senders running, the last writer wins.</p>
+<div class="box" data-k="GMEM link: what was measured"><b>Rendering.</b> Since v1.7.5 the link renders like channels 3/4. In the test renders (44.1, 48 and 96&nbsp;kHz, either track order, <code>ALIGN</code> on and off, also with a plug-in that reports latency in front of the sender or of FREIRAUM) the output over the link was bit-identical to the render over <code>CH 3/4</code>: ducking from the first block on, no dropouts, the same timing. Up to v1.7.4 the link could stay silent for 0.1 to 2.4&nbsp;s after the start, drop out for single stretches later (100&nbsp;ms windows down to 1.3 to 3.1&nbsp;dB of about 5.4&nbsp;dB) and duck about 58&nbsp;ms early; the cause was the way the offset between the two tracks was estimated.<br><b>Playback.</b> With <code>ALIGN</code> on in the sender, the recorded output of playback over the link was identical to playback over <code>CH 3/4</code>: from the first sample after the start, across loop boundaries and after a seek during playback, in either track order. The sender's own audio came out bit-identical, delayed by 12288 samples. With <code>ALIGN</code> off the ducking arrived 4736&nbsp;samples = 107&nbsp;ms late (measured on the audio; 44.1&nbsp;kHz, 128-sample blocks, <code>LOOK</code> 0), so a transient duck then sounds different during mixing than in the render.<br><b>Limits.</b> The playback figures come from one system (ASIO, 44.1&nbsp;kHz, 128-sample blocks); other device block sizes and other buffering settings of REAPER were not measured. While the transport is stopped the plug-ins get no project time, and the link falls back to an estimate from the block counters: good enough to audition, not sample-exact. One sender per project. <code>CH 3/4</code> (the default, see the box above) needs none of this: it is sample-synchronous by design and has no guard delay.</div>
+<div class="box" data-k="Out-of-phase sidechain">The sidechain is detected from its mono sum. A stereo sidechain whose channels are exactly out of phase (right = &minus;left) cancels in that sum and is not detected: in a render, a 1&nbsp;kHz sidechain ducked by 6.0&nbsp;dB in phase and by 0.0&nbsp;dB out of phase. Check the polarity of the sidechain source (or use a mono-compatible send) if nothing ducks.</div>
+<div class="box" data-k="Status LED">The header shows the link state:
+<code>SC CH 3/4 SIGNAL</code> / <code>SC CH 3/4 NO SIGNAL</code>, or
+<code>SC GMEM LINK OK</code> / <code>NO SENDER (GMEM)</code>. Without a valid
+source the plug-in stays idle — nothing is ducked, the main signal passes
+unchanged (still delayed, because PDC is constant).</div>
+
+<h2 id="zones"><span class="num">04</span>Zones &amp; ballistics</h2>
+<p>The spectrum is divided into three zones by two crossover frequencies.
+The zone masks are complementary smooth-step crossfades in log-frequency,
+±1/4 octave wide around each crossover, and sum to exactly 1 — the three
+zones partition the spectrum with no gaps and no overlap.</p>
+<p>Since 0.9.0 the header of the spectral card has <code>3 ZONES</code> / <code>1 BAND</code>.
+<code>1 BAND</code> ducks only between two handles, <code>LO</code> and <code>HI</code> (defaults 250 Hz and 4 kHz, at least half an octave apart), with its own amount, attack, release and trim on the <code>BAND</code> card. Outside that range nothing is removed. The three zone cards stay visible and editable, and do not affect the sound in this mode. <code>3 ZONES</code> is the default; settings inside the old trim range sound the same as before.</p>
+<table>
+  <tr><th>Zone</th><th>Attack</th><th>Release</th><th>Trim</th></tr>
+  <tr><td>LOW — below <code>XOVER LOW</code> (40–500 Hz, def. 140)</td><td>0.5–50 ms (def. 2)</td><td>10–250 ms (def. 20)</td><td rowspan="3">−24 to +24 dB each: scales how much of the detected removal this zone applies. Above +12 dB a quieter sidechain can still reach full removal, as long as it rises above THRESH (trim scales the removal, it does not lift the sidechain over the threshold). The cut never exceeds the whole zone</td></tr>
+  <tr><td>MID — between the crossovers (<code>XOVER HIGH</code> 1–12 kHz, def. 3500)</td><td>2–100 ms (def. 10)</td><td>50–500 ms (def. 150)</td></tr>
+  <tr><td>HIGH — above <code>XOVER HIGH</code></td><td>1–80 ms (def. 5)</td><td>20–300 ms (def. 100)</td></tr>
+</table>
+<p><code>XOVER HIGH</code> is constrained to at least twice
+<code>XOVER LOW</code> — raise the low crossover and the high one moves with
+it if needed.</p>
+<p>Each zone has its own detector on the sidechain: the (pre-EQ'd, mono)
+sidechain is split by 4th-order Linkwitz-Riley-style band filters at the
+crossovers, followed by a fast peak envelope, a gate at <code>THRESH</code>
+with a 3 dB knee, and independent attack/release ballistics — computed
+<b>per sample</b>, so an attack can land well inside the 10.7 ms analysis hop
+(measured: 90 % after 2.9 ms on the LOW zone at its default ATK of 2 ms). The times are
+99 % settling constants. Between hops the zone's spectral removal decays at
+its release rate instead of snapping back at frame boundaries.</p>
+<p>Typical setting: fast low zone (kick vs. sub-bass, no phase smearing), a
+musical mid zone (vocal vs. guitars), a controlled high zone (hi-hat vs.
+snare crispness).</p>
+<figure class="shot"><img src="img/tt-freiraum/fr_v2_zones.png" alt="TT-FREIRAUM zone cards — LOW, MID and HIGH in their own colours, each with the live frequency range, a SOLO toggle and ATK ms, REL ms and TRIM dB knobs" width="884" height="120"><figcaption><span class="tag">ZONES</span><b>One strip per zone.</b> ATK/REL/TRIM knobs plus a SOLO toggle. Each zone has its own colour (bar, knob rings, trim node and plot tint share it), and the header shows the live frequency range of the zone, taken from the two crossovers.</figcaption></figure>
+
+<h2 id="engine"><span class="num">05</span>Spectral engine</h2>
+<p>The engine runs a 4096-sample sqrt-Hann window on a 512-sample hop
+(8× overlap-add, constant-overlap-add sum 4). The sidechain is analysed with
+a 4096-point real FFT, which gives 2049 bins ≈ 11.7 Hz apart at 48 kHz;
+DC and Nyquist are never ducked. The main signal is zero-padded to an
+8192-point transform, so the removal acts as a linear filter and its tails
+cannot wrap around inside the frame; the cut curve is interpolated onto the
+5.9 Hz intermediate bins.</p>
+<p>Two changes in v1.1.0 over v1.0.0: the hop is half as long (v1.0.0:
+1024 samples, 4×), and the main-signal transform is truly zero-padded
+(v1.0.0 filtered circularly within 4096 samples). Measured with a sidechain
+tone that the main signal shares, at AMOUNT 100: the residue of a
+400 Hz→2.8 kHz sweep drops from −55.4 to −64.2 dB, the residue of a 1 kHz
+vocal-style vibrato (±100 Hz, 6 Hz) from −46.7 to −51.2 dB. The energy of
+the removal's impulse response beyond 30 ms falls from −44.1 to −50.5 dB,
+removal away from the notch from −98 to −104 dB. Steady-state depth,
+attack/release, latency and the DELTA null are unchanged. The price is
+~3.5 % of one core more.</p>
+<p>Since v1.5.0 the work of one hop (sidechain analysis, weights, two main
+transforms, up to three zone syntheses per channel) is spread over 13 steps
+36 samples apart instead of landing in a single sample, so a small audio
+buffer at high sample rates no longer sees a spike every 512 samples. The
+price is 512 samples of extra latency (section 11); the sound is unchanged.
+The same zero-padded transform now lives in the shared STFT core and is also
+used by other plug-ins of the suite.</p>
+<p>Per hop, the sidechain magnitudes are converted to dB against a sine-peak
+calibration, mapped through <code>THRESH</code>/<code>RANGE</code> to a 0–1
+weight, <b>dilated by ±2 bins</b> — a 4096-sample window cannot carve a notch
+narrower than roughly five bins, and without dilation a pure tone only
+reaches ~4.7 dB instead of the full 6.0 dB — and smoothed with a 1-2-1
+kernel against comb artefacts and "watery" sound. The removal gain per bin
+and zone is <code>min(1, AMOUNT × weight × trim) × zone mask</code>; each
+zone's removed spectrum is synthesised into its own OLA ring, and the output
+subtracts the activity-weighted sum from the (latency-matched) dry signal.</p>
+<table>
+  <tr><th>Control</th><th>Range</th><th>Function</th></tr>
+  <tr><td><code>AMOUNT</code></td><td>0–100 %, def. 50</td><td>Global removal depth; 100 % = full bin suppression wherever the sidechain is over threshold</td></tr>
+  <tr><td><code>THRESH</code></td><td>−80…0 dB, def. −40</td><td>Sidechain level below which bins count as silent — also the gate of the zone activity detectors</td></tr>
+  <tr><td><code>RANGE</code></td><td>3–48 dB, def. 20</td><td>dB window above THRESH that maps to full weight; smaller = harder, more binary carving</td></tr>
+  <tr><td><code>SMOOTH</code></td><td>0–100 %, def. 0 (off)</td><td>Rounds the corners of the zone activity envelopes, so very fast attacks (e.g. 0.5 ms LOW ATK) no longer click at kick onsets. Global, not part of a preset; at 0 % the output is bit-identical to a build without it</td></tr>
+</table>
+<div class="box" data-k="measured facts">6.0 dB ducking on a 1 kHz sine SC at
+AMOUNT 50, with &lt;0.5 dB at 100 Hz and 10 kHz · DELTA floor below
+−300 dBFS at AMOUNT 0 · impulse position sample-exact under PDC · ~8 % of
+one core at 48 kHz stereo on the test machine (8× overlap, 8192-point
+transforms, 3 zone OLA paths, biquads).</div>
+
+<h2 id="preeq"><span class="num">06</span>SC pre-EQ &amp; gate</h2>
+<p>The <b>SC PRE-EQ</b> shapes the sidechain in the time domain, before
+<em>both</em> consumers — the spectral analysis and the zone detectors hear
+exactly the same filtered signal. One truth, no disagreement between
+"what is removed" and "when".</p>
+<table>
+  <tr><th>Stage</th><th>Range / default</th><th>Typical use</th></tr>
+  <tr><td><code>HPF</code> 4th-order</td><td>20–500 Hz, def. 20 Hz (off at the minimum)</td><td>Remove sub rumble so the ducker follows the real kick</td></tr>
+  <tr><td><code>LPF</code> 4th-order</td><td>1–20 kHz, def. 20 kHz (off at the maximum)</td><td>Ignore hiss/cymbal bleed on the sidechain</td></tr>
+  <tr><td><code>BELL FREQ/Q/GAIN</code></td><td>100 Hz–16 kHz · 0.3–10 · ±18 dB, def. 0 dB (off)</td><td>Surgically notch out a bleed frequency (e.g. hi-hat on the snare send) or emphasise the band that should drive the duck</td></tr>
+</table>
+<p><code>THRESH</code> does double duty: it sets the bin level below which the
+spectrum counts as silent <em>and</em> the gate threshold of all three zone
+detectors (with a 3 dB knee). If a zone never opens even though the
+spectrum shows energy, THRESH is the first knob to lower.</p>
+<figure class="shot"><img src="img/tt-freiraum/fr_v2_sceq.png" alt="TT-FREIRAUM AMOUNT/THRESH/RANGE/SMOOTH panel and SC PRE-EQ panel with HPF, LPF, BELL Hz, BELL Q and BELL dB knobs" width="592" height="138"><figcaption><span class="tag">SC SHAPE</span><b>Amount, gate, smoothing and pre-EQ.</b> AMOUNT is the global depth, THRESH/RANGE gate the sidechain detection, SMOOTH (shown at 50 %) rounds the envelope edges against clicks, and the SC PRE-EQ (HPF, LPF, peak bell) voices what the detector hears.</figcaption></figure>
+
+<h2 id="controls"><span class="num">07</span>Controls &amp; display</h2>
+<p>All sliders stay hidden by design — the drawn front panel (900×622) is
+the interface. Knobs: drag vertically, <kbd>Shift</kbd> for fine steps,
+mouse wheel over a knob, <kbd>Ctrl</kbd>-click, right-click or
+double-click for the default.</p>
+<table>
+  <tr><th>Control</th><th>Values</th><th>Function</th></tr>
+  <tr><td><code>SC SOURCE</code> CH / GMEM buttons</td><td>CH 3/4 · GMEM LINK</td><td>Sidechain input path (section 03)</td></tr>
+  <tr><td><code>AMOUNT</code></td><td>0–100 %, def. 50</td><td>Removal depth</td></tr>
+  <tr><td><code>THRESH / RANGE</code></td><td>−80…0 / 3–48 dB</td><td>Spectral gate shaping (section 06) — also the <code>THR</code> and <code>RNG</code> markers on the right edge of the display (drag up/down, right-click = default)</td></tr>
+  <tr><td><code>XOVER LOW / HIGH</code></td><td>40–500 / 1k–12k Hz</td><td>Zone boundaries — also draggable as lines or as the <code>X1</code>/<code>X2</code> tabs above the display; HIGH ≥ 2× LOW</td></tr>
+  <tr><td><code>LOW/MID/HIGH ATK · REL · TRIM</code></td><td>see zone table</td><td>Per-zone ballistics and removal scaling; TRIM is also on the strip under the display</td></tr>
+  <tr><td><code>PRE HPF / LPF / BELL FREQ·Q·dB</code></td><td>see pre-EQ table</td><td>Sidechain conditioning</td></tr>
+  <tr><td><code>LOOK</code> (LOOKAHEAD)</td><td>0–20 ms, def. 0</td><td>Delays the main signal so ducking starts before the transient (section 10). The value below the knob shows the effective lookahead; at 192 kHz the ring limits it to 18.7 ms.</td></tr>
+  <tr><td><code>MIX</code></td><td>0–100 %, def. 100</td><td>Parallel blend: scales the removed energy only — phase-aligned, no comb</td></tr>
+  <tr><td><code>OUT</code></td><td>±12 dB, def. 0</td><td>Make-up gain after the process</td></tr>
+  <tr><td><code>DELTA / SC LISTEN / LEARN</code></td><td>toggle buttons</td><td>Audition modes and snapshot (sections 08/09). DELTA and SC LISTEN: a short click latches, a long press (over 0.35 s) is heard only while you hold it</td></tr>
+  <tr><td><code>A / B</code> (header)</td><td>two slots</td><td>Compare two settings: clicking the other letter keeps the current setting in its slot and loads the other one; an empty slot starts as a copy. The slots hold the preset values plus SC SOURCE, MIX, SMOOTH and SYNC, and last until the project is closed</td></tr>
+  <tr><td><code>SYNC</code> + note value (bottom line)</td><td>OFF/ON · 1/32, 1/16, 1/8, 1/4 (def. 1/8)</td><td>All release times follow the project tempo: one note value for the three zones and the band, each kept inside its own release range (LOW 10–250, MID 50–500, HIGH 20–300, BAND 50–500 ms). Works with the window closed. Turning a release knob by hand switches SYNC off</td></tr>
+  <tr><td><code>FIT</code> (bottom line, 1 BAND mode)</td><td>button</td><td>Listens to the sidechain for 1.5 s while it plays and sets the band edges around its energy (5–95 % of the energy within 30 dB of the peak, plus 1/6 octave)</td></tr>
+  <tr><td><code>AUTO</code> (bottom line)</td><td>button</td><td>Listens to the sidechain for 1.5 s and sets THRESH 8 dB below its peak (in 1 BAND mode inside the band). If the peak is only just above −80 dB, THRESH goes to −80 and the band trim (SENS) or the three zone trims rise by the missing distance. FIT and AUTO need the window open and the sidechain playing; otherwise the line reports <code>PLAY THE SIDECHAIN</code></td></tr>
+  <tr><td><code>GR</code> strip (bottom line)</td><td>0–24 dB</td><td>Reduction history of the last 3.3 s (strongest cut in any bin, after MIX), the line marks the recent peak</td></tr>
+  <tr><td><code>SOLO</code> per zone</td><td>OFF/LOW/MID/HIGH</td><td>Solos one zone's band (section 08)</td></tr>
+</table>
+<p>The spectral plot (log scale, 20 Hz–20 kHz) shows the <b>main spectrum in
+grey</b> and the <b>sidechain as a white line</b>. What the ducking removes from the main signal right now is
+filled in <b>the colour of the zone</b> it falls in: the area between the main curve and the curve
+after ducking, drawn as a bright line. The shaded <code>THRESH</code> line plus the
+<code>RANGE</code> band above it show where the sidechain starts to bite; the <code>THR</code> and
+<code>RNG</code> markers at the right edge move them directly (THR below the line, RNG above the band;
+right-click = default). The two crossovers are dashed lines with <code>X1</code>/<code>X2</code> tabs above
+the plot; drag the tab or the line. Zone names sit in the plot (a soloed zone shows as a pill). Below the plot, the <code>TRIM</code> lane holds
+a draggable node per zone (±12 dB) with a value tag. The header shows live
+<code>LAT … smp / … ms</code> and <code>GR … dB</code>, the strongest
+per-bin reduction right now (after <code>MIX</code>). The grey MAIN curve shows the louder of the left and right channel. The header texts are placed by their measured
+width: with a large <code>FONT SIZE</code> or a small window the status moves
+behind the wordmark, and if space still runs out the latency drops its
+sample count, then the status word (the LED keeps showing the state), then the
+<code>LAT</code> line — <code>GR</code> always stays.</p>
+<p>The <b>hint line</b> at the bottom of the front explains the control under the mouse in one sentence
+(independent of the tooltip switch in OPTIONS) and shows the messages of <code>FIT</code> and <code>AUTO</code>.</p>
+<figure class="shot"><img src="img/tt-freiraum/fr_v2_display.png" alt="TT-FREIRAUM spectral display — log-frequency plot with X1 and X2 crossover tabs, THR and RNG markers, MAIN/SC/REMOVED legend, and the TRIM lane below" width="884" height="262"><figcaption><span class="tag">DISPLAY</span><b>The spectral plot.</b> Main spectrum vs. sidechain, the removed part in zone colours, crossover tabs, the THRESH/RANGE band with its markers — and the TRIM lane directly underneath.</figcaption></figure>
+
+<h3>Options / Color</h3>
+<p>The <code>OPTIONS</code> button at the right end of the header opens a box
+with three groups. <code>COLOR</code> offers ten colour schemes for the whole
+front: <b>ACID</b> (the factory colour, a neon green), CYAN, ORANGE, MAGENTA,
+YELLOW, RED, BLUE, VIOLET, MINT and ICE — click a swatch to switch the accent,
+its second colour and, for RED to ICE, the tinted panel background at once.
+<code>FONT SIZE</code> scales the title font (<code>FONT 1</code>) and the text
+font (<code>FONT 2</code>) in steps from −4 to +8 (the front of TT-FREIRAUM has fixed text boxes: its
+texts grow up to +2 and keep that size above, so nothing overlaps; the OPTIONS box keeps scaling). <code>CUSTOM COLOR</code>
+gives each of <code>FONT 1</code>, <code>FONT 2</code> and the background
+(<code>BG</code>) its own HSV picker — a combination with too little contrast
+is flagged with a warning; <code>RESET</code>/<code>RESET ALL</code> revert one
+target or everything. A click anywhere outside the box closes it. All of this
+applies per plug-in instance, is stored with the project, the FX chain and
+REAPER presets, and does not touch any audio parameter. The factory colour is
+ACID, and the trace colours of the spectral display (MAIN grey, SC white; the three zone colours are derived from the scheme accent) keep their meaning in every scheme.</p>
+<p><b>Tooltips.</b> Every control has a tooltip: rest the mouse on a knob, toggle,
+crossover or trim handle, the preset bar, <code>OPTIONS</code> or a header
+readout and a one-line explanation appears after a short moment (not while you
+drag). <code>OPTIONS &gt; TOOLTIPS ON / OFF</code>, the switch in the title row
+of the box, turns them off for this instance; the setting is stored with the
+project, like the other style options.</p>
+<figure class="shot"><img src="img/tt-ui-options/freiraum-options.png" alt="TT-FREIRAUM front with the OPTIONS box open — ten colour swatches with ACID selected, FONT SIZE steps for FONT 1 and FONT 2, and the CUSTOM COLOR HSV picker with FONT 1 / FONT 2 / BG targets" width="900" height="625"><figcaption><span class="tag">OPTIONS</span><b>The OPTIONS box.</b> Ten colour schemes (the selected swatch carries a white frame, ACID is active here), font-size steps for the title and text fonts, and a per-element custom-colour picker — per instance, stored with the project.</figcaption></figure>
+
+<h2 id="presets"><span class="num">08</span>Presets</h2>
+<figure class="shot"><img src="img/tt-freiraum/fr_v2_dropdown.png" alt="TT-FREIRAUM with the preset bar in the header left of OPTIONS and the open preset list — FACTORY section with the original and new factory presets" width="900" height="596"><figcaption><span class="tag">PRESETS</span><b>The preset bar</b> sits in the header, directly left of <code>OPTIONS</code>: <code>&lt;</code> name <code>&gt;</code> <code>SAVE</code> <code>...</code>. The name opens the list with the FACTORY and USER sections — 21 factory presets and 32 user slots; scroll to reach the remaining entries.</figcaption></figure>
+<p>The bar loads and saves the <b>whole sound setting</b> of the instance in one step (28 values since 0.9.0; older slots keep their 21 values and the band controls come up at their defaults): <code>AMOUNT</code>, the three zone <code>TRIM</code>s, both crossovers, attack and release of all three zones, the band mode with its edges, amount, trim, attack and release,
+the SC pre-EQ (<code>HPF</code>, <code>LPF</code>, the bell), <code>LOOK</code>, <code>OUT</code>, <code>THRESH</code> and <code>RANGE</code>. <b>Not part of a preset:</b> <code>SC SOURCE</code> (it describes your routing, not the sound), <code>SMOOTH</code> (a global click guard),
+<code>MIX</code>, the audition modes (<code>DELTA</code> / <code>SC LISTEN</code>), the zone <code>SOLO</code>, <code>LEARN</code> together with its snapshot (a measurement of your sidechain; since v1.5.0 saved with the project, but not in a preset slot),
+the colour scheme (<code>OPTIONS</code>) and the hidden test parameters. Loading a preset therefore never switches your routing, your wet/dry balance or an audition. Note that <code>LOOK</code> is part of a preset:
+a preset with lookahead changes the reported latency (REAPER re-aligns it automatically).</p>
+<table>
+  <tr><th>Control</th><th>Function</th></tr>
+  <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Previous / next preset: first the 21 factory presets, then the used user slots; wraps around and loads immediately.</td></tr>
+  <tr><td>Name field</td><td>Opens the list: <b>FACTORY</b> (21 presets) and <b>USER</b> (32 slots, empty ones show <code>- empty -</code>). Mouse wheel scrolls, click loads. A <code>*</code> behind the name means a value differs from the loaded preset.</td></tr>
+  <tr><td><code>SAVE</code></td><td>Saves the current setting into the selected user slot; with a factory preset (or none) selected, into the first free slot. A name box opens (up to 24 characters, default <code>User 01</code>): type, <kbd>Enter</kbd> or <code>OK</code> saves, <code>CANCEL</code> or a click outside cancels.</td></tr>
+  <tr><td><code>...</code></td><td><code>RENAME</code>, <code>COPY</code> (into the next free slot), <code>DELETE</code> (a second click confirms) for the selected user preset, and <code>INIT</code> (all 21 values back to the factory defaults: AMOUNT 50 %, trims 0 dB, crossovers 140 Hz / 3.5 kHz, attack/release 2/20, 10/150 and 5/100 ms, HPF 20 Hz, LPF 20 kHz, bell 1 kHz / Q 1 / 0 dB, LOOK 0 ms, OUT 0 dB, THRESH &minus;40 dB, RANGE 20 dB).</td></tr>
+</table>
+<h3>Original factory presets</h3>
+<p>Starting points, not final settings. The original five presets were measured with a pink-noise main signal (&minus;18 dBFS) and a steady sine as sidechain (&minus;6 dBFS), 3 s after the start, MIX 100 %, offline render.
+The table shows the level change of the main signal in a narrow band around the sidechain tone (&plusmn;6 % for 1 kHz, &plusmn;10 % for 100 Hz), against the same setting with AMOUNT 0. In every case the level 250 Hz, 2.5 kHz and 6 kHz away from the tone stayed within &plusmn;0.01 dB.</p>
+<table>
+  <tr><th>Preset</th><th>Idea</th><th>SC = 1 kHz</th><th>SC = 100 Hz</th></tr>
+  <tr><td><b>Vocal Carve</b></td><td>Sidechain = lead vocal: makes room in the mids. AMOUNT 60 %, mid trim &minus;1 dB, SC filtered 80 Hz&ndash;12 kHz, bell at 2.5 kHz, RANGE 14 dB.</td><td>&minus;4.2 dB</td><td>&minus;7.9 dB</td></tr>
+  <tr><td><b>Kick Space</b></td><td>Sidechain = kick: bass and low mids duck fast (low attack 1 ms, release 80 ms), AMOUNT 75 %, low crossover 120 Hz, SC low-passed at 8 kHz.</td><td>&minus;4.9 dB</td><td>&minus;12.0 dB</td></tr>
+  <tr><td><b>Gentle Glue</b></td><td>Slow, shallow ducking for a bus: AMOUNT 30 %, RANGE 8 dB, long attacks (12&ndash;25 ms) and releases (up to 380 ms).</td><td>&minus;2.7 dB</td><td>&minus;3.1 dB</td></tr>
+  <tr><td><b>Hard Duck</b></td><td>Deep and fast: AMOUNT 100 %, RANGE 30 dB, attacks 0.5&ndash;3 ms, 5 ms lookahead (reported latency 4608 &rarr; 4829 samples at 44.1 kHz).</td><td>&minus;5.3 dB</td><td>&minus;52.3 dB</td></tr>
+  <tr><td><b>Presence Gap</b></td><td>Sidechain = lead: keeps the 3 kHz presence area free (crossovers 180 Hz / 5 kHz, bell at 3 kHz in the sidechain, SC filtered 150 Hz&ndash;16 kHz).</td><td>&minus;4.5 dB</td><td>&minus;6.9 dB</td></tr>
+</table>
+<p>The depth depends on the zone: a narrow sine in the sidechain is a small band, so the average over the measuring band is much smaller than the notch itself; with full-range sidechain material the carved gaps are wider.
+A factory preset changes exactly the 21 values above; <code>SC SOURCE</code>, <code>MIX</code>, audition, solo, <code>LEARN</code> and the colour stay as they are.</p>
+<h3>Where to hear what a preset does</h3>
+<p>Three short routings to test by ear. Match the level before you judge: with the plug-in on and off the loudness should be equal (use <code>OUT</code> or the track fader), otherwise you are comparing loudness, not space. Use <code>DELTA</code> to hear only what is removed.</p>
+<ul>
+  <li><b>Kick and bass</b> &mdash; preset <b>Kick Sub Tight</b> on the bass track, kick on channels 3/4. Listen for the bass stepping back in the low band with every kick while the kick keeps its click; between the kicks the bass is back at full level. <code>DELTA</code> should sound like short low pulses on the kick grid and silence in between.</li>
+  <li><b>Vocal and pad</b> &mdash; preset <b>Vocal Clean Pocket</b> on the pad bus, lead vocal on channels 3/4. Listen for the pad opening a pocket in the mids when a syllable arrives and blooming back afterwards, with low end and air left alone. <code>SC LISTEN</code> shows what the detector hears.</li>
+  <li><b>Hall return</b> &mdash; preset <b>Reverb Vocal Duck</b> behind the reverb, the <em>dry</em> vocal as sidechain. Listen for the tail stepping back while the word is sung and returning smoothly in the pause (MID release 350&nbsp;ms).</li>
+</ul>
+<p>These are descriptions of the intended behaviour. Audio examples are not embedded in this manual.</p>
+<div class="box" data-k="Hard attacks can click">A very fast attack removes a bass note in well under a millisecond; on a low note this is audible as a small click at the onset. In a measurement on a bass line, a LOW attack of 0.5&nbsp;ms with 4&nbsp;ms lookahead gave a click of &minus;36&nbsp;dBFS; with 3&nbsp;ms attack and 3&nbsp;ms lookahead it was &minus;51&nbsp;dBFS, at the same final depth. Kick Sub Tight therefore uses 3&nbsp;ms / 3&nbsp;ms since 1.6.3. If you hear clicks with your own settings, raise the LOW <code>ATK</code> to 2&ndash;3&nbsp;ms and set <code>LOOK</code> to the same value.</div>
+<h3>New factory presets (1.6.0)</h3>
+<p>Sixteen additional starting points for modern productions. Put FREIRAUM on the signal that should make room, and feed the important signal into its sidechain. These recipes are level-dependent: adjust THRESH while the sidechain plays, then tune AMOUNT in the mix. The measurements above describe the original five presets only.</p>
+<p>For the intended starting behaviour, set MIX to 100%, AUDITION to NORM, ZONE SOLO to OFF and LEARN to OFF yourself. These switches and SC SOURCE are deliberately not loaded by a sound preset. All new presets use OUT = 0 dB. Negative TRIM reduces the removal contribution, without completely disabling a zone; SC pre-EQ shapes detection only. RANGE sets the level span above THRESH over which the spectral weight rises to full strength, not a maximum cut in dB. Release times are not tempo-synced. LOOK adds latency compensated by REAPER.</p>
+<table><tr><th>Preset</th><th>FREIRAUM on</th><th>Sidechain</th><th>Intent</th></tr>
+  <tr><td><b>Vocal Clean Pocket</b></td><td>Instrumental / pad bus</td><td>Lead vocal</td><td>Moderate midrange space; reduced low/high trims protect bass and air.</td></tr>
+  <tr><td><b>Rap Front Seat</b></td><td>Beat / instrumental bus</td><td>Rap vocal</td><td>Fast midrange response with a 2.4 kHz detector emphasis.</td></tr>
+  <tr><td><b>Vocal Air Safe</b></td><td>Bright pads / strings / guitars</td><td>Lead vocal</td><td>Midrange space with a 6.5 kHz SC low-pass and strongly reduced high-zone removal.</td></tr>
+  <tr><td><b>Lead Over Pads</b></td><td>Pad / chord bus</td><td>Melodic lead synth</td><td>Sustained midrange clearance with a 240 ms mid release.</td></tr>
+  <tr><td><b>Kick Sub Tight</b></td><td>Sub / bass track</td><td>Short kick</td><td>Fast low-zone clearance; 3 ms low attack with 3 ms lookahead, 55 ms low release and a 1 kHz SC low-pass.</td></tr>
+  <tr><td><b>Techno Kick Pocket</b></td><td>Bass / rumble / low synth bus</td><td>Kick</td><td>Longer low-zone clearance for kick body and tail; 135 ms low release.</td></tr>
+  <tr><td><b>Kick Into 808</b></td><td>808 / deep bass track</td><td>Kick</td><td>Focused low-end space below 110 Hz; neutral detector bell.</td></tr>
+  <tr><td><b>Fast DnB Bass</b></td><td>Fast bass bus</td><td>Kick</td><td>Short low/mid releases for dense breakbeats; 45 / 70 ms.</td></tr>
+  <tr><td><b>Snare Body Space</b></td><td>Synth / guitar / music bus</td><td>Snare / clap</td><td>Midrange transient space; 160 Hz SC high-pass and 1.5 kHz bell.</td></tr>
+  <tr><td><b>Hats Air Slot</b></td><td>Bright synth / noise / FX bus</td><td>Hi-hats / shaker</td><td>High-zone clearance above 6.5 kHz; 1 ms attack / 40 ms release.</td></tr>
+  <tr><td><b>Acid Lead Pocket</b></td><td>Chord / pad / competing synth bus</td><td>Acid / resonant lead</td><td>Wide mid-zone space up to 6 kHz with a 3.2 kHz detector emphasis.</td></tr>
+  <tr><td><b>Reece Mid Space</b></td><td>Reece / mid-bass layer</td><td>Lead / vocal</td><td>Midrange room with reduced sub/high-zone removal; 200 ms mid release.</td></tr>
+  <tr><td><b>Pluck Through Pad</b></td><td>Pad / chord bus</td><td>Pluck / arp / short keys</td><td>Fast onset clearance with 4 ms lookahead and 160 ms mid release.</td></tr>
+  <tr><td><b>Reverb Vocal Duck</b></td><td>Reverb return, after reverb</td><td>Dry lead vocal</td><td>Phrase clearance in the reverb return; 350 ms mid release.</td></tr>
+  <tr><td><b>Delay Lead Duck</b></td><td>Delay return, after delay</td><td>Dry vocal / lead</td><td>Keeps repeats behind new phrases; 280 ms mid release, not tempo synced.</td></tr>
+  <tr><td><b>Bus Gentle Space</b></td><td>Music / background bus</td><td>Vocal / important lead</td><td>Shallow, slow clearance; 24% amount and 32 / 420 ms mid ballistics.</td></tr>
+</table>
+<p>The accompanying <code>MODERNE_PRESETS.md</code> in the plug-in folder contains the complete parameter values and a German routing / adjustment guide. The original five presets keep their indices and settings; the 32 user slots and serialized sound layout are unchanged.</p>
+<p><b>Where the user bank lives.</b> Plug-ins cannot write files, so the 32 user slots are part of the plug-in state: they are saved with the project, with FX-chain and track-template copies,
+and in every <b>REAPER preset</b> of this plug-in (the <code>+</code> button in the FX window toolbar). To take your bank to another project or computer, save a REAPER preset once
+(<code>+</code> &rarr; <i>Save preset</i>) and load it there: the whole bank comes with it. Projects saved with earlier versions load unchanged with an empty bank.</p>
+<p><b>Typing names.</b> REAPER keeps <kbd>Space</kbd> for the transport, so type <kbd>Shift</kbd>+<kbd>Space</kbd> for a blank. Depending on your REAPER settings <kbd>Esc</kbd> closes the whole FX window; use <code>CANCEL</code> instead. (The <code>+</code> menu of the FX window also has <i>Send all keyboard input to plug-in</i>.)</p>
+
+<h2 id="audition"><span class="num">09</span>Audition &amp; solo</h2>
+<table>
+  <tr><th>Mode</th><th>What you hear</th></tr>
+  <tr><td><code>NORM</code> (default)</td><td>Main minus removed spectrum — the product output</td></tr>
+  <tr><td><code>DELTA</code></td><td>Only the removed energy: exactly what the ducker takes away. Nothing else is touched — at AMOUNT 0 the delta floor sits below −300 dBFS</td></tr>
+  <tr><td><code>SC LISTEN</code></td><td>The sidechain <em>after</em> the pre-EQ, delayed to the same output latency — literally what the detector hears</td></tr>
+</table>
+<p><code>ZONE SOLO</code> is a separate selector (OFF/LOW/MID/HIGH, one
+<code>SOLO</code> button per zone) that crossfades the output into a single
+zone's band: with <code>NORM</code> you hear that band <em>after</em>
+ducking — for judging whether a zone is being carved too hard; combined
+with <code>DELTA</code> you hear only what that zone removes. Measured zone
+isolation: −68 dB at 60 Hz and −120 dB at 9 kHz inside a MID solo.</p>
+<p>All mode, solo and learn switches fade over ~20 ms — no clicks
+mid-track. Switching the solo straight from one zone to another fades the
+old zone out, waits until the new zone's band is fully built in the
+analysis (one window, ~85 ms at 48 kHz plus LOOKAHEAD — you hear the
+unsoloed output meanwhile) and then fades the new zone in.</p>
+<figure class="shot"><img src="img/tt-freiraum/fr_v2_master.png" alt="TT-FREIRAUM master section — MIX, LOOK and OUT knobs, DELTA/SC LISTEN/LEARN toggles, SC SOURCE CH/GMEM pair" width="288" height="138"><figcaption><span class="tag">MASTER</span><b>Output and audition.</b> MIX/LOOK/OUT knobs plus the DELTA, SC LISTEN and LEARN toggles and the SC SOURCE pair (CH&nbsp;3/4 vs. GMEM link).</figcaption></figure>
+
+<h2 id="learn"><span class="num">10</span>Learn snapshot</h2>
+<p>Press <code>LEARN</code> while the sidechain plays: the running average
+of the sidechain spectrum (a ~200 ms window) is frozen into a static
+removal profile. Over a 20 ms ramp the weights crossfade from the live
+spectrum to the snapshot, and all three zone activities are pinned fully
+open — the result is an EQ-carving profile that keeps working even when the
+sidechain goes quiet, not a dynamic ducker. Release <code>LEARN</code> to
+ramp back to live tracking.</p>
+<p>Let the sidechain play for at least a fraction of a second before
+pressing so the average is representative. A held profile survives
+transport stops, play and render while the instance runs (since 1.4.4 —
+earlier versions lost it at every transport start); after a sample-rate
+change it is mapped onto the new frequency grid. Since v1.5.0 the profile
+is <b>saved with the project</b> (and with FX-chain copies, track templates
+and REAPER's own preset files) whenever <code>LEARN</code> is on: after a
+reload it works right away, without the sidechain. Projects saved with
+earlier versions carry no profile and behave as before (toggle LEARN again
+with the sidechain playing). The profile is not part of the 32-slot preset
+bar. The averaging window is about 200 ms at every sample rate (up to
+v1.4.5 it shrank at high rates: ~100 ms at 96 kHz, ~50 ms at 192 kHz).</p>
+
+<h2 id="latency"><span class="num">11</span>Latency &amp; lookahead</h2>
+<table>
+  <tr><th>Setting</th><th>Reported delay</th></tr>
+  <tr><td>Base (STFT window 4096 + spread hop work 512)</td><td>4608 samples — 96 ms @48 k, 104.5 ms @44.1 k (up to v1.4.5: 4096)</td></tr>
+  <tr><td>+ LOOKAHEAD 10 ms</td><td>5088 samples @48 k · 5049 @44.1 k — reported exactly to REAPER's PDC</td></tr>
+  <tr><td>+ LOOKAHEAD 20 ms</td><td>5568 samples @48 k</td></tr>
+  <tr><td>GMEM LINK mode</td><td>+2048 samples guard for the sender/receiver block order</td></tr>
+  <tr><td><code>TT-FREIRAUM SEND</code> with <code>ALIGN</code> on</td><td>12288 samples on the sender's own track — 256 ms @48 k, 279 ms @44.1 k (0 with <code>ALIGN</code> off)</td></tr>
+</table>
+<div class="box" data-k="A mixing tool, not a monitoring tool">FREIRAUM is meant for mixing and mastering chains. At 48&nbsp;kHz the reported delay is 4608 samples = 96&nbsp;ms over <code>CH 3/4</code> and 6656 samples = about 139&nbsp;ms over <code>GMEM</code>, each plus <code>LOOK</code> (up to +20&nbsp;ms); a track with <code>TT-FREIRAUM SEND</code> and <code>ALIGN</code> on adds 12288 samples = 256&nbsp;ms of its own. REAPER compensates this for playback and rendering, but it is audible when a performer monitors through the plug-in: put FREIRAUM on bus or return tracks, not on a live monitoring path, and leave it off while recording through it. The header shows the live value in samples and ms.</div>
+<p><code>LOOKAHEAD</code> delays the main signal relative to the zone
+activity — the duck is already down when the (delayed) transient arrives,
+which kills the click at the onset (measured: onset leads by ~9–10 ms at
+LOOKAHEAD 10). The full 20 ms are available up to 176.4 kHz; above that
+the lookahead tops out at 3583 samples (≈18.7 ms @192 k; up to v1.4.5 the
+limit was 1856 samples, i.e. ~19 ms @96 k and ~10 ms @192 k). The header
+shows the live <code>LAT samples / ms</code>. The output lies exactly at
+the reported delay (since 1.4.4; earlier versions were one sample early, so
+a render of 1.4.4 sits one sample later than one of 1.4.3). Moving
+<code>LOOK</code> shifts the latency, which REAPER re-aligns; the ducking
+keeps working while you turn it.</p>
+
+<h2 id="readout"><span class="num">12</span>Hidden readouts</h2>
+<p>For diagnostics and test automation the plug-in publishes read-only
+parameters — hidden from the panel (JSFX <code>-</code> prefix) but exposed
+to the host, so they appear in REAPER's parameter/automation list:</p>
+<table>
+  <tr><th>Parameter</th><th>Content</th></tr>
+  <tr><td><code>Q PDC</code></td><td>Reported latency in samples — the same number the header shows as LAT</td></tr>
+  <tr><td><code>Q SC STATE</code></td><td>0 = no source · 1 = signal present on CH 3/4 · 2 = GMEM link alive (mirrors the header LED)</td></tr>
+  <tr><td><code>Q ACT LOW / MID / HIGH</code></td><td>Live zone activity 0–1, after the gate and the attack/release ballistics</td></tr>
+  <tr><td><code>Q GMAX</code></td><td>Strongest current per-bin removal 0–1 (the header shows it as GR in dB)</td></tr>
+  <tr><td><code>Q HOPS</code></td><td>Analysis hop counter — keeps counting while the engine runs</td></tr>
+  <tr><td><code>Q SC PEAK dB</code></td><td>Level of the loudest sidechain bin this hop, sine-calibrated dB</td></tr>
+  <tr><td><code>Q PB CMD</code> / <code>Q PB IDX</code> / <code>Q PB A</code> / <code>Q PB B</code></td><td>Preset-bank test interface (sliders 37&ndash;40): command, slot or factory index, and two readouts. Only used by the test suite; leave at 0. Commands that write (save, load, factory, INIT) run only when a test script has set the suite's test key, so stray automation cannot touch the preset bank</td></tr>
+  <tr><td><code>Q W MAX</code></td><td>Highest spectral weight 0–1 after THRESH/RANGE gating — did the sidechain open the gate at all?</td></tr>
+</table>
+
+<h2 id="practice"><span class="num">13</span>In practice</h2>
+<p>Three setups cover most of what TT-FREIRAUM is for. Each names the
+routing, the settings that matter and what to watch in the display.</p>
+
+<h3>Kick &#8594; bass: the classic duck</h3>
+<p><b>Goal:</b> every kick hit carves room in a sustained bass or pad —
+only where the kick actually lives, so the bass keeps its own mids and
+tops playing between hits.</p>
+<ol>
+  <li>On the <b>bass track</b>: insert <code>TT-FREIRAUM</code> and set
+      the track channel count to 4. <b>SC SOURCE</b> stays on
+      <code>CH</code>.</li>
+  <li>On the <b>kick track</b>: add a send to the bass track with
+      destination channels 3/4; the kick's own output stays as it is.
+      The header must read <code>SC CH 3/4 SIGNAL</code> —
+      <code>NO SIGNAL</code> means the send is missing or lands on
+      channels 1/2.</li>
+  <li>Raise <b>AMOUNT</b> to 50–80&nbsp;%. Hold <b>SC LISTEN</b> and check
+      that only the kick reaches the detector — if the channel carries
+      rumble or cymbal bleed, raise <code>PRE HPF</code> until the listen
+      contains just the body and the click.</li>
+  <li>LOW zone: <code>ATK</code> ≈&nbsp;2&nbsp;ms, <code>REL</code>
+      20–60&nbsp;ms — short enough to feel tight, long enough not to
+      stutter. If the sub should dive deeper, reach for the zone
+      <code>TRIM</code> before pushing AMOUNT further.</li>
+</ol>
+<div class="box" data-k="What to watch">The GR bars should pulse in time
+with the kick and cluster where its energy sits — fundamental plus
+attack click. Bars spread across the whole plot mean the sidechain
+carries too much foreign material: clean it with the SC pre-EQ, or
+verify with <code>DELTA</code> that only the collisions come out.</div>
+<p><b>Without a send.</b> If a send is not practical — the
+source sits on a subgroup or an FX return, for example — insert
+<code>TT-FREIRAUM SEND</code> first in the kick track's chain (it taps
+whatever plays at that point), leave <code>SEND</code> and <code>ALIGN</code> on and set
+<b>SC SOURCE</b> to <code>GMEM</code> on the bass track. The header must
+then read <code>SC GMEM LINK OK</code>; <code>NO SENDER (GMEM)</code> means
+the sender is bypassed, missing or switched off. This path adds a fixed
+2048-sample guard on top of the 4608-sample base latency (the header
+<code>LAT</code> shows the sum) and 12288 samples of latency on the kick
+track; REAPER compensates both (<a href="#sidechain">section 03</a>).</p>
+<figure class="shot"><img src="img/tt-freiraum/fr_v2_duck.png" alt="TT-FREIRAUM during active ducking — SC CH 3/4 SIGNAL, three GR notches at the sidechain tones, LOW TRIM +4 dB, AMOUNT 85 %" width="900" height="638"><figcaption><span class="tag">LIVE</span><b>Ducking in progress.</b> Sidechain fed over channels 3/4 with tones at 100&nbsp;Hz, 1&nbsp;kHz and 6&nbsp;kHz — every zone carves only where the sidechain has energy (the removed area is filled in the zone colour; the LOW zone is deepest because TRIM sits at +4&nbsp;dB). Header: <code>SC CH 3/4 SIGNAL</code>, GR 80&nbsp;dB at the notch floor, LAT 4961&nbsp;smp&nbsp;≈&nbsp;112.5&nbsp;ms at 44.1&nbsp;kHz (4608 base + 353 for 8&nbsp;ms LOOKAHEAD; with the GMEM link another 2048 link-guard samples are added).</figcaption></figure>
+
+<h3>Vocal unmasking: surgical carve on a bus</h3>
+<p><b>Goal:</b> a dense bus (guitars, keys, pads) gives way to the vocal
+<em>only inside the vocal band</em> — everything outside roughly
+300&nbsp;Hz–4&nbsp;kHz keeps playing untouched.</p>
+<ol>
+  <li>Send the <b>vocal track</b> to channels 3/4 of the bus (send
+      destination 3/4, bus track channel count 4) and leave
+      <b>SC SOURCE</b> on <code>CH</code> — the lowest-latency path, no
+      link guard. Header: <code>SC CH 3/4 SIGNAL</code>.</li>
+  <li>Narrow the work band: <code>XOVER LOW</code> ≈ 300&nbsp;Hz,
+      <code>XOVER HIGH</code> ≈ 4&nbsp;kHz. The MID zone is now exactly
+      the band the vocal masks — the LOW and HIGH zones should stay
+      near-silent and can even be trimmed down.</li>
+  <li>Voice the detector with the <b>SC PRE-EQ</b>: <code>HPF</code>
+      ≈&nbsp;120–250&nbsp;Hz against plosives and rumble,
+      <code>LPF</code> ≈&nbsp;8–10&nbsp;kHz so sibilance does not overdrive
+      the cut, and a <code>BELL</code> boost (+4–8&nbsp;dB, Q&nbsp;1–2) on
+      the masking region (~1–3&nbsp;kHz) so precisely that band decides
+      when to duck.</li>
+  <li>MID zone: <code>ATK</code> 5–10&nbsp;ms, <code>REL</code>
+      200–400&nbsp;ms — a slow release is what makes this transparent
+      instead of pumping. <code>AMOUNT</code> 30–50&nbsp;% is usually
+      plenty for speech clarity.</li>
+  <li>Press <b>SOLO</b> on the MID zone while the vocal sings: you hear
+      that band <em>after</em> ducking — if it sounds hollow, back the
+      TRIM down. Then set SOLO back to <code>OFF</code>.</li>
+</ol>
+<div class="box" data-k="What to watch">GR bars should appear only while
+the vocalist sings, inside the narrowed band. Bars flashing between
+phrases mean THRESH is too low or the pre-EQ too wide — let
+<code>SC LISTEN</code> be the judge: it should contain the vocal and
+nothing else.</div>
+<figure class="shot"><img src="img/tt-freiraum/fr_v2_solo.png" alt="TT-FREIRAUM surgical setup — SC CH 3/4 SIGNAL, crossovers narrowed to 300 Hz and 4000 Hz, MID zone SOLO lit, SC PRE-EQ with HPF 250 Hz and BELL +8 dB at 1 kHz" width="900" height="638"><figcaption><span class="tag">SURGICAL</span><b>The unmasking setup.</b> Crossovers narrowed to 300&nbsp;Hz / 4&nbsp;kHz, MID zone soloed (lit SOLO), pre-EQ engaged (HPF 250&nbsp;Hz, BELL +8&nbsp;dB at 1&nbsp;kHz). The sidechain is wired straight into channels 3/4 — the header reads <code>SC CH 3/4 SIGNAL</code> and LAT stays at the base 4608&nbsp;samples (104.5&nbsp;ms at 44.1&nbsp;kHz), because neither the GMEM guard nor LOOKAHEAD is in play.</figcaption></figure>
+
+<h3>Before you commit: verify it is transparent</h3>
+<p><b>Goal:</b> prove the duck removes exactly the collisions — and
+nothing else — then pin the behaviour.</p>
+<ul>
+  <li><b>DELTA</b> solos the removed energy: it should sound like the
+      collisions, not the song — the slice of bass that collides with
+      each kick hit, the guitar bins sitting under the vocal. If DELTA
+      plays back whole program material, <code>AMOUNT</code> or the zone
+      <code>TRIM</code>s are too hot; if it is near-silent while the
+      display shows cuts, the sidechain path is the thing to check.</li>
+  <li><b>SC LISTEN</b> plays the sidechain <em>after</em> the pre-EQ —
+      literally what the detector hears. Tune HPF/LPF/BELL here, not
+      blind: if the listen contains the trigger and nothing else, the
+      carve can only be surgical.</li>
+  <li><b>ZONE SOLO</b> is a diagnostic, not an effect — always return it
+      to <code>OFF</code>. Its isolation is deep enough (−68&nbsp;dB at
+      60&nbsp;Hz inside a MID solo) that a forgotten SOLO reads as a
+      broken mix.</li>
+  <li><b>LEARN</b> freezes the ~200&nbsp;ms average sidechain spectrum
+      into a static profile: the carve keeps working even while the
+      sidechain pauses — right for "hold space for the lead through the
+      whole section", wrong for punchy groove ducking. Since v1.5.0 the
+      snapshot is saved with the project while LEARN is on.</li>
+  <li><b>LOOKAHEAD</b> 5–10&nbsp;ms when onsets click: the cut is already
+      down when the transient arrives. It is not free — check the cost
+      in the header <code>LAT</code> readout (4608&nbsp;smp base
+      +&nbsp;lookahead, +&nbsp;2048 in GMEM mode) and remember REAPER
+      compensates all of it via PDC.</li>
+</ul>
+<figure class="shot"><img src="img/tt-freiraum/fr_v2_delta.png" alt="TT-FREIRAUM with DELTA audition engaged — lit DELTA toggle in the MASTER panel, live GR notches still visible in the display" width="900" height="638"><figcaption><span class="tag">DELTA</span><b>Audit the removal.</b> DELTA engaged — what you hear now is only what was taken out, and the display keeps showing which bins are being cut. Combined with a zone SOLO it isolates one zone's removal; at AMOUNT&nbsp;0 the delta floor sits below −300&nbsp;dBFS, so anything you hear is real work.</figcaption></figure>
+
+<h2 id="trouble"><span class="num">14</span>Troubleshooting</h2>
+<ul>
+  <li><code>SC CH 3/4 NO SIGNAL</code> — the send is missing, the track has
+      only 2 channels, or the send lands on channels 1/2. Set the send's
+      destination channels to 3/4 and the track channel count to 4.</li>
+  <li><code>NO SENDER (GMEM)</code> — no sender alive: <code>TT-FREIRAUM SEND</code> needs
+      <code>SEND ON</code> and must actually run
+      (a bypassed or offline sender goes stale after ~250 ms). With several
+      senders the last writer wins — keep it to one.</li>
+  <li>Ducking over <code>GMEM</code> sounds late during playback —
+      <code>ALIGN</code> is off in <code>TT-FREIRAUM SEND</code>. Switch it
+      on (section 03); offline renders are aligned either way. Late starts
+      and dropouts of the link were fixed in v1.7.5.</li>
+  <li>Ducking feels late on transients — raise <code>LOOKAHEAD</code> to
+      5–10 ms.</li>
+  <li>Wide smearing instead of a notch — normal STFT physics; sharpen the
+      result with a smaller <code>RANGE</code> and a harder
+      <code>THRESH</code>, or narrow the sidechain with the pre-EQ bell.</li>
+  <li>A zone never opens though the spectrum shows energy — THRESH gates
+      the zone detectors too; lower it, or check the zone TRIM.</li>
+  <li><code>XOVER HIGH</code> refuses to go lower — it is held at
+      ≥ 2 × <code>XOVER LOW</code> by design; lower the low crossover
+      first.</li>
+  <li>LEARN did nothing after reloading a project saved with v1.4.5 or
+      earlier — those versions did not store the snapshot; press LEARN again
+      with the sidechain playing (from v1.5.0 on it is saved).</li>
+  <li>Pumping on a busy sidechain — shorten the zone releases or drop
+      <code>MIX</code> below 100 % for a subtler blend.</li>
+</ul>
+<h2 id="changelog"><span class="num">15</span>Changelog</h2>
+<h3>1.0.0 — First public release</h3><ul>
+<li>First public release as Drop 06 of Acid Season, with the fixes from the final code review.</li>
+</ul>
+<h3>0.10.0 — Tempo sync, A/B, FIT and AUTO</h3><ul>
+<li>New: <code>SYNC</code> sets all release times from the project tempo (1/32 to 1/4), each zone within its own release range. It also works with the window closed; turning a release knob switches it off.</li>
+<li>New: <code>A / B</code> in the header compares two settings.</li>
+<li>New: a hint line at the bottom explains the control under the mouse and shows messages.</li>
+<li>New: <code>FIT</code> sets the band from the sidechain (1 BAND mode), <code>AUTO</code> sets THRESH from it.</li>
+<li>New: reduction history strip (last 3.3 s) next to the buttons.</li>
+<li><code>DELTA</code> and <code>SC LISTEN</code> latch on a click and act only while held on a long press.</li>
+<li>The front is 26 units taller (900×622). The audio engine is unchanged: with SYNC off the output is bit-identical to 0.9.0.</li>
+</ul>
+<h3>0.9.0 — One band, wider trim</h3><ul>
+<li>New: <code>1 BAND</code> ducks a single range between two handles, with its own amount, attack, release and trim. <code>3 ZONES</code> remains the default.</li>
+<li>Zone trim now reaches −24 to +24 dB, so a quieter sidechain can reach full removal without turning the sidechain track up. Values from −12 to +12 dB in three-zone mode sound the same as before.</li>
+</ul>
+<h3>1.7.5 — Sender included, crossover click, display start</h3><ul>
+<li>New: the package includes <code>TT-FREIRAUM SEND</code>, the sender for the GMEM link. It is part of TT-FREIRAUM and carries its version. Put it on the sidechain source track and set <code>SC SOURCE</code> to <code>GMEM</code>. Its <code>ALIGN</code> switch (on by default) reports 12288 samples of latency for that track, so the ducking over the link is on time during playback.</li>
+<li>Fix: the GMEM link no longer starts late or drops out. The offset to the sender now comes from the project time both plug-ins stamp per block. In renders the link is bit-identical to the channels 3/4 path (before: up to 2.4&nbsp;s without ducking after the start, single dropouts later, ducking about 58&nbsp;ms early). During playback it matches channels 3/4 when <code>ALIGN</code> is on in the sender; with <code>ALIGN</code> off it ducks late (107&nbsp;ms at 44.1&nbsp;kHz, 128-sample blocks, LOOK 0). The link is no longer marked experimental; channels 3/4 remain the recommended path. Audio over channels 3/4 is unchanged.</li>
+<li>Clicking a crossover tab or line no longer moves the crossover. It follows the mouse from the click position, like the THR and RNG markers.</li>
+<li>After transport start the open display no longer brings back the spectrum of the previous run.</li>
+<li>A LEARN block with a non-finite header value is rejected instead of replacing the running profile.</li>
+<li>The tooltip of the pre-EQ curve says that the drawing is an approximation: close to half the sample rate the real filters deviate by a few dB.</li>
+<li>Rectangles and rounded boxes sit on whole pixels, so odd zoom steps show no hairline gaps. Sound unchanged.</li></ul>
+<h3>1.7.4 — LEARN, knobs, display</h3><ul>
+<li>LEARN off and on again takes a new snapshot, including after a profile was just loaded.</li>
+<li>A knob reports a change to the host only when its value moves, so redrawing the panel no longer overwrites automation.</li>
+<li>SOLO, DELTA, SC LISTEN, LEARN and GMEM follow the same on/off test as the audio path. A fractional value turns off on the first click.</li>
+<li>A non-finite sample on the main input is replaced before the delay line and the transform.</li>
+<li>After transport start the spectrum begins at the display floor instead of full scale. A broken value in a user preset falls back to its default. The pre-EQ bell drawing uses the same frequency cap as the filter.</li></ul>
+<h3>1.7.3 — Sidechain guard and LEARN load</h3><ul>
+<li>A non-finite sidechain sample is replaced before the pre-EQ, so it cannot stick in the LEARN average.</li>
+<li>A truncated LEARN block stays out of the running profile. Non-finite values in a complete block become zero.</li>
+<li>AUDITION and ZONE SOLO snap to their integer steps.</li></ul>
+<h3>1.7.2 — Marker and status text</h3><ul>
+<li>The RANGE marker no longer sits on the THRESH marker when THRESH is near 0 dB. They stack, and both stay clickable.</li>
+<li>The GMEM status line reads NO SENDER. Sound unchanged.</li></ul>
+<h3>1.7.1 — Flat kit widgets, preset click fix</h3><ul>
+<li>The preset bar and the OPTIONS widgets now use the flat style to match the 1.7.0 front.</li>
+<li>Presets Hard Duck and Fast DnB Bass: LOW attack raised from 0.5 to 3 ms — removes the measurable click at kick onsets (same remedy as Kick Sub Tight in 1.6.3); depth unchanged.</li></ul>
+<h3>1.7.0 — New front</h3><ul>
+<li>Flat front in the style of the newer TimTechlor plug-ins: the display is the main control surface (crossover tabs, THR/RNG markers, trim nodes with value tags).</li>
+<li>The display shows what is removed, in one colour per zone; the old gain-reduction bars from the top are gone. Zone cards show the live frequency range; the SC PRE-EQ panel draws the response of HPF, LPF and bell.</li>
+<li>Sound, parameters, presets and saved state unchanged.</li></ul>
+<h3>1.6.3 — Experimental GMEM, timing notes</h3><ul>
+<li>The GMEM link is marked experimental (tooltip and manual); channels 3/4 stays the default and reference path.</li>
+<li>Manual: mixing-tool use and the monitoring limit with the exact latency figures; descriptions of what a preset does.</li>
+<li>Known limit documented: an exactly out-of-phase stereo sidechain is not detected.</li>
+<li>Lower CPU: a neutral SC pre-EQ is skipped, and the main-signal analysis is skipped while no zone, solo or open display needs it. The output is bit-identical in all verified deterministic scenarios. Single measurements on the reference machine while it was busy; the spread between runs was large, so treat the figures as a rough indication, not a guaranteed saving, as a share of one core: 5.00&nbsp;% standard (CH 3/4), 2.97&nbsp;% idle (plug-in window closed for at least 0.5&nbsp;s), 5.32&nbsp;% GMEM, 5.67&nbsp;% with automation.</li>
+<li>Review fixes: the SC pre-EQ and detector filters are only recalculated when their controls or the sample rate change, so automating other controls keeps the CPU saving; the theme selector no longer reports a wrong parameter change to the host.</li>
+<li>Reported latency is only written when its value changes (0 extra writes over 10 transport starts); this alone does not prove that REAPER skips its own delay recalculation.</li>
+<li>Test-only hook for crossover changes inside a distributed hop and a PDC write counter; DSP, latency and saved state unchanged.</li></ul>
+<h3>1.6.2 — Front review</h3><ul>
+<li>SC SOURCE buttons fit inside the MASTER panel.</li>
+<li>LOOK shows the effective lookahead at the current sample rate (18.7 ms maximum at 192 kHz).</li>
+<li>DSP and saved state unchanged.</li></ul>
+<h3>1.6.1 — Review fixes</h3><ul>
+<li>Projects saved with 1.5.0 or older load their LEARN profile again.</li>
+<li>The zone detector crossover follows the zone masks; reported latency in the parameter handler is written only when it changes.</li></ul>
+<h3>1.6.0 — Factory presets</h3><ul>
+<li>16 practical presets added (21 total), with the original five and the user-bank format preserved.</li></ul>
+<h3>1.5.3 — Review fixes</h3><ul>
+<li>GMEM reads confirmed sender data; SOLO waits for complete frames; crossover and SOURCE changes keep each hop consistent.</li>
+<li>MAIN includes both channels, and GR reflects MIX.</li></ul>
+<h3>1.5.1 — LEARN profile restored</h3><ul><li>Saved LEARN profiles are read on project load and undo.</li></ul>
+<h3>1.5.0 — LEARN, smoothing and timing</h3><ul>
+<li>LEARN profiles are saved. OUT and MIX glide over about 10 ms; hop work is spread over 13 steps.</li>
+<li>Reported base latency is 4608 samples plus LOOK; 20 ms LOOK is available through 176.4 kHz.</li></ul>
+<h3>1.4.5 — UI size</h3><ul>
+<li>Default size 125%; saved size, font and colour options; updated front and OPTIONS screenshots.</li></ul>
+
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v1.4.5</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/freiraum-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/freiraum-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-FREIRAUM v1.0.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>

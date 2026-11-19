@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-FREIRAUM MINI Manual – One-Band Spectral Ducking for REAPER</title>
+<meta name="description" content="Reference manual for TT-FREIRAUM MINI, a free one-band spectral sidechain ducking JSFX for REAPER: the sidechain spectrum carves room into the main signal inside one band you set in the display, with FIT and AUTO setup, a live reduction ring, tempo sync and delta listening.">
+<meta name="tt-doc-name" content="TT-FREIRAUM MINI">
+<meta name="tt-doc-version" content="1.0.0">
+<meta name="tt-doc-date" content="2026-11-16">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-freiraum-mini-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-FREIRAUM MINI Manual – One-Band Spectral Ducking for REAPER">
+<meta property="og:description" content="Reference manual for TT-FREIRAUM MINI, a free one-band spectral sidechain ducking JSFX for REAPER: the sidechain spectrum carves room into the main signal inside one band you set in the display, with FIT and AUTO setup, a live reduction ring, tempo sync and delta listening.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-freiraum-mini-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-freiraum-mini.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-FREIRAUM MINI — User Manual">
+<meta property="article:modified_time" content="2026-11-16">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-FREIRAUM MINI Manual – One-Band Spectral Ducking for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-FREIRAUM MINI, a free one-band spectral sidechain ducking JSFX for REAPER: the sidechain spectrum carves room into the main signal inside one band you set in the display, with FIT and AUTO setup, a live reduction ring, tempo sync and delta listening.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-freiraum-mini.png">
+<meta name="twitter:image:alt" content="TT-FREIRAUM MINI — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html#article",
+   "headline": "TT-FREIRAUM MINI — User Manual",
+   "name": "TT-FREIRAUM MINI Manual – One-Band Spectral Ducking for REAPER",
+   "description": "Reference manual for TT-FREIRAUM MINI, a free one-band spectral sidechain ducking JSFX for REAPER: the sidechain spectrum carves room into the main signal inside one band you set in the display, with FIT and AUTO setup, a live reduction ring, tempo sync and delta listening.",
+   "url": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html",
+   "datePublished": "2026-11-16",
+   "dateModified": "2026-11-16",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-freiraum-mini.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER spectral ducking, sidechain ducking one band, make room for vocals, kick bass ducking, JSFX, dynamic EQ sidechain, frequency ducking plugin",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html#software" },
+   "version": "1.0.0"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html#software",
+   "name": "TT-FREIRAUM MINI",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "1.0.0",
+   "description": "JSFX plug-in for REAPER that ducks the main signal only where the sidechain has energy, inside one frequency band: set the band by dragging, by chips or with FIT, set the threshold with AUTO, and hear the result with DELTA.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-FREIRAUM MINI", "item": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-FREIRAUM MINI</span></nav>
+      <div class="wordmark" style="--wm-n:16" role="img" aria-label="TT-FREIRAUM MINI">TT-FREIRAUM MINI</div>
+      <h1>TT-FREIRAUM MINI — User Manual</h1>
+      <div class="meta">JSFX plug-in for REAPER // Version 1.0.0 // TimTechlor</div>
+      <p class="lead">TT-FREIRAUM MINI makes room the quick way: put it on the track that should step back, feed it the track that should come through, press FIT and AUTO, turn AMOUNT. It removes only the frequencies the sidechain is playing right now, inside one band, and leaves the rest of the sound alone.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/freiraummini-front.png" aria-label="Enlarge screenshot of the TT-FREIRAUM MINI user interface" title="Click to enlarge"><img src="img/tt-ui-options/freiraummini-front.png" width="931" height="524" alt="TT-FREIRAUM MINI user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#quickstart"><span class="num">02</span><span>Quick start</span></a></li>
+<li><a href="#sidechain"><span class="num">03</span><span>Sidechain routing</span></a></li>
+<li><a href="#display"><span class="num">04</span><span>The display</span></a></li>
+<li><a href="#controls"><span class="num">05</span><span>Controls</span></a></li>
+<li><a href="#listen"><span class="num">06</span><span>Listening and comparing</span></a></li>
+<li><a href="#presets"><span class="num">07</span><span>Presets</span></a></li>
+<li><a href="#latency"><span class="num">08</span><span>Latency &amp; lookahead</span></a></li>
+<li><a href="#big"><span class="num">09</span><span>MINI and TT-FREIRAUM</span></a></li>
+<li><a href="#trouble"><span class="num">10</span><span>Troubleshooting</span></a></li>
+<li><a href="#changelog"><span class="num">11</span><span>Changelog</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">12</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>A normal ducker turns the whole track down when the sidechain plays. TT-FREIRAUM MINI works per frequency:
+it looks at the spectrum of the sidechain and removes from the main signal exactly the frequency bins where the
+sidechain has energy, and only inside one band. A vocal over a pad takes out the pad's energy at the vocal's own
+frequencies; the pad's other notes keep playing. A kick over a bass takes out the bass only under the kick, only in
+the low band.</p>
+<p>The engine is the same spectral engine as in TT-FREIRAUM (8192-point transform, 8x overlap, attack and release
+per sample, lookahead). MINI shows what you need for one band and helps you set it fast. The front at the default
+size is shown in the header of this manual and in the section <a href="#ui-size-settings">UI Size &amp; Saved Options</a>.</p>
+
+<h2 id="quickstart"><span class="num">02</span>Quick start</h2>
+<ol>
+<li>Insert TT-FREIRAUM MINI on the track that should make room (pad, bass, music bus, reverb return).</li>
+<li>Give that track 4 channels and send the trigger track (vocal, kick, lead) to channels 3/4 of it.
+The SIDECHAIN box lights <b>SIGNAL</b> when audio arrives; until then it shows how to route it.</li>
+<li>Start playback. Click a band chip (<b>KICK</b>, <b>VOX</b> ...) or press <b>FIT</b>: MINI listens to the sidechain
+for 1.5 seconds and places the band around its energy.</li>
+<li>Press <b>AUTO</b>: MINI sets THRESH 8 dB below the sidechain peak inside the band (lowest −80&nbsp;dB; a peak just above that also raises SENS, a quieter one shows SIDECHAIN TOO QUIET).</li>
+<li>Turn <b>AMOUNT</b> until the trigger sits clearly in front. The inner ring of the knob shows the reduction right now.</li>
+<li>Set <b>SPEED</b>: towards DRUM for drums, middle for vocals, towards PAD for pads and returns.</li>
+<li>Hold <b>DELTA</b> for a moment to hear what is removed; release it to hear the normal output.</li>
+</ol>
+<p>In a hurry: switch on <b>EASY</b> and use AMOUNT alone. Low values give a gentle, slow and soft result, high values a
+fast and hard carve.</p>
+
+<h2 id="sidechain"><span class="num">03</span>Sidechain routing</h2>
+<p><b>CH</b> (recommended): the sidechain comes from input channels 3/4 of the same track. In REAPER set the track
+to 4 channels and create a send from the trigger track to channels 3/4. This path is sample-exact and works in
+playback and render alike.</p>
+<p><b>GMEM</b>: the sidechain comes from another track over a shared-memory link. Put <b>TT-FREIRAUM SEND</b> on the
+trigger track (it is installed with TT-FREIRAUM) and keep <b>ALIGN</b> on in the sender, then the ducking is on time
+during playback. The link adds 2048 samples of latency. Use it when a send to channels 3/4 is not practical.</p>
+<p>Status: <b>SIGNAL</b> / <b>NO SIGNAL</b> in CH mode, <b>LINK OK</b> / <b>NO SENDER</b> in GMEM mode. While nothing
+arrives, the box shows a short routing hint instead of the reduction meter. If the trigger simply is not playing at
+that moment, the hint is expected.</p>
+
+<h2 id="display"><span class="num">04</span>The display</h2>
+<p>Grey is the main signal, white the sidechain, green under the grey curve is what is removed right now. The band is
+the bright area; everything outside it is dimmed because nothing is ducked there. Inside the band the sidechain curve
+turns green where it rises above THRESH, so you see what triggers the ducking. The triangle at the left edge marks the
+recent sidechain peak inside the band; if nothing crosses the line, <b>BELOW THRESH</b> appears.</p>
+<table>
+<tr><th>Gesture</th><th>What happens</th></tr>
+<tr><td>Drag the HP or LP line, or its tab</td><td>Moves that edge. Shift snaps to third-octave steps. Double-click or right-click resets it (250&nbsp;Hz / 4&nbsp;kHz). The edges stay at least half an octave apart and below 0.45&nbsp;× the sample rate.</td></tr>
+<tr><td>Drag inside the band sideways</td><td>Moves the whole band; its width stays and it stops at the ends.</td></tr>
+<tr><td>Drag inside the band up or down</td><td>Sets THRESH (the direction you move first decides).</td></tr>
+<tr><td>Mouse wheel inside the band</td><td>Widens or narrows the band by 1/6 octave per notch around its centre.</td></tr>
+<tr><td>Drag on empty space outside the band</td><td>Draws a new band from where you pressed to where you release.</td></tr>
+<tr><td>Drag the THRESH line</td><td>Sets THRESH; right-click = −40&nbsp;dB; double-click = AUTO.</td></tr>
+<tr><td>Right-click inside the band</td><td>Resets the band to 250&nbsp;Hz – 4&nbsp;kHz.</td></tr>
+</table>
+<p>While you drag, a bubble shows the frequency, the nearest note and the band width in octaves.</p>
+<p>Below the display: band chips <b>SUB</b> (30–90&nbsp;Hz), <b>KICK</b> (40–200&nbsp;Hz), <b>BASS</b> (60–300&nbsp;Hz),
+<b>MUD</b> (150–600&nbsp;Hz), <b>VOX</b> (300&nbsp;Hz–5&nbsp;kHz), <b>AIR</b> (5–16&nbsp;kHz), <b>FULL</b>; then <b>FIT</b> and
+<b>AUTO</b>, which listen to the playing sidechain for 1.5 seconds (the display must be open). On the right three view
+switches: <b>CURVE</b> draws the reduction per frequency as a yellow line (top = 0&nbsp;dB, scale to 24&nbsp;dB),
+<b>CURSOR</b> shows a hairline with the main, sidechain and output level at the mouse, <b>HINTS</b> shows a line that
+explains the control under the mouse (or describes the loaded factory preset).</p>
+
+<h2 id="controls"><span class="num">05</span>Controls</h2>
+<table>
+<tr><th>Control</th><th>Range</th><th>What it does</th></tr>
+<tr><td>AMOUNT</td><td>0–100&nbsp;%</td><td>How much of the sidechain energy is removed inside the band. The inner ring and the line below the knob show the reduction right now.</td></tr>
+<tr><td>EASY</td><td>on/off</td><td>AMOUNT also sets SPEED and RANGE: low = gentle (slow, soft), high = hard carve (fast, hard). The word next to the switch names the character (SPACE, POCKET, CARVE). EASY also follows AMOUNT automation while the window is closed; with SYNC on, release stays with the tempo. Turning SPEED, ATK, REL or RANGE by hand switches EASY off.</td></tr>
+<tr><td>THRESH</td><td>−80…0&nbsp;dB</td><td>Sidechain level where ducking starts. Same as the line in the display.</td></tr>
+<tr><td>SPEED</td><td>2/50 … 50/500&nbsp;ms</td><td>One knob for attack and release (shown as A / R). DRUM = attack 2&nbsp;ms, release 50&nbsp;ms; PAD = 50 / 500&nbsp;ms; the middle is about 10 / 150&nbsp;ms. The chain icon splits it into separate ATK (2–100&nbsp;ms) and REL (50–500&nbsp;ms) knobs.</td></tr>
+<tr><td>SYNC</td><td>1/32 … 1/4</td><td>Release follows the project tempo as a note value; click the readout below SPEED to step through 1/32, 1/16, 1/8, 1/4. The result is limited to 50–500&nbsp;ms. While SYNC is on, release belongs to the tempo; turning the REL knob (split SPEED) switches SYNC off.</td></tr>
+<tr><td>RANGE</td><td>3–48&nbsp;dB</td><td>How far the sidechain must rise above THRESH for full ducking. Small = hard, on/off carving; large = soft and gradual. It is not a limit on the reduction; AMOUNT sets the depth.</td></tr>
+<tr><td>LOOK</td><td>0–20&nbsp;ms</td><td>Lookahead: delays the main signal so the cut starts at the transient. Adds latency. A new instance starts at 4&nbsp;ms.</td></tr>
+<tr><td>SENS</td><td>−24…+24&nbsp;dB</td><td>Sensitivity inside the band: boosts or softens the detected sidechain. Above +12&nbsp;dB a quiet sidechain reaches full reduction without making the sidechain track louder, as long as it rises above THRESH (SENS scales the reduction, it does not lift the sidechain over the threshold).</td></tr>
+<tr><td>MIX</td><td>0–100&nbsp;%</td><td>Blend of the ducked signal; 100&nbsp;% = full effect. The label turns green when it is not at its default.</td></tr>
+<tr><td>OUT</td><td>±12&nbsp;dB</td><td>Level after ducking, to match the bypassed level.</td></tr>
+<tr><td>REDUCTION</td><td>readout</td><td>Strongest cut in any frequency bin right now, PK = recent peak, and a strip with the last three seconds (0–24&nbsp;dB).</td></tr>
+</table>
+<p>Knobs: drag up/down, Shift for fine steps, mouse wheel, right-click, double-click or Ctrl-click for the default.
+Every control has a tooltip; OPTIONS &gt; TOOLTIPS switches them off, the HINTS line works independently.</p>
+
+<h2 id="listen"><span class="num">06</span>Listening and comparing</h2>
+<p><b>DELTA</b> plays only what is removed, <b>SC LISTEN</b> plays the sidechain that drives the ducking. A short click
+switches the mode on until you click again; holding the button longer than about a third of a second plays the mode
+only while you hold it (closing the window while holding also ends it). While either mode is on, a green bar replaces the subtitle in the header; click it to return
+to the normal output.</p>
+<p><b>A / B</b> in the header compares two settings: click the other letter, the current setting stays in its slot
+and the other one loads (an empty slot starts as a copy). A slot holds every setting including MIX, SC SOURCE, EASY, SYNC and the SPEED split. The slots are kept until the project is closed.</p>
+
+<h2 id="presets"><span class="num">07</span>Presets</h2>
+<p>The preset bar in the header loads factory presets and stores up to 32 own presets with the project. A factory
+preset sets AMOUNT, THRESH, the band, SPEED (attack and release), LOOK and SENS; its description appears in the HINTS
+line. With <b>PIN</b> (the pin icon left of the preset bar) on, loading a preset keeps your band and changes only the
+rest.</p>
+<table>
+<tr><th>Preset</th><th>Band</th><th>Character</th></tr>
+<tr><td>Vocal &gt; Pad</td><td>300&nbsp;Hz–5&nbsp;kHz</td><td>medium, room in the mids</td></tr>
+<tr><td>Kick &gt; Bass</td><td>30–250&nbsp;Hz</td><td>fast, attack 3&nbsp;ms with 3&nbsp;ms lookahead</td></tr>
+<tr><td>Gentle &gt; Bus</td><td>150&nbsp;Hz–8&nbsp;kHz</td><td>light and slow</td></tr>
+<tr><td>Any &gt; Hard Carve</td><td>100&nbsp;Hz–10&nbsp;kHz</td><td>deep and fast, 5&nbsp;ms lookahead</td></tr>
+<tr><td>Lead &gt; Pads</td><td>400&nbsp;Hz–6&nbsp;kHz</td><td>medium</td></tr>
+<tr><td>Snare &gt; Room</td><td>150&nbsp;Hz–3&nbsp;kHz</td><td>fast</td></tr>
+<tr><td>Hats &gt; Top</td><td>5–16&nbsp;kHz</td><td>very fast, top only</td></tr>
+<tr><td>Vocal &gt; Reverb</td><td>200&nbsp;Hz–10&nbsp;kHz</td><td>slow release, for reverb returns</td></tr>
+<tr><td>Quiet SC &gt; Any</td><td>250&nbsp;Hz–4&nbsp;kHz</td><td>THRESH −60&nbsp;dB, SENS +12&nbsp;dB</td></tr>
+</table>
+
+<h2 id="latency"><span class="num">08</span>Latency &amp; lookahead</h2>
+<p>MINI reports 4608 samples plus LOOK to REAPER (plus 2048 samples in GMEM mode); REAPER compensates it, so the
+track stays in time with the others. The SIDECHAIN box shows the value in milliseconds (LAT). For live monitoring
+through the plug-in this latency is audible.</p>
+
+<h2 id="big"><span class="num">09</span>MINI and TT-FREIRAUM</h2>
+<p>TT-FREIRAUM is the full version of the same engine: three zones with their own attack and release, a pre-EQ on the
+sidechain, a learn snapshot, zone solo and smoothing. MINI keeps one band; the pre-EQ is flat and the zone settings
+stay at their neutral defaults. Use TT-FREIRAUM when one band is not enough, for example when lows and highs need
+different speeds.</p>
+
+<h2 id="trouble"><span class="num">10</span>Troubleshooting</h2>
+<ul>
+<li><b>Nothing happens, NO SIGNAL:</b> the track needs 4 channels and the send must go to channels 3/4.</li>
+<li><b>SIGNAL, but no reduction, BELOW THRESH:</b> press AUTO or lower THRESH; raise SENS for a quiet trigger; check that the band covers the green part of the sidechain curve.</li>
+<li><b>FIT or AUTO say NO SIDECHAIN:</b> they need playback and an open plug-in window, because they listen to the display.</li>
+<li><b>Clicks on kicks:</b> move SPEED a little towards PAD and set LOOK to about the attack time.</li>
+<li><b>Sounds hollow:</b> narrow the band, lower AMOUNT or raise RANGE; hold DELTA to hear what is taken out.</li>
+<li><b>GMEM: NO SENDER:</b> TT-FREIRAUM SEND must be on the trigger track with SEND on; it comes with TT-FREIRAUM.</li>
+</ul>
+
+<h2 id="changelog"><span class="num">11</span>Changelog</h2>
+<h3>1.0.0 — First public release</h3><ul>
+<li>First public release as Drop 06 of Acid Season, together with TT-FREIRAUM 1.0.0.</li>
+<li>FIT and AUTO count only the time the plug-in window is open.</li>
+</ul>
+<h3>0.10.0 — New front</h3><ul>
+<li>Display: band in focus, sidechain highlighted where it crosses THRESH, peak marker, CURVE, CURSOR and HINTS.</li>
+<li>Band: drag, move, wheel, draw a new band, chips, FIT from the sidechain; AUTO sets THRESH.</li>
+<li>Controls: AMOUNT with a live reduction ring, EASY, SPEED split and SYNC, RANGE, MIX and OUT on the front, LOOK starts at 4&nbsp;ms.</li>
+<li>DELTA and SC LISTEN latch or act while held, with a header bar; A/B compare; PIN for presets; presets named by job.</li>
+<li>Sidechain box: latency, reduction history, routing hint. Audio engine unchanged.</li></ul>
+<h3>0.9.0 — First version</h3><ul>
+<li>One-band spectral ducking on the TT-FREIRAUM engine with AMOUNT, THRESH, SPEED, HP/LP, LOOK, SENS, DELTA, SC LISTEN, 9 factory presets.</li></ul>
+
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v1.0.0</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/freiraummini-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/freiraummini-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-FREIRAUM MINI v1.0.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+</body>
+</html>
