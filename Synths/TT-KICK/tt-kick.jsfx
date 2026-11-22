@@ -1,7 +1,7 @@
-desc:TT-KICK Kick Machine v1.1.0
+desc:TT-KICK Kick Machine v1.1.2
 // @description TT-KICK Kick Machine
 // @author TimTechlor
-// @version 1.1.0
+// @version 1.1.2
 // @license MIT
 // @tags instrument drums kick techno synthesis sample hybrid
 // @link Manual https://timtechlor.de/docs/tt-kick-manual.html
@@ -33,7 +33,7 @@ desc:TT-KICK Kick Machine v1.1.0
 //   img/tt-kick/tt-kick-presets.png
 //   img/tt-kick/tt-kick-presets-entry.png
 // @about
-//   # TT-KICK Kick Machine v1.1.0
+//   # TT-KICK Kick Machine v1.1.2
 //
 //   Kick designer for techno. One kick, three sequential segments on
 //   the time axis (TRANSIENT / BODY / TAIL), joined by equal-power
@@ -77,7 +77,9 @@ desc:TT-KICK Kick Machine v1.1.0
 //   Each lane carries its segment window: drag the START/LENGTH flags
 //   to trim, drag the diamond markers at the window edges to set the
 //   crossfade lengths (the end fade on TAIL is the kick's fade-out),
-//   REV flips the window, GAIN sets the segment level. Every lane has
+//   REV flips the window, GAIN sets the segment level. INV (v1.1.1)
+//   sits next to REV and flips the polarity of that lane's sample.
+//   SYNTH lanes keep the switch but do not use it. Every lane has
 //   its own zoom: - / + zoom out and in, FIT (ZOOM FIT) makes the view
 //   follow the lane window, a scroll bar under the wave moves the
 //   zoomed view. Mouse wheel over a waveform = zoom at the pointer,
@@ -227,6 +229,8 @@ desc:TT-KICK Kick Machine v1.1.0
 //   never touch it.
 //
 // @changelog
+//   1.1.2 - FIX: comments and tooltips match the code. Tail drift is 5 to 14 Hz, the crossfade defaults are the current times, and the user bank stores the lane view. Sound unchanged.
+//   1.1.1 - NEW: INV per lane, next to REV: flips the polarity of that lane's sample (SAMPLE mode only). The switch stays put on lane presets and RAND, resets with INIT and CTRL+click, and is saved with the project. Older projects load with INV off. Synth lanes are unchanged.
 //   1.1.0 - NEW: OFFSET per lane (EXPERT knob row and a start grip in the WAVE page / FUSION EXPAND): moves the start of a lane on the time axis, -100..+100 ms (S1: 0..+100 ms), 0.1 ms steps - positive = later (a gap), negative = earlier (more overlap); the lanes after it move with it. Default 0 = the kick sounds exactly as in 1.0.1. FIT LENGTH TO and the WAVE preview include it. Saved with the project and in user presets (older projects load with 0). Lane import: one more value per lane.
 //   Review 30.10.2026: FIX sample rebuild slot publication, truncated state rejection, preset undo snapshots and delta-based XF dragging (format/version unchanged).
 //   1.0.1 - NEW: hidden parameter 'Lane request (Lua)' - a ReaScript can write lane sounds (the 16 sound parameters of up to three lanes, like a lane preset) into exactly one TT-KICK instance; values are range-checked, one undo step, old values are never applied again.
@@ -3807,10 +3811,42 @@ function ukf_node(id, x, y, lab) local(hot, r, act, rv, w, h, lx) (
 );
 // __UIKIT_END__
 
+// v1.1.1: Polaritaet der SAMPLE-Lane. Bei SYNTH nur gedimmt, der Klick
+// aendert nichts, der gespeicherte Schalter bleibt. CTRL+Klick = aus.
+// Liegt hinter dem UI-Kit, damit der Modulblock unveraendert bleibt.
+function kkInvBtn(x, y, w, h, sm) local(ivOn, ivHit) (
+  sm[SG_MODE] == 1 ? (
+    ivOn = sm[SG_FLIP] > 0.5;
+    ivHit = btn(x, y, w, h, ivOn, "INV");
+    ivHit ? (
+      (mouse_cap & 4) != 0 ? ( sm[SG_FLIP] = 0; )
+                            : ( sm[SG_FLIP] = (ivOn ? 0 : 1); );
+    );
+  ) : (
+    gfx_set(0.10, 0.11, 0.10, 0.45);
+    xrect(x, y, w, h);
+    gfx_set(0.55, 0.62, 0.55, 0.45);
+    xctrfit(x, y, w, h, "INV");
+  );
+);
+
+// Streifen: das Wort INV hinter SAMPLE, nur wenn es vor dem Preset-Browser
+// (Klickzone ab x 284) endet. Die Peak-Balken der Lane sind Betraege und
+// koennen das Vorzeichen nicht zeigen; die gerenderte Welle schon.
+function kkInvStrip(x, y, sm) local(ivTw, ivTh, ivX) (
+  sm[SG_MODE] == 1 && sm[SG_FLIP] > 0.5 ? (
+    gfx_setfont(5);
+    gfx_measurestr("SAMPLE", ivTw, ivTh);
+    ivX = x + ivTw/SC + 4;
+    gfx_measurestr("INV", ivTw, ivTh);
+    ivX + ivTw/SC <= 282 ? ( colAcid(1); xstr(ivX, y, "INV"); ) : 0;
+  ) : 0;
+);
+
 APP_NAME = "TT-KICK";
 // P25 (Harmonisierung Punkt 6): EINE Versionsstelle im Code - #tt_ver (UI-Kit-Vertrag, tt_version_check.py).
 // Kopfzeile, SYS-Seite (BUILD) und Fusszeile zeichnen #tt_ver; APP_VER entfaellt.
-strcpy(#tt_ver, "v1.1.0");
+strcpy(#tt_ver, "v1.1.2");
 
 // ----------------------------------------------------------------------
 // SPEICHERKARTE v1 - FIXED ab v0.2, Regel 5 (PLAN.md, Abschnitt 4.1):
@@ -3938,7 +3974,9 @@ SG_LP   = 22;   // Lane-Preset-Index 0..14 (0 = INIT, 1..14 = Bank)
 SG_LPS  = 23;   // Checksummen-Snapshot (Modifikations-Stern)
 SG_ZFIT = 24;   // Lane-Ansicht ZOOM FIT 0/1: 1 = Ausschnitt folgt dem Lane-Fenster (setzt ZOOM/VOFF selbst) [serialisiert, Ansicht]
 SG_OFF  = 25;   // v1.1.0: OFFSET ms (Start der Lane auf der Zeitachse; S1 0..100, S2/S3 -100..100; 0,1-ms-Raster) [serialisiert, kickVer 9]
-                // 26..31 frei. Bewusst NICHT in chkLane: Lage auf der Zeitachse, kein Klangparameter eines Lane-Presets.
+                // Bewusst NICHT in chkLane: Lage auf der Zeitachse, kein Klangparameter eines Lane-Presets.
+SG_FLIP = 26;   // v1.1.1: Polaritaet der SAMPLE-Lane, 0/1. Liegt im bestehenden 64-Wort-Slot (kickVer bleibt 9).
+                // Nicht in chkLane. 27..31 frei.
 LP_N    = 14;   // Bankgroesse je Lane (INIT + 14)
 
 // Checksumme ueber die 16 Klang-Parameter (Spiegel: verify_v095.py [archiviert]).
@@ -4774,6 +4812,9 @@ function emitSpan(s, ost, vel, note, finS, foutS, phIn) local(sm, mt, vb, r, L) 
       vb[VX_FIN]  = min(L - 1, max(1, finS));
       vb[VX_FOUT] = min(L - 1, max(1, foutS));
       vb[VX_GAIN] = vel*0.0078740157*sm[SG_GAIN]*0.01;
+      // v1.1.1: Polaritaet nur hier, beim Trigger eingefroren. Die Huellkurve
+      // multipliziert mit VX_GAIN; die Sinus-Fades sind nichtnegativ.
+      sm[SG_FLIP] > 0.5 ? ( vb[VX_GAIN] = -vb[VX_GAIN]; ) : 0;
       sm[SG_REV] > 0.5 ? (
         vb[VX_RATE] = -r;
         vb[VX_POS]  = L - 1 + ost*r; // Start am letzten Fenster-Frame,
@@ -4944,7 +4985,8 @@ function spanRead(vb, ps, ln) local(bs, i0, fr, vv, e, el, rm,
       // BODY: Pitch-Env-Oszillator, sanfter Abfall zur Grenze
       vv = (1 - u)^0.6 * sin(6.2831853*ph);
     ) : (
-      // TAIL: Sine + langsamer Drift als AM (7..14 Hz) + "Room":
+      // TAIL: Sine + langsamer Drift als AM (ca. 5..14 Hz, 5 + 9*DRIFT) + "Room":
+      // Historie: TAIL: Sine + langsamer Drift als AM (7..14 Hz) + "Room":
       // phasenversetzte Schwebung (detunierte Kopie) plus Noise-
       // Anteil, beides nur im Ausklang - kompakt, Masterkette in M4.
       dr  = min(1000, max(0, sm[SG_DRIFT]))*0.001;
@@ -5507,14 +5549,16 @@ function handleMidi(m1, m2, m3) local(st) (
 //   4 DRIVE BEEF 0 | 5 GLUE 0 | 6 CLIP CEIL 1000  (Promille, 1000 = 0 dBFS)
 //   7 OUT GAIN 0 dB
 //   20..22 START-Flag 0 (Promille) | 23..25 END-Flag = LEN 1000 (Promille)
-//   26..30 XF-Raute 10 ms (26..28 Austritt Lane 1..3, 29/30 Eintritt 2/3)
+//   26..30 XF-Raute 70 ms (26..28 Austritt Lane 1..3, 29/30 Eintritt 2/3)
+// Historie: 26..30 XF-Raute 10 ms (26..28 Austritt Lane 1..3, 29/30 Eintritt 2/3)
 //   31..33 Lane-GAIN 100 %
 //   (23..25 LEN: v0.9.2 INIT-Dauer 100/200/140 permille = 6/100/280 ms)
 //   53 SWING 0 %
 // v0.9.1 - Schluessel fuer die EXPERT-Elemente. KEINE Drag-IDs (die Potis
 // haben eigenen Zustand kbDrag, die Buttons sind Klicks): 100 + SG-Feld
 // bzw. 200 + PG-Feld, damit sie die Registry nicht beruehren:
-//   102 PITCH 0 st | 117 XFI 10 ms | 118 MUTE 0 | 119 SOLO 0
+//   102 PITCH 0 st | 117 XFI 70 ms | 118 MUTE 0 | 119 SOLO 0
+// Historie: 102 PITCH 0 st | 117 XFI 10 ms | 118 MUTE 0 | 119 SOLO 0
 //   120 FCUT 1000 (= 16 kHz, Filter aus) | 121 FRES 0 | 210 EXPERT 0
 // Lane-TYP-abhaengige Defaults (F0/F1/CRVE/DRIFT/ROOM/MIX) stehen in
 // laneDef(s, feld) direkt darunter.
@@ -5621,7 +5665,8 @@ function laneInit(s) local(b) (
   b[SG_START] = ctlDef(20 + s);   // 0
   b[SG_LEN]   = ctlDef(23 + s);   // v0.9.2: 100 / 200 / 140
   b[SG_REV]   = 0;
-  b[SG_XF]    = ctlDef(26 + s);   // 10
+  b[SG_XF]    = ctlDef(26 + s);   // 70
+  // Historie: 10
   b[SG_PH]    = 0;
   b[SG_ZOOM]  = 0;
   b[SG_SKEW]  = 0;
@@ -5636,12 +5681,14 @@ function laneInit(s) local(b) (
   b[SG_ROOM]  = laneDef(s, SG_ROOM);
   b[SG_MIX]   = laneDef(s, SG_MIX);
   // v0.9.1 (EXPERT-Runde): Entry-Fade, Mute/Solo, Lane-Filter (offen)
-  b[SG_XFI]   = ctlDef(117);      // 10 (= SG_XF-Default, Verhalten wie v0.9.0)
+  b[SG_XFI]   = ctlDef(117);      // 70 (gleicher Default wie SG_XF)
+  // Historie: 10 (= SG_XF-Default, Verhalten wie v0.9.0)
   b[SG_MUTE]  = ctlDef(118);      // 0
   b[SG_SOLO]  = ctlDef(119);      // 0
   b[SG_FCUT]  = ctlDef(120);      // 1000 = Filter umgangen
   b[SG_FRES]  = ctlDef(121);      // 0
   b[SG_OFF]   = 0;                // v1.1.0: OFFSET 0 ms
+  b[SG_FLIP]  = 0;                // v1.1.1: Polaritaet aus
   // v0.9.5: Lane ist dann "INIT" (Bank-Index 0), Snapshot mitgeschrieben
   b[SG_LP]  = 0;
   b[SG_LPS] = chkLane(s);
@@ -5693,6 +5740,10 @@ function validateState() local(s, b, i, v) (
     // auf 1000 - START). SG_MODE ist oben schon auf 0/1 gezogen.
     b[SG_MODE] == 1 ? ( b[SG_LEN] = min(b[SG_LEN], max(1, 1000 - b[SG_START])); );
     b[SG_REV]   = b[SG_REV] > 0.5 ? 1 : 0;
+    // v1.1.1: Wort 26 lag in Altblobs auf 0 (freier Slot). NaN/Inf -> aus.
+    (b[SG_FLIP] > -1000000000000 && b[SG_FLIP] < 1000000000000)
+      ? ( b[SG_FLIP] = b[SG_FLIP] > 0.5 ? 1 : 0; )
+      : ( b[SG_FLIP] = 0; );
     b[SG_XF]    = min(100, max(0, b[SG_XF]));
     b[SG_PH]    = min(500, max(-500, floor(b[SG_PH] + 0.5)));
     b[SG_ZOOM]  = min(1000, max(0, b[SG_ZOOM]));
@@ -5930,6 +5981,7 @@ function segSet(s, ga, pi, ln, rv, xf, ph, f0, f1, cv, dr, rm, mx, xi) local(b) 
   b[SG_FCUT]  = ctlDef(120);
   b[SG_FRES]  = ctlDef(121);
   b[SG_OFF]   = 0;      // v1.1.0: Werks-Presets ohne OFFSET (klingen wie vor 1.1.0)
+  b[SG_FLIP]  = 0;      // v1.1.1: Werks-Presets ohne Polaritaets-Flip
   // v0.9.5: Lane ist dann "INIT" (Bank-Index 0), Snapshot mitgeschrieben
   b[SG_LP]  = 0;
   b[SG_LPS] = chkLane(s);
@@ -6537,8 +6589,11 @@ function psetName(p) (
 //   buf[1..192]   M_SEG (3 x 64: alle Lane-/Segmentdaten, Lane-Preset-Felder)
 //   buf[193..208] M_GEN-Kopf (Player-Kopf; PG_ON/PAGE/SEGSEL/TIPS/EXP/PSET bleiben beim Laden)
 //   buf[209..224] M_SLI (Master: Filter, Drive, Comp, OUT)
-// NICHT: Kit-Pfade (M_PATH), Farbslider 65, Lane-Ansicht (ZOOM/SKEW/VOFF), Player ON,
-// Seite/Lane-Auswahl/Tooltips/EXPERT, PG_PSET. Bank hinter CAP_END (maxmem +16384).
+// NICHT: Kit-Pfade (M_PATH), Farbslider 65, Player ON,
+// Seite/Lane-Auswahl/Tooltips/EXPERT, PG_PSET. Die Lane-Ansicht (ZOOM/SKEW/VOFF/ZFIT) liegt in M_SEG,
+// wird mit dem Anwender-Preset gespeichert und geladen (kkPbCapture/kkPbApply) und zaehlt nicht fuer den Stern (kkPbView).
+// Bank hinter CAP_END (maxmem +16384).
+// Historie: NICHT: Kit-Pfade (M_PATH), Farbslider 65, Lane-Ansicht (ZOOM/SKEW/VOFF), Player ON,
 KK_PSW  = 240;                    // Worte je Anwender-Preset (Layout 1 belegt 225); darf nur wachsen
 KK_PBB  = CAP_END;                // Bankbasis (Bedarf 9902 Worte, maxmem hat 16384 Reserve)
 KK_PBX  = 350;                    // Leiste: x im Designraster (y = 41, links neben OPTIONS bei 610)
@@ -7432,7 +7487,8 @@ function knobRow(s, T) local(sm, md, fmin, fmax, nv, cx, kk, ms) (
       nv = kbKnob(cx, T, kk + 2, "DRIFT", sm[SG_DRIFT], 0, 1000, 0, laneDef(s, SG_DRIFT), 0, 1);
       kbCh ? ( sm[SG_DRIFT] = nv; ) : 0;
       sprintf(#kbTxt, "%d%%", floor(sm[SG_DRIFT]*0.1 + 0.5));
-      kbTipCell(cx, T, "DRIFT: slow amplitude wobble of the tail, 0-100%|Adds movement (about 7-14 Hz)|CTRL+click: reset");
+      kbTipCell(cx, T, "DRIFT: slow amplitude wobble of the tail, 0-100%|Adds movement (about 5-14 Hz)|CTRL+click: reset");
+      // Historie: "DRIFT: slow amplitude wobble of the tail, 0-100%|Adds movement (about 7-14 Hz)|CTRL+click: reset"
     );
     kbTxtDraw(cx, T, 1);
     // ---- Slot 3: ROOM (nur S3)
@@ -8797,7 +8853,8 @@ plWant != plRun ? (
 // An der Timeline haengen, aber NICHT jeden Block hart resetten -
 // beat_position rundet, ein gerade uebersprungener Schlag wuerde sonst
 // doppelt feuern. Neu-Andocken nur bei echtem Versatz (Loop, Positions-
-// oder Tempo-Sprung). 0,02 Achtel sind ~2,3 ms bei 130 BPM. Beim
+// oder Tempo-Sprung). 0,02 Achtel sind ~4,6 ms bei 130 BPM. Beim
+// Historie: 0,02 Achtel sind ~2,3 ms bei 130 BPM.
 // Nachjustieren im Lauf gilt das Achtel unter dem Cursor bereits als
 // erledigt (lastEi = floor, KEIN -1) - das -1 (Schlag feuert sofort)
 // gehoert nur zum Anlauf-/Neu-Andock-Pfad oben.
@@ -8882,7 +8939,8 @@ while (evRd < evN && M_EVT[evRd*4] <= smplPos) (
 );
 
 // --- 4/4-Player: Raster in Achteln, Schlag auf den Rate-Teilen;
-//     Downbeat (Taktanfang) bekommt Accent-Velocity.
+//     Jeder Player-Kick bekommt Velocity 100; der Downbeat (Taktanfang) hat keinen Accent.
+// Historie: Downbeat (Taktanfang) bekommt Accent-Velocity.
 //     Swing (M5, exakt die TT-303-Shuffle-Konvention, dort Z.1067ff:
 //     "(stepIdx & 1) ? sFrac >= swFrac : 1"): GERADE Achtel feuern
 //     sofort an der Rastergrenze, UNGERADE erst ab sFr >= swFrac -
@@ -9469,6 +9527,7 @@ loop(3,
   isCol ? (
     gfx_setfont(5); colInk(0.7);
     sm[SG_MODE] == 0 ? xstr(226, ly + 6, "SYNTH") : xstr(226, ly + 6, "SAMPLE");
+    kkInvStrip(226, ly + 6, sm);
     // P26 (Schriftstufen, p26_fontcheck.py): linke Grenze 456 (hinter dem Browser-">" 434..450) statt 290: der REC-Zusatz faellt weg,
     // bevor DUR in den Browser laeuft (ab Stufe +1 sonst bis 14 Einheiten).
     durLabel(628, 456, ly + 6, s);
@@ -9481,8 +9540,9 @@ loop(3,
   // volle Breite (x 28..624).
   mdY  = isMax ? ly + 28 : ly + 34;
   rcX0 = isMax ? 176 : 28;
-  rcX1 = isMax ? 226 : 78;
-  rcX2 = isMax ? 276 : 128;
+  rcXi = isMax ? 210 : 62;
+  rcX1 = isMax ? 244 : 96;
+  rcX2 = isMax ? 278 : 130;
   rcY  = isMax ? ly + 29 : ly + 64;
   gLx  = isMax ? 330 : 28;
   gx0  = isMax ? 362 : 58;
@@ -9501,25 +9561,29 @@ loop(3,
   tipAt(96, mdY, 66, 18, "SAMPLE: this lane plays a loaded or captured WAV|Assign files with TT-KICK Load Kit.lua");
 
   // REV-Toggle + Gain-Mini-Fader (DragID 31+s)
-  btn(rcX0, rcY, 44, 16, sm[SG_REV] > 0.5, "REV") ? ( sm[SG_REV] = 1 - sm[SG_REV]; );
-  tipAt(rcX0, rcY, 44, 16, "REV: play the lane window backwards");
+  btn(rcX0, rcY, 32, 16, sm[SG_REV] > 0.5, "REV") ? ( sm[SG_REV] = 1 - sm[SG_REV]; );
+  tipAt(rcX0, rcY, 32, 16, "REV: play the lane window backwards");
+  kkInvBtn(rcXi, rcY, 32, 16, sm);
+  sm[SG_MODE] == 1
+    ? tipAt(rcXi, rcY, 32, 16, "INV: flip the polarity of this lane's sample upside down (SAMPLE mode only, CTRL+click: off)")
+    : tipAt(rcXi, rcY, 32, 16, "INV: flip the polarity of this lane's sample upside down (SAMPLE mode only, CTRL+click: off)|No effect in SYNTH mode");
   // CAP (v0.8.2): Live-Aufnahme in den Slot dieser Lane. Armed blinkt,
   // Aufnahme leuchtet dauerhaft; Klick auf die aktive Lane = Abbruch.
   // Reiner Klick (btn), keine Drag-ID - die Anforderung geht ueber capReq
   // in den @block. Ohne erreichbare CAP-Region (capOk = 0): gesperrt.
-  btn(rcX1, rcY, 44, 16,
+  btn(rcX1, rcY, 32, 16,
       capSt > 0 && capLane == s && (capSt == 2 || capBlkOn),
       capOk ? "CAP" : "N/A")
     ? ( capOk ? ( capReq = s + 1; ) : 0; );
-  tipAt(rcX1, rcY, 44, 16, "CAP: record the audio input into this lane's slot|VOLATILE: not saved, gone after a project reload|Click again while armed = abort");
+  tipAt(rcX1, rcY, 32, 16, "CAP: record the audio input into this lane's slot|VOLATILE: not saved, gone after a project reload|Click again while armed = abort");
   // RAND (v0.9.0): frische Zufallswerte in musikalischen Grenzen. Reiner
   // Klick (btn, keine Drag-ID); die Undo-Klammer kommt vom globalen
   // Klick-Mark/Commit, filesDirty bleibt unberuehrt (Pfade aendern sich
   // nicht). CTRL+Klick: Lane auf INIT.
   gfx_setfont(3);
-  btn(rcX2, rcY, 36, 16, 0, "RAND")
+  btn(rcX2, rcY, 34, 16, 0, "RAND")
     ? ( (mouse_cap & 4) ? laneReset(s) : randLane(s); );
-  tipAt(rcX2, rcY, 36, 16, "Randomize this lane's parameters (musical ranges)|CTRL+click: reset to INIT");
+  tipAt(rcX2, rcY, 34, 16, "Randomize this lane's parameters (musical ranges)|CTRL+click: reset to INIT");
   gfx_setfont(3); colInk(1); xstr(gLx, gy0 + 2, "GAIN");
   // v0.12.0 (P21): Kit-hslider statt Hand-Fader (Drag-ID 31+s unveraendert);
   // CTRL-/Rechts-/Doppelklick = Default 100 % (= ctlDef(31+s)) eingebaut,
@@ -10197,14 +10261,18 @@ btn(28, 488, 60, 18, sm[SG_MODE] == 0, "SYNTH") ? ( sm[SG_MODE] = 0; );
 btn(96, 488, 66, 18, sm[SG_MODE] == 1, "SAMPLE") ? ( sm[SG_MODE] = 1; );
 tipAt(28, 488, 60, 18, "SYNTH: this lane renders the built-in engine|No sample needed");
 tipAt(96, 488, 66, 18, "SAMPLE: this lane plays a loaded or captured WAV|Assign files with TT-KICK Load Kit.lua");
-btn(28, 514, 44, 16, sm[SG_REV] > 0.5, "REV") ? ( sm[SG_REV] = 1 - sm[SG_REV]; );
-tipAt(28, 514, 44, 16, "REV: play the lane window backwards");
-btn(76, 514, 44, 16, capSt > 0 && capLane == wvS && (capSt == 2 || capBlkOn), capOk ? "CAP" : "N/A")
+btn(28, 514, 32, 16, sm[SG_REV] > 0.5, "REV") ? ( sm[SG_REV] = 1 - sm[SG_REV]; );
+tipAt(28, 514, 32, 16, "REV: play the lane window backwards");
+kkInvBtn(62, 514, 32, 16, sm);
+sm[SG_MODE] == 1
+  ? tipAt(62, 514, 32, 16, "INV: flip the polarity of this lane's sample upside down (SAMPLE mode only, CTRL+click: off)")
+  : tipAt(62, 514, 32, 16, "INV: flip the polarity of this lane's sample upside down (SAMPLE mode only, CTRL+click: off)|No effect in SYNTH mode");
+btn(96, 514, 32, 16, capSt > 0 && capLane == wvS && (capSt == 2 || capBlkOn), capOk ? "CAP" : "N/A")
   ? ( capOk ? ( capReq = wvS + 1; ) : 0; );
-tipAt(76, 514, 44, 16, "CAP: record the audio input into this lane's slot|VOLATILE: not saved, gone after a project reload|Click again while armed = abort");
+tipAt(96, 514, 32, 16, "CAP: record the audio input into this lane's slot|VOLATILE: not saved, gone after a project reload|Click again while armed = abort");
 gfx_setfont(3);
-btn(124, 514, 38, 16, 0, "RAND") ? ( (mouse_cap & 4) ? laneReset(wvS) : randLane(wvS); );
-tipAt(124, 514, 38, 16, "Randomize this lane's parameters (musical ranges)|CTRL+click: reset to INIT");
+btn(130, 514, 34, 16, 0, "RAND") ? ( (mouse_cap & 4) ? laneReset(wvS) : randLane(wvS); );
+tipAt(130, 514, 34, 16, "Randomize this lane's parameters (musical ranges)|CTRL+click: reset to INIT");
 gfx_setfont(3); colInk(1); xstr(28, 542, "GAIN");
 gtv = hslider(31 + wvS, 58, 543, 72, 11, sm[SG_GAIN]*0.005, 0, 1, 0.5);
 abs(gtv*200 - sm[SG_GAIN]) > 0.001 ? ( sm[SG_GAIN] = min(200, max(0, gtv*200)); ) : 0;

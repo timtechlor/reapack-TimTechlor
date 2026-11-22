@@ -1,7 +1,7 @@
-desc:TT-303PATGEN
+desc:TT-303PATGEN v1.2.1 (acid pattern generator, MIDI) [Tim Techlor]
 // @description TT-303PATGEN - Acid pattern generator with MIDI output (TT-303 or any synth)
 // @author TimTechlor
-// @version 1.2.0
+// @version 1.2.1
 // @license MIT
 // @tags midi acid 303 pattern generator sequencer markov euclid slide accent
 // @link Manual https://timtechlor.de/docs/tt-303patgen-manual.html
@@ -23,13 +23,15 @@ desc:TT-303PATGEN
 //   transport. Accent = velocity above the synth's threshold (default 127
 //   vs. 64, threshold 65 as in the TT-303 1.5.0), slide = overlapping legato notes - exactly what the TT-303
 //   expects in HOST mode, and what any other mono synth understands.
-//   Five algorithms (random walk, Markov, Euclid, motif+variation, classic
-//   mutation), ten scales plus a custom mask, seeded and reproducible,
+//   Six algorithms (random walk, Markov, Euclid, motif+variation, classic
+//   mutation, techno bass), ten scales plus a custom mask, seeded and reproducible,
 //   mutate / rotate / reverse / invert / double, eight pattern slots (A-H),
 //   song chain, 32 built-in style patterns plus 16 factory scenes, swing, humanize, MIDI transpose
 //   (C2 = original pitch) and an optional gmem link (namespace tt303pg).
 //   Operated from the drawn front panel; all parameters stay automatable.
 // @changelog
+//   1.2.1 - FIX: CLASSIC MUT keeps a tie on the same pitch as the note it follows. The degree-shift command is bounded. A lock word that is not finite is rejected. The about text lists all six algorithms, including TECHNO BASS.
+//   1.2.0 - FIX: repair CLASSIC MUT ties, bound degree shifts and validate loaded lock masks.
 //   1.2.0 - TECHNO BASS generator, weighted rhythm families and slot roles; 16 phrase scenes S25-S40 with alternate answers.
 //   1.1.0 - NEW: eight techno bass factory scenes S17-S24 (peaktime offbeat and drive, rolling train and octave rolls,
 //           melodic arps, two-bar hooks, an evolving roll chain and a pedal-point progression); 56 factory entries in total.
@@ -84,6 +86,7 @@ desc:TT-303PATGEN
 //           double / clear / copy / paste / undo, library of 32 style patterns, sample-accurate MIDI output with
 //           swing, slide overlap, ties, accent velocity, MIDI transpose (C2 = original), panic handling,
 //           piano-roll front panel
+// Historie: Five algorithms (random walk, Markov, Euclid, motif+variation, classic mutation),
 // Historie (P25): @changelog nach Versionen sortiert (stand 0.5.3, 0.5.2, 0.1.0 .. 0.5.1); @provides um die sechs Manual-Bilder
 // und [main] fuer das Print-Skript ergaenzt (vorher installierte ReaPack die Bilder nicht und trug das Skript nicht als Aktion ein).
 // Spec: ../auftraege/P11_TT-303PATGEN.md (+ _ERGAENZUNG_gegenlesung.md)
@@ -3676,7 +3679,7 @@ function ukf_node(id, x, y, lab) local(hot, r, act, rv, w, h, lx) (
 // __UIKIT_END__
 uikit_accent(0.224, 1.000, 0.078);   // Produktakzent Acid #39FF14 (Kit-Default; Werks-Schema 0 ACID)
 tth_sync(slider64);                  // Farbschema aus dem versteckten Slider (Theme-Modul, Options-Box)
-strcpy(#tt_ver, "v1.2.0");          // P25: die EINE Versionsstelle im Code; die Front zeichnet #tt_ver (Kopfzeile, 820/14)
+strcpy(#tt_ver, "v1.2.1");          // P25: die EINE Versionsstelle im Code; die Front zeichnet #tt_ver (Kopfzeile, 820/14)
 
 // ---------- Speicherkarte (Offsets, keine Ueberschneidungen) ----------
 PG_SER   = 1;        // serVer des @serialize-Formats
@@ -4340,6 +4343,14 @@ function pg_gen(base, len, algo) local(mk, s, ss) (
   pg_prep(pg_range, mk);
   algo == 4 ? (
     pg_classic(base, len, pg_range, mk, floor(prng_next() * 32));
+    // Same two-pass tie copy as pg_fixTies, defined below this function.
+    loop(2,
+      s = 0;
+      loop(len,
+        ss = s; s += 1;
+        w_gate(base[ss]) == 2 ? ( base[ss] = w_with(base[ss], w_e(base[(ss + len - 1) % len]), 2, 0, w_sld(base[ss])); );
+      );
+    );
   ) : (
     pg_rhythm(len, algo);
     pg_tones(len, algo);
@@ -4864,6 +4875,9 @@ function pg_invertR(b, len) local(s, w, mn, sh, mk) (
 
 // n Skalenstufen verschieben (Tonhoehe e darf ausserhalb der Skala liegen: der erste Schritt landet dann auf dem naechsten Skalenton)
 function pg_degShift(e, n, mk) local(r, st, k, t) (
+  // Historie: r = e; st = n > 0 ? 1 : 0 - 1; k = abs(floor(n));
+  !(n > -1000000000000 && n < 1000000000000) ? n = 0;
+  n = min(24, max(-24, n));
   r = e; st = n > 0 ? 1 : 0 - 1; k = abs(floor(n));
   while (k > 0) (
     r += st; t = 1;
@@ -5497,8 +5511,10 @@ function pg_pbSum() local(i, s, a) (
 // ---------- Werks-Szenen (Vorschlag 0.6.0): ganzer Zustand wie ein Anwender-Preset, aber aus einer Code-Tabelle ----------
 // Erzeugt von docs/TT-303PATGEN/scenes/tt303pg_scenes.py (Quelle der Wahrheit) - nicht von Hand aendern.
 // Eine Szene setzt: Generator, Skala/ROOT/Maske, MUTATE, RATE/SWING/GATE/HUMANIZE/OCTAVE, SEED/LOCK/SONG, aktiven Slot = A,
-// die Slots A..D (Laenge + Muster; nicht belegte werden leer) und die Kette. UNBERUEHRT bleiben: Slots E..H, ACC VEL,
-// NORM VEL, THRESH, FOLLOW (Kalibrierung auf den Ziel-Synth), MIDI CH, RUN, SEQ LINK, Farbe/Optionen.
+// die Slots A..D (Laenge + Muster; nicht belegte werden leer) und die Kette. Ab S25 (pg_scn24) schreibt jede Szene
+// auch die Slots E..H (pg_scnPat 4..7; ein leeres Muster ueberschreibt den Slot). S01..S24 lassen E..H wie aufgenommen.
+// UNBERUEHRT bleiben: ACC VEL, NORM VEL, THRESH, FOLLOW (Kalibrierung auf den Ziel-Synth), MIDI CH, RUN, SEQ LINK, Farbe/Optionen.
+// Historie: die Slots A..D (Laenge + Muster; nicht belegte werden leer) und die Kette. UNBERUEHRT bleiben: Slots E..H, ACC VEL, NORM VEL, THRESH, FOLLOW (Kalibrierung auf den Ziel-Synth), MIDI CH, RUN, SEQ LINK, Farbe/Optionen.
 // Ablauf wie Anwender-Preset (P17): @gfx baut den Zustand im Staging-Puffer PG_PBA, Kommando 30 wendet ihn im @block an.
 // Muster-Format = pg_libAdd (2 Zeichen je Step) + PROB-String ('.' = 100 %, '1'..'9' = 10..90 %).
 // Einfuegen: hinter pg_pbSum (braucht pg_pbCapture/PG_PBT/w_enc), VOR dem Kommando-Ring (Callee vor Caller).
@@ -5519,7 +5535,8 @@ function pg_scnOut(rate, swing, gate, humt, humv, octv) (
   pg_scnSl(22, rate); pg_scnSl(23, swing); pg_scnSl(24, gate); pg_scnSl(31, humt); pg_scnSl(32, humv); pg_scnSl(35, octv);
 );
 function pg_scnSeed(seed, lock, song) ( pg_scnSl(1, 0); pg_scnSl(2, seed); pg_scnSl(3, lock); pg_scnSl(33, song); );
-// Slot slot (0..3) mit len Steps aus dem Step-String s und dem PROB-String p ("" = alle 100 %)
+// Slot slot (0..7, der Index wird nicht geklemmt; Aufrufer nutzen 0..7) mit len Steps aus dem Step-String s und dem PROB-String p ("" = alle 100 %)
+// Historie: Slot slot (0..3) mit len Steps aus dem Step-String s und dem PROB-String p ("" = alle 100 %)
 function pg_scnPat(slot, len, s, p) local(b, n, np, k, kk, c, f, e, g, a, sl, q) (
   b = tt_pb_buf + 1 + PG_PBN + slot*32;
   n = min(len, floor(strlen(s)/2)); np = strlen(p);
@@ -6160,7 +6177,8 @@ function pg_exec(c, a, b, d) local(slot, len) (
   : c == 33 ? ( pg_pbCapture(); tt_pb_defname(min(31, max(0, floor(a)))); tt_pb_commit(min(31, max(0, floor(a))), PG_PBW); )
   : c == 34 ? ( tt_pb_fetch(min(31, max(0, floor(a)))) > 0 ? ( memcpy(PG_PBA, tt_pb_buf, PG_PBW); pg_pbApply(); tt_pb_select(2, min(31, max(0, floor(a)))); ); )
   : c == 35 ? ( floor(a) >= PG_NLIB ? ( pg_scnBuild(min(PG_NSCN - 1, floor(a) - PG_NLIB)); pg_pbApply(); tt_pb_select(1, min(PG_NFAC - 1, floor(a))); ) : ( pg_loadLib(slot, min(31, max(0, floor(a)))); tt_pb_select(1, min(31, max(0, floor(a)))); ); )   // 0.6.0: a >= 32 = Szene
-  : c == 37 ? ( pg_scnBuild(min(PG_NSCN - 1, max(0, floor(a)))); pg_pbApply(); tt_pb_select(1, PG_NLIB + min(PG_NSCN - 1, max(0, floor(a)))); )   // 0.6.0: Szene a (0..15) anwenden (Test)
+  : c == 37 ? ( pg_scnBuild(min(PG_NSCN - 1, max(0, floor(a)))); pg_pbApply(); tt_pb_select(1, PG_NLIB + min(PG_NSCN - 1, max(0, floor(a)))); )   // Szene a (0..39, PG_NSCN = 40, geklemmt) anwenden (Test)
+  // Historie: 0.6.0: Szene a (0..15) anwenden (Test)
   : c == 39 ? ( pg_pbCapture(); tt_pb_commit(min(31, max(0, floor(a))), PG_PBW); )   // 1.0.6 (dsh F4): SAVE im @block (war @gfx: Capture las M_PAT/Slider mitten im Kommando)
   : c == 52 ? ( pg_scnBuild(min(PG_NSCN - 1, max(0, floor(a)))); pg_pbApply(); )     // 1.0.6 (dsh F4): Szenenbau wie 37, ohne tt_pb_select (die Leiste waehlt den Eintrag selbst)
   : c == 42 ? ( pg_rcopy(slot, a, b); )          // 0.7.0 (Stufe 2): Bereichs-Operationen, a / b = von / bis (0-basiert), d = Parameter
@@ -6777,7 +6795,8 @@ pg_first ? ( pg_defaults(); pg_first = 0; );
 // gebraucht. Alle Front-Slider sind 1..36; der Farbslider 64 bleibt in Variablenform (Ende von @gfx).
 // Historie: slider(idx) != v ? ( slider(idx) = v; sliderchange(2 ^ (idx - 1)); slider_automate(2 ^ (idx - 1)); );
 function pg_set(idx, v) (
-  // 0.8.0 (Stufe 5): Slider 65..68 (SLOT QUANT, NOTE TRIG, TRIG BASE, DENS VAR) nur in Variablenform (Masken gibt es bis 63)
+  // Slider 65..69 (SLOT QUANT, NOTE TRIG, TRIG BASE, DENS VAR, SEQ LINK ID) nur in Variablenform (Masken gibt es bis 63)
+  // Historie: 0.8.0 (Stufe 5): Slider 65..68 (SLOT QUANT, NOTE TRIG, TRIG BASE, DENS VAR) nur in Variablenform (Masken gibt es bis 63)
   idx == 65 ? ( abs(slider65 - v) > 0.0000001 ? ( slider65 = v; slider_automate(slider65); tt_sldirty = 1; ); )
   : idx == 66 ? ( abs(slider66 - v) > 0.0000001 ? ( slider66 = v; slider_automate(slider66); tt_sldirty = 1; ); )
   : idx == 67 ? ( abs(slider67 - v) > 0.0000001 ? ( slider67 = v; slider_automate(slider67); tt_sldirty = 1; ); )
@@ -7136,7 +7155,8 @@ function ui_key(k) local(s, w, g, hs, v, np, d, n0, n1) (
 // P25: REAPER-Undo spielt den Zustand ueber diesen Lesezweig in die LAUFENDE Instanz zurueck (jedes Strg+Z). Geprueft: gelesen werden
 // nur Muster, Laengen und Kette (+ pg_validate) und die Bank; Notenzustand (pg_snd, M_SN, Queue), Transport und Kommando-Ring bleiben
 // unberuehrt -> eine klingende Note endet regulaer (Pause/Gate-Ende des neuen Musters, Slide in eine Pause beendet sie). Abgeleitet wird
-// nur die SEQ-LINK-Summe (pg_linkSum = -1); alles andere liest @block je Step neu. Kein Werks-Preset/pg_defaults danach. Format unveraendert.
+// nur die SEQ-LINK-Summe (pg_linkSum = -1); alles andere liest @block je Step neu. Kein Werks-Preset/pg_defaults danach, ausser der abgeschnittene Chunk (B2: Lesen und pg_rdN < 296) ruft pg_defaults(). Format unveraendert.
+// Historie: nur die SEQ-LINK-Summe (pg_linkSum = -1); alles andere liest @block je Step neu. Kein Werks-Preset/pg_defaults danach. Format unveraendert.
 pg_serVer = PG_SER;
 file_var(0, pg_serVer);
 pg_serVer == PG_SER ? (
@@ -7161,6 +7181,8 @@ pg_serVer == PG_SER ? (
     file_mem(0, PG_LK, 16);
     pg_lkSan = 0;
     loop(16,
+      // Historie: PG_LK[pg_lkSan] = min(65535, max(0, floor(PG_LK[pg_lkSan])));
+      !(PG_LK[pg_lkSan] > -1000000000000 && PG_LK[pg_lkSan] < 1000000000000) ? PG_LK[pg_lkSan] = 0;
       PG_LK[pg_lkSan] = min(65535, max(0, floor(PG_LK[pg_lkSan])));
       pg_lkSan += 1;
     );

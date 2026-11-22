@@ -1,7 +1,7 @@
-desc:TT-KNOBMOVER
+desc:TT-KNOBMOVER (MIDI CC ride for the TT-303) [Tim Techlor]
 // @description TT-KNOBMOVER - MIDI CC ride for the TT-303 Acid Machine
 // @author TimTechlor
-// @version 1.1.1
+// @version 1.1.2
 // @license MIT
 // @tags midi cc automation acid 303 filter sweep arrangement
 // @provides
@@ -35,6 +35,7 @@ desc:TT-KNOBMOVER
 //   band): untouched sections follow the class table, edited sections and live overrides use the full 0-100 range.
 //   Each lane has its own LFO. Notes pass through unchanged. Operated entirely from the drawn front panel.
 // @changelog
+//   1.1.2 - FIX: inserting, splitting or shortening a section clears the pending section selection, so the old section is not edited by the next click. Tooltips for BUILD-UP and DELETE match where the bars go.
 //   1.1.1 - FIX: a class change request that was taken back before it ran no longer stays pending.
 //           FIX: ride maps and the TRACKER preview no longer show a stale curve after a tempo change.
 //           FIX: very long audio blocks no longer drop CC events (the MIDI merge now streams instead of a capped queue).
@@ -3875,7 +3876,8 @@ function ke_wave(shp, ph) local(f) (
 );
 // 0.9.0: Wert einer Lane im Abschnitt an der Stelle t (0..1): Streckenzug Start (x = 0, Wert s) -> eigene Punkte -> Ende (x = 1, Wert e).
 // n = Zahl der Punkte (aufsteigend nach x), pp = Zeiger auf die Punkte (x, y, x, y ...), md = Verbindung: 0 linear, 1 weich (Cosinus), 2 Treppe
-// (haelt den Wert des letzten Knotens bis zum naechsten; der Endwert e gilt erst bei t = 1). Ohne Punkte ruft ke_eval diese Funktion nicht.
+// (haelt den Wert des letzten Knotens bis zum naechsten; bei Treppe, md > 1.5, auch hinter dem letzten Knoten, der Endwert e wird nicht zurueckgegeben). Ohne Punkte ruft ke_eval diese Funktion nicht.
+// Historie: (haelt den Wert des letzten Knotens bis zum naechsten; der Endwert e gilt erst bei t = 1). Ohne Punkte ruft ke_eval diese Funktion nicht.
 function ke_lane(s, e, t, n, pp, md) local(j, x0, y0, x1, y1, f) (
   x0 = 0;  y0 = s;  x1 = 1;  y1 = e;
   j = 0;
@@ -4008,7 +4010,8 @@ function kg_wave(shp, ph) local(f) (
 );
 // 0.9.0: Wert einer Lane im Abschnitt an der Stelle t (0..1): Streckenzug Start (x = 0, Wert s) -> eigene Punkte -> Ende (x = 1, Wert e).
 // n = Zahl der Punkte (aufsteigend nach x), pp = Zeiger auf die Punkte (x, y, x, y ...), md = Verbindung: 0 linear, 1 weich (Cosinus), 2 Treppe
-// (haelt den Wert des letzten Knotens bis zum naechsten; der Endwert e gilt erst bei t = 1). Ohne Punkte ruft kg_eval diese Funktion nicht.
+// (haelt den Wert des letzten Knotens bis zum naechsten; bei Treppe, md > 1.5, auch hinter dem letzten Knoten, der Endwert e wird nicht zurueckgegeben). Ohne Punkte ruft kg_eval diese Funktion nicht.
+// Historie: (haelt den Wert des letzten Knotens bis zum naechsten; der Endwert e gilt erst bei t = 1). Ohne Punkte ruft kg_eval diese Funktion nicht.
 function kg_lane(s, e, t, n, pp, md) local(j, x0, y0, x1, y1, f) (
   x0 = 0;  y0 = s;  x1 = 1;  y1 = e;
   j = 0;
@@ -4156,6 +4159,7 @@ function km_total() local(i, s, p) (
 
 // Platz fuer ein Segment an Index pos schaffen (Segmente ab pos ruecken auf; Slot pos behaelt alte Werte und ist zu ueberschreiben)
 function km_insertSeg(pos) local(i) (
+  km_selQ = 0 - 1; // Strukturaenderung verwirft die vorgemerkte Wahl wie km_removeSeg.
   i = km_nseg;
   while (i > pos) ( memcpy(M_SEG + i*KM_SS, M_SEG + (i - 1)*KM_SS, KM_SS);  i -= 1; );
   km_nseg += 1;
@@ -4175,6 +4179,7 @@ function km_setTotal(n) local(d, sg) (
     sg = M_SEG + (km_nseg - 1)*KM_SS;
     sg[KF_LEN] += d;
   ) : d < 0 ? (
+    km_selQ = 0 - 1; // Kuerzen kann Segmente entfernen.
     d = 0 - d;
     while (d > 0) (
       sg = M_SEG + (km_nseg - 1)*KM_SS;
@@ -5608,7 +5613,8 @@ function km_pbFactory(n) (
   km_loadFactoryData(n);
   km_slFactory(n);
 );
-// Pruefsumme fuer den Stern der Preset-Leiste. Jeden Frame direkt aus den Daten (bis 1024 Worte, billig): eine Summe, die erst
+// Pruefsumme fuer den Stern der Preset-Leiste. Jeden Frame direkt aus den Daten (bis km_nseg*KM_SS Worte, hoechstens 27776): eine Summe, die erst
+// Historie: (bis 1024 Worte, billig)
 // ueber km_seq nachlaeuft, zeigte nach dem Laden eines Presets einen falschen Stern.
 function km_pbSum() local(i, s, s2, x, nw) (
   nw = km_nseg*KM_SS;
@@ -6246,7 +6252,8 @@ function kv_laneHit(mx, my, y0, st, h, nl) local(k, i, ly, xa, xb, ya, yb, d, bd
   );
 );
 
-// ---------- Werte setzen (Front): Abschnitt i, Lane k, wh 0 = FROM (Start), 1 = TO (Ende); klemmt auf die Klassengrenzen ----------
+// ---------- Werte setzen (Front): Abschnitt i, Lane k, wh 0 = FROM (Start), 1 = TO (Ende); klemmt auf 0..100 (ganze Lane) ----------
+// Historie: klemmt auf die Klassengrenzen
 function kv_setVal(i, k, wh, v) local(sg) (
   sg = M_SEG + i*KM_SS;
   v = min(100, max(0, floor(v + 0.5)));      // 0.9.0 (22.10.): die ganze Lane, nicht nur die Klassengrenzen
@@ -6812,7 +6819,7 @@ function kv_mapBar(y) local(nv, mid, rc) (
 
 // ==================== Erst-Init, Preset-Bank, Version ====================
 // @init laeuft bei jedem Transportstart erneut: Bedien- und Nutzerzustand nur beim ersten Lauf (km_ini1).
-strcpy(#tt_ver, "v1.1.1");
+strcpy(#tt_ver, "v1.1.2");
 uk_fsmax = 2;
 tt_pb_init(KM_NFAC, 32, KM_BANK, KM_PSW);
 km_facAll();      // Werks-Presets (generiert in 25_templates): Daten in M_FAC und Namen fuer die Preset-Leiste
@@ -7293,7 +7300,8 @@ toggle(730, 724, 112, 22, kv_bu, "BUILD-UP") ? (
     km_toggleBuildup(km_sel) ? tt_undo() : ( km_msgt = 90;  strcpy(#km_m, "NO ROOM FOR A BUILD-UP"); );
   ) : ( km_msgt = 90;  strcpy(#km_m, "ONLY ON A3 DROP SECTIONS"); );
 );
-tt_hov(730, 724, 112, 22, "On a DROP: puts a 2-bar PRE-DROP section in front of it (or removes it). The bars come from the section before.");
+tt_hov(730, 724, 112, 22, "On a DROP: puts a 2-bar PRE-DROP section in front of it (or removes it). The bars come from the section before when it has more than 2 bars, otherwise from the drop itself.");
+// Historie: "On a DROP: puts a 2-bar PRE-DROP section in front of it (or removes it). The bars come from the section before."
 kv_fl = km_hasFill(km_sel);
 toggle(850, 724, 112, 22, kv_fl, "FILL A4") ? (
   kv_ty == 3 ? (
@@ -7327,7 +7335,8 @@ tt_hov(642, 794, 150, 24, "Throws away your edits of the selected section and lo
 btn(798, 794, 80, 24, 0, "DELETE") ? (
   km_delete(km_sel) ? tt_undo() : ( km_msgt = 90;  strcpy(#km_m, "LAST SECTION CANNOT BE DELETED"); );
 );
-tt_hov(798, 794, 80, 24, "Deletes the selected section; its bars go to the section before.");
+tt_hov(798, 794, 80, 24, "Deletes the selected section; its bars go to the section before, or to the next section when this is the first.");
+// Historie: "Deletes the selected section; its bars go to the section before."
 btn(884, 794, 78, 24, 0, "+ ADD") ? (
   km_add(km_sel) ? tt_undo() : ( km_msgt = 90;  strcpy(#km_m, "ARRANGEMENT FULL (256 BARS / 64 SECTIONS)"); );
 );

@@ -1,7 +1,7 @@
 desc:TT-LuckyMidiChance (probability + generative MIDI processor) [Tim Techlor]
 // @description TT-LuckyMidiChance - Probability and generative MIDI processor
 // @author TimTechlor
-// @version 1.6.0
+// @version 1.6.1
 // @license MIT
 // @tags midi probability generative chance euclidean ratchet strum humanize
 // @link Manual https://timtechlor.de/docs/tt-luckymidichance-manual.html
@@ -28,6 +28,7 @@ desc:TT-LuckyMidiChance (probability + generative MIDI processor) [Tim Techlor]
 //   randomness is reproducible. Operated entirely from the drawn front
 //   panel — parameters stay automatable.
 // @changelog
+//   1.6.1 - FIX: value labels next to a caption keep their gap at every UI size. The caption width was scaled twice.
 //   1.6.0 - Front: the processing is easier to follow. MONITOR shows the processing order as stages (IN > COND > EUCLID > CHANCE > MUTATE > HUMAN > STRUM > RATCH > OUT; lit = enabled, the dot flashes when a stage handles a note) and a DROPS row that splits EV DROP by cause (COND, EUCLID, CHANCE, MUTATE, QUEUE; the five add up to EV DROP). COND shows OPEN / CLOSED and the bar position in its cycle. The EUCLID ring marks the last checked note (green = pulse, amber = veto). MUTATE has a hit LED; its target CHANCE is now shown as GATE FLIP (same setting, presets unchanged). HUMAN DEVIATE shows the last note's final velocity change and delay, STRUM the last added strum delay, RATCHET the last scheduled hit count. Knobs in HUMAN DEVIATE and EUCLID & MUTATE are centred; LED flashes run on time instead of frame rate; SEED tooltips explain FREE and LOCKED more precisely. MIDI processing and random sequences unchanged.
 //   1.5.1 - Fixes from a code review. Notes: switching ENABLED off and on while keys are held no longer leaves a note hanging (BYPASS now keeps track of held notes, so the note-offs of notes that were already closed are swallowed instead of doubled); two notes on the same key that touch (legato) are no longer cut short under TIME DEV, STRUM or RATCHET shifts; release velocity is passed through; more than 512 events in one block no longer lose note-offs; EV OUT / PASS count notes actually sent; STRUM ALT only alternates on real chords (a single note between chords no longer flips the direction); a loop jump no longer fires a panic in BYPASS; time-signature changes just behind a block start are anchored independent of the block size (COND after a change), earlier provisional anchors no longer hide learned ones, large blocks no longer count a continuation as a jump; the random stream is seeded already at load (SEED works before the first play); the PRNG avoids 64-bit modulo on 32-bit builds (same sequences on 64-bit); the preset modified-star (*) no longer cancels out and survives project reopen/undo; factory presets load in one step; the front's font fitting does far less work at large font sizes; wheel on the SEED box counts notches; preset bar and OPTIONS: a click on OPTIONS (scrollbars over the bar) no longer also loads a preset, no phantom click when an overlay ends under a held mouse button, a stale key no longer ends SAVE at once, a damaged bank is reported as BANK DAMAGED, UI SIZE accepts 0 (clamped to 50 %). Release-velocity-sensitive instruments now sound as they would without the plug-in. Audio otherwise unchanged. Decisions kept open (they would change the random decisions of projects with a locked SEED): loop passes with a locked SEED still differ, parameter automation across zero still shifts the random stream.
 //     - NEW: OPTIONS > AUTO FIT ON / OFF (default on): dragging the window edge rescales the UI to the new window size; the UI SIZE buttons still set a fixed zoom until the window changes again. UI SIZE now accepts 25 to 400 percent. Saved per instance.
@@ -846,7 +847,7 @@ function tt_pb_free() local(j, r) ( r = -1; j = 0; loop(tt_pb_nusr, (r < 0 && tt
 
 // Auf 24 signifikante Bit runden = float32-exakt (die Serialisierung schreibt float32)
 function tt_pb_q(v) local(e, st) (
-  (v == 0 || abs(v) > 1000000000000000000000000000) ? v : (
+  (v === 0 || abs(v) > 1000000000000000000000000000) ? v : (
     e = floor(log(abs(v))/log(2));
     st = 2^(e - 23);
     floor(v/st + 0.5)*st;
@@ -1528,7 +1529,7 @@ slider17 = -5;
 // __UIKIT_BEGIN__   // generiert aus _shared/tt-uikit.jsfx-inc
 // tt-uikit.jsfx-inc — Tim Techlor UI-Kit fuer JSFX-Geraetefronten
 // Extrahiert aus TT-303 Acid Machine v1.07 + Schwesterprodukt S5 v1.03 (identischer Kern).
-// Stand UKIT_VER 7 (13.10.2026, additiv zu v6; davor 6 = P26). Wird von _shared/tt_modules_inline.py zwischen Marker in die Produktdatei kopiert
+// Stand UKIT_VER 8 (23.10.2026, additiv zu v7: Flat-Stil, Weiche uk_flat; davor 7 = 13.10.2026, 6 = P26). Wird von _shared/tt_modules_inline.py zwischen Marker in die Produktdatei kopiert
 // (kein import mehr; Details: _shared/UIKIT.md). Enthaelt KEINE @-Sektionen —
 // nur Funktionen und Konstanten-Konvention.
 // v7 (13.10.2026): rein additiv - Bausteine, die die Produkte bisher je lokal gebaut haben (Text links/rechts einpassen, Regler mit
@@ -1778,23 +1779,7 @@ function led(x, y, r, on) (
 // Bei 0 bleibt das Verhalten von Kit 1..6 (rohes gfx_set); die Schemata 1..4 sind in beiden Faellen gleich, ab Schema 5 weichen sie leicht ab.
 function uk_gtn(r, g, b, a) ( uk_tone ? tth_tn(r, g, b, a) : gfx_set(r, g, b, a); );
 
-// Schalter. Rueckgabe 1 wenn in diesem Frame geklickt.
-function btn(x, y, w, h, on, s) local(hit, hov) (
-  hov = inBox(x, y, w, h);
-  hit = uiClick && hov;
-  on ? (
-    colAcid(0.88); xrect(x, y, w, h);
-    gfx_set(0, 0, 0, 1);
-  ) : (
-    uk_gtn(0.098, 0.103, 0.098, 1); xrect(x, y, w, h);
-    hov ? tth_tn(0.30, 0.46, 0.26, 1) : tth_tn(0.15, 0.20, 0.14, 1);
-    xrect(x, y, w, 1); xrect(x, y + h - 1, w, 1);
-    xrect(x, y, 1, h); xrect(x + w - 1, y, 1, h);
-    hov ? tth_tn(0.85, 0.95, 0.82, 1) : tth_tn(0.78, 0.84, 0.76, 1);
-  );
-  xctrfit(x, y, w, h, s);       // v6: bei Stufe > 0 nur so gross, wie der Text in den Knopf passt
-  hit;
-);
+// v8: btn steht jetzt hinter den Flat-Bausteinen (Abschnitt v8 Teil 1, nach xshadow).
 
 // Drehregler. Vertikal ziehen, Shift = fein, Mausrad auf hot,
 // Rechtsklick/Doppelklick = Default `def`. Rueckgabe: neuer Wert.
@@ -2015,7 +2000,7 @@ function uikit_ground() (
 // ueber den `id`-Parameter; geteilt werden nur dragId/clickId/clickWait aus v1.
 // Bogenwinkel (uk_arc): Grad, 0 = oben (12 Uhr), im Uhrzeigersinn (gfx_arc-Konvention).
 
-UKIT_VER    = 7;     // Kit-Version (uikit_ver() liefert dieselbe Zahl); v7: 13.10.2026 (Bausteine aus den Produkten, Abschnitt v7 am Dateiende); v3: P20 (uk_txt, Font-Stufen, colDim-Fallback, tth_ik); v4: P25 (Schrittweite knobst/knob2st/hsliderst, tt_modtips je Element, tt_vertag); v5: UI SIZE (tth_view); v6: P26 (drawCentered/kvLabel, Schrift-Einpassung, uk_fsmax)
+UKIT_VER    = 8;     // Kit-Version (uikit_ver() liefert dieselbe Zahl); v8: 23.10.2026 (Flat-Stil ukf_*, Weiche uk_flat); v7: 13.10.2026 (Bausteine aus den Produkten, Abschnitt v7 am Dateiende); v3: P20 (uk_txt, Font-Stufen, colDim-Fallback, tth_ik); v4: P25 (Schrittweite knobst/knob2st/hsliderst, tt_modtips je Element, tt_vertag); v5: UI SIZE (tth_view); v6: P26 (drawCentered/kvLabel, Schrift-Einpassung, uk_fsmax)
 CRV_MAXPTS  = 32;    // max. Punkte je Kurve
 CRV_SIZE    = 98;    // Slots je Kurve: [0]=n, [1]=frei, dann 3 Werte je Punkt (x, y, Spannung)
 CRV_MINDX   = 0.002; // Mindestabstand zweier Punkte in x (beim Setzen/Ziehen)
@@ -2023,7 +2008,7 @@ UK_IMG      = 1000;  // Bildpuffer-Nummer fuer den gecachten Grund (uikit_ground
 // Akzent-Vorbelegung auch schon zur Initzeit (uikit_begin holt sie sonst nach)
 (accR == 0 && accG == 0 && accB == 0) ? ( accR = 0.224; accG = 1.000; accB = 0.078; );
 
-function uikit_ver() ( 7; );
+function uikit_ver() ( 8; );
 
 // Akzentfarbe des Produkts setzen (0..1). Empfehlungen: siehe UIKIT.md
 function uikit_accent(r, g, b) ( accR = r; accG = g; accB = b; );
@@ -2244,6 +2229,242 @@ function xshadow(x, y, w, h, spread) local(j, n, s, al) (
   );
 );
 
+// ======================================================================================================================
+// ---------- v8 (23.10.2026): Flat-Stil (Saturn-Look), Teil 1 - Grundbausteine und Weiche uk_flat ----------
+// Rein additiv. Herkunft: die lokalen Flat-Baukaesten der Produkte, vereinheitlicht (Plan auftraege/P32_UIKIT8_FLAT.md).
+// (Keine Produktnamen in Modulkommentaren: das Modul steckt in jedem Plugin, auch in veroeffentlichten - Namensregel.) Namensraum ukf_ (kollidiert nicht mit dlu_/ds_ui_/ht_/fg_/sg_/kvf_).
+// Produkt-Eingabe uk_flat (Vorgabe 0): 0 = btn, toggle, combo, tabbar, padbtn, knob2st und hsliderst zeichnen wie Kit 7 (bitgleich);
+// 1 = dieselben Funktionen zeichnen flach (gleiche Signaturen, Rueckgaben und Mausbedienung). Die ukf_*-Funktionen sind zusaetzlich
+// direkt nutzbar (z. B. um beide Stile zu mischen). Teil 2 (Knoten, Segmentreihe, Stepper, LED-Leiste, Flaechen mit Titel) steht am Dateiende.
+// Steht hier (vor btn), weil die Weiche Callee vor Caller braucht; btn ist deshalb in v8 hinter diesen Block gewandert (sonst unveraendert).
+// Farben: nur accR/G/B, tth_tn, colInk/colWhite (kein neues Theme-Wort). ukf_c2 = 1 dreht die Akzentkanaele (zweite Farbe, wie dlu_c2);
+// ukf_ac = 1 nimmt statt des Akzents die Farbe ukf_aR/ukf_aG/ukf_aB (z. B. eine Slot-B-Farbe des Produkts).
+// ======================================================================================================================
+function ukf_cl01(v) ( min(1, max(0, v)); );
+
+// Akzentfarbe, mit h (0..1) Richtung Weiss
+function ukf_acc(h, a) local(r, g, b) (
+  h = ukf_cl01(h);
+  ukf_ac ? ( r = ukf_aR; g = ukf_aG; b = ukf_aB; ) : ukf_c2 ? ( r = accB; g = accR; b = accG; ) : ( r = accR; g = accG; b = accB; );
+  gfx_set(r + (1 - r)*h, g + (1 - g)*h, b + (1 - b)*h, a);
+);
+
+// Textfarbe auf einer Akzentflaeche: dunkel auf hellem Akzent, sonst weiss
+function ukf_onacc() local(r, g, b) (
+  ukf_ac ? ( r = ukf_aR; g = ukf_aG; b = ukf_aB; ) : ( r = accR; g = accG; b = accB; );
+  (0.30*r + 0.59*g + 0.11*b) > 0.55 ? gfx_set(0.04, 0.05, 0.05, 1) : colWhite(1);
+);
+
+// ---- Flaechen ----
+// Platte ohne Titelzeile: Schatten, Rahmen, Verlauf (wie dlu_plate / ds_ui_plate)
+function ukf_plate(x, y, w, h) (
+  xshadow(x, y, w, h, 7);
+  colBorder(); xrrect(x, y, w, h, 4, 1);
+  tth_on ? xgrad(x + 2, y + 2, w - 4, h - 4, tth_pnR + 0.018, tth_pnG + 0.019, tth_pnB + 0.018, tth_pnR - 0.012, tth_pnG - 0.013, tth_pnB - 0.012)
+    : xgrad(x + 2, y + 2, w - 4, h - 4, 0.090, 0.096, 0.090, 0.060, 0.064, 0.060);
+  gfx_set(1, 1, 1, 0.07); xrect(x + 3, y + 1, w - 6, 1);
+  gfx_set(0, 0, 0, 0.35); xrect(x + 3, y + h - 2, w - 6, 1);
+  gfx_set(0, 0, 0, 0.5);  xrrect(x, y, w, h, 4, 0);
+);
+// Dunkle Anzeigeflaeche (Display, Readout)
+function ukf_well(x, y, w, h) (
+  gfx_set(0, 0, 0, 0.42); xrrect(x, y, w, h, 3, 1);
+  gfx_set(1, 1, 1, 0.07); xrrect(x, y, w, h, 3, 0);
+);
+// Trennlinie (senkrecht / waagrecht)
+function ukf_vsep(x, y, h) ( gfx_set(1, 1, 1, 0.06); xrect(x, y, 1, h); gfx_set(0, 0, 0, 0.30); xrect(x + 1, y, 1, h); );
+function ukf_hsep(x, y, w) ( gfx_set(1, 1, 1, 0.06); xrect(x, y, w, 1); gfx_set(0, 0, 0, 0.30); xrect(x, y + 1, w, 1); );
+
+// ---- Tasten ----
+// Taste (Druck), on = leuchtet. Schrift setzt der Aufrufer (wie btn). Rueckgabe 1 bei Klick.
+function ukf_btn(x, y, w, h, on, s) local(hov, hit) (
+  hov = inBox(x, y, w, h);
+  hit = uiClick && hov;
+  on ? ( ukf_acc(0, 0.30); xrrect(x, y, w, h, 3, 1); ukf_acc(0.2, 0.9); xrrect(x, y, w, h, 3, 0); colWhite(1); )
+     : ( gfx_set(1, 1, 1, (hov && uiLmb) ? 0.16 : hov ? 0.10 : 0.05); xrrect(x, y, w, h, 3, 1);
+         gfx_set(1, 1, 1, hov ? 0.26 : 0.11); xrrect(x, y, w, h, 3, 0);
+         hov ? colWhite(0.95) : colInk(0.82); );
+  xctrfit(x, y, w, h, s);
+  hit;
+);
+// Segment-Taste (aktiv = gefuellt im Akzent, Text dunkel/hell je nach Akzent). Rueckgabe 1 bei Klick.
+function ukf_seg(x, y, w, h, on, s) local(hov, hit) (
+  hov = inBox(x, y, w, h);
+  hit = uiClick && hov;
+  on ? ( ukf_acc(hov ? 0.12 : 0, 0.92); xrrect(x, y, w, h, 3, 1); ukf_onacc(); )
+     : ( gfx_set(1, 1, 1, hov ? 0.10 : 0.05); xrrect(x, y, w, h, 3, 1);
+         gfx_set(1, 1, 1, hov ? 0.24 : 0.10); xrrect(x, y, w, h, 3, 0);
+         hov ? colWhite(0.95) : colInk(0.80); );
+  xctrfit(x, y, w, h, s);
+  hit;
+);
+// Schalter mit LED links. Rueckgabe 1 bei Klick.
+function ukf_tg(x, y, w, h, on, s) local(hov, hit, lx) (
+  hov = inBox(x, y, w, h);
+  hit = uiClick && hov;
+  lx = x + min(10, h*0.5 + 1);
+  gfx_set(1, 1, 1, hov ? 0.10 : 0.05); xrrect(x, y, w, h, 3, 1);
+  on ? ( ukf_acc(0, 0.16); xrrect(x, y, w, h, 3, 1); ukf_acc(0, 0.55); xrrect(x, y, w, h, 3, 0); )
+     : ( gfx_set(1, 1, 1, hov ? 0.24 : 0.10); xrrect(x, y, w, h, 3, 0); );
+  on ? ( ukf_acc(0, 0.28); xcirc(lx, y + h*0.5, min(5.6, h*0.32), 1); ukf_acc(0.3, 1); xcirc(lx, y + h*0.5, min(3.1, h*0.18), 1); )
+     : ( gfx_set(1, 1, 1, 0.16); xcirc(lx, y + h*0.5, min(3.1, h*0.18), 1); );
+  (on || hov) ? colWhite(0.96) : colInk(0.78);
+  xctrfit(lx + 6, y, x + w - lx - 8, h, s);
+  hit;
+);
+// Pad / Zelle: on = gefuellt, sel = heller Rahmen, s = Text (leer = keiner). Rueckgabe 1 bei Klick. Tooltip: Aufrufer (padbtn tut es).
+function ukf_pad(x, y, w, h, on, sel, s) local(hov, hit) (
+  hov = inBox(x, y, w, h);
+  hit = uiClick && hov;
+  on ? ( ukf_acc(hov ? 0.12 : 0, 0.90); xrrect(x, y, w, h, 3, 1); )
+     : ( gfx_set(1, 1, 1, hov ? 0.10 : 0.05); xrrect(x, y, w, h, 3, 1); );
+  sel ? ( colWhite(0.95); xrrect(x, y, w, h, 3, 0); )
+      : ( gfx_set(1, 1, 1, hov ? 0.24 : 0.10); xrrect(x, y, w, h, 3, 0); );
+  strlen(s) > 0 ? ( on ? ukf_onacc() : colInk(0.9); xctrfit(x, y, w, h, s); );
+  hit;
+);
+
+// Auswahl mit Pfeilen: links/rechts = vorheriges/naechstes, Mitte = naechstes (Umlauf), Rechtsklick = vorheriges, Rad = +-1.
+// Text vorher in #cmb_txt (wie combo). wrap = 1: Pfeile laufen um, 0: Pfeile begrenzen (wie combo). Rueckgabe: neuer Index. Schrift: Aufrufer.
+function ukf_mc(x, y, w, h, val, n, wrap) local(nv, hov, hl, hr, cy, aw) (
+  nv = val; hov = inBox(x, y, w, h);
+  aw = min(22, w*0.25);
+  hl = inBox(x, y, aw, h); hr = inBox(x + w - aw, y, aw, h);
+  uiClick && hov ? ( hl ? ( nv = wrap ? val - 1 : max(0, val - 1); ) : hr ? ( nv = wrap ? val + 1 : min(n - 1, val + 1); ) : ( nv = val + 1; ); );
+  uiRClk && hov ? ( nv = val - 1; );
+  (hov && mouse_wheel != 0) ? ( nv = wrap ? val + (mouse_wheel > 0 ? 1 : 0 - 1) : min(n - 1, max(0, val + (mouse_wheel > 0 ? 1 : 0 - 1))); mouse_wheel = 0; );
+  nv = nv < 0 ? n - 1 : nv >= n ? 0 : nv;
+  gfx_set(1, 1, 1, hov ? 0.09 : 0.05); xrrect(x, y, w, h, 3, 1);
+  gfx_set(1, 1, 1, hov ? 0.22 : 0.10); xrrect(x, y, w, h, 3, 0);
+  cy = y + h*0.5;
+  ukf_acc(hl ? 0.4 : 0, 1);
+  gfx_triangle(OX + (x + aw*0.62)*SC, OY + (cy - 4)*SC, OX + (x + aw*0.62)*SC, OY + (cy + 4)*SC, OX + (x + aw*0.34)*SC, OY + cy*SC);
+  ukf_acc(hr ? 0.4 : 0, 1);
+  gfx_triangle(OX + (x + w - aw*0.62)*SC, OY + (cy - 4)*SC, OX + (x + w - aw*0.62)*SC, OY + (cy + 4)*SC, OX + (x + w - aw*0.34)*SC, OY + cy*SC);
+  colWhite(0.96); xctrfit(x + aw, y, w - 2*aw, h, #cmb_txt);
+  nv;
+);
+
+// ---- Regler ----
+// Gemeinsame Bedienung (Ziehen vertikal, Shift fein, Rad mit Schrittweite st wie knob2st, Rechts-/Doppel-/Strg-Klick = def). Rueckgabe: neuer Wert.
+function ukf_kctl(id, cx, cy, r, val, vmn, vmx, def, st) local(nv, hot, sh, dv) (
+  nv = val;
+  sh = (mouse_cap & 8) ? 1 : 0;
+  hot = (mX - cx)*(mX - cx) + (mY - cy)*(mY - cy) <= (r + 7)*(r + 7);
+  uiRClk && hot ? ( nv = def; )
+  : uiClick && hot ? (
+      ((mouse_cap & 4) || (clickId == id && clickWait > 0)) ? ( nv = def; dragId = -1; clickWait = 0; )
+      : ( dragId = id; dragY = mY; dragV = val; dragSh = sh; clickId = id; clickWait = 12; );
+    );
+  dragId == id && uiLmb ? (
+    sh != dragSh ? ( dragSh = sh; dragY = mY; dragV = val; );
+    dv = (dragY - mY)/(sh ? 900 : 170);
+    nv = min(vmx, max(vmn, dragV + dv*(vmx - vmn)));
+  );
+  (st > 0 && nv != val) ? ( nv = min(vmx, max(vmn, vmn + floor((nv - vmn)/st + 0.5)*st)); );
+  hot && mouse_wheel != 0 ? (
+    st > 0 ? (
+      uk_wid != id ? ( uk_wid = id; uk_wacc = 0; );
+      uk_wacc += mouse_wheel;
+      uk_wk = uk_wacc > 0 ? floor(uk_wacc/120) : 0 - floor((0 - uk_wacc)/120);
+      uk_wacc -= uk_wk*120;
+      nv = val + uk_wk*st;
+    ) : ( nv = val + (mouse_wheel/120)*(vmx - vmn)*0.02; );
+    nv = min(vmx, max(vmn, nv));
+    mouse_wheel = 0;
+  );
+  ukf_khot = hot || dragId == id;
+  nv;
+);
+// Flacher Drehregler: Ringbogen im Akzent (bipolar, wenn vmn < 0 < vmx und def = 0: von der Mitte), dunkle Scheibe, weisser Zeiger.
+function ukf_knob(id, cx, cy, r, val, vmn, vmx, def, st) local(nv, t, t0, ta, tb, act, rb, a, k, ax, ay) (
+  nv = ukf_kctl(id, cx, cy, r, val, vmn, vmx, def, st);
+  act = ukf_khot;
+  t = ukf_cl01((nv - vmn)/(vmx - vmn));
+  t0 = (vmn < 0 && vmx > 0 && abs(def) < 0.0001) ? (0 - vmn)/(vmx - vmn) : 0;
+  ta = min(t, t0); tb = max(t, t0);
+  rb = r - 6;
+  gfx_set(1, 1, 1, 0.10);
+  k = 0; loop(3, uk_arc(cx, cy, r - 2.4 + k*0.8, -135, 135); k += 1; );
+  tb - ta > 0.004 ? (
+    act ? ( ukf_acc(0, 0.18); k = 0; loop(5, uk_arc(cx, cy, r - 3.6 + k*0.8, 0 - 135 + 270*ta, 0 - 135 + 270*tb); k += 1; ); );
+    ukf_acc(act ? 0.15 : 0, 1);
+    k = 0; loop(3, uk_arc(cx, cy, r - 2.4 + k*0.8, 0 - 135 + 270*ta, 0 - 135 + 270*tb); k += 1; );
+  );
+  gfx_set(0, 0, 0, 0.30); xcirc(cx + 0.8, cy + 1.6, rb + 1.2, 1);
+  tth_tn(0.060, 0.064, 0.066, 1); xcirc(cx, cy, rb, 1);
+  gfx_set(1, 1, 1, act ? 0.22 : 0.12); xcirc(cx, cy, rb, 0);
+  a = (0 - 135 + 270*t)*$pi/180;
+  ax = sin(a); ay = 0 - cos(a);
+  colWhite(1);
+  xline(cx + ax*rb*0.25, cy + ay*rb*0.25, cx + ax*rb*0.92, cy + ay*rb*0.92);
+  xline(cx + ax*rb*0.25 - ay*0.6, cy + ay*rb*0.25 + ax*0.6, cx + ax*rb*0.92 - ay*0.6, cy + ay*rb*0.92 + ax*0.6);
+  nv;
+);
+// Flacher waagrechter Schieber: Ziehen 1:1 ueber die Breite, Shift fein, Rad mit Schrittweite st, Rechts-/Doppel-/Strg-Klick = def.
+function ukf_hsl(id, x, y, w, h, val, vmn, vmx, def, st) local(nv, hot, t, sh, cy, act) (
+  nv = val;
+  sh = (mouse_cap & 8) ? 1 : 0;
+  hot = inBox(x - 6, y - 3, w + 12, h + 6);
+  uiRClk && hot ? ( nv = def; )
+  : uiClick && hot ? (
+      ((mouse_cap & 4) || (clickId == id && clickWait > 0)) ? ( nv = def; dragId = -1; clickWait = 0; )
+      : ( dragId = id; dragX = mX; dragV = val; dragSh = sh; clickId = id; clickWait = 12; );
+    );
+  dragId == id && uiLmb ? (
+    sh != dragSh ? ( dragSh = sh; dragX = mX; dragV = val; );
+    nv = min(vmx, max(vmn, dragV + (mX - dragX)*(vmx - vmn)/(w*(sh ? 6 : 1))));
+  );
+  (st > 0 && nv != val) ? ( nv = min(vmx, max(vmn, vmn + floor((nv - vmn)/st + 0.5)*st)); );
+  hot && mouse_wheel != 0 ? (
+    st > 0 ? (
+      uk_wid != id ? ( uk_wid = id; uk_wacc = 0; );
+      uk_wacc += mouse_wheel;
+      uk_wk = uk_wacc > 0 ? floor(uk_wacc/120) : 0 - floor((0 - uk_wacc)/120);
+      uk_wacc -= uk_wk*120;
+      nv = val + uk_wk*st;
+    ) : ( nv = val + (mouse_wheel/120)*(vmx - vmn)*0.02; );
+    nv = min(vmx, max(vmn, nv));
+    mouse_wheel = 0;
+  );
+  t = ukf_cl01((nv - vmn)/(vmx - vmn));
+  act = hot || dragId == id;
+  cy = y + h*0.5;
+  gfx_set(1, 1, 1, 0.08); xrrect(x, cy - 2, w, 4, 2, 1);
+  ukf_acc(0, act ? 1 : 0.8); xrrect(x, cy - 2, max(1, w*t), 4, 2, 1);
+  gfx_set(0, 0, 0, 0.5); xcirc(x + w*t, cy + 0.6, 6.2, 1);
+  tth_tn(0.07, 0.075, 0.08, 1); xcirc(x + w*t, cy, 5.4, 1);
+  ukf_acc(act ? 0.4 : 0.1, 1); xcirc(x + w*t, cy, 5.4, 0); xcirc(x + w*t, cy, 2, 1);
+  nv;
+);
+
+// LED: an = Farbe mit Hof, aus = dunkler Punkt
+function ukf_led(cx, cy, on) (
+  on ? ( ukf_acc(0, 0.28); xcirc(cx, cy, 5.4, 1); ukf_acc(0.3, 1); xcirc(cx, cy, 3, 1); )
+     : ( gfx_set(1, 1, 1, 0.16); xcirc(cx, cy, 3, 1); );
+);
+
+// ---- btn (v1) - in v8 nur hierher verschoben (hinter die Flat-Bausteine) und um die Weiche ergaenzt ----
+// Schalter. Rueckgabe 1 wenn in diesem Frame geklickt.
+function btn(x, y, w, h, on, s) local(hit, hov) (
+  uk_flat ? ukf_btn(x, y, w, h, on, s) : (
+  hov = inBox(x, y, w, h);
+  hit = uiClick && hov;
+  on ? (
+    colAcid(0.88); xrect(x, y, w, h);
+    gfx_set(0, 0, 0, 1);
+  ) : (
+    uk_gtn(0.098, 0.103, 0.098, 1); xrect(x, y, w, h);
+    hov ? tth_tn(0.30, 0.46, 0.26, 1) : tth_tn(0.15, 0.20, 0.14, 1);
+    xrect(x, y, w, 1); xrect(x, y + h - 1, w, 1);
+    xrect(x, y, 1, h); xrect(x + w - 1, y, 1, h);
+    hov ? tth_tn(0.85, 0.95, 0.82, 1) : tth_tn(0.78, 0.84, 0.76, 1);
+  );
+  xctrfit(x, y, w, h, s);       // v6: bei Stufe > 0 nur so gross, wie der Text in den Knopf passt
+  hit;
+  );
+);
+
 // Schraube als Zierpunkt (Radius 4)
 function screw(x, y) (
   gfx_set(0, 0, 0, 0.55); xcirc(x + 0.7, y + 1.0, 4.3, 1);
@@ -2307,6 +2528,7 @@ function uikit_ground2() local(bw, gh, gw) (
 // Polierter Drehregler. Bedienung wie knob + Strg+Klick = Default. Rueckgabe: neuer Wert.
 function knob2st(id, cx, cy, r, val, vmn, vmx, def, st)
   local(nv, t, hot, sh, act, dv, rb, a, j, f, k, ax, ay) (
+  uk_flat ? ukf_knob(id, cx, cy, r, val, vmn, vmx, def, st) : (   // v8: Weiche
   nv = val;
   sh = (mouse_cap & 8) ? 1 : 0;
   hot = (mX - cx)*(mX - cx) + (mY - cy)*(mY - cy) <= (r + 7)*(r + 7);
@@ -2369,6 +2591,7 @@ function knob2st(id, cx, cy, r, val, vmn, vmx, def, st)
   xline(cx + ax*rb*0.28, cy + ay*rb*0.28, cx + ax*rb*0.88, cy + ay*rb*0.88);
   xline(cx + ax*rb*0.28 - ay*0.6, cy + ay*rb*0.28 + ax*0.6, cx + ax*rb*0.88 - ay*0.6, cy + ay*rb*0.88 + ax*0.6);
   nv;
+  );
 );
 // knob2: stufenlos wie bisher (Signatur unveraendert); mit Schrittweite: knob2st(..., st)
 function knob2(id, cx, cy, r, val, vmn, vmx, def) ( knob2st(id, cx, cy, r, val, vmn, vmx, def, 0); );
@@ -2377,6 +2600,7 @@ function knob2(id, cx, cy, r, val, vmn, vmx, def) ( knob2st(id, cx, cy, r, val, 
 // Rechts-/Doppel-/Strg-Klick = Default. Rueckgabe: neuer Wert.
 function hsliderst(id, x, y, w, h, val, vmn, vmx, def, st)
   local(nv, t, hot, sh, hx, ty) (
+  uk_flat ? ukf_hsl(id, x, y, w, h, val, vmn, vmx, def, st) : (   // v8: Weiche
   nv = val;
   sh = (mouse_cap & 8) ? 1 : 0;
   hot = inBox(x - 6, y - 3, w + 12, h + 6);
@@ -2416,6 +2640,7 @@ function hsliderst(id, x, y, w, h, val, vmn, vmx, def, st)
   gfx_set(1, 1, 1, 0.22); xrect(hx - 4, y, 8, 1);
   colAcid(1); xrect(hx - 0.5, y + 2, 1, h - 4);
   nv;
+  );
 );
 // hslider: stufenlos wie bisher (Signatur unveraendert); mit Schrittweite: hsliderst(..., st)
 function hslider(id, x, y, w, h, val, vmn, vmx, def) ( hsliderst(id, x, y, w, h, val, vmn, vmx, def, 0); );
@@ -2424,6 +2649,7 @@ function hslider(id, x, y, w, h, val, vmn, vmx, def) ( hsliderst(id, x, y, w, h,
 // Klick auf die Mitte = naechster Wert (mit Umlauf), Rechtsklick = vorheriger, Rad = +-1.
 // Rueckgabe: neuer Index 0..n-1. Setzt Font 4.
 function combo(id, x, y, w, h, val, n) local(nv, hov, aw, hl, hr) (
+  uk_flat ? ( gfx_setfont(4); ukf_mc(x, y, w, h, val, n, 0); ) : (   // v8: Weiche (combo begrenzt an den Pfeilen, Mitte laeuft um)
   nv = val;
   aw = min(h, w*0.25);
   hov = inBox(x, y, w, h);
@@ -2452,10 +2678,12 @@ function combo(id, x, y, w, h, val, n) local(nv, hov, aw, hl, hr) (
   gfx_setfont(4);
   colWhite(0.95); xctrfit(x + aw, y, w - 2*aw, h, #cmb_txt);     // v6: Text nur so gross, wie er zwischen die Pfeile passt
   nv;
+  );
 );
 
 // Schalter mit LED-Punkt. Rueckgabe 1 bei Klick. Setzt keinen Font (nutzt den aktuellen).
 function toggle(x, y, w, h, on, s) local(hit, hov, lr) (
+  uk_flat ? ukf_tg(x, y, w, h, on, s) : (   // v8: Weiche
   hov = inBox(x, y, w, h);
   hit = uiClick && hov;
   lr = min(3.2, h*0.17);
@@ -2478,6 +2706,7 @@ function toggle(x, y, w, h, on, s) local(hit, hov, lr) (
   on ? colWhite(0.96) : ( hov ? tth_tn(0.85, 0.95, 0.82, 1) : tth_tn(0.72, 0.78, 0.70, 1); );
   xctrfit(x + h*0.85, y, w - h*0.85, h, s);       // v6: Einpassung wie btn (Textfeld rechts vom LED-Punkt)
   hit;
+  );
 );
 
 // Pegelbalken (Pixelraster-Helfer): Verlauf von A nach B ueber ein Rechteck; horiz=1 x-Richtung, sonst y
@@ -2963,13 +3192,27 @@ function card(x, y, w, h) (
 // ---- Tabs ----
 // n Reiter nebeneinander in der Box (x, y, w, h); names = "A|B|C" (n Eintraege), sel = aktiver Reiter. Rueckgabe: neuer Reiter.
 // Tooltip fuer die ganze Leiste in tip (einzelne Reiter bei Bedarf selbst per tt_hov nach dem Aufruf). Setzt Font 4.
-function tabbar(x, y, w, h, sel, n, names, tip) local(i, tw, nsel) (
+function tabbar(x, y, w, h, sel, n, names, tip) local(i, tw, nsel, hv) (
   nsel = sel; tw = w/n; i = 0;
   gfx_setfont(4);
+  uk_flat ? (   // v8: flache Reiter (Grundlinie, aktiver Reiter mit Flaeche 8 % und 2 Einheiten Unterstrich im Akzent)
+    gfx_set(1, 1, 1, 0.10); xrect(x, y + h - 1, w, 1);
+    loop(n,
+      uk_nth(#uk_tn, names, i);
+      hv = inBox(x + i*tw, y, tw, h);
+      i == sel ? ( ukf_acc(0, 0.08); xrect(x + i*tw, y, tw, h); ukf_acc(0, 1); xrect(x + i*tw, y + h - 2, tw, 2); )
+      : hv ? ( gfx_set(1, 1, 1, 0.04); xrect(x + i*tw, y, tw, h); );
+      i == sel ? ukf_acc(0, 1) : hv ? colWhite(0.95) : colInk(0.72);
+      xctrfit(x + i*tw, y, tw, h - 2, #uk_tn);
+      uiClick && hv ? ( nsel = i; );
+      i += 1;
+    );
+  ) : (
   loop(n,
     uk_nth(#uk_tn, names, i);
     btn(x + i*tw, y, tw - 2, h, i == sel, #uk_tn) ? ( nsel = i; );
     i += 1;
+  );
   );
   tt_hov(x, y, w, h, tip);
   nsel;
@@ -2978,6 +3221,7 @@ function tabbar(x, y, w, h, sel, n, names, tip) local(i, tw, nsel) (
 // ---- Pad / Zelle ----
 // on = gefuellt (Akzent), sel = heller Rahmen (z. B. aktueller Schritt), s = optionaler Text. Rueckgabe 1 bei Klick.
 function padbtn(x, y, w, h, on, sel, s, tip) local(hit, hov) (
+  uk_flat ? ( hit = ukf_pad(x, y, w, h, on, sel, s); tt_hov(x, y, w, h, tip); hit; ) : (   // v8: Weiche
   hov = inBox(x, y, w, h);
   hit = uiClick && hov;
   gfx_set(0, 0, 0, 0.35); xrrect(x, y + 1.2, w, h, 3, 1);
@@ -2990,6 +3234,7 @@ function padbtn(x, y, w, h, on, sel, s, tip) local(hit, hov) (
   strlen(s) > 0 ? ( on ? gfx_set(0, 0, 0, 1) : colInk(0.9); xctrfit(x, y, w, h, s); );
   tt_hov(x, y, w, h, tip);
   hit;
+  );
 );
 
 // ---- LED mit Helligkeit ----
@@ -3260,9 +3505,117 @@ function xtri(cx, cy, s, dir, fill) local(px, py, r, a1, a2, b1, b2, c1, c2) (
     gfx_line(px + c1, py + c2, px + a1, py + a2);
   );
 );
+
+// ======================================================================================================================
+// ---------- v8 (23.10.2026): Flat-Stil, Teil 2 - Abschnittskopf, Segmentreihe, Stepper, Regler mit Text, LED-Leiste, Display-Griff ----------
+// Grundbausteine und Weiche uk_flat: Teil 1 (hinter xshadow). Herkunft: lokale Bausteine der Produkte (Abschnittskopf, Regler mit Text, LED-Leiste, Display-Griff, Stepper, Segmente).
+// ======================================================================================================================
+
+// Abschnittskopf: Akzentstrich, Titel (Font 5), optional Untertitel rechts daneben ("" = keiner)
+function ukf_sec(x, y, s, sub) local(w, h) (
+  ukf_acc(0, 1); xrect(x, y + 1, 3, 11);
+  gfx_setfont(5); colInk(0.95); xstr(x + 8, y, s);
+  strlen(sub) > 0 ? (
+    gfx_measurestr(s, w, h);
+    colDim(0.75); xstr(x + 18 + w/SC, y, sub);
+  );
+);
+
+// Segmentreihe: n Felder (Breite w gesamt), Beschriftungen "A|B|C", sel = aktives Feld. Rueckgabe: neues Feld (Klick), sonst sel.
+function ukf_segrow(x, y, w, h, n, sel, names) local(i, cw, nsel) (
+  nsel = sel; cw = w/n; i = 0;
+  loop(n,
+    uk_nth(#uk_tn, names, i);
+    ukf_seg(x + i*cw + (i > 0 ? 1 : 0), y, cw - (i > 0 ? 1 : 0), h, i == sel, #uk_tn) ? ( nsel = i; );
+    i += 1;
+  );
+  nsel;
+);
+
+// Zahlenfeld mit - und +: liefert -1 / 0 / +1 (Klick auf eine Taste oder Rad ueber dem Feld). Text vorher in #uk_sv, Farbe des Werts = Akzent.
+// Schrift: Aufrufer (Tasten und Wert in der aktuellen Schrift).
+function ukf_step(x, y, w, h) local(r, hov, bw) (
+  r = 0; bw = min(18, w*0.3);
+  ukf_btn(x, y, bw, h, 0, "-") ? r = -1;
+  ukf_btn(x + w - bw, y, bw, h, 0, "+") ? r = 1;
+  hov = inBox(x + bw, y, w - 2*bw, h);
+  hov ? ( gfx_set(1, 1, 1, 0.04); xrect(x + bw + 1, y, w - 2*bw - 2, h); );
+  ukf_acc(0, 1); xctrfit(x + bw, y, w - 2*bw, h, #uk_sv);
+  hov && mouse_wheel != 0 ? (
+    uk_wid != 0 - (1 + x*1000 + y) ? ( uk_wid = 0 - (1 + x*1000 + y); uk_wacc = 0; );
+    uk_wacc += mouse_wheel;
+    uk_wk = uk_wacc > 0 ? floor(uk_wacc/120) : 0 - floor((0 - uk_wacc)/120);
+    uk_wacc -= uk_wk*120;
+    uk_wk != 0 ? ( r = uk_wk > 0 ? 1 : -1; );
+    mouse_wheel = 0;
+  );
+  r;
+);
+
+// Flacher Regler mit Titel darueber und Wert darunter (Font 5), Tooltip ueber die Zelle. Text des Werts per sprintf-Format fmt.
+function ukf_knoblv(id, cx, cy, r, val, vmn, vmx, def, st, lbl, fmt, tip) local(nv, bw) (
+  nv = ukf_knob(id, cx, cy, r, val, vmn, vmx, def, st);
+  bw = max(60, 2*r + 24);
+  tt_hov(cx - r - 10, cy - r - 16, 2*r + 20, 2*r + 32, tip);
+  gfx_setfont(5);
+  colInk(0.80); xctrfit(cx - bw*0.5, cy - r - 15, bw, 11, lbl);
+  sprintf(#uk_vs, fmt, nv);
+  colWhite(0.94); xctrfit(cx - bw*0.5, cy + r + 3, bw, 11, #uk_vs);
+  nv;
+);
+
+// Waagrechte LED-Leiste (Pegel 0..1, pk = Haltemarke 0..1, < 0 = keine)
+function ukf_ledh(x, y, w, h, n, lvl, pk) local(i, sw, gp, f, xx, pki) (
+  gp = 1.5;
+  sw = (w - gp*(n - 1))/n;
+  pki = pk >= 0 ? min(n - 1, floor(pk*n)) : 0 - 1;
+  i = 0;
+  loop(n,
+    f = (i + 0.5)/n;
+    xx = x + i*(sw + gp);
+    f <= lvl ? ( ukf_acc(max(0, (f - 0.75)/0.25)*0.8, 0.35 + 0.65*f); xrect(xx, y, sw, h); )
+             : ( gfx_set(1, 1, 1, 0.05); xrect(xx, y, sw, h); );
+    i == pki ? ( gfx_set(1, 1, 1, 0.9); xrect(xx + sw*0.5 - 0.7, y, 1.4, h); );
+    i += 1;
+  );
+);
+
+// Griff in einem Display (EQ-Knoten, Kurvenpunkt). Rueckgabe: 0 nichts, 1 Ziehen beginnt (Startwerte merken!), 2 wird gezogen
+// (ukf_ndx/ukf_ndy = Mausweg seit dem Start, Designraster), 3 Rechts-/Doppelklick (Vorgabe setzen), 4 Rad ueber dem Griff (ukf_ndw = Rasten, +1 = hoch).
+// Zeichnet Ring im Akzent (heller mit Hof bei Ueberfahren/Ziehen) und die Beschriftung lab darueber ("" = keine), begrenzt auf ukf_bx0..ukf_bx1.
+ukf_bx0 = 0; ukf_bx1 = 100000;
+function ukf_node(id, x, y, lab) local(hot, r, act, rv, w, h, lx) (
+  rv = 0;
+  hot = (mX - x)*(mX - x) + (mY - y)*(mY - y) <= 100;
+  uiRClk && hot ? ( rv = 3; )
+  : uiClick && hot ? (
+      (clickId == id && clickWait > 0) ? ( rv = 3; dragId = -1; clickWait = 0; )
+      : ( dragId = id; ukf_nmx = mX; ukf_nmy = mY; clickId = id; clickWait = 12; rv = 1; );
+    );
+  dragId == id && uiLmb && rv == 0 ? ( ukf_ndx = mX - ukf_nmx; ukf_ndy = mY - ukf_nmy; rv = 2; );
+  hot && mouse_wheel != 0 && rv == 0 ? ( ukf_ndw = mouse_wheel/120; mouse_wheel = 0; rv = 4; );
+  act = hot || dragId == id;
+  r = act ? 7 : 6;
+  act ? ( ukf_acc(0, 0.20); xcirc(x, y, 13, 1); );
+  gfx_set(0, 0, 0, 0.55); xcirc(x, y, r + 1.5, 1);
+  ukf_acc(act ? 0.35 : 0, 1); xcirc(x, y, r, 1);
+  tth_tn(0.06, 0.065, 0.07, 1); xcirc(x, y, r - 2.6, 1);
+  strlen(lab) > 0 ? (
+    gfx_setfont(5);
+    gfx_measurestr(lab, w, h);
+    w = w/SC + 8;
+    lx = max(ukf_bx0 + 2 + w*0.5, min(ukf_bx1 - 2 - w*0.5, x));
+    gfx_set(0, 0, 0, 0.72); xrrect(lx - w*0.5, y - 26, w, 14, 3, 1);
+    ukf_acc(act ? 0.2 : 0, act ? 0.9 : 0.45); xrrect(lx - w*0.5, y - 26, w, 14, 3, 0);
+    act ? colWhite(1) : colInk(0.85);
+    xctr(lx - w*0.5, y - 26, w, 14, lab);
+  );
+  ukf_nact = act;
+  rv;
+);
 // __UIKIT_END__
 tth_sync(slider40);   // P14: Farbschema aus dem versteckten Slider (nach Theme-Modul und Kit, vor dem ersten Zeichnen)
-strcpy(#tt_ver, "v1.6.0");   // P25 (Harmonisierung Punkt 6): die EINE Versionsstelle im Code; die Front zeichnet #tt_ver
+strcpy(#tt_ver, "v1.6.1");   // P25 (Harmonisierung Punkt 6): die EINE Versionsstelle im Code; die Front zeichnet #tt_ver
 
 // ---------- Speicherkarte (flache JSFX-Arrays) ----------
 QCAP   = 512;      // Queue-Slots
@@ -4352,11 +4705,14 @@ function lm_fit(base, tw, th, w, h) local(k, sl, wb, hb, go, px) (
 function lm_kv(x0, y, w) local(lw, vw, th, sl) (
   gfx_setfont(4); gfx_measurestr(#klbl, lw, th); gfx_measurestr(#kval, vw, th);
   colInk(1);
-  sl = lm_fit(4, lw * SC + 6 * SC + vw, th, w, 15);
+  // lw und vw sind Pixel der Messung. Die Luecke 6 ist Designraster.
+  // Historie: lm_fit(4, lw * SC + 6 * SC + vw, ...) hat die Labelbreite ein zweites Mal mit SC multipliziert.
+  sl = lm_fit(4, lw + 6*SC + vw, th, w, 15);
   gfx_measurestr(#klbl, lw, th);
   xat(x0, y); gfx_drawstr(#klbl);
   gfx_setfont(4); colAcid(1); uk_txt(); gfx_setfont(sl);
-  xat(x0 + lw + 6, y); gfx_drawstr(#kval);
+  // Historie: xat(x0 + lw + 6, y) hat die Pixelbreite als Designmass noch einmal skaliert.
+  gfx_x = OX + x0*SC + lw + 6*SC; gfx_y = OY + y*SC; gfx_drawstr(#kval);
 );
 // Links oben bei (x, y), Feld w x h
 function lm_xs(base, x, y, w, h, s) local(tw, th) (

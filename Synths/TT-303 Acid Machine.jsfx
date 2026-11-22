@@ -1,4 +1,4 @@
-desc:TT-303 Acid Machine
+desc:TimTechlor/TT-303 Acid Machine (v2.1.5)
 // @provides
 //   [nomain] TT-303/tt-303-jsfx-manual.html
 //   [nomain] TT-303/img/tt-ui-options/303-front.png
@@ -11,6 +11,8 @@ desc:TT-303 Acid Machine
 //   [nomain] TT-303/img/tt-303-acid-machine/tt-303-acid-machine-the-full-tt-303-acid-machine-interface-showing-the.jpg
 //   [nomain] TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-detail-highlighting-the-midi-in-out.webp
 //   [nomain] TT-303/img/tt-303-acid-machine/tt-303-acid-machine-transport-bar-with-play-button-bpm-field-preset-co.webp
+//   [nomain] TT-303/img/tt-303-acid-machine/tt-303-acid-machine-tt-303-acid-machine-web-logo.png
+//   [nomain] TT-303/img/tt-303-jsfx/tt-303-jsfx-logo.png
 //   [nomain] TT-303/img/tt-303-jsfx/tt-303-jsfx-midi.png
 //   [nomain] TT-303/img/tt-303-jsfx/tt-303-jsfx-presets.png
 //   [nomain] TT-303/img/tt-303-jsfx/tt-303-jsfx-save.png
@@ -19,8 +21,9 @@ desc:TT-303 Acid Machine
 //   [nomain] TT-303/img/tt-303-jsfx/tt-303-jsfx-synth-fx.png
 //   [nomain] TT-303/img/tt-303-acid-machine/tt-303-acid-machine-host-mode-keyboard-panel-with-the-playable-keyboard.webp
 //   [nomain] TT-303/TT-303_manual.html
-// @version 2.1.4
+// @version 2.1.5
 // @changelog
+//   2.1.5 - FIX: a factory patch clears the preset slot before the factory block is copied, so the read stays inside that block. Sound unchanged.
 //   2.1.4 - FIX: switching SEQ OUT off while a sequencer note was still playing dropped its note-off - the receiving
 //           instrument kept the note hanging (for many steps on slide chains or 100 % gate). The pending note-off is
 //           now sent once when SEQ OUT switches off. @provides header cleaned (stray PATGEN entries removed, keyboard
@@ -1615,7 +1618,7 @@ function tt_pb_post(px, py, sc)
 // Historie: strcpy(#tt_ver, "v1.5.0"); bis 05.10.2026 (fuer ReaPack auf 2.0.0 umnummeriert, 1.07 > 1.5.0 dort).
 // Historie: strcpy(#tt_ver, "v2.1.1");
 // Historie: strcpy(#tt_ver, "v2.1.3");
-strcpy(#tt_ver, "v2.1.4");
+strcpy(#tt_ver, "v2.1.5");
 
 // ---------- Memory map ----------
 // Note: M_SEQ deliberately lies in a gap that the memset skips.
@@ -2728,8 +2731,9 @@ function noteHeld(n) local(i, r) (
 
 /* ---------- Sound presets ---------- */
 
-// Five factory patches plus INIT, tuned for the current engine.
-// SCREAM and HOOVER use the square wave. INIT also sets Comp ON/100 %
+// Five factory patches plus INIT live in M_FAC. applyPatch loads them.
+// apSet12 is the old setter. Its calls survive only as Historie below.
+// Historie: SCREAM and HOOVER use the square wave. INIT also sets Comp ON/100 %
 // and the delay/reverb input EQs (250 Hz..3.0 kHz resp. 300 Hz..2.3 kHz).
 // P25 (Punkt 4): Werte unveraendert, geschrieben ueber sl303set (meldet nur, was sich aendert). Historie: direkte
 // Zuweisungen sliderN = v plus 23 slider_automate(sliderN) am Ende (auch fuer unveraenderte Slider).
@@ -3060,7 +3064,9 @@ function pbSum() local(i, a, s) (              // checksum for the '*' (state di
 
 function applyPatch(p) (
   p = max(0, min(5, floor(p)));
-  memcpy(tt_pb_buf, M_FAC + p*FAC_W, PB_PSW);
+  // Historie: memcpy(tt_pb_buf, M_FAC + p*FAC_W, PB_PSW);
+  memset(tt_pb_buf, 0, PB_PSW);
+  memcpy(tt_pb_buf, M_FAC + p*FAC_W, FAC_W);
   pbApply();            // Regler (geklemmt), Pattern, validateBanks, paramsDirty
   patchSel = p;
 );

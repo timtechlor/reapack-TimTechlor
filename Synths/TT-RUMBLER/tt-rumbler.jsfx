@@ -1,7 +1,7 @@
-desc:TT-RUMBLER Rumble Machine v1.1.0
+desc:TT-RUMBLER Rumble Machine v1.1.1
 // @description TT-RUMBLER Rumble Machine - kick-triggered techno rumble with three engines (VERB/NOISE/PITCH), sample-accurate trigger, separate kick/rumble outputs and host latency compensation (PDC)
 // @author TimTechlor
-// @version 1.1.0
+// @version 1.1.1
 // @license MIT
 // @tags effect rumble sub bass techno reverb noise pitch
 // @link Manual https://timtechlor.de/docs/tt-rumbler-manual.html
@@ -9,9 +9,11 @@ desc:TT-RUMBLER Rumble Machine v1.1.0
 //   [nomain] img/tt-ui-options/rumbler-front.png
 //   [nomain] img/tt-ui-options/rumbler-options.png
 //   tt-rumbler-manual.html
-//   img/tt-rumbler/rmb_v07_scope.png
+//   img/tt-rumbler/rmb_v2_full.png
+//   img/tt-rumbler/rmb_v2_dropdown.png
+//   img/tt-rumbler/rmb_v2_options.png
 // @about
-//   # TT-RUMBLER Rumble Machine v1.1.0
+//   # TT-RUMBLER Rumble Machine v1.1.1
 //
 //   Techno rumble machine - part of the TimTechlor line
 //   (TT-303 Acid Machine = bass, Kick = the kick,
@@ -79,7 +81,7 @@ desc:TT-RUMBLER Rumble Machine v1.1.0
 //
 //   == PRESET BAR / USER BANK (v0.4.0) ==
 //   Header bar left of OPTIONS: [<] [name v] [>] [SAVE] [...].
-//   The dropdown lists FACTORY (INIT + the 21 factory presets)
+//   The dropdown lists FACTORY (INIT + the 22 factory presets)
 //   and USER (32 slots, kept in the plugin state: project, FX
 //   chain, track template and every native REAPER preset file).
 //   A preset = the 28 sound parameters (not KICK/RUMBLE switches,
@@ -111,7 +113,7 @@ desc:TT-RUMBLER Rumble Machine v1.1.0
 //   v0.1.0 is feature-complete (M1-M5): the 66-word
 //   parameter blob rides @serialize (v3 since 0.9.0: magic + version +
 //   64 words), a 20-slot undo ring (up to 19 edits) lives in memory, and
-//   INIT + 21 factory presets (8 VERB / 7 NOISE / 6 PITCH,
+//   INIT + 22 factory presets (9 VERB / 7 NOISE / 6 PITCH, including FAST 148,
 //   designed in the tt-rumbler_lab.py transcript) sit in the
 //   header preset bar (v0.4.0). Every panel parameter is a
 //   draggable widget with tooltips. v0.5.4: every edit (drag,
@@ -119,6 +121,7 @@ desc:TT-RUMBLER Rumble Machine v1.1.0
 //   to REAPER - one undo point, project marked as changed.
 //
 // @changelog
+//   1.1.1 - FIX: the about text says 22 factory presets plus INIT, and the latency comment matches 4096 samples. Sound unchanged.
 //   v1.1.0 (2026-10-26) NEW: factory preset FAST 148 [VERB/MODAL] - short T60 2 s rumble with HC 120 Hz
 //           for 145-150 BPM (START 8, ATT 45, HLD 60, REL 120 ms); appended as preset 22, the other numbers stay.
 //           FIX (Review 30.10.2026): preserve bank/style on restore before init, validate before DSP seeds,
@@ -222,6 +225,8 @@ out_pin:Right
 // schreiben zuerst gmem[5189] = 20261001). Das Produkt selbst liest/schreibt kein gmem ausser der Testdiagnose
 // (gmem 6000..6013, nur mit tt_testok). Stand 0.9.3: Das Theme-Modul (THEME 6) belegt gmem[5189..5227] (Freigabe 5189,
 // Kommandos/Meldungen bis tth_gmb + 37 = 5227); tth_gmb bleibt auf der Vorgabe 5190.
+// Historie: The dropdown lists FACTORY (INIT + the 21 factory presets)
+// Historie: INIT + 21 factory presets (8 VERB / 7 NOISE / 6 PITCH,
 options:gfx_hz=45 maxmem=1048576 gmem=ttrmb
 
 // ======================================================================
@@ -3744,7 +3749,7 @@ function ukf_node(id, x, y, lab) local(hot, r, act, rv, w, h, lx) (
 // __UIKIT_END__
 APP_NAME = "TT-RUMBLER";
 // P25 (Punkt 6): EINE Versionsstelle im Code (#tt_ver, Kit) - Kopf und Fusszeile zeichnen #tt_ver.
-strcpy(#tt_ver, "v1.1.0");
+strcpy(#tt_ver, "v1.1.1");
 
 // ----------------------------------------------------------------------
 // SPEICHERKARTE v1 (PLAN.md Rev 2, S.3 - frozen ab M1, Regel 5)
@@ -3763,7 +3768,8 @@ M_TOP   = 2048;   // dynamische Puffer:
                   //   M_TOP+65536  .. +69632   Verb: 2 Allpass a 2048
                   //   M_TOP+69632  .. +102400  Pitch-Ring (32768)
                   //   M_TOP+102400 .. +106496  Filter-Comb-Ring (4096, COMB)
-// v0.7.0 (Variante D, Nutzerauftrag 09.10.2026): Dual-Trace-Scope. Spaltenpuffer HINTER der Preset-Bank (Bank endet bei 112538).
+// v0.7.0 (Variante D, Nutzerauftrag 09.10.2026): Dual-Trace-Scope. Spaltenpuffer HINTER der Preset-Bank (Bank endet bei 112488, tt_pb_end = erste freie Adresse; M_SCQ bleibt 116000).
+// Historie: v0.7.0 (Variante D, Nutzerauftrag 09.10.2026): Dual-Trace-Scope. Spaltenpuffer HINTER der Preset-Bank (Bank endet bei 112538).
 // 1024 Spalten x 8 Worte: [0,1] KICK-IN min/max (Eingang Mono-Mid vor dem KICK-Fader), [2,3] RUMBLE min/max (nach AUTO GAIN und
 // RUMBLE-Fader), [4,5] SUMME min/max (Ausgang vor dem Safety-Clamp), [6] Gate (EC_VAL), [7] frei. Spalte = Position im Takt.
 M_SCQ   = 116000;
@@ -3806,7 +3812,8 @@ PM_TTHR  = 26;    // THRESHOLD  -60..0 dBFS (-60+60*c*0.001)
 PM_TSRC  = 27;    // TRIGGER    0=AUDIO, 1=AUDIO+MIDI, 2=MIDI
 PM_KON   = 28;    // KICK an/aus (Mute-Schalter, 1 = an) [serialisiert, NICHT Teil der Presets]
 PM_RON   = 29;    // RUMBLE an/aus (Mute-Schalter, 1 = an) [serialisiert, NICHT Teil der Presets]
-//   +30..31 Reserve [serialisiert]
+//   +30 LATENCY (PG_LAT, serialisiert), +31 Reserve
+// Historie: +30..31 Reserve [serialisiert]
 // Review zcode 17.10.2026 (B1):
 PG_PSET  = 32;    // letztes Werks-Preset (0 INIT, 1 WAREHOUSE) [serialisiert]
 PG_TIPS  = 33;    // Tooltips an/aus, Default 1 [serialisiert] - P25: nur noch Altwort (Format bleibt): Schreiben aus
@@ -4484,7 +4491,8 @@ function pitchRead() local(ph, phb, wa, ha, hb) (
 function pitchTick(x) ( pitchWrite(x); pitchRead(); );
 
 function pitchCoeff() local(semi) (
-  glo_pW = floor(4096*srate/48000);   // ~21-43 ms je nach srate
+  glo_pW = floor(4096*srate/48000);   // Basis ~85 ms (4096 Samples bei 48 kHz), skaliert mit srate, Klemme 1024..8192; CHARACTER: TIGHT ~43 / DEEP ~85 / GRAIN ~171 ms bei 48 kHz
+  // Historie: ~21-43 ms je nach srate
   glo_pW < 1024 ? glo_pW = 1024;
   glo_pW > 8192 ? glo_pW = 8192;
   // A4: CHARACTER skaliert das Fenster (TIGHT x0.5 / DEEP x1 / GRAIN x2)
@@ -5017,7 +5025,8 @@ function pstFast148() (
   par[PM_MRMB] = 900;   // 90 %
 );
 
-// p = Preset-Index (0 INIT, 1..21 Werks-Presets, 1.0.0). Laufzeit-Einstellungen
+// p = Preset-Index (0 INIT, 1..22 Werks-Presets, Fallback pstFast148). Laufzeit-Einstellungen
+// Historie: p = Preset-Index (0 INIT, 1..21 Werks-Presets, 1.0.0). Laufzeit-Einstellungen
 // der Front (TIPS/PAGE) ueberleben den Patchwechsel - PLAN S.10.
 // P25 (A12): writeDefaults/pst*() schreiben nur noch die 28 Klangworte - Farbe, TIPS/PAGE und die Mute-Schalter
 // werden nicht mehr beruehrt, das Sichern/Zurueckschreiben entfaellt.
@@ -6190,11 +6199,11 @@ rmbBridgePrev = rmb; rmbBridgeReady = 1;
 // ---------- AUTO GAIN (Feed-Forward + Freeze, PLAN S.8.4) ----------
 eng[EC_AGR] = max2(eng[EC_AGR], abs(rmb));   // Rumble-Peak pre-VCA
 agFrz = (g_pos - eng[EC_AGT] > glo_agFr) || eng[EC_AGK] < 0.0056;
-agTgt = eng[EC_AGV];                          // freeze/idle = hold
-// QA-FIX v0.1.0 (agy F4): re-adjust ONLY while the gate is open. During
-// the START delay phase rmb is 0 -> AGR ~ 0 -> the raw target would jump to
-// 1.0 on every kick and then sag again (beat pumping). While the gate is
-// closed EC_AGV holds its value.
+agTgt = eng[EC_AGV];                          // Freeze/idle = halten
+// QA-FIX v0.1.0 (agy F4): Nachjustieren NUR bei offenem Gate. Waehrend
+// der START-Delay-Phase ist rmb 0 -> AGR ~ 0 -> das Rohtag spränge je
+// Kick auf 1.0 und sackte danach wieder ab (Beat-Pumpen). Bei geschlossenem
+// Gate hält EC_AGV seinen Stand.
 glo_aut && !agFrz && eng[EC_VAL] > 0.03 ?
   agTgt = min2(1, eng[EC_AGK]*0.501/max2(eng[EC_AGR], 0.0001)) : 0;
 !glo_aut ? agTgt = 1;                         // AUS -> Gain slewt auf 1
