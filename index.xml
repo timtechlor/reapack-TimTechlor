@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="3d4dd99b125eca9b0b90b3842aacbb7e78194baa">
+<index version="1" name="TimTechlor ReaScripts" commit="007607fcc54a0862a6855a853a276dc0edac6c02">
   <category name="MIDI Tools/TT-303PATGEN">
     <reapack name="TT-303PATGEN Print Song Chain.lua" type="script" desc="TT-303PATGEN Print Song Chain">
       <metadata>
@@ -95,16 +95,16 @@
       </version>
       <version name="1.2.1" author="TimTechlor" time="2026-11-22T18:38:23Z">
         <changelog><![CDATA[nach Versionen sortiert (stand 0.5.3, 0.5.2, 0.1.0 .. 0.5.1); @provides um die sechs Manual-Bilder]]></changelog>
-        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN.jsfx</source>
-        <source file="img/tt-ui-options/303patgen-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/img/tt-ui-options/303patgen-front.png</source>
-        <source file="img/tt-ui-options/303patgen-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/img/tt-ui-options/303patgen-options.png</source>
-        <source file="tt-303patgen-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/tt-303patgen-manual.html</source>
-        <source file="TT-303PATGEN Print to MIDI Item.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20to%20MIDI%20Item.lua</source>
-        <source file="TT-303PATGEN Print Song Chain.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20Song%20Chain.lua</source>
-        <source file="img/tt-303patgen/tt-303patgen-gallery.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-gallery.png</source>
-        <source file="img/tt-303patgen/tt-303patgen-long.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-long.png</source>
-        <source file="img/tt-303patgen/tt-303patgen-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-presets.png</source>
-        <source file="img/tt-303patgen/tt-303patgen-song.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-song.png</source>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN.jsfx</source>
+        <source file="img/tt-ui-options/303patgen-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/img/tt-ui-options/303patgen-front.png</source>
+        <source file="img/tt-ui-options/303patgen-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/img/tt-ui-options/303patgen-options.png</source>
+        <source file="tt-303patgen-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/tt-303patgen-manual.html</source>
+        <source file="TT-303PATGEN Print to MIDI Item.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20to%20MIDI%20Item.lua</source>
+        <source file="TT-303PATGEN Print Song Chain.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/TT-303PATGEN%20Print%20Song%20Chain.lua</source>
+        <source file="img/tt-303patgen/tt-303patgen-gallery.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-gallery.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-long.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-long.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-presets.png</source>
+        <source file="img/tt-303patgen/tt-303patgen-song.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-303PATGEN/img/tt-303patgen/tt-303patgen-song.png</source>
       </version>
     </reapack>
   </category>
@@ -338,28 +338,28 @@
         START / END per section, MOVEMENT with swing, period, ride and shape, section tools, output panel),
         CC engine after the section tables of the TT-303 pattern generator, preset bar with six factory
         presets, live override per knob.]]></changelog>
-        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/tt-knobmover.jsfx</source>
-        <source file="TT-KNOBMOVER Import Regions.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/TT-KNOBMOVER%20Import%20Regions.lua</source>
-        <source file="TT-KNOBMOVER Import Service.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/TT-KNOBMOVER%20Import%20Service.lua</source>
-        <source file="tt_km_import.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/tt_km_import.lua</source>
-        <source file="tt-knobmover-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/tt-knobmover-manual.html</source>
-        <source file="img/tt-ui-options/knobmover-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-ui-options/knobmover-front.png</source>
-        <source file="img/tt-ui-options/knobmover-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-ui-options/knobmover-options.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-header.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-header.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-ridemap.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-ridemap.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-section.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-section.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-movement.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-movement.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-presets.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-preset-loaded.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-preset-loaded.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-tools.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-tools.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-max.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-max.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-map.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-map.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-desk.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-desk.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-pads.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-pads.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-tracker.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-tracker.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-zoom.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-zoom.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-points.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-points.png</source>
-        <source file="img/tt-knobmover/tt-knobmover-preview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-preview.png</source>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/tt-knobmover.jsfx</source>
+        <source file="TT-KNOBMOVER Import Regions.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/TT-KNOBMOVER%20Import%20Regions.lua</source>
+        <source file="TT-KNOBMOVER Import Service.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/TT-KNOBMOVER%20Import%20Service.lua</source>
+        <source file="tt_km_import.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/tt_km_import.lua</source>
+        <source file="tt-knobmover-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/tt-knobmover-manual.html</source>
+        <source file="img/tt-ui-options/knobmover-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-ui-options/knobmover-front.png</source>
+        <source file="img/tt-ui-options/knobmover-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-ui-options/knobmover-options.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-header.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-header.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-ridemap.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-ridemap.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-section.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-section.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-movement.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-movement.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-presets.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-preset-loaded.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-preset-loaded.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-tools.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-tools.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-max.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-max.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-map.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-map.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-desk.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-desk.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-pads.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-pads.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-tracker.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-tracker.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-zoom.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-zoom.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-points.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-points.png</source>
+        <source file="img/tt-knobmover/tt-knobmover-preview.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-KNOBMOVER/img/tt-knobmover/tt-knobmover-preview.png</source>
       </version>
     </reapack>
   </category>
@@ -429,19 +429,19 @@
 1.0.0 - Initial release: probability engine, condition modes, strum,
         ratchet, velocity/time deviation, euclidean patterns, mutation,
         deterministic XorShift32 PRNG, UIKit front panel]]></changelog>
-        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/tt-luckymidichance.jsfx</source>
-        <source file="img/tt-ui-options/lmc-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-ui-options/lmc-front.png</source>
-        <source file="img/tt-ui-options/lmc-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-ui-options/lmc-options.png</source>
-        <source file="tt-luckymidichance-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/tt-luckymidichance-manual.html</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-burst.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-burst.png</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-dev.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-dev.png</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-euclid.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-euclid.png</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-footer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-footer.png</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-presets.png</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-prob.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-prob.png</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-wf-human.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-human.png</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-wf-locked.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-locked.png</source>
-        <source file="img/tt-luckymidichance/tt-luckymidichance-wf-rhythm.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-rhythm.png</source>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/tt-luckymidichance.jsfx</source>
+        <source file="img/tt-ui-options/lmc-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-ui-options/lmc-front.png</source>
+        <source file="img/tt-ui-options/lmc-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-ui-options/lmc-options.png</source>
+        <source file="tt-luckymidichance-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/tt-luckymidichance-manual.html</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-burst.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-burst.png</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-dev.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-dev.png</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-euclid.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-euclid.png</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-footer.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-footer.png</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-presets.png</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-prob.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-prob.png</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-wf-human.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-human.png</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-wf-locked.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-locked.png</source>
+        <source file="img/tt-luckymidichance/tt-luckymidichance-wf-rhythm.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/MIDI%20Tools/TT-LuckyMidiChance/img/tt-luckymidichance/tt-luckymidichance-wf-rhythm.png</source>
       </version>
     </reapack>
   </category>
@@ -556,25 +556,25 @@
 Historie: Earlier first release: spectral ducking, 3 zones, SC pre-EQ, lookahead, learn, delta/solo, gmem link
 0.10.0 - New from the small sibling: SYNC sets all release times from the project tempo (1/32 to 1/4, each zone within its own range), A/B compare in the header, a hint line at the bottom explains the control under the mouse, FIT sets the band from the sidechain (1 BAND mode), AUTO sets THRESH from it, a reduction history strip, and DELTA / SC LISTEN act only while held on a long press. Audio engine unchanged.
 0.9.0 - New 1 BAND mode ducks one adjustable frequency range with its own amount, attack, release and trim, and zone trims now reach -24 to +24 dB so a quieter sidechain can reach full reduction. Three-zone settings in the previous trim range sound the same.]]></changelog>
-        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/tt-freiraum.jsfx</source>
-        <source file="img/tt-ui-options/freiraum-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-ui-options/freiraum-front.png</source>
-        <source file="img/tt-ui-options/freiraum-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-ui-options/freiraum-options.png</source>
-        <source file="tt-freiraum_send.jsfx">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/tt-freiraum_send.jsfx</source>
-        <source file="tt-freiraum-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/tt-freiraum-manual.html</source>
-        <source file="MODERNE_PRESETS.md">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/MODERNE_PRESETS.md</source>
-        <source file="img/tt-freiraum/fr_send_off.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_send_off.png</source>
-        <source file="img/tt-freiraum/fr_send_on.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_send_on.png</source>
-        <source file="img/tt-freiraum/fr_v2_delta.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_delta.png</source>
-        <source file="img/tt-freiraum/fr_v2_display.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_display.png</source>
-        <source file="img/tt-freiraum/fr_v2_dropdown.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_dropdown.png</source>
-        <source file="img/tt-freiraum/fr_v2_duck.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_duck.png</source>
-        <source file="img/tt-freiraum/fr_v2_full.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_full.png</source>
-        <source file="img/tt-freiraum/fr_v2_master.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_master.png</source>
-        <source file="img/tt-freiraum/fr_v2_options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_options.png</source>
-        <source file="img/tt-freiraum/fr_v2_sceq.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_sceq.png</source>
-        <source file="img/tt-freiraum/fr_v2_solo.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_solo.png</source>
-        <source file="img/tt-freiraum/fr_v2_zones.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_zones.png</source>
-        <source file="img/tt-freiraum/tt-freiraum-logo.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/tt-freiraum-logo.png</source>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/tt-freiraum.jsfx</source>
+        <source file="img/tt-ui-options/freiraum-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-ui-options/freiraum-front.png</source>
+        <source file="img/tt-ui-options/freiraum-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-ui-options/freiraum-options.png</source>
+        <source file="tt-freiraum_send.jsfx">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/tt-freiraum_send.jsfx</source>
+        <source file="tt-freiraum-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/tt-freiraum-manual.html</source>
+        <source file="MODERNE_PRESETS.md">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/MODERNE_PRESETS.md</source>
+        <source file="img/tt-freiraum/fr_send_off.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_send_off.png</source>
+        <source file="img/tt-freiraum/fr_send_on.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_send_on.png</source>
+        <source file="img/tt-freiraum/fr_v2_delta.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_delta.png</source>
+        <source file="img/tt-freiraum/fr_v2_display.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_display.png</source>
+        <source file="img/tt-freiraum/fr_v2_dropdown.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_dropdown.png</source>
+        <source file="img/tt-freiraum/fr_v2_duck.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_duck.png</source>
+        <source file="img/tt-freiraum/fr_v2_full.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_full.png</source>
+        <source file="img/tt-freiraum/fr_v2_master.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_master.png</source>
+        <source file="img/tt-freiraum/fr_v2_options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_options.png</source>
+        <source file="img/tt-freiraum/fr_v2_sceq.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_sceq.png</source>
+        <source file="img/tt-freiraum/fr_v2_solo.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_solo.png</source>
+        <source file="img/tt-freiraum/fr_v2_zones.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/fr_v2_zones.png</source>
+        <source file="img/tt-freiraum/tt-freiraum-logo.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM/img/tt-freiraum/tt-freiraum-logo.png</source>
       </version>
     </reapack>
   </category>
@@ -604,9 +604,9 @@ Historie: Earlier first release: spectral ducking, 3 zones, SC pre-EQ, lookahead
 1.0.0 - First public release (Drop 06 of Acid Season), together with TT-FREIRAUM 1.0.0. FIT and AUTO now count only the time the window is open.
 0.10.0 - NEW front from a survey of eight AI agents. Display: the band is the only bright area, the sidechain is highlighted where it crosses THRESH, a triangle marks its recent peak, optional CURVE (reduction per frequency) and CURSOR (levels at the mouse), a HINTS line explains the control under the mouse. Band: drag the edges or tabs (Shift = third octaves, double-click = default), drag inside the band sideways to move it or up/down for THRESH, mouse wheel for the width, drag on empty space to draw a new band, quick chips SUB/KICK/BASS/MUD/VOX/AIR/FULL, FIT sets the band from the sidechain, AUTO sets THRESH from it (also double-click on the THRESH line). Controls: AMOUNT is the main knob with a live reduction ring; EASY lets AMOUNT set speed and range too; SPEED labels DRUM/PAD, can be split into attack and release, SYNC sets the release from the project tempo (1/32 to 1/4); RANGE (how far above THRESH until full ducking), MIX and OUT are now on the front; LOOK starts at 4 ms. DELTA and SC LISTEN latch on a click and act only while held on a long press, and a bar in the header shows that you are not hearing the normal output. Header: A/B compare, PIN keeps the band when loading presets. Presets named by job (Kick > Bass, Vocal > Pad ...) with a description in the HINTS line. Sidechain box: latency, reduction with a 3 s history and peak, a short setup guide while no sidechain arrives. Audio engine unchanged.
 0.9.0 - First version: one-band spectral ducking on the TT-FREIRAUM engine. AMOUNT, THRESH and SPEED (attack and release on one knob), HP/LP band edges as knobs and as handles in the spectrum, LOOK, SENS (-24 to +24 dB for quiet sidechains), DELTA, SC LISTEN, sidechain over channels 3/4 or the GMEM link, 9 factory presets, AUTO FIT and tooltips.]]></changelog>
-        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM-MINI/tt-freiraum-mini.jsfx</source>
-        <source file="img/tt-ui-options/freiraummini-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM-MINI/img/tt-ui-options/freiraummini-front.png</source>
-        <source file="tt-freiraum-mini-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-FREIRAUM-MINI/tt-freiraum-mini-manual.html</source>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM-MINI/tt-freiraum-mini.jsfx</source>
+        <source file="img/tt-ui-options/freiraummini-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM-MINI/img/tt-ui-options/freiraummini-front.png</source>
+        <source file="tt-freiraum-mini-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-FREIRAUM-MINI/tt-freiraum-mini-manual.html</source>
       </version>
     </reapack>
   </category>
@@ -738,19 +738,19 @@ Historie: Earlier first release: spectral ducking, 3 zones, SC pre-EQ, lookahead
 0.3.0 - MIDI CC output of the curve, audio-trigger lookahead (0-10 ms, PDC)
 0.2.0 - 3-band split (LR4) with depth / mute / solo per band, low-pass target (VOLUME / LP FILTER / BOTH, beta)
 0.1.0 - Core: curve editor, 8 slots, 19 presets, BEAT / MIDI / AUDIO / FREE trigger, DEPTH / SMOOTH / INVERT / PHASE / TENSION / MIN LEVEL, LINK + L/R offset, meters, tooltips]]></changelog>
-        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/tt-kickshape.jsfx</source>
-        <source file="img/tt-ui-options/kickshape-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-ui-options/kickshape-front.png</source>
-        <source file="img/tt-ui-options/kickshape-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-ui-options/kickshape-options.png</source>
-        <source file="tt-kickshape-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/tt-kickshape-manual.html</source>
-        <source file="img/tt-kickshape/tt-kickshape-gate.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-gate.png</source>
-        <source file="img/tt-kickshape/tt-kickshape-trigger.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-trigger.png</source>
-        <source file="img/tt-kickshape/tt-kickshape-bands.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-bands.png</source>
-        <source file="img/tt-kickshape/tt-kickshape-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-presets.png</source>
-        <source file="img/tt-kickshape/tt-kickshape-simple.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-simple.png</source>
-        <source file="img/tt-kickshape/tt-kickshape-wave.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-wave.png</source>
-        <source file="img/tt-kickshape/tt-kickshape-freq.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-freq.png</source>
-        <source file="img/tt-kickshape/tt-kickshape-freq-full.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-freq-full.png</source>
-        <source file="img/tt-kickshape/tt-kickshape-ducked.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-ducked.png</source>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/tt-kickshape.jsfx</source>
+        <source file="img/tt-ui-options/kickshape-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-ui-options/kickshape-front.png</source>
+        <source file="img/tt-ui-options/kickshape-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-ui-options/kickshape-options.png</source>
+        <source file="tt-kickshape-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/tt-kickshape-manual.html</source>
+        <source file="img/tt-kickshape/tt-kickshape-gate.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-gate.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-trigger.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-trigger.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-bands.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-bands.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-presets.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-simple.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-simple.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-wave.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-wave.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-freq.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-freq.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-freq-full.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-freq-full.png</source>
+        <source file="img/tt-kickshape/tt-kickshape-ducked.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Mix%20Tools/TT-KICKSHAPE/img/tt-kickshape/tt-kickshape-ducked.png</source>
       </version>
     </reapack>
   </category>
@@ -1111,33 +1111,33 @@ Review 30.10.2026: FIX sample rebuild slot publication, truncated state rejectio
 Review 30.10.2026: FIX sample rebuild slot publication, truncated state rejection, preset undo snapshots and delta-based XF dragging (format/version unchanged).
 1.0.1 - NEW: hidden parameter 'Lane request (Lua)' - a ReaScript can write lane sounds (the 16 sound parameters of up to three lanes, like a lane preset) into exactly one TT-KICK instance; values are range-checked, one undo step, old values are never applied again.
 1.0.0 - NEW: first release. Three sequential lanes (TRANSIENT / BODY / TAIL) with equal-power crossfades, each SYNTH (phase-coherent engines) or SAMPLE (loaded via Lua actions or captured live); EXPERT knobs (F0 / F1 with note names), lane filter, mute / solo, RAND and lane preset browsers; per-lane zoom with - / + / ZOOM FIT and scroll bar, stored in presets; FUSION row with SUM / STACK / EXPAND, FIT LENGTH TO and AUTO; WAVE view of the real waveform with the WAVE page; master rack (filter, drive, clip, output); built-in 4/4 player with SYNC / FREE RUN and swing; INIT + 44 factory kicks and a 32-slot user bank; 20-step undo; OPTIONS with ten colour schemes, UI SIZE, AUTO FIT and tooltips; sample loaders per instance and an export action.]]></changelog>
-        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/tt-kick.jsfx</source>
-        <source file="img/tt-ui-options/kick-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-ui-options/kick-front.png</source>
-        <source file="img/tt-ui-options/kick-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-ui-options/kick-options.png</source>
-        <source file="TT-KICK Load Kit.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/TT-KICK%20Load%20Kit.lua</source>
-        <source file="TT-KICK Load Kit (Folder).lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/TT-KICK%20Load%20Kit%20(Folder).lua</source>
-        <source file="TT-KICK Load Kit (from Items).lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/TT-KICK%20Load%20Kit%20(from%20Items).lua</source>
-        <source file="TT-KICK Export Kick.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/TT-KICK%20Export%20Kick.lua</source>
-        <source file="TT-KICK Recent Kits.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/TT-KICK%20Recent%20Kits.lua</source>
-        <source file="tt-kick-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/tt-kick-manual.html</source>
-        <source file="img/tt-kick/header.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/header.png</source>
-        <source file="img/tt-kick/lanes.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/lanes.png</source>
-        <source file="img/tt-kick/fusion.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/fusion.png</source>
-        <source file="img/tt-kick/lane_transient.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/lane_transient.png</source>
-        <source file="img/tt-kick/lane_body.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/lane_body.png</source>
-        <source file="img/tt-kick/lane_tail.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/lane_tail.png</source>
-        <source file="img/tt-kick/lane_browser.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/lane_browser.png</source>
-        <source file="img/tt-kick/lane_menu.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/lane_menu.png</source>
-        <source file="img/tt-kick/player.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/player.png</source>
-        <source file="img/tt-kick/master.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/master.png</source>
-        <source file="img/tt-kick/scope.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/scope.png</source>
-        <source file="img/tt-kick/wave_page.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/wave_page.png</source>
-        <source file="img/tt-kick/wave_layers.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/wave_layers.png</source>
-        <source file="img/tt-kick/fusion_stack.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/fusion_stack.png</source>
-        <source file="img/tt-kick/fusion_expand.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/fusion_expand.png</source>
-        <source file="img/tt-kick/lanes_wave.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/lanes_wave.png</source>
-        <source file="img/tt-kick/tt-kick-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/tt-kick-presets.png</source>
-        <source file="img/tt-kick/tt-kick-presets-entry.png">https://github.com/timtechlor/reapack-TimTechlor/raw/3d4dd99b125eca9b0b90b3842aacbb7e78194baa/Synths/TT-KICK/img/tt-kick/tt-kick-presets-entry.png</source>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/tt-kick.jsfx</source>
+        <source file="img/tt-ui-options/kick-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-ui-options/kick-front.png</source>
+        <source file="img/tt-ui-options/kick-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-ui-options/kick-options.png</source>
+        <source file="TT-KICK Load Kit.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/TT-KICK%20Load%20Kit.lua</source>
+        <source file="TT-KICK Load Kit (Folder).lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/TT-KICK%20Load%20Kit%20(Folder).lua</source>
+        <source file="TT-KICK Load Kit (from Items).lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/TT-KICK%20Load%20Kit%20(from%20Items).lua</source>
+        <source file="TT-KICK Export Kick.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/TT-KICK%20Export%20Kick.lua</source>
+        <source file="TT-KICK Recent Kits.lua">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/TT-KICK%20Recent%20Kits.lua</source>
+        <source file="tt-kick-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/tt-kick-manual.html</source>
+        <source file="img/tt-kick/header.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/header.png</source>
+        <source file="img/tt-kick/lanes.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/lanes.png</source>
+        <source file="img/tt-kick/fusion.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/fusion.png</source>
+        <source file="img/tt-kick/lane_transient.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/lane_transient.png</source>
+        <source file="img/tt-kick/lane_body.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/lane_body.png</source>
+        <source file="img/tt-kick/lane_tail.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/lane_tail.png</source>
+        <source file="img/tt-kick/lane_browser.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/lane_browser.png</source>
+        <source file="img/tt-kick/lane_menu.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/lane_menu.png</source>
+        <source file="img/tt-kick/player.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/player.png</source>
+        <source file="img/tt-kick/master.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/master.png</source>
+        <source file="img/tt-kick/scope.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/scope.png</source>
+        <source file="img/tt-kick/wave_page.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/wave_page.png</source>
+        <source file="img/tt-kick/wave_layers.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/wave_layers.png</source>
+        <source file="img/tt-kick/fusion_stack.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/fusion_stack.png</source>
+        <source file="img/tt-kick/fusion_expand.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/fusion_expand.png</source>
+        <source file="img/tt-kick/lanes_wave.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/lanes_wave.png</source>
+        <source file="img/tt-kick/tt-kick-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/tt-kick-presets.png</source>
+        <source file="img/tt-kick/tt-kick-presets-entry.png">https://github.com/timtechlor/reapack-TimTechlor/raw/007607fcc54a0862a6855a853a276dc0edac6c02/Synths/TT-KICK/img/tt-kick/tt-kick-presets-entry.png</source>
       </version>
     </reapack>
   </category>
