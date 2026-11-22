@@ -2,6 +2,7 @@ desc:TT-KICKSHAPE Volume Shaper 1.0.2
 // @description TT-KICKSHAPE - Drawable volume / sidechain shaper (VolumeShaper / LFOTool / Kickstart style)
 // @author TimTechlor
 // @version 1.0.2
+// Historie: Manual und Screenshots dieser Version nachgezogen (2026-11-22).
 // @link Manual https://timtechlor.de/docs/tt-kickshape-manual.html
 // @license MIT
 // @tags sidechain ducking pump volume shaper gate envelope lfo curve trance-gate

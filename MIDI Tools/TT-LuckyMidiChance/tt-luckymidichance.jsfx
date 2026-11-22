@@ -2,6 +2,7 @@ desc:TT-LuckyMidiChance (probability + generative MIDI processor) [Tim Techlor]
 // @description TT-LuckyMidiChance - Probability and generative MIDI processor
 // @author TimTechlor
 // @version 1.6.1
+// Historie: Manual und Screenshots dieser Version nachgezogen (2026-11-22).
 // @license MIT
 // @tags midi probability generative chance euclidean ratchet strum humanize
 // @link Manual https://timtechlor.de/docs/tt-luckymidichance-manual.html

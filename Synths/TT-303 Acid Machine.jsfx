@@ -22,6 +22,7 @@ desc:TimTechlor/TT-303 Acid Machine (v2.1.5)
 //   [nomain] TT-303/img/tt-303-acid-machine/tt-303-acid-machine-host-mode-keyboard-panel-with-the-playable-keyboard.webp
 //   [nomain] TT-303/TT-303_manual.html
 // @version 2.1.5
+// Historie: Manual und Screenshots dieser Version nachgezogen (2026-11-22).
 // @changelog
 //   2.1.5 - FIX: a factory patch clears the preset slot before the factory block is copied, so the read stays inside that block. Sound unchanged.
 //   2.1.4 - FIX: switching SEQ OUT off while a sequencer note was still playing dropped its note-off - the receiving

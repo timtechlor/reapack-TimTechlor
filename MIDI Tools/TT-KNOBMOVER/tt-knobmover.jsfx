@@ -2,6 +2,7 @@ desc:TT-KNOBMOVER (MIDI CC ride for the TT-303) [Tim Techlor]
 // @description TT-KNOBMOVER - MIDI CC ride for the TT-303 Acid Machine
 // @author TimTechlor
 // @version 1.1.2
+// Historie: Manual und Screenshots dieser Version nachgezogen (2026-11-22).
 // @license MIT
 // @tags midi cc automation acid 303 filter sweep arrangement
 // @provides

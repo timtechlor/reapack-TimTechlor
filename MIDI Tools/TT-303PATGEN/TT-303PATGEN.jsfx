@@ -2,6 +2,7 @@ desc:TT-303PATGEN v1.2.1 (acid pattern generator, MIDI) [Tim Techlor]
 // @description TT-303PATGEN - Acid pattern generator with MIDI output (TT-303 or any synth)
 // @author TimTechlor
 // @version 1.2.1
+// Historie: Manual und Screenshots dieser Version nachgezogen (2026-11-22).
 // @license MIT
 // @tags midi acid 303 pattern generator sequencer markov euclid slide accent
 // @link Manual https://timtechlor.de/docs/tt-303patgen-manual.html

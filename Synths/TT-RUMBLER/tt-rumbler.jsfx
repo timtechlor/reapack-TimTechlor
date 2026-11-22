@@ -2,6 +2,7 @@ desc:TT-RUMBLER Rumble Machine v1.1.1
 // @description TT-RUMBLER Rumble Machine - kick-triggered techno rumble with three engines (VERB/NOISE/PITCH), sample-accurate trigger, separate kick/rumble outputs and host latency compensation (PDC)
 // @author TimTechlor
 // @version 1.1.1
+// Historie: Manual und Screenshots dieser Version nachgezogen (2026-11-22).
 // @license MIT
 // @tags effect rumble sub bass techno reverb noise pitch
 // @link Manual https://timtechlor.de/docs/tt-rumbler-manual.html
