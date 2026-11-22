@@ -6,8 +6,8 @@
 <title>TT-FREIRAUM Manual – Surgical Spectral Ducking for REAPER</title>
 <meta name="description" content="Reference manual for TT-FREIRAUM, a free surgical spectral ducking JSFX for REAPER: frequency-precise sidechain ducking with three attack/release zones, per-band trims, SC pre-EQ, lookahead, learn snapshot, delta/solo audition and a live spectral display — sidechain via channels 3/4 or cross-track over shared memory with the included TT-FREIRAUM SEND.">
 <meta name="tt-doc-name" content="TT-FREIRAUM">
-<meta name="tt-doc-version" content="1.0.0">
-<meta name="tt-doc-date" content="2026-11-17">
+<meta name="tt-doc-version" content="1.0.1">
+<meta name="tt-doc-date" content="2026-11-21">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-freiraum-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-FREIRAUM — User Manual">
-<meta property="article:modified_time" content="2026-11-17">
+<meta property="article:modified_time" content="2026-11-21">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-FREIRAUM Manual – Surgical Spectral Ducking for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-FREIRAUM, a free surgical spectral ducking JSFX for REAPER: frequency-precise sidechain ducking with three attack/release zones, per-band trims, SC pre-EQ, lookahead, learn snapshot, delta/solo audition and a live spectral display — sidechain via channels 3/4 or cross-track over shared memory with the included TT-FREIRAUM SEND.",
    "url": "https://timtechlor.de/docs/tt-freiraum-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-freiraum-manual.html",
-   "datePublished": "2026-11-17",
-   "dateModified": "2026-11-17",
+   "datePublished": "2026-11-21",
+   "dateModified": "2026-11-21",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-freiraum.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER spectral ducking, spectral ducking per frequency band, sidechain EQ ducking, frequency carving plugin, JSFX, dynamic EQ sidechain, cross track ducking REAPER, gmem sidechain",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-freiraum-manual.html#software" },
-   "version": "1.0.0"
+   "version": "1.0.1"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-FREIRAUM",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.0.0",
+   "softwareVersion": "1.0.1",
    "description": "JSFX plug-in for REAPER that carves space in the spectrum of the main signal wherever the sidechain has energy: three attack/release zones, surgical trims, SC pre-EQ, lookahead, learn snapshot and delta/zone-solo audition — sidechain via channels 3/4 or a shared-memory link fed by the included TT-FREIRAUM SEND.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,7 +228,7 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-FREIRAUM</span></nav>
       <div class="wordmark" style="--wm-n:11" role="img" aria-label="TT-FREIRAUM">TT-FREIRAUM</div>
       <h1>TT-FREIRAUM — User Manual</h1>
-      <div class="meta">JSFX plug-in for REAPER // Version 1.0.0 // TimTechlor</div>
+      <div class="meta">JSFX plug-in for REAPER // Version 1.0.1 // TimTechlor</div>
       <p class="lead">TT-FREIRAUM ducks the main signal <em>per frequency bin</em>: wherever the sidechain has energy, exactly that spectral region is carved out — and nothing else. Three zones with their own attack/release, surgical trims, a pre-EQ on the sidechain and a hybrid ballistics model that ducks faster than the analysis frame go well beyond a broadband ducker.</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-ui-options/freiraum-front.png" aria-label="Enlarge screenshot of the TT-FREIRAUM user interface" title="Click to enlarge"><img src="img/tt-ui-options/freiraum-front.png" width="1131" height="786" alt="TT-FREIRAUM user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -270,7 +270,7 @@ weights (updated per hop) and analogue-style envelopes (updated per sample).
 A kick ducking a bass removes only the kick's bins; the bass's own harmonics
 in between keep playing. And because the <em>removed</em> part exists as a
 real signal, DELTA audition and ZONE SOLO come free, without phase errors.</p>
-<figure class="shot"><img src="img/tt-ui-options/freiraum-front.png" alt="Current suite front at 125% UI size, version 1.0.0"><figcaption>Current front in v1.0.0, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/freiraum-front.png" alt="Current suite front at 125% UI size, version 1.0.1"><figcaption>Current front in v1.0.1, at the default UI size of 125%.</figcaption></figure>
 
 <h2 id="quickstart"><span class="num">02</span>Quick start</h2>
 <ol>
@@ -778,6 +778,9 @@ nothing else — then pin the behaviour.</p>
       <code>MIX</code> below 100 % for a subtler blend.</li>
 </ul>
 <h2 id="changelog"><span class="num">15</span>Changelog</h2>
+<h3>1.0.1 — Detector follows a mid-hop edit</h3><ul>
+<li>MODE, BAND LOW and BAND HIGH changed while a hop is running reach the detector filters as soon as that hop ends.</li>
+</ul>
 <h3>1.0.0 — First public release</h3><ul>
 <li>First public release as Drop 06 of Acid Season, with the fixes from the final code review.</li>
 </ul>
@@ -874,7 +877,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-FREIRAUM v1.0.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-FREIRAUM v1.0.1</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

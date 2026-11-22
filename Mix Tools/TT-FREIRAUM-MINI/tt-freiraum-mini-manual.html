@@ -6,8 +6,8 @@
 <title>TT-FREIRAUM MINI Manual – One-Band Spectral Ducking for REAPER</title>
 <meta name="description" content="Reference manual for TT-FREIRAUM MINI, a free one-band spectral sidechain ducking JSFX for REAPER: the sidechain spectrum carves room into the main signal inside one band you set in the display, with FIT and AUTO setup, a live reduction ring, tempo sync and delta listening.">
 <meta name="tt-doc-name" content="TT-FREIRAUM MINI">
-<meta name="tt-doc-version" content="1.0.0">
-<meta name="tt-doc-date" content="2026-11-16">
+<meta name="tt-doc-version" content="1.0.1">
+<meta name="tt-doc-date" content="2026-11-21">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-freiraum-mini-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-FREIRAUM MINI — User Manual">
-<meta property="article:modified_time" content="2026-11-16">
+<meta property="article:modified_time" content="2026-11-21">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-FREIRAUM MINI Manual – One-Band Spectral Ducking for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-FREIRAUM MINI, a free one-band spectral sidechain ducking JSFX for REAPER: the sidechain spectrum carves room into the main signal inside one band you set in the display, with FIT and AUTO setup, a live reduction ring, tempo sync and delta listening.",
    "url": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html",
-   "datePublished": "2026-11-16",
-   "dateModified": "2026-11-16",
+   "datePublished": "2026-11-21",
+   "dateModified": "2026-11-21",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-freiraum-mini.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER spectral ducking, sidechain ducking one band, make room for vocals, kick bass ducking, JSFX, dynamic EQ sidechain, frequency ducking plugin",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-freiraum-mini-manual.html#software" },
-   "version": "1.0.0"
+   "version": "1.0.1"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-FREIRAUM MINI",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.0.0",
+   "softwareVersion": "1.0.1",
    "description": "JSFX plug-in for REAPER that ducks the main signal only where the sidechain has energy, inside one frequency band: set the band by dragging, by chips or with FIT, set the threshold with AUTO, and hear the result with DELTA.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,7 +228,7 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-FREIRAUM MINI</span></nav>
       <div class="wordmark" style="--wm-n:16" role="img" aria-label="TT-FREIRAUM MINI">TT-FREIRAUM MINI</div>
       <h1>TT-FREIRAUM MINI — User Manual</h1>
-      <div class="meta">JSFX plug-in for REAPER // Version 1.0.0 // TimTechlor</div>
+      <div class="meta">JSFX plug-in for REAPER // Version 1.0.1 // TimTechlor</div>
       <p class="lead">TT-FREIRAUM MINI makes room the quick way: put it on the track that should step back, feed it the track that should come through, press FIT and AUTO, turn AMOUNT. It removes only the frequencies the sidechain is playing right now, inside one band, and leaves the rest of the sound alone.</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-ui-options/freiraummini-front.png" aria-label="Enlarge screenshot of the TT-FREIRAUM MINI user interface" title="Click to enlarge"><img src="img/tt-ui-options/freiraummini-front.png" width="931" height="524" alt="TT-FREIRAUM MINI user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -378,6 +378,9 @@ different speeds.</p>
 </ul>
 
 <h2 id="changelog"><span class="num">11</span>Changelog</h2>
+<h3>1.0.1 — View switches</h3><ul>
+<li>CURVE, CURSOR and HINTS report the change to the host, so undo and automation see the switch.</li>
+</ul>
 <h3>1.0.0 — First public release</h3><ul>
 <li>First public release as Drop 06 of Acid Season, together with TT-FREIRAUM 1.0.0.</li>
 <li>FIT and AUTO count only the time the plug-in window is open.</li>
@@ -393,7 +396,7 @@ different speeds.</p>
 
 <section class="section">
 <h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
-<p>Updated in <b>v1.0.0</b>. New instances open at <b>125%</b> UI size for clearer text.
+<p>Updated in <b>v1.0.1</b>. New instances open at <b>125%</b> UI size for clearer text.
 The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
 <figure class="shot"><img src="img/tt-ui-options/freiraummini-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
 <p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
@@ -416,7 +419,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-FREIRAUM MINI v1.0.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-FREIRAUM MINI v1.0.1</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

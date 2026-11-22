@@ -6,8 +6,8 @@
 <title>TT-KNOBMOVER Manual – MIDI CC Ride for the TT-303 in REAPER</title>
 <meta name="description" content="Reference manual for TT-KNOBMOVER, a JSFX MIDI plug-in for REAPER that rides the knobs of a TT-303 through a whole track: cutoff, resonance, env mod, decay and accent follow an arrangement of sections (tease, roll, build, pre-drop, drop, fill, break, reset) with a line from start to end per knob, a cutoff swing and a gentle wobble, with class limits as a guide and full 0–100 % editing. Five views (rack, map, desk, pads, tracker), ride map with zoom and preset preview, own points in the lanes, a RANDOM button, import of project regions and markers, five live knobs with override, keyboard editing, 64 factory presets up to 256 bars.">
 <meta name="tt-doc-name" content="TT-KNOBMOVER">
-<meta name="tt-doc-version" content="1.1.1">
-<meta name="tt-doc-date" content="2026-10-29">
+<meta name="tt-doc-version" content="1.1.2">
+<meta name="tt-doc-date" content="2026-11-22">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-knobmover-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-KNOBMOVER — User Manual">
-<meta property="article:modified_time" content="2026-10-29">
+<meta property="article:modified_time" content="2026-11-22">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-KNOBMOVER Manual – MIDI CC Ride for the TT-303 in REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-KNOBMOVER, a JSFX MIDI plug-in for REAPER that rides the knobs of a TT-303 through a whole track: cutoff, resonance, env mod, decay and accent follow an arrangement of sections (tease, roll, build, pre-drop, drop, fill, break, reset) with a line from start to end per knob, a cutoff swing and a gentle wobble, with class limits as a guide and full 0–100 % editing. Five views (rack, map, desk, pads, tracker), ride map with zoom and preset preview, own points in the lanes, a RANDOM button, import of project regions and markers, five live knobs with override, keyboard editing, 64 factory presets up to 256 bars.",
    "url": "https://timtechlor.de/docs/tt-knobmover-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-knobmover-manual.html",
-   "datePublished": "2026-10-29",
-   "dateModified": "2026-10-29",
+   "datePublished": "2026-11-22",
+   "dateModified": "2026-11-22",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-knobmover.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "TT-303 automation, MIDI CC automation REAPER, acid filter sweep, cutoff automation JSFX, build up drop arrangement, TB-303 style automation, REAPER MIDI JSFX, resonance sweep, acid bass",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-knobmover-manual.html#software" },
-   "version": "1.1.1"
+   "version": "1.1.2"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-KNOBMOVER",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.1.1",
+   "softwareVersion": "1.1.2",
    "description": "JSFX MIDI plug-in for REAPER that sends MIDI CC for cutoff, resonance, env mod, decay and accent to a TT-303 and moves them through an arrangement of sections with lines, swing and wobble, with full-range editing, maximizable lanes, own points, RANDOM, region import, live override and 64 presets.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,10 +228,10 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-KNOBMOVER</span></nav>
       <div class="wordmark" style="--wm-n:12" role="img" aria-label="TT-KNOBMOVER">TT-KNOBMOVER</div>
       <h1>TT-KNOBMOVER — User Manual</h1>
-      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.1.1 // TimTechlor</div>
+      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.1.2 // TimTechlor</div>
       <p class="lead">TT-KNOBMOVER moves the knobs of a TT-303 for you. You describe the track as sections (tease, roll, build, pre-drop, drop, fill, break, reset); for each section and each knob the plug-in draws a line from a start to an end value, adds a swing on the cutoff and a gentle wobble on the rest, and sends the result as MIDI CC. Five views show the same arrangement as a rack, a large map, a mixing desk, performance pads or a tracker table, and you can grab any knob and take over live. Place your own points in the lanes, roll new values with RANDOM, or take the sections from the regions of your project.</p>
     </div>
-    <button type="button" class="hero-shot" data-full="img/tt-ui-options/knobmover-front.png" aria-label="Enlarge screenshot of the TT-KNOBMOVER user interface" title="Click to enlarge"><img src="img/tt-ui-options/knobmover-front.png" width="1203" height="1179" alt="TT-KNOBMOVER user interface: ride map with section band and five CC lanes, five live knobs with start and end, movement, section tools and output" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/knobmover-front.png" aria-label="Enlarge screenshot of the TT-KNOBMOVER user interface" title="Click to enlarge"><img src="img/tt-ui-options/knobmover-front.png" width="1209" height="1209" alt="TT-KNOBMOVER user interface: ride map with section band and five CC lanes, five live knobs with start and end, movement, section tools and output" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
   </div>
 </header>
 <div class="wrap layout">
@@ -693,7 +693,7 @@ generator&rsquo;s recipes, and the shortening of the wobble period for pieces un
 <tr><td>RANDOM does nothing</td><td>The amount is 0 (use the AMOUNT slider or its mouse wheel), the preview is on, or LANE / BLOCK targets the volume lane (volume is never rolled).</td></tr>
 </table>
 
-<h2 id="changelog"><span class="num">15</span>Changelog</h2>
+<h2 id="changelog"><span class="num">15</span>Changelog</h2><h3>1.1.2 — Review fixes</h3><ul><li>FIX: inserting, splitting or shortening a section clears the pending section selection, so the old section is not edited by the next click.</li><li>Tooltips for BUILD-UP and DELETE match where the bars go.</li></ul>
 <h3>1.0.0 — Smoothing respects the class limits after a change</h3>
 <p>One fix: during playback, a class change glided the smoothed output of untouched sections outside the still-valid limits of the new class for a long time (a regression of the 0.9.5 fix). The smoothed value now respects the new limits from the first tick after the change; edited sections and live overrides keep the full 0&ndash;100 range. The automated REAPER full test covers this case with its own probe.</p>
 <h3>0.9.6 — LFO per lane and node, new handles, preset list</h3>
@@ -756,7 +756,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-KNOBMOVER v1.1.1</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.1.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-KNOBMOVER v1.1.2</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.1.2 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

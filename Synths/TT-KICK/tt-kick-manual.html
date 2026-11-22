@@ -6,8 +6,8 @@
 <title>TT-KICK Manual – Segment Fusion Kick Designer for REAPER</title>
 <meta name="description" content="Reference manual for TT-KICK, a free hybrid kick designer JSFX for REAPER: three sequential segments (transient, body, tail) fused by equal-power crossfades, each switchable between a phase-coherent synth engine and your own sample, with live capture into slots, a master chain, INIT plus 44 factory kick designs and a 32-slot user preset bank, per-lane preset browsers, 20-step undo and a built-in 4/4 player.">
 <meta name="tt-doc-name" content="TT-KICK Kick Machine">
-<meta name="tt-doc-version" content="1.1.0">
-<meta name="tt-doc-date" content="2026-10-26">
+<meta name="tt-doc-version" content="1.1.2">
+<meta name="tt-doc-date" content="2026-11-22">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-kick-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-KICK Kick Machine — User Manual">
-<meta property="article:modified_time" content="2026-10-26">
+<meta property="article:modified_time" content="2026-11-22">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-KICK Kick Machine Manual – Segment Fusion Kick Designer for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-KICK, a free hybrid kick designer JSFX for REAPER: three sequential segments (transient, body, tail) fused by equal-power crossfades, each switchable between a phase-coherent synth engine and your own sample, with live capture into slots, a master chain, INIT plus 44 factory kick designs and a 32-slot user preset bank, per-lane preset browsers, 20-step undo and a built-in 4/4 player.",
    "url": "https://timtechlor.de/docs/tt-kick-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-kick-manual.html",
-   "datePublished": "2026-10-26",
-   "dateModified": "2026-10-26",
+   "datePublished": "2026-11-22",
+   "dateModified": "2026-11-22",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-kick.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER kick designer, kick drum synth, kick sampler, JSFX kick, hybrid kick plugin, 808 909 kick, REAPER drum instrument, kick capture",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-kick-manual.html#software" },
-   "version": "1.1.0"
+   "version": "1.1.2"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-KICK Kick Machine",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.1.0",
+   "softwareVersion": "1.1.2",
    "description": "Hybrid kick designer JSFX instrument for REAPER: three sequential segments (transient, body, tail) joined by equal-power crossfades, each switchable between a phase-coherent synth engine and your own sample, with live input capture, master chain, factory presets, undo and a built-in 4/4 player.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,10 +228,10 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-KICK Kick Machine</span></nav>
       <div class="wordmark" style="--wm-n:7" role="img" aria-label="TT-KICK Kick Machine">TT-KICK</div>
       <h1>TT-KICK Kick Machine — User Manual</h1>
-      <div class="meta">JSFX instrument for REAPER // Version 1.1.0 // TimTechlor</div>
+      <div class="meta">JSFX instrument for REAPER // Version 1.1.2 // TimTechlor</div>
       <p class="lead">One kick, three sequential segments — <em>crossfading instead of layering.</em> A hybrid kick designer for REAPER: every segment is either a synth engine or your own sample (loaded or captured live), and the synth path stays phase-coherent across the segment boundaries by construction.</p>
     </div>
-    <button type="button" class="hero-shot" data-full="img/tt-ui-options/kick-front.png" aria-label="Enlarge screenshot of the TT-KICK Kick Machine user interface" title="Click to enlarge"><img src="img/tt-ui-options/kick-front.png" width="1168" height="917" alt="TT-KICK Kick Machine user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/kick-front.png" aria-label="Enlarge screenshot of the TT-KICK Kick Machine user interface" title="Click to enlarge"><img src="img/tt-ui-options/kick-front.png" width="1135" height="885" alt="TT-KICK Kick Machine user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
   </div>
 </header>
 <div class="wrap layout">
@@ -255,6 +255,7 @@ nav.crumbs [aria-current] { color: var(--white); }
 <li><a href="#release"><span class="num">15</span><span>Release notes</span></a></li>
 <li><a href="#trouble"><span class="num">16</span><span>Troubleshooting</span></a></li>
 <li><a href="#ui-size-settings"><span class="num">17</span><span>UI Size & Saved Options</span></a></li>
+<li><a href="#changelog"><span class="num">18</span><span>Changelog</span></a></li>
     </ol>
   </nav>
   <main>
@@ -279,7 +280,7 @@ want it, by the lane's <b>OFFSET</b> (see <i>The time axis and OFFSET</i> in
 section 04).</p>
 <figure class="shot"><svg viewBox="0 0 720 250" role="img" aria-label="Equal-power crossfade: the two gain curves and their constant summed power" style="width:100%;max-width:720px;height:auto;background:#090c08;border:1px solid #2c3b2a" font-family="Consolas,monospace" font-size="13"><polyline fill="none" stroke="#4dd8ff" stroke-width="2.5" points="60.0,36.0 73.1,36.1 86.2,36.4 99.4,36.8 112.5,37.4 125.6,38.2 138.8,39.2 151.9,40.3 165.0,41.6 178.1,43.1 191.2,44.7 204.4,46.5 217.5,48.5 230.6,50.6 243.8,52.9 256.9,55.4 270.0,58.0 283.1,60.7 296.2,63.6 309.4,66.7 322.5,69.9 335.6,73.2 348.8,76.7 361.9,80.3 375.0,84.0 388.1,87.9 401.2,91.9 414.4,96.0 427.5,100.2 440.6,104.5 453.8,108.9 466.9,113.4 480.0,118.0 493.1,122.7 506.2,127.5 519.4,132.3 532.5,137.2 545.6,142.2 558.8,147.3 571.9,152.4 585.0,157.6 598.1,162.8 611.2,168.0 624.4,173.3 637.5,178.6 650.6,183.9 663.8,189.3 676.9,194.6 690.0,200.0"/><polyline fill="none" stroke="#ff4fd8" stroke-width="2.5" points="60.0,200.0 73.1,194.6 86.2,189.3 99.4,183.9 112.5,178.6 125.6,173.3 138.8,168.0 151.9,162.8 165.0,157.6 178.1,152.4 191.2,147.3 204.4,142.2 217.5,137.2 230.6,132.3 243.8,127.5 256.9,122.7 270.0,118.0 283.1,113.4 296.2,108.9 309.4,104.5 322.5,100.2 335.6,96.0 348.8,91.9 361.9,87.9 375.0,84.0 388.1,80.3 401.2,76.7 414.4,73.2 427.5,69.9 440.6,66.7 453.8,63.6 466.9,60.7 480.0,58.0 493.1,55.4 506.2,52.9 519.4,50.6 532.5,48.5 545.6,46.5 558.8,44.7 571.9,43.1 585.0,41.6 598.1,40.3 611.2,39.2 624.4,38.2 637.5,37.4 650.6,36.8 663.8,36.4 676.9,36.1 690.0,36.0"/><polyline fill="none" stroke="#39FF14" stroke-width="2.5" points="60.0,36.0 73.1,36.0 86.2,36.0 99.4,36.0 112.5,36.0 125.6,36.0 138.8,36.0 151.9,36.0 165.0,36.0 178.1,36.0 191.2,36.0 204.4,36.0 217.5,36.0 230.6,36.0 243.8,36.0 256.9,36.0 270.0,36.0 283.1,36.0 296.2,36.0 309.4,36.0 322.5,36.0 335.6,36.0 348.8,36.0 361.9,36.0 375.0,36.0 388.1,36.0 401.2,36.0 414.4,36.0 427.5,36.0 440.6,36.0 453.8,36.0 466.9,36.0 480.0,36.0 493.1,36.0 506.2,36.0 519.4,36.0 532.5,36.0 545.6,36.0 558.8,36.0 571.9,36.0 585.0,36.0 598.1,36.0 611.2,36.0 624.4,36.0 637.5,36.0 650.6,36.0 663.8,36.0 676.9,36.0 690.0,36.0"/><polyline fill="none" stroke="#8a9a86" stroke-width="1.5" stroke-dasharray="5 4" points="60.0,36.0 73.1,42.7 86.2,49.1 99.4,55.2 112.5,61.1 125.6,66.6 138.8,71.9 151.9,76.9 165.0,81.6 178.1,86.0 191.2,90.1 204.4,93.9 217.5,97.5 230.6,100.8 243.8,103.8 256.9,106.5 270.0,108.9 283.1,111.0 296.2,112.9 309.4,114.4 322.5,115.7 335.6,116.7 348.8,117.4 361.9,117.9 375.0,118.0 388.1,117.9 401.2,117.4 414.4,116.7 427.5,115.7 440.6,114.4 453.8,112.9 466.9,111.0 480.0,108.9 493.1,106.5 506.2,103.8 519.4,100.8 532.5,97.5 545.6,93.9 558.8,90.1 571.9,86.0 585.0,81.6 598.1,76.9 611.2,71.9 624.4,66.6 637.5,61.1 650.6,55.2 663.8,49.1 676.9,42.7 690.0,36.0"/><rect x="60" y="36" width="630" height="164" fill="none" stroke="#2c3b2a"/><text x="22" y="204" fill="#cfe8c8">0</text><text x="22" y="122" fill="#cfe8c8">0.5</text><text x="22" y="40" fill="#cfe8c8">1</text><text x="60" y="228" fill="#cfe8c8">position in the crossfade (outgoing lane to incoming lane)</text><text x="60" y="20" fill="#4dd8ff">outgoing (cos)</text><text x="210" y="20" fill="#ff4fd8">incoming (sin)</text><text x="360" y="20" fill="#39FF14">power sum = 1</text><text x="510" y="20" fill="#8a9a86">dashed: linear fade</text></svg><figcaption><span class="tag">EQUAL POWER</span><b>Why the joins do not dip.</b> The outgoing lane follows a cosine, the incoming lane a sine, so their squared gains always add up to 1. A linear fade would lose 3 dB of power in the middle of every join (dashed).</figcaption></figure>
 
-<figure class="shot"><img src="img/tt-ui-options/kick-front.png" alt="The TT-KICK front at 125% UI size, version 1.1.0"><figcaption>The TT-KICK front in v1.1.0 at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/kick-front.png" alt="The TT-KICK front at 125% UI size, version 1.1.2"><figcaption>The TT-KICK front in v1.1.2 at the default UI size of 125%.</figcaption></figure>
 
 <h2 id="sounds"><span class="num">02</span>Sound examples</h2>
 <p>All <b>44 factory kicks</b>, each as <b>eight hits</b> (two bars of four on the floor) at <b>130 BPM</b> with its natural tail. Filter by family, click a waveform to jump,
@@ -631,7 +632,8 @@ plays.</div>
 </table>
 <p>The lane header carries the segment title plus <b>M</b>ute, <b>S</b>olo and
 <b>MAX</b>imize. Below it sit the <b>SYNTH|SAMPLE</b> switch, <b>REV</b>
-(reverse), <b>CAP</b> (record into the slot, section 07), <b>RAND</b>
+(reverse), <b>INV</b> (flips the polarity of this lane's sample; it
+sounds only in SAMPLE mode, CTRL+click turns it off), <b>CAP</b> (record into the slot, section 07), <b>RAND</b>
 (randomize the lane within musical bounds — CTRL+click resets it to INIT) and
 a <b>GAIN</b> fader (0–200 %). The <b>START</b> and <b>LENGTH</b> flags cut
 the sample window — on SYNTH lanes there is no start offset and the LENGTH
@@ -1229,7 +1231,7 @@ equivalent of drag &amp; drop export — drag the item wherever you need it.
 Cursor position, time selection and your item selection are restored.</p>
 
 <h2 id="options"><span class="num">13</span>Options / Color</h2>
-<figure class="shot"><img src="img/tt-ui-options/kick-options.png" alt="TT-KICK with the OPTIONS box open: ten colour swatches, the FONT SIZE steppers and the CUSTOM COLOR picker with FONT 1, FONT 2 and BG targets" width="1408" height="1105"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header (left of MAIN | SYS | EXPERT), then a swatch. Below the schemes sit the FONT SIZE steppers and the CUSTOM COLOR picker. A click outside the box closes it.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/kick-options.png" alt="TT-KICK with the OPTIONS box open: ten colour swatches, the FONT SIZE steppers and the CUSTOM COLOR picker with FONT 1, FONT 2 and BG targets" width="1408" height="1098"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header (left of MAIN | SYS | EXPERT), then a swatch. Below the schemes sit the FONT SIZE steppers and the CUSTOM COLOR picker. A click outside the box closes it.</figcaption></figure>
 <p><b>Options / Color.</b> The <code>OPTIONS</code> button opens the box; <code>COLOR</code> offers ten schemes:
 ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (active switches,
 knob rings, waveforms, LEDs), the warning colour (a DUR outside its target range, SOLO) and, for RED to ICE, the slightly tinted panel
@@ -1280,6 +1282,7 @@ even if OPTIONS is set higher (the setting itself is kept and shown as chosen). 
   <tr><td>take a lane out</td><td>M (mute); CAP and the audition still work on a muted lane</td></tr>
   <tr><td>see the finished kick</td><td>FUSION row; EXPAND for the large editable view</td></tr>
   <tr><td>move a lane on the time axis (gap or more overlap)</td><td>OFFSET knob in EXPERT, or drag the lane's start grip in the WAVE page; double-click the grip for 0</td></tr>
+  <tr><td>flip a sample's polarity</td><td>INV, next to REV, on that lane (SAMPLE mode). CTRL+click turns it off. Lane presets 1&ndash;14 and RAND leave it; INIT clears it</td></tr>
   <tr><td>fit the kick to a note length</td><td>FIT LENGTH TO, then FIT NOW after later edits (AUTO does it on every preset load)</td></tr>
   <tr><td>undo</td><td>UNDO in the header (20 steps, no redo)</td></tr>
   <tr><td>type a space in a name</td><td>SHIFT+Space</td></tr>
@@ -1288,7 +1291,10 @@ even if OPTIONS is set higher (the setting itself is kept and shown as chosen). 
 </table>
 
 <h2 id="release"><span class="num">15</span>Release notes</h2>
-<p><b>TT-KICK 1.1.0</b> adds <b>OFFSET</b> per lane (see <i>The time axis and OFFSET</i>): the
+<p><b>TT-KICK 1.1.1</b> adds <b>INV</b> on every lane, next to REV. It flips the
+polarity of that lane's sample. In SYNTH mode the button stays dim and does
+nothing until the lane is switched to SAMPLE. Older projects open with INV off.
+<b>TT-KICK 1.1.0</b> adds <b>OFFSET</b> per lane (see <i>The time axis and OFFSET</i>): the
 start of every lane can be moved on the time axis, in milliseconds, with an EXPERT knob and a
 grip in the WAVE page and FUSION EXPAND. At 0 the kick sounds exactly as in 1.0.x.
 <b>TT-KICK 1.0.0</b> was the first release; the sound engine was verified by measurement, the
@@ -1367,7 +1373,7 @@ front, the loader scripts and the state handling were checked in REAPER.</p>
 </ul>
 <section class="section">
 <h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
-<p>Updated in <b>v1.1.0</b>. New instances open at <b>125%</b> UI size for clearer text.
+<p>Updated in <b>v1.1.1</b>. New instances open at <b>125%</b> UI size for clearer text.
 The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
 <figure class="shot"><img src="img/tt-ui-options/kick-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
 <p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
@@ -1387,10 +1393,13 @@ They also travel with FX chains and native REAPER FX presets. Save the project t
 Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
 </section>
 
+<h2 id="changelog">Changelog</h2>
+<h3>1.1.2 — Review fixes</h3><ul><li>FIX: inserting, splitting or shortening a section clears the pending section selection, so the old section is not edited by the next click.</li><li>Tooltips for BUILD-UP and DELETE match where the bars go.</li></ul>
+
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-KICK Kick Machine v1.1.0</b> — JSFX instrument for REAPER · Tim Techlor design series<br> Manual revision 1.1.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-KICK Kick Machine v1.1.2</b> — JSFX instrument for REAPER · Tim Techlor design series<br> Manual revision 1.1.2 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

@@ -6,8 +6,8 @@
 <title>TT-RUMBLER Manual – Techno Rumble Machine for REAPER</title>
 <meta name="description" content="Reference manual for TT-RUMBLER, a free rumble machine JSFX effect for REAPER: it builds the pumping techno sub-bass layer from the kick in front of it — shown together with the kick in a bar-synced dual-trace scope — VERB, NOISE and PITCH engines gated by a tempo-synced AHDR envelope, resonant low cut, parallel band drive, high cut with ENV DEPTH sweep, auto gain, clipper, 22 factory presets and up to 19 undo steps.">
 <meta name="tt-doc-name" content="TT-RUMBLER Rumble Machine">
-<meta name="tt-doc-version" content="1.1.0">
-<meta name="tt-doc-date" content="2026-10-26">
+<meta name="tt-doc-version" content="1.1.1">
+<meta name="tt-doc-date" content="2026-11-22">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-rumbler-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-RUMBLER Rumble Machine — User Manual">
-<meta property="article:modified_time" content="2026-10-26">
+<meta property="article:modified_time" content="2026-11-22">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-RUMBLER Rumble Machine Manual – Techno Rumble Machine for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-RUMBLER, a free rumble machine JSFX effect for REAPER: it builds the pumping techno sub-bass layer from the kick in front of it — shown together with the kick in a bar-synced dual-trace scope — VERB, NOISE and PITCH engines gated by a tempo-synced AHDR envelope, resonant low cut, parallel band drive, high cut with ENV DEPTH sweep, auto gain, clipper, 22 factory presets and up to 19 undo steps.",
    "url": "https://timtechlor.de/docs/tt-rumbler-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-rumbler-manual.html",
-   "datePublished": "2026-10-26",
-   "dateModified": "2026-10-26",
+   "datePublished": "2026-11-22",
+   "dateModified": "2026-11-22",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-rumbler.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER rumble plugin, techno rumble, kick rumble, JSFX effect, sub bass generator, kikzilla alternative, rumble machine, free JSFX",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-rumbler-manual.html#software" },
-   "version": "1.1.0"
+   "version": "1.1.1"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-RUMBLER Rumble Machine",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.1.0",
+   "softwareVersion": "1.1.1",
    "description": "Rumble machine JSFX effect for REAPER: builds the pumping techno sub-bass layer from the kick in front of it in the FX chain, with kick and rumble together in a bar-synced scope — VERB/NOISE/PITCH engines gated by a tempo-synced AHDR envelope, resonant low cut, parallel band drive, high cut with ENV DEPTH sweep, feed-forward auto gain, clipper, 22 factory presets and up to 19 undo steps.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,10 +228,10 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-RUMBLER Rumble Machine</span></nav>
       <div class="wordmark" style="--wm-n:10" role="img" aria-label="TT-RUMBLER Rumble Machine">TT-RUMBLER</div>
       <h1>TT-RUMBLER Rumble Machine — User Manual</h1>
-      <div class="meta">JSFX effect for REAPER // Version 1.1.0 // TimTechlor</div>
+      <div class="meta">JSFX effect for REAPER // Version 1.1.1 // TimTechlor</div>
       <p class="lead">The pumping sub-bass layer under your kick — <em>built from the kick itself.</em> A rumble machine for REAPER: it listens to the kick running through it, re-triggers a tempo-synced envelope on every hit and gates a VERB, NOISE or PITCH engine into the signature techno rumble. A Kikzilla-Lite-style chain with every parameter on the front — plus a PITCH engine no Kikzilla has.</p>
     </div>
-    <button type="button" class="hero-shot" data-full="img/tt-ui-options/rumbler-front.png" aria-label="Enlarge screenshot of the TT-RUMBLER Rumble Machine user interface" title="Click to enlarge"><img src="img/tt-ui-options/rumbler-front.png" width="1129" height="916" alt="TT-RUMBLER Rumble Machine user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/rumbler-front.png" aria-label="Enlarge screenshot of the TT-RUMBLER Rumble Machine user interface" title="Click to enlarge"><img src="img/tt-ui-options/rumbler-front.png" width="1135" height="890" alt="TT-RUMBLER Rumble Machine user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
   </div>
 </header>
 <div class="wrap layout">
@@ -287,7 +287,7 @@ preview), <b>FILTER</b> and <b>MIX</b>. The header carries the trigger LED,
 up to 19 UNDO steps, the preset bar (INIT + 22 factory designs and a 32-slot
 user bank) and the OPTIONS button (colours, UI size, font sizes and the
 tooltip switch).</p>
-<figure class="shot"><img src="img/tt-ui-options/rumbler-front.png" alt="Current suite front at 125% UI size, version 1.1.0"><figcaption>Current front in v1.1.0, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/rumbler-front.png" alt="Current suite front at 125% UI size, version 1.1.1"><figcaption>Current front in v1.1.1, at the default UI size of 125%.</figcaption></figure>
 
 <h2 id="sounds"><span class="num">02</span>Sound examples</h2>
 <p>The same <b>TT-KICK 909 TIGHT</b> kick at <b>130 BPM</b>, through the sound of the factory bank:
@@ -852,7 +852,7 @@ routing works the same way.</p>
 the incoming kick and the rumble on <b>one bar</b>, drawn on the same scale, so
 you can see the rumble swell and fall against every hit. It is a display only —
 it never changes the sound.</p>
-<figure class="shot"><img src="img/tt-rumbler/rmb_v07_scope.png" width="900" height="309" alt="The scope of TT-RUMBLER v1.1.0 in FIXED view at 125 BPM: the white KICK IN trace, the accent-coloured RUMBLE trace, the dotted GATE line and the green gate bands with the A, H and R markers over four beats" loading="lazy"><figcaption><span class="tag">SCOPE</span><b>FIXED view at 125 BPM</b> with a four-on-the-floor test kick: the white <b>KICK IN</b> trace, the accent-coloured <b>RUMBLE</b> trace, the dotted <b>GATE</b> line and the green gate bands. The row below holds the trace and view switches, the envelope readouts and the tempo block.</figcaption></figure>
+<figure class="shot"><img src="img/tt-rumbler/rmb_v07_scope.png" width="900" height="309" alt="The scope of TT-RUMBLER v1.1.1 in FIXED view at 125 BPM: the white KICK IN trace, the accent-coloured RUMBLE trace, the dotted GATE line and the green gate bands with the A, H and R markers over four beats" loading="lazy"><figcaption><span class="tag">SCOPE</span><b>FIXED view at 125 BPM</b> with a four-on-the-floor test kick: the white <b>KICK IN</b> trace, the accent-coloured <b>RUMBLE</b> trace, the dotted <b>GATE</b> line and the green gate bands. The row below holds the trace and view switches, the envelope readouts and the tempo block.</figcaption></figure>
 <h3>Traces</h3>
 <table>
   <tr><th>Trace</th><th>Look</th><th>What it shows</th></tr>
@@ -1021,7 +1021,7 @@ empty bank and an unchanged sound. Each used slot adds well under 1 kB to the pr
 </ul>
 
 <h2 id="options"><span class="num">13</span>Options / Color</h2>
-<figure class="shot"><img src="img/tt-ui-options/rumbler-options.png" alt="TT-RUMBLER v1.1.0 with the OPTIONS box open: ten colour swatches with the factory scheme ACID marked, FONT SIZE steps for the title and text fonts, and the CUSTOM COLOR picker with FONT 1 / FONT 2 / BG targets" width="900" height="730"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header (right of the preset bar), then a swatch. A click outside the box closes it.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/rumbler-options.png" alt="TT-RUMBLER v1.1.1 with the OPTIONS box open: ten colour swatches with the factory scheme ACID marked, FONT SIZE steps for the title and text fonts, and the CUSTOM COLOR picker with FONT 1 / FONT 2 / BG targets" width="900" height="706"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header (right of the preset bar), then a swatch. A click outside the box closes it.</figcaption></figure>
 <p>The <code>OPTIONS</code> button opens a box with three areas plus the tooltip switch. <b>COLOR</b>: ten schemes &mdash;
 ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (knob rings, envelope curve,
 active buttons, LEDs, panel lines), the second colour (the CLIP LED) and, for RED to ICE, the slightly tinted background and panel greys of the whole front at once.
@@ -1123,6 +1123,10 @@ changes your look. The factory colour is <b>ACID</b> (the classic acid green, id
 </ul>
 
 <h2 id="changes"><span class="num">16</span>Version history</h2>
+<h3>1.1.1 &mdash; Review fixes</h3>
+<ul>
+<li>The about text says 22 factory presets plus INIT, and the latency comment matches 4096 samples. Sound is unchanged.</li>
+</ul>
 <h3>1.1.0 &mdash; FAST 148</h3>
 <ul>
 <li>New factory design <b>FAST 148</b> (VERB · MODAL, T60 2 s, HC 120 Hz, START 8 / ATT 45 / HLD 60 / REL 120 ms) for fast techno at 145&ndash;150 BPM. It is appended as number 22; the numbers of all other designs stay.</li>
@@ -1203,7 +1207,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-RUMBLER Rumble Machine v1.1.0</b> — JSFX effect for REAPER · Tim Techlor design series<br> Manual revision 1.1.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-RUMBLER Rumble Machine v1.1.1</b> — JSFX effect for REAPER · Tim Techlor design series<br> Manual revision 1.1.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

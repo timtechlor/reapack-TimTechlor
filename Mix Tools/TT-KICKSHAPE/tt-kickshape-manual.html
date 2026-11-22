@@ -6,8 +6,8 @@
 <title>TT-KICKSHAPE Manual – Drawable Volume &amp; Sidechain Shaper for REAPER</title>
 <meta name="description" content="Reference manual for TT-KICKSHAPE, a free drawable volume and sidechain shaper JSFX for REAPER: a curve editor with 8 slots, 22 presets and one-click ducking shapes the volume, triggered by host beat, MIDI note, audio transient or a free clock. Includes a 3-band Linkwitz-Riley split, a low-pass target and the curve as MIDI CC output.">
 <meta name="tt-doc-name" content="TT-KICKSHAPE">
-<meta name="tt-doc-version" content="1.0.1">
-<meta name="tt-doc-date" content="2026-11-09">
+<meta name="tt-doc-version" content="1.0.2">
+<meta name="tt-doc-date" content="2026-11-22">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-kickshape-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-KICKSHAPE — User Manual">
-<meta property="article:modified_time" content="2026-11-09">
+<meta property="article:modified_time" content="2026-11-22">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-KICKSHAPE Manual – Drawable Volume &amp; Sidechain Shaper for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-KICKSHAPE, a free drawable volume and sidechain shaper JSFX for REAPER: a curve editor with 8 slots, 22 presets and one-click ducking shapes the volume, triggered by host beat, MIDI note, audio transient or a free clock. Includes a 3-band Linkwitz-Riley split, a low-pass target and the curve as MIDI CC output.",
    "url": "https://timtechlor.de/docs/tt-kickshape-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-kickshape-manual.html",
-   "datePublished": "2026-11-09",
-   "dateModified": "2026-11-09",
+   "datePublished": "2026-11-22",
+   "dateModified": "2026-11-22",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-kickshape.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER volume shaper, sidechain without compressor, kickstart alternative, LFOTool alternative, trance gate JSFX, drawable curve ducking, MIDI CC LFO REAPER, JSFX",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-kickshape-manual.html#software" },
-   "version": "1.0.1"
+   "version": "1.0.2"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-KICKSHAPE",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.0.1",
+   "softwareVersion": "1.0.2",
    "description": "JSFX plug-in for REAPER that shapes the volume with a drawable curve: sidechain pumping without a compressor, trance gates and tremolos, triggered by host beat, MIDI note, audio transient or a free clock, with a 3-band split, a low-pass target and the curve as MIDI CC.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,7 +228,7 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-KICKSHAPE</span></nav>
       <div class="wordmark" style="--wm-n:12" role="img" aria-label="TT-KICKSHAPE">TT-KICKSHAPE</div>
       <h1>TT-KICKSHAPE — User Manual</h1>
-      <div class="meta">JSFX plug-in for REAPER // Version 1.0.1 // TimTechlor</div>
+      <div class="meta">JSFX plug-in for REAPER // Version 1.0.2 // TimTechlor</div>
       <p class="lead">TT-KICKSHAPE draws the volume. A curve you edit with the mouse is played back on every trigger — by the host beat, a MIDI note, an audio transient or a free clock — and multiplies the signal. That is sidechain pumping without a compressor, a trance gate, a tremolo or a swell, sample-accurate for beat and MIDI triggers, with a separate depth per frequency band and the curve available as MIDI CC.</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-ui-options/kickshape-front.png" aria-label="Enlarge screenshot of the TT-KICKSHAPE user interface" title="Click to enlarge"><img src="img/tt-ui-options/kickshape-front.png" width="1252" height="879" alt="TT-KICKSHAPE user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -253,6 +253,7 @@ nav.crumbs [aria-current] { color: var(--white); }
 <li><a href="#practice"><span class="num">13</span><span>In practice</span></a></li>
 <li><a href="#trouble"><span class="num">14</span><span>Troubleshooting</span></a></li>
 <li><a href="#ui-size-settings"><span class="num">15</span><span>UI Size & Saved Options</span></a></li>
+<li><a href="#changelog"><span class="num">16</span><span>Changelog</span></a></li>
     </ol>
   </nav>
   <main>
@@ -266,7 +267,7 @@ exact timing and no detector in the way.</p>
 <pre><code>trigger  →  curve phase 0..1  →  c = curve(phase)
 gain = max( 1 − DEPTH · (1 − c'), floor )     c' = c, or 1 − c with INVERT
 gain → 1-pole SMOOTH → multiplies the signal (or one band, or a low-pass cutoff)</code></pre>
-<figure class="shot"><img src="img/tt-ui-options/kickshape-front.png" alt="Current suite front at 125% UI size, version 1.0.1"><figcaption>Current front in v1.0.1, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/kickshape-front.png" alt="Current suite front at 125% UI size, version 1.0.2"><figcaption>Current front in v1.0.2, at the default UI size of 125%.</figcaption></figure>
 
 <h2 id="quickstart"><span class="num">02</span>Quick start</h2>
 <ol>
@@ -485,7 +486,7 @@ Hover any control for a tooltip (it appears after a short moment). <code>OPTIONS
   <tr><td>TARGET / BANDS / CC OUT</td><td>TARGET, 3-BAND SPLIT, RANGE, FREQ, X1, X2 (also in the FREQ view), LOW / MID / HIGH depth with M and S, CC OUT, CC #, CH</td></tr>
 </table>
 
-<figure class="shot"><img src="img/tt-ui-options/kickshape-options.png" alt="TT-KICKSHAPE header with the OPTIONS box open: ten colour swatches, the factory scheme CYAN is marked" width="926" height="677"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header, then a swatch. A click outside the box closes it.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/kickshape-options.png" alt="TT-KICKSHAPE header with the OPTIONS box open: ten colour swatches, the factory scheme CYAN is marked" width="926" height="650"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Click <code>OPTIONS</code> in the header, then a swatch. A click outside the box closes it.</figcaption></figure>
 <p><b>Options / Color.</b> The <code>OPTIONS</code> button at the right end of the header (right of the preset bar) opens the box; <code>COLOR</code> offers ten schemes:
 ACID, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (curve, knob rings, active buttons, LEDs, meters),
 the second colour and, for RED to ICE, the slightly tinted panel background of the whole front at once. The choice applies <b>per plug-in instance</b>, is saved with the project
@@ -551,11 +552,14 @@ Closing and reopening the FX window keeps them; saving and reopening the project
 They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
 <p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
 Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+<h2 id="changelog"><span class="num">16</span>Changelog</h2>
+<h3>1.0.2 — Review fixes</h3>
+<ul><li>The comment on the finite-value check matches the range test in the code. Sound is unchanged.</li></ul>
 
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-KICKSHAPE v1.0.1</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-KICKSHAPE v1.0.2</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.2 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

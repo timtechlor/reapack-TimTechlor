@@ -6,8 +6,8 @@
 <title>TT-303 (JSFX) Manual – Acid Bass Synthesizer in the Style of the TB-303 for REAPER</title>
 <meta name="description" content="Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.">
 <meta name="tt-doc-name" content="TT-303 (JSFX)">
-<meta name="tt-doc-version" content="2.1.2">
-<meta name="tt-doc-date" content="2026-10-14">
+<meta name="tt-doc-version" content="2.1.5">
+<meta name="tt-doc-date" content="2026-11-22">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-303-jsfx-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-303 (JSFX) — User Manual">
-<meta property="article:modified_time" content="2026-10-14">
+<meta property="article:modified_time" content="2026-11-22">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-303 (JSFX) Manual – Acid Bass Synthesizer for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for the TT-303 Acid Machine JSFX plug-in for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 with an 18 dB ladder filter, accent and slide, drive, ping-pong delay, reverb and compressor, an internal 16-step sequencer with four banks, MIDI control, a preset bar with a 32-slot user bank and ten colour schemes.",
    "url": "https://timtechlor.de/docs/tt-303-jsfx-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-303-jsfx-manual.html",
-   "datePublished": "2026-10-14",
-   "dateModified": "2026-10-14",
+   "datePublished": "2026-11-22",
+   "dateModified": "2026-11-22",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-303-jsfx.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "TB-303 JSFX, acid bass synthesizer REAPER, 303 clone plug-in, acid sequencer, slide and accent, ladder filter 18 dB, free REAPER synth, JSFX instrument",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-303-jsfx-manual.html#software" },
-   "version": "2.1.2"
+   "version": "2.1.5"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-303 (JSFX)",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "2.1.2",
+   "softwareVersion": "2.1.5",
    "description": "Free JSFX instrument for REAPER: a monophonic acid bass synthesizer in the style of the Roland TB-303 (tribute model, no samples) with slide and accent, a 3-pole 18 dB ladder filter, drive, ping-pong delay, reverb, compressor, an internal 16-step sequencer with four banks, a preset bar with a 32-slot user bank and ten colour schemes.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,10 +228,10 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-303 (JSFX)</span></nav>
       <div class="wordmark" style="--wm-n:6" role="img" aria-label="TT-303 (JSFX)">TT-303</div>
       <h1>TT-303 (JSFX) — User Manual</h1>
-      <div class="meta">JSFX plug-in for REAPER // Version 2.1.2 // TimTechlor</div>
+      <div class="meta">JSFX plug-in for REAPER // Version 2.1.5 // TimTechlor</div>
       <p class="lead">TT-303 is a monophonic acid bass synthesizer in the style of the Roland TB-303 &mdash; a tribute model, no samples: one oscillator, an 18 dB ladder filter that squeals, the accent and slide circuits that make a 303 line move, and a chain of drive, ping-pong delay, reverb and compressor behind it. Play it from the piano roll (HOST) or let the built-in 16-step sequencer with four pattern banks run on the project timeline (SEQ).</p>
     </div>
-    <button type="button" class="hero-shot" data-full="img/tt-ui-options/303-front.png" aria-label="Enlarge screenshot of the TT-303 (JSFX) user interface" title="Click to enlarge"><img src="img/tt-ui-options/303-front.png" width="1142" height="920" alt="TT-303 (JSFX) user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/303-front.png" aria-label="Enlarge screenshot of the TT-303 (JSFX) user interface" title="Click to enlarge"><img src="img/tt-ui-options/303-front.png" width="1138" height="920" alt="TT-303 (JSFX) user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
   </div>
 </header>
 <div class="wrap layout">
@@ -275,7 +275,7 @@ the two circuits that give the original its character: <b>accent</b> and <b>slid
 play it from the outside; in <b>SEQ</b> mode an internal 16-step sequencer with four banks A&ndash;D
 plays the notes itself. The whole front is drawn by the plug-in, uses the UI SIZE setting in OPTIONS, and every
 control can be automated.</p>
-<figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current suite front at 125% UI size, version 2.1.2"><figcaption>Current front in v2.1.2, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current suite front at 125% UI size, version 2.1.5"><figcaption>Current front in v2.1.5, at the default UI size of 125%.</figcaption></figure>
 <div class="box" data-k="Not the web app">There is also a browser version of the TT-303 with its own manual (<a href="TT-303_manual.html">TT-303 (Web)</a>).
 This manual describes the REAPER plug-in only &mdash; the JSFX has no drum machine and no export buttons (REAPER renders the audio), and its tempo is always the project tempo.</div>
 
@@ -535,7 +535,7 @@ To take your bank to another project or computer, save a REAPER preset once (<co
 
 <h2 id="options"><span class="num">15</span>Options / Color</h2>
 <p>The <b>OPTIONS</b> button is at the right end of the header (up to v1.1 it sat between THRU and MODE; since v1.2 the preset bar is on its left). Click it, then a swatch. A click outside the box closes it.</p>
-<figure class="shot"><img src="img/tt-ui-options/303-options.png" alt="The OPTIONS box open: ten colour swatches in two rows, the factory scheme ACID marked with a white frame and named below" width="580" height="467"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Ten swatches; the marked one is active, the name of the swatch under the pointer is shown below. The box says <code>per instance</code>.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/303-options.png" alt="The OPTIONS box open: ten colour swatches in two rows, the factory scheme ACID marked with a white frame and named below" width="580" height="469"><figcaption><span class="tag">OPTIONS</span><b>Options / Color.</b> Ten swatches; the marked one is active, the name of the swatch under the pointer is shown below. The box says <code>per instance</code>.</figcaption></figure>
 <p><code>COLOR</code> offers ten schemes: <b>ACID</b>, CYAN, ORANGE, MAGENTA, YELLOW, RED, BLUE, VIOLET, MINT and ICE. A scheme changes the accent colour (knob rings, active buttons, step bars, LEDs, traces), the dimmed accent and, for RED to ICE, the slightly tinted panel background of the whole front at once.
 The choice applies <b>per plug-in instance</b> and is saved with the project and with FX-chain copies. The factory colour is <b>ACID</b>, the classic acid green (#39FF14). Loading a preset (factory or user), RND, MUT or UNDO does not change the colour.
 It is stored in the hidden parameter 36 (<code>UI Color</code>, 0&ndash;9); the sound is not affected.</p>
@@ -623,6 +623,16 @@ Since v1.3.3 these commands only run while a test script has unlocked them; othe
 </ul>
 
 <h2 id="notes"><span class="num">19</span>Release notes</h2>
+<h3>v2.1.5 &mdash; 2026-11-22: Review fixes</h3>
+<ul>
+  <li>A factory patch clears the preset slot before the factory block is copied, so the read stays inside that block. Sound is unchanged.</li>
+</ul>
+<h3>v2.1.4 &mdash; 2026-10-25: SEQ OUT note-off</h3>
+<p>Switching SEQ OUT off while a sequencer note was still playing dropped its note-off &mdash; the receiving instrument kept the note hanging. The pending note-off is now sent once on the switch. The <code>@provides</code> header was cleaned (stray PATGEN entries removed, the keyboard panel image added). Sound is unchanged.</p>
+<h3>v2.1.3 &mdash; 2026-10-20: space bar</h3>
+<ul>
+  <li><b>Transport:</b> the space bar now always starts and stops the REAPER transport while the plugin window has focus. To type a space in a name field, use Shift+Space.</li>
+</ul>
 <h3>v2.1.2 &mdash; 2026-10-14: fixes</h3>
 <ul>
   <li><b>Keyboard:</b> dragging quickly across the keys could leave a note hanging. The note-off of the previous key now follows at once; the slide stays.</li>
@@ -729,7 +739,7 @@ Since v1.3.3 these commands only run while a test script has unlocked them; othe
 </ul>
 <section class="section">
 <h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
-<p>Updated in <b>v2.1.2</b>. New instances open at <b>125%</b> UI size for clearer text.
+<p>Updated in <b>v2.1.4</b>. New instances open at <b>125%</b> UI size for clearer text.
 The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
 <figure class="shot"><img src="img/tt-ui-options/303-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
 <p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
@@ -752,7 +762,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-303 (JSFX) v2.1.2</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 2.1.2 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-303 (JSFX) v2.1.5</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 2.1.5 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

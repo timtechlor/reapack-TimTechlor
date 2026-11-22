@@ -6,8 +6,8 @@
 <title>TT-LuckyMidiChance Manual – Generative MIDI Processing for REAPER</title>
 <meta name="description" content="Reference manual for TT-LuckyMidiChance, a free generative MIDI JSFX for REAPER: seeded probability gate, bar-cycle conditions, strum and ratchet bursts, velocity/timing humanize, a Euclidean pattern gate and per-note mutation — deterministic chaos for MIDI tracks.">
 <meta name="tt-doc-name" content="TT-LuckyMidiChance">
-<meta name="tt-doc-version" content="1.6.0">
-<meta name="tt-doc-date" content="2026-10-14">
+<meta name="tt-doc-version" content="1.6.1">
+<meta name="tt-doc-date" content="2026-11-21">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-luckymidichance-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-LuckyMidiChance — User Manual">
-<meta property="article:modified_time" content="2026-10-14">
+<meta property="article:modified_time" content="2026-11-21">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-LuckyMidiChance Manual – Generative MIDI Processing for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-LuckyMidiChance, a free generative MIDI JSFX for REAPER: seeded probability gate, bar-cycle conditions, strum and ratchet bursts, velocity/timing humanize, a Euclidean pattern gate and per-note mutation — deterministic chaos for MIDI tracks.",
    "url": "https://timtechlor.de/docs/tt-luckymidichance-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-luckymidichance-manual.html",
-   "datePublished": "2026-10-14",
-   "dateModified": "2026-10-14",
+   "datePublished": "2026-11-21",
+   "dateModified": "2026-11-21",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-luckymidichance.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER generative MIDI, MIDI probability plugin, euclidean sequencer, MIDI humanizer, ratchet effect, strum plugin, JSFX MIDI, seeded random music",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-luckymidichance-manual.html#software" },
-   "version": "1.6.0"
+   "version": "1.6.1"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-LuckyMidiChance",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "1.6.0",
+   "softwareVersion": "1.6.1",
    "description": "JSFX MIDI plug-in for REAPER: probability gating, bar-cycle conditions, strum and ratchet bursts, humanizing deviate, a Euclidean pattern gate and seedable per-note mutation — deterministic generative processing driven from a drawn front panel.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -228,10 +228,10 @@ nav.crumbs [aria-current] { color: var(--white); }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/">Tim Techlor</a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-LuckyMidiChance</span></nav>
       <div class="wordmark" style="--wm-n:18" role="img" aria-label="TT-LuckyMidiChance">TT-LUCKYMIDICHANCE</div>
       <h1>TT-LuckyMidiChance — User Manual</h1>
-      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.6.0 // TimTechlor</div>
+      <div class="meta">JSFX MIDI plug-in for REAPER // Version 1.6.1 // TimTechlor</div>
       <p class="lead">A MIDI processor that injects <em>controlled chance</em>: notes pass or drop by probability, get gated by bar position and Euclidean patterns, burst into strums and ratchets, drift in velocity and timing — all driven by a seedable, deterministic random engine that reproduces exactly when you lock the seed, and all operated from a fully drawn front panel.</p>
     </div>
-    <button type="button" class="hero-shot" data-full="img/tt-ui-options/lmc-front.png" aria-label="Enlarge screenshot of the TT-LuckyMidiChance user interface" title="Click to enlarge"><img src="img/tt-ui-options/lmc-front.png" width="923" height="590" alt="TT-LuckyMidiChance user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/lmc-front.png" aria-label="Enlarge screenshot of the TT-LuckyMidiChance user interface" title="Click to enlarge"><img src="img/tt-ui-options/lmc-front.png" width="924" height="590" alt="TT-LuckyMidiChance user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
   </div>
 </header>
 <div class="wrap layout">
@@ -310,7 +310,7 @@ delay it creates is a scheduled event offset inside the MIDI stream.</p>
 <h2 id="panel"><span class="num">03</span>The front panel</h2>
 <p>Everything you touch is drawn by the plug-in — there is no slider page.
 Layout top to bottom:</p>
-<figure class="shot"><img src="img/tt-ui-options/lmc-front.png" alt="Current suite front at 125% UI size, version 1.6.0"><figcaption>Current front in v1.6.0, at the default UI size of 125%.</figcaption></figure>
+<figure class="shot"><img src="img/tt-ui-options/lmc-front.png" alt="Current suite front at 125% UI size, version 1.6.1"><figcaption>Current front in v1.6.1, at the default UI size of 125%.</figcaption></figure>
 <dl class="kv">
   <dt>HEADER</dt><dd>Wordmark <b>LUCKY MIDI CHANCE</b> with the subtitle
   <i>MIDI PROBABILITY + GENERATIVE</i>; to its right the
@@ -810,7 +810,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-LuckyMidiChance v1.6.0</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.6.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-LuckyMidiChance v1.6.1</b> — JSFX MIDI plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.6.1 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
