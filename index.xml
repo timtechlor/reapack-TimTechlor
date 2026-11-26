@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="TimTechlor ReaScripts" commit="d8d160177b655df7fabec6a297acbe5989e7b144">
+<index version="1" name="TimTechlor ReaScripts" commit="5127417f6f5ea60d86c5e7f4d770404dfa7e2435">
   <category name="MIDI Tools/TT-303PATGEN">
     <reapack name="TT-303PATGEN Print Song Chain.lua" type="script" desc="TT-303PATGEN Print Song Chain">
       <metadata>
@@ -637,6 +637,21 @@ Historie: Earlier first release: spectral ducking, 3 zones, SC pre-EQ, lookahead
         <source file="img/tt-hott/tt-hott-start-shape.png">https://github.com/timtechlor/reapack-TimTechlor/raw/d8d160177b655df7fabec6a297acbe5989e7b144/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-start-shape.png</source>
         <source file="img/tt-hott/tt-hott-start-compare.png">https://github.com/timtechlor/reapack-TimTechlor/raw/d8d160177b655df7fabec6a297acbe5989e7b144/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-start-compare.png</source>
       </version>
+      <version name="1.0.0" author="TimTechlor" time="2026-11-26T22:13:30Z">
+        <changelog><![CDATA[1.0.0 - First stable release (Drop 07 of Acid Season), together with TT-HOTTER. No sound change from 0.9.12 (comment fixes only).
+0.9.12 - First public release (Drop 07 of Acid Season), together with TT-HOTTER. Three minimum-phase Linkwitz-Riley bands, CLASSIC and EXPERT mode, START guided setup, true-peak CEILING, 30 factory presets including six techno presets.]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/tt-hott.jsfx</source>
+        <source file="img/tt-ui-options/hott-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-ui-options/hott-front.png</source>
+        <source file="img/tt-ui-options/hott-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-ui-options/hott-options.png</source>
+        <source file="tt-hott-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/tt-hott-manual.html</source>
+        <source file="img/tt-hott/tt-hott-macros.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-macros.png</source>
+        <source file="img/tt-hott/tt-hott-expert.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-expert.png</source>
+        <source file="img/tt-hott/tt-hott-bandoff.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-bandoff.png</source>
+        <source file="img/tt-hott/tt-hott-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-presets.png</source>
+        <source file="img/tt-hott/tt-hott-start.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-start.png</source>
+        <source file="img/tt-hott/tt-hott-start-shape.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-start-shape.png</source>
+        <source file="img/tt-hott/tt-hott-start-compare.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTT/img/tt-hott/tt-hott-start-compare.png</source>
+      </version>
     </reapack>
   </category>
   <category name="Mix Tools/TT-HOTTER">
@@ -662,6 +677,18 @@ Historie: Earlier first release: spectral ducking, 3 zones, SC pre-EQ, lookahead
         <source file="img/tt-hotter/tt-hotter-scope.png">https://github.com/timtechlor/reapack-TimTechlor/raw/d8d160177b655df7fabec6a297acbe5989e7b144/Mix%20Tools/TT-HOTTER/img/tt-hotter/tt-hotter-scope.png</source>
         <source file="img/tt-hotter/tt-hotter-expert.png">https://github.com/timtechlor/reapack-TimTechlor/raw/d8d160177b655df7fabec6a297acbe5989e7b144/Mix%20Tools/TT-HOTTER/img/tt-hotter/tt-hotter-expert.png</source>
         <source file="img/tt-hotter/tt-hotter-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/d8d160177b655df7fabec6a297acbe5989e7b144/Mix%20Tools/TT-HOTTER/img/tt-hotter/tt-hotter-presets.png</source>
+      </version>
+      <version name="1.0.0" author="TimTechlor" time="2026-11-26T22:13:30Z">
+        <changelog><![CDATA[1.0.0 - First stable release (Drop 07 of Acid Season), together with TT-HOTT. No sound change from 0.9.10.
+0.9.10 - First public release (Drop 07 of Acid Season), together with TT-HOTT. Five linear-phase bands, own level-neutral tuning, target curves with LEARN and MATCH, 23 factory presets including seven techno presets.]]></changelog>
+        <source>https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTTER/tt-hotter.jsfx</source>
+        <source file="img/tt-ui-options/hotter-front.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTTER/img/tt-ui-options/hotter-front.png</source>
+        <source file="img/tt-ui-options/hotter-options.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTTER/img/tt-ui-options/hotter-options.png</source>
+        <source file="tt-hotter-manual.html">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTTER/tt-hotter-manual.html</source>
+        <source file="img/tt-hotter/tt-hotter-balance.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTTER/img/tt-hotter/tt-hotter-balance.png</source>
+        <source file="img/tt-hotter/tt-hotter-scope.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTTER/img/tt-hotter/tt-hotter-scope.png</source>
+        <source file="img/tt-hotter/tt-hotter-expert.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTTER/img/tt-hotter/tt-hotter-expert.png</source>
+        <source file="img/tt-hotter/tt-hotter-presets.png">https://github.com/timtechlor/reapack-TimTechlor/raw/5127417f6f5ea60d86c5e7f4d770404dfa7e2435/Mix%20Tools/TT-HOTTER/img/tt-hotter/tt-hotter-presets.png</source>
       </version>
     </reapack>
   </category>
