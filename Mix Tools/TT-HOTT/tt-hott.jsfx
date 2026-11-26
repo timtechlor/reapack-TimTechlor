@@ -1,7 +1,7 @@
 desc:TT-HOTT Multiband Up/Down Compressor
 // @description TT-HOTT - OTT-style 3-band upward/downward compressor with a glass-box front: live transfer curves, per-band numbers and meters
 // @author TimTechlor
-// @version 0.9.12
+// @version 1.0.0
 // @link Manual https://timtechlor.de/docs/tt-hott-manual.html
 // @license MIT
 // @tags compressor multiband upward downward ott dynamics loud edm dubstep
@@ -23,6 +23,7 @@ desc:TT-HOTT Multiband Up/Down Compressor
 //   EXPERT mode shows and edits the real numbers behind it: thresholds, ratios, attack, release, make-up, crossover frequencies.
 //   Zero latency at LOOKAHEAD 0 and CEILING 0 dB. Not affiliated with any product. The twin with five linear-phase bands is TT-HOTTER.
 // @changelog
+//   1.0.0 - First stable release (Drop 07 of Acid Season), together with TT-HOTTER. No sound change from 0.9.12 (comment fixes only).
 //   0.9.12 - First public release (Drop 07 of Acid Season), together with TT-HOTTER. Three minimum-phase Linkwitz-Riley bands, CLASSIC and EXPERT mode, START guided setup, true-peak CEILING, 30 factory presets including six techno presets.
 // Historie: Spec auftraege/P29_TT-HOTT.md; Formeln MODEL.md; Entscheidungen im LOGBUCH.md.
 // GENERIERT von build_hott.py aus ht_spec.py / presets.json - nicht von Hand aendern.
@@ -3691,7 +3692,7 @@ HT_MG_OUTR    = 3;   // global: HT_MET + HT_NB*HT_METW + HT_MG_*
 HT_MG_AG      = 4;   // global: HT_MET + HT_NB*HT_METW + HT_MG_*
 HT_MG_LAT     = 5;   // global: HT_MET + HT_NB*HT_METW + HT_MG_*
 HT_MG_LIM     = 6;   // global: HT_MET + HT_NB*HT_METW + HT_MG_*
-strcpy(#tt_ver, "v0.9.12");   // EINE Versionsstelle im Code (tt_version_check.py)
+strcpy(#tt_ver, "v1.0.0");   // EINE Versionsstelle im Code (tt_version_check.py)
 // ht10_mem.jsfx — Speicherkarte des Klangkerns ab HT_MEM0 (256).
 // Vertrag: auftraege/P29_TT-HOTT.md Abschnitt 5.1. Benannte Offsets, keine Ueberlappung.
 // HT_END = erste freie Adresse nach dem Klangkern (die Front legt dort u. a. HT_BANK an).
@@ -4005,7 +4006,7 @@ function ht_gdb(k, E) local(rb, z, w, up, dn) (
 
 // =====================================================================
 // Aufloesung (MODEL.md 2): ein Band k -> rb (16 Worte, HT_R_*-Indizes).
-// expert >= 0.5: EXPERT (2.2), sonst CLASSIC (2.1). Historie: ht_snapshot ruft mit expert = 0; es rechnet selbst.
+// expert >= 0.5: EXPERT (2.2), sonst CLASSIC (2.1). ht_snapshot ruft mit expert = 0; es rechnet selbst.
 // =====================================================================
 function ht_resband(rb, k, expert) local(b, d, T, U, Dn, tp, tsh, pp, kn, upon, dnon, s) (
   b = HT_S_BAND0 + k*HT_S_BANDW;
@@ -4206,7 +4207,7 @@ function ht_params() local(k, b, rb) (
   ht_bm     = floor(slider(HT_S_BANDS) + 0.5);     // 0.2.0: BANDS ON, Bitmaske (Bit k = 1: Band aktiv)
   ht_lcv    = slider(HT_S_CEIL);                   // 0.2.0: CEILING dBFS, >= -0,05 = AUS
   ht_lon    = ht_lcv < 0 - 0.05;
-ht_lcl    = 10^(min(0, max(-96, ht_lcv))*0.05);   // 0.9.11: Klemme -96..0; Historie: Bereich wie Slider (-12..0), Fremdwert gaebe Inf
+  ht_lcl    = 10^(min(0, max(-96, ht_lcv))*0.05);   // 0.9.11: Klemme -96..0; Historie: Bereich wie Slider (-12..0), Fremdwert gaebe Inf
   ht_lD     = min(HT_LRW - 2, max(8, floor(0.0015*srate + 0.5)));   // Begrenzer-Lookahead 1,5 ms (0.2.1: auf die Ringlaenge gedeckelt, sonst Ueberlauf ab 352,8 kHz)
   ht_lE     = ht_lD - HT_TPD;                      // 0.6.0: Fensterlaenge der Spitzen-Suche; die True-Peak-Spitze von Position p liegt HT_TPD Samples spaeter vor (D >= 8, also >= 3)
   ht_lrc    = 1 - exp(0 - 1/(0.08*srate));         // Begrenzer-Release 80 ms

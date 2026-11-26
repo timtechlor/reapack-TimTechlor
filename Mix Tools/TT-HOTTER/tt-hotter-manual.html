@@ -6,8 +6,8 @@
 <title>TT-HOTTER Manual – Five-Band Upward/Downward Compressor for REAPER</title>
 <meta name="description" content="Reference manual for TT-HOTTER, a free five-band upward/downward compressor JSFX for REAPER in the OTT style: linear-phase crossovers, DEPTH/TIME/UP/DOWN macros, per-band thresholds, an EXPERT strip, a before/after display (SPECTRUM, BALANCE, SCOPE) with draggable crossovers, genre target curves with LEARN and MATCH, drive, true-peak ceiling, sidechain and 23 factory presets.">
 <meta name="tt-doc-name" content="TT-HOTTER">
-<meta name="tt-doc-version" content="0.9.10">
-<meta name="tt-doc-date" content="2026-11-22">
+<meta name="tt-doc-version" content="1.0.0">
+<meta name="tt-doc-date" content="2026-11-26">
 <link rel="canonical" href="https://timtechlor.de/docs/tt-hotter-manual.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="Tim Techlor">
@@ -26,7 +26,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="TT-HOTTER — User Manual">
-<meta property="article:modified_time" content="2026-11-22">
+<meta property="article:modified_time" content="2026-11-26">
 <meta property="article:author" content="Tim Techlor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TT-HOTTER Manual – Five-Band Upward/Downward Compressor for REAPER">
@@ -45,8 +45,8 @@
    "description": "Reference manual for TT-HOTTER, a free five-band upward/downward compressor JSFX for REAPER in the OTT style: linear-phase crossovers, DEPTH/TIME/UP/DOWN macros, per-band thresholds, an EXPERT strip, a before/after display (SPECTRUM, BALANCE, SCOPE) with draggable crossovers, genre target curves with LEARN and MATCH, drive, true-peak ceiling, sidechain and 23 factory presets.",
    "url": "https://timtechlor.de/docs/tt-hotter-manual.html",
    "mainEntityOfPage": "https://timtechlor.de/docs/tt-hotter-manual.html",
-   "datePublished": "2026-11-22",
-   "dateModified": "2026-11-22",
+   "datePublished": "2026-11-26",
+   "dateModified": "2026-11-26",
    "inLanguage": "en",
    "image": "https://timtechlor.de/docs/img/og-tt-hotter.png",
    "author": { "@id": "https://timtechlor.de/#artist" },
@@ -54,7 +54,7 @@
    "keywords": "REAPER OTT compressor, five band compressor, upward compression, linear phase multiband, multiband dynamics JSFX, tonal balance target curve, reference matching, EDM mixing plugin, acid bass, drum bus",
    "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
    "about": { "@id": "https://timtechlor.de/docs/tt-hotter-manual.html#software" },
-   "version": "0.9.10"
+   "version": "1.0.0"
   },
   {
    "@type": "SoftwareApplication",
@@ -62,7 +62,7 @@
    "name": "TT-HOTTER",
    "applicationCategory": "MultimediaApplication",
    "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
-   "softwareVersion": "0.9.10",
+   "softwareVersion": "1.0.0",
    "description": "JSFX plug-in for REAPER that compresses five frequency bands upward and downward at once (OTT style), with linear-phase crossovers, a before/after display, genre target curves with LEARN/MATCH and 23 factory presets.",
    "author": { "@id": "https://timtechlor.de/#artist" },
    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -238,7 +238,7 @@ header.top { border-bottom: 0; }
       <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/" class="px-wm" aria-label="Tim Techlor"><!-- px-wm: tools/brand/make_crumb_wordmark.py --><svg xmlns="http://www.w3.org/2000/svg" width="168" height="22" viewBox="0 0 84 11" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><rect x="1" y="0" width="7" height="1" fill="#ffffff"/><rect x="9" y="0" width="2" height="1" fill="#ffffff"/><rect x="12" y="0" width="2" height="1" fill="#ffffff"/><rect x="19" y="0" width="2" height="1" fill="#ffffff"/><rect x="24" y="0" width="7" height="1" fill="#ffffff"/><rect x="32" y="0" width="8" height="1" fill="#ffffff"/><rect x="42" y="0" width="6" height="1" fill="#ffffff"/><rect x="50" y="0" width="2" height="1" fill="#ffffff"/><rect x="56" y="0" width="2" height="1" fill="#ffffff"/><rect x="59" y="0" width="2" height="1" fill="#ffffff"/><rect x="66" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="67" y="0" width="6" height="1" fill="#ffffff"/><rect x="74" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="0" width="6" height="1" fill="#ffffff"/><rect x="81" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="2" y="1" width="6" height="1" fill="#ffffff"/><rect x="9" y="1" width="2" height="1" fill="#ffffff"/><rect x="12" y="1" width="3" height="1" fill="#ffffff"/><rect x="18" y="1" width="3" height="1" fill="#ffffff"/><rect x="25" y="1" width="6" height="1" fill="#ffffff"/><rect x="32" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="33" y="1" width="7" height="1" fill="#ffffff"/><rect x="41" y="1" width="8" height="1" fill="#ffffff"/><rect x="50" y="1" width="2" height="1" fill="#ffffff"/><rect x="56" y="1" width="2" height="1" fill="#ffffff"/><rect x="59" y="1" width="2" height="1" fill="#ffffff"/><rect x="66" y="1" width="7" height="1" fill="#ffffff"/><rect x="73" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="1" width="7" height="1" fill="#ffffff"/><rect x="82" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="2" width="3" height="1" fill="#d9ddd6"/><rect x="17" y="2" width="4" height="1" fill="#d9ddd6"/><rect x="27" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="41" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="52" y="2" width="4" height="1" fill="#a9b0a4"/><rect x="56" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="2" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="2" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="81" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="4" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="3" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="14" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="16" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="17" y="3" width="4" height="1" fill="#d9ddd6"/><rect x="27" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="33" y="3" width="6" height="1" fill="#d9ddd6"/><rect x="39" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="41" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="3" width="8" height="1" fill="#d9ddd6"/><rect x="59" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="3" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="75" y="3" width="5" height="1" fill="#a9b0a4"/><rect x="80" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="82" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="4" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="15" y="4" width="3" height="1" fill="#d9ddd6"/><rect x="19" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="33" y="4" width="6" height="1" fill="#a9b0a4"/><rect x="41" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="4" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="74" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="4" width="7" height="1" fill="#d9ddd6"/><rect x="4" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="15" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="19" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="32" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="33" y="5" width="7" height="1" fill="#d9ddd6"/><rect x="41" y="5" width="8" height="1" fill="#d9ddd6"/><rect x="50" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="5" width="5" height="1" fill="#d9ddd6"/><rect x="64" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="5" width="7" height="1" fill="#d9ddd6"/><rect x="73" y="5" width="2" height="1" fill="#a9b0a4"/><rect x="75" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="79" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="80" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="81" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="6" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="19" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="32" y="6" width="8" height="1" fill="#d9ddd6"/><rect x="42" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="50" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="66" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="67" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="74" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="6" width="1" height="1" fill="#d9ddd6"/><rect x="80" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="5" y="7" width="1" height="1" fill="#39FF14"/><rect x="46" y="7" width="1" height="1" fill="#39FF14"/><rect x="80" y="7" width="1" height="1" fill="#39FF14"/><rect x="5" y="8" width="1" height="1" fill="#c8ffb8"/><rect x="46" y="8" width="1" height="1" fill="#2bb51f"/><rect x="80" y="8" width="1" height="1" fill="#2bb51f"/><rect x="46" y="9" width="1" height="1" fill="#2bb51f"/><rect x="80" y="9" width="1" height="1" fill="#c8ffb8"/><rect x="46" y="10" width="1" height="1" fill="#c8ffb8"/></svg></a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-HOTTER</span></nav>
       <div class="wordmark" style="--wm-n:9" role="img" aria-label="TT-HOTTER">TT-HOTTER</div>
       <h1>TT-HOTTER — User Manual</h1>
-      <div class="meta">JSFX plug-in for REAPER // Version 0.9.10 // TimTechlor</div>
+      <div class="meta">JSFX plug-in for REAPER // Version 1.0.0 // TimTechlor</div>
       <p class="lead">TT-HOTTER is a five-band compressor that works upward and downward at once: quiet detail comes up, peaks are pulled in, and the mix gets dense and loud. Linear-phase crossovers keep the bands clean when they add up again, and a before/after display shows what the plug-in does to the sound, band by band.</p>
     </div>
     <button type="button" class="hero-shot" data-full="img/tt-ui-options/hotter-front.png" aria-label="Enlarge screenshot of the TT-HOTTER user interface" title="Click to enlarge"><img src="img/tt-ui-options/hotter-front.png" width="1496" height="959" alt="TT-HOTTER user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
@@ -460,7 +460,7 @@ MAKEUP as direct values. Click a band column or a band in the display to focus i
   <li>LEARN does nothing — it needs audio; on silence no curve is taken.</li>
 </ul>
 
-<h2 id="changelog"><span class="num">13</span>Changelog</h2><h3>0.9.10 — Review fixes</h3><ul><li>FIX: turning CEILING on measures the peak across the whole window once, instead of using a peak that was only tracked while CEILING was already on.</li></ul>
+<h2 id="changelog"><span class="num">13</span>Changelog</h2><h3>1.0.0 — First stable release</h3><ul><li>Version 1.0.0 with the public release (Drop 07 of Acid Season), together with its twin. No sound change from 0.9.10.</li></ul><h3>0.9.10 — Review fixes</h3><ul><li>FIX: turning CEILING on measures the peak across the whole window once, instead of using a peak that was only tracked while CEILING was already on.</li></ul>
 <h3>0.9.9 — Reworked DSP core</h3>
 <p>The sound changes on purpose; controls, presets and latency stay the same.</p>
 <ul><li><b>AUTO GAIN</b> measures after DRIVE and ignores everything below 120 Hz. DRIVE no longer makes the output
@@ -516,7 +516,7 @@ Older projects and style blocks remain readable; projects that predate UI SIZE u
   </main>
 </div>
 <footer>
-  <div class="wrap"><b>TT-HOTTER v0.9.10</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 0.9.10 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+  <div class="wrap"><b>TT-HOTTER v1.0.0</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 1.0.0 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
 </footer>
 <dialog class="shot-modal" aria-label="Screenshot">
   <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>

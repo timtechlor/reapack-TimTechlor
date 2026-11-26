@@ -1,7 +1,7 @@
 desc:TT-HOTTER Five-Band Linear-Phase Compressor
 // @description TT-HOTTER - five-band linear-phase upward/downward compressor with before/after display, target curves, drive and a true-peak ceiling
 // @author TimTechlor
-// @version 0.9.10
+// @version 1.0.0
 // @link Manual https://timtechlor.de/docs/tt-hotter-manual.html
 // @license MIT
 // @tags dynamics multiband compressor upward downward linear-phase ott mastering techno
@@ -20,6 +20,7 @@ desc:TT-HOTTER Five-Band Linear-Phase Compressor
 //   Latency is 5240 samples (about 109 ms at 48 kHz) plus LOOKAHEAD, reported to REAPER. Ceiling 0 dB means the limiter is off, the delay stays.
 //   The twin with three zero-latency bands is TT-HOTT. Not affiliated with any product.
 // @changelog
+//   1.0.0 - First stable release (Drop 07 of Acid Season), together with TT-HOTT. No sound change from 0.9.10.
 //   0.9.10 - First public release (Drop 07 of Acid Season), together with TT-HOTT. Five linear-phase bands, own level-neutral tuning, target curves with LEARN and MATCH, 23 factory presets including seven techno presets.
 // GENERIERT von build_hotter.py. Nicht von Hand aendern.
 
@@ -4006,7 +4007,7 @@ function ukf_node(id, x, y, lab) local(hot, r, act, rv, w, h, lx) (
 // __UIKIT_END__
 // GENERIERT von build_hotter.py. Nicht von Hand aendern.
 // Slider-Nummern. Slider 63 hat keinen hr_-Namen.
-strcpy(#tt_ver, "v0.9.10");
+strcpy(#tt_ver, "v1.0.0");
 hr_sin = 1;
 hr_sout = 2;
 hr_sdepth = 3;
