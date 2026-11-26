@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-HOTT Manual – Three-Band Upward/Downward Compressor for REAPER</title>
+<meta name="description" content="Reference manual for TT-HOTT, a free three-band upward/downward compressor JSFX for REAPER in the OTT style: CLASSIC mode runs the measured model of the well-known factory setting with DEPTH, TIME, UP and DOWN macros, EXPERT exposes thresholds, ratios and times as direct per-band values, and every band shows its live transfer curve, a numbers bar and separate upward/downward meters. With sidechain input, stereo link and mid/side, auto gain, mix and delta monitoring, lookahead and 30 factory presets.">
+<meta name="tt-doc-name" content="TT-HOTT">
+<meta name="tt-doc-version" content="0.9.12">
+<meta name="tt-doc-date" content="2026-11-22">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-hott-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-HOTT Manual – Three-Band Upward/Downward Compressor for REAPER">
+<meta property="og:description" content="Reference manual for TT-HOTT, a free three-band upward/downward compressor JSFX for REAPER in the OTT style: CLASSIC mode runs the measured model of the well-known factory setting with DEPTH, TIME, UP and DOWN macros, EXPERT exposes thresholds, ratios and times as direct per-band values, and every band shows its live transfer curve, a numbers bar and separate upward/downward meters. With sidechain input, stereo link and mid/side, auto gain, mix and delta monitoring, lookahead and 30 factory presets.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-hott-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-hott.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-HOTT — User Manual">
+<meta property="article:modified_time" content="2026-11-22">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-HOTT Manual – Three-Band Upward/Downward Compressor for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-HOTT, a free three-band upward/downward compressor JSFX for REAPER in the OTT style: CLASSIC mode runs the measured model of the well-known factory setting with DEPTH, TIME, UP and DOWN macros, EXPERT exposes thresholds, ratios and times as direct per-band values, and every band shows its live transfer curve, a numbers bar and separate upward/downward meters. With sidechain input, stereo link and mid/side, auto gain, mix and delta monitoring, lookahead and 30 factory presets.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-hott.png">
+<meta name="twitter:image:alt" content="TT-HOTT — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-hott-manual.html#article",
+   "headline": "TT-HOTT — User Manual",
+   "name": "TT-HOTT Manual – Three-Band Upward/Downward Compressor for REAPER",
+   "description": "Reference manual for TT-HOTT, a free three-band upward/downward compressor JSFX for REAPER in the OTT style: CLASSIC mode runs the measured model of the well-known factory setting with DEPTH, TIME, UP and DOWN macros, EXPERT exposes thresholds, ratios and times as direct per-band values, and every band shows its live transfer curve, a numbers bar and separate upward/downward meters. With sidechain input, stereo link and mid/side, auto gain, mix and delta monitoring, lookahead and 30 factory presets.",
+   "url": "https://timtechlor.de/docs/tt-hott-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-hott-manual.html",
+   "datePublished": "2026-11-22",
+   "dateModified": "2026-11-22",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-hott.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER OTT compressor, upward compression, downward compression, multiband compressor JSFX, multiband dynamics REAPER, multiband expansion, EDM mixing plugin, dubstep growl bass, bus glue, sidechain compressor REAPER, JSFX",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-hott-manual.html#software" },
+   "version": "0.9.12"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-hott-manual.html#software",
+   "name": "TT-HOTT",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "0.9.12",
+   "description": "JSFX plug-in for REAPER that compresses three frequency bands upward and downward at once (OTT style): the CLASSIC macros reproduce a measured model of the well-known setting, EXPERT gives direct thresholds, ratios and times, with live transfer curves per band, sidechain input, mid/side, auto gain and mix/delta monitoring.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-HOTT", "item": "https://timtechlor.de/docs/tt-hott-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+/* Pixel-Marke (23.11.2026, _TT_Website/_design-canvas/PIXEL-MARKE.md): Wortmarke in der Brotkrumenzeile,
+   Tropfkante unter dem Kopf, Screenshot schärft sich beim Laden aus Pixeln */
+nav.crumbs a.px-wm { display: inline-block; vertical-align: -9px; line-height: 0; }
+nav.crumbs a.px-wm svg { display: block; }
+nav.crumbs a.px-wm:hover svg, nav.crumbs a.px-wm:focus-visible svg { filter: drop-shadow(0 0 4px rgba(57,255,20,.6)); }
+header.top { border-bottom: 0; }
+.px-edge { position: relative; z-index: 1; height: 42px; margin-bottom: -20px; pointer-events: none;
+  background: url("../img/brand/pixel-drip-edge-plug.svg") repeat-x 0 0, linear-gradient(var(--acid-dim), var(--acid-dim)) 0 0 / 100% 1px no-repeat; }
+.hero-shot canvas.px-mz { position: absolute; left: 0; top: 0; pointer-events: none; image-rendering: pixelated; }
+@media print { .px-edge, .hero-shot canvas.px-mz { display: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/" class="px-wm" aria-label="Tim Techlor"><!-- px-wm: tools/brand/make_crumb_wordmark.py --><svg xmlns="http://www.w3.org/2000/svg" width="168" height="22" viewBox="0 0 84 11" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><rect x="1" y="0" width="7" height="1" fill="#ffffff"/><rect x="9" y="0" width="2" height="1" fill="#ffffff"/><rect x="12" y="0" width="2" height="1" fill="#ffffff"/><rect x="19" y="0" width="2" height="1" fill="#ffffff"/><rect x="24" y="0" width="7" height="1" fill="#ffffff"/><rect x="32" y="0" width="8" height="1" fill="#ffffff"/><rect x="42" y="0" width="6" height="1" fill="#ffffff"/><rect x="50" y="0" width="2" height="1" fill="#ffffff"/><rect x="56" y="0" width="2" height="1" fill="#ffffff"/><rect x="59" y="0" width="2" height="1" fill="#ffffff"/><rect x="66" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="67" y="0" width="6" height="1" fill="#ffffff"/><rect x="74" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="0" width="6" height="1" fill="#ffffff"/><rect x="81" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="2" y="1" width="6" height="1" fill="#ffffff"/><rect x="9" y="1" width="2" height="1" fill="#ffffff"/><rect x="12" y="1" width="3" height="1" fill="#ffffff"/><rect x="18" y="1" width="3" height="1" fill="#ffffff"/><rect x="25" y="1" width="6" height="1" fill="#ffffff"/><rect x="32" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="33" y="1" width="7" height="1" fill="#ffffff"/><rect x="41" y="1" width="8" height="1" fill="#ffffff"/><rect x="50" y="1" width="2" height="1" fill="#ffffff"/><rect x="56" y="1" width="2" height="1" fill="#ffffff"/><rect x="59" y="1" width="2" height="1" fill="#ffffff"/><rect x="66" y="1" width="7" height="1" fill="#ffffff"/><rect x="73" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="1" width="7" height="1" fill="#ffffff"/><rect x="82" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="2" width="3" height="1" fill="#d9ddd6"/><rect x="17" y="2" width="4" height="1" fill="#d9ddd6"/><rect x="27" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="41" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="52" y="2" width="4" height="1" fill="#a9b0a4"/><rect x="56" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="2" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="2" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="81" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="4" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="3" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="14" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="16" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="17" y="3" width="4" height="1" fill="#d9ddd6"/><rect x="27" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="33" y="3" width="6" height="1" fill="#d9ddd6"/><rect x="39" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="41" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="3" width="8" height="1" fill="#d9ddd6"/><rect x="59" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="3" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="75" y="3" width="5" height="1" fill="#a9b0a4"/><rect x="80" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="82" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="4" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="15" y="4" width="3" height="1" fill="#d9ddd6"/><rect x="19" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="33" y="4" width="6" height="1" fill="#a9b0a4"/><rect x="41" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="4" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="74" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="4" width="7" height="1" fill="#d9ddd6"/><rect x="4" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="15" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="19" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="32" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="33" y="5" width="7" height="1" fill="#d9ddd6"/><rect x="41" y="5" width="8" height="1" fill="#d9ddd6"/><rect x="50" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="5" width="5" height="1" fill="#d9ddd6"/><rect x="64" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="5" width="7" height="1" fill="#d9ddd6"/><rect x="73" y="5" width="2" height="1" fill="#a9b0a4"/><rect x="75" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="79" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="80" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="81" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="6" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="19" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="32" y="6" width="8" height="1" fill="#d9ddd6"/><rect x="42" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="50" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="66" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="67" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="74" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="6" width="1" height="1" fill="#d9ddd6"/><rect x="80" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="5" y="7" width="1" height="1" fill="#39FF14"/><rect x="46" y="7" width="1" height="1" fill="#39FF14"/><rect x="80" y="7" width="1" height="1" fill="#39FF14"/><rect x="5" y="8" width="1" height="1" fill="#c8ffb8"/><rect x="46" y="8" width="1" height="1" fill="#2bb51f"/><rect x="80" y="8" width="1" height="1" fill="#2bb51f"/><rect x="46" y="9" width="1" height="1" fill="#2bb51f"/><rect x="80" y="9" width="1" height="1" fill="#c8ffb8"/><rect x="46" y="10" width="1" height="1" fill="#c8ffb8"/></svg></a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-HOTT</span></nav>
+      <div class="wordmark" style="--wm-n:7" role="img" aria-label="TT-HOTT">TT-HOTT</div>
+      <h1>TT-HOTT — User Manual</h1>
+      <div class="meta">JSFX plug-in for REAPER // Version 0.9.12 // TimTechlor</div>
+      <p class="lead">TT-HOTT is a three-band compressor that works upward and downward at once: quiet parts are pushed up, loud parts pulled down, and the interaction of both branches turns thin material into a dense, loud mix. CLASSIC runs the measured model of the well-known factory setting, EXPERT exposes the same engine as direct values in dB and ms — and the front shows, per band, exactly what the sound does: transfer curve, thresholds, ratios, times and meters.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/hott-front.png" aria-label="Enlarge screenshot of the TT-HOTT user interface" title="Click to enlarge"><img src="img/tt-ui-options/hott-front.png" width="1256" height="835" alt="TT-HOTT user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="px-edge" aria-hidden="true"></div>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#twins"><span class="num">02</span><span>HOTT or HOTTER?</span></a></li>
+<li><a href="#quickstart"><span class="num">03</span><span>Quick start</span></a></li>
+<li><a href="#front"><span class="num">04</span><span>The front: bands, boxes &amp; meters</span></a></li>
+<li><a href="#modes"><span class="num">05</span><span>CLASSIC &amp; EXPERT: the numbers</span></a></li>
+<li><a href="#sidechain"><span class="num">06</span><span>Sidechain &amp; stereo</span></a></li>
+<li><a href="#latency"><span class="num">07</span><span>Lookahead &amp; latency</span></a></li>
+<li><a href="#autogain"><span class="num">08</span><span>Auto gain, mix &amp; delta</span></a></li>
+<li><a href="#presets"><span class="num">09</span><span>Preset bar &amp; user bank</span></a></li>
+<li><a href="#practice"><span class="num">10</span><span>In practice</span></a></li>
+<li><a href="#trouble"><span class="num">11</span><span>Troubleshooting</span></a></li>
+<li><a href="#changelog"><span class="num">12</span><span>Changelog</span></a></li>
+<li><a href="#bass20261027"><span class="num">13</span><span>Bass presets</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">14</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>OTT compression is a three-band compressor that works in both directions at the same time.
+The input is split with Linkwitz-Riley crossovers, and inside every band two gain computers run
+in parallel: an <b>upward</b> branch that raises everything below a threshold (quiet detail comes
+up) and a <b>downward</b> branch that pulls everything above another threshold down (peaks come
+off). Because both act simultaneously and the bands add up again, the level envelope flattens
+from both ends — quiet parts get loud, loud parts get held, the texture gets dense. That is the
+sound this effect is known for in EDM, dubstep and bass music production.</p>
+<pre><code>input → IN GAIN → stereo handling → LR4 split at X1 / X2 → LOW | MID | HIGH
+each band:  detector → gain = MAKEUP + up(below UP THR) − down(above DN THR)
+bands → sum → AUTO GAIN → MIX with dry → OUT GAIN → CEILING limiter → output</code></pre>
+<p>TT-HOTT shows what this machinery actually does: every band draws its <b>transfer curve</b>
+(input level to output level) with the live point, a <b>numbers bar</b> states the effective
+thresholds, ratios and times, and separate <b>meters</b> display upward gain and downward
+reduction. Two ways to drive it: <b>CLASSIC</b> with the macros of the well-known setting
+(DEPTH, TIME, UP, DOWN, MAKEUP, per-band THRESH and GAIN), and <b>EXPERT</b> — the same engine with
+direct values in dB and ms.</p>
+<div class="box" data-k="About the model">CLASSIC is an OTT-style model: the measured behaviour
+of a well-known factory setting, re-implemented from published measurement data. Not affiliated
+with any product; no trademark is used here.</div>
+
+<h2 id="twins"><span class="num">02</span>HOTT and HOTTER: the twins</h2>
+<p>TT-HOTT has a twin with five bands: <b>TT-HOTTER</b>, released on the same day.</p>
+<p>TT-HOTT and TT-HOTTER are twins: the same idea (upward and downward compression in every band at the same
+time), the same macros and the same look. They are not the same plug-in twice. They differ in how the signal is
+split into bands, and that one decision changes latency, phase, resolution and what each one is best at.</p>
+<table>
+  <tr><th></th><th>TT-HOTT</th><th>TT-HOTTER</th></tr>
+  <tr><td>Bands</td><td>3: LOW, MID, HIGH</td><td>5: SUB, LOW, L-MID, MID, HIGH</td></tr>
+  <tr><td>Crossovers</td><td>Linkwitz-Riley (IIR), minimum phase. CLASSIC: fixed at 88.3 Hz and 2.5 kHz; EXPERT: X1 40–800 Hz, X2 800 Hz–12 kHz</td><td>Linear phase (FFT). X1–X4 always free: 20–400 Hz, 40–1000 Hz, 100–4000 Hz, 400 Hz–12 kHz; drag them in the display</td></tr>
+  <tr><td>Latency</td><td>None without lookahead; LOOKAHEAD up to 5 ms, plus 1.5 ms when CEILING is on</td><td>5240 samples (about 109 ms at 48 kHz, 119 ms at 44.1 kHz), plus LOOKAHEAD up to 10 ms</td></tr>
+  <tr><td>Sound model</td><td>CLASSIC follows the measured behaviour of the well-known factory setting; EXPERT shows the same sound as numbers</td><td>Own tuning for five bands, level-neutral on pink noise at the start setting</td></tr>
+  <tr><td>Modes</td><td>CLASSIC ↔ EXPERT keep the sound in both directions (the macros are fitted back as closely as possible, HINT shows any rest)</td><td>MACRO → EXPERT keeps the sound; back to MACRO follows the macros again</td></tr>
+  <tr><td>EXPERT view</td><td>All three bands at once (EXPERT VALUES strip)</td><td>The focused band (click a band to focus it)</td></tr>
+  <tr><td>Display</td><td>Spectrum strip, per-band transfer curves with up/down meters, numbers bar, HINT line, START guided setup</td><td>Before/after display with SPECTRUM, BALANCE and SCOPE, genre target curves with LEARN and MATCH, per-band curve with live dot, 5-BAND RESPONSE</td></tr>
+  <tr><td>Saturation</td><td>none</td><td>DRIVE (tanh shaper after the band sum, 0 = clean)</td></tr>
+  <tr><td>Ceiling</td><td>True-peak limiter with 1.5 ms lookahead, −12 to 0 dBFS (factory −0.3 dBFS)</td><td>True-peak limiter, −24 to 0 dBFS (factory 0 = off)</td></tr>
+  <tr><td>AUTO GAIN</td><td>off by default</td><td>on by default</td></tr>
+  <tr><td>Both have</td><td colspan="2">DEPTH, TIME, UP, DOWN and MAKEUP macros, KNEE, UP MAX, RMS/PEAK detector with stereo LINK, stereo or mid/side, sidechain OFF/EXT/LISTEN, MIX, DELTA, BYPASS with the same latency, per-band GAIN, UP/DOWN switches, SOLO and MUTE, user preset bank, the same colour scheme</td></tr>
+</table>
+<h3>The real difference: how the bands are split</h3>
+<p><b>TT-HOTT</b> uses Linkwitz-Riley crossovers, like the classic OTT-style effect. They are minimum-phase filters:
+no latency, and the bands add up to a flat level, but with a phase turn around each crossover. On most material you
+do not hear that turn; it is part of the familiar sound. The price is that a kick or bass note around the crossover
+is smeared slightly in time, and with only three bands the lowest band holds sub and kick body together.</p>
+<p><b>TT-HOTTER</b> uses linear-phase crossovers. With nothing compressed the bands add up to the input exactly, with no
+phase turn at all. That needs a look into the future: about 109 ms at 48 kHz, which REAPER hides with plug-in delay
+compensation on playback. Five bands mean the sub (below 80 Hz) is compressed apart from the kick body and the low
+mids, so the low end stays steadier at high DEPTH. One side effect is typical for linear-phase filters: when bands get
+very different gains, a sharp transient can get a faint pre-echo just before it. At normal settings it is masked.</p>
+
+<h3>Which one when?</h3>
+<ul>
+  <li><b>Recording, live input, playing a synth through it:</b> TT-HOTT. TT-HOTTER&rsquo;s latency makes monitoring
+      while you play impossible.</li>
+  <li><b>The classic OTT sound, fast:</b> TT-HOTT in CLASSIC. Its macros follow the measured original.</li>
+  <li><b>Kick and bass, techno and house low end:</b> TT-HOTTER. SUB and LOW are separate, there is no phase turn
+      at the crossovers, and the crossovers can sit exactly where your kick and bass meet.</li>
+  <li><b>Mix bus and master:</b> TT-HOTTER for the finer split, the true-peak ceiling and the target curves (LEARN,
+      MATCH); TT-HOTT when you need zero latency or the lowest CPU load.</li>
+  <li><b>Drums with sharp transients at heavy settings:</b> try both. TT-HOTT keeps the attack free of pre-echo,
+      TT-HOTTER keeps it in phase.</li>
+  <li><b>Many instances in a big project:</b> TT-HOTT uses less CPU.</li>
+</ul>
+<p>Presets carry the same names where they do the same job (for example <b>Hypnotic Tops</b> and <b>Techno Master</b>),
+so you can A/B the twins on the same track. Numbers are not interchangeable: a TT-HOTT preset loaded by hand into
+TT-HOTTER does not give the same sound, because the bands lie elsewhere.</p>
+
+<h2 id="quickstart"><span class="num">03</span>Quick start</h2>
+<ol>
+  <li>Insert <code>TT-HOTT</code> on a synth, drum or vocal track. A new instance starts in
+      <b>CLASSIC</b> mode at <b>DEPTH 25 %</b> — a mild amount of the model: quiet parts come up,
+      peaks get held down, nothing takes over. The full over-the-top sound is one click away with
+      the preset <b>Classic 100</b> (DEPTH at 100 %).</li>
+  <li>The level rises with DEPTH: the three bands carry model make-up of about +14/+9/+14 dB at
+      DEPTH 100 % (<a class="xref" href="#makeup">why?</a>). At the INIT start it is about +4.6/+2.8/+4.7 dB,
+      <b>MAKEUP</b> scales it further in CLASSIC, <b>AUTO GAIN</b> level-matches while judging, or
+      pull <b>OUT</b> down.</li>
+  <li>Too much? Turn <b>DEPTH</b> down first. Too squashed? Turn <b>DOWN</b> below 100 %, then
+      <b>UP</b>. Too sharp on top? Raise the HIGH band&rsquo;s <b>THRESH</b> or pull its GAIN fader.</li>
+  <li>Watch a band panel while you turn: the transfer curve and the numbers bar show what the
+      macros produce. Use <b>DELTA</b> to hear only the change the plug-in makes.</li>
+  <li>Load a factory preset from the bar in the header as a starting point (see <a class="xref" href="#presets">Presets</a>).</li>
+</ol>
+
+<h3 id="start-tour">START: guided setup</h3>
+<p>Click <b>START</b> in the header to open an optional three-step view. Opening, navigating or closing it
+does not change the sound. These are the same parameters as on the full front; host automation remains visible.
+The tour remembers its page while the instance is open, including across transport starts; it adds no preset or project format.</p>
+<ol>
+<li><b>Starting point.</b> DRUMS sets DEPTH to 15 %, SYNTH / BASS to 25 %, MIX BUS to 10 %.
+Each choice changes <em>only DEPTH</em>; thresholds, timing, gains and monitoring settings stay as they are.
+These are gentle suggestions to try, not measured recipes or complete presets. NEXT keeps your current setting.</li>
+<li><b>Shape the sound.</b> DEPTH changes upward strength, downward strength and model make-up together.
+UP brings quiet detail forward, but may also lift noise and tails. DOWN holds loud moments back, but may reduce punch.
+Both macros affect all three bands.</li>
+<li><b>Compare.</b> ORIGINAL switches BYPASS on; HOTT switches it off. Let AUTO GAIN settle and trim OUT GAIN if needed.
+MIX blends processed and original signal separately from DEPTH. Equal peak readings do not guarantee equal perceived loudness.
+The comparison buttons are unavailable while DELTA, SC LISTEN or any band SOLO/MUTE is active; restore normal monitoring first.</li>
+</ol>
+<p>EXPERT settings are not silently converted: the tour explains the difference and offers an explicit
+<b>CONVERT TO CLASSIC / CLOSEST MATCH</b> button using the existing mode conversion. Its remaining mismatch appears
+in the tour hint. You can close START and keep EXPERT unchanged. Closing START always keeps the current settings,
+<b>including BYPASS</b> if you last selected ORIGINAL. OPTIONS, tooltips and AUTO FIT work in the tour as on the full front.</p>
+<figure class="shot"><img src="img/tt-hott/tt-hott-start.png" alt="START guided setup, step 1: optional depth starting points for drums, synth or bass, and the mix bus" width="1256" height="835"><figcaption><span class="tag">START</span><b>Choose a starting point.</b> Only DEPTH changes when you select one; NEXT keeps the current setting.</figcaption></figure>
+<figure class="shot"><img src="img/tt-hott/tt-hott-start-shape.png" alt="START step 2 with the real DEPTH, UP and DOWN controls and plain-language explanations" width="1256" height="835"><figcaption><span class="tag">SHAPE</span><b>Set the amount.</b> UP lifts quiet detail; DOWN holds loud moments back.</figcaption></figure>
+<figure class="shot"><img src="img/tt-hott/tt-hott-start-compare.png" alt="START step 3 with original and processed comparison, AUTO GAIN, MIX and OUT GAIN" width="1256" height="835"><figcaption><span class="tag">COMPARE</span><b>Judge at similar loudness.</b> Let AUTO GAIN settle, then adjust OUT GAIN if needed.</figcaption></figure>
+
+<h2 id="front"><span class="num">04</span>The front: bands, boxes &amp; meters</h2>
+<p>The drawn front is the interface (design grid about 1000×660, redrawn at the selected UI
+size); all sliders are hidden. The header carries the preset bar, OPTIONS, the CLASSIC | EXPERT
+tabs, BYPASS and DELTA. The left column holds the large DEPTH and TIME controls — TIME shows the
+resulting release times in ms as text — plus the smaller IN, OUT, MIX, UP and DOWN controls and
+the AUTO GAIN switch. The centre is the three band panels LOW / MID / HIGH:</p>
+<ul>
+  <li><b>Band boxes.</b> Each panel has a vertical level scale (−80…0 dB). The left box is the
+      <b>UP region</b> — the range below the upward threshold where quiet signal is raised; the right
+      box is the <b>DOWN region</b> — the range above the downward threshold where loud signal is pulled
+      down. The live band level runs through both as a bar. Drag a box edge to set the threshold
+      (CLASSIC: the THRESH macro moves both edges together; EXPERT: UP THR and DN THR individually).
+      Drag vertically inside a box to trim the band&rsquo;s GAIN in dB; Ctrl-click a box to switch its
+      branch on or off.</li>
+  <li><b>Band switch.</b> Each band can be switched off entirely: OFF takes the band out of the
+      dynamics — no upward, no downward, no make-up, no band GAIN — it passes at 0 dB and stays
+      audible in the sum. That is the difference to <b>MUTE</b>, which silences the band; SOLO and
+      MUTE keep working over a switched-off band.</li>
+  <li><b>Transfer curve.</b> Below the boxes: output level against input level, drawn from the
+      currently effective values, with the neutral diagonal and threshold marks. The live point sits
+      on the curve at the current band level, so you see the gain move with the music.</li>
+  <li><b>Numbers bar.</b> One line per band with the resolved values, e.g.
+      <code>UP: below −46.0 dB, 4.0:1, max +35.9 dB / DOWN: above −38.9 dB, inf:1 / attack 6.2 ms / release 30.9 ms</code>.
+      In CLASSIC these are the numbers your macros produce right now; in EXPERT they are the sliders.
+      This is the glass box: a macro setting becomes a set of concrete dynamics values.</li>
+  <li><b>Meters.</b> Per band: upward gain (+dB) and downward reduction (−dB) shown separately.
+      The <b>IN/OUT panel</b> reads the whole plug-in: <b>PEAK IN</b> and <b>PEAK OUT</b> are held
+      peak meters in dBFS, <b>DIFF</b> states PEAK OUT minus PEAK IN — how far the processed peak
+      sits above the input peak — and <b>LIM</b> shows the current reduction of the ceiling limiter
+      in dB. In digital silence, with the transport stopped for example, the meters rest at zero
+      instead of climbing to their maximum. The spectrum strip on top shows each band as an area of its input level (the white line is the level after the band gain)
+      and carries the two crossovers as tabs — draggable in EXPERT, visible but locked in CLASSIC.</li>
+</ul>
+<figure class="shot"><img src="img/tt-hott/tt-hott-bandoff.png" alt="TT-HOTT with the MID band switched off: the band panel is dimmed and its curve is the neutral diagonal, LOW and HIGH keep working" width="1256" height="835"><figcaption><span class="tag">BAND SWITCH</span><b>MID switched off.</b> The panel dims, the curve stays on the diagonal and the band passes at 0 dB while LOW and HIGH keep compressing. The IN / OUT panel at the lower left shows PEAK IN, PEAK OUT, DIFF, LIM and the CEILING knob.</figcaption></figure>
+
+<p>Level scale: thresholds and band levels read in <b>dB RMS</b> (mean-square); a full-scale sine
+reads −3 dB on this scale. Hover any control for a tooltip; <code>OPTIONS &gt; TOOLTIPS ON / OFF</code>
+switches them off per instance.</p>
+
+<h2 id="modes"><span class="num">05</span>CLASSIC &amp; EXPERT: the numbers</h2>
+<figure class="shot"><img src="img/tt-hott/tt-hott-macros.png" alt="TT-HOTT in CLASSIC mode with DEPTH 55 percent, TIME 300 percent, UP 140 percent, DOWN 60 percent and the MID band soloed; the numbers bars show the resulting thresholds, ratios and times" width="1256" height="835"><figcaption><span class="tag">CLASSIC</span><b>Macros in, numbers out.</b> DEPTH 55 %, TIME 300 %, UP 140 %, DOWN 60 %, LOW THRESH 60 %: the text under every band states what these macros resolve to (thresholds in dB RMS, ratios, attack and release in ms, make-up).</figcaption></figure>
+<figure class="shot"><img src="img/tt-hott/tt-hott-expert.png" alt="TT-HOTT in EXPERT mode with crossovers at 120 Hz and 3 kHz and individual ratios, attack and threshold values per band" width="1256" height="835"><figcaption><span class="tag">EXPERT</span><b>The same engine with direct values.</b> Crossovers at 120 Hz and 3 kHz, per-band thresholds, ratios, attack, release and make-up; switching from CLASSIC copies the numbers of the current setting into these controls.</figcaption></figure>
+<p>Both modes drive the same engine; only the addressing differs. CLASSIC works with seven macros:
+<b>DEPTH</b> scales upward strength, downward strength and make-up together — it is not a dry/wet
+control (that is MIX); <b>TIME</b> scales the release times (100 % = factory timing, 200 % =
+release twice as long; attack stays fixed); <b>UP</b> and <b>DOWN</b> scale the two branches
+(100 % = factory strength, 0 % = branch off, up to 200 %); per band, <b>THRESH</b> shifts both
+thresholds together (about 23–24 dB per 100 %) and <b>GAIN</b> trims the band level after the
+dynamics. <b>MAKEUP</b> scales the model make-up of all three bands together (0–200 %,
+100 % = the full model amount, INIT 85 %); it exists only in CLASSIC — in EXPERT the per-band
+make-up values apply. In CLASSIC the EXPERT fields stay visible but dimmed, showing the resolved numbers.
+</p>
+<p><b>One sound, two views.</b> Switching modes keeps what you hear. Clicking <b>EXPERT</b> writes the
+values the macros currently resolve to into the EXPERT controls (deviation ≤ 0.4 dB at extreme levels;
+upward ratios above 20:1 are clipped by the EXPERT range), so a CLASSIC setting can be taken apart there.
+Clicking <b>CLASSIC</b> goes the other way: TT-HOTT searches the macros (DEPTH, TIME, UP, DOWN, MAKEUP and
+THRESH per band) that come closest to your EXPERT curves and names the remaining difference in the HINT line,
+for example <code>curves within 1.2 dB, attack fixed</code>. CLASSIC has fewer degrees of freedom — attack,
+knee and crossovers are fixed there, and one UP/DOWN setting serves all three bands — so a heavily edited
+EXPERT setting may not come back exactly. Your EXPERT values are not lost: switch back to EXPERT without
+touching the macros and they return unchanged. Loading a preset or INIT starts fresh. Automating the MODE
+parameter switches directly without this transfer.</p>
+<p>The CLASSIC model resolves to these values at DEPTH 100 %, TIME 100 %, UP/DOWN 100 %,
+THRESH 100 % (bands LOW / MID / HIGH):</p>
+<table>
+  <tr><th>Quantity</th><th>LOW</th><th>MID</th><th>HIGH</th></tr>
+  <tr><td>Band range</td><td>20 Hz – 88.3 Hz</td><td>88.3 Hz – 2.5 kHz</td><td>2.5 kHz – 20 kHz</td></tr>
+  <tr><td>Upward threshold</td><td>−46.0 dB</td><td>−46.6 dB</td><td>−47.4 dB</td></tr>
+  <tr><td>Upward ratio</td><td>3.97:1</td><td>4.10:1</td><td>3.96:1</td></tr>
+  <tr><td>Upward gain ceiling</td><td>+35.9 dB</td><td>+36.3 dB</td><td>+35.9 dB</td></tr>
+  <tr><td>Downward threshold</td><td>−38.9 dB</td><td>−34.8 dB</td><td>−41.7 dB</td></tr>
+  <tr><td>Downward ratio</td><td colspan="3">infinite in all bands (hard cut above the threshold; overall gain floor −26 to −32 dB)</td></tr>
+  <tr><td>Attack</td><td>6.2 ms</td><td>6.0 ms</td><td>9.7 ms</td></tr>
+  <tr><td>Release at TIME 100 %</td><td>30.9 ms</td><td>30.9 ms</td><td>10.4 ms</td></tr>
+  <tr><td>Make-up at DEPTH 100 %, MAKEUP 100 %</td><td>+14.0 dB</td><td>+9.1 dB</td><td>+14.1 dB</td></tr>
+</table>
+<h3 id="makeup">Why is the make-up gain so high?</h3>
+<p>Because it is part of the measured model, not a comfort feature. The downward branch compresses
+infinitely above its threshold and the crossover split costs level on the way — the model wins its
+density back with make-up: each band follows its own cubic DEPTH curve (the model&rsquo;s mkshape
+curve) and lands at +14.0/+9.1/+14.1 dB at DEPTH 100 %; even at DEPTH 25 % that is still
++5.5/+3.3/+5.5 dB. Without this gain the plug-in would sound quieter and duller than the setting
+it reproduces — with it, the output is louder than the input. Hence the 0.2.0 defaults: <b>INIT
+starts at DEPTH 25 % with MAKEUP at 85 %</b> (make-up about +4.6/+2.8/+4.7 dB), the <b>MAKEUP</b>
+macro scales the model amount directly in CLASSIC, and <b>AUTO GAIN</b> matches the wet level back
+to the input whenever you want to judge the timbre rather than the loudness.</p>
+
+<h3 id="calculator">Characteristic curve calculator</h3>
+<p>The curves below are computed with the same constants and formulas as the plug-in (CLASSIC model). Move the macros and watch the three bands; the table under the chart is what the plug-in shows under every band. The chart plots output level against input level on the mean-square scale (a full-scale sine reads &minus;3 dB). To the left of the knee the upward branch lifts quiet signal, to the right the downward branch holds loud signal.</p>
+<div class="kr-calc" id="krCalc">
+<style>
+.kr-calc { border: 1px solid var(--line-bright); background: var(--panel); padding: 16px; margin: 18px 0 22px; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; }
+@media (max-width: 760px) { .kr-calc { grid-template-columns: minmax(0, 1fr); } }
+.kr-calc svg { width: 100%; height: auto; display: block; background: #000; border: 1px solid var(--line-bright); }
+.kr-calc svg text { fill: var(--grey); font: 11px var(--mono); }
+.kr-ctl { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.kr-row { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; font: 13px var(--mono); }
+.kr-row label { color: var(--grey); }
+.kr-row output { color: var(--acid); }
+.kr-row input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--acid); }
+.kr-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.kr-btns button { font: 12px var(--mono); letter-spacing: .06em; color: var(--acid); background: var(--black); border: 1px solid var(--acid-dim); padding: 6px 10px; cursor: pointer; }
+.kr-btns button:hover, .kr-btns button:focus-visible { border-color: var(--acid); outline: none; }
+.kr-leg { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; font: 12px var(--mono); color: var(--grey); }
+.kr-leg i { display: inline-block; width: 18px; height: 3px; margin-right: 6px; vertical-align: middle; }
+.kr-tab { grid-column: 1 / -1; overflow-x: auto; }
+.kr-tab table { min-width: 560px; }
+.kr-tab td.n, .kr-tab th.n { text-align: right; padding-right: 14px; font-family: var(--mono); white-space: nowrap; }
+</style>
+<div>
+  <svg id="krChart" viewBox="0 0 560 374" role="img" aria-label="Characteristic curves of the three bands: output level against input level"></svg>
+  <div class="kr-leg"><span><i style="background:#ff9a3c"></i>LOW</span><span><i style="background:#39FF14"></i>MID</span><span><i style="background:#3bd9ff"></i>HIGH</span><span><i style="background:#8C8C8C;height:1px"></i>neutral (out = in)</span></div>
+</div>
+<div class="kr-ctl">
+  <div class="kr-row"><label for="kr-depth">DEPTH</label><output id="kro-depth"></output><input id="kr-depth" type="range" min="0" max="100" step="1" value="100"></div>
+  <div class="kr-row"><label for="kr-up">UP</label><output id="kro-up"></output><input id="kr-up" type="range" min="0" max="200" step="1" value="100"></div>
+  <div class="kr-row"><label for="kr-down">DOWN</label><output id="kro-down"></output><input id="kr-down" type="range" min="0" max="200" step="1" value="100"></div>
+  <div class="kr-row"><label for="kr-thr">THRESH (all bands)</label><output id="kro-thr"></output><input id="kr-thr" type="range" min="0" max="200" step="1" value="100"></div>
+  <div class="kr-row"><label for="kr-time">TIME</label><output id="kro-time"></output><input id="kr-time" type="range" min="0" max="1000" step="10" value="100"></div>
+  <div class="kr-btns"><button type="button" id="kr-reset">FACTORY</button><button type="button" id="kr-gentle">GENTLE LIFT</button><button type="button" id="kr-duck">SIDECHAIN DUCK</button></div>
+</div>
+<div class="kr-tab">
+  <table aria-label="Resolved values per band">
+    <thead><tr><th>Band</th><th class="n">Up below</th><th class="n">Up ratio</th><th class="n">Down above</th><th class="n">Down ratio</th><th class="n">Attack</th><th class="n">Release</th><th class="n">Make-up</th></tr></thead>
+    <tbody id="krBody"></tbody>
+  </table>
+</div>
+<script>
+(function () {
+  var TU = [-46.0171, -46.5885, -47.4393], WU = [0.0552, 0.4509, 0.0338], SU = [0.74786, 0.75601, 0.74738];
+  var TD = [-38.9401, -34.8204, -41.6879], WD = [0.5, 0.530023, 0.5], MK = [14.0348, 9.05203, 14.064];
+  var CU = [35.901, 36.285, 35.872], GM = [-26.26, -31.70, -25.95], TA = [6.21537, 6.0, 9.6577], TS = [23.009, 23.743, 24.021];
+  var TR = [[10.0376, 14.8167, 30.877], [11.8089, 17.4314, 30.877], [7.02632, 7.02632, 10.3717]];
+  var MKS = [[1.83819, -1.21424, 0.37606], [1.63851, -0.83224, 0.19373], [1.8444, -1.22723, 0.38284]];
+  var DNS = [[0.96509, 0.03154, 0.00337], [0.96161, 0.02205, 0.01634], [0.97286, 0.05778, -0.03064]];
+  var FDX = [0, 0.2, 0.4, 0.6, 0.8, 1, 2], FDY = [0, 0.189716, 0.389364, 0.590038, 0.793116, 1, 2];
+  var NAMES = ['LOW', 'MID', 'HIGH'], COL = ['#ff9a3c', '#39FF14', '#3bd9ff'];
+  function poly(c, d) { return d * (c[0] + d * (c[1] + d * c[2])); }
+  function fdstr(x) {
+    if (x <= FDX[0]) return FDY[0];
+    if (x >= FDX[6]) return FDY[6];
+    for (var i = 1; i < 7; i++) if (x <= FDX[i]) return FDY[i - 1] + (FDY[i] - FDY[i - 1]) * (x - FDX[i - 1]) / (FDX[i] - FDX[i - 1]);
+    return FDY[6];
+  }
+  function soft(w, z) { return w > 0 ? Math.max(z, 0) + w * Math.log(1 + Math.exp(-Math.abs(z) / w)) : Math.max(z, 0); }
+  function resolve(k, P) {
+    var d = P.depth / 100, T = P.time / 100, U = P.up / 100, Dn = P.down / 100, p = P.thr / 100, tp = 100 * T;
+    var tsh = (p - 1) * TS[k], pct = Math.min(100, tp), r = TR[k];
+    var rel = (pct <= 50 ? r[0] + (r[1] - r[0]) * pct / 50 : r[1] + (r[2] - r[1]) * (pct - 50) / 50) * Math.max(1, tp / 100);
+    return { upThr: TU[k] + tsh, upSlope: Math.max(0, d) * Math.max(0, U) * SU[k], upKnee: WU[k], upMax: CU[k],
+             dnThr: TD[k] + tsh, dnSlope: Math.min(1, poly(DNS[k], d) * fdstr(Dn)), dnKnee: WD[k], floor: GM[k],
+             attack: TA[k], release: rel, makeup: poly(MKS[k], d) * MK[k] };
+  }
+  function gdb(R, E) {
+    var up = Math.min(R.upMax, R.upSlope * soft(R.upKnee, R.upThr - E));
+    var dn = R.dnSlope * soft(R.dnKnee, E - R.dnThr);
+    return Math.max(R.floor, R.makeup + up - dn);
+  }
+  function ratio(s) { return s < 0.0001 ? '1:1' : (s > 1.001 ? 'inverts' : (s >= 0.999 ? 'inf:1' : (1 / (1 - s)).toFixed(1) + ':1')); }
+  function sg(v) { return (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(1); }
+  var ids = ['depth', 'up', 'down', 'thr', 'time'], DEF = { depth: 100, up: 100, down: 100, thr: 100, time: 100 };
+  var chart = document.getElementById('krChart'), body = document.getElementById('krBody');
+  if (!chart || !body) return;
+  var X0 = 46, X1 = 540, Y0 = 16, Y1 = 330, EMIN = -90, EMAX = 0, OMIN = -70, OMAX = 10;
+  function sx(e) { return X0 + (e - EMIN) / (EMAX - EMIN) * (X1 - X0); }
+  function sy(o) { return Y1 - (o - OMIN) / (OMAX - OMIN) * (Y1 - Y0); }
+  function get() { var P = {}; ids.forEach(function (k) { P[k] = +document.getElementById('kr-' + k).value; }); return P; }
+  function set(P) { ids.forEach(function (k) { document.getElementById('kr-' + k).value = P[k]; }); draw(); }
+  function draw() {
+    var P = get(), s = '', rows = '', k, e;
+    ids.forEach(function (n) { document.getElementById('kro-' + n).textContent = P[n] + ' %'; });
+    for (e = -90; e <= 0; e += 10) s += '<line x1="' + sx(e) + '" y1="' + Y0 + '" x2="' + sx(e) + '" y2="' + Y1 + '" stroke="#1E2A1A" stroke-width="1"/><text x="' + sx(e) + '" y="' + (Y1 + 16) + '" text-anchor="middle">' + e + '</text>';
+    for (e = -70; e <= 10; e += 20) s += '<line x1="' + X0 + '" y1="' + sy(e) + '" x2="' + X1 + '" y2="' + sy(e) + '" stroke="#1E2A1A" stroke-width="1"/><text x="' + (X0 - 8) + '" y="' + (sy(e) + 4) + '" text-anchor="end">' + e + '</text>';
+    s += '<line x1="' + sx(EMIN) + '" y1="' + sy(EMIN) + '" x2="' + sx(0) + '" y2="' + sy(0) + '" stroke="#8C8C8C" stroke-width="1" stroke-dasharray="4 4"/>';
+    s += '<text x="' + ((X0 + X1) / 2) + '" y="' + (Y1 + 34) + '" text-anchor="middle">input in dB RMS</text><text x="12" y="' + ((Y0 + Y1) / 2) + '" transform="rotate(-90 12 ' + ((Y0 + Y1) / 2) + ')" text-anchor="middle">output in dB</text>';
+    for (k = 0; k < 3; k++) {
+      var R = resolve(k, P), d = '';
+      for (e = EMIN; e <= EMAX; e += 1) {
+        var o = Math.max(OMIN, Math.min(OMAX, e + gdb(R, e)));
+        d += (e === EMIN ? 'M' : 'L') + sx(e).toFixed(1) + ' ' + sy(o).toFixed(1);
+      }
+      s += '<path d="' + d + '" fill="none" stroke="' + COL[k] + '" stroke-width="2.2" stroke-linejoin="round"/>';
+      rows += '<tr><td><b style="color:' + COL[k] + '">' + NAMES[k] + '</b></td><td class="n">' + R.upThr.toFixed(1) + ' dB</td><td class="n">' + ratio(R.upSlope) + '</td><td class="n">' + R.dnThr.toFixed(1) + ' dB</td><td class="n">' + ratio(R.dnSlope) + '</td><td class="n">' + R.attack.toFixed(1) + ' ms</td><td class="n">' + R.release.toFixed(1) + ' ms</td><td class="n">' + sg(R.makeup) + ' dB</td></tr>';
+    }
+    chart.innerHTML = s;
+    body.innerHTML = rows;
+  }
+  ids.forEach(function (n) { document.getElementById('kr-' + n).addEventListener('input', draw); });
+  document.getElementById('kr-reset').addEventListener('click', function () { set(DEF); });
+  document.getElementById('kr-gentle').addEventListener('click', function () { set({ depth: 25, up: 100, down: 100, thr: 100, time: 100 }); });
+  document.getElementById('kr-duck').addEventListener('click', function () { set({ depth: 100, up: 0, down: 150, thr: 100, time: 100 }); });
+  draw();
+})();
+</script>
+</div>
+<p class="note">The calculator reproduces the CLASSIC model only and always uses the full model make-up (MAKEUP 100 %); the factory preset Sidechain Duck sets MAKEUP to 0 %, so its make-up column differs. EXPERT mode sets the same numbers directly; switching to EXPERT copies what the table shows into the EXPERT controls.</p>
+
+<p>The split is two cascaded 4th-order Linkwitz-Riley crossovers at <b>88.3 Hz</b> and
+<b>2500 Hz</b> — fixed in CLASSIC, freely movable in EXPERT (40–800 Hz / 0.8–12 kHz); an all-pass
+in the low band keeps the three bands magnitude-flat when summed. Both knees of the model are
+nearly hard (0.03–0.5 dB wide), which is where the characteristic edge comes from. EXPERT adds
+two global controls: <b>KNEE</b> scales the knee widths (10–400 %, 100 % = factory) and
+<b>UP MAX GAIN</b> caps the upward gain (0–48 dB, factory 36).</p>
+<p>One property to know: upward ratios above about 4:1 scaled beyond 133 % (UP &gt; 133 % at full
+DEPTH) become over-compensating — the output level falls as the input drops. That is the model&rsquo;s
+behaviour, kept as measured; on a master it is a deliberate effect, not a mistake.</p>
+
+<h2 id="sidechain"><span class="num">06</span>Sidechain &amp; stereo</h2>
+<ul>
+  <li><b>OFF</b> (default): every band detects its own input.</li>
+  <li><b>EXT</b>: the detectors follow the external sidechain input instead (pins 3/4 — set the
+      plug-in&rsquo;s track to 4 channels and send the trigger track there). The sidechain runs through
+      its own crossover with the same frequencies and the same IN GAIN scaling; the audio path stays
+      on the main input.</li>
+  <li><b>LISTEN</b>: the output becomes the sidechain signal (times IN/OUT GAIN, no dynamics), so
+      you can level-match and check the source before switching back. It is delayed by LOOKAHEAD
+      like every other output path, so it stays in time with the rest of the project.</li>
+  <li><b>No signal on pins 3/4</b>: the detector then sees silence and the upward gain sits at its
+      maximum. While EXT or LISTEN is selected and nothing has arrived for about 6 s (and at least 2 s of audio have played), the SC switch gets a
+      red outline and the GUIDE tab shows NO SC SIGNAL.</li>
+</ul>
+<p>Stereo handling is independent of the source: <b>STEREO LINK</b> (0–100 %) blends between one
+shared gain computer for both channels (100 %, factory) and two independent ones (0 %).
+<b>STEREO MODE</b> switches the whole processing to MID/SIDE, where the bands compress the mid and
+side channels separately — at high DEPTH this is a classic widening trick, since the side channel
+carries the stereo content and gets its own dynamics.</p>
+
+<h2 id="latency"><span class="num">07</span>Lookahead &amp; latency</h2>
+<p>The model itself has no lookahead, so with <b>LOOKAHEAD</b> at 0 ms the plug-in adds
+<b>no latency</b>. LOOKAHEAD (0–5 ms) delays the bands and the dry path equally while the detector
+keeps seeing the un-delayed signal, so the gain computer can react just before a transient
+arrives. The delay is reported to the host (PDC), and MIX, DELTA and BYPASS compensate it, so
+blending and comparing stay phase-true and click-free. A LOOKAHEAD change applies immediately and
+updates the reported latency.</p>
+<h3 id="ceiling">The CEILING limiter</h3>
+<p>Density costs crest factor. The model&rsquo;s attack of about 6–10 ms lets transients pass
+while everything between them gets raised, so even at matched RMS level the processed peaks sit
+above the input peaks — measured +2 to +3 dB on typical material. On a master such overshoot is
+rarely wanted, so the output has a limiter of its own: <b>CEILING</b> (−12 to 0 dB, INIT at
+−0.3 dB, <b>0 = off</b>) caps the output so it never exceeds the ceiling. It reacts with
+<b>1.5 ms of lookahead</b> (capped at 510 samples, so 1.33 ms at 384 kHz) and an 80 ms release; while it is active the lookahead is added to the
+reported latency (PDC) on top of the LOOKAHEAD control, so the host stays in sync. At CEILING 0
+the signal path is delay-free and bit-identical to the unlimited signal, and in BYPASS nothing is
+limited. The <b>LIM</b> readout of the IN/OUT panel shows the current reduction in dB.</p>
+<p><b>True peak (0.6.0).</b> The limiter does not only look at the samples but also at the peaks between them: it
+estimates three intermediate values between every pair of samples (4× oversampled, 16-tap interpolation) and limits
+the highest of them. That matters because a signal that stays under the ceiling sample by sample can still swing above it after
+a D/A converter or a lossy encoder, especially with a lot of high-frequency energy such as hi-hats and noise.
+Measured on test signals (noise, hi-hat bursts, a sine at a quarter of the sample rate) the true peak was up to 2.4 dB over the
+ceiling with the sample-peak limiter of 0.5.0; it is at most 0.35 dB over now (clicks 0.35, hi-hat bursts 0.23, noise 0.19 dB). The estimate has the
+accuracy of the usual 4× true-peak meters (BS.1770 allows 0.55 dB). Very high-frequency content above about 19 kHz can be limited up to
+0.3 dB harder than necessary. The <b>PEAK OUT</b> readout still shows sample peaks, so it can read a little below the
+ceiling while the true peak sits at it. Latency and lookahead are unchanged.</p>
+
+<h2 id="autogain"><span class="num">08</span>Auto gain, mix &amp; delta</h2>
+<p><b>AUTO GAIN</b> matches the wet level back to the input level with a slow RMS average
+(1.5 s time constant, limited to ±24 dB, frozen in silence). It acts only in the wet path and is a
+monitoring aid: it removes the loudness bias of the make-up so you can judge the spectral and
+dynamic change on equal loudness. Leave it off when the level lift is part of the sound.</p>
+<p><b>MIX</b> blends the original with the processed signal (100 %). The wet path is the sum of the three crossover bands, which
+rotates the phase of the signal even when nothing is compressed. To keep parallel mixing free of phasing, the dry signal runs
+through the same crossover (without IN GAIN, latency-matched) and is only then blended; turning MIX at neutral settings changes
+nothing, and a slow sweep never sounds like a phaser. At 0 % the input passes bit-exact. <b>S</b> and <b>M</b> apply to the dry
+part as well, at every MIX setting.
+<b>DELTA</b> outputs only the difference between processed signal and input (MIX is ignored,
+latency compensated) — the fastest way to hear what the compressor actually adds.
+<b>BYPASS</b> crossfades to the untouched input over 10 ms while the gain computers keep running,
+so toggling never clicks and re-engaging picks up where it left off.</p>
+
+<h2 id="presets"><span class="num">09</span>Preset bar &amp; user bank</h2>
+<p>The bar in the header (<code>&lt;</code> name <code>&gt;</code> <code>SAVE</code> <code>...</code>)
+loads and saves the whole sound of the instance in one step: all macros, band and system
+settings. Not part of a preset: the colour scheme and the OPTIONS settings (UI size, tooltips) —
+a loaded preset keeps the instance&rsquo;s appearance.</p>
+<figure class="shot"><img src="img/tt-hott/tt-hott-presets.png" alt="TT-HOTT header with the preset bar and the open preset list showing the FACTORY and USER sections" width="1256" height="835"><figcaption><span class="tag">PRESETS</span><b>The preset bar</b> sits in the header, left of <code>OPTIONS</code>. The name opens the list with the FACTORY and USER sections.</figcaption></figure>
+<table>
+  <tr><th>Preset</th><th>Made for</th></tr>
+  <tr><td>Init</td><td>factory defaults: DEPTH 25 %, MAKEUP 85 % — the mild starting point</td></tr>
+  <tr><td>Classic 100</td><td>the unchanged model at DEPTH 100 % — the full over-the-top sound</td></tr>
+  <tr><td>Gentle Lift</td><td>buses and masters, DEPTH 25 %</td></tr>
+  <tr><td>Bus Glue 30</td><td>drum and synth buses, gentle glue with −2 dB input trim</td></tr>
+  <tr><td>Drum Smack</td><td>breaks and drum buses, both branches slightly above 100 %</td></tr>
+  <tr><td>Kick Punch</td><td>kick buses, HIGH band muted (LOW/MID only)</td></tr>
+  <tr><td>Bass Tighten</td><td>bass and 808s, HIGH branches off</td></tr>
+  <tr><td>Vocal Air</td><td>vocals, slower release, HIGH threshold raised</td></tr>
+  <tr><td>Synth Wide</td><td>supersaws and stabs in MID/SIDE</td></tr>
+  <tr><td>Hat Shine</td><td>hats and tops, LOW muted, HIGH +3 dB</td></tr>
+  <tr><td>Pad Bloom</td><td>pads and strings, four times the release time</td></tr>
+  <tr><td>Parallel 50</td><td>MIX 50 %, classic parallel setup</td></tr>
+  <tr><td>Dubstep Growl</td><td>growl basses, full model with both branches above 100 %</td></tr>
+  <tr><td>Transient Keep</td><td>less downward, more upward: hits stay punchy</td></tr>
+  <tr><td>Tame Harsh</td><td>sharp synths and sibilance, upward mostly off</td></tr>
+  <tr><td>Mix Bus Gentle</td><td>mix buses and stems: DEPTH 15 %, slow release, reduced make-up — glue without a level jump</td></tr>
+  <tr><td>Drum Bus Parallel</td><td>drum buses: a strong setting blended in at MIX 35 %, transients stay</td></tr>
+  <tr><td>Acoustic Room</td><td>guitar, piano, acoustic drums: more room and decay, less downward, HIGH −1 dB</td></tr>
+  <tr><td>Vocal Even</td><td>EXPERT, vocals: crossovers 120 Hz / 5 kHz, soft knee, lifts quiet syllables, catches sibilance fast</td></tr>
+  <tr><td>Master Polish</td><td>EXPERT, masters: very soft knee, 1.25:1 up / 1.6:1 down, slow times, upward at most 12 dB</td></tr>
+  <tr><td>Podcast Voice</td><td>EXPERT, speech: no upward in LOW (no rumble lift), 2:1 up / 4:1 down in MID, fast HIGH control</td></tr>
+  <tr><td>Sidechain Duck</td><td>external sidechain (pins 3/4), pure ducking (UP 0 %, DOWN 150 %, MAKEUP 0 %); needs a routed sidechain</td></tr>
+</table>
+<p><b>Factory presets are code, not saved data</b>: they never overwrite anything you did not
+load yourself. Your own presets live in a 32-slot user bank that is part of the plug-in state:
+saved with the project, with FX-chain and track-template copies, and in every REAPER preset of
+this plug-in (the <code>+</code> button in the FX window toolbar). To move the bank to another
+project or computer, save a REAPER preset once and load it there. <code>SAVE</code> stores into
+the selected user slot (with a factory preset selected, into the first free one); the
+<code>...</code> menu offers RENAME, COPY, DELETE and INIT. Names can be up to 24 characters.
+REAPER keeps <kbd>Space</kbd> for the transport, so type <kbd>Shift</kbd>+<kbd>Space</kbd> for a
+blank.</p>
+
+<h2 id="practice"><span class="num">10</span>In practice</h2>
+<h3 id="setup">Setting it up for a good sound</h3>
+<p>The same six steps are in the <b>GUIDE</b> tab of the plug-in, and the <b>HINT</b> line next to the tabs reads the meters
+while you play and names the next thing to change.</p>
+<ol>
+  <li><b>Start gentle.</b> Load a factory preset or set DEPTH to 30–50 %. 100 % is the full over-the-top sound and rarely the
+      right amount on a whole mix. DEPTH is not a dry/wet control; that is MIX.</li>
+  <li><b>Match the level before you judge.</b> Make-up adds about +14 dB at full DEPTH and upward gain can add more, and louder always sounds better. Turn <b>MAKEUP</b> down, switch AUTO GAIN
+      on or trim OUT GAIN until BYPASS and the effect are equally loud, then compare.</li>
+  <li><b>Read the U and D meters.</b> The U meter (upward gain) should move with the music. If it sits at the top, the noise floor and
+      room tone are being lifted: lower UP or THRESH. A D meter that is always lit means the band is held hard all the time.</li>
+  <li><b>Get punch back.</b> Lower DOWN or DEPTH, raise TIME for a smoother release, or blend the original in with MIX 40–70 %
+      (parallel compression keeps the transients).</li>
+  <li><b>Balance the bands.</b> Press <b>S</b> to hear one band alone and trim each band with its GAIN fader. <b>S</b> and <b>M</b> apply at
+      every MIX setting: with MIX at 0 %, soloing LOW still plays only the low band.</li>
+  <li><b>Go to EXPERT only when you need exact numbers.</b> Switching keeps the sound: EXPERT shows your CLASSIC setting as
+      thresholds, ratios and times you can edit directly, and CLASSIC picks the closest macros back.</li>
+</ol>
+<table>
+  <tr><th>Meter shows</th><th>It means</th><th>Do this</th></tr>
+  <tr><td>U pinned at the top, hiss or room tone louder</td><td>upward branch lifts everything quiet</td><td>lower UP or the band THRESH, or lower that band&rsquo;s GAIN</td></tr>
+  <tr><td>D always lit, sound flat and dull</td><td>downward branch holds the band down constantly</td><td>lower DOWN or DEPTH, raise the band THRESH</td></tr>
+  <tr><td>OUT at 0 dBFS</td><td>the make-up gain overloads the output</td><td>lower OUT GAIN</td></tr>
+  <tr><td>sounds better than bypass, but only because it is louder</td><td>level difference, not quality</td><td>AUTO GAIN on, or OUT GAIN down until both are equally loud</td></tr>
+</table>
+<h3>Typical starting points</h3>
+<table>
+  <tr><th>Source</th><th>Start with</th></tr>
+  <tr><td>Whole mix / master</td><td>Gentle Lift or Bus Glue 30; DEPTH 20–35 %, AUTO GAIN off, check the level</td></tr>
+  <tr><td>Drums</td><td>Drum Smack; DEPTH 50–70 %, TIME 50–100 %, MIX 50–70 % to keep the attack</td></tr>
+  <tr><td>Synth / lead</td><td>DEPTH 60–100 %, then pull HIGH GAIN down 2–3 dB if it gets harsh</td></tr>
+  <tr><td>Bass</td><td>DEPTH 40–70 %; keep the lows steady, solo LOW to check it stays clean</td></tr>
+  <tr><td>Vocals</td><td>Vocal Air; DEPTH 30–50 %, raise HIGH THRESH before touching its GAIN</td></tr>
+  <tr><td>Techno kick bus</td><td>Techno Kick Bus: slower attack keeps the click, no upward on LOW so the tail does not swell</td></tr>
+  <tr><td>Techno rumble</td><td>Techno Rumble: denser downward, slow, no upward on LOW, so the tail does not cover the next kick</td></tr>
+  <tr><td>Hats, rides, percussion</td><td>Hypnotic Tops: fast, lots of upward, LOW without dynamics and −6 dB, HIGH +1.5 dB, 80 % mix</td></tr>
+  <tr><td>Techno drum bus</td><td>Warehouse Smash: full depth, 35 % mix, HIGH +2 dB</td></tr>
+  <tr><td>Dub techno chords</td><td>Dub Techno Space: slow, lots of upward brings delay and reverb tails up, 60 % mix</td></tr>
+  <tr><td>Techno master</td><td>Techno Master: DEPTH 20 %, slow, LOW without upward, lookahead 1.5 ms, ceiling −1 dB</td></tr>
+</table>
+<h3>More examples by source</h3>
+<ul>
+  <li><b>Supersaws &amp; synth stabs:</b> Synth Wide (DEPTH 80 %, MID/SIDE) or the full model;
+      AUTO GAIN on while comparing, then decide whether the lift stays.</li>
+  <li><b>Drum bus:</b> Bus Glue 30 for cohesion, Drum Smack for pressure; Parallel 50 blends the
+      density in instead of replacing the bus.</li>
+  <li><b>Kick:</b> Kick Punch keeps the body low and the mid focused without hat clutter.</li>
+  <li><b>Bass / growl:</b> Dubstep Growl on the bass chain; Bass Tighten when the top end should
+      pass through untouched.</li>
+  <li><b>Hats &amp; tops:</b> Hat Shine is the classic use — LOW muted, HIGH lifted.</li>
+  <li><b>Pads &amp; strings:</b> Pad Bloom (TIME 400 %) swells slowly instead of pumping.</li>
+  <li><b>Vocals:</b> Vocal Air for presence; Tame Harsh when sibilants get sharp. Raise the HIGH
+      THRESH to soften the top end before touching its GAIN.</li>
+  <li><b>On a master, go gentle:</b> Gentle Lift or Bus Glue 30, AUTO GAIN off (you want the lift),
+      and check the numbers bar — the infinite downward ratio is doing more than it sounds.</li>
+  <li><b>Hunting for the cause:</b> SOLO one band at a time, then DELTA; both together show which
+      band contributes which part of the effect.</li>
+</ul>
+
+<h2 id="trouble"><span class="num">11</span>Troubleshooting</h2>
+<ul>
+  <li>The output is much louder than the input — that is the make-up (+14/+9/+14 dB at full
+      DEPTH). Turn <b>MAKEUP</b> down (CLASSIC), use AUTO GAIN while judging, then set OUT GAIN
+      deliberately.</li>
+  <li>The peaks sit above the input even with AUTO GAIN on — expected: at matched RMS the model
+      lets transients pass and the crest factor rises (measured +2 to +3 dB). Keep <b>CEILING</b>
+      below 0 dB — a new instance starts at −0.3 dB — and the output stays under it.</li>
+  <li>The meters read 0 while the transport is stopped — in digital silence the meters rest at
+      zero instead of climbing to their maximum; the audio itself is not touched.</li>
+  <li>The crossover handles will not move — CLASSIC locks them; switch to EXPERT to drag.</li>
+  <li>A band is silent — check its MUTE and the SOLO states of the other bands (solo wins).</li>
+  <li>DELTA sounds huge even at modest DEPTH — expected: the upward branch adds up to +36 dB
+      below −46 dB, and DELTA plays exactly that difference.</li>
+  <li>The sound changes a little when switching from EXPERT to CLASSIC — CLASSIC cannot express every
+      EXPERT setting (attack, knee and crossovers are fixed there); the HINT line names the difference.
+      Switch back to EXPERT without touching the macros to get your values back.</li>
+</ul>
+
+<h2 id="changelog"><span class="num">12</span>Changelog</h2><h3>0.9.12 — Review fixes</h3><ul><li>FIX: comments match the code.</li><li>The snapshot path does not call the expert band solver, and the floor runs from -96 to 0.</li><li>Sound unchanged.</li></ul>
+<h3>0.9.11 — Techno presets, review fix</h3>
+<ul><li>Six techno factory presets: Techno Kick Bus, Techno Rumble, Hypnotic Tops, Warehouse Smash, Dub Techno Space, Techno Master.</li>
+<li>A damaged user preset with an absurd gain value can no longer make the output silent until the plug-in is reloaded: gains are capped at ±96 dB, and the wet sum is cleaned before AUTO GAIN and the limiter.</li></ul>
+<h3>0.9.10 — Review fixes</h3>
+<ul><li>Switching SIDECHAIN off and on again no longer breaks the sidechain crossover. In 0.9.9 the reset also cleared the filter coefficients: the low and mid detectors then saw silence and pushed their upward gain to the maximum, the high detector saw the full band.</li>
+<li>A damaged user preset can no longer feed a ratio below 1:1 or a crossover below 1 Hz into the gain computer. A user preset that contains a non-finite value is not loaded.</li>
+<li>CLASSIC to EXPERT: when an upward ratio above 20:1 has to be capped, HINT says so instead of reporting an exact copy.</li></ul>
+<h3>0.9.9 — Review fixes</h3>
+<ul><li><b>Bass Mid Push</b> runs in EXPERT, so the crossovers at 800 Hz and 3 kHz are used. The band dynamics are the CLASSIC curve of DEPTH 70 %, UP 150 %, DOWN 70 % and MAKEUP 100 %, with upward gain off on the low and high bands, +3 dB on the mid band and mix at 40 %.</li>
+<li>The peak meters keep every audio block since the last frame. A short peak no longer disappears from PEAK OUT and the limiter readout just because it fell in the block after the display read the meters.</li>
+<li>While BYPASS fades, the output limiter follows the signal that is playing, and the blend stays at the ceiling. Full bypass and normal processing are unchanged.</li>
+<li>Switching between STEREO and MID/SIDE no longer plays the lookahead buffer back in the wrong encoding.</li>
+<li>A second edit to the curve within the 10 ms fade continues from the gain just heard.</li>
+<li>Turning SIDECHAIN off clears the sidechain filters, so an old hit does not come back when EXT or LISTEN is switched on again.</li>
+<li>A control move in the same moment as a factory preset is kept. The short check that restores values the host overwrites on its own still runs.</li></ul>
+<h3>0.8.0 — Bass Mid Push</h3>
+<ul><li>New factory preset <b>Bass Mid Push</b>: crossovers at 800 Hz and 3 kHz, more upward than downward compression, 40 % mix and +3 dB on the mid band; the low band gets no upward gain. Use it on a techno or tech house bassline so its mids carry on small speakers.</li>
+<li>Sound of the other presets, parameters and saved state unchanged.</li></ul>
+<h3>0.7.0 — New front</h3>
+<ul><li>Flat front in the style of the newer TimTechlor plug-ins: flat knobs, segment buttons, level bars, cards with a colour bar per band.</li>
+<li>The spectrum strip shows each band as an area of its input level; the crossovers are draggable tabs. SYSTEM tab: segment rows for DETECTOR, STEREO MODE and SIDECHAIN.</li>
+<li>Sound, parameters, presets and saved state unchanged.</li></ul>
+<h3>0.6.0 — True-peak CEILING</h3>
+<ul><li>CEILING is now a true-peak limiter: it also limits the peaks between the samples (4× oversampled, 16-tap interpolation), so the output stays at the ceiling after a D/A converter or a lossy encoder. Measured on test signals the true peak was up to 2.4 dB over the ceiling before and is at most 0.35 dB over now. Latency and lookahead do not change.</li>
+</ul>
+<h3>0.5.0 — Version step</h3>
+<ul><li>No change to sound, presets or controls. The START tour and mode-switch checks were corrected and re-verified.</li></ul>
+<h3>0.3.0 — One sound, two views</h3>
+<ul><li>Optional START guided setup: choose a depth starting point, shape quiet detail and peaks, then compare with AUTO GAIN, MIX and OUT GAIN. Opening the view never changes the sound; EXPERT conversion is explicit.</li>
+<li>CLASSIC and EXPERT share one sound: switching modes carries the setting over. EXPERT takes the resolved CLASSIC numbers,
+CLASSIC picks the closest macros and the HINT line names any remaining difference; switching back and forth without touching the macros
+restores your EXPERT values exactly. The SNAPSHOT button is gone — the mode switch does its job.</li>
+<li>SC LISTEN is now delayed by LOOKAHEAD like every other output path, so it lines up with the latency reported to REAPER.</li>
+<li>Six new factory presets: Mix Bus Gentle, Drum Bus Parallel, Acoustic Room, Vocal Even, Master Polish, Podcast Voice.</li>
+<li>The HINT line names the limiter&rsquo;s gain reduction and suggests CEILING when the output hits 0 dBFS with CEILING off.</li></ul>
+<h3>0.2.7 — UI kit 7, small front fixes</h3>
+<ul><li>Internal: shared UI kit 7 modules. No change to sound or presets.</li>
+<li>The PEAK IN and PEAK OUT fields no longer overlap by one pixel row, so a click resets only the peak you clicked. The CLASSIC hint over KNEE and UP MAX also covers their value text.</li></ul>
+<h3>0.2.6 — Smooth changes</h3>
+<ul><li>Changes to MAKEUP, DEPTH, the thresholds and other curve settings now fade in over 10 ms instead of jumping, and a crossover frequency change glides to the new value instead of stepping the filters. Loading a user preset or INIT right after a factory preset is no longer overwritten by the factory values.</li></ul>
+<h3>0.2.5 — Meter fix</h3>
+<ul><li>The band meters (IN level, UP, DN and TOT) now average only the channels that carry a signal. With a one-sided signal and STEREO LINK below 100 %, the silent channel no longer drags the level marker, the curve point and the spectrum bar out of view or inflates the upward readout.</li></ul>
+<h3>0.2.4 — Review fixes, part 3</h3>
+<ul><li>The GUIDE hint "OUT peaks at the CEILING" now appears when the limiter holds the output at the ceiling (it could never trigger before), and it stays quiet in BYPASS. The NO SC SIGNAL warning fires after about 6 s without a sidechain signal instead of about 12 s, and not before two seconds of audio have played. UP MAX, RELEASE, LOOKAHEAD and band GAIN now round to their 0.1 step, and Ctrl-click on DEPTH resets to the factory 25 %. The calculator button Sidechain Duck matches the preset (UP 0 %), and the limiter lookahead cap at high sample rates is documented.</li></ul>
+<h3>0.2.3 — Review fixes, part 2</h3>
+<ul><li>The SIDECHAIN switch gets a red outline and a NO SC SIGNAL tooltip (and GUIDE hint) while EXT or LISTEN is selected and nothing arrives on pins 3/4. Loading a preset now changes all sliders in one step, so no half-applied state is ever processed. Ctrl-click resets of DN RATIO write the exact factory value; IN GAIN and OUT GAIN snap to 0.1 dB.</li></ul>
+<h3>0.2.2 — Review fixes</h3>
+<ul><li>The source header no longer shows up as a second TT-HOTT in the FX browser. The Sidechain Duck preset is now pure ducking (UP 0 %, MAKEUP 0 %) and no longer lifts the signal by about 45 dB when no sidechain is routed; an unrouted sidechain reads as silence and lifts the upward gain, so route it before using EXT. The GUIDE hint at the ceiling is now relative to CEILING. SNAPSHOT is locked in EXPERT so it cannot overwrite hand-set values. Per-band U/D/TOT meters also work with one-sided signals at LINK below 100 %. Tooltips corrected (MAKEUP, punctuation, lookahead cap of 1023 samples).</li></ul>
+<h3>0.2.1 — Spectrum and CEILING fixes</h3>
+<ul><li>Fixed the spectrum frequency axis and the crossover handles, which a name clash with the limiter state had thrown off. CEILING no longer replays old audio when it is switched off and on again. The limiter lookahead is capped at very high sample rates (352.8 kHz and above). The latency tooltip now includes the limiter's 1.5 ms.</li></ul>
+<h3>0.2.0 — Neutral INIT, MAKEUP macro, band switches, CEILING limiter</h3>
+<ul><li>Neutral INIT (DEPTH 25 %, MAKEUP 85 %); MAKEUP macro for CLASSIC; per-band ON/OFF switches that take a band out of the dynamics at 0 dB while it stays audible; output CEILING limiter (0 dB = off, 1.5 ms lookahead, 80 ms release); idle meters when the input is silent; reworked IN/OUT panel with PEAK IN, PEAK OUT, DIFF and LIM readouts.</li></ul>
+<h3>0.1.0 — Initial release</h3>
+<ul><li>Core: three-band upward/downward compressor (88.3 Hz / 2.5 kHz LR4), CLASSIC model and EXPERT parameters, stereo link / mid-side, sidechain, mix, auto gain, per-band transfer curves with live level, tooltips, factory presets.</li></ul><h2 id="bass20261027">0.9.0 — Bass patterns</h2><p>Bass Bus Split moves the bass-bus idea to HOTT: crossovers 120/800 Hz, low gain +3 dB, low-mid gain -3 dB and ceiling -1 dBFS. All band dynamics are off. The upper crossover cannot go below 800 Hz, so this is a broad three-band interpretation. For the exact 80-Hz shelf and 250-Hz bell use the accompanying TT Bass Bus Split.RfxChain (ReaEQ and Soft Clipper/Limiter). There are 24 factory presets.</p>
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v0.9.11</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/hott-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/hott-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-HOTT v0.9.12</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 0.9.12 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+<script>
+/* Pixel-Marke: Kopf-Screenshot wird aus groben Pixeln scharf */
+(function () {
+  var b = document.querySelector(".hero-shot"), img = b && b.querySelector("img");
+  if (!img || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var S = [28, 18, 11, 7, 4, 2, 1], dpr = Math.min(2, window.devicePixelRatio || 1);
+  function run() {
+    var w = img.offsetWidth, h = img.offsetHeight; if (!w || !h || !img.naturalWidth) return;
+    var cv = document.createElement("canvas"), t = document.createElement("canvas"), k = 0;
+    cv.className = "px-mz"; cv.setAttribute("aria-hidden", "true");
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); cv.style.width = w + "px"; cv.style.height = h + "px";
+    img.insertAdjacentElement("afterend", cv);
+    var x = cv.getContext("2d"); x.imageSmoothingEnabled = false;
+    function draw() {
+      var s = S[k] * dpr; t.width = Math.max(1, Math.round(cv.width / s)); t.height = Math.max(1, Math.round(cv.height / s));
+      var tx = t.getContext("2d"); tx.imageSmoothingQuality = "high"; tx.drawImage(img, 0, 0, t.width, t.height);
+      x.clearRect(0, 0, cv.width, cv.height); x.drawImage(t, 0, 0, cv.width, cv.height);
+    }
+    draw();
+    var iv = setInterval(function () { if (++k >= S.length - 1) { clearInterval(iv); cv.remove(); return; } draw(); }, 95);
+  }
+  if (img.complete) run(); else img.addEventListener("load", run, { once: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TT-HOTTER Manual – Five-Band Upward/Downward Compressor for REAPER</title>
+<meta name="description" content="Reference manual for TT-HOTTER, a free five-band upward/downward compressor JSFX for REAPER in the OTT style: linear-phase crossovers, DEPTH/TIME/UP/DOWN macros, per-band thresholds, an EXPERT strip, a before/after display (SPECTRUM, BALANCE, SCOPE) with draggable crossovers, genre target curves with LEARN and MATCH, drive, true-peak ceiling, sidechain and 23 factory presets.">
+<meta name="tt-doc-name" content="TT-HOTTER">
+<meta name="tt-doc-version" content="0.9.10">
+<meta name="tt-doc-date" content="2026-11-22">
+<link rel="canonical" href="https://timtechlor.de/docs/tt-hotter-manual.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Tim Techlor">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" sizes="32x32" href="https://timtechlor.de/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://timtechlor.de/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://timtechlor.de/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tim Techlor">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="TT-HOTTER Manual – Five-Band Upward/Downward Compressor for REAPER">
+<meta property="og:description" content="Reference manual for TT-HOTTER, a free five-band upward/downward compressor JSFX for REAPER in the OTT style: linear-phase crossovers, DEPTH/TIME/UP/DOWN macros, per-band thresholds, an EXPERT strip, a before/after display (SPECTRUM, BALANCE, SCOPE) with draggable crossovers, genre target curves with LEARN and MATCH, drive, true-peak ceiling, sidechain and 23 factory presets.">
+<meta property="og:url" content="https://timtechlor.de/docs/tt-hotter-manual.html">
+<meta property="og:image" content="https://timtechlor.de/docs/img/og-tt-hotter.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TT-HOTTER — User Manual">
+<meta property="article:modified_time" content="2026-11-22">
+<meta property="article:author" content="Tim Techlor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TT-HOTTER Manual – Five-Band Upward/Downward Compressor for REAPER">
+<meta name="twitter:description" content="Reference manual for TT-HOTTER, a free five-band upward/downward compressor JSFX for REAPER in the OTT style: linear-phase crossovers, DEPTH/TIME/UP/DOWN macros, per-band thresholds, an EXPERT strip, a before/after display (SPECTRUM, BALANCE, SCOPE) with draggable crossovers, genre target curves with LEARN and MATCH, drive, true-peak ceiling, sidechain and 23 factory presets.">
+<meta name="twitter:image" content="https://timtechlor.de/docs/img/og-tt-hotter.png">
+<meta name="twitter:image:alt" content="TT-HOTTER — User Manual">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://timtechlor.de/docs/tt-hotter-manual.html#article",
+   "headline": "TT-HOTTER — User Manual",
+   "name": "TT-HOTTER Manual – Five-Band Upward/Downward Compressor for REAPER",
+   "description": "Reference manual for TT-HOTTER, a free five-band upward/downward compressor JSFX for REAPER in the OTT style: linear-phase crossovers, DEPTH/TIME/UP/DOWN macros, per-band thresholds, an EXPERT strip, a before/after display (SPECTRUM, BALANCE, SCOPE) with draggable crossovers, genre target curves with LEARN and MATCH, drive, true-peak ceiling, sidechain and 23 factory presets.",
+   "url": "https://timtechlor.de/docs/tt-hotter-manual.html",
+   "mainEntityOfPage": "https://timtechlor.de/docs/tt-hotter-manual.html",
+   "datePublished": "2026-11-22",
+   "dateModified": "2026-11-22",
+   "inLanguage": "en",
+   "image": "https://timtechlor.de/docs/img/og-tt-hotter.png",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "publisher": { "@id": "https://timtechlor.de/#artist" },
+   "keywords": "REAPER OTT compressor, five band compressor, upward compression, linear phase multiband, multiband dynamics JSFX, tonal balance target curve, reference matching, EDM mixing plugin, acid bass, drum bus",
+   "isPartOf": { "@id": "https://timtechlor.de/docs/#collection" },
+   "about": { "@id": "https://timtechlor.de/docs/tt-hotter-manual.html#software" },
+   "version": "0.9.10"
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://timtechlor.de/docs/tt-hotter-manual.html#software",
+   "name": "TT-HOTTER",
+   "applicationCategory": "MultimediaApplication",
+   "operatingSystem": "Windows, macOS, Linux (REAPER 6 or newer)",
+   "softwareVersion": "0.9.10",
+   "description": "JSFX plug-in for REAPER that compresses five frequency bands upward and downward at once (OTT style), with linear-phase crossovers, a before/after display, genre target curves with LEARN/MATCH and 23 factory presets.",
+   "author": { "@id": "https://timtechlor.de/#artist" },
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Tim Techlor", "item": "https://timtechlor.de/" },
+    { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://timtechlor.de/docs/" },
+    { "@type": "ListItem", "position": 3, "name": "TT-HOTTER", "item": "https://timtechlor.de/docs/tt-hotter-manual.html" }
+   ]
+  },
+  {
+   "@type": "MusicGroup",
+   "@id": "https://timtechlor.de/#artist",
+   "name": "Tim Techlor",
+   "url": "https://timtechlor.de/"
+  }
+ ]
+}
+</script>
+<style>
+:root {
+  --black: #000000; --white: #FFFFFF; --acid: #39FF14;
+  --acid-dim: rgba(57,255,20,.55); --acid-faint: rgba(57,255,20,.12);
+  --grey: #8C8C8C; --panel: #0a0d09; --panel2: #101a0d; --line: #1E1E1E; --line-bright: #2c3a27;
+  --sans: "Liberation Sans", Arimo, Arial, Helvetica, sans-serif;
+  --mono: "Liberation Mono", Cousine, Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--black); color: var(--white); font: 16px/1.62 var(--sans); }
+a { color: var(--acid); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { border-bottom: 1px solid var(--acid-dim); position: relative; overflow: hidden; }
+header.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 150px; padding-top: 28px; padding-bottom: 24px; }
+header.top .brand { flex: 1 1 auto; min-width: 0; }
+@font-face { font-family: "Zilap Orion"; src: url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff2") format("woff2"), url("../fonts/ZilapOrionPersonalUseFuturistic-DzA3.woff") format("woff"); font-display: swap; }
+header.top .brand { container-type: inline-size; }
+header.top .wordmark { display: block; margin: 0; white-space: nowrap; color: var(--acid); font: 400 44px/1.05 "Zilap Orion", var(--sans); font-size: min(44px, calc(100cqi / var(--wm-n, 12) / .98)); letter-spacing: .02em; text-transform: uppercase; }
+header.top .wordmark .wm-alt { font-family: var(--sans); font-weight: 700; }
+header.top h1 { margin: 14px 0 4px; font-size: 1.05rem; font-weight: 400; letter-spacing: .02em; color: var(--white); }
+header.top .meta { font: 13px/1.4 var(--mono); color: var(--acid); letter-spacing: .08em; text-transform: uppercase; }
+header.top .lead { max-width: 720px; margin: 14px 0 0; color: #cfcfcf; font-size: .98rem; }
+header.top .lead em { color: var(--white); font-style: normal; }
+.hero-shot { flex: 0 0 auto; display: block; position: relative; margin: 0; padding: 0; line-height: 0; background: #000; border: 1px solid var(--acid-dim); cursor: zoom-in; transition: border-color .18s ease, box-shadow .18s ease; }
+.hero-shot img { display: block; width: auto; height: auto; max-width: 380px; max-height: 240px; }
+.hero-shot .zoom { position: absolute; right: 0; bottom: 0; padding: 5px 7px; font: 700 10px/1 var(--mono); letter-spacing: .12em; color: var(--black); background: var(--acid); }
+.hero-shot:hover, .hero-shot:focus-visible { border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid), 0 0 26px -6px rgba(57,255,20,.55); outline: none; }
+dialog.shot-modal { padding: 0; border: 1px solid var(--acid); background: #000; max-width: 96vw; max-height: 92vh; overflow: auto; }
+dialog.shot-modal::backdrop { background: rgba(0,0,0,.86); }
+dialog.shot-modal img { display: block; width: auto; height: auto; max-width: calc(96vw - 2px); max-height: calc(92vh - 2px); cursor: zoom-out; }
+dialog.shot-modal .close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; border: 0; font: 700 22px/36px var(--mono); color: var(--black); background: var(--acid); cursor: pointer; }
+dialog.shot-modal .close:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding-top: 32px; padding-bottom: 80px; }
+nav.toc { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; font: 13px/1.45 var(--mono); }
+nav.toc .label { color: var(--acid); letter-spacing: .12em; margin-bottom: 10px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 0 5px 12px; color: var(--white); border-left: 2px solid transparent; margin-left: -1px; }
+nav.toc li a:hover { color: var(--acid); border-left-color: var(--acid); text-decoration: none; }
+nav.toc .num, h2 .num { color: var(--acid); margin-right: 10px; font-family: var(--mono); }
+nav.toc .num { flex: 0 0 auto; margin-right: 0; }
+main { min-width: 0; max-width: 860px; }
+section { margin: 0; }
+h2 { position: relative; margin: 56px 0 18px; padding: 0 0 10px 34px; font-size: 1.5rem; line-height: 1.25; border-bottom: 1px solid var(--line); }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; width: 24px; height: 24px;
+  background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline points='1,2 11,12 16,12' fill='none' stroke='%2339FF14' stroke-opacity='.6' stroke-width='2'/%3E%3Ccircle cx='18' cy='12' r='3.5' fill='%2339FF14'/%3E%3Ccircle cx='18' cy='12' r='6' fill='none' stroke='%2339FF14' stroke-opacity='.45' stroke-width='1.2'/%3E%3C/svg%3E"); }
+main > h2:first-child, main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 30px 0 8px; color: var(--acid); }
+p, li { color: #E8E8E8; }
+p.lead { font-size: 1.05rem; color: var(--white); }
+.muted, p.muted, li.muted { color: var(--grey); }
+strong, b { color: var(--white); }
+ul, ol { padding-left: 1.4em; }
+li { margin: 4px 0; }
+li::marker { color: var(--acid); }
+code, .path { font: .9em var(--mono); color: var(--acid); background: var(--panel); border: 1px solid var(--line); padding: 1px 5px; overflow-wrap: anywhere; }
+kbd { font: .85em var(--mono); color: var(--white); background: var(--panel); border: 1px solid var(--line-bright); border-bottom-width: 2px; padding: 1px 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--acid); padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { border: 0; padding: 0; background: none; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: .95rem; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--acid); border-bottom-color: var(--acid-dim); }
+td.c { color: var(--grey); }
+figure, figure.shot { margin: 26px 0 30px; }
+figure img { display: block; max-width: 100%; height: auto; border: 1px solid var(--acid-dim); background: #000; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grey); }
+figcaption b, figcaption strong { color: var(--white); }
+figcaption .tag { font: 12px var(--mono); color: var(--acid); letter-spacing: .08em; margin-right: 6px; white-space: nowrap; }
+
+.card, .box, .pad {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel2) 0%, var(--panel) 55%);
+  border: 1px solid var(--line-bright); border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 14px 28px -18px rgba(0,0,0,.8);
+  transition: border-color .18s ease, transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.card::before, .box::after, .pad::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--acid), transparent 70%);
+  opacity: .55; transition: opacity .18s ease;
+}
+.card:hover, .box:hover, .pad:hover {
+  border-color: var(--acid); background: linear-gradient(160deg, #10190d 0%, var(--panel) 55%);
+  transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(57,255,20,.16), 0 18px 34px -16px rgba(0,0,0,.85);
+}
+.card:hover::before, .box:hover::after, .pad:hover::before { opacity: 1; }
+.card { padding: 20px 22px; margin: 14px 0; }
+.card h3:first-child { margin-top: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cols > .card { margin: 0; }
+.box { padding: 14px 18px; margin: 18px 0; font-size: .96rem; }
+.box[data-k]::before { content: attr(data-k); display: block; font: 700 11px var(--mono); letter-spacing: .14em; color: var(--acid); margin-bottom: 6px; text-transform: uppercase; }
+.box.warn { border-color: #3a3a3a; }
+.box.warn::after { background: linear-gradient(90deg, var(--white), transparent 70%); }
+.box.warn[data-k]::before { color: var(--white); content: "! " attr(data-k); }
+.box.warn:hover { border-color: var(--white); }
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; margin: 14px 0; }
+.kv dt { font: 13px/1.7 var(--mono); color: var(--acid); }
+.kv dd { margin: 0; color: #E8E8E8; }
+.pads { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin: 14px 0; }
+.pad { padding: 8px 10px; font: 12px/1.5 var(--mono); }
+.pad b { display: block; color: var(--acid); }
+.pad span, .pad i { display: block; color: var(--grey); font-style: normal; }
+footer { border-top: 1px solid var(--acid-dim); padding: 22px 0 40px; font: 12px/1.6 var(--mono); color: var(--grey); letter-spacing: .04em; }
+footer .acid { color: var(--acid); }
+footer b { color: var(--white); }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  nav.toc { position: static; max-height: none; border: 1px solid var(--line); padding: 14px 16px; }
+  header.top .wrap { flex-wrap: wrap; }
+  header.top .brand { flex-basis: 100%; }
+  .hero-shot { max-width: 100%; }
+  .hero-shot img { max-width: 100%; max-height: 260px; }
+  h2 { font-size: 1.3rem; margin-top: 44px; }
+  .cols { grid-template-columns: 1fr; }
+  .pads { grid-template-columns: repeat(4, 1fr); }
+  .kv { grid-template-columns: 1fr; gap: 0 0; }
+  .kv dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .box, .pad, .hero-shot { transition: none; }
+  .card:hover, .box:hover, .pad:hover { transform: none; }
+}
+@media print {
+  nav.toc, .hero-shot .zoom, dialog.shot-modal { display: none; }
+  .layout { display: block; }
+}
+
+nav.crumbs { font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 18px; }
+nav.crumbs a { color: var(--grey); }
+nav.crumbs a:hover { color: var(--acid); text-decoration: none; }
+nav.crumbs .sep { color: var(--acid-dim); margin: 0 8px; }
+nav.crumbs [aria-current] { color: var(--white); }
+/* Pixel-Marke (23.11.2026, _TT_Website/_design-canvas/PIXEL-MARKE.md): Wortmarke in der Brotkrumenzeile,
+   Tropfkante unter dem Kopf, Screenshot schärft sich beim Laden aus Pixeln */
+nav.crumbs a.px-wm { display: inline-block; vertical-align: -9px; line-height: 0; }
+nav.crumbs a.px-wm svg { display: block; }
+nav.crumbs a.px-wm:hover svg, nav.crumbs a.px-wm:focus-visible svg { filter: drop-shadow(0 0 4px rgba(57,255,20,.6)); }
+header.top { border-bottom: 0; }
+.px-edge { position: relative; z-index: 1; height: 42px; margin-bottom: -20px; pointer-events: none;
+  background: url("../img/brand/pixel-drip-edge-plug.svg") repeat-x 0 0, linear-gradient(var(--acid-dim), var(--acid-dim)) 0 0 / 100% 1px no-repeat; }
+.hero-shot canvas.px-mz { position: absolute; left: 0; top: 0; pointer-events: none; image-rendering: pixelated; }
+@media print { .px-edge, .hero-shot canvas.px-mz { display: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="https://timtechlor.de/" class="px-wm" aria-label="Tim Techlor"><!-- px-wm: tools/brand/make_crumb_wordmark.py --><svg xmlns="http://www.w3.org/2000/svg" width="168" height="22" viewBox="0 0 84 11" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><rect x="1" y="0" width="7" height="1" fill="#ffffff"/><rect x="9" y="0" width="2" height="1" fill="#ffffff"/><rect x="12" y="0" width="2" height="1" fill="#ffffff"/><rect x="19" y="0" width="2" height="1" fill="#ffffff"/><rect x="24" y="0" width="7" height="1" fill="#ffffff"/><rect x="32" y="0" width="8" height="1" fill="#ffffff"/><rect x="42" y="0" width="6" height="1" fill="#ffffff"/><rect x="50" y="0" width="2" height="1" fill="#ffffff"/><rect x="56" y="0" width="2" height="1" fill="#ffffff"/><rect x="59" y="0" width="2" height="1" fill="#ffffff"/><rect x="66" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="67" y="0" width="6" height="1" fill="#ffffff"/><rect x="74" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="0" width="6" height="1" fill="#ffffff"/><rect x="81" y="0" width="1" height="1" fill="#a9b0a4"/><rect x="2" y="1" width="6" height="1" fill="#ffffff"/><rect x="9" y="1" width="2" height="1" fill="#ffffff"/><rect x="12" y="1" width="3" height="1" fill="#ffffff"/><rect x="18" y="1" width="3" height="1" fill="#ffffff"/><rect x="25" y="1" width="6" height="1" fill="#ffffff"/><rect x="32" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="33" y="1" width="7" height="1" fill="#ffffff"/><rect x="41" y="1" width="8" height="1" fill="#ffffff"/><rect x="50" y="1" width="2" height="1" fill="#ffffff"/><rect x="56" y="1" width="2" height="1" fill="#ffffff"/><rect x="59" y="1" width="2" height="1" fill="#ffffff"/><rect x="66" y="1" width="7" height="1" fill="#ffffff"/><rect x="73" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="1" width="7" height="1" fill="#ffffff"/><rect x="82" y="1" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="2" width="3" height="1" fill="#d9ddd6"/><rect x="17" y="2" width="4" height="1" fill="#d9ddd6"/><rect x="27" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="41" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="52" y="2" width="4" height="1" fill="#a9b0a4"/><rect x="56" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="2" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="2" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="81" y="2" width="2" height="1" fill="#d9ddd6"/><rect x="4" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="3" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="14" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="16" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="17" y="3" width="4" height="1" fill="#d9ddd6"/><rect x="27" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="33" y="3" width="6" height="1" fill="#d9ddd6"/><rect x="39" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="41" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="3" width="8" height="1" fill="#d9ddd6"/><rect x="59" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="3" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="75" y="3" width="5" height="1" fill="#a9b0a4"/><rect x="80" y="3" width="2" height="1" fill="#d9ddd6"/><rect x="82" y="3" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="4" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="15" y="4" width="3" height="1" fill="#d9ddd6"/><rect x="19" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="33" y="4" width="6" height="1" fill="#a9b0a4"/><rect x="41" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="50" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="65" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="4" width="1" height="1" fill="#d9ddd6"/><rect x="72" y="4" width="2" height="1" fill="#d9ddd6"/><rect x="74" y="4" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="4" width="7" height="1" fill="#d9ddd6"/><rect x="4" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="15" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="19" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="32" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="33" y="5" width="7" height="1" fill="#d9ddd6"/><rect x="41" y="5" width="8" height="1" fill="#d9ddd6"/><rect x="50" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="5" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="5" width="5" height="1" fill="#d9ddd6"/><rect x="64" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="66" y="5" width="7" height="1" fill="#d9ddd6"/><rect x="73" y="5" width="2" height="1" fill="#a9b0a4"/><rect x="75" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="79" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="80" y="5" width="1" height="1" fill="#d9ddd6"/><rect x="81" y="5" width="1" height="1" fill="#a9b0a4"/><rect x="4" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="9" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="12" y="6" width="1" height="1" fill="#d9ddd6"/><rect x="13" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="19" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="27" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="32" y="6" width="8" height="1" fill="#d9ddd6"/><rect x="42" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="50" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="56" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="59" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="66" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="67" y="6" width="6" height="1" fill="#d9ddd6"/><rect x="74" y="6" width="1" height="1" fill="#a9b0a4"/><rect x="75" y="6" width="1" height="1" fill="#d9ddd6"/><rect x="80" y="6" width="2" height="1" fill="#d9ddd6"/><rect x="5" y="7" width="1" height="1" fill="#39FF14"/><rect x="46" y="7" width="1" height="1" fill="#39FF14"/><rect x="80" y="7" width="1" height="1" fill="#39FF14"/><rect x="5" y="8" width="1" height="1" fill="#c8ffb8"/><rect x="46" y="8" width="1" height="1" fill="#2bb51f"/><rect x="80" y="8" width="1" height="1" fill="#2bb51f"/><rect x="46" y="9" width="1" height="1" fill="#2bb51f"/><rect x="80" y="9" width="1" height="1" fill="#c8ffb8"/><rect x="46" y="10" width="1" height="1" fill="#c8ffb8"/></svg></a><span class="sep">//</span><a href="https://timtechlor.de/docs/">Docs</a><span class="sep">//</span><span aria-current="page">TT-HOTTER</span></nav>
+      <div class="wordmark" style="--wm-n:9" role="img" aria-label="TT-HOTTER">TT-HOTTER</div>
+      <h1>TT-HOTTER — User Manual</h1>
+      <div class="meta">JSFX plug-in for REAPER // Version 0.9.10 // TimTechlor</div>
+      <p class="lead">TT-HOTTER is a five-band compressor that works upward and downward at once: quiet detail comes up, peaks are pulled in, and the mix gets dense and loud. Linear-phase crossovers keep the bands clean when they add up again, and a before/after display shows what the plug-in does to the sound, band by band.</p>
+    </div>
+    <button type="button" class="hero-shot" data-full="img/tt-ui-options/hotter-front.png" aria-label="Enlarge screenshot of the TT-HOTTER user interface" title="Click to enlarge"><img src="img/tt-ui-options/hotter-front.png" width="1496" height="959" alt="TT-HOTTER user interface: the current front" fetchpriority="high" decoding="async"><span class="zoom">CLICK TO ENLARGE</span></button>
+  </div>
+</header>
+<div class="px-edge" aria-hidden="true"></div>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="label">CONTENTS //</div>
+    <ol>
+<li><a href="#concept"><span class="num">01</span><span>The concept</span></a></li>
+<li><a href="#twins"><span class="num">02</span><span>HOTT or HOTTER?</span></a></li>
+<li><a href="#quickstart"><span class="num">03</span><span>Quick start</span></a></li>
+<li><a href="#header"><span class="num">04</span><span>Header: mode, delta, bypass, readouts</span></a></li>
+<li><a href="#display"><span class="num">05</span><span>The display: SPECTRUM, BALANCE, SCOPE</span></a></li>
+<li><a href="#targets"><span class="num">06</span><span>Target curves, LEARN &amp; MATCH</span></a></li>
+<li><a href="#bands"><span class="num">07</span><span>Band columns</span></a></li>
+<li><a href="#macros"><span class="num">08</span><span>Macros, curve, drive &amp; master</span></a></li>
+<li><a href="#expert"><span class="num">09</span><span>EXPERT mode</span></a></li>
+<li><a href="#system"><span class="num">10</span><span>Detector, stereo, sidechain, lookahead</span></a></li>
+<li><a href="#presets"><span class="num">11</span><span>Factory presets</span></a></li>
+<li><a href="#trouble"><span class="num">12</span><span>Troubleshooting</span></a></li>
+<li><a href="#changelog"><span class="num">13</span><span>Changelog</span></a></li>
+<li><a href="#ui-size-settings"><span class="num">14</span><span>UI Size & Saved Options</span></a></li>
+    </ol>
+  </nav>
+  <main>
+<h2 id="concept"><span class="num">01</span>The concept</h2>
+<p>OTT-style compression splits the signal into bands and runs two compressors in each band at the same time:
+an <b>upward</b> branch raises everything below its threshold, a <b>downward</b> branch pulls everything above its
+threshold down. Quiet detail comes up, loud parts are held, and the bands add up to a dense, loud sound.</p>
+<p>TT-HOTTER does this in <b>five</b> bands (SUB, LOW, L-MID, MID, HIGH) instead of three. The crossovers are
+<b>linear-phase</b>: the bands sum back to the input without phase shift when nothing is compressed. That costs
+latency, which REAPER compensates automatically (plug-in delay compensation).</p>
+<pre><code>input → IN → stereo handling → linear-phase split at X1..X4 → SUB | LOW | L-MID | MID | HIGH
+each band: detector → gain = make-up + up(below UP THR) − down(above DN THR) → band GAIN
+bands → sum → DRIVE → AUTO GAIN → MIX with dry → OUT → true-peak CEILING → output</code></pre>
+<p>The factory tuning is level-neutral on pink noise (within 0.3 dB per range at the start setting) and gives
+music a slight “smile” at high DEPTH, as OTT-style settings usually do.</p>
+<div class="box" data-k="About the name">OTT-style means the well-known up/down multiband idea. TT-HOTTER is its own
+design and tuning; it is not affiliated with any product.</div>
+
+<h2 id="twins"><span class="num">02</span>HOTTER and HOTT: the twins</h2>
+<p>TT-HOTTER has a twin with three bands: <b>TT-HOTT</b>, released on the same day.</p>
+<p>TT-HOTT and TT-HOTTER are twins: the same idea (upward and downward compression in every band at the same
+time), the same macros and the same look. They are not the same plug-in twice. They differ in how the signal is
+split into bands, and that one decision changes latency, phase, resolution and what each one is best at.</p>
+<table>
+  <tr><th></th><th>TT-HOTT</th><th>TT-HOTTER</th></tr>
+  <tr><td>Bands</td><td>3: LOW, MID, HIGH</td><td>5: SUB, LOW, L-MID, MID, HIGH</td></tr>
+  <tr><td>Crossovers</td><td>Linkwitz-Riley (IIR), minimum phase. CLASSIC: fixed at 88.3 Hz and 2.5 kHz; EXPERT: X1 40–800 Hz, X2 800 Hz–12 kHz</td><td>Linear phase (FFT). X1–X4 always free: 20–400 Hz, 40–1000 Hz, 100–4000 Hz, 400 Hz–12 kHz; drag them in the display</td></tr>
+  <tr><td>Latency</td><td>None without lookahead; LOOKAHEAD up to 5 ms, plus 1.5 ms when CEILING is on</td><td>5240 samples (about 109 ms at 48 kHz, 119 ms at 44.1 kHz), plus LOOKAHEAD up to 10 ms</td></tr>
+  <tr><td>Sound model</td><td>CLASSIC follows the measured behaviour of the well-known factory setting; EXPERT shows the same sound as numbers</td><td>Own tuning for five bands, level-neutral on pink noise at the start setting</td></tr>
+  <tr><td>Modes</td><td>CLASSIC ↔ EXPERT keep the sound in both directions (the macros are fitted back as closely as possible, HINT shows any rest)</td><td>MACRO → EXPERT keeps the sound; back to MACRO follows the macros again</td></tr>
+  <tr><td>EXPERT view</td><td>All three bands at once (EXPERT VALUES strip)</td><td>The focused band (click a band to focus it)</td></tr>
+  <tr><td>Display</td><td>Spectrum strip, per-band transfer curves with up/down meters, numbers bar, HINT line, START guided setup</td><td>Before/after display with SPECTRUM, BALANCE and SCOPE, genre target curves with LEARN and MATCH, per-band curve with live dot, 5-BAND RESPONSE</td></tr>
+  <tr><td>Saturation</td><td>none</td><td>DRIVE (tanh shaper after the band sum, 0 = clean)</td></tr>
+  <tr><td>Ceiling</td><td>True-peak limiter with 1.5 ms lookahead, −12 to 0 dBFS (factory −0.3 dBFS)</td><td>True-peak limiter, −24 to 0 dBFS (factory 0 = off)</td></tr>
+  <tr><td>AUTO GAIN</td><td>off by default</td><td>on by default</td></tr>
+  <tr><td>Both have</td><td colspan="2">DEPTH, TIME, UP, DOWN and MAKEUP macros, KNEE, UP MAX, RMS/PEAK detector with stereo LINK, stereo or mid/side, sidechain OFF/EXT/LISTEN, MIX, DELTA, BYPASS with the same latency, per-band GAIN, UP/DOWN switches, SOLO and MUTE, user preset bank, the same colour scheme</td></tr>
+</table>
+<h3>The real difference: how the bands are split</h3>
+<p><b>TT-HOTT</b> uses Linkwitz-Riley crossovers, like the classic OTT-style effect. They are minimum-phase filters:
+no latency, and the bands add up to a flat level, but with a phase turn around each crossover. On most material you
+do not hear that turn; it is part of the familiar sound. The price is that a kick or bass note around the crossover
+is smeared slightly in time, and with only three bands the lowest band holds sub and kick body together.</p>
+<p><b>TT-HOTTER</b> uses linear-phase crossovers. With nothing compressed the bands add up to the input exactly, with no
+phase turn at all. That needs a look into the future: about 109 ms at 48 kHz, which REAPER hides with plug-in delay
+compensation on playback. Five bands mean the sub (below 80 Hz) is compressed apart from the kick body and the low
+mids, so the low end stays steadier at high DEPTH. One side effect is typical for linear-phase filters: when bands get
+very different gains, a sharp transient can get a faint pre-echo just before it. At normal settings it is masked.</p>
+
+<h3>Which one when?</h3>
+<ul>
+  <li><b>Recording, live input, playing a synth through it:</b> TT-HOTT. TT-HOTTER&rsquo;s latency makes monitoring
+      while you play impossible.</li>
+  <li><b>The classic OTT sound, fast:</b> TT-HOTT in CLASSIC. Its macros follow the measured original.</li>
+  <li><b>Kick and bass, techno and house low end:</b> TT-HOTTER. SUB and LOW are separate, there is no phase turn
+      at the crossovers, and the crossovers can sit exactly where your kick and bass meet.</li>
+  <li><b>Mix bus and master:</b> TT-HOTTER for the finer split, the true-peak ceiling and the target curves (LEARN,
+      MATCH); TT-HOTT when you need zero latency or the lowest CPU load.</li>
+  <li><b>Drums with sharp transients at heavy settings:</b> try both. TT-HOTT keeps the attack free of pre-echo,
+      TT-HOTTER keeps it in phase.</li>
+  <li><b>Many instances in a big project:</b> TT-HOTT uses less CPU.</li>
+</ul>
+<p>Presets carry the same names where they do the same job (for example <b>Hypnotic Tops</b> and <b>Techno Master</b>),
+so you can A/B the twins on the same track. Numbers are not interchangeable: a TT-HOTT preset loaded by hand into
+TT-HOTTER does not give the same sound, because the bands lie elsewhere.</p>
+
+<h2 id="quickstart"><span class="num">03</span>Quick start</h2>
+<ol>
+  <li>Insert <code>TT-HOTTER</code> on a synth, bass, drum bus or vocal. A new instance starts at <b>DEPTH 25 %</b>:
+      a mild amount, nothing takes over.</li>
+  <li>Turn <b>DEPTH</b> up for more. <b>AUTO GAIN</b> (on by default) keeps the level comparable, so you judge the
+      sound and not the loudness.</li>
+  <li>Too squashed? Lower <b>DOWN</b>. Too noisy or hissy? Lower <b>UP</b> or raise a band&rsquo;s <b>UP THR</b>.</li>
+  <li>Watch the display: green is the output, grey the input. The numbers above each band say what the band does
+      right now (+ lifts, − pulls down).</li>
+  <li>For the classic over-the-top sound load the preset <b>Classic OTT</b>; for the common parallel use
+      <b>OTT 30 Parallel</b> (see <a class="xref" href="#presets">Factory presets</a>).</li>
+</ol>
+
+<h2 id="header"><span class="num">04</span>Header: mode, delta, bypass, readouts</h2>
+<ul>
+  <li><b>MACRO / EXPERT</b> — MACRO drives all bands with the macros below. EXPERT edits threshold, ratio, times and
+      make-up of the focused band directly (<a class="xref" href="#expert">EXPERT mode</a>). Switching back to MACRO
+      follows the macros again; it does not fit them to the expert numbers.</li>
+  <li><b>DELTA</b> — plays only the difference the plug-in makes (output minus input).</li>
+  <li><b>BYPASS</b> — fades the processing out and back in.</li>
+  <li><b>LIM</b> shows the gain reduction of the ceiling limiter, <b>AUTO</b> the current auto-gain correction,
+      <b>LAT</b> the latency reported to REAPER.</li>
+  <li>The preset bar (arrows, list, SAVE, menu) and <b>OPTIONS</b> sit on the right.</li>
+</ul>
+<figure><img src="img/tt-hotter/tt-hotter-presets.png" alt="TT-HOTTER with the preset list open" loading="lazy"></figure>
+
+<h2 id="display"><span class="num">05</span>The display: SPECTRUM, BALANCE, SCOPE</h2>
+<p>The large display compares before and after. Choose the view with the three buttons on its top right:</p>
+<ul>
+  <li><b>SPECTRUM</b> — input spectrum (grey) and output spectrum (green).</li>
+  <li><b>BALANCE</b> — the tonal change: output minus input, averaged over time. A flat line means the plug-in
+      does not tilt the sound.</li>
+  <li><b>SCOPE</b> — peak level over the last three seconds, input grey, output green. Here you see upward
+      compression lift the quiet parts and downward compression pull the loud parts in.</li>
+</ul>
+<p>The handles <b>X1 … X4</b> at the top are the crossovers: drag them, right-click resets one. A crossover cannot
+pass its neighbours; they keep at least a factor of 1.25 apart (also under automation). Click into a band to focus it.</p>
+<figure><img src="img/tt-hotter/tt-hotter-scope.png" alt="TT-HOTTER SCOPE view" loading="lazy"></figure>
+
+<h2 id="targets"><span class="num">06</span>Target curves, LEARN &amp; MATCH</h2>
+<p>In <b>BALANCE</b> a target row appears: OFF, TECHNO, ACID, HOUSE, DNB, DUBSTEP, TRANCE and LEARNED. The genre
+curves are rough hand-made starting points, not measured references. With a target selected, a white bar per band
+shows how far the output sits above or below the target, and the value above each band is what <b>MATCH</b> would
+change.</p>
+<ul>
+  <li><b>LEARN</b> — play a reference track through the plug-in and press LEARN. Its long-term tonal balance
+      becomes the <b>LEARNED</b> target. Press again to stop.</li>
+  <li><b>MATCH</b> — moves the five band GAIN trims 80 % of the way to the target (limit ±12 dB), exactly by the
+      values shown before you press it.</li>
+</ul>
+<figure><img src="img/tt-hotter/tt-hotter-balance.png" alt="TT-HOTTER BALANCE view with a target curve" loading="lazy"></figure>
+
+<h2 id="bands"><span class="num">07</span>Band columns</h2>
+<p>Each band has its own colour, from orange (SUB) through yellow, green and teal to cyan (HIGH), the same
+arc as in TT-HOTT; the colours follow the colour scheme in OPTIONS. Each band has its own column: name and range, the current effect in dB (LIFTED, PULLED DOWN or UNTOUCHED)
+with a bar for up/down action, and next to it the gain curve of the band over input level (−80 … 0 dB). The dot on
+the curve is the live input; the two dim lines are the up and down thresholds. An LED chain shows the band input
+level. Below:</p>
+<ul>
+  <li><b>GAIN</b> — band level after the dynamics, −24 … +24 dB.</li>
+  <li><b>UP THR</b> / <b>DN THR</b> — upward and downward threshold of this band. Factory values: UP −42/−45/−47/−49/−51 dB,
+      DN −25/−28/−31/−33/−34 dB (SUB … HIGH).</li>
+  <li><b>UP</b> / <b>DOWN</b> — switch the upward or downward branch of this band on or off.</li>
+  <li><b>SOLO</b> / <b>MUTE</b> — listen to single bands; solo wins over mute.</li>
+</ul>
+
+<h2 id="macros"><span class="num">08</span>Macros, curve, drive &amp; master</h2>
+<ul>
+  <li><b>DEPTH</b> (0–100 %) — overall amount. 0 % leaves only crossovers and levels.</li>
+  <li><b>5-BAND RESPONSE</b> — the gain curves of all five bands in one view, the focused band bright, each with its
+      live dot. You see at a glance which band lifts and which pulls down.</li>
+  <li><b>TIME</b> (25–400 %) — scales attack and release of all bands.</li>
+  <li><b>UP</b> / <b>DOWN</b> (0–200 %) — strength of the upward and downward branch.</li>
+  <li><b>MAKEUP</b> (0–200 %) — scales the per-band make-up (factory 3.5/2/1.5/2.5/4 dB at full DEPTH).</li>
+  <li><b>KNEE</b> (0–100 %), <b>UP MAX</b> (0–36 dB, the most the upward branch may add), <b>DRIVE</b> (0–100 %,
+      saturation after the band sum; 0 is clean). <b>SHAPE</b> draws the shaper at the current DRIVE.</li>
+  <li><b>IN</b>, <b>MIX</b> (dry/wet), <b>OUT</b>, with LED meters for input and output (left/right) and LIM,
+      the limiter reduction from 0 to 12 dB.</li>
+</ul>
+
+<h2 id="expert"><span class="num">09</span>EXPERT mode</h2>
+<p>EXPERT shows a strip for the focused band: UP THRESH, UP RATIO, DN THRESH, DN RATIO, ATTACK, RELEASE and
+MAKEUP as direct values. Click a band column or a band in the display to focus it.</p>
+<figure><img src="img/tt-hotter/tt-hotter-expert.png" alt="TT-HOTTER in EXPERT mode" loading="lazy"></figure>
+
+<h2 id="system"><span class="num">10</span>Detector, stereo, sidechain, lookahead</h2>
+<ul>
+  <li><b>DETECTOR</b> RMS or PEAK. RMS averages the band power over a few milliseconds (5 ms in SUB and LOW, 2–3 ms
+      above) and both channels: smoother, transients pass. PEAK reacts with half the attack and takes the louder channel:
+      tighter on peaks. <b>STEREO</b> L/R or M/S, <b>LINK</b> 0–100 %. In M/S the SUB band never lifts the side above
+      the mid, so the sub stays mono.</li>
+  <li><b>SIDECHAIN</b> OFF, EXT (pins 3/4 drive the detectors) or LISTEN (hear the sidechain).</li>
+  <li><b>AUTO</b> — auto gain on/off. <b>LOOK</b> — lookahead 0–10 ms. <b>CEIL</b> — true-peak ceiling, 0 dB = off.</li>
+  <li><b>X1–X4</b> — the crossover frequencies as knobs (factory 80, 250, 800, 3000 Hz).</li>
+</ul>
+
+<h2 id="presets"><span class="num">11</span>Factory presets</h2>
+<p>23 presets, built around the usual OTT uses and around typical jobs:</p>
+<ul>
+  <li><b>Init</b> — DEPTH 0, crossovers and levels only.</li>
+  <li><b>Classic OTT</b> — full depth, crossovers 88 Hz / 2.5 kHz with the middle split in three.</li>
+  <li><b>OTT 30 Parallel</b> — full depth, 30 % mixed in: the most common way to use OTT.</li>
+  <li><b>Gentle Glue</b> — light glue for busses. <b>Master Polish</b> — soft, slow, thresholds 3 dB higher, ceiling −1 dB.</li>
+  <li><b>Drum Bus Punch</b> — fast, more downward, a little drive. <b>Bass Smash</b> — low crossovers, dense, sub a bit louder.</li>
+  <li><b>Acid Squash</b> — for 303 lines: resonance range squeezed, drive, parallel.</li>
+  <li><b>Vocal Upfront</b> — mids forward, no upward on the sub. <b>Synth Hype</b> — lots of upward, drive, a bit more top.</li>
+  <li><b>Air</b> — only the high band upward. <b>Mid Push</b> — only the mid band upward, parallel.</li>
+  <li><b>Upward Only</b> / <b>Downward Only</b> — one branch only. <b>Dirty OTT</b> — full depth, drive 40, parallel, ceiling.</li>
+  <li><b>Bass Body</b> — dynamics off, band EQ only.</li>
+</ul>
+<h3>Techno presets</h3>
+<ul>
+  <li><b>Techno Kick Punch</b> — kick bus: crossovers 60/200 Hz, more downward, a slower attack lets the click through, no upward on SUB and LOW so the kick tail does not swell, body +1 dB, a little drive, ceiling −1 dB.</li>
+  <li><b>Techno Rumble Bus</b> — for the rumble (kick plus reverb in the low end): crossovers 50/150/600 Hz, denser downward, slow, no upward on SUB and SUB −1 dB, so the tail does not cover the next kick.</li>
+  <li><b>Hypnotic Tops</b> — hats, rides and percussion loops: fast, lots of upward for room and ghost notes, SUB and LOW without dynamics and turned down, HIGH from 6 kHz +1.5 dB, 80 % mix.</li>
+  <li><b>Warehouse Drums</b> — parallel drum bus: full depth with drive, 35 % mixed in, kick body and top a little louder.</li>
+  <li><b>Industrial Crush</b> — hard and dirty for industrial and hard techno: UP and DOWN 170 %, fast, drive 60, 75 % mix.</li>
+  <li><b>Dub Techno Stabs</b> — chord stabs with delay and reverb: slow, lots of upward brings the tails up, little downward, SUB and LOW without upward and −3 dB, 60 % mix.</li>
+  <li><b>Techno Master</b> — the sum: soft and slow, no upward on SUB so the kick stays steady, thresholds 3 dB higher, lookahead 2 ms, ceiling −1 dB.</li>
+</ul>
+<p>Your own presets go into the user bank with SAVE.</p>
+
+<h2 id="trouble"><span class="num">12</span>Troubleshooting</h2>
+<ul>
+  <li>The track is late against others — check that REAPER&rsquo;s plug-in delay compensation is on; the linear-phase
+      crossovers need it.</li>
+  <li>Noise and hiss come up — expected with upward compression. Lower UP, raise UP THR or switch UP off in the bands
+      that carry noise.</li>
+  <li>A band is silent — check MUTE and the SOLO of the other bands.</li>
+  <li>LEARN does nothing — it needs audio; on silence no curve is taken.</li>
+</ul>
+
+<h2 id="changelog"><span class="num">13</span>Changelog</h2><h3>0.9.10 — Review fixes</h3><ul><li>FIX: turning CEILING on measures the peak across the whole window once, instead of using a peak that was only tracked while CEILING was already on.</li></ul>
+<h3>0.9.9 — Reworked DSP core</h3>
+<p>The sound changes on purpose; controls, presets and latency stay the same.</p>
+<ul><li><b>AUTO GAIN</b> measures after DRIVE and ignores everything below 120 Hz. DRIVE no longer makes the output
+quieter, and a pulled-down kick no longer makes AUTO GAIN push the hats and synths up.</li>
+<li><b>Upward in pauses:</b> below the upward threshold the release slows down, so quiet tails rise gently instead of
+being sucked up. Below −60 dB the upward gain fades out (half at −72 dB, none below −84 dB): noise between kicks and
+in breakdowns is no longer lifted by 20 dB and more, and the first hit after silence does not meet a wide-open band.</li>
+<li><b>DETECTOR</b> RMS and PEAK now differ on mono sources too (see the detector description).</li>
+<li><b>CEILING</b> holds the full reduction over five samples around a peak (less overshoot between samples) and
+recovers from a single peak in about 12 ms; only longer limiting releases slowly (120 ms).</li>
+<li><b>DRIVE</b> sends half of SUB and a quarter of LOW past the shaper and adds them back unchanged: the kick no
+longer roughens the hats above it. DRIVE 0 is unchanged.</li>
+<li><b>LOOKAHEAD</b> is limited per band to half its attack, so fast bands no longer duck a hat before it hits.</li>
+<li>Crossover slopes are log-symmetric and wider above each crossover (less ringing before a kick).</li>
+<li>The oversampling of DRIVE computes only the non-zero filter taps: the same result at about a quarter of the CPU.</li></ul>
+<h3>0.7.1 — Techno presets, review fixes</h3>
+<ul><li>Seven techno factory presets: Techno Kick Punch, Techno Rumble Bus, Hypnotic Tops, Warehouse Drums, Industrial Crush, Dub Techno Stabs, Techno Master.</li>
+<li>The SHAPE display has its own copy of the saturation function. With DRIVE above 0 and the window open, the display could rarely hand one wrong sample to the audio.</li>
+<li>The UP and DOWN tooltips say where DEPTH caps them; the EXPERT MAKEUP knob resets to the band default on double-click.</li></ul>
+<h3>0.4.0 — Presets and a brighter factory sound</h3>
+<ul><li>16 factory presets (Classic OTT, OTT 30 Parallel, Master Polish, Drum Bus Punch, Bass Smash, Acid Squash, Vocal Upfront, Synth Hype, Upward Only, Downward Only, Dirty OTT and more).</li>
+<li>Default band thresholds and make-up retuned: the factory sound is no longer darker than the input (pink noise within 0.3 dB), music gets a slight OTT-style smile.</li></ul>
+<h3>0.3.1 — Display fixes</h3>
+<ul><li>No thin dark line through buttons and bars at odd UI sizes. Crossover handles at the top of the display with name and frequency. MATCH shows its values before you press it and applies exactly those.</li></ul>
+<h3>0.3.0 — Targets</h3>
+<ul><li>UP THR and DN THR per band column. BALANCE target curves (genres and LEARNED), LEARN and MATCH.</li></ul>
+<h3>0.2.0 — Before/after display</h3>
+<ul><li>SPECTRUM, BALANCE and SCOPE with draggable crossovers, band columns, EXPERT strip. Crossovers can no longer pass each other.</li></ul>
+<h3>0.1.0 — First version</h3>
+<ul><li>Five-band linear-phase upward/downward compressor, drive, true-peak ceiling, external sidechain.</li></ul>
+<section class="section">
+<h2 id="ui-size-settings">UI Size &amp; Saved Options</h2>
+<p>Updated in <b>v0.9.9</b>. New instances open at <b>125%</b> UI size for clearer text.
+The controls and text are redrawn at the selected size; the colour scheme and background retain their appearance.</p>
+<figure class="shot"><img src="img/tt-ui-options/hotter-front.png" alt="Current front at the new default UI size" loading="lazy"><figcaption>Current front at the default UI size of 125%.</figcaption></figure>
+<p>Open <b>OPTIONS</b> and choose <b>UI SIZE: 100% / 125% / 150% / 200% / 300%</b>,
+or click the percentage field and enter a whole number from <b>25 to 400</b>.
+<b>Enter</b> or a click outside the field applies it; <b>Escape</b> cancels the edit.
+Values outside the range are limited to the nearest supported value.</p>
+<figure class="shot"><img src="img/tt-ui-options/hotter-options.png" alt="OPTIONS with UI size buttons and the custom percentage field" loading="lazy"><figcaption>The shared OPTIONS box, including the UI size controls.</figcaption></figure>
+<p><b>AUTO FIT.</b> When you drag the edge of the FX window, the front rescales to the new window size (the largest whole percentage that shows the whole front, 25 to 400&nbsp;%) and the scrollbars disappear. The UI SIZE buttons and the percentage field still set a fixed size, which stays until you change the window again. <b>AUTO FIT ON / OFF</b> in the UI SIZE row of OPTIONS switches the rescaling off for this instance; the setting is saved with the project. Switching it on fits the front to the current window at once.</p>
+<p>If the enlarged front exceeds the host window, use the horizontal and vertical scrollbars to reach every control.
+The mouse wheel over a scrollbar moves that view. OPTIONS stays visible at the upper right.
+You can also enlarge the REAPER FX window to show more of the front.</p>
+<p><b>All OPTIONS settings are saved per instance:</b> UI size, colour scheme, title and text font sizes,
+custom title/text/background colours, colour-picker target, and TOOLTIPS ON / OFF.
+Closing and reopening the FX window keeps them; saving and reopening the project restores them.
+They also travel with FX chains and native REAPER FX presets. Save the project to keep changes between sessions.</p>
+<p>The sound presets in the plugin's own preset bar retain the instance's appearance settings.
+Older projects and style blocks remain readable; projects that predate UI SIZE use the new 125% default.</p>
+</section>
+
+  </main>
+</div>
+<footer>
+  <div class="wrap"><b>TT-HOTTER v0.9.10</b> — JSFX plug-in for REAPER · Tim Techlor design series<br> Manual revision 0.9.10 · Free JSFX, installable via the TimTechlor ReaPack repository · License: MIT</div>
+</footer>
+<dialog class="shot-modal" aria-label="Screenshot">
+  <button type="button" class="close" aria-label="Close" title="Close (Esc)">&times;</button>
+  <img src="data:," alt="">
+</dialog>
+<script>
+(function () {
+  var b = document.querySelector(".hero-shot"), d = document.querySelector("dialog.shot-modal");
+  if (!b) return;
+  b.addEventListener("click", function () {
+    var src = b.getAttribute("data-full");
+    if (!d || !d.showModal) { window.location.href = src; return; }
+    var i = d.querySelector("img");
+    i.src = src; i.alt = b.querySelector("img").alt;
+    d.showModal();
+  });
+  // jeder Klick im Modal schliesst es: Bild, Hintergrund, Schliessen-Taste
+  if (d) d.addEventListener("click", function () { d.close(); });
+})();
+</script>
+<script>
+/* Pixel-Marke: Kopf-Screenshot wird aus groben Pixeln scharf */
+(function () {
+  var b = document.querySelector(".hero-shot"), img = b && b.querySelector("img");
+  if (!img || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var S = [28, 18, 11, 7, 4, 2, 1], dpr = Math.min(2, window.devicePixelRatio || 1);
+  function run() {
+    var w = img.offsetWidth, h = img.offsetHeight; if (!w || !h || !img.naturalWidth) return;
+    var cv = document.createElement("canvas"), t = document.createElement("canvas"), k = 0;
+    cv.className = "px-mz"; cv.setAttribute("aria-hidden", "true");
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); cv.style.width = w + "px"; cv.style.height = h + "px";
+    img.insertAdjacentElement("afterend", cv);
+    var x = cv.getContext("2d"); x.imageSmoothingEnabled = false;
+    function draw() {
+      var s = S[k] * dpr; t.width = Math.max(1, Math.round(cv.width / s)); t.height = Math.max(1, Math.round(cv.height / s));
+      var tx = t.getContext("2d"); tx.imageSmoothingQuality = "high"; tx.drawImage(img, 0, 0, t.width, t.height);
+      x.clearRect(0, 0, cv.width, cv.height); x.drawImage(t, 0, 0, cv.width, cv.height);
+    }
+    draw();
+    var iv = setInterval(function () { if (++k >= S.length - 1) { clearInterval(iv); cv.remove(); return; } draw(); }, 95);
+  }
+  if (img.complete) run(); else img.addEventListener("load", run, { once: true });
+})();
+</script>
+</body>
+</html>
